@@ -27,7 +27,7 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Get in touch with TRWLA";
+            ViewBag.Message = "Get in touch with TRWLA.";
 
             return View();
         }
