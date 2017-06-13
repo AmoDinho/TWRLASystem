@@ -13,21 +13,16 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
-        public ActionResult Gallery()
-        {
-            return View();
-        }
-
         public ActionResult About()
         {
-            ViewBag.Message = "Who are we?";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Get in touch with TRWLA";
+            ViewBag.Message = "Your contact page.";
 
             return View();
         }

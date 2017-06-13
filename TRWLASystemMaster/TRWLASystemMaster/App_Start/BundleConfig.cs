@@ -21,10 +21,16 @@ namespace TRWLASystemMaster
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/now-ui-kit.js",
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/bootstrap-switch.js",
+                      "~/Scripts/moment.min.js",
+                      "~/Scripts/nouislider.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/now-ui-kit.css",
                       "~/Content/site.css"));
         }
     }

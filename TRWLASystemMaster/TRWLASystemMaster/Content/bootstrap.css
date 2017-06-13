@@ -1197,11 +1197,6 @@ pre code {
   }
   .col-md-4 {
     width: 33.33333333333333%;
-    border: 2px solid transparent;
-  }
-
-  .col-md-4:hover{
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   }
   .col-md-5 {
     width: 41.66666666666667%;
@@ -1227,50 +1222,6 @@ pre code {
   .col-md-12 {
     width: 100%;
   }
-
-  .gallery {
-  width: 640px;
-  margin: 0 auto;
-  margin-bottom:10px;
-  padding: 5px;
-  background: transparent;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-}
-
-  .gallery > div {
-  position: relative;
-  float: left;
-  padding: 5px;
-}
-
-  .gallery > div > img {
-  display: block;
-  width: 200px;
-  transition: .1s transform;
-  transform: translateZ(0); /* hack */
-}
-
-.gallery > div:hover {
-  z-index: 1;
-}
-
-.gallery > div:hover > img {
-  transform: scale(1.7,1.7);
-  transition: .3s transform;
-}
-
-.cf:before, .cf:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-
-.cf:after {
-  clear: both;
-}
-
-
-  
   .col-md-push-0 {
     left: auto;
   }
@@ -5083,7 +5034,6 @@ a.list-group-item.active > .badge,
   background-color: lavenderblush;
   text-align: left;
   z-index:100;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 
