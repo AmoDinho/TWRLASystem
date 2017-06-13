@@ -18,13 +18,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("TRWLA Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -49,3 +50,4 @@ $(document).ready(function(){
     </script>
 </body>
 </html>
+<script src="https://use.fontawesome.com/dead28a296.js"></script>
