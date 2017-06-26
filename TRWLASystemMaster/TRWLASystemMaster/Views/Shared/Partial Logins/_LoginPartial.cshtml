@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@* The Right-Side of navbar for the USERS who want to log in *@
+
+@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
