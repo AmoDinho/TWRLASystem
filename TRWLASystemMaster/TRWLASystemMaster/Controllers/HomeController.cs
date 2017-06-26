@@ -31,5 +31,10 @@ namespace TRWLASystemMaster.Controllers
 
             return View();
         }
+        public ActionResult VolunteerLogIn()
+        {
+         
+            return View();
+        }
     }
 }
