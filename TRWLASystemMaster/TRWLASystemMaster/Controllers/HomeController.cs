@@ -13,6 +13,11 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+        public ActionResult LoggedIn()
+        {
+            return View();
+        }
+
         public ActionResult Gallery()
         {
             return View();

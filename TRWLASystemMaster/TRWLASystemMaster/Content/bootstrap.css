@@ -1202,6 +1202,8 @@ pre code {
 
     .col-md-4:hover {
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        -webkit-transition: .25s ease-in-out;
+        -moz-transition: .25s ease-in-out;
     }
     .gallery {
   width: 640px;
@@ -3478,7 +3480,7 @@ input[type="button"].btn-block {
 .dropup .caret,
 .navbar-fixed-bottom .dropdown .caret {
   border-top: 0 dotted;
-  border-bottom: 4px solid #000000;
+  border-bottom: 4px solid lavenderblush;
   content: "";
 }
 
@@ -4166,7 +4168,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   z-index: 1000;
   min-height: 50px;
   margin-bottom: 20px;
-  border: 1px solid transparent;
+  border: 1px solid lavenderblush;
+  background-color:transparent;
 }
 
 .navbar:before,
@@ -5075,6 +5078,7 @@ a.list-group-item.active > .badge,
 .jumbotron {
   padding: 30px;
   margin-bottom: 30px;
+  margin-top: 30px;
   font-size: 20px;
   font-weight: 200;
   line-height: 2.1428571435;

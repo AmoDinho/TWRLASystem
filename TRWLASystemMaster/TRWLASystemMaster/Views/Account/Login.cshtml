@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Log in";
 }
-
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">
@@ -28,17 +27,19 @@
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
                 <div class="form-group">
+                    @* This is not working, the tick does not appear. *@
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox label" })
                             @Html.LabelFor(m => m.RememberMe)
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input type="submit" value="Log in" class="btn btn-default btn-round" />
                     </div>
                 </div>
                 <p>
@@ -57,7 +58,6 @@
         </section>
     </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
