@@ -80,6 +80,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -198,12 +200,125 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Usertype\Address.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Alumnus.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\AuditLog.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\CommEngage.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Content.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Event.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\FunctionEvent.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\GuestSpeaker.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Lecture.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\LectureReview.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\LectureSummary.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Message.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Milestone.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\MilestoneType.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Notification.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Person.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Residence.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\ResType.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Schedule.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\SecurityAnswer.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Student.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\StudentType.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Theme.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\TWRALDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TWRALDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\TWRALDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\TWRALDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TWRALDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\TWRLA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TWRLA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\TWRLA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TWRLA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\UserType.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Venue.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\VenueType.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\Volunteer.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\VolunteerFeedback.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usertype\VolunteerType.cs">
+      <DependentUpon>TWRALDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -215,6 +330,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Usertype\TWRALDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TWRALDB.edmx</DependentUpon>
+      <LastGenOutput>TWRALDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Usertype\TWRALDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TWRALDB.edmx</DependentUpon>
+      <LastGenOutput>TWRALDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Usertype\TWRLA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TWRLA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Usertype\TWRLA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TWRLA.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -262,6 +395,13 @@
     <Content Include="Content\SASS\Maxins\_popovers.scss" />
     <Content Include="Content\SASS\Maxins\_transparency.scss" />
     <Content Include="Content\SASS\Maxins\_vendor-prefixes.scss" />
+    <EntityDeploy Include="Models\Usertype\TWRALDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TWRALDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Usertype\TWRALDB.edmx.diagram">
+      <DependentUpon>TWRALDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\core\bootstrap.min.js" />
     <Content Include="Scripts\core\jquery.3.2.1.min.js" />
@@ -322,6 +462,11 @@
     <Content Include="Views\Shared\VolunteerLoggedInPage.cshtml" />
     <Content Include="Views\Shared\Vol_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Stud_LoginPartial.cshtml" />
+    <Content Include="Views\UserTypes\Create.cshtml" />
+    <Content Include="Views\UserTypes\Delete.cshtml" />
+    <Content Include="Views\UserTypes\Details.cshtml" />
+    <Content Include="Views\UserTypes\Edit.cshtml" />
+    <Content Include="Views\UserTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -334,6 +479,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

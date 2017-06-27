@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Db_TRWLA_StagingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StreetNumber" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StreetName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Suburb" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Province" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Venues" Relationship="Self.FK__Venue__AddressID__403A8C7D" FromRole="Address" ToRole="Venue" />
+  </EntityType>
+  <EntityType Name="Alumnus">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK__Alumni__PersonID__00200768" FromRole="Alumni" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="CommEngage">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="Self.FK__CommEngag__Event__5812160E" FromRole="CommEngage" ToRole="Event" />
+    <NavigationProperty Name="Contents" Relationship="Self.CommContent" FromRole="CommEngage" ToRole="Content" />
+  </EntityType>
+  <EntityType Name="Content">
+    <Key>
+      <PropertyRef Name="ContentID" />
+    </Key>
+    <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContentType" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DatePublished" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Theme" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CommEngages" Relationship="Self.CommContent" FromRole="Content" ToRole="CommEngage" />
+    <NavigationProperty Name="Lectures" Relationship="Self.LectureContent" FromRole="Content" ToRole="Lecture" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Summary" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EventStartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="VenueID" Type="Int32" />
+    <NavigationProperty Name="CommEngage" Relationship="Self.FK__CommEngag__Event__5812160E" FromRole="Event" ToRole="CommEngage" />
+    <NavigationProperty Name="Venue" Relationship="Self.FK__Event__VenueID__45F365D3" FromRole="Event" ToRole="Venue" />
+    <NavigationProperty Name="FunctionEvent" Relationship="Self.FK__FunctionE__Event__5165187F" FromRole="Event" ToRole="FunctionEvent" />
+    <NavigationProperty Name="Lecture" Relationship="Self.FK__Lecture__EventID__5AEE82B9" FromRole="Event" ToRole="Lecture" />
+    <NavigationProperty Name="Themes" Relationship="Self.FK__Theme__EventID__48CFD27E" FromRole="Event" ToRole="Theme" />
+    <NavigationProperty Name="People" Relationship="Self.Attendance" FromRole="Event" ToRole="Person" />
+    <NavigationProperty Name="Schedules" Relationship="Self.EventSchedule" FromRole="Event" ToRole="Schedule" />
+    <NavigationProperty Name="Residences" Relationship="Self.Res_Event" FromRole="Event" ToRole="Residence" />
+    <NavigationProperty Name="People1" Relationship="Self.RSVP_Event" FromRole="Event" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="FunctionEvent">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="Self.FK__FunctionE__Event__5165187F" FromRole="FunctionEvent" ToRole="Event" />
+    <NavigationProperty Name="GuestSpeakers" Relationship="Self.FunctionSpeaker" FromRole="FunctionEvent" ToRole="GuestSpeaker" />
+  </EntityType>
+  <EntityType Name="GuestSpeaker">
+    <Key>
+      <PropertyRef Name="GuestSpeakerID" />
+    </Key>
+    <Property Name="GuestSpeakerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PictureLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FunctionEvents" Relationship="Self.FunctionSpeaker" FromRole="GuestSpeaker" ToRole="FunctionEvent" />
+  </EntityType>
+  <EntityType Name="Lecture">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="Self.FK__Lecture__EventID__5AEE82B9" FromRole="Lecture" ToRole="Event" />
+    <NavigationProperty Name="LectureReviews" Relationship="Self.FK__LectureRe__Event__5DCAEF64" FromRole="Lecture" ToRole="LectureReview" />
+    <NavigationProperty Name="Contents" Relationship="Self.LectureContent" FromRole="Lecture" ToRole="Content" />
+  </EntityType>
+  <EntityType Name="LectureReview">
+    <Key>
+      <PropertyRef Name="LectureReviewID" />
+      <PropertyRef Name="EventID" />
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="LectureReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Rating" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Lecture" Relationship="Self.FK__LectureRe__Event__5DCAEF64" FromRole="LectureReview" ToRole="Lecture" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__LectureRe__Perso__5EBF139D" FromRole="LectureReview" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="LectureSummary">
+    <Key>
+      <PropertyRef Name="LectureSummaryID" />
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="LectureSummaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="LectureDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Suggestions" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Breakdown" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Volunteer" Relationship="Self.FK__LectureSu__Perso__37A5467C" FromRole="LectureSummary" ToRole="Volunteer" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MessageText" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="People" Relationship="Self.PersonMessage" FromRole="Message" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Milestone">
+    <Key>
+      <PropertyRef Name="MilestoneID" />
+    </Key>
+    <Property Name="MilestoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Progress" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+    <Property Name="MilestoneTypeID" Type="Int32" />
+    <NavigationProperty Name="MilestoneType" Relationship="Self.FK__Milestone__Miles__276EDEB3" FromRole="Milestone" ToRole="MilestoneType" />
+    <NavigationProperty Name="Students" Relationship="Self.StudentMilestone" FromRole="Milestone" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="MilestoneType">
+    <Key>
+      <PropertyRef Name="MilestoneTypeID" />
+    </Key>
+    <Property Name="MilestoneTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Milestones" Relationship="Self.FK__Milestone__Miles__276EDEB3" FromRole="MilestoneType" ToRole="Milestone" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="People" Relationship="Self.PersonNotification" FromRole="Notification" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoginPassword" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ActiveStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProfilePictureID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserTypeID" Type="Int32" />
+    <NavigationProperty Name="Alumnus" Relationship="Self.FK__Alumni__PersonID__00200768" FromRole="Person" ToRole="Alumni" />
+    <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__Person__1BFD2C07" FromRole="Person" ToRole="AuditLog" />
+    <NavigationProperty Name="UserType" Relationship="Self.FK__Person__UserType__173876EA" FromRole="Person" ToRole="UserType" />
+    <NavigationProperty Name="SecurityAnswers" Relationship="Self.FK__SecurityA__Perso__1A14E395" FromRole="Person" ToRole="SecurityAnswer" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__Student__PersonI__20C1E124" FromRole="Person" ToRole="Student" />
+    <NavigationProperty Name="Volunteer" Relationship="Self.FK__Volunteer__Perso__300424B4" FromRole="Person" ToRole="Volunteer" />
+    <NavigationProperty Name="Events" Relationship="Self.Attendance" FromRole="Person" ToRole="Event" />
+    <NavigationProperty Name="Messages" Relationship="Self.PersonMessage" FromRole="Person" ToRole="Message" />
+    <NavigationProperty Name="Notifications" Relationship="Self.PersonNotification" FromRole="Person" ToRole="Notification" />
+    <NavigationProperty Name="Events1" Relationship="Self.RSVP_Event" FromRole="Person" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="Residence">
+    <Key>
+      <PropertyRef Name="ResID" />
+    </Key>
+    <Property Name="ResID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResType" Type="Int32" />
+    <NavigationProperty Name="ResType1" Relationship="Self.FK__Residence__ResTy__1273C1CD" FromRole="Residence" ToRole="ResType" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__Residen__21B6055D" FromRole="Residence" ToRole="Student" />
+    <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__Resid__31EC6D26" FromRole="Residence" ToRole="Volunteer" />
+    <NavigationProperty Name="Events" Relationship="Self.Res_Event" FromRole="Residence" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="ResType">
+    <Key>
+      <PropertyRef Name="ResTypeID" />
+    </Key>
+    <Property Name="ResTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Residences" Relationship="Self.FK__Residence__ResTy__1273C1CD" FromRole="ResType" ToRole="Residence" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="ScheduleID" />
+    </Key>
+    <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Events" Relationship="Self.EventSchedule" FromRole="Schedule" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="SecurityAnswer">
+    <Key>
+      <PropertyRef Name="SecurityAnswerID" />
+    </Key>
+    <Property Name="SecurityAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Answer" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PersonID" Type="Int32" />
+    <NavigationProperty Name="Person" Relationship="Self.FK__SecurityA__Perso__1A14E395" FromRole="SecurityAnswer" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="StudentNumber" Type="Int32" Nullable="false" />
+    <Property Name="Graduate" Type="Boolean" Nullable="false" />
+    <Property Name="Degree" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="YearOfStudy" Type="DateTime" Precision="0" />
+    <Property Name="Residence" Type="Int32" />
+    <Property Name="StudentType" Type="Int32" />
+    <NavigationProperty Name="LectureReviews" Relationship="Self.FK__LectureRe__Perso__5EBF139D" FromRole="Student" ToRole="LectureReview" />
+    <NavigationProperty Name="Person" Relationship="Self.FK__Student__PersonI__20C1E124" FromRole="Student" ToRole="Person" />
+    <NavigationProperty Name="Residence1" Relationship="Self.FK__Student__Residen__21B6055D" FromRole="Student" ToRole="Residence" />
+    <NavigationProperty Name="StudentType1" Relationship="Self.FK__Student__Student__22AA2996" FromRole="Student" ToRole="StudentType" />
+    <NavigationProperty Name="Milestones" Relationship="Self.StudentMilestone" FromRole="Student" ToRole="Milestone" />
+  </EntityType>
+  <EntityType Name="StudentType">
+    <Key>
+      <PropertyRef Name="StudentTypeID" />
+    </Key>
+    <Property Name="StudentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__Student__22AA2996" FromRole="StudentType" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Theme">
+    <Key>
+      <PropertyRef Name="ThemeID" />
+    </Key>
+    <Property Name="ThemeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ThemeName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EventID" Type="Int32" />
+    <NavigationProperty Name="Event" Relationship="Self.FK__Theme__EventID__48CFD27E" FromRole="Theme" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeID" />
+    </Key>
+    <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AccessRight" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="People" Relationship="Self.FK__Person__UserType__173876EA" FromRole="UserType" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Venue">
+    <Key>
+      <PropertyRef Name="VenueID" />
+    </Key>
+    <Property Name="VenueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Capacity" Type="Int32" />
+    <Property Name="Accessibility" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AddressID" Type="Int32" />
+    <Property Name="VenueTypeID" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="Self.FK__Venue__AddressID__403A8C7D" FromRole="Venue" ToRole="Address" />
+    <NavigationProperty Name="Events" Relationship="Self.FK__Event__VenueID__45F365D3" FromRole="Venue" ToRole="Event" />
+    <NavigationProperty Name="VenueType" Relationship="Self.FK__Venue__VenueType__412EB0B6" FromRole="Venue" ToRole="VenueType" />
+  </EntityType>
+  <EntityType Name="VenueType">
+    <Key>
+      <PropertyRef Name="VenueTypeID" />
+    </Key>
+    <Property Name="VenueTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Venues" Relationship="Self.FK__Venue__VenueType__412EB0B6" FromRole="VenueType" ToRole="Venue" />
+  </EntityType>
+  <EntityType Name="Volunteer">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="VolunteerType" Type="Int32" />
+    <Property Name="Residence" Type="Int32" />
+    <NavigationProperty Name="LectureSummaries" Relationship="Self.FK__LectureSu__Perso__37A5467C" FromRole="Volunteer" ToRole="LectureSummary" />
+    <NavigationProperty Name="Person" Relationship="Self.FK__Volunteer__Perso__300424B4" FromRole="Volunteer" ToRole="Person" />
+    <NavigationProperty Name="Residence1" Relationship="Self.FK__Volunteer__Resid__31EC6D26" FromRole="Volunteer" ToRole="Residence" />
+    <NavigationProperty Name="VolunteerFeedbacks" Relationship="Self.FK__Volunteer__Perso__34C8D9D1" FromRole="Volunteer" ToRole="VolunteerFeedback" />
+    <NavigationProperty Name="VolunteerType1" Relationship="Self.FK__Volunteer__Volun__30F848ED" FromRole="Volunteer" ToRole="VolunteerType" />
+  </EntityType>
+  <EntityType Name="VolunteerFeedback">
+    <Key>
+      <PropertyRef Name="VolunteerFeedbackID" />
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="VolunteerFeedbackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Enjoyment" Type="Int32" Nullable="false" />
+    <Property Name="Preparation" Type="Int32" Nullable="false" />
+    <Property Name="Expectation" Type="Int32" Nullable="false" />
+    <Property Name="Communication" Type="Int32" Nullable="false" />
+    <Property Name="Growth" Type="Int32" Nullable="false" />
+    <Property Name="Impact" Type="Int32" Nullable="false" />
+    <Property Name="Coping" Type="Int32" Nullable="false" />
+    <Property Name="FutureVision" Type="Int32" Nullable="false" />
+    <Property Name="Confident" Type="Int32" Nullable="false" />
+    <Property Name="Challenge" Type="Int32" Nullable="false" />
+    <Property Name="Improvement" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Criticism" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FutureMonths" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExperienceImpact" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Volunteer" Relationship="Self.FK__Volunteer__Perso__34C8D9D1" FromRole="VolunteerFeedback" ToRole="Volunteer" />
+  </EntityType>
+  <EntityType Name="VolunteerType">
+    <Key>
+      <PropertyRef Name="VolunteerTypeID" />
+    </Key>
+    <Property Name="VolunteerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__Volun__30F848ED" FromRole="VolunteerType" ToRole="Volunteer" />
+  </EntityType>
+  <EntityType Name="AuditLog">
+    <Key>
+      <PropertyRef Name="AuditID" />
+      <PropertyRef Name="LoginDate" />
+      <PropertyRef Name="LoginTime" />
+      <PropertyRef Name="LoginDuration" />
+    </Key>
+    <Property Name="AuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" />
+    <Property Name="LoginDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoginTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="LoginDuration" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK__AuditLog__Person__1BFD2C07" FromRole="AuditLog" ToRole="Person" />
+  </EntityType>
+  <Association Name="FK__Venue__AddressID__403A8C7D">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Venue">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Alumni__PersonID__00200768">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Alumni" Type="Self.Alumnus" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Alumni">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommEngag__Event__5812160E">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="CommEngage" Type="Self.CommEngage" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="CommEngage">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Event__VenueID__45F365D3">
+    <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="VenueID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="VenueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FunctionE__Event__5165187F">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="FunctionEvent">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lecture__EventID__5AEE82B9">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="Lecture">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Theme__EventID__48CFD27E">
+    <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+    <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="Theme">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LectureRe__Event__5DCAEF64">
+    <End Role="Lecture" Type="Self.Lecture" Multiplicity="1" />
+    <End Role="LectureReview" Type="Self.LectureReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecture">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="LectureReview">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LectureRe__Perso__5EBF139D">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="LectureReview" Type="Self.LectureReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="LectureReview">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LectureSu__Perso__37A5467C">
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="1" />
+    <End Role="LectureSummary" Type="Self.LectureSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteer">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="LectureSummary">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Milestone__Miles__276EDEB3">
+    <End Role="MilestoneType" Type="Self.MilestoneType" Multiplicity="0..1" />
+    <End Role="Milestone" Type="Self.Milestone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MilestoneType">
+        <PropertyRef Name="MilestoneTypeID" />
+      </Principal>
+      <Dependent Role="Milestone">
+        <PropertyRef Name="MilestoneTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AuditLog__Person__1BFD2C07">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="AuditLog">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Person__UserType__173876EA">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="UserTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SecurityA__Perso__1A14E395">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="SecurityAnswer" Type="Self.SecurityAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="SecurityAnswer">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__PersonI__20C1E124">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Perso__300424B4">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Volunteer">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Residence__ResTy__1273C1CD">
+    <End Role="ResType" Type="Self.ResType" Multiplicity="0..1" />
+    <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResType">
+        <PropertyRef Name="ResTypeID" />
+      </Principal>
+      <Dependent Role="Residence">
+        <PropertyRef Name="ResType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Residen__21B6055D">
+    <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Residence">
+        <PropertyRef Name="ResID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Residence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Resid__31EC6D26">
+    <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Residence">
+        <PropertyRef Name="ResID" />
+      </Principal>
+      <Dependent Role="Volunteer">
+        <PropertyRef Name="Residence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Student__22AA2996">
+    <End Role="StudentType" Type="Self.StudentType" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentType">
+        <PropertyRef Name="StudentTypeID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="StudentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Venue__VenueType__412EB0B6">
+    <End Role="VenueType" Type="Self.VenueType" Multiplicity="0..1" />
+    <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VenueType">
+        <PropertyRef Name="VenueTypeID" />
+      </Principal>
+      <Dependent Role="Venue">
+        <PropertyRef Name="VenueTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Perso__34C8D9D1">
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="1" />
+    <End Role="VolunteerFeedback" Type="Self.VolunteerFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteer">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="VolunteerFeedback">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Volunteer__Volun__30F848ED">
+    <End Role="VolunteerType" Type="Self.VolunteerType" Multiplicity="0..1" />
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VolunteerType">
+        <PropertyRef Name="VolunteerTypeID" />
+      </Principal>
+      <Dependent Role="Volunteer">
+        <PropertyRef Name="VolunteerType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Attendance">
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+  </Association>
+  <Association Name="CommContent">
+    <End Role="Content" Type="Self.Content" Multiplicity="*" />
+    <End Role="CommEngage" Type="Self.CommEngage" Multiplicity="*" />
+  </Association>
+  <Association Name="EventSchedule">
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+  </Association>
+  <Association Name="FunctionSpeaker">
+    <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
+    <End Role="GuestSpeaker" Type="Self.GuestSpeaker" Multiplicity="*" />
+  </Association>
+  <Association Name="LectureContent">
+    <End Role="Content" Type="Self.Content" Multiplicity="*" />
+    <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
+  </Association>
+  <Association Name="PersonMessage">
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+  </Association>
+  <Association Name="PersonNotification">
+    <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+  </Association>
+  <Association Name="Res_Event">
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+  </Association>
+  <Association Name="RSVP_Event">
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+  </Association>
+  <Association Name="StudentMilestone">
+    <End Role="Milestone" Type="Self.Milestone" Multiplicity="*" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Db_TRWLA_StagingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="Alumni" EntityType="Self.Alumnus" />
+    <EntitySet Name="CommEngages" EntityType="Self.CommEngage" />
+    <EntitySet Name="Contents" EntityType="Self.Content" />
+    <EntitySet Name="Events" EntityType="Self.Event" />
+    <EntitySet Name="FunctionEvents" EntityType="Self.FunctionEvent" />
+    <EntitySet Name="GuestSpeakers" EntityType="Self.GuestSpeaker" />
+    <EntitySet Name="Lectures" EntityType="Self.Lecture" />
+    <EntitySet Name="LectureReviews" EntityType="Self.LectureReview" />
+    <EntitySet Name="LectureSummaries" EntityType="Self.LectureSummary" />
+    <EntitySet Name="Messages" EntityType="Self.Message" />
+    <EntitySet Name="Milestones" EntityType="Self.Milestone" />
+    <EntitySet Name="MilestoneTypes" EntityType="Self.MilestoneType" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="Residences" EntityType="Self.Residence" />
+    <EntitySet Name="ResTypes" EntityType="Self.ResType" />
+    <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+    <EntitySet Name="SecurityAnswers" EntityType="Self.SecurityAnswer" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentTypes" EntityType="Self.StudentType" />
+    <EntitySet Name="Themes" EntityType="Self.Theme" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <EntitySet Name="Venues" EntityType="Self.Venue" />
+    <EntitySet Name="VenueTypes" EntityType="Self.VenueType" />
+    <EntitySet Name="Volunteers" EntityType="Self.Volunteer" />
+    <EntitySet Name="VolunteerFeedbacks" EntityType="Self.VolunteerFeedback" />
+    <EntitySet Name="VolunteerTypes" EntityType="Self.VolunteerType" />
+    <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+    <AssociationSet Name="FK__Venue__AddressID__403A8C7D" Association="Self.FK__Venue__AddressID__403A8C7D">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="Venue" EntitySet="Venues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Alumni__PersonID__00200768" Association="Self.FK__Alumni__PersonID__00200768">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Alumni" EntitySet="Alumni" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommEngag__Event__5812160E" Association="Self.FK__CommEngag__Event__5812160E">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="CommEngage" EntitySet="CommEngages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Event__VenueID__45F365D3" Association="Self.FK__Event__VenueID__45F365D3">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FunctionE__Event__5165187F" Association="Self.FK__FunctionE__Event__5165187F">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="FunctionEvent" EntitySet="FunctionEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lecture__EventID__5AEE82B9" Association="Self.FK__Lecture__EventID__5AEE82B9">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Lecture" EntitySet="Lectures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Theme__EventID__48CFD27E" Association="Self.FK__Theme__EventID__48CFD27E">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Theme" EntitySet="Themes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LectureRe__Event__5DCAEF64" Association="Self.FK__LectureRe__Event__5DCAEF64">
+      <End Role="Lecture" EntitySet="Lectures" />
+      <End Role="LectureReview" EntitySet="LectureReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LectureRe__Perso__5EBF139D" Association="Self.FK__LectureRe__Perso__5EBF139D">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="LectureReview" EntitySet="LectureReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LectureSu__Perso__37A5467C" Association="Self.FK__LectureSu__Perso__37A5467C">
+      <End Role="Volunteer" EntitySet="Volunteers" />
+      <End Role="LectureSummary" EntitySet="LectureSummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Milestone__Miles__276EDEB3" Association="Self.FK__Milestone__Miles__276EDEB3">
+      <End Role="MilestoneType" EntitySet="MilestoneTypes" />
+      <End Role="Milestone" EntitySet="Milestones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AuditLog__Person__1BFD2C07" Association="Self.FK__AuditLog__Person__1BFD2C07">
+      <End Role="Person" EntitySet="People" />
+      <End Role="AuditLog" EntitySet="AuditLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Person__UserType__173876EA" Association="Self.FK__Person__UserType__173876EA">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SecurityA__Perso__1A14E395" Association="Self.FK__SecurityA__Perso__1A14E395">
+      <End Role="Person" EntitySet="People" />
+      <End Role="SecurityAnswer" EntitySet="SecurityAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__PersonI__20C1E124" Association="Self.FK__Student__PersonI__20C1E124">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Perso__300424B4" Association="Self.FK__Volunteer__Perso__300424B4">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Volunteer" EntitySet="Volunteers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Residence__ResTy__1273C1CD" Association="Self.FK__Residence__ResTy__1273C1CD">
+      <End Role="ResType" EntitySet="ResTypes" />
+      <End Role="Residence" EntitySet="Residences" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Residen__21B6055D" Association="Self.FK__Student__Residen__21B6055D">
+      <End Role="Residence" EntitySet="Residences" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Resid__31EC6D26" Association="Self.FK__Volunteer__Resid__31EC6D26">
+      <End Role="Residence" EntitySet="Residences" />
+      <End Role="Volunteer" EntitySet="Volunteers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Student__22AA2996" Association="Self.FK__Student__Student__22AA2996">
+      <End Role="StudentType" EntitySet="StudentTypes" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Venue__VenueType__412EB0B6" Association="Self.FK__Venue__VenueType__412EB0B6">
+      <End Role="VenueType" EntitySet="VenueTypes" />
+      <End Role="Venue" EntitySet="Venues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Perso__34C8D9D1" Association="Self.FK__Volunteer__Perso__34C8D9D1">
+      <End Role="Volunteer" EntitySet="Volunteers" />
+      <End Role="VolunteerFeedback" EntitySet="VolunteerFeedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Volun__30F848ED" Association="Self.FK__Volunteer__Volun__30F848ED">
+      <End Role="VolunteerType" EntitySet="VolunteerTypes" />
+      <End Role="Volunteer" EntitySet="Volunteers" />
+    </AssociationSet>
+    <AssociationSet Name="Attendance" Association="Self.Attendance">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="CommContent" Association="Self.CommContent">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="CommEngage" EntitySet="CommEngages" />
+    </AssociationSet>
+    <AssociationSet Name="EventSchedule" Association="Self.EventSchedule">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Schedule" EntitySet="Schedules" />
+    </AssociationSet>
+    <AssociationSet Name="FunctionSpeaker" Association="Self.FunctionSpeaker">
+      <End Role="FunctionEvent" EntitySet="FunctionEvents" />
+      <End Role="GuestSpeaker" EntitySet="GuestSpeakers" />
+    </AssociationSet>
+    <AssociationSet Name="LectureContent" Association="Self.LectureContent">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="Lecture" EntitySet="Lectures" />
+    </AssociationSet>
+    <AssociationSet Name="PersonMessage" Association="Self.PersonMessage">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="PersonNotification" Association="Self.PersonNotification">
+      <End Role="Notification" EntitySet="Notifications" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="Res_Event" Association="Self.Res_Event">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Residence" EntitySet="Residences" />
+    </AssociationSet>
+    <AssociationSet Name="RSVP_Event" Association="Self.RSVP_Event">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Person" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="StudentMilestone" Association="Self.StudentMilestone">
+      <End Role="Milestone" EntitySet="Milestones" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

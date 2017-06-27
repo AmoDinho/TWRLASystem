@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="61b4057107924a84bf6dcd16e9b37928" Name="Diagram1">
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Address" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Alumnus" Width="1.5" PointX="14.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.CommEngage" Width="1.5" PointX="7.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Content" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Event" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.FunctionEvent" Width="1.5" PointX="7.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.GuestSpeaker" Width="1.5" PointX="9.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Lecture" Width="1.5" PointX="7.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.LectureReview" Width="1.5" PointX="20" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.LectureSummary" Width="1.5" PointX="17" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Message" Width="1.5" PointX="10.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Milestone" Width="1.5" PointX="15.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.MilestoneType" Width="1.5" PointX="13.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Notification" Width="1.5" PointX="10.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Person" Width="1.5" PointX="12.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Residence" Width="1.5" PointX="10.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.ResType" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Schedule" Width="1.5" PointX="7.5" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.SecurityAnswer" Width="1.5" PointX="14.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Student" Width="1.5" PointX="17.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.StudentType" Width="1.5" PointX="15.5" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Theme" Width="1.5" PointX="7.5" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.UserType" Width="1.5" PointX="10.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Venue" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.VenueType" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.Volunteer" Width="1.5" PointX="14.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.VolunteerFeedback" Width="1.5" PointX="17" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.VolunteerType" Width="1.5" PointX="12.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db_TRWLA_StagingModel.AuditLog" Width="1.5" PointX="14.75" PointY="34.375" IsExpanded="true" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Venue__AddressID__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Alumni__PersonID__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__CommEngag__Event__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Event__VenueID__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__FunctionE__Event__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Lecture__EventID__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Theme__EventID__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__LectureRe__Event__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__LectureRe__Perso__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__LectureSu__Perso__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Milestone__Miles__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__AuditLog__Person__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Person__UserType__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__SecurityA__Perso__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Student__PersonI__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Volunteer__Perso__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Residence__ResTy__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Student__Residen__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Volunteer__Resid__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Student__Student__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Venue__VenueType__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Volunteer__Perso__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FK__Volunteer__Volun__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.Attendance" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.CommContent" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.EventSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.FunctionSpeaker" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.LectureContent" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.PersonMessage" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.PersonNotification" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.Res_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.RSVP_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Db_TRWLA_StagingModel.StudentMilestone" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
