@@ -41,12 +41,13 @@
                         </ul>
                     </li>
                 </ul>
-                @Html.Partial("StraightLoginStudent")
+                @Html.Partial("Vol_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
-        @*
+       @RenderBody()
+         @*
             <footer class="panel-footer">
                 <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
             </footer>*@
@@ -55,7 +56,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @*@RenderSection("scripts", required: false)*@
+    @RenderSection("scripts", required: false)
 
     <script>
 $(document).ready(function(){

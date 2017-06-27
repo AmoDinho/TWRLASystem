@@ -32,6 +32,7 @@
                     @* This is not working, the tick does not appear. *@
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
+                            <input id="checkbox1" type="checkbox">
                             @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox label" })
                             @Html.LabelFor(m => m.RememberMe)
                         </div>
@@ -45,6 +46,9 @@
                 <p>
                     @Html.ActionLink("Register as a new user", "Register")
                 </p>
+                <p>
+                    @Html.ActionLink("Forgot Password", "ForgotPassword")
+                </p>
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
@@ -52,12 +56,13 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
-    </div>
+    </div>*@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }
