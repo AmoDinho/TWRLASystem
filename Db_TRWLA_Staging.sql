@@ -114,7 +114,9 @@ create table Volunteer
 (
 PersonID int primary key references Person(PersonID),
 VolunteerType int references VolunteerType(VolunteerTypeID),
-Residence int references Residence(ResID)
+Residence int references Residence(ResID),
+AccessRight char(25) not null,
+
 )
 
 create table VolunteerFeedback
