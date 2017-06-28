@@ -24,6 +24,7 @@ namespace TRWLASystemMaster.Models.Usertype
         public int PersonID { get; set; }
         public Nullable<int> VolunteerType { get; set; }
         public Nullable<int> Residence { get; set; }
+        public string AccessRight { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LectureSummary> LectureSummaries { get; set; }

@@ -297,6 +297,7 @@
     <NavigationProperty Name="Residence1" Relationship="Self.FK__Volunteer__Resid__31EC6D26" FromRole="Volunteer" ToRole="Residence" />
     <NavigationProperty Name="VolunteerFeedbacks" Relationship="Self.FK__Volunteer__Perso__34C8D9D1" FromRole="Volunteer" ToRole="VolunteerFeedback" />
     <NavigationProperty Name="VolunteerType1" Relationship="Self.FK__Volunteer__Volun__30F848ED" FromRole="Volunteer" ToRole="VolunteerType" />
+    <Property Name="AccessRight" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="VolunteerFeedback">
     <Key>

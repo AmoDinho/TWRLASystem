@@ -329,6 +329,7 @@ warning 6002: The table/view 'Db_TRWLA_Staging.dbo.AuditLog' does not have a pri
     <Property Name="PersonID" Type="int" Nullable="false" />
     <Property Name="VolunteerType" Type="int" />
     <Property Name="Residence" Type="int" />
+    <Property Name="AccessRight" Type="char" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="VolunteerFeedback">
     <Key>

@@ -474,11 +474,6 @@
     <Content Include="Views\UserTypes\Details.cshtml" />
     <Content Include="Views\UserTypes\Edit.cshtml" />
     <Content Include="Views\UserTypes\Index.cshtml" />
-    <Content Include="Views\Volunteers\Create.cshtml" />
-    <Content Include="Views\Volunteers\Delete.cshtml" />
-    <Content Include="Views\Volunteers\Details.cshtml" />
-    <Content Include="Views\Volunteers\Edit.cshtml" />
-    <Content Include="Views\Volunteers\Index.cshtml" />
     <Content Include="Views\VolunteerTypes\Create.cshtml" />
     <Content Include="Views\VolunteerTypes\Delete.cshtml" />
     <Content Include="Views\VolunteerTypes\Details.cshtml" />
@@ -509,6 +504,11 @@
     <Content Include="Views\Residences\Details.cshtml" />
     <Content Include="Views\Residences\Edit.cshtml" />
     <Content Include="Views\Residences\Index.cshtml" />
+    <Content Include="Views\Volunteers\Create.cshtml" />
+    <Content Include="Views\Volunteers\Delete.cshtml" />
+    <Content Include="Views\Volunteers\Details.cshtml" />
+    <Content Include="Views\Volunteers\Edit.cshtml" />
+    <Content Include="Views\Volunteers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

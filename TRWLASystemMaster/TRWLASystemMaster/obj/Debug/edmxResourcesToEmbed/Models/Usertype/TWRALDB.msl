@@ -253,6 +253,7 @@
     <EntitySetMapping Name="Volunteers">
       <EntityTypeMapping TypeName="Db_TRWLA_StagingModel.Volunteer">
         <MappingFragment StoreEntitySet="Volunteer">
+          <ScalarProperty Name="AccessRight" ColumnName="AccessRight" />
           <ScalarProperty Name="PersonID" ColumnName="PersonID" />
           <ScalarProperty Name="VolunteerType" ColumnName="VolunteerType" />
           <ScalarProperty Name="Residence" ColumnName="Residence" />

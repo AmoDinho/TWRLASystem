@@ -50,7 +50,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonID,VolunteerType,Residence")] Volunteer volunteer)
+        public ActionResult Create([Bind(Include = "PersonID,VolunteerType,Residence,AccessRight")] Volunteer volunteer)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonID,VolunteerType,Residence")] Volunteer volunteer)
+        public ActionResult Edit([Bind(Include = "PersonID,VolunteerType,Residence,AccessRight")] Volunteer volunteer)
         {
             if (ModelState.IsValid)
             {

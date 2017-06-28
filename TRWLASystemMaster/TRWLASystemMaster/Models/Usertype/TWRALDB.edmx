@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Db_TRWLA_StagingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Db_TRWLA_StagingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -334,6 +334,7 @@ warning 6002: The table/view 'Db_TRWLA_Staging.dbo.AuditLog' does not have a pri
           <Property Name="PersonID" Type="int" Nullable="false" />
           <Property Name="VolunteerType" Type="int" />
           <Property Name="Residence" Type="int" />
+          <Property Name="AccessRight" Type="char" MaxLength="25" Nullable="false" />
         </EntityType>
         <EntityType Name="VolunteerFeedback">
           <Key>
@@ -1102,8 +1103,7 @@ warning 6002: The table/view 'Db_TRWLA_Staging.dbo.AuditLog' does not have a pri
             <End Role="Volunteer" EntitySet="Volunteer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Db_TRWLA_StagingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1404,6 +1404,7 @@ warning 6002: The table/view 'Db_TRWLA_Staging.dbo.AuditLog' does not have a pri
           <NavigationProperty Name="Residence1" Relationship="Self.FK__Volunteer__Resid__31EC6D26" FromRole="Volunteer" ToRole="Residence" />
           <NavigationProperty Name="VolunteerFeedbacks" Relationship="Self.FK__Volunteer__Perso__34C8D9D1" FromRole="Volunteer" ToRole="VolunteerFeedback" />
           <NavigationProperty Name="VolunteerType1" Relationship="Self.FK__Volunteer__Volun__30F848ED" FromRole="Volunteer" ToRole="VolunteerType" />
+          <Property Name="AccessRight" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="VolunteerFeedback">
           <Key>
@@ -2188,6 +2189,7 @@ warning 6002: The table/view 'Db_TRWLA_Staging.dbo.AuditLog' does not have a pri
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="Db_TRWLA_StagingModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteer">
+                <ScalarProperty Name="AccessRight" ColumnName="AccessRight" />
                 <ScalarProperty Name="PersonID" ColumnName="PersonID" />
                 <ScalarProperty Name="VolunteerType" ColumnName="VolunteerType" />
                 <ScalarProperty Name="Residence" ColumnName="Residence" />
