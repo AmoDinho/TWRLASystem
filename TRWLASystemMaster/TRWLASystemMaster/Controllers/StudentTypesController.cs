@@ -15,9 +15,26 @@ namespace TRWLASystemMaster.Controllers
         private Db_TRWLA_StagingEntities db = new Db_TRWLA_StagingEntities();
 
         // GET: StudentTypes
-        public ActionResult Index()
+        public ActionResult Index(string searchStringST)
         {
-            return View(db.StudentTypes.ToList());
+            /*
+* Linq Query
+* 
+* Search String is for Student Type Description!!
+* 
+* */
+            var stutype = from st in db.StudentTypes
+                      select st;
+            if (!String.IsNullOrEmpty(searchStringST))
+            {
+                stutype = stutype.Where(s => s.Description.Contains(searchStringST));
+
+            }
+
+
+
+            return View(stutype.ToList());
+
         }
 
         // GET: StudentTypes/Details/5

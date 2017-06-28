@@ -5,11 +5,20 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Students</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@* Search Button for Stundent Degree'*@
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Degree: @Html.TextBox("SearchStringS")
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>

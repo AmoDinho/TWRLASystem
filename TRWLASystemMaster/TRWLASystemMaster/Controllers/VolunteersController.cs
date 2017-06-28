@@ -15,6 +15,8 @@ namespace TRWLASystemMaster.Controllers
         private Db_TRWLA_StagingEntities db = new Db_TRWLA_StagingEntities();
 
         // GET: Volunteers
+
+            // THERE IS NO STRING IN HERE 
         public ActionResult Index()
         {
             var volunteers = db.Volunteers.Include(v => v.Person).Include(v => v.Residence1).Include(v => v.VolunteerType1);

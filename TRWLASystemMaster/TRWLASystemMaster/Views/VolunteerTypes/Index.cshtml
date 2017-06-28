@@ -5,11 +5,21 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Volunteer Type</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@* Search Button for VolunteerType Description  '*@
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Descrtiption: @Html.TextBox("SearchStringvS")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>

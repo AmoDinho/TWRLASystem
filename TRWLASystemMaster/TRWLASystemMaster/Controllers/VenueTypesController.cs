@@ -15,9 +15,25 @@ namespace TRWLASystemMaster.Controllers
         private Db_TRWLA_StagingEntities db = new Db_TRWLA_StagingEntities();
 
         // GET: VenueTypes
-        public ActionResult Index()
+        public ActionResult Index(string searchStringVT)
         {
-            return View(db.VenueTypes.ToList());
+            /*
+       * Linq Query
+       * 
+       * Search String is for DESCRRIPTION!!
+       * 
+       * */
+            var ventype = from vt in db.VenueTypes
+                      select vt;
+            if (!String.IsNullOrEmpty(searchStringVT))
+            {
+                ventype = ventype.Where(s => s.Description.Contains(searchStringVT));
+
+            }
+
+
+
+            return View(ventype.ToList());
         }
 
         // GET: VenueTypes/Details/5

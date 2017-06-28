@@ -15,9 +15,24 @@ namespace TRWLASystemMaster.Controllers
         private Db_TRWLA_StagingEntities db = new Db_TRWLA_StagingEntities();
 
         // GET: VolunteerTypes
-        public ActionResult Index()
+        public ActionResult Index( string searchStringVS)
         {
-            return View(db.VolunteerTypes.ToList());
+            /*
+* Linq Query
+* 
+* Search String is for Student Degree!!
+* 
+* */
+            var voltype = from vu in db.VolunteerTypes
+                      select vu;
+
+            if (!String.IsNullOrEmpty(searchStringVS))
+            {
+                voltype = voltype.Where(s => s.Description.Contains(searchStringVS));
+
+            }
+
+            return View(voltype.ToList());
         }
 
         // GET: VolunteerTypes/Details/5

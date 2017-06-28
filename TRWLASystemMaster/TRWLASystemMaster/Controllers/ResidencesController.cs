@@ -19,7 +19,13 @@ namespace TRWLASystemMaster.Controllers
         {
             //var residences = db.Residences.Include(r => r.ResType1);
             //return View(residences.ToList());
-
+        /*
+         * Linq Query
+         * 
+         * Search String is for RES NAME!!
+         * 
+         * */
+           
             var res = from s in db.Residences
                            select s;
             if (!String.IsNullOrEmpty(searchString))
