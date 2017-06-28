@@ -1,0 +1,41 @@
+﻿@model TRWLASystemMaster.Models.Usertype.Residence
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Residence</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ResName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResType1.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResType1.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

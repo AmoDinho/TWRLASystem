@@ -200,7 +200,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResidencesController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\StudentTypesController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
+    <Compile Include="Controllers\VenuesController.cs" />
+    <Compile Include="Controllers\VenueTypesController.cs" />
+    <Compile Include="Controllers\VolunteersController.cs" />
+    <Compile Include="Controllers\VolunteerTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -467,6 +474,41 @@
     <Content Include="Views\UserTypes\Details.cshtml" />
     <Content Include="Views\UserTypes\Edit.cshtml" />
     <Content Include="Views\UserTypes\Index.cshtml" />
+    <Content Include="Views\Volunteers\Create.cshtml" />
+    <Content Include="Views\Volunteers\Delete.cshtml" />
+    <Content Include="Views\Volunteers\Details.cshtml" />
+    <Content Include="Views\Volunteers\Edit.cshtml" />
+    <Content Include="Views\Volunteers\Index.cshtml" />
+    <Content Include="Views\VolunteerTypes\Create.cshtml" />
+    <Content Include="Views\VolunteerTypes\Delete.cshtml" />
+    <Content Include="Views\VolunteerTypes\Details.cshtml" />
+    <Content Include="Views\VolunteerTypes\Edit.cshtml" />
+    <Content Include="Views\VolunteerTypes\Index.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\StudentTypes\Create.cshtml" />
+    <Content Include="Views\StudentTypes\Delete.cshtml" />
+    <Content Include="Views\StudentTypes\Details.cshtml" />
+    <Content Include="Views\StudentTypes\Edit.cshtml" />
+    <Content Include="Views\StudentTypes\Index.cshtml" />
+    <Content Include="Views\Venues\Create.cshtml" />
+    <Content Include="Views\Venues\Delete.cshtml" />
+    <Content Include="Views\Venues\Details.cshtml" />
+    <Content Include="Views\Venues\Edit.cshtml" />
+    <Content Include="Views\Venues\Index.cshtml" />
+    <Content Include="Views\VenueTypes\Create.cshtml" />
+    <Content Include="Views\VenueTypes\Delete.cshtml" />
+    <Content Include="Views\VenueTypes\Details.cshtml" />
+    <Content Include="Views\VenueTypes\Edit.cshtml" />
+    <Content Include="Views\VenueTypes\Index.cshtml" />
+    <Content Include="Views\Residences\Create.cshtml" />
+    <Content Include="Views\Residences\Delete.cshtml" />
+    <Content Include="Views\Residences\Details.cshtml" />
+    <Content Include="Views\Residences\Edit.cshtml" />
+    <Content Include="Views\Residences\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.Usertype.Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Graduate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearOfStudy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residence1.ResName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentType1.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Graduate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearOfStudy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residence1.ResName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentType1.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })
+        </td>
+    </tr>
+}
+
+</table>

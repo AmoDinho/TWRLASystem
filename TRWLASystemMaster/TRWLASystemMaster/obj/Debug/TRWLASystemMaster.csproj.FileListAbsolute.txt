@@ -407,3 +407,4 @@ C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMa
 C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.dll
 C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.pdb
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.csprojResolveAssemblyReference.cache
