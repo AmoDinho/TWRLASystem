@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.Usertype.Alumnus>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Generate Graduate List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@* Genereate Button for Graduate List'*@
+@using (Html.BeginForm())
+{
+    <p>
+        @*Find by Degree: @Html.TextBox("SearchStringS")*@
+        <input type="submit" value="Generate Graduate List" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })
+        </td>
+    </tr>
+}
+
+</table>

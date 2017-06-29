@@ -198,11 +198,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlumniController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentTypesController.cs" />
+    <Compile Include="Controllers\UniqueCodeController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Controllers\VenueTypesController.cs" />
@@ -509,6 +511,12 @@
     <Content Include="Views\Volunteers\Details.cshtml" />
     <Content Include="Views\Volunteers\Edit.cshtml" />
     <Content Include="Views\Volunteers\Index.cshtml" />
+    <Content Include="Views\Alumni\Create.cshtml" />
+    <Content Include="Views\Alumni\Delete.cshtml" />
+    <Content Include="Views\Alumni\Details.cshtml" />
+    <Content Include="Views\Alumni\Edit.cshtml" />
+    <Content Include="Views\Alumni\Index.cshtml" />
+    <Content Include="Views\UniqueCode\UniqueCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

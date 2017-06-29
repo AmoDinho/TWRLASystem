@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Generate Unique Code</h2>
+<p>Unique codes can only be used once</p>
+
+@* Search Button for Stundent Degree'*@
+@using (Html.BeginForm())
+{
+    <p>
+        @*Find by Degree: @Html.TextBox("SearchStringS")*@
+        <input type="submit" value="Generate Unique Code" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            Code
+        </th>
+        <th>
+            Status
+        </th>
+            <th></th>
+    </tr>
+
+
+    <tr>
+        <td><!-- Record # 1 -->
+           124357
+        </td>
+        <td>
+            Active
+        </td>
+    </tr>
+
+    <tr>
+
+        <td>
+            <!-- Record # 2 -->
+            258478
+        </td>
+        <td>
+            Expired
+        </td>
+
+    </tr>
+
+    <tr>
+
+        <td>
+            <!-- Record #  3-->
+            123546
+        </td>
+        <td>
+            Active
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 4 -->
+            859756
+        </td>
+        <td>
+            Expired
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 5 -->
+            745896
+        </td>
+        <td>
+            Active
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 6 -->
+            1452369
+        </td>
+        <td>
+            Expired
+        </td>
+    </tr>
+
+</table>

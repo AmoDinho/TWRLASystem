@@ -36,6 +36,13 @@ namespace TRWLASystemMaster.Controllers
 
             return View();
         }
-       
+
+        public ActionResult GenerateAlumn()
+        {
+           
+
+            return View();
+        }
+
     }
 }
