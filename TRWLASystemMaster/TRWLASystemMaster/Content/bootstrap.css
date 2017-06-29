@@ -366,6 +366,7 @@ table {
   }
   .navbar {
     display: none;
+    background-color:transparent;
   }
   .table td,
   .table th {
@@ -4545,19 +4546,19 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: #777777;
+  color: black;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333333;
+color: grey;
   background-color: transparent;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #555555;
+  color: black;
   background-color: #e7e7e7;
 }
 
@@ -4643,12 +4644,14 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
-  border-color: #080808;
+ background-color: transparent;
+ box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+ background:rgba(255,240,245, 0.9);
+ font-family: 'El Messiri', sans-serif;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: black;
 }
 
 .navbar-inverse .navbar-brand:hover,
