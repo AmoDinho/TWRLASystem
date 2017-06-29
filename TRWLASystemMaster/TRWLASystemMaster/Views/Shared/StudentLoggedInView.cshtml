@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title TRWLA Student Portal</title>
     @Styles.Render("~/Content/css")
-
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -31,7 +30,14 @@
 
                     @* ADD LINK TO Volunteer List PAGE *@
                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
+                        <ul class="dropdown-menu"></ul>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Volunteer<b class="caret"></b></a>
+                        <ul class="dropdown-menu"></ul>
+                    </li>
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -46,6 +52,7 @@
         </div>
     </div>
     <div class="container body-content">
+        
         @*
             <footer class="panel-footer">
                 <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
@@ -57,11 +64,11 @@
 
     @*@RenderSection("scripts", required: false)*@
 
-    <script>
+    @*<script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
-    </script>
+    </script>*@
 </body>
 </html>
 <script src="https://use.fontawesome.com/dead28a296.js"></script>
