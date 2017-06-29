@@ -943,10 +943,10 @@
   color: #f85019;
   border-color: #f85019; }
 .btn-primary.btn-link {
-  color: #bb0eb8; }
+  color: white; }
 .btn-primary.btn-link:hover, .btn-primary.btn-link:focus, .btn-primary.btn-link:active {
   background-color: transparent;
-  color: #790ca4;
+  color: #fff;
   text-decoration: none; }
 
 .btn-success {
