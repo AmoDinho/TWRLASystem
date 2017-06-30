@@ -198,8 +198,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlumniController.cs" />
     <Compile Include="Controllers\CheckPasswordController.cs" />
+    <Compile Include="Controllers\DeactivateAccController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
@@ -522,6 +524,8 @@
     <Content Include="Views\UniqueCode\UniqueCode.cshtml" />
     <Content Include="Views\CheckPassword\Index.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\DeactivateAcc\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+
+<h1>Deactivate Account</h1>
+
+<div>
+    <center>
+        <div class="col-sm-4">
+            <div class="form-group form-group-no-border">
+                <label>Enter Your Password</label>
+                <input type="text" value="" placeholder="Password" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group form-group-no-border">
+                <label>Re-enter Your Password</label>
+                <input type="text" value="" placeholder="Confirm Password" class="form-control" />
+            </div>
+        </div>
+        <button class="btn" data-toggle="modal" data-target="#myModal">Confirm</button>
+    </center>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Are You Sure?</h4>
+            </div>
+            <div class="modal-body">
+               You are about to deactivate your account. You will not be able to access the system with the email address and password you registered with.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Deactivate</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
