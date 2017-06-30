@@ -199,12 +199,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumniController.cs" />
+    <Compile Include="Controllers\CheckPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentTypesController.cs" />
     <Compile Include="Controllers\UniqueCodeController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Controllers\VenueTypesController.cs" />
@@ -332,6 +334,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\1498841323_user_female.svg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\now-ui-kit.css" />
@@ -517,6 +520,8 @@
     <Content Include="Views\Alumni\Edit.cshtml" />
     <Content Include="Views\Alumni\Index.cshtml" />
     <Content Include="Views\UniqueCode\UniqueCode.cshtml" />
+    <Content Include="Views\CheckPassword\Index.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
