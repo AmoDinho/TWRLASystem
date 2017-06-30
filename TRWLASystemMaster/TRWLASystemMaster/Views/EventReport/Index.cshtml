@@ -23,15 +23,15 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Functions', 'Lectures'],
-          ['2017',  50,      45],
-          ['2018',  75,      12],
-          ['2019',  89,       78],
-          ['2020',  100,      98]
+          ['Jan',  50,      45],
+          ['Feb',  75,      12],
+          ['March',  89,       78],
+          ['April',  100,      98]
         ]);
 
         var options = {
-          title: 'Avg yearly attendance for events between 2017-2020',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          title: 'Average Monthly attendance for events between January - April of 2017',
+          hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0,title:"Average Attendance"}
         };
 

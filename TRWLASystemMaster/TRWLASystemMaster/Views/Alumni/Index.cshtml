@@ -5,18 +5,15 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Generate Graduate List</h2>
+<h2>Alumni</h2>
+<p>You can search for students who have graduated from the Tuks Women In Res Leadership Academy</p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@* Genereate Button for Graduate List'*@
+@** Search Button for 'RES NAME'*@
 @using (Html.BeginForm())
 {
     <p>
-        @*Find by Degree: @Html.TextBox("SearchStringS")*@
-        <input type="submit" value="Generate Graduate List" />
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" class="btn" value="Search" />
     </p>
 }
 

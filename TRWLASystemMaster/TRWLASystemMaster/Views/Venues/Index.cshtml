@@ -8,7 +8,7 @@
 <h2>Venues</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a new Venue", "Create")
 </p>
 
 @* Search Button for Venue Name'*@
@@ -59,7 +59,7 @@
             @Html.DisplayFor(modelItem => item.VenueType.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VenueID }) |
+            @Html.ActionLink("Update", "Edit", new { id=item.VenueID }) |
             @Html.ActionLink("Details", "Details", new { id=item.VenueID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.VenueID })
         </td>

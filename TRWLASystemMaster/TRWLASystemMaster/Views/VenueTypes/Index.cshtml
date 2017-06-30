@@ -8,7 +8,7 @@
 <h2>Venue Type</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a New Venue", "Create")
 </p>
 
 
@@ -34,7 +34,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VenueTypeID }) |
+            @Html.ActionLink("Update", "Edit", new { id=item.VenueTypeID }) |
             @Html.ActionLink("Details", "Details", new { id=item.VenueTypeID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.VenueTypeID })
         </td>

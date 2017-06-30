@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Residences</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a Residence", "Create")
 </p>
 
 @* Search Button for 'RES NAME'*@
@@ -16,7 +16,7 @@
 {
     <p>
         Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        <input type="submit" class="btn" value="Search" />
     </p>
 }
 
@@ -40,7 +40,7 @@
             @Html.DisplayFor(modelItem => item.ResType1.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ResID }) |
+            @Html.ActionLink("Update", "Edit", new { id=item.ResID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ResID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ResID })
         </td>

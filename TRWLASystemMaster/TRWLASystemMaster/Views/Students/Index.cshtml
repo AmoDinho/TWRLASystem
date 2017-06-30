@@ -8,7 +8,7 @@
 <h2>Students</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Register a new Student", "Create")
 </p>
 
 @* Search Button for Stundent Degree'*@
@@ -16,9 +16,11 @@
 {
     <p>
         Find by Degree: @Html.TextBox("SearchStringS")
-        <input type="submit" value="Search" />
+        <input type="submit" class="btn" value="Search" />
     </p>
 }
+
+
 <table class="table">
     <tr>
         <th>

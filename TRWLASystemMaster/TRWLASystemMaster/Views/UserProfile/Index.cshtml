@@ -19,8 +19,26 @@
 <hr>
           <div><button class="btn">Deactivate Account</button></div>
         <hr>
-        <div><button class="btn">Logout</button></div>
+        <div><button class="btn" data-toggle="modal" data-target="#myModal">Logout</button></div>
     </center>
     
 
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Are You Sure?</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to be logged out of your account?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Log out</button>
+
+            </div>
+        </div>
+    </div>
 </div>

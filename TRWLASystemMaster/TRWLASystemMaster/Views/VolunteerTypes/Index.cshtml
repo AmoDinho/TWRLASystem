@@ -8,7 +8,7 @@
 <h2>Volunteer Type</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create Volunteer Type", "Create")
 </p>
 
 @* Search Button for VolunteerType Description  '*@
@@ -16,7 +16,7 @@
 {
     <p>
         Find by Descrtiption: @Html.TextBox("SearchStringvS")
-        <input type="submit" value="Search" />
+        <input type="submit" class="btn" value="Search" />
     </p>
 }
 
@@ -34,7 +34,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VolunteerTypeID }) |
+            @Html.ActionLink("Update", "Edit", new { id=item.VolunteerTypeID }) |
             @Html.ActionLink("Details", "Details", new { id=item.VolunteerTypeID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerTypeID })
         </td>
