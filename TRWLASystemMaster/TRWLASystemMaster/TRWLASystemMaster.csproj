@@ -201,14 +201,22 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlumniController.cs" />
     <Compile Include="Controllers\CheckPasswordController.cs" />
+    <Compile Include="Controllers\ClassReportController.cs" />
+    <Compile Include="Controllers\ComEngageReportController.cs" />
     <Compile Include="Controllers\DeactivateAccController.cs" />
+    <Compile Include="Controllers\DemographicsReportController.cs" />
+    <Compile Include="Controllers\EventReportController.cs" />
+    <Compile Include="Controllers\FeedbackReportController.cs" />
+    <Compile Include="Controllers\FunctionReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
+    <Compile Include="Controllers\StudentProgressController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentTypesController.cs" />
     <Compile Include="Controllers\UniqueCodeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
+    <Compile Include="Controllers\UserStatsController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Controllers\VenueTypesController.cs" />
@@ -526,6 +534,14 @@
     <Content Include="Views\UserProfile\Index.cshtml" />
     <Content Include="Views\DeactivateAcc\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\ClassReport\Index.cshtml" />
+    <Content Include="Views\FunctionReport\Index.cshtml" />
+    <Content Include="Views\ComEngageReport\Index.cshtml" />
+    <Content Include="Views\DemographicsReport\Index.cshtml" />
+    <Content Include="Views\EventReport\Index.cshtml" />
+    <Content Include="Views\FeedbackReport\Index.cshtml" />
+    <Content Include="Views\UserStats\Index.cshtml" />
+    <Content Include="Views\StudentProgress\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

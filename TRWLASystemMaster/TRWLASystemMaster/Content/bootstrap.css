@@ -7025,3 +7025,37 @@ td.visible-print {
     display:none;
   }
 }
+
+
+    .bar {
+        fill: #352c2c;
+        height: 21px;
+        -webkit-transition: fill .3s ease;
+        transition: fill .3s ease;
+        cursor: pointer;
+    }
+.bar text {
+  fill: #555;
+}
+
+.chart:hover .bar,
+.chart:focus .bar {
+  fill: #aaa;
+}
+
+.bar:hover,
+.bar:focus {
+  fill: red !important;
+}
+.bar:hover text,
+.bar:focus text {
+  fill: red;
+}
+
+figcaption {
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+
