@@ -542,6 +542,7 @@
     <Content Include="Views\FeedbackReport\Index.cshtml" />
     <Content Include="Views\UserStats\Index.cshtml" />
     <Content Include="Views\StudentProgress\Index.cshtml" />
+    <Content Include="Views\CheckPassword\Checkpass1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

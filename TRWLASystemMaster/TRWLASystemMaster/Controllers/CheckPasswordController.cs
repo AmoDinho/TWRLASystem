@@ -13,5 +13,10 @@ namespace TRWLASystemMaster.Controllers
         {
             return View();
         }
+
+        public ActionResult Checkpass1()
+        {
+            return View();
+        }
     }
 }
