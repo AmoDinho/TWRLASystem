@@ -925,11 +925,12 @@
   top: 1px; }
 
 .btn-primary {
-  background-color: #f96332;
-  color: #FFFFFF; }
+   background-color:transparent;
+     border:none;
+  color: #9b16d8;  }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary.active:focus, .btn-primary.active:hover, .open > .btn-primary.dropdown-toggle, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle:hover {
-  background-color: #f85019;
-  color: #FFFFFF; }
+  background-color: transparent;
+   color: #9b16d8;}
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary:disabled, .btn-primary:disabled:hover, .btn-primary:disabled:focus, .btn-primary:disabled.focus, .btn-primary:disabled:active, .btn-primary:disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
   background-color: #f96332;
   border-color: #f96332; }
@@ -975,23 +976,23 @@
   text-decoration: none; }
 
 .btn-info {
-  background-color: #2CA8FF;
-  color: #FFFFFF; }
+   background-color: #9b16d8;
+   color: #9b16d8; }
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info:active:focus, .btn-info:active:hover, .btn-info.active:focus, .btn-info.active:hover, .open > .btn-info.dropdown-toggle, .open > .btn-info.dropdown-toggle:focus, .open > .btn-info.dropdown-toggle:hover {
-  background-color: #109CFF;
-  color: #FFFFFF; }
+  background-color: #9b16d8;
+   color: #9b16d8; }
 .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info:disabled, .btn-info:disabled:hover, .btn-info:disabled:focus, .btn-info:disabled.focus, .btn-info:disabled:active, .btn-info:disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled].focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
   background-color: #2CA8FF;
   border-color: #2CA8FF; }
 .btn-info.focus, .btn-info:focus {
   box-shadow: none; }
 .btn-info.btn-simple {
-  color: #2CA8FF;
-  border-color: #2CA8FF; }
+  color: #9b16d8;
+  border-color: #9b16d8; }
 .btn-info.btn-simple:hover, .btn-info.btn-simple:focus, .btn-info.btn-simple:active {
   background-color: transparent;
-  color: #109CFF;
-  border-color: #109CFF; }
+  color: #9b16d8;
+  border-color: #9b16d8; }
 .btn-info.btn-link {
   color: #2CA8FF; }
 .btn-info.btn-link:hover, .btn-info.btn-link:focus, .btn-info.btn-link:active {
@@ -2798,7 +2799,7 @@ Created using IcoMoon - icomoon.io
   padding-top: 0; }
 
 .modal-backdrop {
-  background: rgba(0, 0, 0, 0.3); }
+    background: lavenderblush;  }
 
 .modal.modal-mini p {
   text-align: center; }
@@ -2808,7 +2809,7 @@ Created using IcoMoon - icomoon.io
 .modal.modal-mini .modal-profile {
   width: 70px;
   height: 70px;
-  background-color: #FFFFFF;
+  background-color: lavenderblush;
   border-radius: 50%;
   text-align: center;
   line-height: 5.7;
@@ -2833,7 +2834,7 @@ Created using IcoMoon - icomoon.io
 .modal.modal-mini .modal-footer button:first-child {
   opacity: .5; }
 .modal.modal-default .modal-content {
-  background-color: #FFFFFF;
+  background-color: lavenderblush;
   color: #2c2c2c; }
 .modal.modal-default .modal-header .close {
   color: #2c2c2c; }
