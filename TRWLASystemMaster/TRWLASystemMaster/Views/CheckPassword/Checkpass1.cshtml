@@ -3,28 +3,78 @@
 }
 
 
-<div>
+@* Hide the stuff at the bottom so that it only shows email. *@
 
-    <h1> Check Forgotten Password</h1>
+<div class="row">
+    <div class="col-md-8">
+        <div class="jumbotron">
+
+            <h1> Check Forgotten Password</h1>
+        </div>
+
+        @*<div class="form-group">
+            @*<label class="col-md-2">Email Address</label> 
+            <div class="col-md-10">
+             
+                <input type="text" value="" placeholder="Email address here" class="form-control has-error" />
+            </div>
+        </div>*@
+
+        <div class="col-sm-4">
+            <div class="form-group form-group-no-border">
+                <label >Email address</label>
+                <input type="text" value="" placeholder="Email address here" class="form-control has-error" />
+            </div>
+        </div>
+        <div class="form-group">
+
+            <button class="btn btn-round btn-round" style = "color:#9b16d8" >Submit</button>
+        </div>
+        <hr>
+        <div>
+            <h5>
+                Please answer the following security quiestion.
+            </h5>
+          
+        </div>
+
+        <div>
+            <p>
+                What was the name of your third grade teacher?
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group form-group-no-border">
+                <input type="text" value="" placeholder="Regular" class="form-control" />
+            </div>
+
+        </div>
+
+        <div><button class="btn btn-round btn-round" style="color:#9b16d8"data-toggle="modal" data-target="#myModal">Change Password</button></div>
+    </div>
+
+
+
+    <div class="col-md-3">
+        <img src="..\Images\!Logo.png" id="TRWLAImage" style="width:300px; height:400px;" />
+    </div>
+
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Success</h4>
+            </div>
+            <div class="modal-body">
+              Your password has been successfully Updated!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Confirm</button>
 
-        <h5>Email address</h5>
-       <div class="col-sm-4">
-    <div class="form-group form-group-no-border">
-        <input type="text" value="" placeholder="Email address here" class="form-control" />
+            </div>
+        </div>
     </div>
-</div>
-    <div class="form-group">
-
-        <button class="btn btn-round">Submit</button>
-    </div>
-        
-  
-
-   
-
-<div>
-    <img src="" alt="" />
-
 </div>

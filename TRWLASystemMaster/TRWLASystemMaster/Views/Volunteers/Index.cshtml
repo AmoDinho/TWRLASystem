@@ -5,57 +5,97 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Volunteers</h2>
+<div class="jumbotron">
+    <h2>Volunteers</h2>
+</div>
 
 <p>
     @Html.ActionLink("Register a New Volunteer", "Create")
 </p>
 
+
 @using (Html.BeginForm())
 {
-    <p>
-        Find by name: @Html.TextBox("SearchStringV")
-        <input type="submit" value="Search" />
+    <p class="form-group">
+        Find by name: <input style = "border-radius:4px; width:300px; color:black; border-color:white" />
+        <input type="submit" value="Search" class="btn btn-default btn-round" style="color:#9b16d8" />
     </p>
 }
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AccessRight)
+           Name @*@Html.DisplayNameFor(model => model.AccessRight)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Person.FirstName)
+           Surnmae @*@Html.DisplayNameFor(model => model.Person.FirstName)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Residence1.ResName)
+           Phone Number @*@Html.DisplayNameFor(model => model.Residence1.ResName)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VolunteerType1.Description)
+         Email Address   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
+        </th>
+        <th>
+           Date of Birth   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
+        </th>
+        <th>
+            Volunteer Type   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
+        </th>
+        <th>
+            Residence   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@*@foreach (var item in Model) {*@
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AccessRight)
+           Cheryl @*@Html.DisplayFor(modelItem => item.AccessRight)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Person.FirstName)
+           Wyngarrd @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Residence1.ResName)
+         078475321   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VolunteerType1.Description)
+         cheryl@twrla.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
         </td>
         <td>
-            @Html.ActionLink("Update", "Edit", new { id=item.PersonID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })
+         10/09/1998   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+         Admin   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+          Neria  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+
+        <td>
+            @Html.ActionLink("Details","Edit","Volunteers")   @*new { id=item.PersonID })*@ 
+            @*@Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
         </td>
     </tr>
-}
+@*}*@
 
 </table>
+
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+   
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Delete" style="color:#9b16d8">
+                Delete
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <div>
+                @Html.ActionLink("Return", "Index", "Home", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+</div>

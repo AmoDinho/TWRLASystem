@@ -2,26 +2,41 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<hgroup class="title">
-    <h1>Forgot Password</h1>
-</hgroup>
-<div>
-    <p>
-        Please answer the following security quiestion.
-    </p>
-</div>
+<div class="row">
+    <div class="col-md-8">
+        <hgroup class="jumbotron">
+            <h1>Change Password</h1>
+        </hgroup>
+        
+        <div class="form-group form-group-no-border">
+          Email Address
+                         <input type="email" value="" placeholder="Regular" class="form-control" required />
+         
+         
+        </div>
 
-<div>
-    
-    <p>
-        What was the name of your third grade teacher?
-    </p>
-</div>
+        <div class="form-group form-group-no-border">
+            Old Password
+            <input type="password" value="" placeholder="Regular" class="form-control" />
+        </div>
 
-<div class="col-sm-4">
-    <div class="form-group form-group-no-border">
-        <input type="text" value="" placeholder="Regular" class="form-control" />
+        <div class="form-group form-group-no-border">
+            New Password
+            <input type="password" value="" placeholder="Regular" class="form-control" />
+        </div>
+        <div class="form-group form-group-no-border">
+            Confirm Password
+            <input type="password" value="" placeholder="Regular" class="form-control" />
+        </div>
+        <div class="form-group">
+
+            <button class="btn btn-round btn-round" style="color:#9b16d8">Change</button>
+        </div>
+
+
     </div>
+    <div class="col-md-3 align-right">
+        <img src="..\Images\!Logo.png" id="TRWLAImage" style="width:300px; height:400px;" />
+    </div>
+    
 </div>
-
-<div><button class="btn btn-round">Change password</button></div>

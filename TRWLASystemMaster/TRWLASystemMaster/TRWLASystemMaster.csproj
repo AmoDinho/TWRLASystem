@@ -543,6 +543,8 @@
     <Content Include="Views\UserStats\Index.cshtml" />
     <Content Include="Views\StudentProgress\Index.cshtml" />
     <Content Include="Views\CheckPassword\Checkpass1.cshtml" />
+    <Content Include="Views\Account\LoginOption.cshtml" />
+    <Content Include="Views\Volunteers\Testviewvol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

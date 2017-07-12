@@ -23,6 +23,12 @@ namespace TRWLASystemMaster.Controllers
             return View(volunteers.ToList());
         }
 
+        public ActionResult Testviewvol()
+        {
+           
+            return View();
+        }
+
         // GET: Volunteers/Details/5
         public ActionResult Details(int? id)
         {
@@ -79,10 +85,10 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonID = new SelectList(db.People, "PersonID", "FirstName", volunteer.PersonID);
-            ViewBag.Residence = new SelectList(db.Residences, "ResID", "ResName", volunteer.Residence);
-            ViewBag.VolunteerType = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "Description", volunteer.VolunteerType);
-            return View(volunteer);
+            //ViewBag.PersonID = new SelectList(db.People, "PersonID", "FirstName", volunteer.PersonID);
+            //ViewBag.Residence = new SelectList(db.Residences, "ResID", "ResName", volunteer.Residence);
+            //ViewBag.VolunteerType = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "Description", volunteer.VolunteerType);
+            return View(/*volunteer*/);
         }
 
         // POST: Volunteers/Edit/5

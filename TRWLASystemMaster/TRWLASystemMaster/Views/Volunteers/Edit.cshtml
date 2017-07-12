@@ -5,7 +5,91 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Update Volunteer</h2>
+
+<div class="jumbotron">
+    <h2>Register Volunteer</h2>
+
+</div>
+
+<h3>Register</h3>
+<hr />
+
+<div class="form-horizontal">
+    <hr />
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Name</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2"> Surname</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Phone Number</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Email Address</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Date of Birth</lable>
+        <div class="col-md-10">
+            <input type="text" class="form-control date-picker" value="10/05/2016" data-datepicker-color="" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Volunteer Type</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Residence</lable>
+        <div class="col-md-10">
+            <input type="text" value="NERINA" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    @*<div class="form-inline" style="float:right">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-default btn-round" style="color:#9b16d8;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Delete" class="btn btn-default btn-round" style="color:#9b16d8;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Return" class="btn btn-default btn-round" style="color:#9b16d8;" />
+            </div>
+        </div>
+    </div>*@
+
+
+</div>
+
+
+@*<h2>Update Volunteer</h2>
 
 
 @using (Html.BeginForm())
@@ -52,7 +136,7 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
