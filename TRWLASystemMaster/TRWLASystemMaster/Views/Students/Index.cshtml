@@ -5,8 +5,11 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Students</h2>
 
+<div class="jumbotron">
+    <h2>Students</h2>
+
+</div>
 <p>
     @Html.ActionLink("Register a new Student", "Create")
 </p>
@@ -15,8 +18,8 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by Degree: @Html.TextBox("SearchStringS")
-        <input type="submit" class="btn" value="Search" />
+        Find by Name: @*@Html.TextBox("SearchStringS")*@ <input style="border-radius:4px; width:300px; color:black; border-color:white" />
+        <input type="submit"class="btn btn-default btn-round" style="color:#9b16d8" value="Search" />
     </p>
 }
 
@@ -24,32 +27,54 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.StudentNumber)
+            Name @*@Html.DisplayNameFor(model => model.AccessRight)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Graduate)
+            Surnmae @*@Html.DisplayNameFor(model => model.Person.FirstName)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Degree)
+            Phone Number @*@Html.DisplayNameFor(model => model.Residence1.ResName)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.YearOfStudy)
+            Email Address   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Person.FirstName)
+            Date of Birth   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Residence1.ResName)
+            Student Type   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StudentType1.Description)
+            Residence   @*@Html.DisplayNameFor(model => model.VolunteerType1.Description)*@
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@*@foreach (var item in Model) {*@
     <tr>
+
         <td>
+            Enguhla @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+           Phebve @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            0781980322   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+           enguhla@tuks.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            10/09/1993   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Post Graduate @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Erika @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.StudentNumber)
         </td>
         <td>
@@ -69,13 +94,30 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.StudentType1.Description)
-        </td>
+        </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |*@
+            @Html.ActionLink("Details", "Details"@*new { id=item.PersonID }*@) 
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
         </td>
     </tr>
-}
+
 
 </table>
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Delete" style="color:#9b16d8">
+                Delete
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <div>
+                @Html.ActionLink("Return", "Index", "Home", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+</div>

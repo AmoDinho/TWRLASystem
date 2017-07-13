@@ -1,17 +1,12 @@
-﻿
-@{
-    ViewBag.Title = "Testviewvol";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+﻿@{
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 
 <div class="jumbotron">
     <h2>My Profile</h2>
-
 </div>
 
-<h3></h3>
-<hr />
 
 <div class="form-horizontal">
     <hr />
@@ -46,7 +41,7 @@
 
     <div class="form-group">
         <lable class="control-label col-md-2">Date of Birth</lable>
-        <a href="~/Views/Volunteers/Index.cshtml">~/Views/Volunteers/Index.cshtml</a>
+      
         <div class="col-md-10">
             <input type="text" class="form-control date-picker" value="10/05/2016" data-datepicker-color="" />
         </div>
@@ -54,7 +49,7 @@
 
 
     <div class="form-group">
-        <lable class="control-label col-md-2">Volunteer Type</lable>
+        <lable class="control-label col-md-2">Student Type</lable>
         <div class="col-md-10">
             <input type="text" value="" placeholder="Regular" class="form-control" />
         </div>
@@ -66,9 +61,9 @@
             <input type="text" value="NERINA" placeholder="Regular" class="form-control" />
         </div>
     </div>
+    </div>
 
-    </div>      
-  @* For delete make a button and a modal to do it *@
+    @* For delete make a button and a modal to do it *@
 
     <div class="form-inline" style="float:right">
         <div class="form-group">
@@ -91,7 +86,7 @@
                     <h4 class="modal-title" id="myModalLabel">Save Changes</h4>
                 </div>
                 <div class="modal-body">
-                   Are you sure you would like to update your account?
+                    Are you sure you would like to update your account?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info btn-simple" data-dismiss="modal" data-toggle="modal" data-target="#myModal2">Confirm</button>
@@ -113,8 +108,8 @@
                     You have successfuly updated your profile.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal" >Confirm</button>
-           
+                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Confirm</button>
+
 
                 </div>
             </div>

@@ -57,6 +57,11 @@ namespace TRWLASystemMaster.Controllers
             return View(student);
         }
 
+        public ActionResult ViewStudent()
+        {
+            return View();
+        }
+
         // GET: Students/Create
         public ActionResult Create()
         {

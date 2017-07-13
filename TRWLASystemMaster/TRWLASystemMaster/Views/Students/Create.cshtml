@@ -2,13 +2,108 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Register A New Student</h2>
+
+<div class="jumbotron">
+    <h2>Register A New Student</h2>
+
+</div>
+
+<h3>Student</h3>
+<hr />
 
 
-@using (Html.BeginForm()) 
+<div class="form-horizontal">
+    <hr />
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Name</lable>
+        <div class="col-md-10">
+            <input type="text" value="ME" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2"> Surname</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Phone Number</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Email Address</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Date of Birth</lable>
+        <div class="col-md-10">
+            <input type="text" class="form-control date-picker" value="10/05/2016" data-datepicker-color="" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Student Type</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2">Residence</lable>
+        <div class="col-md-10">
+            <input type="text" value="" placeholder="Regular" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-inline" style="float:right">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register" class="btn btn-default btn-round" data-toggle="modal" data-target="#myModal1" style="color:#9b16d8;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Return", "Index", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Congradulations!</h4>
+            </div>
+            <div class="modal-body">
+                Your registeration was succesfull!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Confirm</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -72,19 +167,11 @@
                 @Html.DropDownList("StudentType", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StudentType, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

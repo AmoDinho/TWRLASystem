@@ -545,6 +545,7 @@
     <Content Include="Views\CheckPassword\Checkpass1.cshtml" />
     <Content Include="Views\Account\LoginOption.cshtml" />
     <Content Include="Views\Volunteers\Testviewvol.cshtml" />
+    <Content Include="Views\Students\ViewStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
