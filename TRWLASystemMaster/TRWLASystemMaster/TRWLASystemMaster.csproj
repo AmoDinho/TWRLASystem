@@ -210,6 +210,7 @@
     <Compile Include="Controllers\FunctionReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
     <Compile Include="Controllers\StudentProgressController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -546,6 +547,7 @@
     <Content Include="Views\Account\LoginOption.cshtml" />
     <Content Include="Views\Volunteers\Testviewvol.cshtml" />
     <Content Include="Views\Students\ViewStudent.cshtml" />
+    <Content Include="Views\Reports\MainReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
