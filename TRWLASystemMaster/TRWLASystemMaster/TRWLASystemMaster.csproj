@@ -205,6 +205,7 @@
     <Compile Include="Controllers\ComEngageReportController.cs" />
     <Compile Include="Controllers\DeactivateAccController.cs" />
     <Compile Include="Controllers\DemographicsReportController.cs" />
+    <Compile Include="Controllers\ElibraryController.cs" />
     <Compile Include="Controllers\EventReportController.cs" />
     <Compile Include="Controllers\FeedbackReportController.cs" />
     <Compile Include="Controllers\FunctionReportController.cs" />
@@ -548,6 +549,7 @@
     <Content Include="Views\Volunteers\Testviewvol.cshtml" />
     <Content Include="Views\Students\ViewStudent.cshtml" />
     <Content Include="Views\Reports\MainReports.cshtml" />
+    <Content Include="Views\Elibrary\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
