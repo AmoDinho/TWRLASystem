@@ -13,5 +13,12 @@ namespace TRWLASystemMaster.Controllers
         {
             return View();
         }
+
+        
+
+              public ActionResult StudentMyProfile()
+        {
+            return View();
+        }
     }
 }

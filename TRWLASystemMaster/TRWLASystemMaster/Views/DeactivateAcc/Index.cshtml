@@ -2,12 +2,14 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
+<div class="jumbotron">
+    <h1>Deactivate Account</h1>   
+</div>
 
-<h1>Deactivate Account</h1>
 
-<div>
-    <center>
-        <div class="col-sm-4">
+<div class="form-horizontal">
+    @*<center>
+        <div class="">
             <div class="form-group form-group-no-border">
                 <label>Enter Your Password</label>
                 <input type="text" value="" placeholder="Password" class="form-control" />
@@ -19,9 +21,33 @@
                 <label>Re-enter Your Password</label>
                 <input type="text" value="" placeholder="Confirm Password" class="form-control" />
             </div>
+        </div>*@
+
+
+        <div class="form-group">
+            <lable class="control-label col-md-2">Enter Password</lable>
+            <div class="col-md-10">
+                <input type="password" value="" placeholder="Password" class="form-control" />
+            </div>
         </div>
-        <button class="btn" data-toggle="modal" data-target="#myModal">Confirm</button>
-    </center>
+
+        <div class="form-group">
+            <lable class="control-label col-md-2">Re-enter Your Password</lable>
+            <div class="col-md-10">
+                <input type="password" value="" placeholder="Password" class="form-control" />
+            </div>
+        </div>
+
+    <div class="form-group">
+        <lable class="control-label col-md-2"></lable>
+        <div class="col-md-10">
+            <button class="btn btn-round" data-toggle="modal" style="color:#9b16d8;" data-target="#myModal">Confirm</button>
+
+        </div>
+    </div>
+
+   
+    
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

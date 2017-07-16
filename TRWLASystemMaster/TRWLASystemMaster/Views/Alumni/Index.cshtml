@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Alumni</h2>
+<div class="jumbotron">
+    <h2>Alumni</h2>
+
+</div>
+
 <p>You can search for students who have graduated from the Tuks Women In Res Leadership Academy</p>
 
 @** Search Button for 'RES NAME'*@
@@ -13,7 +17,7 @@
 {
     <p>
         Find by name: @Html.TextBox("SearchString")
-        <input type="submit" class="btn" value="Search" />
+        <input type="submit" class="btn btn-round" style = "color:#9b16d8" value="Search" />
     </p>
 }
 
@@ -22,11 +26,110 @@
         <th>
             @Html.DisplayNameFor(model => model.Person.FirstName)
         </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            Email Address
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    <!-- Record 1-->
+    @*<tr>
+        <td>
+           Ciara
+        </td>
+        <td>
+            Mash
+        </td>
+        <td>
+            0147258786
+        </td>
+        <td>
+            u14284795@tuks.co.za
+        </td>
+    </tr>*@
+
+    <!-- Record 2-->
+
+    @*<tr>
+        <td>
+            Una
+        </td>
+        <td>
+            De Burger
+        </td>
+        <td>
+            07895847
+        </td>
+        <td>
+            u14254786@tuks.co.za
+        </td>
+    </tr>*@
+
+    <!-- Record 3-->
+
     <tr>
+
+        <td>
+            Sinqo
+        </td>
+        <td>
+           Renwilie
+        </td>
+        <td>
+            0174536985
+        </td>
+        <td>
+            u18789654@tuks.co.za
+        </td>
+    </tr>
+
+
+    <!-- Record 4-->
+
+    @*<tr>
+
+        <td>
+           Martina
+        </td>
+        <td>
+           Khiosi
+        </td>
+        <td>
+            0214785963
+        </td>
+        <td>
+            u103658@tuks.co.za
+        </td>
+    </tr>*@
+
+
+    <!-- Record 5-->
+    @*<tr>
+        <td>
+            Ellie
+        </td>
+        <td>
+            Martuns
+        </td>
+        <td>
+            0612587963
+        </td>
+        <td>
+            u10285478@tuks.co.za
+        </td>
+    </tr>*@
+    
+    
+
+        @foreach (var item in Model)
+        {
+<tr>
         <td>
             @Html.DisplayFor(modelItem => item.Person.FirstName)
         </td>

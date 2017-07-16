@@ -5,11 +5,16 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Create User Type</h2>
+<div class="jumbotron">
+    <h2>User Type</h2>
 
-<p>
+</div>
+
+
+@*<p>
     @Html.ActionLink("Create a New User Type", "Create")
-</p>
+</p>*@
+
 <table class="table">
     <tr>
         <th>
@@ -39,3 +44,40 @@
 
 </table>
 
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                @Html.ActionLink("Add a new User Type", "Create", "VenueTypes", new { @class = "btn btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn btn-round" style="color:#9b16d8">Update</button>
+                @*@Html.ActionLink("Update", "Details", "VenueTypes", new { @class = "btn btn-round", @style = "color:#9b16d8" })*@
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn btn-round" style="color:#9b16d8">Delete</button>
+                @*@Html.ActionLink("Delete", "Delete", new { @class = "btn  btn-round", @style = "color:#9b16d8" })*@
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn btn-round" style="color:#9b16d8">Return</button>
+                @*@Html.ActionLink("Return", "Create", new { @class = "btn  btn-round", @style = "color:#9b16d8" })*@
+            </div>
+        </div>
+    </div>
+
+</div>

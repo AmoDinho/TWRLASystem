@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Update User Type</h2>
+<div class="jumbotron">
+    <h2>Update User Type</h2>
+
+</div>
+
 
 @using (Html.BeginForm())
 {
@@ -35,12 +39,41 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn  btn-round" data-toggle="modal" data-target="#myModal"  style = "color:#9b16d8"/>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn btn-round" style="color:#9b16d8">Return</button>
+                @*@Html.ActionLink("Return", "Index", new { @class = "btn  btn-round", @style = "color:#9b16d8" })*@
+            </div>
+        </div>
+    </div>
+
+  
+    </div>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Success</h4>
+            </div>
+            <div class="modal-body">
+              The user type has been successfully updated,
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Confirm</button>
+
+            </div>
+        </div>
+    </div>
 </div>
