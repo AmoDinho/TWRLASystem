@@ -5,18 +5,24 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Residences</h2>
 
-<p>
+<div class="jumbotron">
+    <h2>Residences</h2>
+
+</div>
+
+
+
+@*<p>
     @Html.ActionLink("Add a Residence", "Create")
-</p>
+</p>*@
 
 @* Search Button for 'RES NAME'*@
 @using (Html.BeginForm())
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
-        <input type="submit" class="btn" value="Search" />
+        Find by name: @Html.TextBox("SearchString",null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+        <input type="submit"  value="Search"  class = "btn btn-default btn-round" style = "color:#9b16d8"/>
     </p>
 }
 
@@ -48,3 +54,39 @@
 }
 
 </table>
+
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                @Html.ActionLink("Add a new Residence", "Create", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                @Html.ActionLink("Update", "Details", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <input type="submit" class="btn btn-round" style="color:#9b16d8" value="Delete" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <input type="submit" class="btn btn-round" style="color:#9b16d8" value="Return" />
+            </div>
+        </div>
+    </div>
+
+</div>
+

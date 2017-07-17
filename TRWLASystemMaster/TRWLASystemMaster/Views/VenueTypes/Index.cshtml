@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h2>Venue Type</h2>
+    <h2>Add a Venue Type</h2>
     </div>
 
    
@@ -16,7 +16,7 @@
     {
         <p>
             Find by name: @Html.TextBox("SearchStringVT", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search"  class = "btn btn-default btn-round" style = "color:#9b16d8"/>
         </p>
     }
     <table class="table">
@@ -34,8 +34,9 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    
-                    @Html.ActionLink("Details", "Details", new { id = item.VenueTypeID }) 
+                    @Html.ActionLink("Update", "Edit", new { id = item.VenueTypeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.VenueTypeID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.VenueTypeID })
                    
                 </td>
             </tr>
@@ -63,7 +64,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Delete", "Delete", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+                <input type="submit" class="btn btn-round" style="color:#9b16d8" value="Delete" />
             </div>
         </div>
     </div>
@@ -71,7 +72,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Return", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+                <input type="submit" class="btn btn-round" style="color:#9b16d8" value="Return" />
             </div>
         </div>
     </div>

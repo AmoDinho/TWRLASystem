@@ -10,9 +10,9 @@
     <h2>Students</h2>
 
 </div>
-<p>
+@*<p>
     @Html.ActionLink("Register a new Student", "Create")
-</p>
+</p>*@
 
 @* Search Button for Stundent Degree'*@
 @using (Html.BeginForm())
@@ -97,10 +97,116 @@
         </td>*@
         <td>
             @*@Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |*@
-            @Html.ActionLink("Details", "Details"@*new { id=item.PersonID }*@) 
+            @*@Html.ActionLink("Details", "Details"@*new { id=item.PersonID }*@
             @*@Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
         </td>
     </tr>
+
+
+    @* rECORD 2 *@
+    <tr>
+
+        <td>
+            Caira @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Milkbottom @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            075864721   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            17355612@tuks.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            09/09/1996  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Post Graduate @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Erika @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        </tr>
+
+    @* rECORD 3 *@
+    <tr>
+
+        <td>
+            Tinyko @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Vilakazi @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            083589745  @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            14992949@tuks.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            10/09/1993   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Undergraduate @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            TNerina @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+    </tr>
+
+    @* rECORD 4 *@
+    <tr>
+
+        <td>
+            Cailn @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Van Rensburg @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+           0742587456  @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            15511549@tuks.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            12/02/1996   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Post Graduate @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Tuks Naledi @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+    </tr>
+
+    @* rECORD 5 *@
+    <tr>
+
+        <td>
+            Simphwe @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Mholbo @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            0864789456   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            14935058@tuks.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            12/09/1953   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Undergraduate @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Madelief @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+    </tr>
+
 
 
 </table>
