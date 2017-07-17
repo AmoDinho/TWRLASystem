@@ -551,6 +551,7 @@
     <Content Include="Views\Reports\MainReports.cshtml" />
     <Content Include="Views\Elibrary\Index.cshtml" />
     <Content Include="Views\UserProfile\StudentMyProfile.cshtml" />
+    <Content Include="Views\Venues\ViewVenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

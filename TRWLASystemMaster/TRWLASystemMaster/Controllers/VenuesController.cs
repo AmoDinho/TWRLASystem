@@ -15,7 +15,7 @@ namespace TRWLASystemMaster.Controllers
         private Db_TRWLA_StagingEntities db = new Db_TRWLA_StagingEntities();
 
         // GET: Venues
-        public ActionResult Index(string searchStringV)
+        public ActionResult Index(/*string searchStringV*/)
         {
             //var venues = db.Venues.Include(v => v.Address).Include(v => v.VenueType);
             //return View(venues.ToList());
@@ -25,18 +25,28 @@ namespace TRWLASystemMaster.Controllers
  * 
  * Search String is for Venue Name!!
  * 
- * */
-            var ven = from v in db.Venues
-                          select v;
-            if (!String.IsNullOrEmpty(searchStringV))
-            {
-                ven = ven.Where(s => s.Name.Contains(searchStringV));
+ //* */
+ //           var ven = from v in db.Venues
+ //                         select v;
+ //           if (!String.IsNullOrEmpty(searchStringV))
+ //           {
+ //               ven = ven.Where(s => s.Name.Contains(searchStringV));
 
-            }
+ //           }
 
 
 
-            return View(ven.ToList());
+            return View(/*ven.ToList()*/);
+
+
+        }
+
+
+        public ActionResult ViewVenue()
+        {
+
+
+            return View();
 
 
         }
