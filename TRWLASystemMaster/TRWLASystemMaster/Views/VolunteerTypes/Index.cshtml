@@ -5,18 +5,22 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Volunteer Type</h2>
+<div class="jumbotron">
+    <h2>Volunteer Type</h2>
+</div>
 
-<p>
+
+
+@*<p>
     @Html.ActionLink("Create Volunteer Type", "Create")
-</p>
+</p>*@
 
 @* Search Button for VolunteerType Description  '*@
 @using (Html.BeginForm())
 {
-    <p>
-        Find by Descrtiption: @Html.TextBox("SearchStringvS")
-        <input type="submit" class="btn" value="Search" />
+    <p class="form-group">
+        Find by Descrtiption: @Html.TextBox("SearchStringvS",null,new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+        <input type="submit" value="Search" class="btn btn-default btn-round" style="color:#9b16d8" />
     </p>
 }
 
@@ -34,11 +38,41 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Update", "Edit", new { id=item.VolunteerTypeID }) |
+            @*@Html.ActionLink("Update", "Edit", new { id=item.VolunteerTypeID }) |
             @Html.ActionLink("Details", "Details", new { id=item.VolunteerTypeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerTypeID })
+            @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerTypeID })*@
         </td>
     </tr>
 }
 
 </table>
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                @Html.ActionLink("Create a new Volunteer Type", "Create", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                @Html.ActionLink("Update", "Create", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Delete" style="color:#9b16d8">
+                Delete
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <div>
+                @Html.ActionLink("Return", "Index", "Home", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+</div>

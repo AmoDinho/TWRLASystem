@@ -2,7 +2,10 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Generate Unique Code</h2>
+<div class="jumbotron">
+    <h2>Generate Unique Code</h2>
+</div>
+
 
 <ceneter><p>Unique codes can only be used once</p></ceneter>
 
@@ -10,11 +13,9 @@
     @using (Html.BeginForm())
     {
         <p>
-            <button class="btn btn-lg">Generate Unique Code</button>
+            <button class="btn btn-round btn-round" style="color:#9b16d8">Generate Unique Code</button>
         </p>
     }
-
-
 
 
 

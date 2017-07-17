@@ -9,9 +9,9 @@
     <h2>Volunteers</h2>
 </div>
 
-<p>
+@*<p>
     @Html.ActionLink("Register a New Volunteer", "Create")
-</p>
+</p>*@
 
 
 @using (Html.BeginForm())
@@ -66,16 +66,142 @@
          10/09/1998   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
         </td>
         <td>
-         Admin   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+         Admin  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
         </td>
         <td>
           Nerina  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
         </td>
 
         <td>
-            @Html.ActionLink("Details","Edit","Volunteers")   @*new { id=item.PersonID })*@ 
+            @*@Html.ActionLink("Details","Edit","Volunteers")*@   @*new { id=item.PersonID })*@ 
             @*@Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
+        </td>
+    </tr>
+
+    @* Record 2 *@
+    <tr>
+        <td>
+            Sarah @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Lawler @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            07894258963   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            u1428963@twrla.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            10/09/1994  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Facilitator   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Asterhof  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Details","Edit","Volunteers")*@   @*new { id=item.PersonID })*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
+        </td>
+    </tr>
+
+
+    @* Record 3 *@
+    <tr>
+        <td>
+            Mavius @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Khekna @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            08745896   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            u14896321@twrla.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            10/10/1996   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Facilitator   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+           Tuks Naledi  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Details","Edit","Volunteers")*@   @*new { id=item.PersonID })*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
+        </td>
+    </tr>
+
+
+    @* Record 4 *@
+    <tr>
+        <td>
+           Sultte @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+           Drawbridge @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            0258747965   @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+            u14578749@twrla.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            10/09/1992  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Facilitator  @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+           Hatfield Studios @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Details","Edit","Volunteers")*@   @*new { id=item.PersonID })*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
+        </td>
+    </tr>
+
+    @* Record 5 *@
+    <tr>
+        <td>
+            Suzane @*@Html.DisplayFor(modelItem => item.AccessRight)*@
+        </td>
+        <td>
+            Helderblom @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+        </td>
+        <td>
+            0796874521  @*@Html.DisplayFor(modelItem => item.Residence1.ResName)*@
+        </td>
+        <td>
+           u14287931@twrla.co.za   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            11/10/1998   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Admin   @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+        <td>
+            Lilium @*@Html.DisplayFor(modelItem => item.VolunteerType1.Description)*@
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Details","Edit","Volunteers")*@   @*new { id=item.PersonID })*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })*@
         </td>
     </tr>
 @*}*@
@@ -86,7 +212,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Add a new Venue Type", "Create", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+                @Html.ActionLink("Update", "Create", "VenueTypes", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
             </div>
         </div>
     </div>
