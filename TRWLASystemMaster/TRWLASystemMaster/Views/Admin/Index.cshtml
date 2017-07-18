@@ -128,7 +128,7 @@
             <span class="badge badge-danger">Inactive</span>
         </td>
         <td>
-            <input type="checkbox" name="checkbox" class="bootstrap-switch"
+            <input type="checkbox" name="checkbox" data-toggle="modal" data-target="#myModal3" class="bootstrap-switch"
                    data-on-label="On"
                    data-off-label="Off" />
         </td>
@@ -139,3 +139,22 @@
     </table>
 
 
+@* Error Modal *@
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><span class="badge badge-warning">Error</span></h4>
+            </div>
+            <div class="modal-body">
+                No volunteers match your search criteria.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Try Again</button>
+
+            </div>
+        </div>
+    </div>
+</div>
