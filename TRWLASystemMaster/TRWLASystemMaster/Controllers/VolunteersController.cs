@@ -7,12 +7,55 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Threading.Tasks;
 
 namespace TRWLASystemMaster.Controllers
 {
+    [Authorize]
     public class VolunteersController : Controller
     {
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public VolunteersController()
+        {
+        }
+
+        public VolunteersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+      
 
         // GET: Volunteers
         public ActionResult Index()
@@ -37,6 +80,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         // GET: Volunteers/Create
+        [AllowAnonymous]
         public ActionResult Create()
         {
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description");
@@ -50,15 +94,25 @@ namespace TRWLASystemMaster.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_Email,Volunteer_DoB,Volunteer_Password,ActiveStatus,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
+        public async Task<ActionResult> Create(/*[Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_Email,Volunteer_DoB,Volunteer_Password,ActiveStatus,UserTypeID,VolunteerTypeID")]*/ Volunteer volunteer)
         {
+           
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = volunteer.Volunteer_Email, Email = volunteer.Volunteer_Email };
-                //var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await UserManager.CreateAsync(user, volunteer.Volunteer_Password);
+                if(result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    
+                    
+                }
+                //AddErrors(result);
                 db.Volunteers.Add(volunteer);
                 db.SaveChanges();
-                return RedirectToAction("Index", "StudentProgress");
+                return RedirectToAction("MainReports", "Reports");
             }
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);

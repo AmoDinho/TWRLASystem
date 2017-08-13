@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.Venue>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address.StreetNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueType.VenueType_Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Venue_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address.StreetNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VenueType.VenueType_Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VenueID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VenueID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VenueID })
+        </td>
+    </tr>
+}
+
+</table>

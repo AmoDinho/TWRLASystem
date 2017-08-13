@@ -1,0 +1,124 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Graduate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearOfStudy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_DoB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student_Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActiveStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attendance.StudentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RSVP_Event.StudentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserType.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Graduate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearOfStudy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_DoB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student_Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActiveStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residence.Res_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendance.StudentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RSVP_Event.StudentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentType.StudentTypeDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserType.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StudentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StudentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StudentID })
+        </td>
+    </tr>
+}
+
+</table>
