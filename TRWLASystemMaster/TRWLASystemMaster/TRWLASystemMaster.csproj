@@ -199,7 +199,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AlumniController.cs" />
     <Compile Include="Controllers\CheckPasswordController.cs" />
     <Compile Include="Controllers\ClassReportController.cs" />
     <Compile Include="Controllers\ComEngageReportController.cs" />
@@ -212,135 +211,90 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
-    <Compile Include="Controllers\ResidencesController.cs" />
     <Compile Include="Controllers\StudentProgressController.cs" />
-    <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Controllers\StudentTypesController.cs" />
     <Compile Include="Controllers\UniqueCodeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\UserStatsController.cs" />
-    <Compile Include="Controllers\UserTypesController.cs" />
-    <Compile Include="Controllers\VenuesController.cs" />
-    <Compile Include="Controllers\VenueTypesController.cs" />
-    <Compile Include="Controllers\VolunteersController.cs" />
-    <Compile Include="Controllers\VolunteerTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Attendance.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComEngEvent.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Content.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FunctionEvent.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GuestSpeaker.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lecture.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Usertype\Address.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\Milestone.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\Alumnus.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\Residence.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\AuditLog.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\RSVP_Event.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\CommEngage.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\Student.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\Content.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\StudentMilestone.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\Event.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\StudentType.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\FunctionEvent.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\TRWLASchedule.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\GuestSpeaker.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Lecture.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\LectureReview.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\LectureSummary.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Message.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Milestone.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\MilestoneType.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Notification.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Person.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Residence.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\ResType.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Schedule.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\SecurityAnswer.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Student.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\StudentType.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\Theme.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\TWRALDB.Context.cs">
+    <Compile Include="Models\TWRLA_Staging_DB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TWRALDB.Context.tt</DependentUpon>
+      <DependentUpon>TWRLA_Staging_DB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\TWRALDB.cs">
+    <Compile Include="Models\TWRLA_Staging_DB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\TWRALDB.Designer.cs">
+    <Compile Include="Models\TWRLA_Staging_DB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TWRALDB.edmx</DependentUpon>
+      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\TWRLA.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TWRLA.Context.tt</DependentUpon>
+    <Compile Include="Models\UserType.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\TWRLA.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TWRLA.tt</DependentUpon>
+    <Compile Include="Models\Venue.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\UserType.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\VenueType.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\Venue.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\Volunteer.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\VenueType.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\VolunteerFeedback.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usertype\Volunteer.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\VolunteerFeedback.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usertype\VolunteerType.cs">
-      <DependentUpon>TWRALDB.tt</DependentUpon>
+    <Compile Include="Models\VolunteerType.cs">
+      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -354,23 +308,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Usertype\TWRALDB.Context.tt">
+    <Content Include="Models\TWRLA_Staging_DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TWRALDB.edmx</DependentUpon>
-      <LastGenOutput>TWRALDB.Context.cs</LastGenOutput>
+      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
+      <LastGenOutput>TWRLA_Staging_DB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Usertype\TWRALDB.tt">
+    <Content Include="Models\TWRLA_Staging_DB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TWRALDB.edmx</DependentUpon>
-      <LastGenOutput>TWRALDB.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Usertype\TWRLA.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TWRLA.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Usertype\TWRLA.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TWRLA.cs</LastGenOutput>
+      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
+      <LastGenOutput>TWRLA_Staging_DB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -419,12 +365,12 @@
     <Content Include="Content\SASS\Maxins\_popovers.scss" />
     <Content Include="Content\SASS\Maxins\_transparency.scss" />
     <Content Include="Content\SASS\Maxins\_vendor-prefixes.scss" />
-    <EntityDeploy Include="Models\Usertype\TWRALDB.edmx">
+    <EntityDeploy Include="Models\TWRLA_Staging_DB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TWRALDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>TWRLA_Staging_DB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Usertype\TWRALDB.edmx.diagram">
-      <DependentUpon>TWRALDB.edmx</DependentUpon>
+    <Content Include="Models\TWRLA_Staging_DB.edmx.diagram">
+      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\core\bootstrap.min.js" />
@@ -486,51 +432,6 @@
     <Content Include="Views\Shared\VolunteerLoggedInPage.cshtml" />
     <Content Include="Views\Shared\Vol_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Stud_LoginPartial.cshtml" />
-    <Content Include="Views\UserTypes\Create.cshtml" />
-    <Content Include="Views\UserTypes\Delete.cshtml" />
-    <Content Include="Views\UserTypes\Details.cshtml" />
-    <Content Include="Views\UserTypes\Edit.cshtml" />
-    <Content Include="Views\UserTypes\Index.cshtml" />
-    <Content Include="Views\VolunteerTypes\Create.cshtml" />
-    <Content Include="Views\VolunteerTypes\Delete.cshtml" />
-    <Content Include="Views\VolunteerTypes\Details.cshtml" />
-    <Content Include="Views\VolunteerTypes\Edit.cshtml" />
-    <Content Include="Views\VolunteerTypes\Index.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
-    <Content Include="Views\Students\Delete.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\StudentTypes\Create.cshtml" />
-    <Content Include="Views\StudentTypes\Delete.cshtml" />
-    <Content Include="Views\StudentTypes\Details.cshtml" />
-    <Content Include="Views\StudentTypes\Edit.cshtml" />
-    <Content Include="Views\StudentTypes\Index.cshtml" />
-    <Content Include="Views\Venues\Create.cshtml" />
-    <Content Include="Views\Venues\Delete.cshtml" />
-    <Content Include="Views\Venues\Details.cshtml" />
-    <Content Include="Views\Venues\Edit.cshtml" />
-    <Content Include="Views\Venues\Index.cshtml" />
-    <Content Include="Views\VenueTypes\Create.cshtml" />
-    <Content Include="Views\VenueTypes\Delete.cshtml" />
-    <Content Include="Views\VenueTypes\Details.cshtml" />
-    <Content Include="Views\VenueTypes\Edit.cshtml" />
-    <Content Include="Views\VenueTypes\Index.cshtml" />
-    <Content Include="Views\Residences\Create.cshtml" />
-    <Content Include="Views\Residences\Delete.cshtml" />
-    <Content Include="Views\Residences\Details.cshtml" />
-    <Content Include="Views\Residences\Edit.cshtml" />
-    <Content Include="Views\Residences\Index.cshtml" />
-    <Content Include="Views\Volunteers\Create.cshtml" />
-    <Content Include="Views\Volunteers\Delete.cshtml" />
-    <Content Include="Views\Volunteers\Details.cshtml" />
-    <Content Include="Views\Volunteers\Edit.cshtml" />
-    <Content Include="Views\Volunteers\Index.cshtml" />
-    <Content Include="Views\Alumni\Create.cshtml" />
-    <Content Include="Views\Alumni\Delete.cshtml" />
-    <Content Include="Views\Alumni\Details.cshtml" />
-    <Content Include="Views\Alumni\Edit.cshtml" />
-    <Content Include="Views\Alumni\Index.cshtml" />
     <Content Include="Views\UniqueCode\UniqueCode.cshtml" />
     <Content Include="Views\CheckPassword\Index.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
@@ -546,12 +447,9 @@
     <Content Include="Views\StudentProgress\Index.cshtml" />
     <Content Include="Views\CheckPassword\Checkpass1.cshtml" />
     <Content Include="Views\Account\LoginOption.cshtml" />
-    <Content Include="Views\Volunteers\Testviewvol.cshtml" />
-    <Content Include="Views\Students\ViewStudent.cshtml" />
     <Content Include="Views\Reports\MainReports.cshtml" />
     <Content Include="Views\Elibrary\Index.cshtml" />
     <Content Include="Views\UserProfile\StudentMyProfile.cshtml" />
-    <Content Include="Views\Venues\ViewVenue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
