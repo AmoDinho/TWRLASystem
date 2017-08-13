@@ -11,7 +11,11 @@ namespace TRWLASystemMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    //[Required]
+    //[EmailAddress]
+    //[Display(Name = "Email")]
     public partial class Volunteer
     {
         public int VolunteerID { get; set; }
