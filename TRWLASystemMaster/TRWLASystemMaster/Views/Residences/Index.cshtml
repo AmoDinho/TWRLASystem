@@ -7,6 +7,16 @@
 
 <h2>Index</h2>
 
+@* Search Button for 'RES NAME'*@
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+        <input type="submit" value="Search" class="btn btn-default btn-round" style="color:#9b16d8" />
+    </p>
+}
+
+
 
 <table class="table">
     <tr>

@@ -15,9 +15,20 @@ namespace TRWLASystemMaster.Controllers
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         // GET: Residences
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Residences.ToList());
+
+            var res = from s in db.Residences
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                res = res.Where(s => s.Res_Name.Contains(searchString));
+
+            }
+
+            return View(res.ToList());
+            //return View(db.Residences.ToList());
         }
 
         // GET: Residences/Details/5
