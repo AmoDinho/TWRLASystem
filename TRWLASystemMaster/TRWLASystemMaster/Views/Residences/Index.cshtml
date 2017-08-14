@@ -7,13 +7,11 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Res_Name)
+            @*@Html.DisplayNameFor(model => model.Res_Name)*@ Res Name
         </th>
         <th></th>
     </tr>
@@ -24,11 +22,25 @@
             @Html.DisplayFor(modelItem => item.Res_Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ResID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ResID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ResID })
+            <a href="@Url.Action("Edit", new { id=item.ResID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+
+            <a href="@Url.Action("Details", new { id=item.ResID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+
+            <a href="@Url.Action("Delete", new { id=item.ResID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+
+
         </td>
     </tr>
 }
 
 </table>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+               @Html.ActionLink("Add a new Residence", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+    </div>
