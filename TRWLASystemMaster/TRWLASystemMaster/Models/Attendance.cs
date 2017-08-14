@@ -11,9 +11,11 @@ namespace TRWLASystemMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    
+  
+
     public partial class Attendance
     {
+      
         public int StudentID { get; set; }
         public Nullable<int> FunctionID { get; set; }
         public Nullable<int> LectureID { get; set; }

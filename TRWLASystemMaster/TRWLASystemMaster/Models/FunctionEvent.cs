@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class FunctionEvent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +24,31 @@ namespace TRWLASystemMaster.Models
         }
     
         public int FunctionID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function Name")]
         public string Function_Name { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function Summary")]
         public string Function_Summary { get; set; }
+        [Required]
+        [StringLength(300, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function  Description")]
         public string Function_Description { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Function_Date { get; set; }
+
+        [Required]
+    
         public System.TimeSpan Function_StartTime { get; set; }
+        [Required]
         public System.TimeSpan Function_EndTime { get; set; }
+        [Required]
+        [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function Theme")]
         public string Function_Theme { get; set; }
         public Nullable<int> GuestSpeakerID { get; set; }
         public Nullable<int> VenueID { get; set; }

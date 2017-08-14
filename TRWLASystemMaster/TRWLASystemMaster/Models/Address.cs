@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace TRWLASystemMaster.Models
         {
             this.Venues = new HashSet<Venue>();
         }
-    
+     
         public int AddressID { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
