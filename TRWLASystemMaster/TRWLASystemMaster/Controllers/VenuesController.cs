@@ -15,10 +15,22 @@ namespace TRWLASystemMaster.Controllers
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         // GET: Venues
-        public ActionResult Index()
+        public ActionResult Index(string searchStringV)
         {
-            var venues = db.Venues.Include(v => v.Address).Include(v => v.VenueType);
-            return View(venues.ToList());
+            //var venues = db.Venues.Include(v => v.Address).Include(v => v.VenueType);
+            //return View(venues.ToList());
+
+            var ven = from v in db.Venues
+                          select v;
+           if (!String.IsNullOrEmpty(searchStringV))
+          {
+             ven = ven.Where(s => s.Venue_Name.Contains(searchStringV));
+
+                             }
+
+
+
+            return View(ven.ToList());
         }
 
         // GET: Venues/Details/5

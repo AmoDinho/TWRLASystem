@@ -58,10 +58,22 @@ namespace TRWLASystemMaster.Controllers
       
 
         // GET: Volunteers
-        public ActionResult Index()
+        public ActionResult Index(string searchStringVols)
         {
-            var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
-            return View(volunteers.ToList());
+            //var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
+            //return View(volunteers.ToList());
+
+            var ven = from v in db.Volunteers
+                      select v;
+            if (!String.IsNullOrEmpty(searchStringVols))
+            {
+                ven = ven.Where(s => s.Volunteer_Name.Contains(searchStringVols));
+
+            }
+
+
+
+            return View(ven.ToList());
         }
 
         // GET: Volunteers/Detailsc:\users\residences\documents\visual studio 2015\Projects\WebApplication1\WebApplication1\Controllers\ManageController.cs/5

@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<TRWLASystemMaster.Models.Volunteer>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@* Search Button for 'Volunteer Name'*@
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("searchStringVols", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+
+        <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -72,9 +79,13 @@
             @Html.DisplayFor(modelItem => item.VolunteerType.VolunteerType_Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VolunteerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VolunteerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerID })
+          
+
+            <a href="@Url.Action("Details", new { id=item.VolunteerID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> 
+
+            
+
+          
         </td>
     </tr>
 }
