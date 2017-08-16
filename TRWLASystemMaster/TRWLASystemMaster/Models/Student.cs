@@ -22,17 +22,15 @@ namespace TRWLASystemMaster.Models
         public string Student_Name { get; set; }
         public string Student_Surname { get; set; }
         public string Student_Phone { get; set; }
-        public string Student_Email { get; set; }
         public System.DateTime Student_DoB { get; set; }
-        public string Student_Password { get; set; }
         public string ActiveStatus { get; set; }
+        public string StudId { get; set; }
         public int ResID { get; set; }
         public int UserTypeID { get; set; }
         public int StudentTypeID { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Residence Residence { get; set; }
-        public virtual Attendance Attendance { get; set; }
-        public virtual RSVP_Event RSVP_Event { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual UserType UserType { get; set; }
     }

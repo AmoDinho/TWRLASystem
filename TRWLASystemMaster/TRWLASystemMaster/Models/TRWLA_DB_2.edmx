@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -17,16 +27,56 @@
           <Property Name="Province" Type="varchar" MaxLength="35" />
           <Property Name="PostCode" Type="varchar" MaxLength="9" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.Attendance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Attendance">
+        <EntityType Name="AspNetRoles">
           <Key>
-            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="StudentID" Type="int" Nullable="false" />
-          <Property Name="FunctionID" Type="int" />
-          <Property Name="LectureID" Type="int" />
-          <Property Name="ComEngID" Type="int" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
@@ -50,7 +100,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.Attendance' does not have a
           <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content_Name" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="Content_Link" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Content_Status" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="Content_Status" Type="int" Nullable="false" />
           <Property Name="Content_Description" Type="varchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <EntityType Name="FunctionEvent">
@@ -92,7 +142,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.Attendance' does not have a
           <Property Name="Lecture_EndTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="Lecture_Theme" Type="varchar" MaxLength="25" />
           <Property Name="VenueID" Type="int" />
-          <Property Name="ResID" Type="int" />
+          <Property Name="ResidenceID" Type="int" />
           <Property Name="ContentID" Type="int" />
         </EntityType>
         <EntityType Name="Milestone">
@@ -109,17 +159,6 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.Attendance' does not have a
           <Property Name="ResID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Res_Name" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="RSVP_Event">
-          <Key>
-            <PropertyRef Name="StudentID" />
-          </Key>
-          <Property Name="StudentID" Type="int" Nullable="false" />
-          <Property Name="FunctionID" Type="int" />
-          <Property Name="LectureID" Type="int" />
-          <Property Name="ComEngID" Type="int" />
-        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="StudentID" />
@@ -132,10 +171,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Student_Name" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="Student_Surname" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="Student_Phone" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Student_Email" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Student_DoB" Type="datetime" Nullable="false" />
-          <Property Name="Student_Password" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="ActiveStatus" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="StudId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ResID" Type="int" Nullable="false" />
           <Property Name="UserTypeID" Type="int" Nullable="false" />
           <Property Name="StudentTypeID" Type="int" Nullable="false" />
@@ -194,10 +232,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Volunteer_Name" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="Volunteer_Surname" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="Volunteer_Phone" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Volunteer_Email" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Volunteer_DoB" Type="datetime" Nullable="false" />
-          <Property Name="Volunteer_Password" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="ActiveStatus" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="VolId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="UserTypeID" Type="int" Nullable="false" />
           <Property Name="VolunteerTypeID" Type="int" Nullable="false" />
         </EntityType>
@@ -229,55 +266,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="VolunteerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VolunteerType_Description" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Attendanc__ComEn__48CFD27E">
-          <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComEngEvent">
-              <PropertyRef Name="ComEngID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="ComEngID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Attendanc__Funct__46E78A0C">
-          <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FunctionEvent">
-              <PropertyRef Name="FunctionID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="FunctionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Attendanc__Lectu__47DBAE45">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="LectureID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="LectureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Attendanc__Stude__45F365D3">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ComEngEve__Conte__3B75D760">
+        <Association Name="FK__ComEngEve__Conte__3D5E1FD2">
           <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -289,7 +278,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ComEngEve__Venue__3A81B327">
+        <Association Name="FK__ComEngEve__Venue__3C69FB99">
           <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -301,7 +290,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FunctionE__Guest__3F466844">
+        <Association Name="FK__FunctionE__Guest__412EB0B6">
           <End Role="GuestSpeaker" Type="Self.GuestSpeaker" Multiplicity="0..1" />
           <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -313,7 +302,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FunctionE__Venue__3E52440B">
+        <Association Name="FK__FunctionE__Venue__403A8C7D">
           <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
           <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -325,7 +314,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lecture__Content__37A5467C">
+        <Association Name="FK__Lecture__Content__398D8EEE">
           <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,7 +326,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lecture__ResID__36B12243">
+        <Association Name="FK__Lecture__Residen__38996AB5">
           <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -345,11 +334,11 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
               <PropertyRef Name="ResID" />
             </Principal>
             <Dependent Role="Lecture">
-              <PropertyRef Name="ResID" />
+              <PropertyRef Name="ResidenceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lecture__VenueID__35BCFE0A">
+        <Association Name="FK__Lecture__VenueID__37A5467C">
           <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,55 +350,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RSVP_Even__ComEn__4D94879B">
-          <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComEngEvent">
-              <PropertyRef Name="ComEngID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="ComEngID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RSVP_Even__Funct__4BAC3F29">
-          <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FunctionEvent">
-              <PropertyRef Name="FunctionID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="FunctionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RSVP_Even__Lectu__4CA06362">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="LectureID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="LectureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RSVP_Even__Stude__4AB81AF0">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student__ResID__1920BF5C">
+        <Association Name="FK__Student__ResID__656C112C">
           <End Role="Residence" Type="Self.Residence" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -421,7 +362,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__Student__1B0907CE">
+        <Association Name="FK__Student__Student__6754599E">
           <End Role="StudentType" Type="Self.StudentType" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -433,7 +374,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__UserTyp__1A14E395">
+        <Association Name="FK__Student__UserTyp__66603565">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,7 +386,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StudentMi__Miles__1FCDBCEB">
+        <Association Name="FK__StudentMi__Miles__22AA2996">
           <End Role="Milestone" Type="Self.Milestone" Multiplicity="1" />
           <End Role="StudentMilestone" Type="Self.StudentMilestone" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -457,7 +398,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TRWLASche__ComEn__440B1D61">
+        <Association Name="FK__TRWLASche__ComEn__45F365D3">
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
           <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -469,7 +410,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TRWLASche__Funct__4222D4EF">
+        <Association Name="FK__TRWLASche__Funct__440B1D61">
           <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
           <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -481,7 +422,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TRWLASche__Lectu__4316F928">
+        <Association Name="FK__TRWLASche__Lectu__44FF419A">
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
           <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -493,7 +434,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Venue__AddressID__2E1BDC42">
+        <Association Name="FK__Venue__AddressID__300424B4">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
           <ReferentialConstraint>
@@ -505,7 +446,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Venue__VenueType__2F10007B">
+        <Association Name="FK__Venue__VenueType__30F848ED">
           <End Role="VenueType" Type="Self.VenueType" Multiplicity="1" />
           <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
           <ReferentialConstraint>
@@ -517,7 +458,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Volunteer__UserT__24927208">
+        <Association Name="FK__Volunteer__UserT__6D0D32F4">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -529,7 +470,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Volunteer__Volun__25869641">
+        <Association Name="FK__Volunteer__Volun__6E01572D">
           <End Role="VolunteerType" Type="Self.VolunteerType" Multiplicity="1" />
           <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -541,8 +482,98 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="StudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="VolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TWRLADB_Staging_V2ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComEngEvent" EntityType="Self.ComEngEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionEvent" EntityType="Self.FunctionEvent" Schema="dbo" store:Type="Tables" />
@@ -560,124 +591,100 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <EntitySet Name="Volunteer" EntityType="Self.Volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VolunteerFeedback" EntityType="Self.VolunteerFeedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VolunteerType" EntityType="Self.VolunteerType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Attendance" EntityType="Self.Attendance" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Attendance].[StudentID] AS [StudentID], 
-    [Attendance].[FunctionID] AS [FunctionID], 
-    [Attendance].[LectureID] AS [LectureID], 
-    [Attendance].[ComEngID] AS [ComEngID]
-    FROM [dbo].[Attendance] AS [Attendance]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="RSVP_Event" EntityType="Self.RSVP_Event" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RSVP_Event].[StudentID] AS [StudentID], 
-    [RSVP_Event].[FunctionID] AS [FunctionID], 
-    [RSVP_Event].[LectureID] AS [LectureID], 
-    [RSVP_Event].[ComEngID] AS [ComEngID]
-    FROM [dbo].[RSVP_Event] AS [RSVP_Event]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Attendanc__ComEn__48CFD27E" Association="Self.FK__Attendanc__ComEn__48CFD27E">
-            <End Role="ComEngEvent" EntitySet="ComEngEvent" />
-            <End Role="Attendance" EntitySet="Attendance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__Funct__46E78A0C" Association="Self.FK__Attendanc__Funct__46E78A0C">
-            <End Role="FunctionEvent" EntitySet="FunctionEvent" />
-            <End Role="Attendance" EntitySet="Attendance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__Lectu__47DBAE45" Association="Self.FK__Attendanc__Lectu__47DBAE45">
-            <End Role="Lecture" EntitySet="Lecture" />
-            <End Role="Attendance" EntitySet="Attendance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__Stude__45F365D3" Association="Self.FK__Attendanc__Stude__45F365D3">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Attendance" EntitySet="Attendance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ComEngEve__Conte__3B75D760" Association="Self.FK__ComEngEve__Conte__3B75D760">
+          <AssociationSet Name="FK__ComEngEve__Conte__3D5E1FD2" Association="Self.FK__ComEngEve__Conte__3D5E1FD2">
             <End Role="Content" EntitySet="Content" />
             <End Role="ComEngEvent" EntitySet="ComEngEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK__ComEngEve__Venue__3A81B327" Association="Self.FK__ComEngEve__Venue__3A81B327">
+          <AssociationSet Name="FK__ComEngEve__Venue__3C69FB99" Association="Self.FK__ComEngEve__Venue__3C69FB99">
             <End Role="Venue" EntitySet="Venue" />
             <End Role="ComEngEvent" EntitySet="ComEngEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK__FunctionE__Guest__3F466844" Association="Self.FK__FunctionE__Guest__3F466844">
+          <AssociationSet Name="FK__FunctionE__Guest__412EB0B6" Association="Self.FK__FunctionE__Guest__412EB0B6">
             <End Role="GuestSpeaker" EntitySet="GuestSpeaker" />
             <End Role="FunctionEvent" EntitySet="FunctionEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK__FunctionE__Venue__3E52440B" Association="Self.FK__FunctionE__Venue__3E52440B">
+          <AssociationSet Name="FK__FunctionE__Venue__403A8C7D" Association="Self.FK__FunctionE__Venue__403A8C7D">
             <End Role="Venue" EntitySet="Venue" />
             <End Role="FunctionEvent" EntitySet="FunctionEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lecture__Content__37A5467C" Association="Self.FK__Lecture__Content__37A5467C">
+          <AssociationSet Name="FK__Lecture__Content__398D8EEE" Association="Self.FK__Lecture__Content__398D8EEE">
             <End Role="Content" EntitySet="Content" />
             <End Role="Lecture" EntitySet="Lecture" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lecture__ResID__36B12243" Association="Self.FK__Lecture__ResID__36B12243">
+          <AssociationSet Name="FK__Lecture__Residen__38996AB5" Association="Self.FK__Lecture__Residen__38996AB5">
             <End Role="Residence" EntitySet="Residence" />
             <End Role="Lecture" EntitySet="Lecture" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lecture__VenueID__35BCFE0A" Association="Self.FK__Lecture__VenueID__35BCFE0A">
+          <AssociationSet Name="FK__Lecture__VenueID__37A5467C" Association="Self.FK__Lecture__VenueID__37A5467C">
             <End Role="Venue" EntitySet="Venue" />
             <End Role="Lecture" EntitySet="Lecture" />
           </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__ComEn__4D94879B" Association="Self.FK__RSVP_Even__ComEn__4D94879B">
-            <End Role="ComEngEvent" EntitySet="ComEngEvent" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__Funct__4BAC3F29" Association="Self.FK__RSVP_Even__Funct__4BAC3F29">
-            <End Role="FunctionEvent" EntitySet="FunctionEvent" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__Lectu__4CA06362" Association="Self.FK__RSVP_Even__Lectu__4CA06362">
-            <End Role="Lecture" EntitySet="Lecture" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__Stude__4AB81AF0" Association="Self.FK__RSVP_Even__Stude__4AB81AF0">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student__ResID__1920BF5C" Association="Self.FK__Student__ResID__1920BF5C">
+          <AssociationSet Name="FK__Student__ResID__656C112C" Association="Self.FK__Student__ResID__656C112C">
             <End Role="Residence" EntitySet="Residence" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__Student__1B0907CE" Association="Self.FK__Student__Student__1B0907CE">
+          <AssociationSet Name="FK__Student__Student__6754599E" Association="Self.FK__Student__Student__6754599E">
             <End Role="StudentType" EntitySet="StudentType" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__UserTyp__1A14E395" Association="Self.FK__Student__UserTyp__1A14E395">
+          <AssociationSet Name="FK__Student__UserTyp__66603565" Association="Self.FK__Student__UserTyp__66603565">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK__StudentMi__Miles__1FCDBCEB" Association="Self.FK__StudentMi__Miles__1FCDBCEB">
+          <AssociationSet Name="FK__StudentMi__Miles__22AA2996" Association="Self.FK__StudentMi__Miles__22AA2996">
             <End Role="Milestone" EntitySet="Milestone" />
             <End Role="StudentMilestone" EntitySet="StudentMilestone" />
           </AssociationSet>
-          <AssociationSet Name="FK__TRWLASche__ComEn__440B1D61" Association="Self.FK__TRWLASche__ComEn__440B1D61">
+          <AssociationSet Name="FK__TRWLASche__ComEn__45F365D3" Association="Self.FK__TRWLASche__ComEn__45F365D3">
             <End Role="ComEngEvent" EntitySet="ComEngEvent" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK__TRWLASche__Funct__4222D4EF" Association="Self.FK__TRWLASche__Funct__4222D4EF">
+          <AssociationSet Name="FK__TRWLASche__Funct__440B1D61" Association="Self.FK__TRWLASche__Funct__440B1D61">
             <End Role="FunctionEvent" EntitySet="FunctionEvent" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK__TRWLASche__Lectu__4316F928" Association="Self.FK__TRWLASche__Lectu__4316F928">
+          <AssociationSet Name="FK__TRWLASche__Lectu__44FF419A" Association="Self.FK__TRWLASche__Lectu__44FF419A">
             <End Role="Lecture" EntitySet="Lecture" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK__Venue__AddressID__2E1BDC42" Association="Self.FK__Venue__AddressID__2E1BDC42">
+          <AssociationSet Name="FK__Venue__AddressID__300424B4" Association="Self.FK__Venue__AddressID__300424B4">
             <End Role="Address" EntitySet="Address" />
             <End Role="Venue" EntitySet="Venue" />
           </AssociationSet>
-          <AssociationSet Name="FK__Venue__VenueType__2F10007B" Association="Self.FK__Venue__VenueType__2F10007B">
+          <AssociationSet Name="FK__Venue__VenueType__30F848ED" Association="Self.FK__Venue__VenueType__30F848ED">
             <End Role="VenueType" EntitySet="VenueType" />
             <End Role="Venue" EntitySet="Venue" />
           </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__UserT__24927208" Association="Self.FK__Volunteer__UserT__24927208">
+          <AssociationSet Name="FK__Volunteer__UserT__6D0D32F4" Association="Self.FK__Volunteer__UserT__6D0D32F4">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="Volunteer" EntitySet="Volunteer" />
           </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__25869641" Association="Self.FK__Volunteer__Volun__25869641">
+          <AssociationSet Name="FK__Volunteer__Volun__6E01572D" Association="Self.FK__Volunteer__Volun__6E01572D">
             <End Role="VolunteerType" EntitySet="VolunteerType" />
+            <End Role="Volunteer" EntitySet="Volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Volunteer" EntitySet="Volunteer" />
           </AssociationSet>
         </EntityContainer>
@@ -686,6 +693,16 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TWRLADB_Staging_V2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -697,7 +714,58 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="City" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Province" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
           <Property Name="PostCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Venues" Relationship="Self.FK__Venue__AddressID__2E1BDC42" FromRole="Address" ToRole="Venue" />
+          <NavigationProperty Name="Venues" Relationship="Self.FK__Venue__AddressID__300424B4" FromRole="Address" ToRole="Venue" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId" FromRole="AspNetUsers" ToRole="Student" />
+          <NavigationProperty Name="Volunteers" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId" FromRole="AspNetUsers" ToRole="Volunteer" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
@@ -713,11 +781,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="ComEng_Theme" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="VenueID" Type="Int32" />
           <Property Name="ContentID" Type="Int32" />
-          <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__ComEn__48CFD27E" FromRole="ComEngEvent" ToRole="Attendance" />
-          <NavigationProperty Name="Content" Relationship="Self.FK__ComEngEve__Conte__3B75D760" FromRole="ComEngEvent" ToRole="Content" />
-          <NavigationProperty Name="Venue" Relationship="Self.FK__ComEngEve__Venue__3A81B327" FromRole="ComEngEvent" ToRole="Venue" />
-          <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__ComEn__4D94879B" FromRole="ComEngEvent" ToRole="RSVP_Event" />
-          <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__ComEn__440B1D61" FromRole="ComEngEvent" ToRole="TRWLASchedule" />
+          <NavigationProperty Name="Content" Relationship="Self.FK__ComEngEve__Conte__3D5E1FD2" FromRole="ComEngEvent" ToRole="Content" />
+          <NavigationProperty Name="Venue" Relationship="Self.FK__ComEngEve__Venue__3C69FB99" FromRole="ComEngEvent" ToRole="Venue" />
+          <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__ComEn__45F365D3" FromRole="ComEngEvent" ToRole="TRWLASchedule" />
         </EntityType>
         <EntityType Name="Content">
           <Key>
@@ -726,10 +792,10 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Content_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Content_Link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Content_Status" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="Content_Status" Type="Int32" Nullable="false" />
           <Property Name="Content_Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ComEngEvents" Relationship="Self.FK__ComEngEve__Conte__3B75D760" FromRole="Content" ToRole="ComEngEvent" />
-          <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Content__37A5467C" FromRole="Content" ToRole="Lecture" />
+          <NavigationProperty Name="ComEngEvents" Relationship="Self.FK__ComEngEve__Conte__3D5E1FD2" FromRole="Content" ToRole="ComEngEvent" />
+          <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Content__398D8EEE" FromRole="Content" ToRole="Lecture" />
         </EntityType>
         <EntityType Name="FunctionEvent">
           <Key>
@@ -745,11 +811,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Function_Theme" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="GuestSpeakerID" Type="Int32" />
           <Property Name="VenueID" Type="Int32" />
-          <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Funct__46E78A0C" FromRole="FunctionEvent" ToRole="Attendance" />
-          <NavigationProperty Name="GuestSpeaker" Relationship="Self.FK__FunctionE__Guest__3F466844" FromRole="FunctionEvent" ToRole="GuestSpeaker" />
-          <NavigationProperty Name="Venue" Relationship="Self.FK__FunctionE__Venue__3E52440B" FromRole="FunctionEvent" ToRole="Venue" />
-          <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Funct__4BAC3F29" FromRole="FunctionEvent" ToRole="RSVP_Event" />
-          <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__Funct__4222D4EF" FromRole="FunctionEvent" ToRole="TRWLASchedule" />
+          <NavigationProperty Name="GuestSpeaker" Relationship="Self.FK__FunctionE__Guest__412EB0B6" FromRole="FunctionEvent" ToRole="GuestSpeaker" />
+          <NavigationProperty Name="Venue" Relationship="Self.FK__FunctionE__Venue__403A8C7D" FromRole="FunctionEvent" ToRole="Venue" />
+          <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__Funct__440B1D61" FromRole="FunctionEvent" ToRole="TRWLASchedule" />
         </EntityType>
         <EntityType Name="GuestSpeaker">
           <Key>
@@ -761,7 +825,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="GuestSpeaker_Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="GuestSpeaker_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="GuestSpeaker_PictureLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="FunctionEvents" Relationship="Self.FK__FunctionE__Guest__3F466844" FromRole="GuestSpeaker" ToRole="FunctionEvent" />
+          <NavigationProperty Name="FunctionEvents" Relationship="Self.FK__FunctionE__Guest__412EB0B6" FromRole="GuestSpeaker" ToRole="FunctionEvent" />
         </EntityType>
         <EntityType Name="Lecture">
           <Key>
@@ -776,14 +840,12 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Lecture_EndTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Lecture_Theme" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="VenueID" Type="Int32" />
-          <Property Name="ResID" Type="Int32" />
+          <Property Name="ResidenceID" Type="Int32" />
           <Property Name="ContentID" Type="Int32" />
-          <NavigationProperty Name="Content" Relationship="Self.FK__Lecture__Content__37A5467C" FromRole="Lecture" ToRole="Content" />
-          <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Lectu__47DBAE45" FromRole="Lecture" ToRole="Attendance" />
-          <NavigationProperty Name="Residence" Relationship="Self.FK__Lecture__ResID__36B12243" FromRole="Lecture" ToRole="Residence" />
-          <NavigationProperty Name="Venue" Relationship="Self.FK__Lecture__VenueID__35BCFE0A" FromRole="Lecture" ToRole="Venue" />
-          <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Lectu__4CA06362" FromRole="Lecture" ToRole="RSVP_Event" />
-          <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__Lectu__4316F928" FromRole="Lecture" ToRole="TRWLASchedule" />
+          <NavigationProperty Name="Content" Relationship="Self.FK__Lecture__Content__398D8EEE" FromRole="Lecture" ToRole="Content" />
+          <NavigationProperty Name="Residence" Relationship="Self.FK__Lecture__Residen__38996AB5" FromRole="Lecture" ToRole="Residence" />
+          <NavigationProperty Name="Venue" Relationship="Self.FK__Lecture__VenueID__37A5467C" FromRole="Lecture" ToRole="Venue" />
+          <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__Lectu__44FF419A" FromRole="Lecture" ToRole="TRWLASchedule" />
         </EntityType>
         <EntityType Name="Milestone">
           <Key>
@@ -791,7 +853,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           </Key>
           <Property Name="MilestoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Milestone_Description" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="StudentMilestone" Relationship="Self.FK__StudentMi__Miles__1FCDBCEB" FromRole="Milestone" ToRole="StudentMilestone" />
+          <NavigationProperty Name="StudentMilestone" Relationship="Self.FK__StudentMi__Miles__22AA2996" FromRole="Milestone" ToRole="StudentMilestone" />
         </EntityType>
         <EntityType Name="Residence">
           <Key>
@@ -799,8 +861,8 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           </Key>
           <Property Name="ResID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Res_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__ResID__36B12243" FromRole="Residence" ToRole="Lecture" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__ResID__1920BF5C" FromRole="Residence" ToRole="Student" />
+          <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Residen__38996AB5" FromRole="Residence" ToRole="Lecture" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__ResID__656C112C" FromRole="Residence" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -814,25 +876,23 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Student_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Student_Surname" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Student_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Student_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Student_DoB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Student_Password" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ActiveStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ResID" Type="Int32" Nullable="false" />
           <Property Name="UserTypeID" Type="Int32" Nullable="false" />
           <Property Name="StudentTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Residence" Relationship="Self.FK__Student__ResID__1920BF5C" FromRole="Student" ToRole="Residence" />
-          <NavigationProperty Name="Attendance" Relationship="Self.FK__Attendanc__Stude__45F365D3" FromRole="Student" ToRole="Attendance" />
-          <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Stude__4AB81AF0" FromRole="Student" ToRole="RSVP_Event" />
-          <NavigationProperty Name="StudentType" Relationship="Self.FK__Student__Student__1B0907CE" FromRole="Student" ToRole="StudentType" />
-          <NavigationProperty Name="UserType" Relationship="Self.FK__Student__UserTyp__1A14E395" FromRole="Student" ToRole="UserType" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId" FromRole="Student" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Residence" Relationship="Self.FK__Student__ResID__656C112C" FromRole="Student" ToRole="Residence" />
+          <NavigationProperty Name="StudentType" Relationship="Self.FK__Student__Student__6754599E" FromRole="Student" ToRole="StudentType" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK__Student__UserTyp__66603565" FromRole="Student" ToRole="UserType" />
         </EntityType>
         <EntityType Name="StudentMilestone">
           <Key>
             <PropertyRef Name="MilestoneID" />
           </Key>
           <Property Name="MilestoneID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Milestone" Relationship="Self.FK__StudentMi__Miles__1FCDBCEB" FromRole="StudentMilestone" ToRole="Milestone" />
+          <NavigationProperty Name="Milestone" Relationship="Self.FK__StudentMi__Miles__22AA2996" FromRole="StudentMilestone" ToRole="Milestone" />
         </EntityType>
         <EntityType Name="StudentType">
           <Key>
@@ -840,7 +900,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           </Key>
           <Property Name="StudentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentTypeDescription" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Student__1B0907CE" FromRole="StudentType" ToRole="Student" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Student__6754599E" FromRole="StudentType" ToRole="Student" />
         </EntityType>
         <EntityType Name="TRWLASchedule">
           <Key>
@@ -850,9 +910,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="FunctionID" Type="Int32" />
           <Property Name="LectureID" Type="Int32" />
           <Property Name="ComEngID" Type="Int32" />
-          <NavigationProperty Name="ComEngEvent" Relationship="Self.FK__TRWLASche__ComEn__440B1D61" FromRole="TRWLASchedule" ToRole="ComEngEvent" />
-          <NavigationProperty Name="FunctionEvent" Relationship="Self.FK__TRWLASche__Funct__4222D4EF" FromRole="TRWLASchedule" ToRole="FunctionEvent" />
-          <NavigationProperty Name="Lecture" Relationship="Self.FK__TRWLASche__Lectu__4316F928" FromRole="TRWLASchedule" ToRole="Lecture" />
+          <NavigationProperty Name="ComEngEvent" Relationship="Self.FK__TRWLASche__ComEn__45F365D3" FromRole="TRWLASchedule" ToRole="ComEngEvent" />
+          <NavigationProperty Name="FunctionEvent" Relationship="Self.FK__TRWLASche__Funct__440B1D61" FromRole="TRWLASchedule" ToRole="FunctionEvent" />
+          <NavigationProperty Name="Lecture" Relationship="Self.FK__TRWLASche__Lectu__44FF419A" FromRole="TRWLASchedule" ToRole="Lecture" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -861,8 +921,8 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AccessRight" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__UserTyp__1A14E395" FromRole="UserType" ToRole="Student" />
-          <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__UserT__24927208" FromRole="UserType" ToRole="Volunteer" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__UserTyp__66603565" FromRole="UserType" ToRole="Student" />
+          <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__UserT__6D0D32F4" FromRole="UserType" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="Venue">
           <Key>
@@ -872,11 +932,11 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Venue_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AddressID" Type="Int32" Nullable="false" />
           <Property Name="VenueTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Venue__AddressID__2E1BDC42" FromRole="Venue" ToRole="Address" />
-          <NavigationProperty Name="ComEngEvents" Relationship="Self.FK__ComEngEve__Venue__3A81B327" FromRole="Venue" ToRole="ComEngEvent" />
-          <NavigationProperty Name="FunctionEvents" Relationship="Self.FK__FunctionE__Venue__3E52440B" FromRole="Venue" ToRole="FunctionEvent" />
-          <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__VenueID__35BCFE0A" FromRole="Venue" ToRole="Lecture" />
-          <NavigationProperty Name="VenueType" Relationship="Self.FK__Venue__VenueType__2F10007B" FromRole="Venue" ToRole="VenueType" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Venue__AddressID__300424B4" FromRole="Venue" ToRole="Address" />
+          <NavigationProperty Name="ComEngEvents" Relationship="Self.FK__ComEngEve__Venue__3C69FB99" FromRole="Venue" ToRole="ComEngEvent" />
+          <NavigationProperty Name="FunctionEvents" Relationship="Self.FK__FunctionE__Venue__403A8C7D" FromRole="Venue" ToRole="FunctionEvent" />
+          <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__VenueID__37A5467C" FromRole="Venue" ToRole="Lecture" />
+          <NavigationProperty Name="VenueType" Relationship="Self.FK__Venue__VenueType__30F848ED" FromRole="Venue" ToRole="VenueType" />
         </EntityType>
         <EntityType Name="VenueType">
           <Key>
@@ -884,7 +944,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           </Key>
           <Property Name="VenueTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VenueType_Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Venues" Relationship="Self.FK__Venue__VenueType__2F10007B" FromRole="VenueType" ToRole="Venue" />
+          <NavigationProperty Name="Venues" Relationship="Self.FK__Venue__VenueType__30F848ED" FromRole="VenueType" ToRole="Venue" />
         </EntityType>
         <EntityType Name="Volunteer">
           <Key>
@@ -894,14 +954,14 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <Property Name="Volunteer_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Volunteer_Surname" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Volunteer_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Volunteer_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Volunteer_DoB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Volunteer_Password" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ActiveStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VolId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserTypeID" Type="Int32" Nullable="false" />
           <Property Name="VolunteerTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserType" Relationship="Self.FK__Volunteer__UserT__24927208" FromRole="Volunteer" ToRole="UserType" />
-          <NavigationProperty Name="VolunteerType" Relationship="Self.FK__Volunteer__Volun__25869641" FromRole="Volunteer" ToRole="VolunteerType" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId" FromRole="Volunteer" ToRole="AspNetUsers" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK__Volunteer__UserT__6D0D32F4" FromRole="Volunteer" ToRole="UserType" />
+          <NavigationProperty Name="VolunteerType" Relationship="Self.FK__Volunteer__Volun__6E01572D" FromRole="Volunteer" ToRole="VolunteerType" />
         </EntityType>
         <EntityType Name="VolunteerFeedback">
           <Key>
@@ -930,35 +990,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           </Key>
           <Property Name="VolunteerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VolunteerType_Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__Volun__25869641" FromRole="VolunteerType" ToRole="Volunteer" />
+          <NavigationProperty Name="Volunteers" Relationship="Self.FK__Volunteer__Volun__6E01572D" FromRole="VolunteerType" ToRole="Volunteer" />
         </EntityType>
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="StudentID" />
-          </Key>
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="FunctionID" Type="Int32" />
-          <Property Name="LectureID" Type="Int32" />
-          <Property Name="ComEngID" Type="Int32" />
-          <NavigationProperty Name="ComEngEvent" Relationship="Self.FK__Attendanc__ComEn__48CFD27E" FromRole="Attendance" ToRole="ComEngEvent" />
-          <NavigationProperty Name="FunctionEvent" Relationship="Self.FK__Attendanc__Funct__46E78A0C" FromRole="Attendance" ToRole="FunctionEvent" />
-          <NavigationProperty Name="Lecture" Relationship="Self.FK__Attendanc__Lectu__47DBAE45" FromRole="Attendance" ToRole="Lecture" />
-          <NavigationProperty Name="Student" Relationship="Self.FK__Attendanc__Stude__45F365D3" FromRole="Attendance" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="RSVP_Event">
-          <Key>
-            <PropertyRef Name="StudentID" />
-          </Key>
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="FunctionID" Type="Int32" />
-          <Property Name="LectureID" Type="Int32" />
-          <Property Name="ComEngID" Type="Int32" />
-          <NavigationProperty Name="ComEngEvent" Relationship="Self.FK__RSVP_Even__ComEn__4D94879B" FromRole="RSVP_Event" ToRole="ComEngEvent" />
-          <NavigationProperty Name="FunctionEvent" Relationship="Self.FK__RSVP_Even__Funct__4BAC3F29" FromRole="RSVP_Event" ToRole="FunctionEvent" />
-          <NavigationProperty Name="Lecture" Relationship="Self.FK__RSVP_Even__Lectu__4CA06362" FromRole="RSVP_Event" ToRole="Lecture" />
-          <NavigationProperty Name="Student" Relationship="Self.FK__RSVP_Even__Stude__4AB81AF0" FromRole="RSVP_Event" ToRole="Student" />
-        </EntityType>
-        <Association Name="FK__Venue__AddressID__2E1BDC42">
+        <Association Name="FK__Venue__AddressID__300424B4">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
           <ReferentialConstraint>
@@ -970,19 +1004,63 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Attendanc__ComEn__48CFD27E">
-          <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ComEngEvent">
-              <PropertyRef Name="ComEngID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="ComEngID" />
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ComEngEve__Conte__3B75D760">
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="StudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Volunteer">
+              <PropertyRef Name="VolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ComEngEve__Conte__3D5E1FD2">
           <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -994,7 +1072,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ComEngEve__Venue__3A81B327">
+        <Association Name="FK__ComEngEve__Venue__3C69FB99">
           <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1006,19 +1084,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RSVP_Even__ComEn__4D94879B">
-          <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComEngEvent">
-              <PropertyRef Name="ComEngID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="ComEngID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TRWLASche__ComEn__440B1D61">
+        <Association Name="FK__TRWLASche__ComEn__45F365D3">
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
           <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1030,7 +1096,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lecture__Content__37A5467C">
+        <Association Name="FK__Lecture__Content__398D8EEE">
           <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1042,19 +1108,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Attendanc__Funct__46E78A0C">
-          <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FunctionEvent">
-              <PropertyRef Name="FunctionID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="FunctionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__FunctionE__Guest__3F466844">
+        <Association Name="FK__FunctionE__Guest__412EB0B6">
           <End Role="GuestSpeaker" Type="Self.GuestSpeaker" Multiplicity="0..1" />
           <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1066,7 +1120,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FunctionE__Venue__3E52440B">
+        <Association Name="FK__FunctionE__Venue__403A8C7D">
           <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
           <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1078,19 +1132,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RSVP_Even__Funct__4BAC3F29">
-          <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FunctionEvent">
-              <PropertyRef Name="FunctionID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="FunctionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TRWLASche__Funct__4222D4EF">
+        <Association Name="FK__TRWLASche__Funct__440B1D61">
           <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
           <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1102,19 +1144,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Attendanc__Lectu__47DBAE45">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="LectureID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="LectureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Lecture__ResID__36B12243">
+        <Association Name="FK__Lecture__Residen__38996AB5">
           <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1122,11 +1152,11 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
               <PropertyRef Name="ResID" />
             </Principal>
             <Dependent Role="Lecture">
-              <PropertyRef Name="ResID" />
+              <PropertyRef Name="ResidenceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lecture__VenueID__35BCFE0A">
+        <Association Name="FK__Lecture__VenueID__37A5467C">
           <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1138,19 +1168,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RSVP_Even__Lectu__4CA06362">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="LectureID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="LectureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TRWLASche__Lectu__4316F928">
+        <Association Name="FK__TRWLASche__Lectu__44FF419A">
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
           <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1162,7 +1180,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StudentMi__Miles__1FCDBCEB">
+        <Association Name="FK__StudentMi__Miles__22AA2996">
           <End Role="Milestone" Type="Self.Milestone" Multiplicity="1" />
           <End Role="StudentMilestone" Type="Self.StudentMilestone" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1174,7 +1192,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__ResID__1920BF5C">
+        <Association Name="FK__Student__ResID__656C112C">
           <End Role="Residence" Type="Self.Residence" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1186,31 +1204,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Attendanc__Stude__45F365D3">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RSVP_Even__Stude__4AB81AF0">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="RSVP_Event">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Student__Student__1B0907CE">
+        <Association Name="FK__Student__Student__6754599E">
           <End Role="StudentType" Type="Self.StudentType" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1222,7 +1216,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__UserTyp__1A14E395">
+        <Association Name="FK__Student__UserTyp__66603565">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1234,7 +1228,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Volunteer__UserT__24927208">
+        <Association Name="FK__Volunteer__UserT__6D0D32F4">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1246,7 +1240,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Venue__VenueType__2F10007B">
+        <Association Name="FK__Venue__VenueType__30F848ED">
           <End Role="VenueType" Type="Self.VenueType" Multiplicity="1" />
           <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1258,7 +1252,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Volunteer__Volun__25869641">
+        <Association Name="FK__Volunteer__Volun__6E01572D">
           <End Role="VolunteerType" Type="Self.VolunteerType" Multiplicity="1" />
           <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1270,8 +1264,17 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TWRLADB_Staging_V2Entities" annotation:LazyLoadingEnabled="true">
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TWRLADB_Staging_V2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="ComEngEvents" EntityType="Self.ComEngEvent" />
           <EntitySet Name="Contents" EntityType="Self.Content" />
           <EntitySet Name="FunctionEvents" EntityType="Self.FunctionEvent" />
@@ -1289,111 +1292,97 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
           <EntitySet Name="Volunteers" EntityType="Self.Volunteer" />
           <EntitySet Name="VolunteerFeedbacks" EntityType="Self.VolunteerFeedback" />
           <EntitySet Name="VolunteerTypes" EntityType="Self.VolunteerType" />
-          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
-          <EntitySet Name="RSVP_Event" EntityType="Self.RSVP_Event" />
-          <AssociationSet Name="FK__Venue__AddressID__2E1BDC42" Association="Self.FK__Venue__AddressID__2E1BDC42">
+          <AssociationSet Name="FK__Venue__AddressID__300424B4" Association="Self.FK__Venue__AddressID__300424B4">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="Venue" EntitySet="Venues" />
           </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__ComEn__48CFD27E" Association="Self.FK__Attendanc__ComEn__48CFD27E">
-            <End Role="ComEngEvent" EntitySet="ComEngEvents" />
-            <End Role="Attendance" EntitySet="Attendances" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
-          <AssociationSet Name="FK__ComEngEve__Conte__3B75D760" Association="Self.FK__ComEngEve__Conte__3B75D760">
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_StudId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_VolId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ComEngEve__Conte__3D5E1FD2" Association="Self.FK__ComEngEve__Conte__3D5E1FD2">
             <End Role="Content" EntitySet="Contents" />
             <End Role="ComEngEvent" EntitySet="ComEngEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK__ComEngEve__Venue__3A81B327" Association="Self.FK__ComEngEve__Venue__3A81B327">
+          <AssociationSet Name="FK__ComEngEve__Venue__3C69FB99" Association="Self.FK__ComEngEve__Venue__3C69FB99">
             <End Role="Venue" EntitySet="Venues" />
             <End Role="ComEngEvent" EntitySet="ComEngEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__ComEn__4D94879B" Association="Self.FK__RSVP_Even__ComEn__4D94879B">
-            <End Role="ComEngEvent" EntitySet="ComEngEvents" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TRWLASche__ComEn__440B1D61" Association="Self.FK__TRWLASche__ComEn__440B1D61">
+          <AssociationSet Name="FK__TRWLASche__ComEn__45F365D3" Association="Self.FK__TRWLASche__ComEn__45F365D3">
             <End Role="ComEngEvent" EntitySet="ComEngEvents" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lecture__Content__37A5467C" Association="Self.FK__Lecture__Content__37A5467C">
+          <AssociationSet Name="FK__Lecture__Content__398D8EEE" Association="Self.FK__Lecture__Content__398D8EEE">
             <End Role="Content" EntitySet="Contents" />
             <End Role="Lecture" EntitySet="Lectures" />
           </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__Funct__46E78A0C" Association="Self.FK__Attendanc__Funct__46E78A0C">
-            <End Role="FunctionEvent" EntitySet="FunctionEvents" />
-            <End Role="Attendance" EntitySet="Attendances" />
-          </AssociationSet>
-          <AssociationSet Name="FK__FunctionE__Guest__3F466844" Association="Self.FK__FunctionE__Guest__3F466844">
+          <AssociationSet Name="FK__FunctionE__Guest__412EB0B6" Association="Self.FK__FunctionE__Guest__412EB0B6">
             <End Role="GuestSpeaker" EntitySet="GuestSpeakers" />
             <End Role="FunctionEvent" EntitySet="FunctionEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK__FunctionE__Venue__3E52440B" Association="Self.FK__FunctionE__Venue__3E52440B">
+          <AssociationSet Name="FK__FunctionE__Venue__403A8C7D" Association="Self.FK__FunctionE__Venue__403A8C7D">
             <End Role="Venue" EntitySet="Venues" />
             <End Role="FunctionEvent" EntitySet="FunctionEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__Funct__4BAC3F29" Association="Self.FK__RSVP_Even__Funct__4BAC3F29">
-            <End Role="FunctionEvent" EntitySet="FunctionEvents" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TRWLASche__Funct__4222D4EF" Association="Self.FK__TRWLASche__Funct__4222D4EF">
+          <AssociationSet Name="FK__TRWLASche__Funct__440B1D61" Association="Self.FK__TRWLASche__Funct__440B1D61">
             <End Role="FunctionEvent" EntitySet="FunctionEvents" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__Lectu__47DBAE45" Association="Self.FK__Attendanc__Lectu__47DBAE45">
-            <End Role="Lecture" EntitySet="Lectures" />
-            <End Role="Attendance" EntitySet="Attendances" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Lecture__ResID__36B12243" Association="Self.FK__Lecture__ResID__36B12243">
+          <AssociationSet Name="FK__Lecture__Residen__38996AB5" Association="Self.FK__Lecture__Residen__38996AB5">
             <End Role="Residence" EntitySet="Residences" />
             <End Role="Lecture" EntitySet="Lectures" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lecture__VenueID__35BCFE0A" Association="Self.FK__Lecture__VenueID__35BCFE0A">
+          <AssociationSet Name="FK__Lecture__VenueID__37A5467C" Association="Self.FK__Lecture__VenueID__37A5467C">
             <End Role="Venue" EntitySet="Venues" />
             <End Role="Lecture" EntitySet="Lectures" />
           </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__Lectu__4CA06362" Association="Self.FK__RSVP_Even__Lectu__4CA06362">
-            <End Role="Lecture" EntitySet="Lectures" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TRWLASche__Lectu__4316F928" Association="Self.FK__TRWLASche__Lectu__4316F928">
+          <AssociationSet Name="FK__TRWLASche__Lectu__44FF419A" Association="Self.FK__TRWLASche__Lectu__44FF419A">
             <End Role="Lecture" EntitySet="Lectures" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK__StudentMi__Miles__1FCDBCEB" Association="Self.FK__StudentMi__Miles__1FCDBCEB">
+          <AssociationSet Name="FK__StudentMi__Miles__22AA2996" Association="Self.FK__StudentMi__Miles__22AA2996">
             <End Role="Milestone" EntitySet="Milestones" />
             <End Role="StudentMilestone" EntitySet="StudentMilestones" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__ResID__1920BF5C" Association="Self.FK__Student__ResID__1920BF5C">
+          <AssociationSet Name="FK__Student__ResID__656C112C" Association="Self.FK__Student__ResID__656C112C">
             <End Role="Residence" EntitySet="Residences" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK__Attendanc__Stude__45F365D3" Association="Self.FK__Attendanc__Stude__45F365D3">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Attendance" EntitySet="Attendances" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RSVP_Even__Stude__4AB81AF0" Association="Self.FK__RSVP_Even__Stude__4AB81AF0">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="RSVP_Event" EntitySet="RSVP_Event" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Student__Student__1B0907CE" Association="Self.FK__Student__Student__1B0907CE">
+          <AssociationSet Name="FK__Student__Student__6754599E" Association="Self.FK__Student__Student__6754599E">
             <End Role="StudentType" EntitySet="StudentTypes" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__UserTyp__1A14E395" Association="Self.FK__Student__UserTyp__1A14E395">
+          <AssociationSet Name="FK__Student__UserTyp__66603565" Association="Self.FK__Student__UserTyp__66603565">
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__UserT__24927208" Association="Self.FK__Volunteer__UserT__24927208">
+          <AssociationSet Name="FK__Volunteer__UserT__6D0D32F4" Association="Self.FK__Volunteer__UserT__6D0D32F4">
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="Volunteer" EntitySet="Volunteers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Venue__VenueType__2F10007B" Association="Self.FK__Venue__VenueType__2F10007B">
+          <AssociationSet Name="FK__Venue__VenueType__30F848ED" Association="Self.FK__Venue__VenueType__30F848ED">
             <End Role="VenueType" EntitySet="VenueTypes" />
             <End Role="Venue" EntitySet="Venues" />
           </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__25869641" Association="Self.FK__Volunteer__Volun__25869641">
+          <AssociationSet Name="FK__Volunteer__Volun__6E01572D" Association="Self.FK__Volunteer__Volun__6E01572D">
             <End Role="VolunteerType" EntitySet="VolunteerTypes" />
             <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1401,7 +1390,17 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
+        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities1">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -1412,6 +1411,51 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Province" ColumnName="Province" />
                 <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1482,7 +1526,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
                 <ScalarProperty Name="Lecture_EndTime" ColumnName="Lecture_EndTime" />
                 <ScalarProperty Name="Lecture_Theme" ColumnName="Lecture_Theme" />
                 <ScalarProperty Name="VenueID" ColumnName="VenueID" />
-                <ScalarProperty Name="ResID" ColumnName="ResID" />
+                <ScalarProperty Name="ResidenceID" ColumnName="ResidenceID" />
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1514,10 +1558,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
                 <ScalarProperty Name="Student_Name" ColumnName="Student_Name" />
                 <ScalarProperty Name="Student_Surname" ColumnName="Student_Surname" />
                 <ScalarProperty Name="Student_Phone" ColumnName="Student_Phone" />
-                <ScalarProperty Name="Student_Email" ColumnName="Student_Email" />
                 <ScalarProperty Name="Student_DoB" ColumnName="Student_DoB" />
-                <ScalarProperty Name="Student_Password" ColumnName="Student_Password" />
                 <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+                <ScalarProperty Name="StudId" ColumnName="StudId" />
                 <ScalarProperty Name="ResID" ColumnName="ResID" />
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="StudentTypeID" ColumnName="StudentTypeID" />
@@ -1583,10 +1626,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
                 <ScalarProperty Name="Volunteer_Name" ColumnName="Volunteer_Name" />
                 <ScalarProperty Name="Volunteer_Surname" ColumnName="Volunteer_Surname" />
                 <ScalarProperty Name="Volunteer_Phone" ColumnName="Volunteer_Phone" />
-                <ScalarProperty Name="Volunteer_Email" ColumnName="Volunteer_Email" />
                 <ScalarProperty Name="Volunteer_DoB" ColumnName="Volunteer_DoB" />
-                <ScalarProperty Name="Volunteer_Password" ColumnName="Volunteer_Password" />
                 <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+                <ScalarProperty Name="VolId" ColumnName="VolId" />
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
               </MappingFragment>
@@ -1622,26 +1664,14 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Attendances">
-            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
-              <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-                <ScalarProperty Name="LectureID" ColumnName="LectureID" />
-                <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RSVP_Event">
-            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
-              <MappingFragment StoreEntitySet="RSVP_Event">
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-                <ScalarProperty Name="LectureID" ColumnName="LectureID" />
-                <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="TWRLADB_Staging_V2Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

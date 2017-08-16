@@ -13,10 +13,10 @@ namespace TRWLASystemMaster.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TWRLADB_Staging_V2Entities : DbContext
+    public partial class TWRLADB_Staging_V2Entities1 : DbContext
     {
-        public TWRLADB_Staging_V2Entities()
-            : base("name=TWRLADB_Staging_V2Entities")
+        public TWRLADB_Staging_V2Entities1()
+            : base("name=TWRLADB_Staging_V2Entities1")
         {
         }
     
@@ -25,7 +25,12 @@ namespace TRWLASystemMaster.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<ComEngEvent> ComEngEvents { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
         public virtual DbSet<FunctionEvent> FunctionEvents { get; set; }
@@ -43,7 +48,5 @@ namespace TRWLASystemMaster.Models
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<VolunteerFeedback> VolunteerFeedbacks { get; set; }
         public virtual DbSet<VolunteerType> VolunteerTypes { get; set; }
-        public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<RSVP_Event> RSVP_Event { get; set; }
     }
 }

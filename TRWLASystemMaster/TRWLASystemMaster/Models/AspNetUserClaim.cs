@@ -12,16 +12,13 @@ namespace TRWLASystemMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RSVP_Event
+    public partial class AspNetUserClaim
     {
-        public int StudentID { get; set; }
-        public Nullable<int> FunctionID { get; set; }
-        public Nullable<int> LectureID { get; set; }
-        public Nullable<int> ComEngID { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public virtual ComEngEvent ComEngEvent { get; set; }
-        public virtual FunctionEvent FunctionEvent { get; set; }
-        public virtual Lecture Lecture { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

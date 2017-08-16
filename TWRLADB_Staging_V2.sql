@@ -83,6 +83,106 @@ StudentID int FOREIGN KEY REFERENCES Student(StudentID)
 --AuditID int identity(1,1)
 --)
 
+
+---Migration History Table----
+
+CREATE TABLE [dbo].[__MigrationHistory] (
+    [MigrationId]    NVARCHAR (150)  NOT NULL,
+    [ContextKey]     NVARCHAR (300)  NOT NULL,
+    [Model]          VARBINARY (MAX) NOT NULL,
+    [ProductVersion] NVARCHAR (32)   NOT NULL,
+    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED ([MigrationId] ASC, [ContextKey] ASC)
+);
+
+--ASP.NET ROLES TABLES---
+CREATE TABLE [dbo].[AspNetRoles] (
+    [Id]   NVARCHAR (128) NOT NULL,
+    [Name] NVARCHAR (256) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
+    ON [dbo].[AspNetRoles]([Name] ASC);
+
+
+	---ASPNET User Claims---
+
+CREATE TABLE [dbo].[AspNetUserClaims] (
+    [Id]         INT            IDENTITY (1, 1) NOT NULL,
+    [UserId]     NVARCHAR (128) NOT NULL,
+    [ClaimType]  NVARCHAR (MAX) NULL,
+    [ClaimValue] NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[AspNetUserClaims]([UserId] ASC);
+
+
+	---ASPNET User loginss---
+CREATE TABLE [dbo].[AspNetUserLogins] (
+    [LoginProvider] NVARCHAR (128) NOT NULL,
+    [ProviderKey]   NVARCHAR (128) NOT NULL,
+    [UserId]        NVARCHAR (128) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED ([LoginProvider] ASC, [ProviderKey] ASC, [UserId] ASC),
+    CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[AspNetUserLogins]([UserId] ASC);
+
+
+	---ASPNET USER ROLES---
+	CREATE TABLE [dbo].[AspNetUserRoles] (
+    [UserId] NVARCHAR (128) NOT NULL,
+    [RoleId] NVARCHAR (128) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
+    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId]
+    ON [dbo].[AspNetUserRoles]([UserId] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_RoleId]
+    ON [dbo].[AspNetUserRoles]([RoleId] ASC);
+
+
+	---ASPNET USERS----
+
+	CREATE TABLE [dbo].[AspNetUsers] (
+    [Id]                   NVARCHAR (128) NOT NULL,
+    [Email]                NVARCHAR (256) NULL,
+    [EmailConfirmed]       BIT            NOT NULL,
+    [PasswordHash]         NVARCHAR (MAX) NULL,
+    [SecurityStamp]        NVARCHAR (MAX) NULL,
+    [PhoneNumber]          NVARCHAR (MAX) NULL,
+    [PhoneNumberConfirmed] BIT            NOT NULL,
+    [TwoFactorEnabled]     BIT            NOT NULL,
+    [LockoutEndDateUtc]    DATETIME       NULL,
+    [LockoutEnabled]       BIT            NOT NULL,
+    [AccessFailedCount]    INT            NOT NULL,
+    [UserName]             NVARCHAR (256) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([UserName] ASC);
+
+
  ---- StudentType---
 
 create table StudentType
@@ -100,15 +200,13 @@ StudentNumber varchar(10) not null,
 Graduate varchar(10)  not null,
 Degree varchar(35) not null,
 YearOfStudy date not null,
-
 Student_Name varchar(35) not null,
 Student_Surname varchar(35) not null,
 Student_Phone varchar(10) not null,
-Student_Email varchar(255) not null,
 Student_DoB datetime not null,
-Student_Password varchar(35) not null,
 ActiveStatus varchar(25)not null,
-
+[StudId] NVARCHAR (128) NOT NULL,
+ CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_StudId] FOREIGN KEY ([StudId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null
@@ -151,11 +249,12 @@ VolunteerID int IDENTITY(1,1) PRIMARY KEY,
 Volunteer_Name varchar(35) not null,
 Volunteer_Surname varchar(35) not null,
 Volunteer_Phone varchar(10) not null,
-Volunteer_Email varchar(255) not null,
-Volunteer_DoB datetime not null,
-Volunteer_Password varchar(35) not null,
-ActiveStatus varchar(25)not null,
 
+Volunteer_DoB datetime not null,
+
+ActiveStatus varchar(25)not null,
+[VolId] NVARCHAR (128) NOT NULL,
+ CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_VolId] FOREIGN KEY ([VolId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE,
 
 UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not null
@@ -292,6 +391,8 @@ insert into Residence(Res_Name)
 values('Vividus Ladies')
 go
 
+--Insert into Aspnetusers--
+
 
 
 ---Student---
@@ -311,10 +412,6 @@ values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u
 GO
 
 
-
-
-*/
-
 insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
 values('14284783','1','Informatics','2017/01/01','Siobhann','Tatum','074100249','u14284783@tuks.co.za','1994/04/06','January','None active',1,2,2)
 GO
@@ -322,6 +419,10 @@ GO
 insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
 values('1422','2','BSC Zoology','2017/06/21','Manion','Flom','07784249','u1587985@tuks.co.za','1994/04/06','march','None active',1,2,2)
 GO
+
+*/
+
+
 
 
 ---Volunteer----
@@ -343,11 +444,14 @@ GO
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO 
-*/
+
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_Email,Volunteer_DoB,Volunteer_Password,ActiveStatus,UserTypeID,VolunteerTypeID)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None','1','1')
 GO
+
+*/
+
 
 
 				  
@@ -426,7 +530,7 @@ create table Content
 	ContentID int identity(1,1) primary key,
 	Content_Name varchar(35) not null,
 	Content_Link varchar(100) not null,
-	Content_Status binary not null,
+	Content_Status int not null,
 	Content_Description varchar(300) not null
 )
 GO
@@ -447,10 +551,10 @@ create table Lecture
 	Lecture_EndTime time not null,
 	Lecture_Theme varchar(25) null,
 	VenueID int null,
-	ResID int null,
+	ResidenceID int null,
 	ContentID int null,
 	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
-	FOREIGN KEY (ResID) REFERENCES Residence(ResID),
+	FOREIGN KEY (ResidenceID) REFERENCES Residence(ResID),
 	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
 )
 GO
@@ -602,8 +706,74 @@ go
 delete from VenueType where VenueTypeID = 5
 go
 
+  ---insert into:CONTENT TABLE---
+insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
+values('Looking Forward', 'www.google.com', 1, 'Taking the plunge')
+go
 
-  ---insert into: SCHEDULE TABLE---
+insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
+values('Looking Backward', 'www.google.com', 1, 'Taking the plunge together')
+go
+
+insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
+values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
+go
+
+--Guest Speaker
+insert into GuestSpeaker(GuestSpeaker_Name,GuestSpeaker_Surname,GuestSpeaker_Phone,GuestSpeaker_Email,GuestSpeaker_PictureLink)
+values('Bob' , 'Buider','0741258','me@me.co.za','jgjgfjjg/gjgj')
+go
+
+				  /* TEST RECORDS!!! - 
+				  
+				  PLEASE END YOUR INSERTS HERERERERERERERERE :D - LIFE IS ALWAYS BEUTIFUL 
+				  
+				  
+				  */
+
+insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
+values('31', '22nd Street', 'Menlo Park', 'Pretori', 'Gauteng', '0081')
+GO
+
+insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
+values('5A', 'Arcadia Street', 'Arcadia', 'Pretoria', 'Gauteng', '2130')
+GO
+
+insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
+values('17', 'Chris Corner', 'Kichenbrandish', 'Pretoria', 'Gauteng', '2103')
+GO
+
+insert into VenueType(VenueType_Description)
+values('Resturant')
+go
+
+insert into VenueType(VenueType_Description)
+values('Hall')
+go
+
+insert into VenueType(VenueType_Description)
+values('Lecture Hall')
+go
+
+insert into VenueType(VenueType_Description)
+values('House')
+go
+
+insert into venue(Venue_Name, AddressID, VenueTypeID)
+values('Duxbury Palace', 3, 4)
+go
+
+insert into venue(Venue_Name, AddressID, VenueTypeID)
+values('Rautenbach Hall', 2, 2)
+go
+
+insert into venue(Venue_Name, AddressID, VenueTypeID)
+values('IT 4-5', 1, 3)
+go
+
+delete from VenueType where VenueTypeID = 5
+go
+
 insert into TRWLASchedule(FunctionID)
 values(1)
 Go
@@ -623,9 +793,22 @@ insert into TRWLASchedule(FunctionID)
 values(5)
 Go
 
+insert into Residence(Res_Name)
+values('Magritjie')
+go
 
+insert into Residence(Res_Name)
+values('Madelief')
+go
 
-  ---insert into:CONTENT TABLE---
+insert into Residence(Res_Name)
+values('Klaradyn')
+go
+
+insert into Residence(Res_Name)
+values('Vividus Ladies')
+go
+
 insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
 values('Looking Forward', 'www.google.com', 1, 'Taking the plunge')
 go
@@ -637,33 +820,3 @@ go
 insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
 values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
-
---Guest Speaker
-insert into GuestSpeaker(GuestSpeaker_Name,GuestSpeaker_Surname,GuestSpeaker_Phone,GuestSpeaker_Email,GuestSpeaker_PictureLink)
-values('Bob' , 'Buider','0741258','me@me.co.za','jgjgfjjg/gjgj')
-go
-
----Comengage
-
-insert into ComEngEvent(ComEng_Name,ComEng_Summary, ComEng_Description,ComEng_Date,ComEnge_StartTime,ComEng_EndTime,ComEng_Theme,VenueID,ContentID)
-values('Me and Me','Much to do about nothing really','SSHAJKAKA', '2017/02/03','21:00:00' ,'22:00:00','aNGRY',1,1)
-GO
-
----Lecture--
-insert into Lecture(Lecture_Name,Lecture_Summary,Lecture_Description,Lecture_Date,Lecture_StartTime,Lecture_EndTime,Lecture_Theme,VenueID,ResID,ContentID)
-values('WTW345', 'i AM GOING TO ','yOU WANT MORE?', '2019/09/08', '21:00:00' ,'22:00:00','aNGRY',1,1,1)
-go
-
-
----Function---
-
-insert into FunctionEvent(Function_Name,Function_Summary,Function_Description,Function_Date,Function_StartTime,Function_EndTime,Function_Theme,GuestSpeakerID,VenueID)
-values('I dont want','Im not going anyway', 'It is furstrating me!','2019/09/08', '21:00:00' ,'22:00:00','aNGRY',1,1)
-go
-
-				  /* TEST RECORDS!!! - 
-				  
-				  PLEASE END YOUR INSERTS HERERERERERERERERE :D - LIFE IS ALWAYS BEUTIFUL 
-				  
-				  
-				  */

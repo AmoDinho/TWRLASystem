@@ -220,81 +220,90 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Attendance.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ComEngEvent.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Content.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FunctionEvent.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GuestSpeaker.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lecture.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Milestone.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Residence.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RSVP_Event.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentMilestone.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentType.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TRWLASchedule.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TWRLA_Staging_DB.Context.cs">
+    <Compile Include="Models\TRWLA_DB_2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TWRLA_Staging_DB.Context.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TWRLA_Staging_DB.cs">
+    <Compile Include="Models\TRWLA_DB_2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TWRLA_Staging_DB.Designer.cs">
+    <Compile Include="Models\TRWLA_DB_2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UserType.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Venue.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VenueType.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Volunteer.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VolunteerFeedback.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VolunteerType.cs">
-      <DependentUpon>TWRLA_Staging_DB.tt</DependentUpon>
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -308,15 +317,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\TWRLA_Staging_DB.Context.tt">
+    <Content Include="Models\TRWLA_DB_2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
-      <LastGenOutput>TWRLA_Staging_DB.Context.cs</LastGenOutput>
+      <DependentUpon>TRWLA_DB_2.edmx</DependentUpon>
+      <LastGenOutput>TRWLA_DB_2.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\TWRLA_Staging_DB.tt">
+    <Content Include="Models\TRWLA_DB_2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
-      <LastGenOutput>TWRLA_Staging_DB.cs</LastGenOutput>
+      <DependentUpon>TRWLA_DB_2.edmx</DependentUpon>
+      <LastGenOutput>TRWLA_DB_2.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -365,12 +374,12 @@
     <Content Include="Content\SASS\Maxins\_popovers.scss" />
     <Content Include="Content\SASS\Maxins\_transparency.scss" />
     <Content Include="Content\SASS\Maxins\_vendor-prefixes.scss" />
-    <EntityDeploy Include="Models\TWRLA_Staging_DB.edmx">
+    <EntityDeploy Include="Models\TRWLA_DB_2.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TWRLA_Staging_DB.Designer.cs</LastGenOutput>
+      <LastGenOutput>TRWLA_DB_2.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\TWRLA_Staging_DB.edmx.diagram">
-      <DependentUpon>TWRLA_Staging_DB.edmx</DependentUpon>
+    <Content Include="Models\TRWLA_DB_2.edmx.diagram">
+      <DependentUpon>TRWLA_DB_2.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\core\bootstrap.min.js" />
