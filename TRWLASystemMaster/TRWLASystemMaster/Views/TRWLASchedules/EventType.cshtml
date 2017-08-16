@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "EventType";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+@{
+    ViewBag.Title = "EventType";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Event Type Selection</h2>
+</div>
+<h4>Please select an Event Type</h4>
+<hr />
+
+<div class="row" style="justify-content:center;">
+    <button class="btn " , style="background-color:transparent; color:ghostwhite; font-family: Arial;  font-size: 15px;" }>
+        @Html.ActionLink("Function", "Create", "FunctionEvents")
+    </button>
+
+    <div class="h4 col-md-3" , style="margin-top:10px; height:100px; text-align:center; vertical-align: middle; line-height: 100px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-right:5%;">
+        @Html.ActionLink("Community Engagement", "Create", "ComEngEvents")
+    </div>
+
+    <div class="h4 col-md-3" , style="margin-top:10px; height:100px; text-align:center; vertical-align: middle; line-height: 100px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-right:5%;">
+        @Html.ActionLink("Lecture", "Create", "Lectures")
+
+    </div>
+</div>
+
+
+

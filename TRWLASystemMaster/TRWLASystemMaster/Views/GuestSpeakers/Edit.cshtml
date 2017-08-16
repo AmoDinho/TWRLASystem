@@ -1,0 +1,80 @@
+﻿@model TRWLASystemMaster.Models.GuestSpeaker
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Edit @Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.GuestSpeakerID)
+
+        <div class="form-group">
+            @Html.Label("Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuestSpeaker_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GuestSpeaker_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Surname:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuestSpeaker_Surname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GuestSpeaker_Surname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Phone Number:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuestSpeaker_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GuestSpeaker_Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuestSpeaker_Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GuestSpeaker_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Picture Link", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuestSpeaker_PictureLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GuestSpeaker_PictureLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+            <div class="form-group" style=" margin-right:10px;">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Create" style="color:#9b16d8">
+                        Update
+                    </button>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 ">
+                    <div>
+                        @Html.ActionLink("Return", "Index", "GuestSpeakers1", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

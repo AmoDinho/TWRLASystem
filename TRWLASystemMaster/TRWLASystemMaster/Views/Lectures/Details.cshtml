@@ -1,0 +1,99 @@
+﻿@model TRWLASystemMaster.Models.Lecture
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lecture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lecture_Theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lecture_Theme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content.Content_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content.Content_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residence.Res_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue.Venue_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LectureID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
