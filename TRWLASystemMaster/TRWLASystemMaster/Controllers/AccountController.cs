@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Data;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,9 +14,12 @@ using TRWLASystemMaster.Models;
 
 namespace TRWLASystemMaster.Controllers
 {
+   
     [Authorize]
     public class AccountController : Controller
     {
+        private TWRLADB_Staging_V2Entities2 tb = new TWRLADB_Staging_V2Entities2();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -158,6 +163,10 @@ namespace TRWLASystemMaster.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    //tb.AspNetUsers.Add();
+                    //tb.SaveChanges();
+
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -171,6 +180,11 @@ namespace TRWLASystemMaster.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private static RegisterViewModel GetModel(RegisterViewModel model)
+        {
+            return model;
         }
 
         public ActionResult LoggedIn()

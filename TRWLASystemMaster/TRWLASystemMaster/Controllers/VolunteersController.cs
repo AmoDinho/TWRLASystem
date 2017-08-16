@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class VolunteersController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
         // GET: Volunteers
         public ActionResult Index()
@@ -39,7 +39,7 @@ namespace TRWLASystemMaster.Controllers
         // GET: Volunteers/Create
         public ActionResult Create()
         {
-            ViewBag.VolId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description");
             ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description");
             return View();
@@ -50,7 +50,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
+        public ActionResult Create([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace TRWLASystemMaster.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.VolId = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.VolId);
+            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
             ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
             return View(volunteer);
@@ -77,7 +77,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.VolId = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.VolId);
+            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
             ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
             return View(volunteer);
@@ -88,7 +88,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,VolId,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
+        public ActionResult Edit([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace TRWLASystemMaster.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.VolId = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.VolId);
+            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
             ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
             return View(volunteer);

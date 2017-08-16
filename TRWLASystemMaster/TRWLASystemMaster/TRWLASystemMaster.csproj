@@ -233,6 +233,9 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Attendance.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ComEngEvent.cs">
       <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
@@ -257,6 +260,9 @@
       <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Residence.cs">
+      <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RSVP_Event.cs">
       <DependentUpon>TRWLA_DB_2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">

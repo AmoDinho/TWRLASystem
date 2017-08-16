@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities1">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities2">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -170,7 +170,7 @@
           <ScalarProperty Name="Student_Phone" ColumnName="Student_Phone" />
           <ScalarProperty Name="Student_DoB" ColumnName="Student_DoB" />
           <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
-          <ScalarProperty Name="StudId" ColumnName="StudId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ResID" ColumnName="ResID" />
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="StudentTypeID" ColumnName="StudentTypeID" />
@@ -238,7 +238,7 @@
           <ScalarProperty Name="Volunteer_Phone" ColumnName="Volunteer_Phone" />
           <ScalarProperty Name="Volunteer_DoB" ColumnName="Volunteer_DoB" />
           <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
-          <ScalarProperty Name="VolId" ColumnName="VolId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
         </MappingFragment>
@@ -271,6 +271,26 @@
         <MappingFragment StoreEntitySet="VolunteerType">
           <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
           <ScalarProperty Name="VolunteerType_Description" ColumnName="VolunteerType_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendances">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSVP_Event">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
+        <MappingFragment StoreEntitySet="RSVP_Event">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
