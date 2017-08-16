@@ -443,12 +443,12 @@ values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO 
 
 
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_Email,Volunteer_DoB,Volunteer_Password,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None','1','1')
-GO
 
 */
 
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID)
+values('Vuyo','Renene','0741258963','1994/06/12','None',4,1,1)
+GO
 
 
 				  
@@ -817,3 +817,8 @@ go
 insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
 values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
+
+/*
+insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
+values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
+go*/
