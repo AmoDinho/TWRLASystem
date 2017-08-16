@@ -207,7 +207,6 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
     <Compile Include="Controllers\SelectController.cs" />
-    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentTypesController.cs" />
     <Compile Include="Controllers\UniqueCodeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -451,17 +450,7 @@
     <Content Include="Views\Reports\MainReports.cshtml" />
     <Content Include="Views\Elibrary\Index.cshtml" />
     <Content Include="Views\UserProfile\StudentMyProfile.cshtml" />
-    <Content Include="Views\Volunteers\Create.cshtml" />
-    <Content Include="Views\Volunteers\Delete.cshtml" />
-    <Content Include="Views\Volunteers\Details.cshtml" />
-    <Content Include="Views\Volunteers\Edit.cshtml" />
-    <Content Include="Views\Volunteers\Index.cshtml" />
     <Content Include="Views\Select\SelectVolStud.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
-    <Content Include="Views\Students\Delete.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\UserTypes\Create.cshtml" />
     <Content Include="Views\UserTypes\Delete.cshtml" />
     <Content Include="Views\UserTypes\Details.cshtml" />
@@ -487,6 +476,11 @@
     <Content Include="Views\StudentTypes\Details.cshtml" />
     <Content Include="Views\StudentTypes\Edit.cshtml" />
     <Content Include="Views\StudentTypes\Index.cshtml" />
+    <Content Include="Views\Volunteers\Create.cshtml" />
+    <Content Include="Views\Volunteers\Delete.cshtml" />
+    <Content Include="Views\Volunteers\Details.cshtml" />
+    <Content Include="Views\Volunteers\Edit.cshtml" />
+    <Content Include="Views\Volunteers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -93,7 +93,7 @@ CREATE TABLE [dbo].[__MigrationHistory] (
     [ProductVersion] NVARCHAR (32)   NOT NULL,
     CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED ([MigrationId] ASC, [ContextKey] ASC)
 );
-
+go
 --ASP.NET ROLES TABLES---
 CREATE TABLE [dbo].[AspNetRoles] (
     [Id]   NVARCHAR (128) NOT NULL,
@@ -111,15 +111,15 @@ CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
 
 CREATE TABLE [dbo].[AspNetUserClaims] (
     [Id]         INT            IDENTITY (1, 1) NOT NULL,
-    [UserId]     NVARCHAR (128) NOT NULL,
+    [UserId]     INT NOT NULL,
     [ClaimType]  NVARCHAR (MAX) NULL,
     [ClaimValue] NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_UserId]
     ON [dbo].[AspNetUserClaims]([UserId] ASC);
 
@@ -128,20 +128,20 @@ CREATE NONCLUSTERED INDEX [IX_UserId]
 CREATE TABLE [dbo].[AspNetUserLogins] (
     [LoginProvider] NVARCHAR (128) NOT NULL,
     [ProviderKey]   NVARCHAR (128) NOT NULL,
-    [UserId]        NVARCHAR (128) NOT NULL,
+    [UserId]        INT  NOT NULL,
     CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED ([LoginProvider] ASC, [ProviderKey] ASC, [UserId] ASC),
     CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 
-
 GO
+
 CREATE NONCLUSTERED INDEX [IX_UserId]
     ON [dbo].[AspNetUserLogins]([UserId] ASC);
 
 
 	---ASPNET USER ROLES---
 	CREATE TABLE [dbo].[AspNetUserRoles] (
-    [UserId] NVARCHAR (128) NOT NULL,
+    [UserId] INT NOT NULL,
     [RoleId] NVARCHAR (128) NOT NULL,
     CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
     CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles] ([Id]) ON DELETE CASCADE,
@@ -162,7 +162,7 @@ CREATE NONCLUSTERED INDEX [IX_RoleId]
 	---ASPNET USERS----
 
 	CREATE TABLE [dbo].[AspNetUsers] (
-    [Id]                   NVARCHAR (128) NOT NULL,
+    [Id]                   int IDENTITY (1, 1) NOT NULL,
     [Email]                NVARCHAR (256) NULL,
     [EmailConfirmed]       BIT            NOT NULL,
     [PasswordHash]         NVARCHAR (MAX) NULL,
@@ -205,8 +205,7 @@ Student_Surname varchar(35) not null,
 Student_Phone varchar(10) not null,
 Student_DoB datetime not null,
 ActiveStatus varchar(25)not null,
-[StudId] NVARCHAR (128) NOT NULL,
- CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_StudId] FOREIGN KEY ([StudId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE,
+Id int FOREIGN KEY REFERENCES AspNetUsers(Id) not null,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null
@@ -253,9 +252,7 @@ Volunteer_Phone varchar(10) not null,
 Volunteer_DoB datetime not null,
 
 ActiveStatus varchar(25)not null,
-[VolId] NVARCHAR (128) NOT NULL,
- CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_VolId] FOREIGN KEY ([VolId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE,
-
+Id int FOREIGN KEY REFERENCES AspNetUsers(Id) not null,
 UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not null
 )
