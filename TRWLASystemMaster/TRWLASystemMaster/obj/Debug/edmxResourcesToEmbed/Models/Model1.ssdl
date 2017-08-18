@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -169,12 +169,23 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.Attendance' does not have a
 warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="RSVP_Event">
     <Key>
+      <PropertyRef Name="rsvpID" />
       <PropertyRef Name="StudentID" />
     </Key>
+    <Property Name="rsvpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StudentID" Type="int" Nullable="false" />
     <Property Name="FunctionID" Type="int" />
     <Property Name="LectureID" Type="int" />
     <Property Name="ComEngID" Type="int" />
+  </EntityType>
+  <EntityType Name="SecurityAnswer">
+    <Key>
+      <PropertyRef Name="SecurityAnswerID" />
+    </Key>
+    <Property Name="SecurityAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Security_Question" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Security_Answer" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -283,7 +294,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
     <Property Name="VolunteerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VolunteerType_Description" Type="varchar" MaxLength="25" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Attendanc__ComEn__5CD6CB2B">
+  <Association Name="FK__Attendanc__ComEn__6D0D32F4">
     <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
     <ReferentialConstraint>
@@ -295,7 +306,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Attendanc__Funct__5AEE82B9">
+  <Association Name="FK__Attendanc__Funct__6B24EA82">
     <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
     <ReferentialConstraint>
@@ -307,7 +318,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Attendanc__Lectu__5BE2A6F2">
+  <Association Name="FK__Attendanc__Lectu__6C190EBB">
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
     <ReferentialConstraint>
@@ -319,7 +330,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Attendanc__Stude__59FA5E80">
+  <Association Name="FK__Attendanc__Stude__6A30C649">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -331,7 +342,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ComEngEve__Conte__4F7CD00D">
+  <Association Name="FK__ComEngEve__Conte__5BE2A6F2">
     <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
     <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="*" />
     <ReferentialConstraint>
@@ -343,7 +354,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ComEngEve__Venue__4E88ABD4">
+  <Association Name="FK__ComEngEve__Venue__5AEE82B9">
     <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
     <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="*" />
     <ReferentialConstraint>
@@ -355,7 +366,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FunctionE__Guest__534D60F1">
+  <Association Name="FK__FunctionE__Guest__619B8048">
     <End Role="GuestSpeaker" Type="Self.GuestSpeaker" Multiplicity="0..1" />
     <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
     <ReferentialConstraint>
@@ -367,7 +378,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FunctionE__Venue__52593CB8">
+  <Association Name="FK__FunctionE__Venue__60A75C0F">
     <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
     <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="*" />
     <ReferentialConstraint>
@@ -379,7 +390,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Lecture__Content__4BAC3F29">
+  <Association Name="FK__Lecture__Content__5629CD9C">
     <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
     <ReferentialConstraint>
@@ -391,7 +402,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Lecture__Residen__4AB81AF0">
+  <Association Name="FK__Lecture__Residen__5535A963">
     <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
     <ReferentialConstraint>
@@ -403,7 +414,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Lecture__VenueID__49C3F6B7">
+  <Association Name="FK__Lecture__VenueID__5441852A">
     <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
     <ReferentialConstraint>
@@ -415,7 +426,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVP_Even__ComEn__619B8048">
+  <Association Name="FK__RSVP_Even__ComEn__71D1E811">
     <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
     <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
     <ReferentialConstraint>
@@ -427,7 +438,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVP_Even__Funct__5FB337D6">
+  <Association Name="FK__RSVP_Even__Funct__6FE99F9F">
     <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
     <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
     <ReferentialConstraint>
@@ -439,7 +450,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVP_Even__Lectu__60A75C0F">
+  <Association Name="FK__RSVP_Even__Lectu__70DDC3D8">
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
     <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
     <ReferentialConstraint>
@@ -451,9 +462,9 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVP_Even__Stude__5EBF139D">
+  <Association Name="FK__RSVP_Even__Stude__6EF57B66">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
-    <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="0..1" />
+    <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
         <PropertyRef Name="StudentID" />
@@ -463,7 +474,19 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Student__Id__2B3F6F97">
+  <Association Name="FK__SecurityA__Stude__239E4DCF">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="SecurityAnswer" Type="Self.SecurityAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="SecurityAnswer">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Id__1BFD2C07">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
@@ -475,7 +498,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Student__ResID__2C3393D0">
+  <Association Name="FK__Student__ResID__1CF15040">
     <End Role="Residence" Type="Self.Residence" Multiplicity="1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
@@ -487,7 +510,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Student__Student__2E1BDC42">
+  <Association Name="FK__Student__Student__1ED998B2">
     <End Role="StudentType" Type="Self.StudentType" Multiplicity="1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
@@ -499,7 +522,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Student__UserTyp__2D27B809">
+  <Association Name="FK__Student__UserTyp__1DE57479">
     <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
     <End Role="Student" Type="Self.Student" Multiplicity="*" />
     <ReferentialConstraint>
@@ -511,7 +534,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StudentMi__Miles__32E0915F">
+  <Association Name="FK__StudentMi__Miles__2C3393D0">
     <End Role="Milestone" Type="Self.Milestone" Multiplicity="1" />
     <End Role="StudentMilestone" Type="Self.StudentMilestone" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -523,7 +546,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TRWLASche__ComEn__5812160E">
+  <Association Name="FK__TRWLASche__ComEn__68487DD7">
     <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
     <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
     <ReferentialConstraint>
@@ -535,7 +558,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TRWLASche__Funct__5629CD9C">
+  <Association Name="FK__TRWLASche__Funct__66603565">
     <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
     <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
     <ReferentialConstraint>
@@ -547,7 +570,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TRWLASche__Lectu__571DF1D5">
+  <Association Name="FK__TRWLASche__Lectu__6754599E">
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
     <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
     <ReferentialConstraint>
@@ -559,7 +582,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Venue__AddressID__4222D4EF">
+  <Association Name="FK__Venue__AddressID__46E78A0C">
     <End Role="Address" Type="Self.Address" Multiplicity="1" />
     <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
     <ReferentialConstraint>
@@ -571,7 +594,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Venue__VenueType__4316F928">
+  <Association Name="FK__Venue__VenueType__47DBAE45">
     <End Role="VenueType" Type="Self.VenueType" Multiplicity="1" />
     <End Role="Venue" Type="Self.Venue" Multiplicity="*" />
     <ReferentialConstraint>
@@ -583,7 +606,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Volunteer__Id__37A5467C">
+  <Association Name="FK__Volunteer__Id__34C8D9D1">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -595,7 +618,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Volunteer__UserT__38996AB5">
+  <Association Name="FK__Volunteer__UserT__35BCFE0A">
     <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -607,7 +630,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Volunteer__Volun__398D8EEE">
+  <Association Name="FK__Volunteer__Volun__36B12243">
     <End Role="VolunteerType" Type="Self.VolunteerType" Multiplicity="1" />
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="*" />
     <ReferentialConstraint>
@@ -690,6 +713,7 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
     <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Milestone" EntityType="Self.Milestone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Residence" EntityType="Self.Residence" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecurityAnswer" EntityType="Self.SecurityAnswer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentMilestone" EntityType="Self.StudentMilestone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentType" EntityType="Self.StudentType" Schema="dbo" store:Type="Tables" />
@@ -710,121 +734,126 @@ warning 6002: The table/view 'TWRLADB_Staging_V2.dbo.RSVP_Event' does not have a
     </EntitySet>
     <EntitySet Name="RSVP_Event" EntityType="Self.RSVP_Event" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
+    [RSVP_Event].[rsvpID] AS [rsvpID], 
     [RSVP_Event].[StudentID] AS [StudentID], 
     [RSVP_Event].[FunctionID] AS [FunctionID], 
     [RSVP_Event].[LectureID] AS [LectureID], 
     [RSVP_Event].[ComEngID] AS [ComEngID]
     FROM [dbo].[RSVP_Event] AS [RSVP_Event]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__Attendanc__ComEn__5CD6CB2B" Association="Self.FK__Attendanc__ComEn__5CD6CB2B">
+    <AssociationSet Name="FK__Attendanc__ComEn__6D0D32F4" Association="Self.FK__Attendanc__ComEn__6D0D32F4">
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__Attendanc__Funct__5AEE82B9" Association="Self.FK__Attendanc__Funct__5AEE82B9">
+    <AssociationSet Name="FK__Attendanc__Funct__6B24EA82" Association="Self.FK__Attendanc__Funct__6B24EA82">
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__Attendanc__Lectu__5BE2A6F2" Association="Self.FK__Attendanc__Lectu__5BE2A6F2">
+    <AssociationSet Name="FK__Attendanc__Lectu__6C190EBB" Association="Self.FK__Attendanc__Lectu__6C190EBB">
       <End Role="Lecture" EntitySet="Lecture" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__Attendanc__Stude__59FA5E80" Association="Self.FK__Attendanc__Stude__59FA5E80">
+    <AssociationSet Name="FK__Attendanc__Stude__6A30C649" Association="Self.FK__Attendanc__Stude__6A30C649">
       <End Role="Student" EntitySet="Student" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__ComEngEve__Conte__4F7CD00D" Association="Self.FK__ComEngEve__Conte__4F7CD00D">
+    <AssociationSet Name="FK__ComEngEve__Conte__5BE2A6F2" Association="Self.FK__ComEngEve__Conte__5BE2A6F2">
       <End Role="Content" EntitySet="Content" />
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__ComEngEve__Venue__4E88ABD4" Association="Self.FK__ComEngEve__Venue__4E88ABD4">
+    <AssociationSet Name="FK__ComEngEve__Venue__5AEE82B9" Association="Self.FK__ComEngEve__Venue__5AEE82B9">
       <End Role="Venue" EntitySet="Venue" />
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__FunctionE__Guest__534D60F1" Association="Self.FK__FunctionE__Guest__534D60F1">
+    <AssociationSet Name="FK__FunctionE__Guest__619B8048" Association="Self.FK__FunctionE__Guest__619B8048">
       <End Role="GuestSpeaker" EntitySet="GuestSpeaker" />
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__FunctionE__Venue__52593CB8" Association="Self.FK__FunctionE__Venue__52593CB8">
+    <AssociationSet Name="FK__FunctionE__Venue__60A75C0F" Association="Self.FK__FunctionE__Venue__60A75C0F">
       <End Role="Venue" EntitySet="Venue" />
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__Lecture__Content__4BAC3F29" Association="Self.FK__Lecture__Content__4BAC3F29">
+    <AssociationSet Name="FK__Lecture__Content__5629CD9C" Association="Self.FK__Lecture__Content__5629CD9C">
       <End Role="Content" EntitySet="Content" />
       <End Role="Lecture" EntitySet="Lecture" />
     </AssociationSet>
-    <AssociationSet Name="FK__Lecture__Residen__4AB81AF0" Association="Self.FK__Lecture__Residen__4AB81AF0">
+    <AssociationSet Name="FK__Lecture__Residen__5535A963" Association="Self.FK__Lecture__Residen__5535A963">
       <End Role="Residence" EntitySet="Residence" />
       <End Role="Lecture" EntitySet="Lecture" />
     </AssociationSet>
-    <AssociationSet Name="FK__Lecture__VenueID__49C3F6B7" Association="Self.FK__Lecture__VenueID__49C3F6B7">
+    <AssociationSet Name="FK__Lecture__VenueID__5441852A" Association="Self.FK__Lecture__VenueID__5441852A">
       <End Role="Venue" EntitySet="Venue" />
       <End Role="Lecture" EntitySet="Lecture" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVP_Even__ComEn__619B8048" Association="Self.FK__RSVP_Even__ComEn__619B8048">
+    <AssociationSet Name="FK__RSVP_Even__ComEn__71D1E811" Association="Self.FK__RSVP_Even__ComEn__71D1E811">
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVP_Even__Funct__5FB337D6" Association="Self.FK__RSVP_Even__Funct__5FB337D6">
+    <AssociationSet Name="FK__RSVP_Even__Funct__6FE99F9F" Association="Self.FK__RSVP_Even__Funct__6FE99F9F">
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVP_Even__Lectu__60A75C0F" Association="Self.FK__RSVP_Even__Lectu__60A75C0F">
+    <AssociationSet Name="FK__RSVP_Even__Lectu__70DDC3D8" Association="Self.FK__RSVP_Even__Lectu__70DDC3D8">
       <End Role="Lecture" EntitySet="Lecture" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVP_Even__Stude__5EBF139D" Association="Self.FK__RSVP_Even__Stude__5EBF139D">
+    <AssociationSet Name="FK__RSVP_Even__Stude__6EF57B66" Association="Self.FK__RSVP_Even__Stude__6EF57B66">
       <End Role="Student" EntitySet="Student" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
-    <AssociationSet Name="FK__Student__Id__2B3F6F97" Association="Self.FK__Student__Id__2B3F6F97">
+    <AssociationSet Name="FK__SecurityA__Stude__239E4DCF" Association="Self.FK__SecurityA__Stude__239E4DCF">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="SecurityAnswer" EntitySet="SecurityAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Id__1BFD2C07" Association="Self.FK__Student__Id__1BFD2C07">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
-    <AssociationSet Name="FK__Student__ResID__2C3393D0" Association="Self.FK__Student__ResID__2C3393D0">
+    <AssociationSet Name="FK__Student__ResID__1CF15040" Association="Self.FK__Student__ResID__1CF15040">
       <End Role="Residence" EntitySet="Residence" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
-    <AssociationSet Name="FK__Student__Student__2E1BDC42" Association="Self.FK__Student__Student__2E1BDC42">
+    <AssociationSet Name="FK__Student__Student__1ED998B2" Association="Self.FK__Student__Student__1ED998B2">
       <End Role="StudentType" EntitySet="StudentType" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
-    <AssociationSet Name="FK__Student__UserTyp__2D27B809" Association="Self.FK__Student__UserTyp__2D27B809">
+    <AssociationSet Name="FK__Student__UserTyp__1DE57479" Association="Self.FK__Student__UserTyp__1DE57479">
       <End Role="UserType" EntitySet="UserType" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
-    <AssociationSet Name="FK__StudentMi__Miles__32E0915F" Association="Self.FK__StudentMi__Miles__32E0915F">
+    <AssociationSet Name="FK__StudentMi__Miles__2C3393D0" Association="Self.FK__StudentMi__Miles__2C3393D0">
       <End Role="Milestone" EntitySet="Milestone" />
       <End Role="StudentMilestone" EntitySet="StudentMilestone" />
     </AssociationSet>
-    <AssociationSet Name="FK__TRWLASche__ComEn__5812160E" Association="Self.FK__TRWLASche__ComEn__5812160E">
+    <AssociationSet Name="FK__TRWLASche__ComEn__68487DD7" Association="Self.FK__TRWLASche__ComEn__68487DD7">
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
     </AssociationSet>
-    <AssociationSet Name="FK__TRWLASche__Funct__5629CD9C" Association="Self.FK__TRWLASche__Funct__5629CD9C">
+    <AssociationSet Name="FK__TRWLASche__Funct__66603565" Association="Self.FK__TRWLASche__Funct__66603565">
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
     </AssociationSet>
-    <AssociationSet Name="FK__TRWLASche__Lectu__571DF1D5" Association="Self.FK__TRWLASche__Lectu__571DF1D5">
+    <AssociationSet Name="FK__TRWLASche__Lectu__6754599E" Association="Self.FK__TRWLASche__Lectu__6754599E">
       <End Role="Lecture" EntitySet="Lecture" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
     </AssociationSet>
-    <AssociationSet Name="FK__Venue__AddressID__4222D4EF" Association="Self.FK__Venue__AddressID__4222D4EF">
+    <AssociationSet Name="FK__Venue__AddressID__46E78A0C" Association="Self.FK__Venue__AddressID__46E78A0C">
       <End Role="Address" EntitySet="Address" />
       <End Role="Venue" EntitySet="Venue" />
     </AssociationSet>
-    <AssociationSet Name="FK__Venue__VenueType__4316F928" Association="Self.FK__Venue__VenueType__4316F928">
+    <AssociationSet Name="FK__Venue__VenueType__47DBAE45" Association="Self.FK__Venue__VenueType__47DBAE45">
       <End Role="VenueType" EntitySet="VenueType" />
       <End Role="Venue" EntitySet="Venue" />
     </AssociationSet>
-    <AssociationSet Name="FK__Volunteer__Id__37A5467C" Association="Self.FK__Volunteer__Id__37A5467C">
+    <AssociationSet Name="FK__Volunteer__Id__34C8D9D1" Association="Self.FK__Volunteer__Id__34C8D9D1">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Volunteer" EntitySet="Volunteer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Volunteer__UserT__38996AB5" Association="Self.FK__Volunteer__UserT__38996AB5">
+    <AssociationSet Name="FK__Volunteer__UserT__35BCFE0A" Association="Self.FK__Volunteer__UserT__35BCFE0A">
       <End Role="UserType" EntitySet="UserType" />
       <End Role="Volunteer" EntitySet="Volunteer" />
     </AssociationSet>
-    <AssociationSet Name="FK__Volunteer__Volun__398D8EEE" Association="Self.FK__Volunteer__Volun__398D8EEE">
+    <AssociationSet Name="FK__Volunteer__Volun__36B12243" Association="Self.FK__Volunteer__Volun__36B12243">
       <End Role="VolunteerType" EntitySet="VolunteerType" />
       <End Role="Volunteer" EntitySet="Volunteer" />
     </AssociationSet>

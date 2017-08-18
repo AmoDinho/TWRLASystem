@@ -14,6 +14,13 @@ namespace TRWLASystemMaster.Models
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.SecurityAnswers = new HashSet<SecurityAnswer>();
+            this.RSVP_Event = new HashSet<RSVP_Event>();
+        }
+    
         public int StudentID { get; set; }
         public string StudentNumber { get; set; }
         public string Graduate { get; set; }
@@ -31,8 +38,11 @@ namespace TRWLASystemMaster.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Residence Residence { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SecurityAnswer> SecurityAnswers { get; set; }
         public virtual Attendance Attendance { get; set; }
-        public virtual RSVP_Event RSVP_Event { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual UserType UserType { get; set; }
     }

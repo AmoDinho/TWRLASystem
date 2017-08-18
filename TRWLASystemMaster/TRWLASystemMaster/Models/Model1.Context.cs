@@ -38,6 +38,7 @@ namespace TRWLASystemMaster.Models
         public virtual DbSet<Lecture> Lectures { get; set; }
         public virtual DbSet<Milestone> Milestones { get; set; }
         public virtual DbSet<Residence> Residences { get; set; }
+        public virtual DbSet<SecurityAnswer> SecurityAnswers { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentMilestone> StudentMilestones { get; set; }
         public virtual DbSet<StudentType> StudentTypes { get; set; }

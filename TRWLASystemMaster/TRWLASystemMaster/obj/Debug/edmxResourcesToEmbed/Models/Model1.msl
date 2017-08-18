@@ -157,6 +157,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SecurityAnswers">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityAnswer">
+        <MappingFragment StoreEntitySet="SecurityAnswer">
+          <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
+          <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
+          <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Students">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Student">
         <MappingFragment StoreEntitySet="Student">
@@ -287,6 +297,7 @@
     <EntitySetMapping Name="RSVP_Event">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
         <MappingFragment StoreEntitySet="RSVP_Event">
+          <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />

@@ -31,7 +31,8 @@ namespace TRWLASystemMaster
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/now-ui-kit.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/Custom.css"));
         }
     }
 }
