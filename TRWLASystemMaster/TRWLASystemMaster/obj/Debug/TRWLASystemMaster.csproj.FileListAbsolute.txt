@@ -569,6 +569,6 @@ C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster
 C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.csprojResolveAssemblyReference.cache
 C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.dll
 C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.pdb
+C:\Users\Cailin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.csprojResolveAssemblyReference.cache

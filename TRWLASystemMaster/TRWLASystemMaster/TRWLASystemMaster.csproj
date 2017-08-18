@@ -529,6 +529,9 @@
     <Content Include="Views\ComEngEvents\Edit.cshtml" />
     <Content Include="Views\ComEngEvents\Index.cshtml" />
     <Content Include="Views\TRWLASchedules\RSVP.cshtml" />
+    <Content Include="Views\Home\CommServe.cshtml" />
+    <Content Include="Views\Shared\Network.cshtml" />
+    <Content Include="Views\Home\Skills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

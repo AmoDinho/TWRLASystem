@@ -44,5 +44,20 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+        public ActionResult CommServe()
+        {
+            return View();
+        }
+
+        public ActionResult Network()
+        {
+            return View();
+        }
+
+        public ActionResult Skills()
+        {
+            return View();
+        }
+
     }
 }
