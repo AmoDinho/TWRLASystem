@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ComEngEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
 
         // GET: ComEngEvents
         public ActionResult Index()
@@ -61,7 +61,7 @@ namespace TRWLASystemMaster.Controllers
                     int k = max + 1;
                     comEngEvent.ComEngID = k;
 
-                    comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CO)";
+                    comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
                     db.ComEngEvents.Add(comEngEvent);
 
                     TRWLASchedule mySchedule = new TRWLASchedule();
@@ -72,7 +72,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 else
                 {
-                    comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CO)";
+                    comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
                     db.ComEngEvents.Add(comEngEvent);
                     TRWLASchedule mySchedule = new TRWLASchedule();
                     mySchedule.ComEngID = comEngEvent.ComEngID;

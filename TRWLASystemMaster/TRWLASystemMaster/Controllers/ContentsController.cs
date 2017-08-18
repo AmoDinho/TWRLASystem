@@ -10,9 +10,9 @@ using TRWLASystemMaster.Models;
 
 namespace TRWLASystemMaster.Controllers
 {
-    public class Contents1Controller : Controller
+    public class ContentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
 
         // GET: Contents1
         public ActionResult Index(string sortOrder, string searchString, string locked, string unlocked, string all)

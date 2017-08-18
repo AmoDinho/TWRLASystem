@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
 
         // GET: TRWLASchedules
         public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)
@@ -31,6 +31,7 @@ namespace TRWLASystemMaster.Controllers
                         || s.ComEngEvent.ComEng_Name.Contains(searchString));
             }
 
+            
 
             if (!String.IsNullOrEmpty(F))
             {
@@ -39,7 +40,7 @@ namespace TRWLASystemMaster.Controllers
 
             if (!String.IsNullOrEmpty(CO))
             {
-                tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.ComEng_Name.Contains("(CO)"));
+                tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.ComEng_Name.Contains("(CE)"));
             }
 
             if (!String.IsNullOrEmpty(L))
@@ -50,7 +51,7 @@ namespace TRWLASystemMaster.Controllers
             if (!String.IsNullOrEmpty(all))
             {
                 tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)")
-                        || s.ComEngEvent.ComEng_Name.Contains("(CO)")
+                        || s.ComEngEvent.ComEng_Name.Contains("(CE)")
                         || s.FunctionEvent.Function_Name.Contains("(F)"));
             }
 
@@ -82,7 +83,40 @@ namespace TRWLASystemMaster.Controllers
             return View(tRWLASchedules.ToList());
         }
 
+        public ActionResult LogAttendance()
+        {
+            return View(db.TRWLASchedules.ToList());
+        }
 
+        public ActionResult RSVPdMembers(int id)
+        {
+            TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+
+            
+
+            if (tRWLASchedule.FunctionID != null)
+            {
+                //var evnt = from s in db.Students
+                //           where s.RSVP_ == tRWLASchedule.FunctionID
+                //           select s;
+
+                //evnt = evnt.Where(s => s.
+
+                //return View(student.ToList());
+            }
+            else if (tRWLASchedule.LectureID != null)
+            {
+                var student = db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.LectureID);
+                return View(student.ToList());
+            }
+            else
+            {
+                var student = db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.ComEngID);
+                return View(student.ToList());
+            }
+
+            
+        }
 
         // GET: TRWLASchedules/Details/5
         public ActionResult Details(int? id)
@@ -267,56 +301,210 @@ namespace TRWLASystemMaster.Controllers
 
         [HttpPost, ActionName("RSVP")]
         [ValidateAntiForgeryToken]
-        public ActionResult RSVPConfirmed(RSVP_Event @event, int id, TRWLASchedule trwla)
+        public ActionResult RSVPConfirmed(RSVP_Event @event, int id)
         {
+
+            TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
             //Counts if the table has data in it
             int i = db.RSVP_Event.Count();
-
             if (i == 0)
             {
                 //this is what adds data to the table
-                @event.StudentID = 1;
+                @event.StudentID = 2;
 
-                if (trwla.FunctionID != null)
+                if (tRWLASchedule.FunctionID != null)
                 {
-                    @event.FunctionID = id;
+                    @event.FunctionID = tRWLASchedule.FunctionID;
+
+                    RSVPSchedule mysched = new RSVPSchedule();
+                    mysched.rsvpID = @event.rsvpID;
+                    mysched.ScheduleID = id;
+                    mysched.StudentID = @event.StudentID = 2;
+                    db.RSVPSchedules.Add(mysched);
+                    db.RSVP_Event.Add(@event);
+
+                    foreach (var s in db.RSVP_Event.Where(p => p.StudentID == 2))
+                    {
+                        if (db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.FunctionID) == null)
+                        {
+                            TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+
+                            TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
+                        }
+                    }
+
+                    TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else if (trwla.ComEngID != null)
+                else if (tRWLASchedule.ComEngID != null)
                 {
-                    @event.ComEngID = id;
+                    @event.ComEngID = tRWLASchedule.ComEngID;
+
+                    RSVPSchedule mysched = new RSVPSchedule();
+                    mysched.rsvpID = @event.rsvpID;
+                    mysched.ScheduleID = id;
+                    mysched.StudentID = @event.StudentID = 2;
+                    db.RSVPSchedules.Add(mysched);
+                    db.RSVP_Event.Add(@event);
+
+                    foreach (var s in db.RSVP_Event.Where(p => p.StudentID == 2))
+                    {
+                        if (db.RSVP_Event.Where(p => p.ComEngID == tRWLASchedule.ComEngID) == null)
+                        {
+                            TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+
+                            TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
+                        }
+                    }
+
+                    TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else if (trwla.LectureID != null)
+                else if (tRWLASchedule.LectureID != null)
                 {
-                    @event.LectureID = id;
+                    @event.LectureID = tRWLASchedule.LectureID;
+
+                    RSVPSchedule mysched = new RSVPSchedule();
+                    mysched.rsvpID = @event.rsvpID;
+                    mysched.ScheduleID = id;
+                    mysched.StudentID = @event.StudentID = 2;
+                    db.RSVPSchedules.Add(mysched);
+                    db.RSVP_Event.Add(@event);
+
+                    foreach (var s in db.RSVP_Event.Where(p => p.StudentID == 2))
+                    {
+                        if (db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.LectureID) == null)
+                        {
+                            TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+
+                            TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
+                        }
+                    }
+
+                    TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                //@event.rsvpID = 0;
-                db.RSVP_Event.Add(@event);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
             {
-                //int max = db.RSVP_Event.Max(p => p.rsvpID);
-                //int l = max + 1;
-                @event.StudentID = 1;
-                if (trwla.FunctionID != null)
+                int max = db.RSVP_Event.Max(p => p.rsvpID);
+                int l = max + 1;
+                @event.StudentID = 2;
+
+                if (tRWLASchedule.FunctionID != null)
                 {
-                    @event.FunctionID = id;
+                    @event.FunctionID = tRWLASchedule.FunctionID;
+                    @event.rsvpID = l;
+
+                    RSVPSchedule mysched = new RSVPSchedule();
+                    mysched.rsvpID = @event.rsvpID;
+                    mysched.ScheduleID = id;
+                    mysched.StudentID = @event.StudentID = 2;
+                    db.RSVPSchedules.Add(mysched);
+                    db.RSVP_Event.Add(@event);
+
+                    foreach (var s in db.RSVP_Event.Where(p => p.StudentID == 2))
+                    {
+                        if (db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.FunctionID) == null)
+                        {
+                            TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+
+                            TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
+                        }
+                    }
+
+                    TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else if (trwla.ComEngID != null)
+                else if (tRWLASchedule.ComEngID != null)
                 {
-                    @event.ComEngID = id;
+                    @event.ComEngID = tRWLASchedule.ComEngID;
+                    @event.rsvpID = l;
+
+                    RSVPSchedule mysched = new RSVPSchedule();
+                    mysched.rsvpID = @event.rsvpID;
+                    mysched.ScheduleID = id;
+                    mysched.StudentID = @event.StudentID = 2;
+                    db.RSVPSchedules.Add(mysched);
+                    db.RSVP_Event.Add(@event);
+
+                    foreach (var s in db.RSVP_Event.Where(p => p.StudentID == 2))
+                    {
+                        if (db.RSVP_Event.Where(p => p.ComEngID == tRWLASchedule.ComEngID) == null)
+                        {
+                            TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+
+                            TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
+                        }
+                    }
+
+                    TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else if (trwla.LectureID != null)
+                else if (tRWLASchedule.LectureID != null)
                 {
-                    @event.LectureID = id;
+                    @event.LectureID = tRWLASchedule.LectureID;
+                    @event.rsvpID = l;
+
+                    RSVPSchedule mysched = new RSVPSchedule();
+                    mysched.rsvpID = @event.rsvpID;
+                    mysched.ScheduleID = id;
+                    mysched.StudentID = @event.StudentID = 2;
+                    db.RSVPSchedules.Add(mysched);
+                    db.RSVP_Event.Add(@event);
+
+                    foreach (var s in db.RSVP_Event.Where(p => p.StudentID == 2))
+                    {
+                        if (db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.LectureID) == null)
+                        {
+                            TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+
+                            TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
+                        }
+                    }
+                    TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                //@event.rsvpID = l;
-                db.RSVP_Event.Add(@event);
-                db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
-
         }
 
         // POST: TRWLASchedules/Delete/5

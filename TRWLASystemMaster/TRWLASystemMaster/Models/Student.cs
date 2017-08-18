@@ -14,6 +14,15 @@ namespace TRWLASystemMaster.Models
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.Attendances = new HashSet<Attendance>();
+            this.RSVP_Event = new HashSet<RSVP_Event>();
+            this.RSVPSchedules = new HashSet<RSVPSchedule>();
+            this.SecurityAnswers = new HashSet<SecurityAnswer>();
+        }
+    
         public int StudentID { get; set; }
         public string StudentNumber { get; set; }
         public string Graduate { get; set; }
@@ -30,9 +39,15 @@ namespace TRWLASystemMaster.Models
         public int StudentTypeID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Residence Residence { get; set; }
-        public virtual Attendance Attendance { get; set; }
-        public virtual RSVP_Event RSVP_Event { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SecurityAnswer> SecurityAnswers { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual UserType UserType { get; set; }
     }

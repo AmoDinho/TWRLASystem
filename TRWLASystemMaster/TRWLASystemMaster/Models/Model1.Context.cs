@@ -13,10 +13,10 @@ namespace TRWLASystemMaster.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TWRLADB_Staging_V2Entities : DbContext
+    public partial class TWRLADB_Staging_V2Entities5 : DbContext
     {
-        public TWRLADB_Staging_V2Entities()
-            : base("name=TWRLADB_Staging_V2Entities")
+        public TWRLADB_Staging_V2Entities5()
+            : base("name=TWRLADB_Staging_V2Entities5")
         {
         }
     
@@ -31,6 +31,7 @@ namespace TRWLASystemMaster.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<ComEngEvent> ComEngEvents { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
         public virtual DbSet<FunctionEvent> FunctionEvents { get; set; }
@@ -38,6 +39,9 @@ namespace TRWLASystemMaster.Models
         public virtual DbSet<Lecture> Lectures { get; set; }
         public virtual DbSet<Milestone> Milestones { get; set; }
         public virtual DbSet<Residence> Residences { get; set; }
+        public virtual DbSet<RSVP_Event> RSVP_Event { get; set; }
+        public virtual DbSet<RSVPSchedule> RSVPSchedules { get; set; }
+        public virtual DbSet<SecurityAnswer> SecurityAnswers { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentMilestone> StudentMilestones { get; set; }
         public virtual DbSet<StudentType> StudentTypes { get; set; }
@@ -48,7 +52,5 @@ namespace TRWLASystemMaster.Models
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<VolunteerFeedback> VolunteerFeedbacks { get; set; }
         public virtual DbSet<VolunteerType> VolunteerTypes { get; set; }
-        public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<RSVP_Event> RSVP_Event { get; set; }
     }
 }

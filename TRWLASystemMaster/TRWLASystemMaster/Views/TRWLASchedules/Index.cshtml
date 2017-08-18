@@ -8,6 +8,16 @@
 <div class="jumbotron">
     <h2>Welcome Cailin</h2>
 </div>
+
+@if (TempData["rsvp"] != null)
+{
+    <h4>@TempData["rsvp"]</h4>
+}
+@if (TempData["rsvpFAIL"] != null)
+{
+    <h4>@TempData["rsvpFAIL"]</h4>
+}
+
 <div class="form-inline" style="margin-bottom:10px;">
     <div class="form-group">
         @using (Html.BeginForm())
@@ -148,51 +158,51 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
-                    <h4>
-                        @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
-                        @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
-                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
-                    </h4>
+                foreach (var s in item.RSVPSchedules.Where(p => p.StudentID == 2))
+                {
+                    <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
+                        <h4>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                        </h4>
 
-                    <p>
-                        <strong>Summary:</strong>
-                        @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
-                        @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
-                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
-                    </p>
-                    <p>
-                        <strong>
-                            Date of the Event:
-                        </strong>
-                        @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
-                        @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
-                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
-                    </p>
-                    <p>
-                        <strong>
-                            Time of Event:
-                        </strong>
-                        @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime) to @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
-                        @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime) to @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
-                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime) to @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+                        <p>
+                            <strong>Summary:</strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
+                        </p>
+                        <p>
+                            <strong>
+                                Date of the Event:
+                            </strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                        </p>
+                        <p>
+                            <strong>
+                                Time of Event:
+                            </strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime) to @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime) to @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime) to @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
 
-                    </p>
-                    <p>
-                        <strong>
-                            Venue Name:
-                        </strong>
-                        @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
-                        @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
-                        @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
-                    </p>
-                    <p>
-                        @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
-                        <button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
-                            RSVP
-                        </button>
-                    </p>
-                </div>
+                        </p>
+                        <p>
+                            <strong>
+                                Venue Name:
+                            </strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                            @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+                        </p>
+                        <p>
+                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+                        </p>
+                    </div>
+                }
             }
         </div>
     </div>
@@ -201,15 +211,13 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div>
-                @Html.ActionLink("Create", "EventType", "TRWLASchedules", new { @class = "btn" })
-            </div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
             <div>
-                @Html.ActionLink("Log Attendance", "LogAttendance", "Events", new { @class = "btn" })
+                <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Log Event Attedance</button>
             </div>
         </div>
     </div>

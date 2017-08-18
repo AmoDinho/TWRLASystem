@@ -15,20 +15,19 @@
     {
         <p>
             @Html.Label("Find by name:") @Html.TextBox("searchString")
-            <input type="submit" value="Search" class="btn btn-default btn-round" , style="color:#9b16d8" />
+            <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
         </p>
     }
 </div>
 
 <div class="form-inline" style="margin-bottom:10px;">
-    <div class="form-group">@Html.Label("Order by:")</div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-
-            <div class="btn btn-default btn-round" , style="color:#9b16d8">
-                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
-            </div>
-        </div>
+        <p>
+            <i class="fa fa-filter" aria-hidden="true"></i>
+        </p>
+    </div>
+    <div class="form-group">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "GuestSpeaker", new { sortOrder = ViewBag.NameSortParm })'">Name</button>
     </div>
 </div>
 
@@ -83,16 +82,12 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div>
-                @Html.ActionLink("Register Guest Speaker", "Create", "GuestSpeakers1", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
-            </div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "GuestSpeaker")'">Register Guest Speaker</button>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
-            <div class="btn btn-default btn-round" , style="color:#9b16d8">
-                @Html.ActionLink("Return", "Index", "TRWLASchedules")
-            </div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
         </div>
     </div>
 </div>

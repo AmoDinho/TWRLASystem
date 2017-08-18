@@ -14,6 +14,12 @@ namespace TRWLASystemMaster.Models
     
     public partial class TRWLASchedule
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TRWLASchedule()
+        {
+            this.RSVPSchedules = new HashSet<RSVPSchedule>();
+        }
+    
         public int ScheduleID { get; set; }
         public Nullable<int> FunctionID { get; set; }
         public Nullable<int> LectureID { get; set; }
@@ -22,5 +28,7 @@ namespace TRWLASystemMaster.Models
         public virtual ComEngEvent ComEngEvent { get; set; }
         public virtual FunctionEvent FunctionEvent { get; set; }
         public virtual Lecture Lecture { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
     }
 }

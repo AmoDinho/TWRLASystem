@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class VolunteersController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
 
         // GET: Volunteers
         public ActionResult Index()

@@ -624,10 +624,13 @@ GO
 
 create table Attendance
 (
-		StudentID int not null,
+		attendanceID int identity (1,1) primary key,
+		VolunteerID int null,
+		StudentID int null,
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
@@ -639,17 +642,29 @@ GO
 				---		 [dbo].[RSVP_Event]
 create table RSVP_Event
 (
-		rsvpID int identity (1,1) not null,
-		StudentID int not null,
+		rsvpID int identity (1,1) primary key,
+		VolunteerID int null,
+		StudentID int null,
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
 		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID)
 )	
 GO	
+
+create table RSVPSchedule
+(
+	RsvpScheduleID int identity (1,1) primary key,
+	rsvpID int not null,
+	ScheduleID int not null,
+	FOREIGN KEY (rsvpID) REFERENCES RSVP_Event(rsvpID),
+	FOREIGN KEY (ScheduleID) REFERENCES TRWLASchedule(ScheduleID)
+)
+GO
 
 					
 				  /* TEST RECORDS!!! - 

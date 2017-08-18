@@ -285,16 +285,14 @@
     </div>
     <div class="form-group">
         <div style="margin-right:5px;">
-            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Delete" style="color:#9b16d8">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Delete" >
                 Cancel Event
             </button>
         </div>
     </div>
     <div class="form-group">
         <div style="margin-right:5px;">
-            <div class="btn btn-default btn-round">
-                @Html.ActionLink("Return", "Index", "TRWLASchedules")
-            </div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
         </div>
     </div>
 </div>

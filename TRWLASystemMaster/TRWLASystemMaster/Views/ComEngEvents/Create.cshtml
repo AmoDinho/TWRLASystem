@@ -26,15 +26,16 @@
         </div>
 
         <div class="form-group row">
-            @Html.Label("Time", new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
+            @Html.Label("Start Time:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
                 @Html.EditorFor(model => model.ComEnge_StartTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                 @Html.ValidationMessageFor(model => model.ComEnge_StartTime, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-
-            @Html.Label("-", new { @class = "control-label col-md-2", @style = "margin-left: -80px; margin-right: -10px;" })
-            <div class="col-md-3">
+        <div class="form-group">
+            @Html.Label("End Time:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
                 @Html.EditorFor(model => model.ComEng_EndTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                 @Html.ValidationMessageFor(model => model.ComEng_EndTime, "", new { @class = "text-danger" })
             </div>
@@ -105,15 +106,11 @@
     <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default btn-round" style="color:#9b16d8" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 ">
-                <div class="btn btn-default btn-round" , style="color:#9b16d8">
-                    @Html.ActionLink("Return", "Index", "TRWLASchedules")
-                </div>
-            </div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Return</button>
         </div>
     </div>
 

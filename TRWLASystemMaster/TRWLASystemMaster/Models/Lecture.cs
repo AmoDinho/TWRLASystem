@@ -34,9 +34,9 @@ namespace TRWLASystemMaster.Models
         public Nullable<int> ResidenceID { get; set; }
         public Nullable<int> ContentID { get; set; }
     
-        public virtual Content Content { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual Content Content { get; set; }
         public virtual Residence Residence { get; set; }
         public virtual Venue Venue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -15,18 +15,11 @@
 <hr />
 
 <div class="row" style="justify-content:center;">
-    <button class="btn " , style="background-color:transparent; color:ghostwhite; font-family: Arial;  font-size: 15px;" }>
-        @Html.ActionLink("Function", "Create", "FunctionEvents")
-    </button>
+    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "FunctionEvents")'">Function Event</button>
 
-    <div class="h4 col-md-3" , style="margin-top:10px; height:100px; text-align:center; vertical-align: middle; line-height: 100px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-right:5%;">
-        @Html.ActionLink("Community Engagement", "Create", "ComEngEvents")
-    </div>
+    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "ComEngEvents")'">Community Engagement Event</button>
 
-    <div class="h4 col-md-3" , style="margin-top:10px; height:100px; text-align:center; vertical-align: middle; line-height: 100px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-right:5%;">
-        @Html.ActionLink("Lecture", "Create", "Lectures")
-
-    </div>
+    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Lectures")'">Lecture Event</button>
 </div>
 
 

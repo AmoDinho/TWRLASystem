@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.RSVP_Event>
+
+@{
+    ViewBag.Title = "RSVPdMembers";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>RSVPdMembers</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Student Number
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Degree  
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Student_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Student_Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.AspNetUser.Email) 
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Degree) 
+            </td>
+            <td>
+                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.StudentID })
+            </td>
+        </tr>
+    }
+
+</table>
+

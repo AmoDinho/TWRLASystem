@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TRWLA Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("TRWLA Management System", "Index", "TRWLASchedules", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -42,19 +42,18 @@
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Create Event</a></li>
-                            <li><a href="#">Manage Events</a></li>
+                            <li><a href="#">@Html.ActionLink("Create","EventType","TRWLASchedules")</a></li>
+                            <li><a href="#">@Html.ActionLink("Manage Events", "Index", "TRWLASchedules")</a></li>
                             <li><a href="#">Manage Venues</a></li>
                             <li><a href="#">Log Attendance</a></li>
-                            <li><a href="#">Manage Guest Speaker</a></li>
+                            <li><a href="#">@Html.ActionLink("Manage Guest Speakers", "Index", "GuestSpeaker")</a></li>
                         </ul>
                     </li>
 
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Lecture</a></li>
-                            <li><a href="#">Community Engagement </a></li>
+                            <li><a href="#">@Html.ActionLink("Content", "Index", "Contents")</a></li>
                             <li><a href="#">E-Library</a></li>
                         </ul>
                     </li>

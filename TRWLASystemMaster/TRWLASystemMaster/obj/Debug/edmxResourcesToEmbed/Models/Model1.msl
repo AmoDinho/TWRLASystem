@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities5">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -66,6 +66,18 @@
           <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
           <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendances">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -154,6 +166,39 @@
         <MappingFragment StoreEntitySet="Residence">
           <ScalarProperty Name="ResID" ColumnName="ResID" />
           <ScalarProperty Name="Res_Name" ColumnName="Res_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSVP_Event">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
+        <MappingFragment StoreEntitySet="RSVP_Event">
+          <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSVPSchedules">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVPSchedule">
+        <MappingFragment StoreEntitySet="RSVPSchedule">
+          <ScalarProperty Name="RsvpScheduleID" ColumnName="RsvpScheduleID" />
+          <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
+          <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityAnswers">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityAnswer">
+        <MappingFragment StoreEntitySet="SecurityAnswer">
+          <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
+          <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
+          <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -271,26 +316,6 @@
         <MappingFragment StoreEntitySet="VolunteerType">
           <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
           <ScalarProperty Name="VolunteerType_Description" ColumnName="VolunteerType_Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Attendances">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
-        <MappingFragment StoreEntitySet="Attendance">
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
-          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RSVP_Event">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
-        <MappingFragment StoreEntitySet="RSVP_Event">
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
-          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
