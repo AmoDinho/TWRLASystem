@@ -99,6 +99,20 @@ namespace TRWLASystemMaster.Controllers
             return View(tRWLASchedule);
         }
 
+        public ActionResult RSVP(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+            if (tRWLASchedule == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tRWLASchedule);
+        }
+
         public ActionResult EventType(int? id)
         {
             return View();
@@ -251,9 +265,9 @@ namespace TRWLASystemMaster.Controllers
             return View(tRWLASchedule);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("RSVP")]
         [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "RSVP_Event_ID,EventID,PersonID")] RSVP_Event @event, int id, TRWLASchedule trwla)
+        public ActionResult RSVPConfirmed(RSVP_Event @event, int id, TRWLASchedule trwla)
         {
             //Counts if the table has data in it
             int i = db.RSVP_Event.Count();

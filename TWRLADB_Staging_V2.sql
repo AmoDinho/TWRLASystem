@@ -66,23 +66,17 @@ AccessRight char(25) not null
 )
 go
 
----SecurityAnswer---
 
-create table SecurityAnswer
- (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
- Security_Answer varchar(25) not null,
-StudentID int FOREIGN KEY REFERENCES Student(StudentID)
---StudentID int references Student(StudentID)
- )
- go
 
---Left out until decision made
---create table AuditLog
---(
---AuditID int identity(1,1)
---)
 
+
+ ---- StudentType---
+
+create table StudentType
+(StudentTypeID int identity(1,1) primary key,
+StudentTypeDescription varchar(25) not null
+)
+go
 
 ---Migration History Table----
 
@@ -105,6 +99,29 @@ CREATE TABLE [dbo].[AspNetRoles] (
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
     ON [dbo].[AspNetRoles]([Name] ASC);
+
+		---ASPNET USERS----
+
+	CREATE TABLE [dbo].[AspNetUsers] (
+    [Id]                   int IDENTITY (1, 1) NOT NULL,
+    [Email]                NVARCHAR (256) NULL,
+    [EmailConfirmed]       BIT            NOT NULL,
+    [PasswordHash]         NVARCHAR (MAX) NULL,
+    [SecurityStamp]        NVARCHAR (MAX) NULL,
+    [PhoneNumber]          NVARCHAR (MAX) NULL,
+    [PhoneNumberConfirmed] BIT            NOT NULL,
+    [TwoFactorEnabled]     BIT            NOT NULL,
+    [LockoutEndDateUtc]    DATETIME       NULL,
+    [LockoutEnabled]       BIT            NOT NULL,
+    [AccessFailedCount]    INT            NOT NULL,
+    [UserName]             NVARCHAR (256) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([UserName] ASC);
 
 
 	---ASPNET User Claims---
@@ -159,39 +176,6 @@ CREATE NONCLUSTERED INDEX [IX_RoleId]
     ON [dbo].[AspNetUserRoles]([RoleId] ASC);
 
 
-	---ASPNET USERS----
-
-	CREATE TABLE [dbo].[AspNetUsers] (
-    [Id]                   int IDENTITY (1, 1) NOT NULL,
-    [Email]                NVARCHAR (256) NULL,
-    [EmailConfirmed]       BIT            NOT NULL,
-    [PasswordHash]         NVARCHAR (MAX) NULL,
-    [SecurityStamp]        NVARCHAR (MAX) NULL,
-    [PhoneNumber]          NVARCHAR (MAX) NULL,
-    [PhoneNumberConfirmed] BIT            NOT NULL,
-    [TwoFactorEnabled]     BIT            NOT NULL,
-    [LockoutEndDateUtc]    DATETIME       NULL,
-    [LockoutEnabled]       BIT            NOT NULL,
-    [AccessFailedCount]    INT            NOT NULL,
-    [UserName]             NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
-    ON [dbo].[AspNetUsers]([UserName] ASC);
-
-
- ---- StudentType---
-
-create table StudentType
-(StudentTypeID int identity(1,1) primary key,
-StudentTypeDescription varchar(25) not null
-)
-go
-
-
   ------Student -----
 create table Student
 (
@@ -212,6 +196,17 @@ StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null
 
 )
 go
+
+---SecurityAnswer---
+create table SecurityAnswer
+ (SecurityAnswerID int identity(1,1) primary key,
+ Security_Question varchar(150) not null,
+ Security_Answer varchar(25) not null,
+StudentID int FOREIGN KEY REFERENCES Student(StudentID)
+--StudentID int references Student(StudentID)
+ )
+ go
+
 
     ---Milestone---     
 create table Milestone
@@ -299,6 +294,19 @@ ExperienceImpact varchar(250) not null,
 
 )
 go
+
+
+--Left out until decision made
+--create table AuditLog
+--(
+--AuditID int identity(1,1)
+--)
+
+
+
+
+
+
 
 
 
@@ -631,6 +639,7 @@ GO
 				---		 [dbo].[RSVP_Event]
 create table RSVP_Event
 (
+		rsvpID int identity (1,1) not null,
 		StudentID int not null,
 		FunctionID int null,
 		LectureID int null,
@@ -770,25 +779,6 @@ go
 
 delete from VenueType where VenueTypeID = 5
 go
-
-insert into TRWLASchedule(FunctionID)
-values(1)
-Go
-
-insert into TRWLASchedule(FunctionID)
-values(2)
-Go
-
-insert into TRWLASchedule(FunctionID)
-values(3)
-Go
-
-insert into TRWLASchedule(FunctionID)
-values(4)
-Go
-insert into TRWLASchedule(FunctionID)
-values(5)
-Go
 
 insert into Residence(Res_Name)
 values('Magritjie')

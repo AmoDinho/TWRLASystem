@@ -524,6 +524,7 @@
     <Content Include="Views\ComEngEvents\Details.cshtml" />
     <Content Include="Views\ComEngEvents\Edit.cshtml" />
     <Content Include="Views\ComEngEvents\Index.cshtml" />
+    <Content Include="Views\TRWLASchedules\RSVP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

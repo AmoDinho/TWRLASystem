@@ -1,32 +1,33 @@
 ﻿@model TRWLASystemMaster.Models.TRWLASchedule
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "RSVP";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
 @if (Model.FunctionID != null)
 {
     <div class="jumbotron">
-        <h2>Details on @Html.DisplayFor(model => model.FunctionEvent.Function_Name) </h2>
+        <h2>RSVP to @Html.DisplayFor(model => model.FunctionEvent.Function_Name) </h2>
     </div>
 }
 
 @if (Model.LectureID != null)
 {
     <div class="jumbotron">
-        <h2>Details on @Html.DisplayFor(model => model.Lecture.Lecture_Name) </h2>
+        <h2>RSVP to @Html.DisplayFor(model => model.Lecture.Lecture_Name) </h2>
     </div>
 }
 
 @if (Model.ComEngID != null)
 {
     <div class="jumbotron">
-        <h2>Details on @Html.DisplayFor(model => model.ComEngEvent.ComEng_Name) </h2>
+        <h2>RSVP to @Html.DisplayFor(model => model.ComEngEvent.ComEng_Name) </h2>
     </div>
 }
 
 <div>
+    <h4>Are you sure that you want to RSVP to this event?</h4>
     <hr />
     @if (Model.FunctionID != null)
     {
@@ -265,7 +266,11 @@
 </div>
 <div class="form-inline" style="float:right;">
     <div class="form-group">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("RSVP", "TRWLASchedules", new { id = Model.ScheduleID })'">RSVP</button>
+        <div style="margin-right:5px;">
+            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#NotGoing" style="color:#9b16d8">
+                RSVP
+            </button>
+        </div>
     </div>
     <div class="form-group">
         <div style="margin-right:5px;">
@@ -346,3 +351,4 @@
         </div>
     </div>
 </div>
+
