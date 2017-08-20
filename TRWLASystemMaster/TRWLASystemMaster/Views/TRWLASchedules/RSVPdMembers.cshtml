@@ -5,7 +5,14 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>RSVPdMembers</h2>
+<div class="jumbotron">
+    <h2>RSVPd Members</h2>
+</div>
+
+@if (TempData["Attend"] != null)
+{
+    <h4>@TempData["Attend"]</h4>
+}
 
 <table class="table">
     <tr>
@@ -22,7 +29,7 @@
             Email
         </th>
         <th>
-            Degree  
+            Degree
         </th>
         <th></th>
     </tr>
@@ -40,17 +47,36 @@
                 @Html.DisplayFor(modelItem => item.Student.StudentNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.AspNetUser.Email) 
+                @Html.DisplayFor(modelItem => item.Student.AspNetUser.Email)
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Degree) 
+                @Html.DisplayFor(modelItem => item.Student.Degree)
             </td>
             <td>
-                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.StudentID })
+                @if (item.FunctionID != null)
+                {
+                    @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, schedid = item.FunctionID })
+                }
+                @if (item.LectureID != null)
+                {
+                    @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, schedid = item.LectureID })
+                }
+                @if (item.ComEngID != null)
+                {
+                    @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, schedid = item.ComEngID })
+                }
+
             </td>
         </tr>
     }
 
 </table>
 
+
+
+<div class="form-inline" style="float:right;">
+    <div style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+    </div>
+</div>

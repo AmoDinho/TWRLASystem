@@ -489,3 +489,15 @@ C:\Users\User\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\b
 C:\Users\User\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.csprojResolveAssemblyReference.cache
 C:\Users\User\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.dll
 C:\Users\User\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.pdb
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.csprojResolveAssemblyReference.cache
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Web.DataVisualization.Design.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Web.DataVisualization.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Windows.Forms.DataVisualization.Design.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Windows.Forms.DataVisualization.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\ClosedXML.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\DocumentFormat.OpenXml.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\FastMember.Signed.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.IO.Packaging.dll
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\ClosedXML.xml
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\DocumentFormat.OpenXml.xml

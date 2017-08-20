@@ -26,12 +26,14 @@ namespace TRWLASystemMaster
                       "~/Scripts/bootstrap-switch.js",
                       "~/Scripts/moment.min.js",
                       "~/Scripts/nouislider.min.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/Chart.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/now-ui-kit.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/Custom.css"));
         }
     }
 }

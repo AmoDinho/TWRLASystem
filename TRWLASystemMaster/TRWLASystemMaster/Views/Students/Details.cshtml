@@ -1,0 +1,129 @@
+﻿@model TRWLASystemMaster.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Graduate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Graduate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Degree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearOfStudy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearOfStudy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student_Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student_DoB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_DoB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residence.Res_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentType.StudentTypeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType.Description)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="form-inline" style="float:right;">
+    <div style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+    </div>
+    <div style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+    </div>
+</div>
+

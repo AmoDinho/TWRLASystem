@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.Attendance>
+
+@{
+    ViewBag.Title = "ClassAttendance";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>ClassAttendance</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Residence
+        </th>
+        <th>
+            Number of Events Attendended
+        </th>
+        <th>
+            Number of Events Required
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Student_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Student_Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Residence.Res_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+            </td>
+            <td>
+                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

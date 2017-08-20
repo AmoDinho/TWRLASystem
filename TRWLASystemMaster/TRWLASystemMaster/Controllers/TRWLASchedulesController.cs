@@ -7,6 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
+using System.Web.Helpers;
+using System.Net.Mail;
+using System.Web.UI.DataVisualization.Charting;
+using System.Text;
+using System.IO;
+using System.Drawing;
+using ClosedXML.Excel;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TRWLASystemMaster.Controllers
 {
@@ -83,40 +92,351 @@ namespace TRWLASystemMaster.Controllers
             return View(tRWLASchedules.ToList());
         }
 
+        //Begginning of Report Generation 
+        public IList<AttendanceViewModel> GetLectureAttendance()
+        {
+            var at = (from l in db.RSVP_Event
+                      where l.LectureID != null
+                              select new AttendanceViewModel
+                              {
+                                  EventName = l.Lecture.Lecture_Name,
+                                  EventDate = l.Lecture.Lecture_Date,
+                                  Student_Name = l.Student.Student_Name
+                              }).ToList();
+            return at;
+        }
+        public IList<AttendanceViewModel> GetFunctionAttendance()
+        {
+            var attendance = (from s in db.RSVP_Event
+                              where s.FunctionID != null
+                              select new AttendanceViewModel
+                                {
+                                    EventName = s.FunctionEvent.Function_Name,
+                                    EventDate = s.FunctionEvent.Function_Date,
+                                    Student_Name = s.Student.Student_Name
+                                }).ToList();
+            return attendance;
+        }
+
+       
+
+        public IList<AttendanceViewModel> GetComAttendance()
+        {
+            var attend = (from m in db.RSVP_Event
+                          where m.ComEngID != null
+                              select new AttendanceViewModel
+                              {
+                                  EventName = m.ComEngEvent.ComEng_Name,
+                                  EventDate = m.ComEngEvent.ComEng_Date,
+                                  Student_Name = m.Student.Student_Name
+                              }).ToList();
+            return attend;
+        }
+
+        public ActionResult ExportToExcel1()
+        {
+            var gv = new GridView();
+            gv.DataSource = this.GetFunctionAttendance();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            string name = "Function Attendance Report " + Convert.ToString(DateTime.Now);
+            Response.AddHeader("content-disposition", "attachment; filename="+name+ ".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return View("Index");
+        }
+
+        public ActionResult ExportToExcel2()
+        {
+            var gv = new GridView();
+            gv.DataSource = this.GetLectureAttendance();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            string name = "Lecture Attendance Report " + Convert.ToString(DateTime.Now);
+            Response.AddHeader("content-disposition", "attachment; filename=" + name + ".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return View("Index");
+        }
+
+        public ActionResult ExportToExcel3()
+        {
+            var gv = new GridView();
+            gv.DataSource = this.GetComAttendance();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            string name = "Community Engagement Attendance Report " + Convert.ToString(DateTime.Now);
+            Response.AddHeader("content-disposition", "attachment; filename=" + name + ".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return View("Index");
+        }
+
+
+        public ActionResult ClassAttendance()
+        {
+            return View(db.Attendances.ToList());
+        }
+
+        public ActionResult FunctionAttendance()
+        {
+            return View(this.GetFunctionAttendance());
+        }
+
+        public ActionResult ComAttendance()
+        {
+            return View(this.GetComAttendance());
+        }
+
+        public ActionResult LecAttendance()
+        {
+            return View(this.GetLectureAttendance());
+        }
+
+        //public ActionResult ClassAttendance(SeriesChartType chartType)
+        //{
+        //    IList<Attendance> attendances = Attendance.GetResults();
+        //    System.Web.UI.DataVisualization.Charting.Chart chart = new System.Web.UI.DataVisualization.Charting.Chart();
+        //    chart.Width = 700;
+        //    chart.Height = 300;
+        //    chart.BackColor = Color.FromArgb(211, 223, 240);
+        //    chart.BorderlineDashStyle = ChartDashStyle.Solid;
+        //    chart.BackSecondaryColor = Color.White;
+        //    chart.BackGradientStyle = GradientStyle.TopBottom;
+        //    chart.BorderlineWidth = 1;
+        //    chart.Palette = ChartColorPalette.BrightPastel;
+        //    chart.BorderlineColor = Color.FromArgb(26, 59, 105);
+        //    chart.RenderType = RenderType.BinaryStreaming;
+        //    chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
+        //    chart.AntiAliasing = AntiAliasingStyles.All;
+        //    chart.TextAntiAliasingQuality = TextAntiAliasingQuality.Normal;
+        //    chart.Titles.Add(CreateTitle());
+        //    chart.Legends.Add(CreateLegend());
+        //    chart.Series.Add(CreateSeries(attendances, chartType));
+        //    chart.ChartAreas.Add(CreateChartArea());
+
+        //    MemoryStream ms = new MemoryStream();
+        //    chart.SaveImage(ms);
+        //    return File(ms.GetBuffer(), @"image/png");
+        //}
+
+        //public Title CreateTitle()
+        //{
+        //    Title title = new Title();
+        //    title.Text = "Result Chart";
+        //    title.ShadowColor = Color.FromArgb(32, 0, 0, 0);
+        //    title.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
+        //    title.ShadowOffset = 3;
+        //    title.ForeColor = Color.FromArgb(26, 59, 105);
+        //    return title;
+        //}
+
+        //private Legend CreateLegend()
+        //{
+        //    Legend legend = new Legend();
+        //    legend.Enabled = true;
+        //    legend.ShadowColor = Color.FromArgb(32, 0, 0, 0);
+        //    legend.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
+        //    legend.ShadowOffset = 3;
+        //    legend.ForeColor = Color.FromArgb(26, 59, 105);
+        //    legend.Title = "Legend";
+        //    return legend;
+        //}
+
+
+        //public Series CreateSeries(IList<Attendance> results, SeriesChartType chartType)
+        //{
+        //    Series seriesDetail = new Series();
+        //    seriesDetail.Name = "Result Chart";
+        //    seriesDetail.IsValueShownAsLabel = false;
+        //    seriesDetail.Color = Color.FromArgb(198, 99, 99);
+        //    seriesDetail.ChartType = chartType;
+        //    seriesDetail.BorderWidth = 2;
+        //    DataPoint point;
+
+        //    foreach (Attendance result in results)
+        //    {
+        //        point = new DataPoint();
+        //        point.AxisLabel = result.Student.Student_Name ;
+        //        point.YValues = new double[] { double.Parse(result.) };
+        //        seriesDetail.Points.Add(point);
+        //    }
+        //    seriesDetail.ChartArea = "Result Chart";
+        //    return seriesDetail;
+        //}
+
+        //public ChartArea CreateChartArea()
+        //{
+        //    ChartArea chartArea = new ChartArea();
+        //    chartArea.Name = "Result Chart";
+        //    chartArea.BackColor = Color.Transparent;
+        //    chartArea.AxisX.IsLabelAutoFit = false;
+        //    chartArea.AxisY.IsLabelAutoFit = false;
+        //    chartArea.AxisX.LabelStyle.Font =
+        //       new Font("Verdana,Arial,Helvetica,sans-serif",
+        //                8F, FontStyle.Regular);
+        //    chartArea.AxisY.LabelStyle.Font =
+        //       new Font("Verdana,Arial,Helvetica,sans-serif",
+        //                8F, FontStyle.Regular);
+        //    chartArea.AxisY.LineColor = Color.FromArgb(64, 64, 64, 64);
+        //    chartArea.AxisX.LineColor = Color.FromArgb(64, 64, 64, 64);
+        //    chartArea.AxisY.MajorGrid.LineColor = Color.FromArgb(64, 64, 64, 64);
+        //    chartArea.AxisX.MajorGrid.LineColor = Color.FromArgb(64, 64, 64, 64);
+        //    chartArea.AxisX.Interval = 1;
+        //}
+
         public ActionResult LogAttendance()
         {
             return View(db.TRWLASchedules.ToList());
         }
 
-        public ActionResult RSVPdMembers(int id)
+        public ActionResult RSVPdMembers(int? id)
         {
             TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
 
-            
-
             if (tRWLASchedule.FunctionID != null)
             {
-                //var evnt = from s in db.Students
-                //           where s.RSVP_ == tRWLASchedule.FunctionID
-                //           select s;
+                var evnt = from s in db.Students
+                           join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                           join t in db.TRWLASchedules on r.FunctionID equals t.FunctionID
+                           where r.FunctionID == tRWLASchedule.FunctionID
+                           select r;
+                
 
-                //evnt = evnt.Where(s => s.
-
-                //return View(student.ToList());
+                return View(evnt.ToList());
             }
             else if (tRWLASchedule.LectureID != null)
             {
-                var student = db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.LectureID);
-                return View(student.ToList());
+                var evnt = from s in db.Students
+                           join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                           join t in db.TRWLASchedules on r.LectureID equals t.LectureID
+                           where r.LectureID == tRWLASchedule.LectureID
+                           select r;
+                
+
+                return View(evnt.ToList());
             }
             else
             {
-                var student = db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.ComEngID);
-                return View(student.ToList());
-            }
+                var evnt = from s in db.Students
+                           join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                           join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
+                           where r.ComEngID == tRWLASchedule.ComEngID
+                           select r;
+                
 
-            
+                return View(evnt.ToList());
+            }
         }
+
+        public ActionResult ConfirmAttendance(int? id, int? idd)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
+
+        [HttpPost, ActionName("ConfirmAttendance")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AttendanceConfirmed(Attendance att ,int id, int idd)
+        {
+
+            Student stud = db.Students.Find(id);
+            TRWLASchedule ev = db.TRWLASchedules.Find(idd);
+
+
+            int i = db.Attendances.Count();
+
+            try
+            {
+                if (i == 0)
+                {
+                    if (ev.FunctionID != null)
+                    {
+                        att.FunctionID = ev.FunctionID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else if (ev.LectureID != null)
+                    {
+                        att.LectureID = ev.LectureID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else
+                    {
+                        att.ComEngID = ev.ComEngID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+
+                }
+                else
+                {
+                    int max = db.Attendances.Max(p => p.attendanceID);
+                    int l = max + 1;
+
+                    att.attendanceID = l;
+
+                    if (ev.FunctionID != null)
+                    {
+                        att.FunctionID = ev.FunctionID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else if (ev.LectureID != null)
+                    {
+                        att.LectureID = ev.LectureID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else
+                    {
+                        att.ComEngID = ev.ComEngID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                }
+                db.SaveChanges();
+
+                TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.Student_Name;
+            }
+            catch (Exception)
+            {
+                TempData["Attend"] = "There was an error in the attempt of logging the attendance of the student";
+            }
+            return View();
+        }
+
+
 
         // GET: TRWLASchedules/Details/5
         public ActionResult Details(int? id)
@@ -169,10 +489,7 @@ namespace TRWLASystemMaster.Controllers
                 return View("../Lectures/Create");
             }
         }
-
-
-
-
+        
         // GET: TRWLASchedules/Create
         public ActionResult Create()
         {
@@ -512,25 +829,170 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
+            //Finds the row in the table where the scheduleID is equal to this
             TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+
+            //Finds the row/s in the table where the scheduleID found is equal to this
+            RSVPSchedule rsvp = db.RSVPSchedules.FirstOrDefault(p => p.ScheduleID == id);
+            
+            
 
             if (tRWLASchedule.FunctionID != null)
             {
+                
                 FunctionEvent functions = db.FunctionEvents.Find(tRWLASchedule.FunctionID);
+                
+
+                var email = from s in db.RSVP_Event
+                            where s.FunctionID == tRWLASchedule.FunctionID
+                            select s.StudentID;
+
+                foreach (var s in email)
+                {
+                    try
+                    {
+                        Student recipient = db.Students.Find(s);
+
+                        FunctionEvent func = db.FunctionEvents.Find(Convert.ToInt32(tRWLASchedule.FunctionID));
+
+                        MailMessage msg = new MailMessage();
+                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                        msg.To.Add(recipient.AspNetUser.Email);
+                        msg.Subject = func.Function_Name + " Cancellation";
+                        msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                        SmtpClient smtp = new SmtpClient();
+
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                        smtp.EnableSsl = true;
+                        smtp.Send(msg);
+
+                        ModelState.Clear();
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.Status = "Problem while sending email, Please check details.";
+                    }
+                }
+
+                RSVP_Event function = db.RSVP_Event.FirstOrDefault(l => l.FunctionID == tRWLASchedule.FunctionID);
+
+                db.RSVP_Event.Remove(function);
+                db.TRWLASchedules.Remove(tRWLASchedule);
+                db.RSVPSchedules.Remove(rsvp);
                 db.FunctionEvents.Remove(functions);
+                
             }
             else if (tRWLASchedule.LectureID != null)
             {
-                Lecture lectures = db.Lectures.Find(tRWLASchedule.LectureID);
+                
+                Lecture lectures = db.Lectures.Find(Convert.ToInt32(tRWLASchedule.LectureID));
+
+                var email = from s in db.RSVP_Event
+                            where s.LectureID == tRWLASchedule.LectureID
+                            select s.StudentID;
+
+                foreach (var s in email)
+                {
+                    try
+                    {
+                        Student recipient = db.Students.Find(s);
+                        Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
+
+                        MailMessage msg = new MailMessage();
+                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                        msg.To.Add(recipient.AspNetUser.Email);
+                        msg.Subject = lec.Lecture_Name + " Cancellation";
+                        msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                        SmtpClient smtp = new SmtpClient();
+
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                        smtp.EnableSsl = true;
+                        smtp.Send(msg);
+
+                        ModelState.Clear();
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.Status = "Problem while sending email, Please check details.";
+                    }
+                }
+
+                RSVP_Event lecture = db.RSVP_Event.FirstOrDefault(l => l.LectureID == tRWLASchedule.LectureID);
+
+                db.TRWLASchedules.Remove(tRWLASchedule);
+                db.RSVPSchedules.Remove(rsvp);
+                db.RSVP_Event.Remove(lecture);
                 db.Lectures.Remove(lectures);
+                
+
+
+
             }
             else if (tRWLASchedule.ComEngID != null)
             {
-                ComEngEvent comeng = db.ComEngEvents.Find(tRWLASchedule.ComEngID);
-                db.ComEngEvents.Remove(comeng);
+                
+
+                ComEngEvent comeng = db.ComEngEvents.Find(Convert.ToInt32(tRWLASchedule.ComEngID));
+
+                var email = from s in db.RSVP_Event
+                            where s.ComEngID == tRWLASchedule.ComEngID
+                            select s.StudentID;
+
+                foreach (var s in email)
+                {
+                    try
+                    {
+                        Student recipient = db.Students.Find(s);
+                        ComEngEvent com = db.ComEngEvents.Find(tRWLASchedule.ComEngID);
+
+                        MailMessage msg = new MailMessage();
+                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                        msg.To.Add(recipient.AspNetUser.Email);
+                        msg.Subject = com.ComEng_Name + " Cancellation";
+                        msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                        SmtpClient smtp = new SmtpClient();
+
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                        smtp.EnableSsl = true;
+                        smtp.Send(msg);
+
+                        ModelState.Clear();
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.Status = "Problem while sending email, Please check details.";
+                    }
+
+                    RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.ComEngID == tRWLASchedule.ComEngID);
+
+                    db.TRWLASchedules.Remove(tRWLASchedule);
+                    db.RSVPSchedules.Remove(rsvp);
+                    db.RSVP_Event.Remove(comu);
+                    db.ComEngEvents.Remove(comeng);
+                    
+
+
+
+
+                }
+
+                //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
+
+
             }
 
-            db.TRWLASchedules.Remove(tRWLASchedule);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
