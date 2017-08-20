@@ -54,6 +54,12 @@ namespace TRWLASystemMaster.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
+                //AspNetUser user = new AspNetUser();
+                //volunteer.AspNetUser = user;
+
+                //db.AspNetUsers.Add(user);
                 db.Volunteers.Add(volunteer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
