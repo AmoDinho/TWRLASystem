@@ -10,50 +10,52 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("TRWLA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sevice", "CommServe", "Home")</li>
-                    <li>@Html.ActionLink("Network", "Network", "Home")</li>
-                    <li>@Html.ActionLink("Skills", "Skills", "Home")</li>
-                            @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                             <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
+    <div class="marginwrapper">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("TRWLA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Sevice", "CommServe", "Home")</li>
+                        <li>@Html.ActionLink("Relationships", "Network", "Home")</li>
+                        <li>@Html.ActionLink("Skills", "Skills", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
 
-                </ul>
-                @Html.Partial("_LoginPartial")
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <hr />
-        <footer class="panel-footer">
-            <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <hr />
+            <div class="footer">
+                <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
+            </div>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
 
-    <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-    </script>
+        @RenderSection("scripts", required: false)
+
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+    </div>
 </body>
 </html>
 <script src="https://use.fontawesome.com/dead28a296.js"></script>
