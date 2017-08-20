@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities1">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -271,26 +271,6 @@
         <MappingFragment StoreEntitySet="VolunteerType">
           <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
           <ScalarProperty Name="VolunteerType_Description" ColumnName="VolunteerType_Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Attendances">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
-        <MappingFragment StoreEntitySet="Attendance">
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
-          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RSVP_Event">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
-        <MappingFragment StoreEntitySet="RSVP_Event">
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
-          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

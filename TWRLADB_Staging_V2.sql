@@ -822,3 +822,7 @@ go
 insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
 values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
 go*/
+
+insert into AspNetUsers(Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName)
+values('Margie@tuks.co.za',1,'4545#@34$','stamp1','0741020360',1,1,'2017/03/03',1,1,'Margie@tuks.co.za')
+go

@@ -12,6 +12,8 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult UniqueCode()
         {
             return View();
+
+            //Add Random Generator Code
         }
     }
 }

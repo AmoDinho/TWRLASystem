@@ -13,10 +13,10 @@ namespace TRWLASystemMaster.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TWRLADB_Staging_V2Entities : DbContext
+    public partial class TWRLADB_Staging_V2Entities1 : DbContext
     {
-        public TWRLADB_Staging_V2Entities()
-            : base("name=TWRLADB_Staging_V2Entities")
+        public TWRLADB_Staging_V2Entities1()
+            : base("name=TWRLADB_Staging_V2Entities1")
         {
         }
     
@@ -48,7 +48,5 @@ namespace TRWLASystemMaster.Models
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<VolunteerFeedback> VolunteerFeedbacks { get; set; }
         public virtual DbSet<VolunteerType> VolunteerTypes { get; set; }
-        public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<RSVP_Event> RSVP_Event { get; set; }
     }
 }

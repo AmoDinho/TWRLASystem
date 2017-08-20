@@ -17,8 +17,6 @@ namespace TRWLASystemMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lecture()
         {
-            this.Attendances = new HashSet<Attendance>();
-            this.RSVP_Event = new HashSet<RSVP_Event>();
             this.TRWLASchedules = new HashSet<TRWLASchedule>();
         }
     
@@ -35,12 +33,8 @@ namespace TRWLASystemMaster.Models
         public Nullable<int> ContentID { get; set; }
     
         public virtual Content Content { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Residence Residence { get; set; }
         public virtual Venue Venue { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRWLASchedule> TRWLASchedules { get; set; }
     }

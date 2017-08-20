@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class VolunteersController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
 
         // GET: Volunteers
         public ActionResult Index()
@@ -62,6 +62,7 @@ namespace TRWLASystemMaster.Controllers
                 //db.AspNetUsers.Add(user);
                 db.Volunteers.Add(volunteer);
                 db.SaveChanges();
+                //Redirect to Events 
                 return RedirectToAction("Index");
             }
 

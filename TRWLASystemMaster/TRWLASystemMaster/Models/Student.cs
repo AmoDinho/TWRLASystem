@@ -31,8 +31,6 @@ namespace TRWLASystemMaster.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Residence Residence { get; set; }
-        public virtual Attendance Attendance { get; set; }
-        public virtual RSVP_Event RSVP_Event { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual UserType UserType { get; set; }
     }

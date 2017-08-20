@@ -4,62 +4,52 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f92e246e20a645b894f23e4bd14d5f28" Name="Diagram1">
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Address" Width="1.5" PointX="1.5" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetRole" Width="1.5" PointX="1.5" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetUserClaim" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetUserLogin" Width="1.5" PointX="6" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetUser" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ComEngEvent" Width="1.5" PointX="6" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Content" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.FunctionEvent" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.GuestSpeaker" Width="1.5" PointX="3.75" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Lecture" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Milestone" Width="1.5" PointX="8.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Residence" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Student" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.StudentMilestone" Width="1.5" PointX="11" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.StudentType" Width="1.5" PointX="3.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.TRWLASchedule" Width="1.5" PointX="8.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.UserType" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Venue" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VenueType" Width="1.5" PointX="1.5" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Volunteer" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VolunteerFeedback" Width="1.5" PointX="8.75" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VolunteerType" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Attendance" Width="1.5" PointX="11.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.RSVP_Event" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__AddressID__4222D4EF" ManuallyRouted="false" />
+      <Diagram DiagramId="91a89fa000c847c0b7d5753fa72669ec" Name="Diagram1">
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.C__MigrationHistory" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Address" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetRole" Width="1.5" PointX="10.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetUserClaim" Width="1.5" PointX="15.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetUserLogin" Width="1.5" PointX="15.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetUser" Width="1.5" PointX="13" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ComEngEvent" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Content" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.FunctionEvent" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.GuestSpeaker" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Lecture" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Milestone" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Residence" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Student" Width="1.5" PointX="18.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.StudentMilestone" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.StudentType" Width="1.5" PointX="16" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.TRWLASchedule" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.UserType" Width="1.5" PointX="16" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Venue" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VenueType" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Volunteer" Width="1.5" PointX="18.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VolunteerFeedback" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VolunteerType" Width="1.5" PointX="16" PointY="22.625" IsExpanded="true" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__AddressID__300424B4" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__Id__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Id__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Attendanc__ComEn__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__ComEngEve__Conte__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__ComEngEve__Venue__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__ComEn__619B8048" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__ComEn__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__Content__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Attendanc__Funct__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__FunctionE__Guest__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__FunctionE__Venue__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__Funct__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__Funct__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Attendanc__Lectu__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__Residen__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__VenueID__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__Lectu__60A75C0F" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__Lectu__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__StudentMi__Miles__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__ResID__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Attendanc__Stude__59FA5E80" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__Stude__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__Student__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__UserTyp__2D27B809" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__UserT__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__VenueType__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Volun__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__Id__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Id__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__ComEngEve__Conte__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__ComEngEve__Venue__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__ComEn__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__Content__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__FunctionE__Guest__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__FunctionE__Venue__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__Funct__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__Residen__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__VenueID__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__Lectu__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__StudentMi__Miles__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__ResID__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__Student__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__UserTyp__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__UserT__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__VenueType__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Volun__6754599E" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
