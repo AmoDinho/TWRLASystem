@@ -52,6 +52,7 @@ namespace TRWLASystemMaster.Controllers
 
         //
         // GET: /Manage/Index
+        [AllowAnonymous]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
