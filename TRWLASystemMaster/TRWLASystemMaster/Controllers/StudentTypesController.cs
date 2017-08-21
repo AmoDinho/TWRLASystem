@@ -63,13 +63,16 @@ namespace TRWLASystemMaster.Controllers
             try
             {
 
-                int i = db.StudentTypes.Count();
+                
 
-                if (i != 0)
-                {
-
+       
                     if (ModelState.IsValid)
                     {
+                    int i = db.StudentTypes.Count();
+
+                    if (i != 0)
+                    {
+
                         int k = db.StudentTypes.Max(p => p.StudentTypeID);
                         int max = k + 1;
 
@@ -86,7 +89,9 @@ namespace TRWLASystemMaster.Controllers
 
                 else
                 {
-
+                    db.StudentTypes.Add(studentType);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
                 return View(studentType);
             }
