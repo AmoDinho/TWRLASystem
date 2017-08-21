@@ -23,7 +23,7 @@
         @using (Html.BeginForm())
         {
             <p>
-                @Html.TextBox("searchString", "", new { placeholder = "Name of Event" })
+                @Html.Label("Find by name:") @Html.TextBox("searchString"@*, "", new { placeholder = "Name of Event" }*@)
                 <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
             </p>
         }
@@ -33,27 +33,27 @@
 <div class="form-inline" style="margin-bottom:10px;">
     <div class="form-group">
         <p>
-            <i class="fa fa-filter" aria-hidden="true"></i>
+            @Html.Label("Filter by:")
         </p>
     </div>
     <div class="form-group">
-        <div style="margin-right:10px;">
+        <div>
             <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">All</button>
 
         </div>
     </div>
     <div class="form-group">
-        <div style="margin-right:10px;">
+        <div>
             <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagements</button>
         </div>
     </div>
     <div class="form-group">
-        <div style="margin-right:10px;">
+        <div>
             <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lectures</button>
         </div>
     </div>
     <div class="form-group">
-        <div style="margin-right:10px;">
+        <div>
             <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Functions</button>
         </div>
     </div>
