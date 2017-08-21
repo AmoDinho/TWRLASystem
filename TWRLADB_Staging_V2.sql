@@ -666,6 +666,25 @@ create table RSVPSchedule
 )
 GO
 
+create table RatingType
+(
+	RatingID int identity (1,1) primary key,
+	Rating varchar(50) not null
+)
+
+create table LectureReview
+(
+	reviewID int identity (1,1) primary key,
+	Review varchar(500) not null,
+	RatingID int not null,
+	StudentID int not null,
+	LectureID int not null,
+	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
+	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
+)
+
+
 					
 				  /* TEST RECORDS!!! - 
 				  
@@ -688,6 +707,27 @@ GO
 
 insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
 values('17', 'Chris Corner', 'Kichenbrandish', 'Pretoria', 'Gauteng', '2103')
+GO
+
+---insert into: RatingType Table---
+insert into RatingType(Rating)
+values('Excellent')
+GO
+
+insert into RatingType(Rating)
+values('Good')
+GO
+
+insert into RatingType(Rating)
+values('Average')
+GO
+
+insert into RatingType(Rating)
+values('Bad')
+GO
+
+insert into RatingType(Rating)
+values('Terrible')
 GO
 
 

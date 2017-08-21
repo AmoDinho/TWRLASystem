@@ -93,6 +93,43 @@ namespace TRWLASystemMaster.Controllers
         }
 
         //Begginning of Report Generation 
+
+        public IList<ClassAttendance> GetClassAttendance()
+        {
+            var at = (from l in db.RSVP_Event
+                      join s in db.Students on l.StudentID equals s.StudentID
+                      select new ClassAttendance
+                      {
+                          Name = s.Student_Name,
+                          Surname = s.Student_Surname,
+                          EventCount = db.RSVP_Event.Count(),
+                          StudentID = s.StudentID,
+                          PersonalCount = (db.RSVP_Event.Distinct().Where(p => p.StudentID == s.StudentID).Count())/(db.RSVP_Event.Count())*100
+                      }).ToList();
+
+            return at;
+        }
+
+        public IList<Demographic> GetDemo()
+        {
+            var at = (from l in db.Students
+                      join r in db.Residences on l.ResID equals r.ResID
+                      join st in db.StudentTypes on l.StudentTypeID equals st.StudentTypeID
+                      select new Demographic
+                      {
+                          StudNo = l.StudentNumber,
+                          Name = l.Student_Name,
+                          Surname = l.Student_Surname,
+                          DoB = l.Student_DoB,
+                          Degree = l.Degree,
+                          Grad = l.Graduate,
+                          Res = r.Res_Name,
+                          StudType = st.StudentTypeDescription
+                      }).ToList();
+
+            return at;
+        }
+
         public IList<AttendanceViewModel> GetLectureAttendance()
         {
             var at = (from l in db.RSVP_Event
@@ -133,11 +170,13 @@ namespace TRWLASystemMaster.Controllers
             return attend;
         }
 
+        //Generate the Excel Spreadsheets for the data
         public ActionResult ExportToExcel1()
         {
             var gv = new GridView();
             gv.DataSource = this.GetFunctionAttendance();
             gv.DataBind();
+            
             Response.ClearContent();
             Response.Buffer = true;
             string name = "Function Attendance Report " + Convert.ToString(DateTime.Now);
@@ -146,6 +185,30 @@ namespace TRWLASystemMaster.Controllers
             Response.Charset = "";
             StringWriter objStringWriter = new StringWriter();
             HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+
+            gv.AllowPaging = false;
+
+            //   Create a form to contain the grid
+            Table table = new Table();
+            TableRow title = new TableRow();
+            title.BackColor = Color.Cyan;
+            TableCell titlecell = new TableCell();
+            titlecell.ColumnSpan = 3;//Should span across all columns
+            Label lbl = new Label();
+            lbl.Text = "Function Attendance Report " + Convert.ToString(DateTime.Now);
+            titlecell.Controls.Add(lbl);
+            title.Cells.Add(titlecell);
+            table.Rows.Add(title);
+
+            table.GridLines = gv.GridLines;
+
+            TableCell cell = new TableCell();
+            cell.Text = gv.Caption;
+            cell.ColumnSpan = 10;
+            TableRow tr = new TableRow();
+            tr.Controls.Add(cell);
+            table.Rows.Add(tr);
+
             gv.RenderControl(objHtmlTextWriter);
             Response.Output.Write(objStringWriter.ToString());
             Response.Flush();
@@ -193,10 +256,34 @@ namespace TRWLASystemMaster.Controllers
             return View("Index");
         }
 
+        public ActionResult ExportToExcel4()
+        {
+            var gv = new GridView();
+            gv.DataSource = this.GetDemo();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            string name = "Demographic Report " + Convert.ToString(DateTime.Now);
+            Response.AddHeader("content-disposition", "attachment; filename=" + name + ".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return View("Index");
+        }
+
+        public ActionResult StudentDemographic()
+        {
+            return View(this.GetDemo());
+        }
 
         public ActionResult ClassAttendance()
         {
-            return View(db.Attendances.ToList());
+            return View(this.GetClassAttendance());
         }
 
         public ActionResult FunctionAttendance()
