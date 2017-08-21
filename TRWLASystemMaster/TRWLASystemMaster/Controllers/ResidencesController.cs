@@ -89,9 +89,7 @@ namespace TRWLASystemMaster.Controllers
                         return RedirectToAction("Index");
 
                     }
-
-
-
+                    
                 }
 
                 return View(residence);

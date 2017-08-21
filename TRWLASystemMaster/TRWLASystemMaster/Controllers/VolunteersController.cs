@@ -52,24 +52,49 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
         {
-            if (ModelState.IsValid)
+
+            try
             {
+                if (ModelState.IsValid)
+                {
+                    int i = db.Volunteers.Count();
+                    if (i != 0)
+                    {
+
+                        int k = db.Volunteers.Max(p => p.VolunteerID);
+                        int max = k + 1;
 
 
-                //AspNetUser user = new AspNetUser();
-                //volunteer.AspNetUser = user;
+                        volunteer.VolunteerID = max;
 
-                //db.AspNetUsers.Add(user);
-                db.Volunteers.Add(volunteer);
-                db.SaveChanges();
-                //Redirect to Events 
-                return RedirectToAction("Index");
+                        //AspNetUser user = new AspNetUser();
+                        //volunteer.AspNetUser = user;
+
+                        //db.AspNetUsers.Add(user);
+                        db.Volunteers.Add(volunteer);
+                        db.SaveChanges();
+                        //Redirect to Events 
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        db.Volunteers.Add(volunteer);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
+                ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
+                return View(volunteer);
             }
 
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
-            ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
-            return View(volunteer);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+           
         }
 
         // GET: Volunteers/Edit/5
@@ -97,16 +122,25 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(volunteer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(volunteer).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
+                ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
+                return View(volunteer);
             }
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
-            ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
-            return View(volunteer);
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+            
         }
 
         // GET: Volunteers/Delete/5
@@ -129,10 +163,20 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Volunteer volunteer = db.Volunteers.Find(id);
-            db.Volunteers.Remove(volunteer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            try
+            {
+                Volunteer volunteer = db.Volunteers.Find(id);
+                db.Volunteers.Remove(volunteer);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+
+           
         }
 
         protected override void Dispose(bool disposing)
