@@ -9,7 +9,7 @@ Go
 use TWRLADB_Staging_V2
 go
 
-
+ 
 /*=================================================================================================================================
 ==================================================================                       =============================
 ========================   TWRLA Staging Database                                     =========================================================
@@ -46,9 +46,6 @@ go
 
 ----------------------------------------  Start of tables --------------------------------------------------;
 
-                 ---User Management --- 
-
-				           --- Residence  ----
 create table Residence
 (
 ResID int identity(1,1) primary key,
@@ -66,23 +63,17 @@ AccessRight char(25) not null
 )
 go
 
----SecurityAnswer---
 
-create table SecurityAnswer
- (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
- Security_Answer varchar(25) not null,
-StudentID int FOREIGN KEY REFERENCES Student(StudentID)
---StudentID int references Student(StudentID)
- )
- go
 
---Left out until decision made
---create table AuditLog
---(
---AuditID int identity(1,1)
---)
 
+
+ ---- StudentType---
+
+create table StudentType
+(StudentTypeID int identity(1,1) primary key,
+StudentTypeDescription varchar(25) not null
+)
+go
 
 ---Migration History Table----
 
@@ -105,6 +96,29 @@ CREATE TABLE [dbo].[AspNetRoles] (
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
     ON [dbo].[AspNetRoles]([Name] ASC);
+
+		---ASPNET USERS----
+
+	CREATE TABLE [dbo].[AspNetUsers] (
+    [Id]                   int IDENTITY (1, 1) NOT NULL,
+    [Email]                NVARCHAR (256) NULL,
+    [EmailConfirmed]       BIT            NOT NULL,
+    [PasswordHash]         NVARCHAR (MAX) NULL,
+    [SecurityStamp]        NVARCHAR (MAX) NULL,
+    [PhoneNumber]          NVARCHAR (MAX) NULL,
+    [PhoneNumberConfirmed] BIT            NOT NULL,
+    [TwoFactorEnabled]     BIT            NOT NULL,
+    [LockoutEndDateUtc]    DATETIME       NULL,
+    [LockoutEnabled]       BIT            NOT NULL,
+    [AccessFailedCount]    INT            NOT NULL,
+    [UserName]             NVARCHAR (256) NOT NULL,
+    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
+    ON [dbo].[AspNetUsers]([UserName] ASC);
 
 
 	---ASPNET User Claims---
@@ -159,39 +173,6 @@ CREATE NONCLUSTERED INDEX [IX_RoleId]
     ON [dbo].[AspNetUserRoles]([RoleId] ASC);
 
 
-	---ASPNET USERS----
-
-	CREATE TABLE [dbo].[AspNetUsers] (
-    [Id]                   int IDENTITY (1, 1) NOT NULL,
-    [Email]                NVARCHAR (256) NULL,
-    [EmailConfirmed]       BIT            NOT NULL,
-    [PasswordHash]         NVARCHAR (MAX) NULL,
-    [SecurityStamp]        NVARCHAR (MAX) NULL,
-    [PhoneNumber]          NVARCHAR (MAX) NULL,
-    [PhoneNumberConfirmed] BIT            NOT NULL,
-    [TwoFactorEnabled]     BIT            NOT NULL,
-    [LockoutEndDateUtc]    DATETIME       NULL,
-    [LockoutEnabled]       BIT            NOT NULL,
-    [AccessFailedCount]    INT            NOT NULL,
-    [UserName]             NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
-    ON [dbo].[AspNetUsers]([UserName] ASC);
-
-
- ---- StudentType---
-
-create table StudentType
-(StudentTypeID int identity(1,1) primary key,
-StudentTypeDescription varchar(25) not null
-)
-go
-
-
   ------Student -----
 create table Student
 (
@@ -212,6 +193,17 @@ StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null
 
 )
 go
+
+---SecurityAnswer---
+create table SecurityAnswer
+ (SecurityAnswerID int identity(1,1) primary key,
+ Security_Question varchar(150) not null,
+ Security_Answer varchar(25) not null,
+StudentID int FOREIGN KEY REFERENCES Student(StudentID)
+--StudentID int references Student(StudentID)
+ )
+ go
+
 
     ---Milestone---     
 create table Milestone
@@ -259,10 +251,8 @@ VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not nu
 go
 
 /*
-
 create table ResVolunteer
 (
-
 Facilitation_Year date not null,
 VolunteerID int references Volunteer(VolunteerID),
 Volunteer_Name varchar references Volunteer(Volunteer_Name)
@@ -270,7 +260,6 @@ ResID int references Residence(ResID),
 primary key(VolunteerID, ResID)
 )
 go
-
 */
 
 
@@ -299,6 +288,19 @@ ExperienceImpact varchar(250) not null,
 
 )
 go
+
+
+--Left out until decision made
+--create table AuditLog
+--(
+--AuditID int identity(1,1)
+--)
+
+
+
+
+
+
 
 
 
@@ -397,26 +399,18 @@ go
 insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
 values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
 GO
-
-
 insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
 values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
 GO
-
-
 insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
 values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
 GO
-
-
 insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
 values('14284783','1','Informatics','2017/01/01','Siobhann','Tatum','074100249','u14284783@tuks.co.za','1994/04/06','January','None active',1,2,2)
 GO
-
 insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
 values('1422','2','BSC Zoology','2017/06/21','Manion','Flom','07784249','u1587985@tuks.co.za','1994/04/06','march','None active',1,2,2)
 GO
-
 */
 
 
@@ -424,26 +418,18 @@ GO
 
 ---Volunteer----
 /*
-
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO 
-
-
-
 */
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID)
@@ -616,10 +602,13 @@ GO
 
 create table Attendance
 (
-		StudentID int not null,
+		attendanceID int identity (1,1) primary key,
+		VolunteerID int null,
+		StudentID int null,
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
@@ -631,16 +620,48 @@ GO
 				---		 [dbo].[RSVP_Event]
 create table RSVP_Event
 (
-		StudentID int not null,
+		rsvpID int identity (1,1) primary key,
+		VolunteerID int null,
+		StudentID int null,
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
 		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID)
 )	
 GO	
+
+create table RSVPSchedule
+(
+	RsvpScheduleID int identity (1,1) primary key,
+	rsvpID int not null,
+	ScheduleID int not null,
+	FOREIGN KEY (rsvpID) REFERENCES RSVP_Event(rsvpID),
+	FOREIGN KEY (ScheduleID) REFERENCES TRWLASchedule(ScheduleID)
+)
+GO
+
+create table RatingType
+(
+	RatingID int identity (1,1) primary key,
+	Rating varchar(50) not null
+)
+
+create table LectureReview
+(
+	reviewID int identity (1,1) primary key,
+	Review varchar(500) not null,
+	RatingID int not null,
+	StudentID int not null,
+	LectureID int not null,
+	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
+	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
+)
+
 
 					
 				  /* TEST RECORDS!!! - 
@@ -664,6 +685,27 @@ GO
 
 insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
 values('17', 'Chris Corner', 'Kichenbrandish', 'Pretoria', 'Gauteng', '2103')
+GO
+
+---insert into: RatingType Table---
+insert into RatingType(Rating)
+values('Excellent')
+GO
+
+insert into RatingType(Rating)
+values('Good')
+GO
+
+insert into RatingType(Rating)
+values('Average')
+GO
+
+insert into RatingType(Rating)
+values('Bad')
+GO
+
+insert into RatingType(Rating)
+values('Terrible')
 GO
 
 
@@ -771,25 +813,6 @@ go
 delete from VenueType where VenueTypeID = 5
 go
 
-insert into TRWLASchedule(FunctionID)
-values(1)
-Go
-
-insert into TRWLASchedule(FunctionID)
-values(2)
-Go
-
-insert into TRWLASchedule(FunctionID)
-values(3)
-Go
-
-insert into TRWLASchedule(FunctionID)
-values(4)
-Go
-insert into TRWLASchedule(FunctionID)
-values(5)
-Go
-
 insert into Residence(Res_Name)
 values('Magritjie')
 go
@@ -818,10 +841,15 @@ insert into Content(Content_Name, Content_Link, Content_Status, Content_Descript
 values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
 
-/*
+
 insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
 values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
-go*/
+go
+
+
+
+
+
 
 insert into AspNetUsers(Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName)
 values('Margie@tuks.co.za',1,'4545#@34$','stamp1','0741020360',1,1,'2017/03/03',1,1,'Margie@tuks.co.za')

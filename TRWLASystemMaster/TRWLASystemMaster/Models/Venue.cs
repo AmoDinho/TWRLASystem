@@ -24,6 +24,9 @@ namespace TRWLASystemMaster.Models
         }
     
         public int VenueID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Venue_Name")]
         public string Venue_Name { get; set; }
         public int AddressID { get; set; }
         public int VenueTypeID { get; set; }
