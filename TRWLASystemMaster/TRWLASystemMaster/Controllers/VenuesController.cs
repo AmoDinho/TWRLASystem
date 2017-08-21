@@ -26,7 +26,7 @@ namespace TRWLASystemMaster.Controllers
           {
              ven = ven.Where(s => s.Venue_Name.Contains(searchStringV));
 
-                             }
+          }
 
 
 
@@ -63,16 +63,43 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID")] Venue venue)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                db.Venues.Add(venue);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    int i = db.Venues.Count();
+
+                    if (i != 0)
+                    {
+
+                        int k = db.Venues.Max(p => p.VenueID);
+                        int max = k + 1;
+
+
+
+
+                        db.Venues.Add(venue);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        db.Venues.Add(venue);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
+                ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
+                return View(venue);
             }
 
-            ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
-            ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
-            return View(venue);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: Venues/Edit/5
@@ -99,15 +126,24 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID")] Venue venue)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(venue).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+            try {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(venue).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
+                ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
+                return View(venue);
             }
-            ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
-            ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
-            return View(venue);
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+            
         }
 
         // GET: Venues/Delete/5
@@ -130,10 +166,20 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Venue venue = db.Venues.Find(id);
-            db.Venues.Remove(venue);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            try {
+
+                Venue venue = db.Venues.Find(id);
+                db.Venues.Remove(venue);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
