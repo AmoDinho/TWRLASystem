@@ -59,14 +59,49 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ResID,Res_Name")] Residence residence)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                db.Residences.Add(residence);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    int i = db.Residences.Count();
+
+                    if (i != 0)
+                    {
+
+                        int k = db.Residences.Max(p => p.ResID);
+                        int max = k + 1;
+
+
+                        residence.ResID = max;
+
+                        db.Residences.Add(residence);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+
+
+
+                    }
+                    else
+                    {
+                        db.Residences.Add(residence);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+
+                    }
+
+
+
+                }
+
+                return View(residence);
             }
 
-            return View(residence);
+            catch(Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+           
         }
 
         // GET: Residences/Edit/5
@@ -91,6 +126,8 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ResID,Res_Name")] Residence residence)
         {
+
+            try { 
             if (ModelState.IsValid)
             {
                 db.Entry(residence).State = EntityState.Modified;
@@ -98,6 +135,12 @@ namespace TRWLASystemMaster.Controllers
                 return RedirectToAction("Index");
             }
             return View(residence);
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: Residences/Delete/5
@@ -120,10 +163,20 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            try
+            {
+
+            
             Residence residence = db.Residences.Find(id);
             db.Residences.Remove(residence);
             db.SaveChanges();
             return RedirectToAction("Index");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         protected override void Dispose(bool disposing)
