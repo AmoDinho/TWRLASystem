@@ -15,5 +15,15 @@ namespace TRWLASystemMaster.Controllers
 
             //Add Random Generator Code
         }
+
+
+ 
+              public ActionResult EnterUniCode()
+        {
+            return View();
+
+          
+        }
+
     }
 }
