@@ -60,14 +60,41 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentTypeID,StudentTypeDescription")] StudentType studentType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.StudentTypes.Add(studentType);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                int i = db.StudentTypes.Count();
+
+                if (i != 0)
+                {
+
+                    if (ModelState.IsValid)
+                    {
+                        int k = db.StudentTypes.Max(p => p.StudentTypeID);
+                        int max = k + 1;
+
+
+                        studentType.StudentTypeID = max;
+
+                        db.StudentTypes.Add(studentType);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+
+                }
+
+                else
+                {
+
+                }
+                return View(studentType);
             }
 
-            return View(studentType);
+           catch(Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: StudentTypes/Edit/5
@@ -92,13 +119,21 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StudentTypeID,StudentTypeDescription")] StudentType studentType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(studentType).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(studentType).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(studentType);
             }
-            return View(studentType);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+
         }
 
         // GET: StudentTypes/Delete/5
@@ -121,10 +156,23 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            StudentType studentType = db.StudentTypes.Find(id);
-            db.StudentTypes.Remove(studentType);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            try
+            {
+                StudentType studentType = db.StudentTypes.Find(id);
+                db.StudentTypes.Remove(studentType);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+          
+
+
+
         }
 
         protected override void Dispose(bool disposing)
