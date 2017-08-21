@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Create</h2>
+
+<div class="jumbotron">
+    <h2>Create a Residence</h2>
+</div>
 
 
 @using (Html.BeginForm()) 
@@ -33,7 +36,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+  <button>@Html.ActionLink("Back", "Index") </button> 
 </div>
 
 @section Scripts {
