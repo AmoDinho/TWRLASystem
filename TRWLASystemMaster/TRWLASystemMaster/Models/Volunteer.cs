@@ -39,7 +39,7 @@ namespace TRWLASystemMaster.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Volunteer_DoB { get; set; }
-        Required]
+        [Required]
         [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Active Status")]
         public string ActiveStatus { get; set; }
