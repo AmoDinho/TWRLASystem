@@ -5,14 +5,21 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+
+
+<div class="jumbotron">
+
+    <h2> Residence - Home</h2>
+
+</div>
+
 
 @* Search Button for 'RES NAME'*@
 @using (Html.BeginForm())
 {
     <p>
         Find by name: @Html.TextBox("SearchString", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
-      
+
         <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
     </p>
 }
@@ -27,22 +34,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Res_Name)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", new { id=item.ResID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Res_Name)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.ResID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
 
-            <a href="@Url.Action("Details", new { id=item.ResID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Details", new { id=item.ResID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
 
-            <a href="@Url.Action("Delete", new { id=item.ResID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Delete", new { id=item.ResID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
 
 
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
 
@@ -50,8 +58,8 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-               @Html.ActionLink("Add a new Residence", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+                @Html.ActionLink("Add a new Residence", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
             </div>
         </div>
     </div>
-    </div>
+</div>
