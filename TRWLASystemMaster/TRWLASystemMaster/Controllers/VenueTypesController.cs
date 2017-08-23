@@ -60,14 +60,40 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "VenueTypeID,VenueType_Description")] VenueType venueType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.VenueTypes.Add(venueType);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    int i = db.VenueTypes.Count();
+
+                    if (i != 0)
+                    {
+
+                        int k = db.VenueTypes.Max(p => p.VenueTypeID);
+                        int max = k + 1;
+
+
+                        venueType.VenueTypeID = max;
+
+                        db.VenueTypes.Add(venueType);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        db.VenueTypes.Add(venueType);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                return View(venueType);
             }
 
-            return View(venueType);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: VenueTypes/Edit/5
@@ -92,13 +118,21 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "VenueTypeID,VenueType_Description")] VenueType venueType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(venueType).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(venueType).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(venueType);
             }
-            return View(venueType);
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: VenueTypes/Delete/5
@@ -121,10 +155,18 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VenueType venueType = db.VenueTypes.Find(id);
-            db.VenueTypes.Remove(venueType);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                VenueType venueType = db.VenueTypes.Find(id);
+                db.VenueTypes.Remove(venueType);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         protected override void Dispose(bool disposing)
