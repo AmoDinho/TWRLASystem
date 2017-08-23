@@ -4,16 +4,18 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
+<div class="jumbotron">
+    <h2>Create a Venue Type</h2>
+</div>
 
-<h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>VenueType</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -33,7 +35,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button>@Html.ActionLink("Back", "Index")</button>
 </div>
 
 @section Scripts {
