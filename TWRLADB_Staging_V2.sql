@@ -863,7 +863,7 @@ insert into Content(Content_Name, Content_Link, Content_Status, Content_Descript
 values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
 
-/*
+
 insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
 values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
-go*/
+go
