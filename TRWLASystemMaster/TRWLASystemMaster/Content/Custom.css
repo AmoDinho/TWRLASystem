@@ -316,7 +316,32 @@ h4
    color: white;
    background-color: #333163;
  }
+.navbar-toggle
+{
+    background-color: #333163;
+    color: violet;
+    border-color: violet;
+}
 
+.navbar-toggle
+{
+    background-color: #333163;
+    color: violet;
+    border-color: violet;
+}
+
+.navbar-inverse .navbar-toggle
+{
+    background-color: #333163;
+    color: violet;
+    border-color: violet;
+
+}
+
+.nav .navbar-nav
+{
+    background-color: #333163;
+}
 /*Hover underline here*/
 .nav.navbar-nav li a::after
 {
@@ -494,6 +519,12 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   box-shadow: none;
 }
 
+.navbar-header
+{
+    background-color: #333163;
+    color: white;
+}
+
 .navbar-inverse .navbar-nav > .open > a:focus
 {
     background-color: #333163;
@@ -561,4 +592,126 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
 .icondiv
 {
     padding:70px 0 0 0;
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid #333163;
+    border-radius: 50%;
+    font-size: 40px;
+    color: #fff;
+    text-shadow:none;
+    box-shadow:none;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+
+.btn-circle.btn-dark {
+    border: 2px solid #666;
+    color: #666;
+}
+
+
+.btn-circle:hover,
+.btn-circle:focus {
+    outline: 0;
+    color: #fff;
+    background: rgba(255,255,255,.1);
+}
+
+.btn-circle.btn-dark :hover,
+.btn-circle.btn-dark :focus {
+    outline: 0;
+    color: #999;
+    background: #fff;
+}
+
+.btn-circle.btn-dark :hover i,
+.btn-circle.btn-dark :focus i{
+    color: #999;
+}
+
+.page-scroll .btn-circle i.animated {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+
+.page-scroll .btn-circle:hover i.animated {
+    -webkit-animation-name: pulse;
+    -moz-animation-name: pulse;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+/*Home page bouncy arrow icon*/
+.arrow-icon
+{
+    color:#333163;
+    font-size: 300% !important;
+}
+
+/*Home page bouncy arrow*/
+.bounce {
+  display: inline-block;
+  position: relative;
+  -moz-animation: bounce 0.5s infinite linear;
+  -o-animation: bounce 0.5s infinite linear;
+  -webkit-animation: bounce 0.5s infinite linear;
+  animation: bounce 1s infinite linear;
+}
+@-webkit-keyframes bounce {
+    0% { top: 0; }
+    50% { top: -0.2em; }
+    70% { top: -0.3em; }
+    100% { top: 0; }
+}
+@-moz-keyframes bounce {
+    0% { top: 0; }
+    50% { top: -0.2em; }
+    70% { top: -0.3em; }
+    100% { top: 0; }
+}
+@-o-keyframes bounce {
+    0% { top: 0; }
+    50% { top: -0.2em; }
+    70% { top: -0.3em; }
+    100% { top: 0; }
+}
+@-ms-keyframes bounce {
+    0% { top: 0; }
+    50% { top: -0.2em; }
+    70% { top: -0.3em; }
+    100% { top: 0; }
+}
+@keyframes bounce {
+    0% { top: 0; }
+    50% { top: -0.2em; }
+    70% { top: -0.3em; }
+    100% { top: 0; }
+}
+.static-icon
+{
+    color:#c71585; 
+    font-size:250% !important;
+}
+
+.email-icon
+{
+    color:#c71585; 
+    font-size:150% !important;
+}
+
+.col-md-4 h3
+{
+    text-align: center;
 }

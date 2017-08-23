@@ -25,7 +25,7 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Sevice", "CommServe", "Home")</li>
+                        <li>@Html.ActionLink("Service", "CommServe", "Home")</li>
                         <li>@Html.ActionLink("Relationships", "Network", "Home")</li>
                         <li>@Html.ActionLink("Skills", "Skills", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -39,9 +39,16 @@
         <div class="container body-content">
             @RenderBody()
             <hr />
-            <hr />
             <div class="footer">
-                <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
+                <p>
+                    &copy; @DateTime.Now.Year - TuksRes Women in Leadership Academy
+                    <a href="https://www.facebook.com/TuksResWomenInLeadershipAcademy/" data-toggle="tooltip" title="Facebook" class="icon-button facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a>
+                    <a href="https://twitter.com/TRWLA1" data-toggle="tooltip" title="Twitter" class="icon-button twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span></span></a>
+                    <a href="https://www.instagram.com/trwla1/?hl=en" data-toggle="tooltip" title="Instagram" class="icon-button google-plus"><i class="fa fa-instagram" aria-hidden="true"></i><span></span></a>
+                    <a href="https://tuksreswomeninleadershipacademy.wordpress.com/" data-toggle="tooltip" title="Blog" class="icon-button blog"><i class="fa fa-book" aria-hidden="true"></i><span></span></a>
+                    @*<a href="https://tuksreswomeninleadershipacademy.wordpress.com/" data-toggle="tooltip" title="Donations" class="icon-button donation"><i class="fa fa-usd" aria-hidden="true"></i><span></span></a>*@
+                </p>
+            </div>
             </div>
         </div>
 
@@ -55,7 +62,6 @@
                 $('[data-toggle="tooltip"]').tooltip();
             });
         </script>
-    </div>
 </body>
 </html>
 <script src="https://use.fontawesome.com/dead28a296.js"></script>

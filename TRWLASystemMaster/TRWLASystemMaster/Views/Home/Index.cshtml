@@ -6,28 +6,16 @@
     </div>
     <div class=row>
         <center>
-            <img src="..\Images\logo.png" id="TRWLAImage" style="width:400px; height:400px;" />
+            <img src="..\Images\logo.png" id="TRWLAImage" style="width:350px; height:350px;" />
+            <div class="page-scroll">
+                <a href="#about">
+                    <i class="fa fa-angle-down animated arrow-icon bounce"></i>
+                </a>
+            </div>
         </center>
     </div>
-        @*<div class="icon-bar">
-            <div class="icondiv">
-                <a href="https://facebook.com" data-toggle="tooltip" title="Facebook" class="icon-button facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a>
-            </div>
-            <div class="icondiv">
-                <a href="https://twitter.com/minimalmonkey" data-toggle="tooltip" title="Twitter" class="icon-button twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span></span></a>
-            </div>
-            <div class="icondiv">
-                <a href="https://instagram" data-toggle="tooltip" title="Instagram" class="icon-button google-plus"><i class="fa fa-instagram" aria-hidden="true"></i><span></span></a>
-            </div>
-            <div class="icondiv">
-                <a href="https://tuksreswomeninleadershipacademy.wordpress.com/" data-toggle="tooltip" title="Blog" class="icon-button blog"><i class="fa fa-book" aria-hidden="true"></i><span></span></a>
-               </div>
-            <div class="icondiv">
-                <a href="https://tuksreswomeninleadershipacademy.wordpress.com/" data-toggle="tooltip" title="Donations" class="icon-button donation"><i class="fa fa-usd" aria-hidden="true"></i><span></span></a>
-            </div>
-         </div>*@
-        
-        <div class="row">
+       
+        <div class="row"  id="about">
             <div class="col-md-8 col-md-offset-2">
                 <h2>Background</h2>
                 <p>
@@ -44,4 +32,26 @@
     <script src="https://use.fontawesome.com/dead28a296.js"></script>
     @*@Html.ActionLink("Log In", "LoggedIn", "Home")*@
     <script src="https://use.fontawesome.com/dead28a296.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        var headerHeight = 200;
+        $(function () {
+            $('a[href*="#"]:not([href="#"])').click(function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
+
+</script>
