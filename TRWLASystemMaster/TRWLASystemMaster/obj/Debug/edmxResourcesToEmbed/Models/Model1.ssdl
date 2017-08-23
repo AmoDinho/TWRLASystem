@@ -109,6 +109,14 @@
     <Property Name="Content_Status" Type="int" Nullable="false" />
     <Property Name="Content_Description" Type="varchar" MaxLength="300" Nullable="false" />
   </EntityType>
+  <EntityType Name="EventMessage">
+    <Key>
+      <PropertyRef Name="MessID" />
+    </Key>
+    <Property Name="MessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VolunteerID" Type="int" />
+  </EntityType>
   <EntityType Name="FunctionEvent">
     <Key>
       <PropertyRef Name="FunctionID" />
@@ -412,6 +420,18 @@
       </Principal>
       <Dependent Role="ComEngEvent">
         <PropertyRef Name="VenueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventMess__Volun__4F47C5E3">
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
+    <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteer">
+        <PropertyRef Name="VolunteerID" />
+      </Principal>
+      <Dependent Role="EventMessage">
+        <PropertyRef Name="VolunteerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -854,6 +874,7 @@
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComEngEvent" EntityType="Self.ComEngEvent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventMessage" EntityType="Self.EventMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FunctionEvent" EntityType="Self.FunctionEvent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GuestSpeaker" EntityType="Self.GuestSpeaker" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImageUpload" EntityType="Self.ImageUpload" Schema="dbo" store:Type="Tables" />
@@ -902,6 +923,10 @@
     <AssociationSet Name="FK__ComEngEve__Venue__534D60F1" Association="Self.FK__ComEngEve__Venue__534D60F1">
       <End Role="Venue" EntitySet="Venue" />
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventMess__Volun__4F47C5E3" Association="Self.FK__EventMess__Volun__4F47C5E3">
+      <End Role="Volunteer" EntitySet="Volunteer" />
+      <End Role="EventMessage" EntitySet="EventMessage" />
     </AssociationSet>
     <AssociationSet Name="FK__FunctionE__Guest__5812160E" Association="Self.FK__FunctionE__Guest__5812160E">
       <End Role="GuestSpeaker" EntitySet="GuestSpeaker" />

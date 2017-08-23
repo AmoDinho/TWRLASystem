@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.Lecture
+﻿@model TRWLASystemMaster.Models.LectureReview
 
 @{
     ViewBag.Title = "WriteReview";
@@ -6,85 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h2>Write a review on @Html.DisplayFor(model => model.Lecture_Name) </h2>
-</div>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.Label("Name:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_Name)
-        </dd>
-
-        <dt>
-            @Html.Label("Summary:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:100px; overflow-y:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_Summary)
-        </dd>
-
-        <dt>
-            @Html.Label("Description:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:150px; overflow-y:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_Description)
-        </dd>
-
-        <dt>
-            @Html.Label("Date:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_Date)
-        </dd>
-
-        <dt>
-            @Html.Label("Time:")
-        </dt>
-
-
-        <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_StartTime)
-        </dd>
-        <dd style="margin-bottom:10px;">
-            to
-        </dd>
-
-        <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_EndTime)
-        </dd>
-
-
-        <dt>
-            @Html.Label("Theme:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Lecture_Theme)
-        </dd>
-
-        <dt>
-            @Html.Label("Assigned Content:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Content.Content_Name)
-        </dd>
-
-        <dt>
-            @Html.Label("Residence:")
-        </dt>
-
-        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-            @Html.DisplayFor(model => model.Residence.Res_Name)
-        </dd>
-    </dl>
+    <h2>Write a review on @ViewBag.LectureName </h2>
 </div>
 
 
@@ -92,7 +14,28 @@
 {
     @Html.AntiForgeryToken()
     <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" style="margin-bottom:10px;">
+            @Html.Label("Review", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="margin-bottom:10px;">
+                @Html.TextAreaFor(model => model.Review, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; color: #2c2c2c; width:280px; height:200px;" })
+                @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
+        <div class="form-group">
+            @Html.Label("Rating", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RatingID", null, htmlAttributes: new { @class = "form-control", @id = "RatingType" })
+                @Html.ValidationMessageFor(model => model.RatingID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit Review" class="btn btn-default" />
+        </div>
     </div>
 }
 

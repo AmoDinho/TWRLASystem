@@ -684,7 +684,14 @@ create table LectureReview
 	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
 )
 
-
+create table EventMessage
+(
+	MessID int identity (1,1) primary key,
+	Message varchar(500) not null,
+	VolunteerID int null,
+	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
+)
+go
 					
 				  /* TEST RECORDS!!! - 
 				  

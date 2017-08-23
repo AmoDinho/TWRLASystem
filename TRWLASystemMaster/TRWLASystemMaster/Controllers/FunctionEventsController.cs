@@ -14,7 +14,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class FunctionEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities6 db = new TWRLADB_Staging_V2Entities6();
+        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
 
         // GET: FunctionEvents
         public ActionResult Index()

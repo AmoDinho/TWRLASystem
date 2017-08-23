@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.EventMessage>
+@{
+    ViewBag.Title = "SendNotification";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Write Notification for the Attendees of @ViewBag.Name</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.Label("Write Message", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Message, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px; height:200px;" })
+            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+        </div>
+    </div>
+}
+
+
+

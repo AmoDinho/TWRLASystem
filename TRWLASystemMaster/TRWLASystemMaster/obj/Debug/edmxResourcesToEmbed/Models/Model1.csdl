@@ -122,6 +122,15 @@
     <NavigationProperty Name="ComEngEvents" Relationship="Self.FK__ComEngEve__Conte__5441852A" FromRole="Content" ToRole="ComEngEvent" />
     <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Content__5070F446" FromRole="Content" ToRole="Lecture" />
   </EntityType>
+  <EntityType Name="EventMessage">
+    <Key>
+      <PropertyRef Name="MessID" />
+    </Key>
+    <Property Name="MessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VolunteerID" Type="Int32" />
+    <NavigationProperty Name="Volunteer" Relationship="Self.FK__EventMess__Volun__4F47C5E3" FromRole="EventMessage" ToRole="Volunteer" />
+  </EntityType>
   <EntityType Name="FunctionEvent">
     <Key>
       <PropertyRef Name="FunctionID" />
@@ -371,6 +380,7 @@
     <Property Name="VolunteerTypeID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Volunteer__Id__3C69FB99" FromRole="Volunteer" ToRole="AspNetUsers" />
     <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Volun__74AE54BC" FromRole="Volunteer" ToRole="Attendance" />
+    <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__Volun__4F47C5E3" FromRole="Volunteer" ToRole="EventMessage" />
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Volun__2B0A656D" FromRole="Volunteer" ToRole="RSVP_Event" />
     <NavigationProperty Name="RSVPSchedules" Relationship="Self.FK__RSVPSched__Volun__3C34F16F" FromRole="Volunteer" ToRole="RSVPSchedule" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__Volunteer__UserT__3D5E1FD2" FromRole="Volunteer" ToRole="UserType" />
@@ -586,6 +596,18 @@
       </Principal>
       <Dependent Role="Lecture">
         <PropertyRef Name="ContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventMess__Volun__4F47C5E3">
+    <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
+    <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteer">
+        <PropertyRef Name="VolunteerID" />
+      </Principal>
+      <Dependent Role="EventMessage">
+        <PropertyRef Name="VolunteerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -893,7 +915,7 @@
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="TWRLADB_Staging_V2Entities6" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TWRLADB_Staging_V2Entities7" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -903,6 +925,7 @@
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="ComEngEvents" EntityType="Self.ComEngEvent" />
     <EntitySet Name="Contents" EntityType="Self.Content" />
+    <EntitySet Name="EventMessages" EntityType="Self.EventMessage" />
     <EntitySet Name="FunctionEvents" EntityType="Self.FunctionEvent" />
     <EntitySet Name="GuestSpeakers" EntityType="Self.GuestSpeaker" />
     <EntitySet Name="ImageUploads" EntityType="Self.ImageUpload" />
@@ -983,6 +1006,10 @@
     <AssociationSet Name="FK__Lecture__Content__5070F446" Association="Self.FK__Lecture__Content__5070F446">
       <End Role="Content" EntitySet="Contents" />
       <End Role="Lecture" EntitySet="Lectures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventMess__Volun__4F47C5E3" Association="Self.FK__EventMess__Volun__4F47C5E3">
+      <End Role="Volunteer" EntitySet="Volunteers" />
+      <End Role="EventMessage" EntitySet="EventMessages" />
     </AssociationSet>
     <AssociationSet Name="FK__FunctionE__Guest__5812160E" Association="Self.FK__FunctionE__Guest__5812160E">
       <End Role="GuestSpeaker" EntitySet="GuestSpeakers" />

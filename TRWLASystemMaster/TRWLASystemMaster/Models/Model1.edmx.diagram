@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d006e8180b0643fc976d888f41d78abc" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="0bb231381c804cfdb3538e37ea5fb7f9" Name="Diagram1">
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Address" Width="1.5" PointX="1.5" PointY="19" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AspNetRole" Width="1.5" PointX="1.5" PointY="31.625" IsExpanded="true" />
@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Attendance" Width="1.5" PointX="11.25" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ComEngEvent" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Content" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.EventMessage" Width="1.5" PointX="11.25" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.FunctionEvent" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.GuestSpeaker" Width="1.5" PointX="0.75" PointY="26.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ImageUpload" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
@@ -32,7 +33,7 @@
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.UserType" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Venue" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VenueType" Width="1.5" PointX="1.5" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Volunteer" Width="1.5" PointX="9" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Volunteer" Width="1.5" PointX="9" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VolunteerFeedback" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.VolunteerType" Width="1.5" PointX="6.75" PointY="20.125" IsExpanded="true" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__AddressID__46E78A0C" ManuallyRouted="false" />
@@ -50,6 +51,7 @@
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__ComEn__2EDAF651" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__TRWLASche__ComEn__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Lecture__Content__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__EventMess__Volun__4F47C5E3" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__FunctionE__Guest__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__FunctionE__Venue__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__Funct__2CF2ADDF" ManuallyRouted="false" />

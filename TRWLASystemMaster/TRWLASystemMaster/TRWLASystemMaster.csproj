@@ -292,6 +292,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Demographic.cs" />
+    <Compile Include="Models\EventMessage.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FunctionEvent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -308,6 +311,7 @@
     <Compile Include="Models\LectureReview.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LectureReviewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Milestone.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -342,6 +346,8 @@
     <Compile Include="Models\SecurityAnswer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SelectRecipients.cs" />
+    <Compile Include="Models\SendMessage.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -598,6 +604,8 @@
     <Content Include="Views\TRWLASchedules\LecAttendance.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentDemographic.cshtml" />
     <Content Include="Views\TRWLASchedules\WriteReview.cshtml" />
+    <Content Include="Views\TRWLASchedules\SelectRecip.cshtml" />
+    <Content Include="Views\TRWLASchedules\SendNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
