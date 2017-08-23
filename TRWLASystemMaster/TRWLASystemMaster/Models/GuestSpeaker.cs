@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class GuestSpeaker
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,25 @@ namespace TRWLASystemMaster.Models
         }
     
         public int GuestSpeakerID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Guest Speaker Name")]
         public string GuestSpeaker_Name { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Guest Speaker Surname")]
         public string GuestSpeaker_Surname { get; set; }
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Phone")]
         public string GuestSpeaker_Phone { get; set; }
+       [ Required]
+        [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Guest Speaker Email")]
         public string GuestSpeaker_Email { get; set; }
+       [ Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Picturelink")]
         public string GuestSpeaker_PictureLink { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

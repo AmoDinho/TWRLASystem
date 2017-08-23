@@ -11,7 +11,7 @@ namespace TRWLASystemMaster.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class ComEngEvent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +23,31 @@ namespace TRWLASystemMaster.Models
         }
     
         public int ComEngID { get; set; }
+       [ Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Community Outreach Name")]
         public string ComEng_Name { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Summary")]
         public string ComEng_Summary { get; set; }
+        [Required]
+        [StringLength(300, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Description")]
         public string ComEng_Description { get; set; }
+       [ Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime ComEng_Date { get; set; }
+        [Required]
+        [Display(Name = "Start Time")]
         public System.TimeSpan ComEnge_StartTime { get; set; }
+       [ Required]
+        [Display(Name = "End Time")]
         public System.TimeSpan ComEng_EndTime { get; set; }
+        [Required]
+        [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Theme")]
         public string ComEng_Theme { get; set; }
         public Nullable<int> VenueID { get; set; }
         public Nullable<int> ContentID { get; set; }
