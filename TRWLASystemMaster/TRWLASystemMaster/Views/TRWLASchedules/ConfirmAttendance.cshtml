@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.StudentNumber)
+            @Html.Label("Student Number:")
         </dt>
 
         <dd>
@@ -20,31 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Graduate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Graduate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Degree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Degree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.YearOfStudy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YearOfStudy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Student_Name)
+            @Html.Label("Name:")
         </dt>
 
         <dd>
@@ -52,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Surname)
+            @Html.Label("Surname:")
         </dt>
 
         <dd>
@@ -60,39 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student_Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Student_DoB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student_DoB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActiveStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActiveStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+            @Html.Label("Residence:")
         </dt>
 
         <dd>
@@ -100,21 +44,48 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
+            @Html.Label("Graduate:")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StudentType.StudentTypeDescription)
+            @Html.DisplayFor(model => model.Graduate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserType.Description)
+            @Html.Label("Degree:")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserType.Description)
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+
+        <dt>
+            @Html.Label("Year of Study:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearOfStudy)
+        </dd>
+
+
+        <dt>
+            @Html.Label("Date of Birth:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student_DoB)
         </dd>
 
     </dl>
 </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Log Attendance" class="btn btn-default" />
+        </div>
+    </div>
+}
 

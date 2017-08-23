@@ -199,7 +199,10 @@
                             @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                         </p>
                         <p>
-                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) @if (item.LectureID != null)
+                            {
+                               <p>| </p> @Html.ActionLink("Write a Review", "WriteReview", new { id = item.ScheduleID })
+                            }
                         </p>
                     </div>
                 }

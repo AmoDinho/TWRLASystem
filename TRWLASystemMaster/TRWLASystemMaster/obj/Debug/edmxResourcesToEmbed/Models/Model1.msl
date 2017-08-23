@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities5">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities6">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -136,6 +136,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ImageUploads">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ImageUpload">
+        <MappingFragment StoreEntitySet="ImageUpload">
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="ImageAlt" ColumnName="ImageAlt" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="Approved" ColumnName="Approved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Lectures">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Lecture">
         <MappingFragment StoreEntitySet="Lecture">
@@ -153,11 +165,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LectureReviews">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.LectureReview">
+        <MappingFragment StoreEntitySet="LectureReview">
+          <ScalarProperty Name="reviewID" ColumnName="reviewID" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Milestones">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Milestone">
         <MappingFragment StoreEntitySet="Milestone">
           <ScalarProperty Name="MilestoneID" ColumnName="MilestoneID" />
           <ScalarProperty Name="Milestone_Description" ColumnName="Milestone_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RatingTypes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RatingType">
+        <MappingFragment StoreEntitySet="RatingType">
+          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -178,6 +209,7 @@
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+          <ScalarProperty Name="Attended" ColumnName="Attended" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -26,6 +26,7 @@ namespace TRWLASystemMaster.Models
         public Nullable<int> FunctionID { get; set; }
         public Nullable<int> LectureID { get; set; }
         public Nullable<int> ComEngID { get; set; }
+        public Nullable<int> Attended { get; set; }
     
         public virtual ComEngEvent ComEngEvent { get; set; }
         public virtual FunctionEvent FunctionEvent { get; set; }

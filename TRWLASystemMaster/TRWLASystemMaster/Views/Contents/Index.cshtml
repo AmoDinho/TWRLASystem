@@ -93,17 +93,9 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                @Html.ActionLink("Upload Content", "Create", "Contents1", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
-            </div>
-        </div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Contents")'">Upload Content</button>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <div class="btn btn-default btn-round" , style="color:#9b16d8">
-                @Html.ActionLink("Return", "Index", "TRWLASchedules")
-            </div>
-        </div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
     </div>
 </div>
