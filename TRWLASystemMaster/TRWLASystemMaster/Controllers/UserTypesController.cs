@@ -48,14 +48,43 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserTypeID,Description,AccessRight")] UserType userType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.UserTypes.Add(userType);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+                if (ModelState.IsValid)
+                {
+                    int i = db.UserTypes.Count();
+
+                    if (i != 0)
+                    {
+                        int k = db.UserTypes.Max(p => p.UserTypeID);
+                        int max = k + 1;
+
+
+                        userType.UserTypeID = max;
+
+                        db.UserTypes.Add(userType);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    else
+                    {
+                        db.UserTypes.Add(userType);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                }
+
+                return View(userType);
             }
 
-            return View(userType);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: UserTypes/Edit/5
@@ -80,13 +109,20 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserTypeID,Description,AccessRight")] UserType userType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(userType).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(userType).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(userType);
             }
-            return View(userType);
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         // GET: UserTypes/Delete/5
@@ -109,10 +145,18 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserType userType = db.UserTypes.Find(id);
-            db.UserTypes.Remove(userType);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                UserType userType = db.UserTypes.Find(id);
+                db.UserTypes.Remove(userType);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
         }
 
         protected override void Dispose(bool disposing)
