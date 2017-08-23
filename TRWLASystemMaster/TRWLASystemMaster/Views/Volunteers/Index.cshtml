@@ -5,11 +5,15 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+<div class="jumbotron">
+    <h2>Register Volunteers</h2>
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@Html.ActionLink("ForgotPassword", "ForgotPassword", "Account")
+
 <table class="table">
     <tr>
         <th>
@@ -39,38 +43,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Volunteer_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Volunteer_Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Volunteer_Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Volunteer_DoB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActiveStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserType.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VolunteerType.VolunteerType_Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VolunteerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VolunteerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volunteer_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volunteer_Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volunteer_Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Volunteer_DoB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserType.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerType.VolunteerType_Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.VolunteerID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.VolunteerID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.VolunteerID })
+            </td>
+        </tr>
+    }
 
 </table>
