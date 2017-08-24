@@ -141,7 +141,8 @@
                     @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                 </p>
                 <p>
-                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+                    @Html.ActionLink("RSVP", "RSVP", new { id = item.ScheduleID })
                     @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
                             RSVP
                         </button>*@
@@ -203,12 +204,15 @@
                             @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                         </p>
                         <p>
-                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) @if (item.LectureID != null)
+                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+
+                            @if (item.LectureID != null)
                             {
-                               <p>| </p> @Html.ActionLink("Write a Review", "WriteReview", new { id = item.ScheduleID })
+                            <p>|  @Html.ActionLink("Write a Review", "WriteReview", new { id = item.ScheduleID })</p>
                             }
-                        </p>
-                    </div>
+
+                            </p>
+                        </div>
                 }
             }
         </div>
@@ -218,7 +222,7 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
         </div>
     </div>
     <div class="form-group">

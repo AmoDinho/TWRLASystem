@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ResidencesController : Controller
     {
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities9 db = new TWRLADB_Staging_V2Entities9();
 
         // GET: Residences
         public ActionResult Index(string searchString)

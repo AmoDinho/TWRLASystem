@@ -21,7 +21,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities9 db = new TWRLADB_Staging_V2Entities9();
 
         // GET: TRWLASchedules
         public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)
@@ -88,6 +88,7 @@ namespace TRWLASystemMaster.Controllers
                     break;
             }
 
+            tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.ComEngEvent.ComEng_Date >= DateTime.Now);
 
             return View(tRWLASchedules.ToList());
         }
@@ -331,18 +332,254 @@ namespace TRWLASystemMaster.Controllers
 
         [HttpPost, ActionName("SendNotification")]
         [ValidateAntiForgeryToken]
-        public ActionResult SendNotificationConfirmed(int id)
+        public ActionResult SendNotificationConfirmed(EventMessage mess,int id)
         {
             int i = db.EventMessages.Count();
+            RSVP_Event rsvp = db.RSVP_Event.Find(id);
+            var select = from s in db.RSVP_Event
+                         select s;
+
 
             if (i == 0)
             {
+                if (rsvp.FunctionID != null)
+                {
+                    foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
+                    {
+                        mess.StudentID = Convert.ToInt32(s.StudentID);
 
+                        try
+                        {
+                            int k = Convert.ToInt32(rsvp.StudentID);
+
+                            Student myStu = db.Students.Find(k);
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
+                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+
+
+                            ViewBag.Status = "Email Sent Successfully.";
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+                        db.EventMessages.Add(mess);
+                    }
+                }
+                else if (rsvp.LectureID != null)
+                {
+                    foreach (var s in select.Where(p => p.LectureID == rsvp.LectureID))
+                    {
+                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        try
+                        {
+                            int k = Convert.ToInt32(rsvp.StudentID);
+
+                            Student myStu = db.Students.Find(k);
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
+                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+
+
+                            ViewBag.Status = "Email Sent Successfully.";
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+                        db.EventMessages.Add(mess);
+                    }
+                }
+                else if (rsvp.ComEngID != null)
+                {
+                    foreach (var s in select.Where(p => p.ComEngID == rsvp.ComEngID))
+                    {
+                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        try
+                        {
+                            int k = Convert.ToInt32(rsvp.StudentID);
+
+                            Student myStu = db.Students.Find(k);
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
+                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+
+
+                            ViewBag.Status = "Email Sent Successfully.";
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+                        db.EventMessages.Add(mess);
+                    }
+                }
             }
             else
             {
+                int max = db.EventMessages.Max(p => p.MessID);
+                int l = max + 1;
+
+                mess.MessID = l;
+
+                if (rsvp.FunctionID != null)
+                {
+                    foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
+                    {
+                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        try
+                        {
+                            int k = Convert.ToInt32(rsvp.StudentID);
+
+                            Student myStu = db.Students.Find(k);
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
+                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+
+
+                            ViewBag.Status = "Email Sent Successfully.";
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+                        db.EventMessages.Add(mess);
+                    }
+                }
+                else if (rsvp.LectureID != null)
+                {
+                    foreach (var s in select.Where(p => p.LectureID == rsvp.LectureID))
+                    {
+                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        try
+                        {
+                            int k = Convert.ToInt32(rsvp.StudentID);
+
+                            Student myStu = db.Students.Find(k);
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
+                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+
+
+                            ViewBag.Status = "Email Sent Successfully.";
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+                        db.EventMessages.Add(mess);
+                    }
+                }
+                else if (rsvp.ComEngID != null)
+                {
+                    foreach (var s in select.Where(p => p.ComEngID == rsvp.ComEngID))
+                    {
+                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        try
+                        {
+                            int k = Convert.ToInt32(rsvp.StudentID);
+
+                            Student myStu = db.Students.Find(k);
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
+                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+
+
+                            ViewBag.Status = "Email Sent Successfully.";
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+                        db.EventMessages.Add(mess);
+                    }
+                }
+
+
 
             }
+
+            db.SaveChanges();
+            return RedirectToAction("Index", "TRWLASchedules");
 
         }
 

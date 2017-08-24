@@ -18,6 +18,7 @@ namespace TRWLASystemMaster.Models
         public Student()
         {
             this.Attendances = new HashSet<Attendance>();
+            this.EventMessages = new HashSet<EventMessage>();
             this.LectureReviews = new HashSet<LectureReview>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.RSVPSchedules = new HashSet<RSVPSchedule>();
@@ -42,6 +43,8 @@ namespace TRWLASystemMaster.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventMessage> EventMessages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LectureReview> LectureReviews { get; set; }
         public virtual Residence Residence { get; set; }

@@ -114,8 +114,9 @@
       <PropertyRef Name="MessID" />
     </Key>
     <Property Name="MessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Message" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Msg" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="VolunteerID" Type="int" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FunctionEvent">
     <Key>
@@ -423,7 +424,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EventMess__Volun__4F47C5E3">
+  <Association Name="FK__EventMess__Stude__56E8E7AB">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="EventMessage">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventMess__Volun__55F4C372">
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
     <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
     <ReferentialConstraint>
@@ -924,7 +937,11 @@
       <End Role="Venue" EntitySet="Venue" />
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__EventMess__Volun__4F47C5E3" Association="Self.FK__EventMess__Volun__4F47C5E3">
+    <AssociationSet Name="FK__EventMess__Stude__56E8E7AB" Association="Self.FK__EventMess__Stude__56E8E7AB">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="EventMessage" EntitySet="EventMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventMess__Volun__55F4C372" Association="Self.FK__EventMess__Volun__55F4C372">
       <End Role="Volunteer" EntitySet="Volunteer" />
       <End Role="EventMessage" EntitySet="EventMessage" />
     </AssociationSet>

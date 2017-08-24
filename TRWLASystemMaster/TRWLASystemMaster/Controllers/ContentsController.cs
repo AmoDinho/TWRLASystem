@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ContentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities9 db = new TWRLADB_Staging_V2Entities9();
 
         // GET: Contents1
         public ActionResult Index(string sortOrder, string searchString, string locked, string unlocked, string all)
