@@ -17,7 +17,7 @@ namespace TRWLASystemMaster.Models
         public int MessID { get; set; }
         public string Msg { get; set; }
         public Nullable<int> VolunteerID { get; set; }
-        public int StudentID { get; set; }
+        public Nullable<int> StudentID { get; set; }
     
         public virtual Student Student { get; set; }
         public virtual Volunteer Volunteer { get; set; }

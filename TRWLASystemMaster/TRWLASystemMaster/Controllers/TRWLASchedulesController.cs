@@ -21,7 +21,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities9 db = new TWRLADB_Staging_V2Entities9();
+        private TWRLADB_Staging_V2Entities12 db = new TWRLADB_Staging_V2Entities12();
 
         // GET: TRWLASchedules
         public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)

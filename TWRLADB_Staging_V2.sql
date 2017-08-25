@@ -534,7 +534,7 @@ create table Content
 (
 	ContentID int identity(1,1) primary key,
 	Content_Name varchar(35) not null,
-	Content_Link varchar(100) not null,
+	Content_Link varchar(1000) not null,
 	Content_Status int not null,
 	Content_Description varchar(300) not null
 )
@@ -648,6 +648,7 @@ create table RSVP_Event
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+		Attended int null,
 		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
@@ -661,6 +662,8 @@ create table RSVPSchedule
 	RsvpScheduleID int identity (1,1) primary key,
 	rsvpID int not null,
 	ScheduleID int not null,
+	StudentID int not null,
+	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 	FOREIGN KEY (rsvpID) REFERENCES RSVP_Event(rsvpID),
 	FOREIGN KEY (ScheduleID) REFERENCES TRWLASchedule(ScheduleID)
 )
@@ -687,8 +690,10 @@ create table LectureReview
 create table EventMessage
 (
 	MessID int identity (1,1) primary key,
-	Message varchar(500) not null,
+	Msg varchar(500) not null,
 	VolunteerID int null,
+	StudentID int null,
+	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
 )
 go
@@ -874,3 +879,11 @@ go
 insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
 values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
 go*/
+
+insert into AspNetUsers(Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled , LockoutEndDateUtc,LockoutEnabled, AccessFailedCount, UserName)
+Values('u15213626@tuks.co.za', 1, '12sdsa', 'asdasd', '0834074027', 1, 1, '2017/10/12',1, 0, 'Rootsms4')
+go
+
+insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, Id, ResID, UserTypeID, StudentTypeID)
+Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18', 1, 2, 8, 2, 1)
+go

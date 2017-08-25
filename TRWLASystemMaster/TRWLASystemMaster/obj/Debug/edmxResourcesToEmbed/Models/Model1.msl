@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities9">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities12">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -146,18 +146,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ImageUploads">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ImageUpload">
-        <MappingFragment StoreEntitySet="ImageUpload">
-          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
-          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
-          <ScalarProperty Name="ImageAlt" ColumnName="ImageAlt" />
-          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="Approved" ColumnName="Approved" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Lectures">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Lecture">
         <MappingFragment StoreEntitySet="Lecture">
@@ -230,7 +218,6 @@
           <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
           <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
