@@ -120,6 +120,8 @@
           </Key>
           <Property Name="MessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Msg" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TimeMes" Type="time" Precision="7" Nullable="false" />
+          <Property Name="RoN" Type="int" Nullable="false" />
           <Property Name="VolunteerID" Type="int" />
           <Property Name="StudentID" Type="int" />
         </EntityType>
@@ -417,7 +419,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventMess__Stude__0C85DE4D">
+        <Association Name="FK__EventMess__Stude__19DFD96B">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -429,7 +431,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventMess__Volun__0D7A0286">
+        <Association Name="FK__EventMess__Volun__1AD3FDA4">
           <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
           <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -917,11 +919,11 @@
             <End Role="Venue" EntitySet="Venue" />
             <End Role="ComEngEvent" EntitySet="ComEngEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventMess__Stude__0C85DE4D" Association="Self.FK__EventMess__Stude__0C85DE4D">
+          <AssociationSet Name="FK__EventMess__Stude__19DFD96B" Association="Self.FK__EventMess__Stude__19DFD96B">
             <End Role="Student" EntitySet="Student" />
             <End Role="EventMessage" EntitySet="EventMessage" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventMess__Volun__0D7A0286" Association="Self.FK__EventMess__Volun__0D7A0286">
+          <AssociationSet Name="FK__EventMess__Volun__1AD3FDA4" Association="Self.FK__EventMess__Volun__1AD3FDA4">
             <End Role="Volunteer" EntitySet="Volunteer" />
             <End Role="EventMessage" EntitySet="EventMessage" />
           </AssociationSet>
@@ -1195,10 +1197,12 @@
           </Key>
           <Property Name="MessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Msg" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TimeMes" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="RoN" Type="Int32" Nullable="false" />
           <Property Name="VolunteerID" Type="Int32" />
           <Property Name="StudentID" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="Self.FK__EventMess__Stude__0C85DE4D" FromRole="EventMessage" ToRole="Student" />
-          <NavigationProperty Name="Volunteer" Relationship="Self.FK__EventMess__Volun__0D7A0286" FromRole="EventMessage" ToRole="Volunteer" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__EventMess__Stude__19DFD96B" FromRole="EventMessage" ToRole="Student" />
+          <NavigationProperty Name="Volunteer" Relationship="Self.FK__EventMess__Volun__1AD3FDA4" FromRole="EventMessage" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="FunctionEvent">
           <Key>
@@ -1353,7 +1357,7 @@
           <Property Name="StudentTypeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Student__Id__25869641" FromRole="Student" ToRole="AspNetUsers" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Stude__59063A47" FromRole="Student" ToRole="Attendance" />
-          <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__Stude__0C85DE4D" FromRole="Student" ToRole="EventMessage" />
+          <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__Stude__19DFD96B" FromRole="Student" ToRole="EventMessage" />
           <NavigationProperty Name="LectureReviews" Relationship="Self.FK__LectureRe__Stude__6B24EA82" FromRole="Student" ToRole="LectureReview" />
           <NavigationProperty Name="Residence" Relationship="Self.FK__Student__ResID__267ABA7A" FromRole="Student" ToRole="Residence" />
           <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Stude__7E37BEF6" FromRole="Student" ToRole="RSVP_Event" />
@@ -1437,7 +1441,7 @@
           <Property Name="VolunteerTypeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Volunteer__Id__34C8D9D1" FromRole="Volunteer" ToRole="AspNetUsers" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Volun__5812160E" FromRole="Volunteer" ToRole="Attendance" />
-          <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__Volun__0D7A0286" FromRole="Volunteer" ToRole="EventMessage" />
+          <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__Volun__1AD3FDA4" FromRole="Volunteer" ToRole="EventMessage" />
           <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Volun__7D439ABD" FromRole="Volunteer" ToRole="RSVP_Event" />
           <NavigationProperty Name="UserType" Relationship="Self.FK__Volunteer__UserT__35BCFE0A" FromRole="Volunteer" ToRole="UserType" />
           <NavigationProperty Name="VolunteerType" Relationship="Self.FK__Volunteer__Volun__36B12243" FromRole="Volunteer" ToRole="VolunteerType" />
@@ -1655,7 +1659,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventMess__Stude__0C85DE4D">
+        <Association Name="FK__EventMess__Stude__19DFD96B">
           <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
           <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1667,7 +1671,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EventMess__Volun__0D7A0286">
+        <Association Name="FK__EventMess__Volun__1AD3FDA4">
           <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
           <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1971,7 +1975,7 @@
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="TWRLADB_Staging_V2Entities12" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TWRLADB_Staging_V2Entities14" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -2062,11 +2066,11 @@
             <End Role="Content" EntitySet="Contents" />
             <End Role="Lecture" EntitySet="Lectures" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventMess__Stude__0C85DE4D" Association="Self.FK__EventMess__Stude__0C85DE4D">
+          <AssociationSet Name="FK__EventMess__Stude__19DFD96B" Association="Self.FK__EventMess__Stude__19DFD96B">
             <End Role="Student" EntitySet="Students" />
             <End Role="EventMessage" EntitySet="EventMessages" />
           </AssociationSet>
-          <AssociationSet Name="FK__EventMess__Volun__0D7A0286" Association="Self.FK__EventMess__Volun__0D7A0286">
+          <AssociationSet Name="FK__EventMess__Volun__1AD3FDA4" Association="Self.FK__EventMess__Volun__1AD3FDA4">
             <End Role="Volunteer" EntitySet="Volunteers" />
             <End Role="EventMessage" EntitySet="EventMessages" />
           </AssociationSet>
@@ -2176,7 +2180,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities12">
+        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities14">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -2289,6 +2293,8 @@
               <MappingFragment StoreEntitySet="EventMessage">
                 <ScalarProperty Name="MessID" ColumnName="MessID" />
                 <ScalarProperty Name="Msg" ColumnName="Msg" />
+                <ScalarProperty Name="TimeMes" ColumnName="TimeMes" />
+                <ScalarProperty Name="RoN" ColumnName="RoN" />
                 <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>

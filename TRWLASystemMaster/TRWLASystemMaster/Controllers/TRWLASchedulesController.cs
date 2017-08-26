@@ -21,11 +21,13 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities12 db = new TWRLADB_Staging_V2Entities12();
+        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
 
         // GET: TRWLASchedules
         public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)
         {
+            
+
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -347,6 +349,10 @@ namespace TRWLASystemMaster.Controllers
                     foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
                     {
                         mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.TimeMes = DateTime.Now.TimeOfDay;
+                        mess.RoN = 0;
+
+
 
                         try
                         {
@@ -377,6 +383,9 @@ namespace TRWLASystemMaster.Controllers
                         {
                             ViewBag.Status = "Problem while sending email, Please check details.";
                         }
+
+                        
+
                         db.EventMessages.Add(mess);
                     }
                 }
@@ -388,6 +397,8 @@ namespace TRWLASystemMaster.Controllers
                         try
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
+                            mess.TimeMes = DateTime.Now.TimeOfDay;
+                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
@@ -425,6 +436,8 @@ namespace TRWLASystemMaster.Controllers
                         try
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
+                            mess.TimeMes = DateTime.Now.TimeOfDay;
+                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
@@ -470,6 +483,8 @@ namespace TRWLASystemMaster.Controllers
                         try
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
+                            mess.TimeMes = DateTime.Now.TimeOfDay;
+                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
@@ -507,6 +522,8 @@ namespace TRWLASystemMaster.Controllers
                         try
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
+                            mess.TimeMes = DateTime.Now.TimeOfDay;
+                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
@@ -544,6 +561,8 @@ namespace TRWLASystemMaster.Controllers
                         try
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
+                            mess.TimeMes = DateTime.Now.TimeOfDay;
+                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
@@ -580,6 +599,30 @@ namespace TRWLASystemMaster.Controllers
 
             db.SaveChanges();
             return RedirectToAction("Index", "TRWLASchedules");
+
+        }
+
+        public ActionResult ViewNotification()
+        {
+            var mes = from n in db.EventMessages
+                      where n.StudentID == 2
+                      select n;
+
+            //Timer myTime = new Timer();
+            //myTime.Enabled = true;
+
+            //if (myTime <= DateTime.Now.AddSeconds(25))
+            //{
+
+            //}
+
+            foreach (var s in mes.Where(p => p.RoN != 1))
+            {
+                s.RoN = 1;
+            }
+
+            return View(mes.ToList());
+
 
         }
 

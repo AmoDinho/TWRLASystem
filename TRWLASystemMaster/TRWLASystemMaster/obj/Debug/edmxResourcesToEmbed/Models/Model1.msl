@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities12">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities14">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -113,6 +113,8 @@
         <MappingFragment StoreEntitySet="EventMessage">
           <ScalarProperty Name="MessID" ColumnName="MessID" />
           <ScalarProperty Name="Msg" ColumnName="Msg" />
+          <ScalarProperty Name="TimeMes" ColumnName="TimeMes" />
+          <ScalarProperty Name="RoN" ColumnName="RoN" />
           <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
         </MappingFragment>

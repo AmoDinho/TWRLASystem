@@ -16,6 +16,8 @@ namespace TRWLASystemMaster.Models
     {
         public int MessID { get; set; }
         public string Msg { get; set; }
+        public System.TimeSpan TimeMes { get; set; }
+        public int RoN { get; set; }
         public Nullable<int> VolunteerID { get; set; }
         public Nullable<int> StudentID { get; set; }
     

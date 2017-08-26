@@ -603,6 +603,7 @@
     <Content Include="Views\TRWLASchedules\WriteReview.cshtml" />
     <Content Include="Views\TRWLASchedules\SelectRecip.cshtml" />
     <Content Include="Views\TRWLASchedules\SendNotification.cshtml" />
+    <Content Include="Views\TRWLASchedules\ViewNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

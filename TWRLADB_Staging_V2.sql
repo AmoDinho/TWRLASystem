@@ -691,6 +691,8 @@ create table EventMessage
 (
 	MessID int identity (1,1) primary key,
 	Msg varchar(500) not null,
+	TimeMes time not null,
+	NumberMess int not null,
 	VolunteerID int null,
 	StudentID int null,
 	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),

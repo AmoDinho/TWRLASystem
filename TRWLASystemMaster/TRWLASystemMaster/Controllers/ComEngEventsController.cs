@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ComEngEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities12 db = new TWRLADB_Staging_V2Entities12();
+        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
 
         // GET: ComEngEvents
         public ActionResult Index()

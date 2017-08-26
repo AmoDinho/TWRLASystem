@@ -115,6 +115,8 @@
     </Key>
     <Property Name="MessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Msg" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="TimeMes" Type="time" Precision="7" Nullable="false" />
+    <Property Name="RoN" Type="int" Nullable="false" />
     <Property Name="VolunteerID" Type="int" />
     <Property Name="StudentID" Type="int" />
   </EntityType>
@@ -412,7 +414,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EventMess__Stude__0C85DE4D">
+  <Association Name="FK__EventMess__Stude__19DFD96B">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
     <ReferentialConstraint>
@@ -424,7 +426,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EventMess__Volun__0D7A0286">
+  <Association Name="FK__EventMess__Volun__1AD3FDA4">
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
     <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
     <ReferentialConstraint>
@@ -912,11 +914,11 @@
       <End Role="Venue" EntitySet="Venue" />
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__EventMess__Stude__0C85DE4D" Association="Self.FK__EventMess__Stude__0C85DE4D">
+    <AssociationSet Name="FK__EventMess__Stude__19DFD96B" Association="Self.FK__EventMess__Stude__19DFD96B">
       <End Role="Student" EntitySet="Student" />
       <End Role="EventMessage" EntitySet="EventMessage" />
     </AssociationSet>
-    <AssociationSet Name="FK__EventMess__Volun__0D7A0286" Association="Self.FK__EventMess__Volun__0D7A0286">
+    <AssociationSet Name="FK__EventMess__Volun__1AD3FDA4" Association="Self.FK__EventMess__Volun__1AD3FDA4">
       <End Role="Volunteer" EntitySet="Volunteer" />
       <End Role="EventMessage" EntitySet="EventMessage" />
     </AssociationSet>
