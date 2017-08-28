@@ -7,12 +7,27 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
+using System.IO;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class ContentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+
+        //public FileActionResult Downloads()
+        //{
+        //    var dir = new System.IO.DirectoryInfo(Server.MapPath("~/App_Data/Images/"));
+        //    System.IO.FileInfo[] fileNames = dir.GetFiles("*.*");
+        //    List<string> items = new List<string>();
+
+        //    foreach (var file in fileNames)
+        //    {
+        //        items.Add(file.Name);
+        //    }
+
+        //    return View(items);
+        //}
 
         // GET: Contents1
         public ActionResult Index(string sortOrder, string searchString, string locked, string unlocked, string all)
@@ -98,6 +113,7 @@ namespace TRWLASystemMaster.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 int i = db.Contents.Count();
 
                 if (i != 0)
@@ -106,6 +122,27 @@ namespace TRWLASystemMaster.Controllers
                     int max = k + 1;
 
                     content.Content_Status = 1;
+                    try
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            var file = Request.Files[0];
+
+                            if (file != null && file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                                content.Content_Link = path.ToString(); ;
+                                file.SaveAs(path);
+                            }
+                        }
+                        ViewBag.Message = "File Uploaded Successfully!!";
+                    }
+                    catch
+                    {
+                        ViewBag.Message = "File upload failed!!";
+                    }
+
 
                     content.ContentID = max;
                     db.Contents.Add(content);
@@ -114,6 +151,27 @@ namespace TRWLASystemMaster.Controllers
                 }
                 else
                 {
+                    try
+                    {
+                        if (Request.Files.Count > 0)
+                        {
+                            var file = Request.Files[0];
+
+                            if (file != null && file.ContentLength > 0)
+                            {
+                                var fileName = Path.GetFileName(file.FileName);
+                                var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                                content.Content_Link = path.ToString();
+                                file.SaveAs(path);
+                            }
+                        }
+                        ViewBag.Message = "File Uploaded Successfully!!";
+                    }
+                    catch
+                    {
+                        ViewBag.Message = "File upload failed!!";
+                    }
+
                     db.Contents.Add(content);
                     db.SaveChanges();
                     return RedirectToAction("Index");

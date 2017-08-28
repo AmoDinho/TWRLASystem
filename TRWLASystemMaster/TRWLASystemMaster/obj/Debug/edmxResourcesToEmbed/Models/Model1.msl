@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities5">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities14">
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -108,6 +108,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EventMessages">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.EventMessage">
+        <MappingFragment StoreEntitySet="EventMessage">
+          <ScalarProperty Name="MessID" ColumnName="MessID" />
+          <ScalarProperty Name="Msg" ColumnName="Msg" />
+          <ScalarProperty Name="TimeMes" ColumnName="TimeMes" />
+          <ScalarProperty Name="RoN" ColumnName="RoN" />
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="FunctionEvents">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.FunctionEvent">
         <MappingFragment StoreEntitySet="FunctionEvent">
@@ -153,11 +165,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LectureReviews">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.LectureReview">
+        <MappingFragment StoreEntitySet="LectureReview">
+          <ScalarProperty Name="reviewID" ColumnName="reviewID" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Milestones">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Milestone">
         <MappingFragment StoreEntitySet="Milestone">
           <ScalarProperty Name="MilestoneID" ColumnName="MilestoneID" />
           <ScalarProperty Name="Milestone_Description" ColumnName="Milestone_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RatingTypes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RatingType">
+        <MappingFragment StoreEntitySet="RatingType">
+          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -178,6 +209,7 @@
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+          <ScalarProperty Name="Attended" ColumnName="Attended" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -188,7 +220,6 @@
           <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
           <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -18,8 +18,8 @@ namespace TRWLASystemMaster.Models
         public Volunteer()
         {
             this.Attendances = new HashSet<Attendance>();
+            this.EventMessages = new HashSet<EventMessage>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
-            this.RSVPSchedules = new HashSet<RSVPSchedule>();
         }
     
         public int VolunteerID { get; set; }
@@ -51,9 +51,9 @@ namespace TRWLASystemMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
+        public virtual ICollection<EventMessage> EventMessages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
+        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual VolunteerType VolunteerType { get; set; }
     }

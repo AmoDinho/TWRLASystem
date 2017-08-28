@@ -9,7 +9,7 @@
     <h2>Upload Content</h2>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Contents", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -24,12 +24,8 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Content Link", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content_Link, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content_Link, "", new { @class = "text-danger" })
-            </div>
+        <div class="editor-field">
+            <input type="file" name="file" />
         </div>
 
 

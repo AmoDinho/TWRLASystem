@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.RSVP_Event>
+
+@{
+    ViewBag.Title = "SelectRecip";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Select Notification Recipients</h2>
+</div>
+
+<table class="table">
+   <tr>
+       <th>
+           Event Name:
+       </th>
+       <th>
+           Event Date:
+       </th>
+       <th>
+           Event Start Time:
+       </th>
+       <th>
+           Event End Time:
+       </th>
+       <th></th>
+   </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "SendNotification", new { id = item.rsvpID })
+            </td>
+        </tr>
+    }
+
+</table>
+
