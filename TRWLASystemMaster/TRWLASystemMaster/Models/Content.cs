@@ -27,8 +27,6 @@ namespace TRWLASystemMaster.Models
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Content Name")]
         public string Content_Name { get; set; }
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Link")]
         public string Content_Link { get; set; }
         public int Content_Status { get; set; }

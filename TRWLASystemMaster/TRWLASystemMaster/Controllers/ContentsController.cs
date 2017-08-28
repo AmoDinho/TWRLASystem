@@ -95,7 +95,19 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
+
+            TempData["Image"] = id;
             return View(content);
+        }
+
+        public FilePathResult Download()
+        {
+            int id = Convert.ToInt32(TempData["Image"]);
+
+            Content contnents = db.Contents.Find(id);
+
+            return new FilePathResult(contnents.Content_Link, System.Net.Mime.MediaTypeNames.Application.Octet);
+
         }
 
         // GET: Contents1/Create
@@ -149,7 +161,7 @@ namespace TRWLASystemMaster.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                else
+                else if (i == 0)
                 {
                     try
                     {
@@ -176,10 +188,15 @@ namespace TRWLASystemMaster.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                
             }
 
             return View(content);
         }
+
+
+
+
 
         // GET: Contents1/Edit/5
         public ActionResult Edit(int? id)

@@ -173,6 +173,30 @@ namespace TRWLASystemMaster.Controllers
             return attend;
         }
 
+        public IList<NoAttend> GetNoAttendance()
+        {
+            var attend = (from m in db.RSVP_Event
+                          join s in db.Students on m.StudentID equals s.StudentID
+                          join st in db.StudentTypes on s.StudentTypeID equals st.StudentTypeID
+                          where m.Attended == null
+                          select new NoAttend
+                          {
+                              StudNo = s.StudentNumber,
+                              Name = s.Student_Name,
+                              Surname = s.Student_Surname,
+                              DoB = s.Student_DoB,
+                              Degree = s.Degree,
+                              Grad = s.Graduate,
+                              Res = s.Residence.Res_Name,
+                              StudType = st.StudentTypeDescription,
+                              FunctionDate = m.FunctionEvent.Function_Date,
+                              LectureDate = m.Lecture.Lecture_Date,
+                              ComEngDate = m.ComEngEvent.ComEng_Date
+                          }).ToList();
+
+            return attend;
+        }
+
         //Generate the Excel Spreadsheets for the data
         public ActionResult ExportToExcel1()
         {
@@ -279,9 +303,34 @@ namespace TRWLASystemMaster.Controllers
             return View("Index");
         }
 
+        public ActionResult ExportToExcel5()
+        {
+            var gv = new GridView();
+            gv.DataSource = this.GetNoAttendance();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            string name = "No Attendance Report " + Convert.ToString(DateTime.Now);
+            Response.AddHeader("content-disposition", "attachment; filename=" + name + ".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return View("Index");
+        }
+
         public ActionResult StudentDemographic()
         {
             return View(this.GetDemo());
+        }
+
+        public ActionResult NoAttend()
+        {
+            return View(this.GetNoAttendance());
         }
 
         public ActionResult ClassAttendance()
@@ -1095,23 +1144,7 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
-        [HttpPost, ActionName("EventType")]
-        [ValidateAntiForgeryToken]
-        public ActionResult EventTypeLoad(int id)
-        {
-            if (id == 1)
-            {
-                return View("../FunctionEvents/Create");
-            }
-            else if (id == 2)
-            {
-                return View("../ComEngEvents/Create");
-            }
-            else
-            {
-                return View("../Lectures/Create");
-            }
-        }
+        
 
         // GET: TRWLASchedules/Create
         public ActionResult Create()

@@ -6,10 +6,31 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models
 {
-    public class Demographic
+    public class NoAttend
     {
         public string StudNo
         { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> FunctionDate
+        {
+            get; set;
+        }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> LectureDate
+        {
+            get; set;
+        }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> ComEngDate
+        {
+            get; set;
+        }
 
         public string Name
         { get; set; }

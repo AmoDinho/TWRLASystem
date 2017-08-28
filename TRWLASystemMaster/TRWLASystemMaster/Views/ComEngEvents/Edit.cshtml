@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="jumbotron">
+    <h2>Update @Html.DisplayFor(model => model.ComEng_Name)</h2>
+</div>
 
 @using (Html.BeginForm())
 {
@@ -25,58 +27,60 @@
             </div>
         </div>
 
-        <div class="form-group row">
-            @Html.Label("Time", new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.Label("Start Time:", new { @class = "control-label col-md-2" })
             <div class="col-md-3">
                 @Html.EditorFor(model => model.ComEnge_StartTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                 @Html.ValidationMessageFor(model => model.ComEnge_StartTime, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-
-            @Html.Label("-", new { @class = "control-label col-md-2", @style = "margin-left: -80px; margin-right: -10px;" })
+        <div class="form-group">
+            @Html.Label("End Time:", new { @class = "control-label col-md-2"})
             <div class="col-md-3">
                 @Html.EditorFor(model => model.ComEng_EndTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                 @Html.ValidationMessageFor(model => model.ComEng_EndTime, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Date", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ComEng_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-                @Html.ValidationMessageFor(model => model.ComEng_Date, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Venue", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
-                @Html.ActionLink("Add Venue", "Index", "Events", new { @style = "margin-top:10px; text-align:center; margin-left:25px;" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Content", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
-                <div style="margin-left:20px;">
-                    @Html.ActionLink("Upload Content", "Create", "Contents")
+            <div class="form-group">
+                @Html.Label("Date", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ComEng_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.ComEng_Date, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Theme", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ComEng_Theme, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ComEng_Theme, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Venue", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
+                    @Html.ActionLink("Add Venue", "Index", "Events", new { @style = "margin-top:10px; text-align:center; margin-left:25px;" })
+                </div>
             </div>
-        </div>
 
-        @*<div class="form-group">
+            <div class="form-group">
+                @Html.Label("Content", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
+                    <div style="margin-left:20px;">
+                        @Html.ActionLink("Upload Content", "Create", "Contents")
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Theme", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ComEng_Theme, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ComEng_Theme, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
                 @Html.Label("Residence", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("ResidenceID", null, htmlAttributes: new { @class = "form-control" })
@@ -84,31 +88,56 @@
                 </div>
             </div>*@
 
-        <div class="form-group">
-            @Html.Label("Summary", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ComEng_Summary, new { maxlength = 100, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px;" })
-                @Html.ValidationMessageFor(model => model.ComEng_Summary, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Summary", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ComEng_Summary, new { maxlength = 100, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px;" })
+                    @Html.ValidationMessageFor(model => model.ComEng_Summary, "", new { @class = "text-danger" })
+                </div>
             </div>
+
+            <div class="form-group">
+                @Html.Label("Description", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ComEng_Description, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px; height:200px;" })
+                    @Html.ValidationMessageFor(model => model.ComEng_Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
         </div>
 
-        <div class="form-group">
-            @Html.Label("Description", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => modelComEng_Description, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px; height:200px;" })
-                @Html.ValidationMessageFor(model => model.ComEng_Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Update Event" class="btn btn-default" />
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Update Event</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to update this event?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color ">
+                        <button type="submit" value="Create" class="btn">Confirm</button>
+                    </div>
+                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div style="margin-right:5px;">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Update Event
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        </div>
+    </div>
 </div>
