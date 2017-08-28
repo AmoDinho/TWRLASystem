@@ -34,7 +34,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(p=>p.Attended == null))
     {
         <tr>
             <td>
@@ -54,19 +54,7 @@
                 @Html.DisplayFor(modelItem => item.Student.Degree)
             </td>
             <td>
-                @if (item.FunctionID != null)
-                {
-                    @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, schedid = item.FunctionID })
-                }
-                @if (item.LectureID != null)
-                {
-                    @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, schedid = item.LectureID })
-                }
-                @if (item.ComEngID != null)
-                {
-                    @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, schedid = item.ComEngID })
-                }
-
+                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, evid = item.rsvpID }, null)
             </td>
         </tr>
     }

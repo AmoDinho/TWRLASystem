@@ -18,7 +18,7 @@ namespace TRWLASystemMaster.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private TWRLADB_Staging_V2Entities5 tb = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities14 tb = new TWRLADB_Staging_V2Entities14();
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

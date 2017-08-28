@@ -12,15 +12,16 @@ namespace TRWLASystemMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RSVPSchedule
+    public partial class LectureReview
     {
-        public int RsvpScheduleID { get; set; }
-        public int rsvpID { get; set; }
-        public int ScheduleID { get; set; }
+        public int reviewID { get; set; }
+        public string Review { get; set; }
+        public int RatingID { get; set; }
         public int StudentID { get; set; }
+        public int LectureID { get; set; }
     
-        public virtual RSVP_Event RSVP_Event { get; set; }
-        public virtual TRWLASchedule TRWLASchedule { get; set; }
+        public virtual Lecture Lecture { get; set; }
+        public virtual RatingType RatingType { get; set; }
         public virtual Student Student { get; set; }
     }
 }

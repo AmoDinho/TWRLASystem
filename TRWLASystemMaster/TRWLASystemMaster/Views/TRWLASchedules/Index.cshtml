@@ -17,6 +17,10 @@
 {
     <h4>@TempData["rsvpFAIL"]</h4>
 }
+@if (TempData["Attended"] != null)
+{
+    <h4>@TempData["Attended"]</h4>
+}
 
 <div class="form-inline" style="margin-bottom:10px;">
     <div class="form-group">
@@ -137,7 +141,8 @@
                     @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                 </p>
                 <p>
-                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+                    @Html.ActionLink("RSVP", "RSVP", new { id = item.ScheduleID })
                     @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
                             RSVP
                         </button>*@
@@ -158,7 +163,7 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                foreach (var s in item.RSVPSchedules.Where(p => p.StudentID == 2))
+                foreach (var s in item.RSVPSchedules.Where(p => p.StudentID == 2).Where(p => p.RSVP_Event.Attended == null))
                 {
                     <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
                         <h4>
@@ -200,8 +205,14 @@
                         </p>
                         <p>
                             @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
-                        </p>
-                    </div>
+
+                            @if (item.LectureID != null)
+                            {
+                            <p>|  @Html.ActionLink("Write a Review", "WriteReview", new { id = item.ScheduleID })</p>
+                            }
+
+                            </p>
+                        </div>
                 }
             }
         </div>
@@ -211,7 +222,7 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
         </div>
     </div>
     <div class="form-group">
