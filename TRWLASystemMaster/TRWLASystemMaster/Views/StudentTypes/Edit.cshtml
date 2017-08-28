@@ -5,13 +5,16 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Edit</h2>
+<
 
+<div class="jumbotron">
+    <h2>Update a Student Type</h2>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>StudentType</h4>
         <hr />
@@ -35,7 +38,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button>@Html.ActionLink("Back to List", "Index") </button>
 </div>
 
 @section Scripts {

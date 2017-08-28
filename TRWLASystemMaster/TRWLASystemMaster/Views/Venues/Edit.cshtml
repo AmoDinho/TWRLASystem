@@ -5,15 +5,21 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Edit</h2>
+
+<div class="jumbotron">
+
+    <h2>Edit a venue</h2>
+
+</div>
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Venue</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.VenueID)
@@ -51,7 +57,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <button>@Html.ActionLink("Back", "Index")</button>
 </div>
 
 @section Scripts {

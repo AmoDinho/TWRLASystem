@@ -877,10 +877,11 @@ insert into Content(Content_Name, Content_Link, Content_Status, Content_Descript
 values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
 
-/*
+
 insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
 values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
-go*/
+
+go
 
 insert into AspNetUsers(Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled , LockoutEndDateUtc,LockoutEnabled, AccessFailedCount, UserName)
 Values('u15213626@tuks.co.za', 1, '12sdsa', 'asdasd', '0834074027', 1, 1, '2017/10/12',1, 0, 'Rootsms4')
@@ -888,4 +889,6 @@ go
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, Id, ResID, UserTypeID, StudentTypeID)
 Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18', 1, 2, 8, 2, 1)
+
+ 
 go

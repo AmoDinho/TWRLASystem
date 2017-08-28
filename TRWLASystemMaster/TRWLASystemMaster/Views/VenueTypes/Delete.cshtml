@@ -1,28 +1,87 @@
-﻿@model TRWLASystemMaster.Models.VenueType
+﻿@model TRWLASystemMaster.Models.Volunteer
 
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Delete</h2>
+<div class="jumbotron">
+    <h2>Deactivate your account as a Volunteer</h2>
+</div>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>VenueType</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.VenueType_Description)
+            @Html.DisplayNameFor(model => model.Volunteer_Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VenueType_Description)
+            @Html.DisplayFor(model => model.Volunteer_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_DoB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_DoB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerType.VolunteerType_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerType.VolunteerType_Description)
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

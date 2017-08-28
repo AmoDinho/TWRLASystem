@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Details</h2>
+
+
+<div class="jumbotron">
+    <h2>Details of a Student Type</h2>
+</div>
 
 <div>
     <h4>StudentType</h4>
@@ -21,7 +25,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div>
+    <p>
+        <button> @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID })</button>
+        <button>@Html.ActionLink("Back", "Index") </button>
+    </p>
+
+</div>

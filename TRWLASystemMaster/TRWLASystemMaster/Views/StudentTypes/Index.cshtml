@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+
+<div class="jumbotron">
+    <h2>Student Type - Home</h2>
+</div>
+
 @* Search Button for 'Stuent Type Description'*@
 @using (Html.BeginForm())
 {
@@ -25,22 +29,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StudentTypeDescription)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", new { id=item.StudentTypeID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentTypeDescription)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.StudentTypeID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
 
-            <a href="@Url.Action("Details", new { id=item.StudentTypeID})" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Details", new { id=item.StudentTypeID})" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
 
-            <a href="@Url.Action("Delete", new { id=item.StudentTypeID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Delete", new { id=item.StudentTypeID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
 
-           
-        </td>
-    </tr>
-}
+
+            </td>
+        </tr>
+    }
 
 </table>
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
