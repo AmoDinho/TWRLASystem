@@ -367,12 +367,14 @@
       <DependentUpon>TRWLA_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Demographic.cs" />
+    <Compile Include="Models\EntityManager\UserManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LectureReviewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NoAttend.cs" />
     <Compile Include="Models\SelectRecipients.cs" />
     <Compile Include="Models\SendMessage.cs" />
+    <Compile Include="Models\ViewModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -606,8 +608,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\EntityManager\" />
-    <Folder Include="Models\ViewModel\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
