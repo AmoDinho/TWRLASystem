@@ -14,20 +14,23 @@ using TRWLASystemMaster.Models;
 using TRWLASystemMaster.Models.ViewModel;
 using TRWLASystemMaster.Models.EntityManager;
 using System.Web.Security;
+using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
 
     public class AccountController : Controller
     {
-
-        public ActionResult SignUp()
+        private TWRLADB_Staging_V2Entities15 db = new TWRLADB_Staging_V2Entities15();
+        public ActionResult Register()
         {
+              
+            ViewBag.UserTypeID= new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignUp(UserSignUpView USV)
+        public ActionResult Register(UserSignUpView USV)
         {
             if (ModelState.IsValid)
             {
