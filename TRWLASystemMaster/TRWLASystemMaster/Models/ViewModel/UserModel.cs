@@ -35,4 +35,17 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "Phone Number")]
         public string Phonenumber { get; set; }
     }
+
+    public class UserLoginView
+    {
+        [Key]
+        public int SYSUserID { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Login ID")]
+        public string LoginName { get; set; }
+        [Required(ErrorMessage = "*")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+    }
 }

@@ -71,5 +71,19 @@ namespace TRWLASystemMaster.Models.EntityManager
                 return db.SYSUsers.Where(o => o.LoginName.Equals(loginName)).Any();
             }
         }
+
+        public string GetUserPassword(string loginName)
+        {
+            using (TWRLADB_Staging_V2Entities15 db = new TWRLADB_Staging_V2Entities15())
+            {
+                var user = db.SYSUsers.Where(o => o.LoginName.ToLower().Equals(loginName));
+                if (user.Any())
+                    return user.FirstOrDefault().PasswordEncryptedText;
+                else
+                    return string.Empty;
+            }
+        }
     }
+
+
 }

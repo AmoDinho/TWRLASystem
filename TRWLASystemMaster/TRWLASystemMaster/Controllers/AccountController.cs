@@ -48,6 +48,46 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(UserLoginView ULV, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                UserManager UM = new UserManager();
+                string password = UM.GetUserPassword(ULV.LoginName);
+
+                if (string.IsNullOrEmpty(password))
+                    ModelState.AddModelError("", "The user login or password provided is incorrect.");
+                else
+                {
+                    if (ULV.Password.Equals(password))
+                    {
+                        FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
+                        return RedirectToAction("Index", "TRWLASchedules");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The password provided is incorrect.");
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form  
+            return View(ULV);
+        }
+
+
+        [Authorize]
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
         internal class ChallengeResult : ActionResult
         {
             private string provider;
