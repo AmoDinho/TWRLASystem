@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
+using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class VolunteersController : Controller
     {
-        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+        private TWRLADB_Staging_V2Entities15 db = new TWRLADB_Staging_V2Entities15();
 
         // GET: Volunteers
         public ActionResult Index()
         {
-            var volunteers = db.Volunteers.Include(v => v.AspNetUser).Include(v => v.UserType).Include(v => v.VolunteerType);
+            var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
             return View(volunteers.ToList());
         }
 
@@ -39,7 +40,7 @@ namespace TRWLASystemMaster.Controllers
         // GET: Volunteers/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email");
+            
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description");
             ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description");
             return View();
@@ -83,7 +84,7 @@ namespace TRWLASystemMaster.Controllers
                     }
                 }
 
-                ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
+                
                 ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
                 ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
                 return View(volunteer);
@@ -107,7 +108,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
+            
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
             ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
             return View(volunteer);
@@ -128,7 +129,7 @@ namespace TRWLASystemMaster.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", volunteer.Id);
+      
                 ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
                 ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
                 return View(volunteer);

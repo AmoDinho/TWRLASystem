@@ -8,12 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
 using System.IO;
+using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class ContentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+        private TWRLADB_Staging_V2Entities15 db = new TWRLADB_Staging_V2Entities15();
 
         //public FileActionResult Downloads()
         //{

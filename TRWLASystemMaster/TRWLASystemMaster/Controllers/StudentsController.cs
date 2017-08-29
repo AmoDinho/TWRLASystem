@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
+using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class StudentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+        private TWRLADB_Staging_V2Entities15 db = new TWRLADB_Staging_V2Entities15();
 
         // GET: Students
         public ActionResult Index()
         {
-            var students = db.Students.Include(s => s.AspNetUser).Include(s => s.Residence).Include(s => s.StudentType).Include(s => s.UserType);
+            var students = db.Students.Include(s => s.Residence).Include(s => s.StudentType).Include(s => s.UserType);
             return View(students.ToList());
         }
 
@@ -39,7 +40,7 @@ namespace TRWLASystemMaster.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email");
+          
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription");
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description");
@@ -60,7 +61,7 @@ namespace TRWLASystemMaster.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", student.Id);
+            
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", student.ResID);
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription", student.StudentTypeID);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", student.UserTypeID);
@@ -79,7 +80,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", student.Id);
+          
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", student.ResID);
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription", student.StudentTypeID);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", student.UserTypeID);
@@ -99,7 +100,7 @@ namespace TRWLASystemMaster.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.AspNetUsers, "Id", "Email", student.Id);
+        
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", student.ResID);
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription", student.StudentTypeID);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", student.UserTypeID);

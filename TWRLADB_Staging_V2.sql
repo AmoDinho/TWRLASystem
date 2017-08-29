@@ -66,8 +66,88 @@ AccessRight char(25) not null
 )
 go
 
+CREATE TABLE [dbo].[LOOKUPRole](
+    [LOOKUPRoleID] [int] IDENTITY(1,1) NOT NULL,
+    [RoleName] [varchar](100) DEFAULT '',
+    [RoleDescription] [varchar](500) DEFAULT '',
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime]  DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+PRIMARY KEY (LOOKUPRoleID)
+    )
+GO
+
+INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
+       VALUES ('Admin','Can Edit, Update, Delete',1,1)
+INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
+       VALUES ('Member','Read only',1,1)
 
 
+
+
+CREATE TABLE [dbo].[SYSUser](
+    [SYSUserID] [int] IDENTITY(1,1) NOT NULL,
+    [LoginName] [varchar](50) NOT NULL,
+    [PasswordEncryptedText] [varchar](200) NOT NULL,
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+    PRIMARY KEY (SYSUserID)
+)
+
+GO
+
+
+CREATE TABLE [dbo].[SYSUserProfile](
+    [SYSUserProfileID] [int] IDENTITY(1,1) NOT NULL,
+    [SYSUserID] [int] NOT NULL,
+    [FirstName] [varchar](35) NOT NULL,
+    [LastName] [varchar](35) NOT NULL,
+	UserTypeID int not null,
+    [Email] [varchar](225) NOT NULL,
+	[DoB] [datetime]  NOT NULL,
+	[Phonenumber] [varchar](50) NOT NULL,
+	
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+    PRIMARY KEY (SYSUserProfileID)
+    )
+GO
+
+ALTER TABLE [dbo].[SYSUserProfile]  WITH CHECK ADD FOREIGN KEY([SYSUserID])
+REFERENCES [dbo].[SYSUser] ([SYSUserID])
+GO
+
+ALTER TABLE [dbo].[SYSUserProfile]  WITH CHECK ADD FOREIGN KEY([UserTypeID])
+REFERENCES [dbo].[UserType] ([UserTypeID])
+GO
+
+
+
+CREATE TABLE [dbo].[SYSUserRole](
+    [SYSUserRoleID] [int] IDENTITY(1,1) NOT NULL,
+    [SYSUserID] [int] NOT NULL,
+    [LOOKUPRoleID] [int] NOT NULL,
+    [IsActive] [bit] DEFAULT (1),
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+    PRIMARY KEY (SYSUserRoleID)
+)
+GO
+
+ALTER TABLE [dbo].[SYSUserRole]  WITH CHECK ADD FOREIGN KEY([LOOKUPRoleID])
+REFERENCES [dbo].[LOOKUPRole] ([LOOKUPRoleID])
+GO
+
+ALTER TABLE [dbo].[SYSUserRole]  WITH CHECK ADD FOREIGN KEY([SYSUserID])
+REFERENCES [dbo].[SYSUser] ([SYSUserID])
+GO
 
 
  ---- StudentType---
@@ -78,102 +158,6 @@ StudentTypeDescription varchar(25) not null
 )
 go
 
----Migration History Table----
-
-CREATE TABLE [dbo].[__MigrationHistory] (
-    [MigrationId]    NVARCHAR (150)  NOT NULL,
-    [ContextKey]     NVARCHAR (300)  NOT NULL,
-    [Model]          VARBINARY (MAX) NOT NULL,
-    [ProductVersion] NVARCHAR (32)   NOT NULL,
-    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED ([MigrationId] ASC, [ContextKey] ASC)
-);
-go
---ASP.NET ROLES TABLES---
-CREATE TABLE [dbo].[AspNetRoles] (
-    [Id]   NVARCHAR (128) NOT NULL,
-    [Name] NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
-    ON [dbo].[AspNetRoles]([Name] ASC);
-
-		---ASPNET USERS----
-
-	CREATE TABLE [dbo].[AspNetUsers] (
-    [Id]                   int IDENTITY (1, 1) NOT NULL,
-    [Email]                NVARCHAR (256) NULL,
-    [EmailConfirmed]       BIT            NOT NULL,
-    [PasswordHash]         NVARCHAR (MAX) NULL,
-    [SecurityStamp]        NVARCHAR (MAX) NULL,
-    [PhoneNumber]          NVARCHAR (MAX) NULL,
-    [PhoneNumberConfirmed] BIT            NOT NULL,
-    [TwoFactorEnabled]     BIT            NOT NULL,
-    [LockoutEndDateUtc]    DATETIME       NULL,
-    [LockoutEnabled]       BIT            NOT NULL,
-    [AccessFailedCount]    INT            NOT NULL,
-    [UserName]             NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
-    ON [dbo].[AspNetUsers]([UserName] ASC);
-
-
-	---ASPNET User Claims---
-
-CREATE TABLE [dbo].[AspNetUserClaims] (
-    [Id]         INT            IDENTITY (1, 1) NOT NULL,
-    [UserId]     INT NOT NULL,
-    [ClaimType]  NVARCHAR (MAX) NULL,
-    [ClaimValue] NVARCHAR (MAX) NULL,
-    CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
-);
-
-GO
-
-CREATE NONCLUSTERED INDEX [IX_UserId]
-    ON [dbo].[AspNetUserClaims]([UserId] ASC);
-
-
-	---ASPNET User loginss---
-CREATE TABLE [dbo].[AspNetUserLogins] (
-    [LoginProvider] NVARCHAR (128) NOT NULL,
-    [ProviderKey]   NVARCHAR (128) NOT NULL,
-    [UserId]        INT  NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED ([LoginProvider] ASC, [ProviderKey] ASC, [UserId] ASC),
-    CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
-);
-
-GO
-
-CREATE NONCLUSTERED INDEX [IX_UserId]
-    ON [dbo].[AspNetUserLogins]([UserId] ASC);
-
-
-	---ASPNET USER ROLES---
-	CREATE TABLE [dbo].[AspNetUserRoles] (
-    [UserId] INT NOT NULL,
-    [RoleId] NVARCHAR (128) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
-    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
-);
-
-
-GO
-CREATE NONCLUSTERED INDEX [IX_UserId]
-    ON [dbo].[AspNetUserRoles]([UserId] ASC);
-
-
-GO
-CREATE NONCLUSTERED INDEX [IX_RoleId]
-    ON [dbo].[AspNetUserRoles]([RoleId] ASC);
 
 
   ------Student -----
@@ -189,11 +173,10 @@ Student_Surname varchar(35) not null,
 Student_Phone varchar(10) not null,
 Student_DoB datetime not null,
 ActiveStatus varchar(25)not null,
-Id int FOREIGN KEY REFERENCES AspNetUsers(Id) not null,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
-StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null
-
+StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null,
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
 )
 go
 
@@ -247,7 +230,6 @@ Volunteer_Phone varchar(10) not null,
 Volunteer_DoB datetime not null,
 
 ActiveStatus varchar(25)not null,
-Id int FOREIGN KEY REFERENCES AspNetUsers(Id) not null,
 UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not null
 )
@@ -322,11 +304,11 @@ go
 
 
 insert into UserType(Description, AccessRight)
-values('Admin','Flexiable')
+values('Student','Strict')
 GO
 
 insert into UserType(Description, AccessRight)
-values('Regular','Strict')
+values('Volunteer','Flexiable')
 GO
 
 

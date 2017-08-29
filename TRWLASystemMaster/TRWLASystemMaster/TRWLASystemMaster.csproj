@@ -262,120 +262,117 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Address.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Attendance.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AttendanceViewModel.cs" />
     <Compile Include="Models\ClassAttendance.cs" />
-    <Compile Include="Models\ComEngEvent.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\DB\Address.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Content.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\DB\Attendance.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\DB\ComEngEvent.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Content.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\EventMessage.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\FunctionEvent.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\GuestSpeaker.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Lecture.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\LectureReview.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\LOOKUPRole.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Milestone.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RatingType.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Residence.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RSVPSchedule.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\RSVP_Event.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\SecurityAnswer.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Student.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\StudentMilestone.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\StudentType.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\SYSUser.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\SYSUserProfile.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\SYSUserRole.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\TRWLASchedule.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\TRWLA_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TRWLA_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\TRWLA_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\TRWLA_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TRWLA_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\UserType.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Venue.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\VenueType.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\Volunteer.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\VolunteerFeedback.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\VolunteerType.cs">
+      <DependentUpon>TRWLA_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Demographic.cs" />
-    <Compile Include="Models\EventMessage.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FunctionEvent.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GuestSpeaker.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Lecture.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LectureReview.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LectureReviewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Milestone.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\NoAttend.cs" />
-    <Compile Include="Models\RatingType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Residence.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RSVPSchedule.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RSVP_Event.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SecurityAnswer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SelectRecipients.cs" />
     <Compile Include="Models\SendMessage.cs" />
-    <Compile Include="Models\Student.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StudentMilestone.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StudentType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TRWLASchedule.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Venue.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VenueType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Volunteer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VolunteerFeedback.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VolunteerType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -389,15 +386,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\DB\TRWLA_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>TRWLA_Model.edmx</DependentUpon>
+      <LastGenOutput>TRWLA_Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\DB\TRWLA_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>TRWLA_Model.edmx</DependentUpon>
+      <LastGenOutput>TRWLA_Model.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -446,12 +443,12 @@
     <Content Include="Content\SASS\Maxins\_popovers.scss" />
     <Content Include="Content\SASS\Maxins\_transparency.scss" />
     <Content Include="Content\SASS\Maxins\_vendor-prefixes.scss" />
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\DB\TRWLA_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>TRWLA_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\DB\TRWLA_Model.edmx.diagram">
+      <DependentUpon>TRWLA_Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
@@ -609,6 +606,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\EntityManager\" />
+    <Folder Include="Models\ViewModel\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
