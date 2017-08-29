@@ -1,0 +1,35 @@
+﻿@model TRWLASystemMaster.Models.StudentType
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+
+
+<div class="jumbotron">
+    <h2>Details of a Student Type</h2>
+</div>
+
+<div>
+    <h4>StudentType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentTypeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentTypeDescription)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <p>
+        <button> @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID })</button>
+        <button>@Html.ActionLink("Back", "Index") </button>
+    </p>
+
+</div>

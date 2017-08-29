@@ -1,0 +1,288 @@
+﻿@model TRWLASystemMaster.Models.TRWLASchedule
+
+@{
+    ViewBag.Title = "RSVP";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+@if (Model.FunctionID != null)
+{
+    <div class="jumbotron">
+        <h2>RSVP to @Html.DisplayFor(model => model.FunctionEvent.Function_Name) </h2>
+    </div>
+}
+
+@if (Model.LectureID != null)
+{
+    <div class="jumbotron">
+        <h2>RSVP to @Html.DisplayFor(model => model.Lecture.Lecture_Name) </h2>
+    </div>
+}
+
+@if (Model.ComEngID != null)
+{
+    <div class="jumbotron">
+        <h2>RSVP to @Html.DisplayFor(model => model.ComEngEvent.ComEng_Name) </h2>
+    </div>
+}
+
+
+
+<div>
+    
+    <h4>Are you sure that you want to RSVP to this event?</h4>
+
+    <hr />
+    @if (Model.FunctionID != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Label("Name:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Summary:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:100px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_Summary)
+            </dd>
+
+            <dt>
+                @Html.Label("Description:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:150px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_Description)
+            </dd>
+
+            <dt>
+                @Html.Label("Date:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_Date)
+            </dd>
+
+            <dt>
+                @Html.Label("Time:")
+            </dt>
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_StartTime)
+            </dd>
+            <dd style="margin-bottom:10px; ">
+                to
+            </dd>
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_EndTime)
+            </dd>
+
+            <dt>
+                @Html.Label("Theme:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Function_Theme)
+            </dd>
+
+            <dt>
+                @Html.Label("Guest Speaker:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.GuestSpeaker.GuestSpeaker_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Venue:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.FunctionEvent.Venue.Venue_Name)
+            </dd>
+        </dl>
+    }
+    @if (Model.LectureID != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Label("Name:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Summary:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:100px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_Summary)
+            </dd>
+
+            <dt>
+                @Html.Label("Description:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:150px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_Description)
+            </dd>
+
+            <dt>
+                @Html.Label("Date:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_Date)
+            </dd>
+
+            <dt>
+                @Html.Label("Time:")
+            </dt>
+
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_StartTime)
+            </dd>
+            <dd style="margin-bottom:10px;">
+                to
+            </dd>
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_EndTime)
+            </dd>
+
+
+            <dt>
+                @Html.Label("Theme:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Lecture_Theme)
+            </dd>
+
+            <dt>
+                @Html.Label("Assigned Content:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Content.Content_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Residence:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Lecture.Residence.Res_Name)
+            </dd>
+        </dl>
+
+    }
+
+    @if (Model.ComEngID != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Label("Name:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEng_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Summary:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:100px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEng_Summary)
+            </dd>
+
+            <dt>
+                @Html.Label("Description:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:150px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEng_Description)
+            </dd>
+
+            <dt>
+                @Html.Label("Date:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEng_Date)
+            </dd>
+
+            <dt>
+                @Html.Label("Time:")
+            </dt>
+
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEnge_StartTime)
+            </dd>
+
+            <dd style="margin-bottom:10px;">
+                to
+            </dd>
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEng_EndTime)
+            </dd>
+
+            <dt>
+                @Html.Label("Theme:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.ComEng_Theme)
+            </dd>
+
+            <dt>
+                @Html.Label("Content:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.Content.Content_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Venue:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ComEngEvent.Venue.Venue_Name)
+            </dd>
+
+        </dl>
+
+        
+    }
+</div>
+
+@using (Html.BeginForm())
+        {
+@Html.AntiForgeryToken()
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="RSVP" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+
+        </div>
+    </div>
+</div>
+        }

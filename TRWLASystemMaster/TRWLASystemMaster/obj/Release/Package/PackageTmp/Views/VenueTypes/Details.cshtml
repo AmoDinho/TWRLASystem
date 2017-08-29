@@ -1,0 +1,86 @@
+﻿@model TRWLASystemMaster.Models.Volunteer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Details</h2>
+</div>
+
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volunteer_DoB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volunteer_DoB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiveStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActiveStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VolunteerType.VolunteerType_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VolunteerType.VolunteerType_Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

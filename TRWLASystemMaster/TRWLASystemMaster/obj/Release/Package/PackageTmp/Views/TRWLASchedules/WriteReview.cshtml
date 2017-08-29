@@ -1,0 +1,48 @@
+﻿@model TRWLASystemMaster.Models.LectureReview
+
+@{
+    ViewBag.Title = "WriteReview";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Write a review on @ViewBag.LectureName </h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" style="margin-bottom:10px;">
+            @Html.Label("Review", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="margin-bottom:10px;">
+                @Html.TextAreaFor(model => model.Review, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; color: #2c2c2c; width:280px; height:200px;" })
+                @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Rating", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RatingID", null, htmlAttributes: new { @class = "form-control", @id = "RatingType" })
+                @Html.ValidationMessageFor(model => model.RatingID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit Review" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div class="form-inline" style="float:right;">
+    <div style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    </div>
+</div>
+
+

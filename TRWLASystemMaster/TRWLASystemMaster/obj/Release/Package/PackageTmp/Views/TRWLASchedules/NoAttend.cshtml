@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.NoAttend>
+
+
+@{
+    ViewBag.Title = "NoAttend";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>NoAttend</h2>
+</div>
+
+@using (Html.BeginForm("ExportToExcel5", "TRWLASchedules", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Student Number
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Degree
+            </th>
+            <th>
+                Graduate Status
+            </th>
+            <th>
+                Residence
+            </th>
+            <th>
+                Student Type
+            </th>
+            <th>
+                Date of Missed Event
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoB, new { type = "date" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Degree)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Res)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FunctionDate)
+                    @Html.DisplayFor(modelItem => item.LectureDate)
+                    @Html.DisplayFor(modelItem => item.ComEngDate)
+                </td>
+
+                <td></td>
+
+            </tr>
+        }
+
+    </table>
+    <tr>
+        <td colspan="4">
+            <br />
+            <br />
+            <input type="submit" value="Export to Excel" class="btn" style="float:right;" />
+        </td>
+    </tr>
+}
+

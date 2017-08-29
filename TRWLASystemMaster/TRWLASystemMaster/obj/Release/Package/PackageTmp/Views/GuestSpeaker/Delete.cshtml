@@ -1,0 +1,65 @@
+﻿@model TRWLASystemMaster.Models.GuestSpeaker
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>GuestSpeaker</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker_Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker_Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker_Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker_Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker_PictureLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker_PictureLink)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

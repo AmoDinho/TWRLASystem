@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.ClassAttendance>
+
+@{
+    ViewBag.Title = "ClassAttendance";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>ClassAttendance</h2>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>Email</th>
+        <th>
+            Progress
+        </th>
+        <th>
+            Total Number of Events
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventCount)
+            </td>
+            
+            <td></td>
+            
+        </tr>
+    }
+
+</table>
+
+

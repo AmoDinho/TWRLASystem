@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.ComEngEvent>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEng_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEng_Summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEng_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEng_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEnge_StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEng_EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComEng_Theme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content.Content_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEng_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEng_Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEng_Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEng_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEnge_StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEng_EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComEng_Theme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content.Content_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue.Venue_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ComEngID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ComEngID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ComEngID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,45 @@
+﻿@model TRWLASystemMaster.Models.UserType
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+
+
+
+<div class="jumbotron">
+    <h2>Details of the User Type</h2>
+</div>
+
+<div>
+    <h4>UserType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccessRight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccessRight)
+        </dd>
+
+    </dl>
+</div>
+
+
+<div>
+    <p>
+        <button>@Html.ActionLink("Edit", "Edit", new { id = Model.UserTypeID })</button>
+        <button>@Html.ActionLink("Back to List", "Index")</button>
+    </p>
+
+</div>

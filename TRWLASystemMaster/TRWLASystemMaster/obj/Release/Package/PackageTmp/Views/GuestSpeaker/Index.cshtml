@@ -1,0 +1,93 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.GuestSpeaker>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>TRWLA Guest Speakers</h2>
+</div>
+
+
+<div class="form-group">
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.Label("Find by name:") @Html.TextBox("searchString")
+            <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+        </p>
+    }
+</div>
+
+<div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+        <p>
+            @Html.Label("Filter Guest Speakers by:")
+        </p>
+    </div>
+    <div class="form-group">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "GuestSpeaker", new { sortOrder = ViewBag.NameSortParm })'">Name</button>
+    </div>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            Email Address
+        </th>
+        <th>
+            Picture Link
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestSpeaker_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestSpeaker_Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestSpeaker_Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestSpeaker_Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestSpeaker_PictureLink)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.GuestSpeakerID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.GuestSpeakerID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "GuestSpeaker")'">Register Guest Speaker</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,235 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.TRWLASchedule>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Welcome Cailin</h2>
+</div>
+
+@if (TempData["rsvp"] != null)
+{
+    <h4>@TempData["rsvp"]</h4>
+}
+@if (TempData["rsvpFAIL"] != null)
+{
+    <h4>@TempData["rsvpFAIL"]</h4>
+}
+@if (TempData["Attended"] != null)
+{
+    <h4>@TempData["Attended"]</h4>
+}
+
+<div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.Label("Find by name:") @Html.TextBox("searchString"@*, "", new { placeholder = "Name of Event" }*@)
+                <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+            </p>
+        }
+    </div>
+</div>
+
+<div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+        <p>
+            @Html.Label("Filter by:")
+        </p>
+    </div>
+    <div class="form-group">
+        <div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">All</button>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagements</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lectures</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Functions</button>
+        </div>
+    </div>
+</div>
+
+@*<select id="filter">
+        <option value="All">All</option>
+        <option value="Functions">Functions</option>
+    </select>
+
+    <script>
+        $(function () {
+            $('#filter').on('change', function () {
+                var value;
+                if(value == "All")
+                {
+                    @Html.ActionLink("Show all","Index", new { all = ViewBag.SurnameSortParm })
+                }
+                else if (value == "Functions") {
+                     @Html.ActionLink("Functions", "Index", new { F = ViewBag.SurnameSortParm })
+                }
+            });
+        });
+
+    </script>*@
+
+
+<div class="row" @*id="showMe" style="display:none;*@ ">
+
+    <div class="col-md-6" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-bottom:10px; height:500px; overflow-y:auto;">
+        <h3 style="text-align:center;">Upcoming TRWLA Events</h3>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-5" style="margin-bottom:15px; margin-top:10px;">
+                <h4>
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                </h4>
+                <p>
+                    <strong>Summary:</strong>
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
+                </p>
+                <p>
+                    <strong>
+                        Date of the Event:
+                    </strong>
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:dd/MM/yyyy}")
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date, "{0:dd/MM/yyyy}")
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date, "{0:dd/MM/yyyy}")
+                </p>
+                <p>
+                    <strong>
+                        Start of Event:
+                    </strong>
+
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+
+                </p>
+
+                <p>
+                    <strong>
+                        End of Event:
+                    </strong>
+
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+
+                </p>
+                <p>
+                    <strong>
+                        Venue Name:
+                    </strong>
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                    @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+                </p>
+                <p>
+                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+                    @Html.ActionLink("RSVP", "RSVP", new { id = item.ScheduleID })
+                    @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
+                            RSVP
+                        </button>*@
+
+
+                    @*<div class="form-actions no-color ">
+                            <button type="submit" value="RSVP" class="btn" id="item.Schedule">Cancel Event</button>
+                        </div>*@
+                </p>
+            </div>
+        }
+
+    </div>
+
+    <div class="col-md-5" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); float:right; margin-left:3px;margin-bottom:10px; height:500px; overflow-y:auto;">
+        <h3 style="text-align:center;">My Upcoming Events</h3>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                foreach (var s in item.RSVPSchedules.Where(p => p.StudentID == 2).Where(p => p.RSVP_Event.Attended == null))
+                {
+                    <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
+                        <h4>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                        </h4>
+
+                        <p>
+                            <strong>Summary:</strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
+                        </p>
+                        <p>
+                            <strong>
+                                Date of the Event:
+                            </strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                        </p>
+                        <p>
+                            <strong>
+                                Time of Event:
+                            </strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime) to @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime) to @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime) to @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+
+                        </p>
+                        <p>
+                            <strong>
+                                Venue Name:
+                            </strong>
+                            @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                            @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                            @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+                        </p>
+                        <p>
+                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+
+                            @if (item.LectureID != null)
+                            {
+                            <p>|  @Html.ActionLink("Write a Review", "WriteReview", new { id = item.ScheduleID })</p>
+                            }
+
+                            </p>
+                        </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Log Event Attedance</button>
+            </div>
+        </div>
+    </div>
+</div>

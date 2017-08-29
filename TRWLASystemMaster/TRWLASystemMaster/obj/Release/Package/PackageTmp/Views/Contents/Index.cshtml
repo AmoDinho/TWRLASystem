@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.Content>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>TRWLA Content</h2>
+</div>
+
+
+
+<div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.Label("Find by name:") @Html.TextBox("searchString")
+                <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+            </p>
+        }
+    </div>
+</div>
+<div class="form-inline" style="margin-bottom:20px;">
+    <div class="form-group">
+        <p>
+            @Html.Label("Filter by:")
+        </p>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents", new { sortOrder = ViewBag.NameSortParm })'">Name</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents", new { locked = ViewBag.SurnameSortParm })'">Locked</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents", new { unlocked = ViewBag.SurnameSortParm })'">Unlocked</button>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents", new { all = ViewBag.SurnameSortParm })'">All</button>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Description
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content_Name)
+            </td>
+            <td>
+                @if (item.Content_Status == 1)
+                {
+                    <p>Locked</p>
+                }
+                @if (item.Content_Status == 0)
+                {
+                    <p>Unlocked</p>
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content_Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ContentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ContentID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Contents")'">Upload Content</button>
+    </div>
+    <div class="form-group">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    </div>
+</div>

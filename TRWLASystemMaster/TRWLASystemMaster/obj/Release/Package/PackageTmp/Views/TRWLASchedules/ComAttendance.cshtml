@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.AttendanceViewModel>
+
+@{
+    ViewBag.Title = "ComAttendance";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+<h2>Community Engagement Attendance Report</h2>
+</div>
+@using (Html.BeginForm("ExportToExcel3", "TRWLASchedules", FormMethod.Post))
+{
+<table class="table">
+    <tr>
+        <th>
+            Name of Event
+        </th>
+        <th>
+            Date of Event
+        </th>
+        <th>
+            Student Attendee
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student_Name)
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4">
+            <br />
+            <br />
+            <input type="submit" value="Export to Excel" class="btn" style="float:right;" />
+        </td>
+    </tr>  
+</table>
+}

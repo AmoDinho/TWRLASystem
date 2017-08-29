@@ -24,6 +24,7 @@ namespace TRWLASystemMaster.Controllers
         private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
 
         // GET: TRWLASchedules
+        [AllowAnonymous]
         public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)
         {
             
@@ -677,12 +678,155 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult LogAttendance()
         {
-            return View(db.TRWLASchedules.ToList());
+            var trwla = from s in db.TRWLASchedules
+                        select s;
+
+            trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.Lecture.Lecture_Date >= DateTime.Now);
+
+            return View(trwla.ToList());
         }
 
-        public ActionResult RSVPdMembers(int? id)
+        public ActionResult LogAttendancePast()
+        {
+            var trwla = from s in db.TRWLASchedules
+                        select s;
+
+            trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date < DateTime.Now || p.FunctionEvent.Function_Date < DateTime.Now || p.Lecture.Lecture_Date < DateTime.Now);
+
+            return View(trwla.ToList());
+        }
+
+        public ActionResult AddNewStudent(string sortOrder, string searchString)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+            var stud = from s in db.Students
+                       join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                       where s.StudentID != r.StudentID
+                       select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                stud = stud.Where(s => s.Student_Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    break;
+                case "sur_desc":
+                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    break;
+                case "Surname":
+                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    break;
+                default:
+                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    break;
+            }
+
+            return View(stud.ToList());
+        }
+
+        public ActionResult StudentDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(student);
+        }
+
+        [HttpPost, ActionName("StudentDetails")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AttendanceConfirmed(Attendance att, int id)
+        {
+
+            int stude = Convert.ToInt32(TempData["NewStudent"]);
+
+            Student stud = db.Students.Find(id);
+            RSVP_Event ev = db.RSVP_Event.Find(stude);
+
+
+            int i = db.Attendances.Count();
+
+            try
+            {
+                if (i == 0)
+                {
+                    if (ev.FunctionID != null)
+                    {
+                        att.FunctionID = ev.FunctionID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else if (ev.LectureID != null)
+                    {
+                        att.LectureID = ev.LectureID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else
+                    {
+                        att.ComEngID = ev.ComEngID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+
+                }
+                else
+                {
+                    int max = db.Attendances.Max(p => p.attendanceID);
+                    int l = max + 1;
+
+                    att.attendanceID = l;
+
+                    if (ev.FunctionID != null)
+                    {
+                        att.FunctionID = ev.FunctionID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else if (ev.LectureID != null)
+                    {
+                        att.LectureID = ev.LectureID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                    else
+                    {
+                        att.ComEngID = ev.ComEngID;
+                        att.StudentID = stud.StudentID;
+                        db.Attendances.Add(att);
+                    }
+                }
+                db.SaveChanges();
+
+                TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.Student_Name;
+            }
+            catch (Exception)
+            {
+                TempData["Attend"] = "There was an error in the attempt of logging the attendance of the student";
+            }
+            return RedirectToAction("LogAttendance");
+        }
+
+        public ActionResult RSVPdMembers(int? id, string sortOrder, string searchString)
         {
             TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+
+
+            
+
+            TempData["NewStudent"] = id;
 
             if (tRWLASchedule.FunctionID != null)
             {
@@ -691,6 +835,30 @@ namespace TRWLASystemMaster.Controllers
                            join t in db.TRWLASchedules on r.FunctionID equals t.FunctionID
                            where r.FunctionID == tRWLASchedule.FunctionID
                            select r;
+
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    evnt = evnt.Where(s => s.Student.Student_Name.Contains(searchString));
+                }
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    case "sur_desc":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    case "Surname":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    default:
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                }
 
 
                 return View(evnt.ToList());
@@ -702,6 +870,29 @@ namespace TRWLASystemMaster.Controllers
                            join t in db.TRWLASchedules on r.LectureID equals t.LectureID
                            where r.LectureID == tRWLASchedule.LectureID
                            select r;
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    evnt = evnt.Where(s => s.Student.Student_Name.Contains(searchString));
+                }
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    case "sur_desc":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    case "Surname":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    default:
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                }
 
 
                 return View(evnt.ToList());
@@ -713,6 +904,29 @@ namespace TRWLASystemMaster.Controllers
                            join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
                            where r.ComEngID == tRWLASchedule.ComEngID
                            select r;
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    evnt = evnt.Where(s => s.Student.Student_Name.Contains(searchString));
+                }
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    case "sur_desc":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    case "Surname":
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                    default:
+                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        break;
+                }
 
 
                 return View(evnt.ToList());

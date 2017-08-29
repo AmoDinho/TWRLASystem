@@ -453,6 +453,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\trwla mvc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -475,7 +476,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -606,6 +609,9 @@
     <Content Include="Views\TRWLASchedules\SendNotification.cshtml" />
     <Content Include="Views\TRWLASchedules\ViewNotification.cshtml" />
     <Content Include="Views\TRWLASchedules\NoAttend.cshtml" />
+    <Content Include="Views\TRWLASchedules\LogAttendancePast.cshtml" />
+    <Content Include="Views\TRWLASchedules\AddNewStudent.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

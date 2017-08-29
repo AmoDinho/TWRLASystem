@@ -1,0 +1,98 @@
+﻿@model TRWLASystemMaster.Models.ComEngEvent
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ComEngEvent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEng_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEng_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEng_Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEng_Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEng_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEng_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEng_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEng_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEnge_StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEnge_StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEng_EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEng_EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComEng_Theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComEng_Theme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content.Content_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content.Content_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue.Venue_Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.RSVP_Event>
+
+@{
+    ViewBag.Title = "RSVPdMembers";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>RSVPd Members</h2>
+</div>
+
+@if (TempData["Attend"] != null)
+{
+    <h4>@TempData["Attend"]</h4>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Student Number
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Degree
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(p=>p.Attended == null))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Student_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Student_Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.AspNetUser.Email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Degree)
+            </td>
+            <td>
+                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, evid = item.rsvpID }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+<div class="form-inline" style="float:right;">
+    <div style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+    </div>
+</div>

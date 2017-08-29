@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.TRWLASchedule>
+
+@{
+    ViewBag.Title = "LogAttendance";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Log Event Attendance</h2>
+</div>
+
+<h4>Please select an event</h4>
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            Name of Event
+        </th>
+        <th>
+            Date of Event
+        </th>
+        <th>
+            Start of Event
+        </th>
+        <th>
+            End of Event
+        </th>
+        <th>
+            Venue
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:dd/MM/yyyy}")
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date, "{0:dd/MM/yyyy}")
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date, "{0:dd/MM/yyyy}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+            </td>
+                
+            <td>
+                @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+            </td>
+            <td>
+                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div class="form-inline" style="float:right;">
+    <div style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    </div>
+</div>

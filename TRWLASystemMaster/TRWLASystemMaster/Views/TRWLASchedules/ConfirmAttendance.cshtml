@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Confirm Attendance of @Html.DisplayFor(p => p.Student_Name)</h2>
+<div class="jumbotron">
+    <h2>Confirm Attendance of @Html.DisplayFor(p => p.Student_Name)</h2>
+</div>
 
 <div>
     <h4>Student</h4>
@@ -82,9 +84,12 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+    <div class="form-inline" style="float:right;">
+        <div class="form-group">
             <input type="submit" value="Log Attendance" class="btn btn-default" />
+        </div>
+        <div class="form-group" style="margin-right:5px;">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
         </div>
     </div>
 }

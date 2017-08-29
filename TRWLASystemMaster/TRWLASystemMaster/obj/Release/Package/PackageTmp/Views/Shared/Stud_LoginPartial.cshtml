@@ -1,0 +1,33 @@
+﻿@* The Right-Side of navbar for the students who are logged In *@
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @* TO DO:
+
+        1- Add Image of Messagebox & User Profile Image
+        2- add drop down components: *Link to profile *Log out*@
+        <li><a><i class="fa fa-envelope-o fa-1x"></i></a></li>
+        <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>User <span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#"><i class="fa fa-power-off"></i> Log out</a></li>
+            </ul>
+        </li>
+    </ul>
+}

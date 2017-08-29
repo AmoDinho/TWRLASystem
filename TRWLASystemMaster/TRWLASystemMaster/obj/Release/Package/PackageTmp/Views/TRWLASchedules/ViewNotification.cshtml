@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.EventMessage>
+
+
+@{
+    ViewBag.Title = "ViewNotification";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>View Your Notifications</h2>
+</div>
+
+<div class="col-md-12" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-bottom:10px; height:500px; overflow-y:auto;">
+    @foreach (var item in Model.OrderBy(p => p.TimeMes))
+    {
+        if (item.RoN == 0)
+        {
+            <div class="col-md-12" style="margin-bottom:5px; margin-top:5px; margin-right: 5px; margin-left:5px; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);">
+                <dl>
+                    <dt>@Html.Label("Message:")</dt>
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => item.Msg)
+                    </dd>
+
+                    <dt>
+                        @Html.Label("Received:")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => item.TimeMes)
+                    </dd>
+                </dl>
+            </div>
+        }
+        if (item.RoN == 1)
+        {
+            <div class="col-md-12" style="margin-bottom:5px; margin-top:5px; margin-right: 5px; margin-left:5px;">
+                <dl>
+                    <dt>@Html.Label("Message:")</dt>
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => item.Msg)
+                    </dd>
+
+                    <dt>
+                        @Html.Label("Received:")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(modelItem => item.TimeMes)
+                    </dd>
+                </dl>
+            </div>
+        }
+
+
+    }
+</div>
+
+<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { id = 1 })'">Return</button>
