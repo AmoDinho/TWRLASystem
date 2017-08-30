@@ -27,6 +27,51 @@ namespace TRWLASystemMaster.Models.ViewModel
 
         public int UserTypeID { get; set; }
 
+
+        public int SecurityAnswerID { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Degree")]
+        public string Degree { get; set; }
+        public DateTime YearOfStudy { get; set; }
+        public int ResID { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        public DateTime DoB { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public string Phonenumber { get; set; }
+    }
+
+
+    public class UserSignUpViewVol
+    {
+        [Key]
+        public int SYSUserID { get; set; }
+        public int LOOKUPRoleID { get; set; }
+        public string RoleName { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Login ID")]
+        public string LoginName { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        public int UserTypeID { get; set; }
+
+
+        public int SecurityAnswerID { get; set; }
+
+        public int ResID { get; set; }
+
         [Display(Name = "Email")]
         public string Email { get; set; }
 

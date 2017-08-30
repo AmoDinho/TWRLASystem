@@ -19,6 +19,7 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.Lectures = new HashSet<Lecture>();
             this.Students = new HashSet<Student>();
+            this.SYSUserProfiles = new HashSet<SYSUserProfile>();
         }
     
         public int ResID { get; set; }
@@ -28,5 +29,7 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<Lecture> Lectures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SYSUserProfile> SYSUserProfiles { get; set; }
     }
 }

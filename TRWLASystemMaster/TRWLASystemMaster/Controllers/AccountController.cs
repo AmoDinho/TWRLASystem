@@ -22,15 +22,49 @@ namespace TRWLASystemMaster.Controllers
     public class AccountController : Controller
     {
         private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
+        //Register Student
         public ActionResult Register()
         {
-              
-            ViewBag.UserTypeID= new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             return View();
         }
 
         [HttpPost]
         public ActionResult Register(UserSignUpView USV)
+        {
+            if (ModelState.IsValid)
+            {
+                UserManager UM = new UserManager();
+                if (!UM.IsLoginNameExist(USV.LoginName))
+                {
+                    UM.AddUserAccount(USV);
+                    FormsAuthentication.SetAuthCookie(USV.FirstName, false);
+                    return RedirectToAction("Index", "TRWLASchedules");
+
+                }
+                else
+                    ModelState.AddModelError("", "Login Name already taken.");
+            }
+            return View();
+        }
+
+
+
+        //Register Volunteer
+        public ActionResult RegisterVol()
+        {
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+            
+            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegisterVol(UserSignUpView USV)
         {
             if (ModelState.IsValid)
             {

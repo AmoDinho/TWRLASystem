@@ -250,6 +250,10 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
+          <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="Graduate" ColumnName="Graduate" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />

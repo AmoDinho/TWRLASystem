@@ -128,14 +128,20 @@ CREATE TABLE [dbo].[SYSUserProfile](
     [Email] [varchar](225) NOT NULL,
 	[DoB] [datetime]  NOT NULL,
 	[Phonenumber] [varchar](50) NOT NULL,
+
 	SecurityAnswerID int NOT NULL,
-	
+	Graduate varchar(10) null,
+    Degree varchar(35) null,
+    YearOfStudy datetime null,
 	
     [RowCreatedSYSUserID] [int] NOT NULL,
     [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
     [RowModifiedSYSUserID] [int] NOT NULL,
     [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
     PRIMARY KEY (SYSUserProfileID),
+	
+	ResID int FOREIGN KEY REFERENCES Residence(ResID)  null,
+
 	FOREIGN KEY (SecurityAnswerID) REFERENCES SecurityAnswer(SecurityAnswerID)
     )
 GO
@@ -212,7 +218,6 @@ StudentID int FOREIGN KEY REFERENCES Student(StudentID)
 --StudentID int references Student(StudentID)
  )
  go
-
 
     ---Milestone---     
 create table Milestone
@@ -444,6 +449,11 @@ insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer
 values('Vuyo','Renene','0741258963','1994/06/12','None',4,1,1)
 GO
 
+--Security question---
+
+ insert into SecurityAnswer(Security_Question,Security_Answer)
+ values('What is your mothers maden name','Kelebogile')
+ go
 
 				  
 				  /* TEST RECORDS!!! - 

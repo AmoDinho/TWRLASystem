@@ -188,6 +188,7 @@
     <Property Name="Res_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Residen__5165187F" FromRole="Residence" ToRole="Lecture" />
     <NavigationProperty Name="Students" Relationship="Self.FK__Student__ResID__31EC6D26" FromRole="Residence" ToRole="Student" />
+    <NavigationProperty Name="SYSUserProfiles" Relationship="TWRLADB_Staging_V2Model.FK__SYSUserPr__ResID__239E4DCF" FromRole="Residence" ToRole="SYSUserProfile" />
   </EntityType>
   <EntityType Name="RSVP_Event">
     <Key>
@@ -308,6 +309,11 @@
     <NavigationProperty Name="Students" Relationship="Self.FK__Student__SYSUser__34C8D9D1" FromRole="SYSUserProfile" ToRole="Student" />
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__276EDEB3" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__286302EC" FromRole="SYSUserProfile" ToRole="UserType" />
+    <Property Name="Graduate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Degree" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="YearOfStudy" Type="DateTime" Precision="0" />
+    <Property Name="ResID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Residence" Relationship="TWRLADB_Staging_V2Model.FK__SYSUserPr__ResID__239E4DCF" FromRole="SYSUserProfile" ToRole="Residence" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>
@@ -1136,5 +1142,21 @@
       <End Role="VolunteerType" EntitySet="VolunteerTypes" />
       <End Role="Volunteer" EntitySet="Volunteers" />
     </AssociationSet>
+    <AssociationSet Name="FK__SYSUserPr__ResID__239E4DCF" Association="TWRLADB_Staging_V2Model.FK__SYSUserPr__ResID__239E4DCF">
+      <End Role="Residence" EntitySet="Residences" />
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__SYSUserPr__ResID__239E4DCF">
+    <End Type="TWRLADB_Staging_V2Model.Residence" Role="Residence" Multiplicity="1" />
+    <End Type="TWRLADB_Staging_V2Model.SYSUserProfile" Role="SYSUserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Residence">
+        <PropertyRef Name="ResID" />
+      </Principal>
+      <Dependent Role="SYSUserProfile">
+        <PropertyRef Name="ResID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

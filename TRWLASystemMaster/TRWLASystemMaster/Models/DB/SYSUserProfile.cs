@@ -35,6 +35,10 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<System.DateTime> RowCreatedDateTime { get; set; }
         public int RowModifiedSYSUserID { get; set; }
         public Nullable<System.DateTime> RowModifiedDateTime { get; set; }
+        public string Graduate { get; set; }
+        public string Degree { get; set; }
+        public Nullable<System.DateTime> YearOfStudy { get; set; }
+        public int ResID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Progress> Progresses { get; set; }
@@ -43,5 +47,6 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<Student> Students { get; set; }
         public virtual SYSUser SYSUser { get; set; }
         public virtual UserType UserType { get; set; }
+        public virtual Residence Residence { get; set; }
     }
 }
