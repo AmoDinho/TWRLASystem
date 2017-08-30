@@ -236,6 +236,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthorizeRolesAttribute.cs" />
     <Compile Include="Controllers\CheckPasswordController.cs" />
     <Compile Include="Controllers\ComEngEventsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
@@ -501,12 +502,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
@@ -610,6 +605,7 @@
     <Content Include="Views\TRWLASchedules\AddNewStudent.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentDetails.cshtml" />
     <Content Include="Views\Account\RegisterVol.cshtml" />
+    <Content Include="Views\Manage\ManageUserPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

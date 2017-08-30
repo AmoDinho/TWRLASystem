@@ -155,23 +155,30 @@ namespace TRWLASystemMaster.Models.ViewModel
         {
         [Key]
         public int UserTypeID { get; set; }
-
-
+        
         public string Description { get; set; }
         public string AccessRight { get; set; }
     }
 
 
-    public class SecurityAnswerID
+    public class LookupSecurityAnswer
     {
-        public string Text { get; set; }
-        public string Value { get; set; }
+        [Key]
+        public int SecurityAnswerID { get; set; }
+
+        public string Security_Question { get; set; }
+       
+        public string Security_Answer { get; set; }
     }
 
-    public class ResID
+    public class LookUpRes
     {
-        public string Text { get; set; }
-        public string Value { get; set; }
+        [Key]
+        public int ResID { get; set; }
+
+        public string Res_Name   { get; set; }
+
+      
     }
 
     public class UserRoles
@@ -188,22 +195,24 @@ namespace TRWLASystemMaster.Models.ViewModel
 
     public class UserSecurityAnswerID
     {
-        public string SelectedSecurityAnswer { get; set; }
-        public IEnumerable<SecurityAnswerID> SecurityAnswerID { get; set; }
+        public int? SelectedSecurityAnswer { get; set; }
+        public IEnumerable<LookupSecurityAnswer> SecurityAnswerList { get; set; }
+
+      
     }
 
     public class UserResID
     {
-        public string SelectedRes { get; set; }
-        public IEnumerable<ResID> ResID { get; set; }
+        public int? SelectedRes { get; set; }
+        public IEnumerable<LookUpRes> ResList { get; set; }
     }
 
 
     public class UserDataView
 {
-    public IEnumerable<UserProfileView> UserProfile { get; set; }
-public UserRoles UserRoles { get; set; }
-public User_UserTypeID User_UserTypeID { get; set; }
+        public IEnumerable<UserProfileView> UserProfile { get; set; }
+       public UserRoles UserRoles { get; set; }
+        public User_UserTypeID User_UserTypeID { get; set; }
 
         public UserSecurityAnswerID UserSecurityAnswerID { get; set; }
         public UserResID UserResID { get; set; }

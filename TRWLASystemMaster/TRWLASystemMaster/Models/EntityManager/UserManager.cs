@@ -258,19 +258,24 @@ namespace TRWLASystemMaster.Models.EntityManager
 
             int? userAssignedRoleID = 0, userID = 0;
             int? user_usertype = 0;
+            int? user_resid = 0;
+            int? user_secq= 0;
 
             userID = GetUserID(loginName);
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
             {
                 userAssignedRoleID = db.SYSUserRoles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().LOOKUPRoleID;
                 user_usertype = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().UserTypeID;
+
+                user_resid = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().ResID;
+                user_secq = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().SecurityAnswerID;
             }
 
             List <LookUpUserType> usertypes = new List<LookUpUserType> ();
 
-            List<ResID> residences = new List<ResID>();
+            List<LookUpRes> residences = new List<LookUpRes>();
 
-            List<SecurityAnswerID> secanswers = new List<SecurityAnswerID>();
+            List<LookupSecurityAnswer> secanswers = new List<LookupSecurityAnswer>();
 
             UDV.UserProfile = profiles;
             UDV.UserRoles = new UserRoles
@@ -284,6 +289,27 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SelectedUserType = user_usertype,
                 UserTypeList= usertypes
             };
+
+
+            UDV.UserResID = new UserResID
+            {
+
+                SelectedRes = user_resid,
+                ResList = residences
+
+
+            };
+
+
+            UDV.UserSecurityAnswerID = new UserSecurityAnswerID
+            {
+
+                SelectedSecurityAnswer = user_secq,
+                SecurityAnswerList = secanswers
+
+
+            };
+
 
             return UDV;
         }
