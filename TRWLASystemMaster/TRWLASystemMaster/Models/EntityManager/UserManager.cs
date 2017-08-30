@@ -221,7 +221,17 @@ namespace TRWLASystemMaster.Models.EntityManager
                     {
                         UPV.FirstName = SUP.FirstName;
                         UPV.LastName = SUP.LastName;
-                        UPV.Gender = SUP.Gender;
+                        UPV.Degree = SUP.Degree;
+                        UPV.DoB = SUP.DoB;
+                        UPV.Email = SUP.Email;
+                        UPV.Phonenumber = SUP.Phonenumber;
+                        UPV.UserTypeID = SUP.UserTypeID;
+                        UPV.SecurityAnswerID = SUP.SecurityAnswerID;
+                        UPV.StudentNumber = SUP.StudentNumber;
+                        UPV.Degree = SUP.Degree;
+                        
+                        //UPV.YearOfStudy = SUP.YearOfStudy;
+                        UPV.ResID = SUP.ResID;
                     }
 
                     var SUR = db.SYSUserRoles.Where(o => o.SYSUserID.Equals(u.SYSUserID));
@@ -247,26 +257,20 @@ namespace TRWLASystemMaster.Models.EntityManager
             List <LOOKUPAvailableRole > roles = GetAllRoles();
 
             int? userAssignedRoleID = 0, userID = 0;
-            string userGender = string.Empty;
+            int? user_usertype = 0;
 
             userID = GetUserID(loginName);
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
             {
                 userAssignedRoleID = db.SYSUserRoles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().LOOKUPRoleID;
-                userGender = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().Gender;
+                user_usertype = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().UserTypeID;
             }
 
-            List <Gender> genders = new List< Gender > ();
-            genders.Add(new Gender
-            {
-                Text = "Male",
-                Value = "M"
-            });
-            genders.Add(new Gender
-            {
-                Text = "Female",
-                Value = "F"
-            });
+            List <LookUpUserType> usertypes = new List<LookUpUserType> ();
+
+            List<ResID> residences = new List<ResID>();
+
+            List<SecurityAnswerID> secanswers = new List<SecurityAnswerID>();
 
             UDV.UserProfile = profiles;
             UDV.UserRoles = new UserRoles
@@ -275,10 +279,10 @@ namespace TRWLASystemMaster.Models.EntityManager
                 UserRoleList = roles
             };
 
-            UDV.UserGender = new UserGender
+            UDV.User_UserTypeID = new User_UserTypeID
             {
-                SelectedGender = userGender,
-                Gender = genders
+                SelectedUserType = user_usertype,
+                UserTypeList= usertypes
             };
 
             return UDV;

@@ -119,8 +119,29 @@ namespace TRWLASystemMaster.Models.ViewModel
             [Required(ErrorMessage = "*")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
-            public string Gender { get; set; }
-        }
+        public int UserTypeID { get; set; }
+
+
+        public int SecurityAnswerID { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = " StudentNumber")]
+        public string StudentNumber { get; set; }
+
+
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Degree")]
+        public string Degree { get; set; }
+        public DateTime YearOfStudy { get; set; }
+        public int ResID { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        public DateTime DoB { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public string Phonenumber { get; set; }
+    }
 
         public class LOOKUPAvailableRole
         {
@@ -130,11 +151,15 @@ namespace TRWLASystemMaster.Models.ViewModel
             public string RoleDescription { get; set; }
         }
 
-        public class UserTypeID
+        public class LookUpUserType
         {
-            public string Text { get; set; }
-            public string Value { get; set; }
-        }
+        [Key]
+        public int UserTypeID { get; set; }
+
+
+        public string Description { get; set; }
+        public string AccessRight { get; set; }
+    }
 
 
     public class SecurityAnswerID
@@ -157,14 +182,14 @@ namespace TRWLASystemMaster.Models.ViewModel
 
     public class User_UserTypeID
     {
-        public string SelectedUserType { get; set; }
-        public IEnumerable<UserTypeID> UserType { get; set; }
+        public int? SelectedUserType { get; set; }
+        public IEnumerable<LookUpUserType> UserTypeList { get; set; }
 }
 
     public class UserSecurityAnswerID
     {
         public string SelectedSecurityAnswer { get; set; }
-        public IEnumerable<SecurityAnswerID> SecurityAnswer { get; set; }
+        public IEnumerable<SecurityAnswerID> SecurityAnswerID { get; set; }
     }
 
     public class UserResID
