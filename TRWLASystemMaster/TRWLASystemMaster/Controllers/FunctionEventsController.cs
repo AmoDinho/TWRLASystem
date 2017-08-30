@@ -10,6 +10,7 @@ using TRWLASystemMaster.Models;
 using System.Web.Helpers;
 using System.Net.Mail;
 using TRWLASystemMaster.Models.DB;
+using TRWLASystemMaster.Security;
 
 namespace TRWLASystemMaster.Controllers
 {
@@ -17,7 +18,9 @@ namespace TRWLASystemMaster.Controllers
     {
         private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
 
+
         // GET: FunctionEvents
+        [AuthorizeRole("Admin")]
         public ActionResult Index()
         {
             var functionEvents = db.FunctionEvents.Include(f => f.GuestSpeaker).Include(f => f.Venue);
@@ -40,6 +43,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         // GET: FunctionEvents/Create
+       
         public ActionResult Create()
         {
             ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name");
@@ -52,6 +56,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public ActionResult Create([Bind(Include = "FunctionID,Function_Name,Function_Summary,Function_Description,Function_Date,Function_StartTime,Function_EndTime,Function_Theme,GuestSpeakerID,VenueID")] FunctionEvent functionEvent)
         {
 

@@ -379,6 +379,7 @@
     <Compile Include="Models\SendMessage.cs" />
     <Compile Include="Models\ViewModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AuthorizeRoleAttribute.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
