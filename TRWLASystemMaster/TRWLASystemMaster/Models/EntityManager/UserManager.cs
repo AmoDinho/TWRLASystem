@@ -255,6 +255,12 @@ namespace TRWLASystemMaster.Models.EntityManager
             UserDataView UDV = new UserDataView();
             List < UserProfileView > profiles = GetAllUserProfiles();
             List <LOOKUPAvailableRole > roles = GetAllRoles();
+            List<LookUpUserType> usertypes = new List<LookUpUserType>();
+
+            List<LookUpRes> residences = new List<LookUpRes>();
+
+            List<LookupSecurityAnswer> secanswers = new List<LookupSecurityAnswer>();
+
 
             int? userAssignedRoleID = 0, userID = 0;
             int? user_usertype = 0;
@@ -271,11 +277,7 @@ namespace TRWLASystemMaster.Models.EntityManager
                 user_secq = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().SecurityAnswerID;
             }
 
-            List <LookUpUserType> usertypes = new List<LookUpUserType> ();
-
-            List<LookUpRes> residences = new List<LookUpRes>();
-
-            List<LookupSecurityAnswer> secanswers = new List<LookupSecurityAnswer>();
+           
 
             UDV.UserProfile = profiles;
             UDV.UserRoles = new UserRoles

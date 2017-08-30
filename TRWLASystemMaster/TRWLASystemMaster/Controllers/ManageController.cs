@@ -27,7 +27,8 @@ namespace TRWLASystemMaster.Controllers
                 return PartialView(UDV);
             }
 
-            return View();
+            return View();    
+            //return RedirectToAction("Index", "Home");
         }
     }
 
