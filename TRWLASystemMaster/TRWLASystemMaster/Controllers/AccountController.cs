@@ -57,7 +57,6 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult RegisterVol()
         {
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            
             ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             return View();

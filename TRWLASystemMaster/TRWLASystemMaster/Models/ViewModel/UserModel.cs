@@ -29,7 +29,11 @@ namespace TRWLASystemMaster.Models.ViewModel
 
 
         public int SecurityAnswerID { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = " StudentNumber")]
+        public string StudentNumber { get; set; }
 
+       
         [Required(ErrorMessage = "*")]
         [Display(Name = "Degree")]
         public string Degree { get; set; }

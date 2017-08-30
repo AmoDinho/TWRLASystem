@@ -38,7 +38,7 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SUP.YearOfStudy = user.YearOfStudy;
                 SUP.Degree = user.Degree;
                 SUP.SecurityAnswerID = user.SecurityAnswerID;
-
+                SUP.StudentNumber = user.StudentNumber;
           
                 SUP.Phonenumber = user.Phonenumber;
               

@@ -9,6 +9,8 @@
     <h2>@Context.User.Identity.Name</h2>
 </div>
 
+@Html.ActionLink("Signout", "SignOut", "Account") 
+
 @if (TempData["rsvp"] != null)
 {
     <h4>@TempData["rsvp"]</h4>
