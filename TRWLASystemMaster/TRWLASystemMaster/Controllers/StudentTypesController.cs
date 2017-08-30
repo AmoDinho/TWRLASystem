@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TRWLASystemMaster.Models;
+using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class StudentTypesController : Controller
     {
-        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+        private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
 
         // GET: StudentTypes
         public ActionResult Index(string searchStringST)

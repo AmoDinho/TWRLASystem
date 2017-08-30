@@ -9,12 +9,13 @@ using System.Web.Mvc;
 using TRWLASystemMaster.Models;
 using System.Web.Helpers;
 using System.Net.Mail;
+using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class FunctionEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+        private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
 
         // GET: FunctionEvents
         public ActionResult Index()

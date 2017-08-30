@@ -9,19 +9,20 @@ using System.Web.Mvc;
 using TRWLASystemMaster.Models;
 using System.Web.Helpers;
 using System.Net.Mail;
-using System.Web.UI.DataVisualization.Charting;
 using System.Text;
 using System.IO;
 using System.Drawing;
 using ClosedXML.Excel;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TRWLASystemMaster.Models.DB;
+using System.Collections;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities14 db = new TWRLADB_Staging_V2Entities14();
+        private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
 
         // GET: TRWLASchedules
         [AllowAnonymous]
@@ -336,7 +337,21 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult ClassAttendance()
         {
-            return View(this.GetClassAttendance());
+            var _contenxt = new TWRLADB_Staging_V2Entities17();
+            ArrayList xValue = new ArrayList();
+            ArrayList yValue = new ArrayList();
+
+            var results = (from c in _contenxt.Progresses select c);
+            results.ToList().ForEach(rs => xValue.Add(rs.SYSUserProfile.StudentNumber));
+            results.ToList().ForEach(rs => yValue.Add(rs.ProgressCount));
+
+
+            new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+                .AddTitle("Class Attendance for Students")
+                .AddSeries("Default", chartType: "Column", xValue: xValue, yValues: yValue)
+                .Write("jpeg");
+
+            return View();
         }
 
         public ActionResult FunctionAttendance()
@@ -400,7 +415,6 @@ namespace TRWLASystemMaster.Controllers
                     {
                         mess.StudentID = Convert.ToInt32(s.StudentID);
                         mess.TimeMes = DateTime.Now.TimeOfDay;
-                        mess.RoN = 0;
 
 
 
@@ -411,7 +425,7 @@ namespace TRWLASystemMaster.Controllers
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.To.Add(myStu.SYSUserProfile.Email);
                             msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
                             msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
 
@@ -448,12 +462,11 @@ namespace TRWLASystemMaster.Controllers
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
-                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.To.Add(myStu.SYSUserProfile.Email);
                             msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
                             msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
 
@@ -487,12 +500,11 @@ namespace TRWLASystemMaster.Controllers
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
-                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.To.Add(myStu.SYSUserProfile.Email);
                             msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
                             msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
 
@@ -534,12 +546,11 @@ namespace TRWLASystemMaster.Controllers
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
-                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.To.Add(myStu.SYSUserProfile.Email);
                             msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
                             msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
 
@@ -573,12 +584,11 @@ namespace TRWLASystemMaster.Controllers
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
-                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.To.Add(myStu.SYSUserProfile.Email);
                             msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
                             msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
 
@@ -612,12 +622,11 @@ namespace TRWLASystemMaster.Controllers
                         {
                             int k = Convert.ToInt32(rsvp.StudentID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
-                            mess.RoN = 0;
 
                             Student myStu = db.Students.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.AspNetUser.Email);
+                            msg.To.Add(myStu.SYSUserProfile.Email);
                             msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
                             msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
 
@@ -665,11 +674,6 @@ namespace TRWLASystemMaster.Controllers
             //{
 
             //}
-
-            foreach (var s in mes.Where(p => p.RoN != 1))
-            {
-                s.RoN = 1;
-            }
 
             return View(mes.ToList());
 
@@ -1521,7 +1525,7 @@ namespace TRWLASystemMaster.Controllers
 
                         MailMessage msg = new MailMessage();
                         msg.From = new MailAddress("u15213626@tuks.co.za");
-                        msg.To.Add(recipient.AspNetUser.Email);
+                        msg.To.Add(recipient.SYSUserProfile.Email);
                         msg.Subject = func.Function_Name + " Cancellation";
                         msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
@@ -1568,7 +1572,7 @@ namespace TRWLASystemMaster.Controllers
 
                         MailMessage msg = new MailMessage();
                         msg.From = new MailAddress("u15213626@tuks.co.za");
-                        msg.To.Add(recipient.AspNetUser.Email);
+                        msg.To.Add(recipient.SYSUserProfile.Email);
                         msg.Subject = lec.Lecture_Name + " Cancellation";
                         msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
@@ -1619,7 +1623,7 @@ namespace TRWLASystemMaster.Controllers
 
                         MailMessage msg = new MailMessage();
                         msg.From = new MailAddress("u15213626@tuks.co.za");
-                        msg.To.Add(recipient.AspNetUser.Email);
+                        msg.To.Add(recipient.SYSUserProfile.Email);
                         msg.Subject = com.ComEng_Name + " Cancellation";
                         msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 

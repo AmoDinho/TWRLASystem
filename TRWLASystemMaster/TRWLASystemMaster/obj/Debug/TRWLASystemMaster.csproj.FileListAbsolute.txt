@@ -501,3 +501,14 @@ C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\
 C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.IO.Packaging.dll
 C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\ClosedXML.xml
 C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\DocumentFormat.OpenXml.xml
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\ClosedXML.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\DocumentFormat.OpenXml.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\FastMember.Signed.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.IO.FileSystem.Primitives.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.IO.Packaging.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Web.DataVisualization.Design.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Web.DataVisualization.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Windows.Forms.DataVisualization.Design.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\System.Windows.Forms.DataVisualization.dll
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\ClosedXML.xml
+C:\Users\Residences\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\DocumentFormat.OpenXml.xml

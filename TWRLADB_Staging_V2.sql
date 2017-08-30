@@ -66,6 +66,22 @@ AccessRight char(25) not null
 )
 go
 
+CREATE TABLE [dbo].[LOOKUPRole](
+    [LOOKUPRoleID] [int] IDENTITY(1,1) NOT NULL,
+    [RoleName] [varchar](100) DEFAULT '',
+    [RoleDescription] [varchar](500) DEFAULT '',
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime]  DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+PRIMARY KEY (LOOKUPRoleID)
+    )
+GO
+
+INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
+       VALUES ('Admin','Can Edit, Update, Delete',1,1)
+INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
+       VALUES ('Member','Read only',1,1)
 
 
 
@@ -78,102 +94,93 @@ StudentTypeDescription varchar(25) not null
 )
 go
 
----Migration History Table----
+---SecurityAnswer---
+create table SecurityAnswer
+ (SecurityAnswerID int identity(1,1) primary key,
+ Security_Question varchar(150) not null,
+ Security_Answer varchar(25) not null
+--StudentID int references Student(StudentID)
+ )
+ go
 
-CREATE TABLE [dbo].[__MigrationHistory] (
-    [MigrationId]    NVARCHAR (150)  NOT NULL,
-    [ContextKey]     NVARCHAR (300)  NOT NULL,
-    [Model]          VARBINARY (MAX) NOT NULL,
-    [ProductVersion] NVARCHAR (32)   NOT NULL,
-    CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED ([MigrationId] ASC, [ContextKey] ASC)
-);
+
+CREATE TABLE [dbo].[SYSUser](
+    [SYSUserID] [int] IDENTITY(1,1) NOT NULL,
+    [LoginName] [varchar](50) NOT NULL,
+    [PasswordEncryptedText] [varchar](200) NOT NULL,
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+    PRIMARY KEY (SYSUserID)
+)
+
+GO
+
+
+CREATE TABLE [dbo].[SYSUserProfile](
+    [SYSUserProfileID] [int] IDENTITY(1,1) NOT NULL,
+    [SYSUserID] [int] NOT NULL,
+	[StudentNumber] [varchar](10) NULL,
+    [FirstName] [varchar](35) NOT NULL,
+    [LastName] [varchar](35) NOT NULL,
+	UserTypeID int not null,
+    [Email] [varchar](225) NOT NULL,
+	[DoB] [datetime]  NOT NULL,
+	[Phonenumber] [varchar](50) NOT NULL,
+	SecurityAnswerID int NOT NULL,
+	
+	
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+    PRIMARY KEY (SYSUserProfileID),
+	FOREIGN KEY (SecurityAnswerID) REFERENCES SecurityAnswer(SecurityAnswerID)
+    )
+GO
+
+ Create table Progress
+(
+	ProgressID int identity (1,1) primary key,
+	[SYSUserProfileID] [int] not null,
+	ProgressCount int not null,
+
+	FOREIGN KEY ([SYSUserProfileID]) REFERENCES [SYSUserProfile]([SYSUserProfileID])
+)
 go
---ASP.NET ROLES TABLES---
-CREATE TABLE [dbo].[AspNetRoles] (
-    [Id]   NVARCHAR (128) NOT NULL,
-    [Name] NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
 
 
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex]
-    ON [dbo].[AspNetRoles]([Name] ASC);
-
-		---ASPNET USERS----
-
-	CREATE TABLE [dbo].[AspNetUsers] (
-    [Id]                   int IDENTITY (1, 1) NOT NULL,
-    [Email]                NVARCHAR (256) NULL,
-    [EmailConfirmed]       BIT            NOT NULL,
-    [PasswordHash]         NVARCHAR (MAX) NULL,
-    [SecurityStamp]        NVARCHAR (MAX) NULL,
-    [PhoneNumber]          NVARCHAR (MAX) NULL,
-    [PhoneNumberConfirmed] BIT            NOT NULL,
-    [TwoFactorEnabled]     BIT            NOT NULL,
-    [LockoutEndDateUtc]    DATETIME       NULL,
-    [LockoutEnabled]       BIT            NOT NULL,
-    [AccessFailedCount]    INT            NOT NULL,
-    [UserName]             NVARCHAR (256) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-
-GO
-CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex]
-    ON [dbo].[AspNetUsers]([UserName] ASC);
-
-
-	---ASPNET User Claims---
-
-CREATE TABLE [dbo].[AspNetUserClaims] (
-    [Id]         INT            IDENTITY (1, 1) NOT NULL,
-    [UserId]     INT NOT NULL,
-    [ClaimType]  NVARCHAR (MAX) NULL,
-    [ClaimValue] NVARCHAR (MAX) NULL,
-    CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
-);
-
+ALTER TABLE [dbo].[SYSUserProfile]  WITH CHECK ADD FOREIGN KEY([SYSUserID])
+REFERENCES [dbo].[SYSUser] ([SYSUserID])
 GO
 
-CREATE NONCLUSTERED INDEX [IX_UserId]
-    ON [dbo].[AspNetUserClaims]([UserId] ASC);
-
-
-	---ASPNET User loginss---
-CREATE TABLE [dbo].[AspNetUserLogins] (
-    [LoginProvider] NVARCHAR (128) NOT NULL,
-    [ProviderKey]   NVARCHAR (128) NOT NULL,
-    [UserId]        INT  NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED ([LoginProvider] ASC, [ProviderKey] ASC, [UserId] ASC),
-    CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
-);
-
+ALTER TABLE [dbo].[SYSUserProfile]  WITH CHECK ADD FOREIGN KEY([UserTypeID])
+REFERENCES [dbo].[UserType] ([UserTypeID])
 GO
 
-CREATE NONCLUSTERED INDEX [IX_UserId]
-    ON [dbo].[AspNetUserLogins]([UserId] ASC);
 
 
-	---ASPNET USER ROLES---
-	CREATE TABLE [dbo].[AspNetUserRoles] (
-    [UserId] INT NOT NULL,
-    [RoleId] NVARCHAR (128) NOT NULL,
-    CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
-    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) ON DELETE CASCADE
-);
-
-
+CREATE TABLE [dbo].[SYSUserRole](
+    [SYSUserRoleID] [int] IDENTITY(1,1) NOT NULL,
+    [SYSUserID] [int] NOT NULL,
+    [LOOKUPRoleID] [int] NOT NULL,
+    [IsActive] [bit] DEFAULT (1),
+    [RowCreatedSYSUserID] [int] NOT NULL,
+    [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
+    [RowModifiedSYSUserID] [int] NOT NULL,
+    [RowModifiedDateTime] [datetime] DEFAULT GETDATE(),
+    PRIMARY KEY (SYSUserRoleID)
+)
 GO
-CREATE NONCLUSTERED INDEX [IX_UserId]
-    ON [dbo].[AspNetUserRoles]([UserId] ASC);
 
-
+ALTER TABLE [dbo].[SYSUserRole]  WITH CHECK ADD FOREIGN KEY([LOOKUPRoleID])
+REFERENCES [dbo].[LOOKUPRole] ([LOOKUPRoleID])
 GO
-CREATE NONCLUSTERED INDEX [IX_RoleId]
-    ON [dbo].[AspNetUserRoles]([RoleId] ASC);
+
+ALTER TABLE [dbo].[SYSUserRole]  WITH CHECK ADD FOREIGN KEY([SYSUserID])
+REFERENCES [dbo].[SYSUser] ([SYSUserID])
+GO
 
 
   ------Student -----
@@ -189,11 +196,10 @@ Student_Surname varchar(35) not null,
 Student_Phone varchar(10) not null,
 Student_DoB datetime not null,
 ActiveStatus varchar(25)not null,
-Id int FOREIGN KEY REFERENCES AspNetUsers(Id) not null,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
-StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null
-
+StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null,
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
 )
 go
 
@@ -247,17 +253,14 @@ Volunteer_Phone varchar(10) not null,
 Volunteer_DoB datetime not null,
 
 ActiveStatus varchar(25)not null,
-Id int FOREIGN KEY REFERENCES AspNetUsers(Id) not null,
 UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not null
 )
 go
 
 /*
-
 create table ResVolunteer
 (
-
 Facilitation_Year date not null,
 VolunteerID int references Volunteer(VolunteerID),
 Volunteer_Name varchar references Volunteer(Volunteer_Name)
@@ -265,7 +268,6 @@ ResID int references Residence(ResID),
 primary key(VolunteerID, ResID)
 )
 go
-
 */
 
 
@@ -322,11 +324,11 @@ go
 
 
 insert into UserType(Description, AccessRight)
-values('Admin','Flexiable')
+values('Student','Strict')
 GO
 
 insert into UserType(Description, AccessRight)
-values('Regular','Strict')
+values('Volunteer','Flexiable')
 GO
 
 
@@ -405,26 +407,18 @@ go
 insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
 values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
 GO
-
-
 insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
 values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
 GO
-
-
 insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
 values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
 GO
-
-
 insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
 values('14284783','1','Informatics','2017/01/01','Siobhann','Tatum','074100249','u14284783@tuks.co.za','1994/04/06','January','None active',1,2,2)
 GO
-
 insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
 values('1422','2','BSC Zoology','2017/06/21','Manion','Flom','07784249','u1587985@tuks.co.za','1994/04/06','march','None active',1,2,2)
 GO
-
 */
 
 
@@ -432,26 +426,18 @@ GO
 
 ---Volunteer----
 /*
-
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO
-
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
 values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO 
-
-
-
 */
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID)
@@ -687,6 +673,14 @@ create table LectureReview
 	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
 )
 
+Create table Progress
+(
+	ProgressID int identity (1,1) primary key,
+	StudentNumber varchar(1) not null,
+	ProgressCount int not null
+)
+go
+
 create table EventMessage
 (
 	MessID int identity (1,1) primary key,
@@ -891,4 +885,20 @@ insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, 
 Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18', 1, 2, 8, 2, 1)
 
  
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer)
+values('What is the Maiden Name of your Mother', 'Wallace')
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer)
+values('What is first dogs name?', 'Cadbury')
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer)
+values('What is the name of your street where you were born', 'Linksfield')
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer)
+values('What is was your favourite sport in high school', 'Swimming')
 go
