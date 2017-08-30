@@ -1,5 +1,6 @@
-﻿@using TRWLASystemMaster.Models
-@model LoginViewModel
+﻿@model TRWLASystemMaster.Models.ViewModel.UserLoginView
+
+
 @{
     ViewBag.Title = "Log in";
 }
@@ -9,17 +10,17 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(Model => Model.LoginName, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(Model => Model.LoginName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Model => Model.LoginName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -30,8 +31,8 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @* This is not working, the tick does not appear. *@
+                @*<div class="form-group">
+               
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
                             <input id="checkbox1" type="checkbox">
@@ -39,7 +40,9 @@
                             @Html.LabelFor(m => m.RememberMe)
                         </div>
                     </div>
-                </div>
+                </div>*@
+
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Log in" style="color:#9b16d8" class="btn btn-default btn-round" />
