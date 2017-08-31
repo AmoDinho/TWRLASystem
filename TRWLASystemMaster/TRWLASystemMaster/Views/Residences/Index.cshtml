@@ -20,7 +20,7 @@
     <p>
         Find by name: @Html.TextBox("SearchString", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
 
-        <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
     </p>
 }
 
@@ -58,7 +58,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Add a new Residence", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+             <button class="btn">@Html.ActionLink("Add a new Residence", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })</button>   
             </div>
         </div>
     </div>
