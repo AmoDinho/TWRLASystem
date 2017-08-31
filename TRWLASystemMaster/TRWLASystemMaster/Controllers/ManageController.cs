@@ -17,7 +17,7 @@ namespace TRWLASystemMaster.Controllers
     {
 
        // [AuthorizeRoles("Admin")]
-        public ActionResult ManageUserPartial()
+        public ActionResult ManageUser()
         {
             if (User.Identity.IsAuthenticated)
             {

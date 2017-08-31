@@ -2,11 +2,11 @@
 @model TRWLASystemMaster.Models.ViewModel.UserDataView
 
 @{
-    ViewBag.Title = "ManageUserPartial";
+    //ViewBag.Title = "ManageUserPartial";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>ManageUserPartial</h2>
+<h2>Manage Users </h2>
 
 <div>
     <h1>List of Users</h1>
@@ -21,21 +21,21 @@
                 <th>UserType</th>
                 <th colspan="2">Role</th>
 
-                <th>SecurityAnswer</th>
-                <th>StudentNumber</th>
+                <th>Security Answer</th>
+                <th>Student Number</th>
                 <th>Degree</th>
-                <th>YearOfStudy</th>
+                <th>Year Of Study</th>
                 <th>Res</th>
                 <th>Email</th>
                 <th>DoB</th>
-                <th>Phonenumber</th>
+                <th>Phone number</th>
 
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var i in Model.UserProfile)
+            @*@foreach (var i in Model.UserProfile)
             {
                 <tr>
                     <td> @Html.DisplayFor(m => i.SYSUserID)</td>
@@ -44,24 +44,29 @@
                     <td> @Html.DisplayFor(m => i.FirstName)</td>
                     <td> @Html.DisplayFor(m => i.LastName)</td>
                     <td> @Html.DisplayFor(m => i.UserTypeID)</td>
-                    
+
                     <td> @Html.DisplayFor(m => i.SecurityAnswerID)</td>
                     <td> @Html.DisplayFor(m => i.StudentNumber)</td>
                     <td> @Html.DisplayFor(m => i.Degree)</td>
-                    <td> @Html.DisplayFor(m => i.YearOfStudy)<td >
+                    <td> @Html.DisplayFor(m => i.YearOfStudy)
+                    <td>
 
-                     <td> @Html.DisplayFor(m => i.ResID)<td >
+                    <td> @Html.DisplayFor(m => i.ResID)
+                    <td>
 
-                    <td> @Html.DisplayFor(m => i.Email)<td >
-                    <td> @Html.DisplayFor(m => i.DoB)<td >
-                    <td> @Html.DisplayFor(m => i.Phonenumber)<td >
+                    <td> @Html.DisplayFor(m => i.Email)
+                    <td>
+                    <td> @Html.DisplayFor(m => i.DoB)
+                    <td>
+                    <td> @Html.DisplayFor(m => i.Phonenumber)
+                    <td>
 
                     <td> @Html.DisplayFor(m => i.RoleName)</td>
                     <td> @Html.HiddenFor(m => i.LOOKUPRoleID)</td>
                     <td><a href="javascript:void(0)" class="lnkEdit">Edit</a></td>
                     <td><a href="javascript:void(0)" class="lnkDelete">Delete</a></td>
                 </tr>
-            }
+            }*@
         </tbody>
     </table>
 </div>

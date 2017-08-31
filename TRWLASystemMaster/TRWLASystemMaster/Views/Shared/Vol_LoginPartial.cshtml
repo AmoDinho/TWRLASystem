@@ -25,19 +25,20 @@ else
         @*<li>@Html.ActionLink("Message", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
         @*<li>@Html.ActionLink("User Profile", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
 
-
+        @*'@Url.Action("Index", "UserProfile")'*@
 
         <li><a href='@Url.Action("ViewNotification", "TRWLASchedules")'><i class="fa fa-envelope-o fa-1x"> </i></a></li>
-        <li>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>User <span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-folder-open-o fa-fw"></i> Reports</a></li>
-                <li><a href="#"><i class="fa fa-users fa-fw"></i> Register Admin</a></li>
-                <li><a href="#"><i class="fa fa-user-plus fa-fw"></i> User Type</a></li>
-                <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-power-off"></i> @Html.ActionLink("Sign Out", "SignOut", "Account") </a></li>
-            </ul>
-        </li>
+        <li><a href='@Url.Action("Index", "UserProfile")'><i class="fa fa-user fa-fw"> </i></a></li>
+        <li> 
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bars fa-fw"></i>Menu<span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
+    <ul class="dropdown-menu">
+        @*<li><a href="#"><i class="fa fa-folder-open-o fa-fw"></i> Reports</a></li>*@
+        <li><a href="#"><i class="fa fa-users fa-fw"></i> @Html.ActionLink("Register Admin", "ManageUser", "Manage")</a></li>
+        <li><a href="#"><i class="fa fa-user-plus fa-fw"></i>@Html.ActionLink("User Type", "Index", "UserTypes")</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="fa fa-power-off"></i> @Html.ActionLink("Sign Out", "SignOut", "Account") </a></li>
+    </ul>
+</li>
 </ul>
 
 

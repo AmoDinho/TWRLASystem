@@ -601,10 +601,10 @@
     <Content Include="Views\TRWLASchedules\AddNewStudent.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentDetails.cshtml" />
     <Content Include="Views\Account\RegisterVol.cshtml" />
-    <Content Include="Views\Manage\ManageUserPartial.cshtml" />
     <Content Include="Views\VenueTypes\Create.cshtml" />
     <Content Include="Views\VenueTypes\Edit.cshtml" />
     <Content Include="Views\VenueTypes\Delete.cshtml" />
+    <Content Include="Views\Manage\ManageUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
