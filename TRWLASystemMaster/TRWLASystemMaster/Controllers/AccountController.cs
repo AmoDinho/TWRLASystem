@@ -35,20 +35,30 @@ namespace TRWLASystemMaster.Controllers
         [HttpPost]
         public ActionResult Register(UserSignUpView USV)
         {
-            if (ModelState.IsValid)
-            {
-                UserManager UM = new UserManager();
-                if (!UM.IsLoginNameExist(USV.LoginName))
-                {
-                    UM.AddUserAccount(USV);
-                    FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                    return RedirectToAction("Index", "TRWLASchedules");
 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UserManager UM = new UserManager();
+                    if (!UM.IsLoginNameExist(USV.LoginName))
+                    {
+                        UM.AddUserAccount(USV);
+                        FormsAuthentication.SetAuthCookie(USV.FirstName, false);
+                        return RedirectToAction("Index", "TRWLASchedules");
+
+                    }
+                    else
+                        ModelState.AddModelError("", "Login Name already taken.");
                 }
-                else
-                    ModelState.AddModelError("", "Login Name already taken.");
+                return View();
             }
-            return View();
+
+            
+           catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+            }
         }
 
 
@@ -63,22 +73,31 @@ namespace TRWLASystemMaster.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterVol(UserSignUpView USV)
+        public ActionResult RegisterVol(UserSignUpViewVol USV)
         {
-            if (ModelState.IsValid)
-            {
-                UserManager UM = new UserManager();
-                if (!UM.IsLoginNameExist(USV.LoginName))
-                {
-                    UM.AddUserAccount(USV);
-                    FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                    return RedirectToAction("Index", "TRWLASchedules");
 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UserManager UM = new UserManager();
+                    if (!UM.IsLoginNameExist(USV.LoginName))
+                    {
+                        UM.AddUserAccount(USV);
+                        FormsAuthentication.SetAuthCookie(USV.FirstName, false);
+                        return RedirectToAction("Index", "TRWLASchedules");
+
+                    }
+                    else
+                        ModelState.AddModelError("", "Login Name already taken.");
                 }
-                else
-                    ModelState.AddModelError("", "Login Name already taken.");
+                return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+            }
+
         }
 
         public ActionResult Login()
@@ -89,29 +108,38 @@ namespace TRWLASystemMaster.Controllers
         [HttpPost]
         public ActionResult Login(UserLoginView ULV, string returnUrl)
         {
-            if (ModelState.IsValid)
-            {
-                UserManager UM = new UserManager();
-                string password = UM.GetUserPassword(ULV.LoginName);
 
-                if (string.IsNullOrEmpty(password))
-                    ModelState.AddModelError("", "The user login or password provided is incorrect.");
-                else
+            try
+            {
+                if (ModelState.IsValid)
                 {
-                    if (ULV.Password.Equals(password))
-                    {
-                        FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
-                        return RedirectToAction("Index", "TRWLASchedules");
-                    }
+                    UserManager UM = new UserManager();
+                    string password = UM.GetUserPassword(ULV.LoginName);
+
+                    if (string.IsNullOrEmpty(password))
+                        ModelState.AddModelError("", "The user login or password provided is incorrect.");
                     else
                     {
-                        ModelState.AddModelError("", "The password provided is incorrect.");
+                        if (ULV.Password.Equals(password))
+                        {
+                            FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
+                            return RedirectToAction("Index", "TRWLASchedules");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "The password provided is incorrect.");
+                        }
                     }
                 }
+
+                // If we got this far, something failed, redisplay form  
+                return View(ULV);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
             }
 
-            // If we got this far, something failed, redisplay form  
-            return View(ULV);
         }
 
 
