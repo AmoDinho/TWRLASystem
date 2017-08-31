@@ -71,8 +71,12 @@
                 @Html.DisplayFor(modelItem => item.GuestSpeaker_PictureLink)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.GuestSpeakerID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.GuestSpeakerID })
+              
+                <a href="@Url.Action("Edit", new { id=item.GuestSpeakerID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+
+                <a href="@Url.Action("Details", new { id=item.GuestSpeakerID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+
+                
             </td>
         </tr>
     }

@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.UserType
+﻿@model TRWLASystemMaster.Models.DB.UserType
 
 @{
     ViewBag.Title = "Create";
@@ -17,11 +17,10 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>UserType</h4>
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2"> Description</label>     @*@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -29,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AccessRight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2"> Access Right</label>   @*@Html.LabelFor(model => model.AccessRight, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AccessRight, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AccessRight, "", new { @class = "text-danger" })
@@ -44,9 +43,17 @@
     </div>
 }
 
-<div>
-    <button>@Html.ActionLink("Back ", "Index")</button>
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn">@Html.ActionLink("Back ", "Index")</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

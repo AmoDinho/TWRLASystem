@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.StudentType>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.StudentType>
 
 @{
     ViewBag.Title = "Index";
@@ -16,7 +16,7 @@
     <p>
         Find by name: @Html.TextBox("SearchStringST", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
 
-        <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+        <button value="Search" class="btn btn-default " ><i class="fa fa-search" aria-hidden="true"></i> search</button>
     </p>
 }
 
@@ -24,7 +24,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.StudentTypeDescription)
+            @*@Html.DisplayNameFor(model => model.StudentTypeDescription)*@ Student Type
         </th>
         <th></th>
     </tr>
@@ -52,7 +52,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Add a new Student Type", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+               <button class="btn btn-default">@Html.ActionLink("Add a new Student Type", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })</button> 
             </div>
         </div>
     </div>

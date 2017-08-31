@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.Venue>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.Venue>
 
 @{
     ViewBag.Title = "Index";
@@ -70,7 +70,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Add a new Venue", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+           <button class="btn">@Html.ActionLink("Add a new Venue", "Create")</button>     
             </div>
         </div>
     </div>

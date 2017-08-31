@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.UserType>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.UserType>
 
 @{
     ViewBag.Title = "Index";
@@ -51,7 +51,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                @Html.ActionLink("Add a new User Type", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+          <button class="btn">@Html.ActionLink("Add a new User Type", "Create") </button>    
             </div>
         </div>
     </div>

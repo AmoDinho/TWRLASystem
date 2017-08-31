@@ -536,10 +536,6 @@
     <Content Include="Views\Venues\Details.cshtml" />
     <Content Include="Views\Venues\Edit.cshtml" />
     <Content Include="Views\Venues\Index.cshtml" />
-    <Content Include="Views\VenueTypes\Create.cshtml" />
-    <Content Include="Views\VenueTypes\Delete.cshtml" />
-    <Content Include="Views\VenueTypes\Details.cshtml" />
-    <Content Include="Views\VenueTypes\Edit.cshtml" />
     <Content Include="Views\VenueTypes\Index.cshtml" />
     <Content Include="Views\StudentTypes\Create.cshtml" />
     <Content Include="Views\StudentTypes\Delete.cshtml" />
@@ -606,6 +602,9 @@
     <Content Include="Views\TRWLASchedules\StudentDetails.cshtml" />
     <Content Include="Views\Account\RegisterVol.cshtml" />
     <Content Include="Views\Manage\ManageUserPartial.cshtml" />
+    <Content Include="Views\VenueTypes\Create.cshtml" />
+    <Content Include="Views\VenueTypes\Edit.cshtml" />
+    <Content Include="Views\VenueTypes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

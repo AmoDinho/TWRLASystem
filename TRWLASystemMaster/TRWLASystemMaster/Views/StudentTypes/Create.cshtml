@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.StudentType
+﻿@model TRWLASystemMaster.Models.DB.StudentType
 
 @{
     ViewBag.Title = "Create";
@@ -21,7 +21,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.StudentTypeDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2"> Student Type</label>   @*@Html.LabelFor(model => model.StudentTypeDescription, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StudentTypeDescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StudentTypeDescription, "", new { @class = "text-danger" })
@@ -36,8 +36,15 @@
     </div>
 }
 
-<div>
-    <button> @Html.ActionLink("Back to List", "Index") </button>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn">@Html.ActionLink("Back to List", "Index")</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
