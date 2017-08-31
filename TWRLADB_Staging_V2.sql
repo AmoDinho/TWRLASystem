@@ -78,10 +78,6 @@ PRIMARY KEY (LOOKUPRoleID)
     )
 GO
 
-INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
-       VALUES ('Admin','Can Edit, Update, Delete',1,1)
-INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
-       VALUES ('Member','Read only',1,1)
 
 
 
@@ -882,15 +878,6 @@ values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
 
 
-insert into AspNetUsers(Email,EmailConfirmed ,PasswordHash,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,UserName)
-values('me@live.co.za',1,'454ttr##',1,1,1,1,'bob')
-
-go
-
-insert into AspNetUsers(Email, EmailConfirmed, PasswordHash, SecurityStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled , LockoutEndDateUtc,LockoutEnabled, AccessFailedCount, UserName)
-Values('u15213626@tuks.co.za', 1, '12sdsa', 'asdasd', '0834074027', 1, 1, '2017/10/12',1, 0, 'Rootsms4')
-go
-
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, Id, ResID, UserTypeID, StudentTypeID)
 Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18', 1, 2, 8, 2, 1)
 
@@ -912,3 +899,69 @@ go
 insert into SecurityAnswer(Security_Question, Security_Answer)
 values('What is was your favourite sport in high school', 'Swimming')
 go
+
+/*Look up Roles*/
+
+INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
+       VALUES ('Volunteer','Can Edit, Update, Delete',1,1)
+INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
+       VALUES ('Student','Read only',1,1)
+
+
+/*Test Students & Volunteerss*/
+
+--Volunteers--
+
+--vOL 1--
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Admin','Admin',1,1)  
+  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (2,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1,1)  
+ 
+  
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (2,1,1,1,1)
+ 
+
+
+--vOL 2---
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Admin2','Admin2',2,2)  
+
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (3,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
+
+
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (3,1,1,2,2)
+
+
+
+
+---Students---
+
+
+---Student1---
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Student1','Student2',3,3)  
+
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (4,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
+
+
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (4,2,1,3,3)
+
+
+---Student2---
+
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Student2','Student3',4,4)  
+
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (5,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
+
+
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (5,2,1,4,4)
