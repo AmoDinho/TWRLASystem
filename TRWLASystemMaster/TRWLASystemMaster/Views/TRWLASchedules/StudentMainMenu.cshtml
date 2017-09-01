@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<TRWLASystemMaster.Models.DB.TRWLASchedule>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+    ViewBag.Title = "StudentMainMenu";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 <div class="jumbotron">
@@ -10,8 +10,8 @@
 </div>
 
 @*<div id="divUserListContainer">
-    @Html.Action("ManageUserPartial", "Manage");
-</div>*@
+        @Html.Action("ManageUserPartial", "Manage");
+    </div>*@
 
 
 
@@ -92,10 +92,10 @@
     </script>*@
 
 
-@*@using (Html.BeginForm())
+@using (Html.BeginForm())
 {
     TRWLASystemMaster.Models.DB.Progress myprog = new TRWLASystemMaster.Models.DB.Progress();
-    
+
     if (myprog.ProgressCount == 1)
     {
         <div class="progress-container progress-danger">
@@ -217,11 +217,11 @@
             </div>
         </div>
     }
-}*@
+}
 
-<div class="row" @*id="showMe" style="display:none;*@ >
+<div class="row" @*id="showMe" style="display:none;*@>
 
-    <div class="col-md-12" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-bottom:10px; height:500px; overflow-y:auto;">
+    <div class="col-md-6" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-bottom:10px; height:500px; overflow-y:auto;">
         <h3 style="text-align:center;">Upcoming TRWLA Events</h3>
         @foreach (var item in Model)
         {
@@ -275,7 +275,8 @@
                     @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                 </p>
                 <p>
-                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+                    @Html.ActionLink("RSVP", "RSVP", new { id = item.ScheduleID })
                     @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
                             RSVP
                         </button>*@
@@ -286,11 +287,11 @@
                         </div>*@
                 </p>
             </div>
-            }
+        }
 
     </div>
 
-    @*<div class="col-md-5" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); float:right; margin-left:3px;margin-bottom:10px; height:500px; overflow-y:auto;">
+    <div class="col-md-5" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); float:right; margin-left:3px;margin-bottom:10px; height:500px; overflow-y:auto;">
         <h3 style="text-align:center;">My Upcoming Events</h3>
 
         <div class="row">
@@ -349,7 +350,7 @@
                 }
             }
         </div>
-    </div>*@
+    </div>
 
 </div>
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">

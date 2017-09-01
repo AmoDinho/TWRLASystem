@@ -24,6 +24,76 @@ namespace TRWLASystemMaster.Controllers
     {
         private TWRLADB_Staging_V2Entities18 db = new TWRLADB_Staging_V2Entities18();
 
+        public ActionResult StudentMainMenu(string sortOrder, string searchString, string F, string CO, string L, string all)
+        {
+
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            var tRWLASchedules = db.TRWLASchedules.Include(t => t.ComEngEvent).Include(t => t.FunctionEvent).Include(t => t.Lecture);
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Function_Name.Contains(searchString)
+                        || s.Lecture.Lecture_Name.Contains(searchString)
+                        || s.ComEngEvent.ComEng_Name.Contains(searchString));
+            }
+
+
+
+            if (!String.IsNullOrEmpty(F))
+            {
+                tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Function_Name.Contains("(F)"));
+            }
+
+            if (!String.IsNullOrEmpty(CO))
+            {
+                tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.ComEng_Name.Contains("(CE)"));
+            }
+
+            if (!String.IsNullOrEmpty(L))
+            {
+                tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)"));
+            }
+
+            if (!String.IsNullOrEmpty(all))
+            {
+                tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)")
+                        || s.ComEngEvent.ComEng_Name.Contains("(CE)")
+                        || s.FunctionEvent.Function_Name.Contains("(F)"));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
+                        || s.Lecture.Lecture_Name.Contains(searchString)
+                        || s.ComEngEvent.ComEng_Name.Contains(searchString));
+                    break;
+                case "sur_desc":
+                    tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
+                        || s.Lecture.Lecture_Name.Contains(searchString)
+                        || s.ComEngEvent.ComEng_Name.Contains(searchString));
+                    break;
+                case "Surname":
+                    tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
+                        || s.Lecture.Lecture_Name.Contains(searchString)
+                        || s.ComEngEvent.ComEng_Name.Contains(searchString));
+                    break;
+                default:
+                    tRWLASchedules = tRWLASchedules.OrderBy(s => s.FunctionEvent.Function_Name.Contains(searchString)
+                        || s.Lecture.Lecture_Name.Contains(searchString)
+                        || s.ComEngEvent.ComEng_Name.Contains(searchString));
+                    break;
+            }
+
+            tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.ComEngEvent.ComEng_Date >= DateTime.Now);
+
+            return View(tRWLASchedules.ToList());
+        }
         // GET: TRWLASchedules
         [AllowAnonymous]
         public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)

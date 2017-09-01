@@ -605,11 +605,13 @@
     <Content Include="Views\VenueTypes\Edit.cshtml" />
     <Content Include="Views\VenueTypes\Delete.cshtml" />
     <Content Include="Views\Manage\ManageUser.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentMainMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Test\" />
+    <Folder Include="Views\TRWLASchedules\StudentViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
