@@ -727,8 +727,9 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult ViewNotification()
         {
+            var user = (int)Session["User"];
             var mes = from n in db.EventMessages
-                      where n.SYSUserProfileID == Convert.ToInt32(TempData["User"])
+                      where n.SYSUserProfileID == user
                       select n;
 
             //Timer myTime = new Timer();
@@ -1108,6 +1109,8 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult WriteReviewConfirmed([Bind(Include = "reviewID, Review, RatingID, StudentID, VolunteerID, LectureID")] LectureReview LecRev, int id)
         {
+            var user = (int)Session["User"];
+
             if (ModelState.IsValid)
             {
                 int i = db.LectureReviews.Count();
@@ -1117,7 +1120,7 @@ namespace TRWLASystemMaster.Controllers
                 if (i == 0)
                 {
                     LecRev.LectureID = lec.LectureID;
-                    LecRev.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    LecRev.SYSUserProfileID = user;
 
                     db.LectureReviews.Add(LecRev);
                     db.SaveChanges();
@@ -1130,7 +1133,7 @@ namespace TRWLASystemMaster.Controllers
                     int k = max + 1;
                     LecRev.LectureID = lec.LectureID;
                     LecRev.reviewID = k;
-                    LecRev.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    LecRev.SYSUserProfileID = user;
 
                     db.LectureReviews.Add(LecRev);
                     db.SaveChanges();
@@ -1160,6 +1163,37 @@ namespace TRWLASystemMaster.Controllers
                 return HttpNotFound();
             }
             return View(tRWLASchedule);
+        }
+
+        public ActionResult StudentEventDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+            TempData["guestspeaker"] = tRWLASchedule.FunctionEvent.GuestSpeakerID;
+            TempData["EventIdNeeded"] = tRWLASchedule.ScheduleID;
+
+            if (tRWLASchedule == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tRWLASchedule);
+        }
+
+        public ActionResult StudentGuestSpeaker(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            GuestSpeaker guestSpeaker = db.GuestSpeakers.Find(id);
+            if (guestSpeaker == null)
+            {
+                return HttpNotFound();
+            }
+            return View(guestSpeaker);
         }
 
         //RSVP to an EVENT
@@ -1194,14 +1228,14 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RSVPConfirmed(RSVP_Event @event, int id)
         {
-
+            var user = (int)Session["User"];
             TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
             //Counts if the table has data in it
             int i = db.RSVP_Event.Count();
             if (i == 0)
             {
                 //this is what adds data to the table
-                @event.SYSUserProfileID = Convert.ToInt32(TempData["User"]); ;
+                @event.SYSUserProfileID = user; 
 
                 if (tRWLASchedule.FunctionID != null)
                 {
@@ -1210,7 +1244,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    mysched.SYSUserProfileID = user;
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1221,12 +1255,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        else if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
                         }
@@ -1242,7 +1276,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    mysched.SYSUserProfileID = user;
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1253,12 +1287,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.SYSUserProfileID != Convert.ToInt32(TempData["User"]))
+                        else if (s.SYSUserProfileID != user)
                         {
 
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
@@ -1275,7 +1309,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    mysched.SYSUserProfileID = user;
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1287,12 +1321,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        else if (s.SYSUserProfileID == user)
                         {
 
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
@@ -1308,7 +1342,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 int max = db.RSVP_Event.Max(p => p.rsvpID);
                 int l = max + 1;
-                @event.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                @event.SYSUserProfileID = Convert.ToInt32(@TempData["User"]);
 
                 if (tRWLASchedule.FunctionID != null)
                 {
@@ -1318,7 +1352,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    mysched.SYSUserProfileID = Convert.ToInt32(@TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1330,12 +1364,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        else if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
                         }
@@ -1353,7 +1387,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    mysched.SYSUserProfileID = user;
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1365,12 +1399,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        else if (s.SYSUserProfileID == user)
                         {
 
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
@@ -1389,7 +1423,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
+                    mysched.SYSUserProfileID = user;
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1401,12 +1435,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
+                        else if (s.SYSUserProfileID == user)
                         {
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
                         }
@@ -1727,6 +1761,74 @@ namespace TRWLASystemMaster.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult StudentContent(string sortOrder, string searchString, string locked, string unlocked, string all)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+
+            var content = from s in db.Contents
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                content = content.Where(s => s.Content_Name.Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(locked))
+            {
+
+                content = content.Where(s => s.Content_Status.Equals(1));
+            }
+
+            if (!String.IsNullOrEmpty(unlocked))
+            {
+
+                content = content.Where(s => s.Content_Status.Equals(0));
+            }
+
+            if (!String.IsNullOrEmpty(all))
+            {
+
+                content = content.Where(s => s.Content_Status.Equals(0) || s.Content_Status.Equals(1));
+            }
+
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    content = content.OrderByDescending(s => s.Content_Name);
+                    break;
+                case "sur_desc":
+                    content = content.OrderByDescending(s => s.Content_Name);
+                    break;
+                case "Surname":
+                    content = content.OrderByDescending(s => s.Content_Name);
+                    break;
+                default:
+                    content = content.OrderBy(s => s.Content_Name);
+                    break;
+            }
+
+            return View(content.ToList());
+        }
+
+        public ActionResult StudentContentDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Models.DB.Content content = db.Contents.Find(id);
+            if (content == null)
+            {
+                return HttpNotFound();
+            }
+
+            TempData["Image"] = id;
+            return View(content);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -1738,3 +1840,4 @@ namespace TRWLASystemMaster.Controllers
         }
     }
 }
+

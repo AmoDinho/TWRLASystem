@@ -275,7 +275,7 @@
                     @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                 </p>
                 <p>
-                    @Html.ActionLink("Details", "Details", new { id = item.ScheduleID }) |
+                    @Html.ActionLink("Details", "StudentEventDetails", new { id = item.ScheduleID }) |
                     @Html.ActionLink("RSVP", "RSVP", new { id = item.ScheduleID })
                     @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
                             RSVP
@@ -297,7 +297,7 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                foreach (var s in item.RSVPSchedules.Where(p => p.SYSUserProfileID == Convert.ToInt32(TempData["User"])).Where(p => p.RSVP_Event.Attended == null))
+                foreach (var s in item.RSVPSchedules.Where(p => p.SYSUserProfileID == (int)Session["User"]).Where(p => p.RSVP_Event.Attended == null))
                 {
                     <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
                         <h4>
@@ -338,7 +338,7 @@
                             @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                         </p>
                         <p>
-                            @Html.ActionLink("Details", "Details", new { id = item.ScheduleID })
+                            @Html.ActionLink("Details", "StudentEventDetails", new { id = item.ScheduleID })
 
                             @if (item.LectureID != null)
                             {

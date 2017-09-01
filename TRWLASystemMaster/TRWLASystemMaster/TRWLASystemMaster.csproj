@@ -606,6 +606,10 @@
     <Content Include="Views\VenueTypes\Delete.cshtml" />
     <Content Include="Views\Manage\ManageUser.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentMainMenu.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentEventDetails.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentContent.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentContentDetails.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentGuestSpeaker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

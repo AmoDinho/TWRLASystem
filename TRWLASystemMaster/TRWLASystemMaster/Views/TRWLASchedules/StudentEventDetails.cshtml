@@ -1,8 +1,8 @@
 ﻿@model TRWLASystemMaster.Models.DB.TRWLASchedule
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+    ViewBag.Title = "StudentEventDetails";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 @if (Model.FunctionID != null)
@@ -92,7 +92,9 @@
 
             <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
                 @Html.DisplayFor(model => model.FunctionEvent.GuestSpeaker.GuestSpeaker_Name)
+                @Html.ActionLink("StudentGuestSpeaker", "StudentGuestSpeaker", new { id = Convert.ToInt32(@TempData["guestspeaker"]) })
             </dd>
+            
 
             <dt>
                 @Html.Label("Venue:")
@@ -181,29 +183,30 @@
         </dl>
 
         <h4>Student Reviews on @Html.DisplayFor(model => model.Lecture.Lecture_Name)</h4>
-        
-                using (Html.BeginForm())
-                {
-                    var review = from s in Model.Lecture.LectureReviews
-                                 select s;
-                    <table class="table" style="overflow-y:auto; max-height:500px;">
-                        <tr>
-                            <th>Name of Student</th>
-                            <th>Student Review</th>
-                            <th>Rating</th>
-                        </tr>
 
-                        @foreach (var rev in review)
-                        {
-                        <tr>
-                            <td>@rev.SYSUserProfile.FirstName
-                            </td>
-                            <td>@rev.Review</td>
-                            <td>@rev.RatingType.Rating</td>
-                        </tr>
-                        }
-                    </table>
+        using (Html.BeginForm())
+        {
+            var review = from s in Model.Lecture.LectureReviews
+                         select s;
+            <table class="table" style="overflow-y:auto; max-height:500px;">
+                <tr>
+                    <th>Name of Student</th>
+                    <th>Student Review</th>
+                    <th>Rating</th>
+                </tr>
+
+                @foreach (var rev in review)
+                {
+                    <tr>
+                        <td>
+                            @rev.SYSUserProfile.FirstName
+                    </td>
+                    <td>@rev.Review</td>
+                    <td>@rev.RatingType.Rating</td>
+                </tr>
                 }
+            </table>
+        }
 
     }
 
@@ -284,7 +287,7 @@
             </dd>
 
         </dl>
-        }
+    }
 
 
 </div>
@@ -294,78 +297,10 @@
     </div>
     <div class="form-group">
         <div style="margin-right:5px;">
-            @if (Model.FunctionID != null)
-            {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "FunctionEvents", new { id = Model.FunctionID })'">Update</button>
-            }
-            @if (Model.LectureID != null)
-            {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Lectures", new { id = Model.LectureID })'">Update</button>
-            }
-            @if (Model.ComEngID != null)
-            {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "ComEngEvents", new { id = Model.ComEngID })'">Update</button>
-            }
-        </div>
-    </div>
-    <div class="form-group">
-        <div style="margin-right:5px;">
-            <button class="btn btn-default" data-toggle="modal" data-target="#Delete" >
-                Cancel Event
-            </button>
-        </div>
-    </div>
-    <div class="form-group">
-        <div style="margin-right:5px;">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'">Return</button>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Cancel Event</h4>
-            </div>
-            <div class="modal-body">
-                Are you sure that you want to cancel this event?
-            </div>
-            <div class="modal-footer form-inline">
-                @using (Html.BeginForm())
-            {
-                    @Html.AntiForgeryToken()
-                    <div class="form-actions no-color ">
-                        <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Cancel Event</button>
-                    </div>
-                }
-                <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade" id="NotGoing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 id="myModalLabel">RSVP Confirmation</h4>
-            </div>
-            <div class="modal-body">
-                Are you sure that you want to RSVP to this event?
-            </div>
-            <div class="modal-footer">
-                @using (Html.BeginForm())
-            {
-                    @Html.AntiForgeryToken()
-                    <div class="form-actions no-color ">
-                        <button type="submit" value="RSVP" class="btn btn-default btn-simple form-group">Confirm RSVP</button>
-                    </div>
-                }
-                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
+

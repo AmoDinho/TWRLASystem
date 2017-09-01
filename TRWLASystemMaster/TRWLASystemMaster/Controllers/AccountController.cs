@@ -66,7 +66,7 @@ namespace TRWLASystemMaster.Controllers
 
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-                        TempData["User"] = myUserP.SYSUserProfileID;
+                        Session["User"] = myUserP.SYSUserProfileID;
 
                         return RedirectToAction("StudentMainMenu", "TRWLASchedules");
 
@@ -113,7 +113,7 @@ namespace TRWLASystemMaster.Controllers
 
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-                        TempData["User"] = myUserP.SYSUserProfileID;
+                        Session["User"] = myUserP.SYSUserProfileID;
 
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
                         return RedirectToAction("Index", "TRWLASchedules");
@@ -166,12 +166,12 @@ namespace TRWLASystemMaster.Controllers
 
                             if (Convert.ToInt32(myUserP.UserTypeID) == 1)
                             {
-                                TempData["User"] = myUserP.SYSUserProfileID;
+                                Session["User"] = myUserP.SYSUserProfileID;
                                 return RedirectToAction("StudentMainMenu", "TRWLASchedules");
                             }
                             else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
                             {
-                                TempData["User"] = myUserP.SYSUserProfileID;
+                                Session["User"] = myUserP.SYSUserProfileID;
                                 return RedirectToAction("Index", "TRWLASchedules");
                             }
                             
