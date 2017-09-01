@@ -9,10 +9,11 @@
 
 <div class="row">
     <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm())
+    <section id="loginForm">
+        @using (Html.BeginForm())
             {
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -32,15 +33,15 @@
                 </div>
 
                 @*<div class="form-group">
-               
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            <input id="checkbox1" type="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox label" })
-                            @Html.LabelFor(m => m.RememberMe)
+
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input id="checkbox1" type="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox label" })
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
 
 
                 <div class="form-group">
@@ -49,7 +50,7 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register as a new user", "SelectVolStud","Select")
+                    @Html.ActionLink("Register as a new user", "SelectVolStud", "Select")
                 </p>
                 <p>
                     @Html.ActionLink("Forgot Password", "ForgotPassword")
@@ -58,9 +59,9 @@
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
                     </p>*@
-            }
+                </div>
+                }
         </section>
-    </div>
     <div class="col-md-3">
         <img src="..\Images\!Logo.png" id="TRWLAImage" style="width:300px; height:400px;" />
     </div>
@@ -69,6 +70,7 @@
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>*@
+        </div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

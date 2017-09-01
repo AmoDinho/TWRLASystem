@@ -60,9 +60,11 @@ namespace TRWLASystemMaster.Controllers
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
                     {
+                        USV.UserTypeID = 1;
                         UM.AddUserAccount(USV);
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                        return RedirectToAction("Index", "TRWLASchedules");
+                        
+                        return RedirectToAction("StudentMainMenu", "TRWLASchedules");
 
                     }
                     else
@@ -102,6 +104,7 @@ namespace TRWLASystemMaster.Controllers
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
                     {
+                        USV.UserTypeID = 2;
                         UM.AddUserAccount(USV);
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
                         return RedirectToAction("Index", "TRWLASchedules");
@@ -136,6 +139,14 @@ namespace TRWLASystemMaster.Controllers
                     UserManager UM = new UserManager();
                     string password = UM.GetUserPassword(ULV.LoginName);
 
+                    var username = from n in db.SYSUsers
+                                   where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
+                                   select n;
+
+                    SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
+                    SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+                    
+
                     if (string.IsNullOrEmpty(password))
                         ModelState.AddModelError("", "The user login or password provided is incorrect.");
                     else
@@ -143,7 +154,19 @@ namespace TRWLASystemMaster.Controllers
                         if (ULV.Password.Equals(password))
                         {
                             FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
-                            return RedirectToAction("Index", "TRWLASchedules");
+
+                            if (Convert.ToInt32(myUserP.UserTypeID) == 1)
+                            {
+                                TempData["User"] = myUserP.SYSUserProfileID;
+                                return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                            }
+                            else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
+                            {
+                                TempData["User"] = myUserP.SYSUserProfileID;
+                                return RedirectToAction("Index", "TRWLASchedules");
+                            }
+                            
+                            
                         }
                         else
                         {

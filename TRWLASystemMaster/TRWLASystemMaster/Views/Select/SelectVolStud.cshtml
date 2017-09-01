@@ -13,6 +13,6 @@
     <h4> Please select whether you are signing up as Student or Volunteer.</h4>
 </div>
 
-<button class="btn" > @Html.ActionLink("Volunteer", "RegisterVol", "Account") </button >
+<button type="button" class="btn" onclick="location.href='@Url.Action("RegisterVol", "Account")'">Register Volunteer</button>
 
-<button class="btn"> @Html.ActionLink("Student", "Register", "Account") </button>
+<button type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Log Event Attedance</button>
