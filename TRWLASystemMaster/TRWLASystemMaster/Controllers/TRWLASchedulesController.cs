@@ -1342,7 +1342,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 int max = db.RSVP_Event.Max(p => p.rsvpID);
                 int l = max + 1;
-                @event.SYSUserProfileID = Convert.ToInt32(@TempData["User"]);
+                @event.SYSUserProfileID = user;
 
                 if (tRWLASchedule.FunctionID != null)
                 {
@@ -1352,7 +1352,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.SYSUserProfileID = Convert.ToInt32(@TempData["User"]);
+                    mysched.SYSUserProfileID = user;
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
