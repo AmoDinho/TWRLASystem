@@ -1,6 +1,16 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+ 
     <div class="jumbotron">
         <h1>TuksRes Women in Leadership Academy</h1>
     </div>
@@ -14,7 +24,6 @@
             </div>
         </center>
     </div>
-       
         <div class="row"  id="about">
             <div class="col-md-8 col-md-offset-2">
                 <h2>Background</h2>
@@ -27,6 +36,15 @@
                     The academy highly values relationships. The culture of cultivating positive relationships in all dimensions is evident throughout the academy. Peer –learning, mentorship, emotional intelligence and teamwork are all integrated into the functioning of the academy at all levels. We aim to provide a powerful network that can be used as a platform for young women to benefit from.
                     In order for young female leaders to succeed professionally as well as challenge the status quo and try and achieve greater gender equality in their communities, we believe in equipping them with as many skills as possible. These focus on three aspects: business, life, and leadership skills.
                 </p>
+                <div class="fb-video" data-href="https://www.facebook.com/TuksResWomenInLeadershipAcademy/videos/1643037206003165/" data-width="1000" data-show-text="false">
+                    <blockquote cite="https://www.facebook.com/TuksResWomenInLeadershipAcademy/videos/1643037206003165/" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/TuksResWomenInLeadershipAcademy/videos/1643037206003165/">We Have a Dream</a><p>
+                            The TuksRes Women in Leadership Academy has a dream...
+
+                            Video by Jessie Palmer
+                        </p>Posted by <a href="https://www.facebook.com/TuksResWomenInLeadershipAcademy/">TuksRes Women in Leadership Academy</a> on Thursday, March 2, 2017
+                    </blockquote>
+                </div>
             </div>
         </div>
     <script src="https://use.fontawesome.com/dead28a296.js"></script>
@@ -46,7 +64,7 @@
                     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                     if (target.length) {
                         $('html, body').animate({
-                            scrollTop: target.offset().top
+                            scrollTop: target.offset().top-50
                         }, 1000);
                         return false;
                     }
@@ -55,3 +73,5 @@
         });
 
 </script>
+
+

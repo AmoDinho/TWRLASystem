@@ -1,0 +1,91 @@
+﻿@model TRWLASystemMaster.Models.FunctionEvent
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FunctionEvent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Theme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker.GuestSpeaker_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker.GuestSpeaker_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue.Venue_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FunctionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

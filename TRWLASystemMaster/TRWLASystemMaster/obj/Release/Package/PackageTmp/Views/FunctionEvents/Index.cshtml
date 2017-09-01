@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.FunctionEvent>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_Summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Function_Theme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestSpeaker.GuestSpeaker_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Function_Theme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestSpeaker.GuestSpeaker_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue.Venue_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FunctionID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.FunctionID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FunctionID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,98 @@
+﻿@model TRWLASystemMaster.Models.FunctionEvent
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FunctionEvent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Function_Theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Function_Theme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuestSpeaker.GuestSpeaker_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuestSpeaker.GuestSpeaker_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venue.Venue_Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

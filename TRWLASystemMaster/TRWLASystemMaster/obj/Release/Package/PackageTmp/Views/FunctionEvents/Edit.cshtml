@@ -1,0 +1,106 @@
+﻿@model TRWLASystemMaster.Models.FunctionEvent
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.FunctionID)
+
+    <div class="form-horizontal">
+        <div class="form-horizontal" style="margin-bottom:100px; display:inline-block; width:50%;">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group" style="margin-bottom:10px;">
+                @Html.Label("Name", new { @class = "control-label col-md-2" })
+                <div class="col-md-10 ">
+                    @Html.TextBoxFor(model => model.Function_Name, new { maxlength = 30, @class = "form-control form-control-danger" })
+                    @Html.ValidationMessageFor(model => model.Function_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("Guest Speaker", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
+                    <div style="margin-top:10px; margin-left:10px;">
+                        @Html.ActionLink("Register Guest Speaker", "Create", "GuestSpeakers")
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.Label("Date", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Function_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.Function_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.Label("Time", new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Function_StartTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                    @Html.ValidationMessageFor(model => model.Function_StartTime, "", new { @class = "text-danger" })
+                </div>
+
+
+                @Html.Label("-", new { @class = "control-label col-md-2", @style = "margin-left: -80px; margin-right: -10px;" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Function_EndTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                    @Html.ValidationMessageFor(model => model.Function_EndTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Theme", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Function_Theme, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Function_Theme, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Venue", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
+                    @Html.ActionLink("Add Venue", "Index", "Events", new { @style = "margin-top:10px; text-align:center; margin-left:25px;" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Summary", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Function_Summary, new { maxlength = 100, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px;" })
+                    @Html.ValidationMessageFor(model => model.Function_Summary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Description", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Function_Description, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px; height:200px;" })
+                    @Html.ValidationMessageFor(model => model.Function_Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Edit" class="btn" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

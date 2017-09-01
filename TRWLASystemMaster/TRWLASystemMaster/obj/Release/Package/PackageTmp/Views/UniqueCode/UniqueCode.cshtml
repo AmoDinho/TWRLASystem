@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Generate Unique Code</h2>
+</div>
+
+
+<ceneter><p>Unique codes can only be used once</p></ceneter>
+
+    @* Generate Unique Code For vols'*@
+    @using (Html.BeginForm())
+    {
+        <p>
+            <button class="btn btn-round btn-round" style="color:#9b16d8">Generate Unique Code</button>
+        </p>
+    }
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            Code
+        </th>
+        <th>
+            Status
+        </th>
+            <th></th>
+    </tr>
+
+
+    <tr>
+        <td><!-- Record # 1 -->
+           124357
+        </td>
+        <td>
+            <span class="badge badge-success">Active</span>
+        </td>
+    </tr>
+
+    <tr>
+
+        <td>
+            <!-- Record # 2 -->
+            258478
+        </td>
+        <td>
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+
+    </tr>
+
+    <tr>
+
+        <td>
+            <!-- Record #  3-->
+            123546
+        </td>
+        <td>
+            <span class="badge badge-success">Active</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 4 -->
+            859756
+        </td>
+        <td>
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 5 -->
+            745896
+        </td>
+        <td>
+            <span class="badge badge-success">Active</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 6 -->
+            1452369
+        </td>
+        <td>
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+    </tr>
+
+</table>

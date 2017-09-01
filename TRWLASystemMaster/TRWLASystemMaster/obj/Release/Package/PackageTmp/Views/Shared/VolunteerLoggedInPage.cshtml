@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "VolunteerLoggedInPage";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title TRWLA Student Portal</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("TRWLA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @* ADD LINK TO EVENTS PAGE *@
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+                    @* ADD LINK TO Volunteer List PAGE *@
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Members<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Students</a></li>
+                            <li><a href="#">Volunteers</a></li>
+                            <li><a href="#">Alumni</a></li>
+                            <li><a href="#">Send Notification</a></li>
+                        </ul>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Create Event</a></li>
+                            <li><a href="#">Manage Events</a></li>
+                            <li><a href="#">Manage Venues</a></li>
+                            <li><a href="#">Log Attendance</a></li>
+                            <li><a href="#">Manage Guest Speaker</a></li>
+                        </ul>
+                    </li>
+
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Lecture</a></li>
+                            <li><a href="#">Community Engagement </a></li>
+                            <li><a href="#">E-Library</a></li>
+                        </ul>
+                    </li>
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gallery<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("Vol_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+       @RenderBody()
+         @*
+            <footer class="panel-footer">
+                <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
+            </footer>*@
+    </div>
+
+  
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+    </script>
+</body>
+</html>
+<script src="https://use.fontawesome.com/dead28a296.js"></script>
+
+@*
+    How to do the dropdown, Just need to fix css
+    
+    
+    <li class="@Html.ActionLink("Home", "Index", "Home") dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Storage<span class="caret"></span>
+       </a>
+       <ul class="dropdown-menu" role="menu">
+           <li>@Html.ActionLink("About", "About", "Home")</li>
+           <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+       </ul>
+    </li>*@   

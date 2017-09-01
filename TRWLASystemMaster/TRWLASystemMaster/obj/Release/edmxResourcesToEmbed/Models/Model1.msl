@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
+          <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+          <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComEngEvents">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ComEngEvent">
+        <MappingFragment StoreEntitySet="ComEngEvent">
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+          <ScalarProperty Name="ComEng_Name" ColumnName="ComEng_Name" />
+          <ScalarProperty Name="ComEng_Summary" ColumnName="ComEng_Summary" />
+          <ScalarProperty Name="ComEng_Description" ColumnName="ComEng_Description" />
+          <ScalarProperty Name="ComEng_Date" ColumnName="ComEng_Date" />
+          <ScalarProperty Name="ComEnge_StartTime" ColumnName="ComEnge_StartTime" />
+          <ScalarProperty Name="ComEng_EndTime" ColumnName="ComEng_EndTime" />
+          <ScalarProperty Name="ComEng_Theme" ColumnName="ComEng_Theme" />
+          <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Content">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="Content_Name" ColumnName="Content_Name" />
+          <ScalarProperty Name="Content_Link" ColumnName="Content_Link" />
+          <ScalarProperty Name="Content_Status" ColumnName="Content_Status" />
+          <ScalarProperty Name="Content_Description" ColumnName="Content_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FunctionEvents">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.FunctionEvent">
+        <MappingFragment StoreEntitySet="FunctionEvent">
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="Function_Name" ColumnName="Function_Name" />
+          <ScalarProperty Name="Function_Summary" ColumnName="Function_Summary" />
+          <ScalarProperty Name="Function_Description" ColumnName="Function_Description" />
+          <ScalarProperty Name="Function_Date" ColumnName="Function_Date" />
+          <ScalarProperty Name="Function_StartTime" ColumnName="Function_StartTime" />
+          <ScalarProperty Name="Function_EndTime" ColumnName="Function_EndTime" />
+          <ScalarProperty Name="Function_Theme" ColumnName="Function_Theme" />
+          <ScalarProperty Name="GuestSpeakerID" ColumnName="GuestSpeakerID" />
+          <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuestSpeakers">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.GuestSpeaker">
+        <MappingFragment StoreEntitySet="GuestSpeaker">
+          <ScalarProperty Name="GuestSpeakerID" ColumnName="GuestSpeakerID" />
+          <ScalarProperty Name="GuestSpeaker_Name" ColumnName="GuestSpeaker_Name" />
+          <ScalarProperty Name="GuestSpeaker_Surname" ColumnName="GuestSpeaker_Surname" />
+          <ScalarProperty Name="GuestSpeaker_Phone" ColumnName="GuestSpeaker_Phone" />
+          <ScalarProperty Name="GuestSpeaker_Email" ColumnName="GuestSpeaker_Email" />
+          <ScalarProperty Name="GuestSpeaker_PictureLink" ColumnName="GuestSpeaker_PictureLink" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lectures">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Lecture">
+        <MappingFragment StoreEntitySet="Lecture">
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="Lecture_Name" ColumnName="Lecture_Name" />
+          <ScalarProperty Name="Lecture_Summary" ColumnName="Lecture_Summary" />
+          <ScalarProperty Name="Lecture_Description" ColumnName="Lecture_Description" />
+          <ScalarProperty Name="Lecture_Date" ColumnName="Lecture_Date" />
+          <ScalarProperty Name="Lecture_StartTime" ColumnName="Lecture_StartTime" />
+          <ScalarProperty Name="Lecture_EndTime" ColumnName="Lecture_EndTime" />
+          <ScalarProperty Name="Lecture_Theme" ColumnName="Lecture_Theme" />
+          <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+          <ScalarProperty Name="ResidenceID" ColumnName="ResidenceID" />
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Milestones">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Milestone">
+        <MappingFragment StoreEntitySet="Milestone">
+          <ScalarProperty Name="MilestoneID" ColumnName="MilestoneID" />
+          <ScalarProperty Name="Milestone_Description" ColumnName="Milestone_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Residences">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Residence">
+        <MappingFragment StoreEntitySet="Residence">
+          <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="Res_Name" ColumnName="Res_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityAnswers">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityAnswer">
+        <MappingFragment StoreEntitySet="SecurityAnswer">
+          <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
+          <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
+          <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
+          <ScalarProperty Name="Graduate" ColumnName="Graduate" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
+          <ScalarProperty Name="Student_Name" ColumnName="Student_Name" />
+          <ScalarProperty Name="Student_Surname" ColumnName="Student_Surname" />
+          <ScalarProperty Name="Student_Phone" ColumnName="Student_Phone" />
+          <ScalarProperty Name="Student_DoB" ColumnName="Student_DoB" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="StudentTypeID" ColumnName="StudentTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentMilestones">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.StudentMilestone">
+        <MappingFragment StoreEntitySet="StudentMilestone">
+          <ScalarProperty Name="MilestoneID" ColumnName="MilestoneID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentTypes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.StudentType">
+        <MappingFragment StoreEntitySet="StudentType">
+          <ScalarProperty Name="StudentTypeID" ColumnName="StudentTypeID" />
+          <ScalarProperty Name="StudentTypeDescription" ColumnName="StudentTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRWLASchedules">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.TRWLASchedule">
+        <MappingFragment StoreEntitySet="TRWLASchedule">
+          <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.UserType">
+        <MappingFragment StoreEntitySet="UserType">
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AccessRight" ColumnName="AccessRight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Venues">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Venue">
+        <MappingFragment StoreEntitySet="Venue">
+          <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+          <ScalarProperty Name="Venue_Name" ColumnName="Venue_Name" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="VenueTypeID" ColumnName="VenueTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VenueTypes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.VenueType">
+        <MappingFragment StoreEntitySet="VenueType">
+          <ScalarProperty Name="VenueTypeID" ColumnName="VenueTypeID" />
+          <ScalarProperty Name="VenueType_Description" ColumnName="VenueType_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Volunteers">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Volunteer">
+        <MappingFragment StoreEntitySet="Volunteer">
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+          <ScalarProperty Name="Volunteer_Name" ColumnName="Volunteer_Name" />
+          <ScalarProperty Name="Volunteer_Surname" ColumnName="Volunteer_Surname" />
+          <ScalarProperty Name="Volunteer_Phone" ColumnName="Volunteer_Phone" />
+          <ScalarProperty Name="Volunteer_DoB" ColumnName="Volunteer_DoB" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VolunteerFeedbacks">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.VolunteerFeedback">
+        <MappingFragment StoreEntitySet="VolunteerFeedback">
+          <ScalarProperty Name="VolunteerFeedbackID" ColumnName="VolunteerFeedbackID" />
+          <ScalarProperty Name="Feedback_Date" ColumnName="Feedback_Date" />
+          <ScalarProperty Name="Enjoyment" ColumnName="Enjoyment" />
+          <ScalarProperty Name="Preparation" ColumnName="Preparation" />
+          <ScalarProperty Name="Expectation" ColumnName="Expectation" />
+          <ScalarProperty Name="Communication" ColumnName="Communication" />
+          <ScalarProperty Name="Growth" ColumnName="Growth" />
+          <ScalarProperty Name="Impact" ColumnName="Impact" />
+          <ScalarProperty Name="Coping" ColumnName="Coping" />
+          <ScalarProperty Name="FutureVision" ColumnName="FutureVision" />
+          <ScalarProperty Name="Confident" ColumnName="Confident" />
+          <ScalarProperty Name="Challenge" ColumnName="Challenge" />
+          <ScalarProperty Name="Improvement" ColumnName="Improvement" />
+          <ScalarProperty Name="Criticism" ColumnName="Criticism" />
+          <ScalarProperty Name="FutureMonths" ColumnName="FutureMonths" />
+          <ScalarProperty Name="ExperienceImpact" ColumnName="ExperienceImpact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VolunteerTypes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.VolunteerType">
+        <MappingFragment StoreEntitySet="VolunteerType">
+          <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
+          <ScalarProperty Name="VolunteerType_Description" ColumnName="VolunteerType_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attendances">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSVP_Event">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
+        <MappingFragment StoreEntitySet="RSVP_Event">
+          <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="TWRLADB_Staging_V2Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,510 @@
+﻿@{
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+
+<div class="jumbotron">
+    <h1>Reports</h1>
+</div>
+<hr />
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'London')">Class Attendance</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">Community Engagement </button>
+    <button class="tablinks" onclick="openCity(event, 'Demo')">Demographics</button>
+    <button class="tablinks" onclick="openCity(event, 'Event')">Event Popularity</button>
+    <button class="tablinks" onclick="openCity(event, 'Feed')">Feedback</button>
+    <button class="tablinks" onclick="openCity(event, 'Funct')">Function Attendance</button>
+    <button class="tablinks" onclick="openCity(event, 'User')">User Statistics</button>
+    <button class="tablinks" onclick="openCity(event, 'Student')">Student Progress</button>
+</div>
+
+@* Start of tab content  *@
+<div id="London" class="tabcontent">
+    <center>
+        <div id="chart_div1" style="width:1000px; height:1000px"></div>
+    </center>
+</div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['City', 'Class of 2017', ],
+          ['Ciara',10],
+          ['Noma', 5],
+          ['Siobahn', 2],
+          ['Veronica', 20],
+          ['Buleywa', 15],
+          ['Janine', 29],
+          ['Sarah', 45],
+          ['Nicola', 65],
+          ['Thuli', 14],
+          ['Nkosiana', 12],
+          ['Tawanda', 30],
+          ['Susan', 40],
+          ['Aimee', 50],
+          ['Ruby', 2],
+          ['Blue', 55],
+          ['Sunete', 10],
+          ['Martha', 45],
+          ['Gcina', 68],
+          ['Juaex', 27],
+          ['Carla', 44]
+        ]);
+
+        var options = {
+            title: 'Class Attendace of Registered TWRLA Members',
+            chartArea: { width: '50%' },
+            hAxis: {
+                title: 'Total Classes',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Students'
+            }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div1'));
+
+        chart.draw(data, options);
+    }
+    </script>
+
+
+@* Community Engagement  *@
+ 
+<div id="Paris" class="tabcontent">
+    <center>
+     
+        <div id="chart_div2" style="width:800px; height:800px"></div>
+    </center>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['City', 'Class of 2017', ],
+          ['Mamelodi',14],
+          ['Sanitry Towel Dive',123],
+          ['Green Tree Creche Revamp', 74],
+          ['Tin Can Food Drive', 25],
+          ['Litter collection', 73]
+        ]);
+
+        var options = {
+            title: 'Function Attendace of Registered TWRLA Members',
+            chartArea: { width: '50%' },
+            hAxis: {
+                title: 'Number of Students',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Community Engagement Events'
+            }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
+
+        chart.draw(data, options);
+    }
+    </script>
+
+</div>
+
+@* Demographics *@
+<div id="Demo" class="tabcontent">
+
+    <center>
+     
+        <div id="donutchart" style="width:900px; height:400px"></div>
+    </center>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Black', 11],
+          ['White', 2],
+          ['Coloured', 2],
+          ['Indian', 2],
+          ['Asian', 7]
+        ]);
+
+        var options = {
+            title: 'Demographic make up of TWRLA Students',
+            pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+    }
+    </script>
+</div>
+
+@* Event Popularity *@
+<div id="Event" class="tabcontent">
+
+    <center>
+      
+
+        <div id="chart_div3" style="width:900px; height:400px"></div>
+    </center>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Functions', 'Lectures'],
+          ['Jan',  50,      45],
+          ['Feb',  75,      12],
+          ['March',  89,       78],
+          ['April',  100,      98]
+        ]);
+
+        var options = {
+          title: 'Average Monthly attendance for events between January - April of 2017',
+          hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0,title:"Average Attendance"}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div3'));
+        chart.draw(data, options);
+      }
+    </script> 
+</div>
+
+@* Feedback Report *@
+<div id="Feed" class="tabcontent">
+    <center>
+      
+        <div id="chart_div4" style="width:800px; height:800px"></div>
+    </center>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['City', 'Voluneers of 2017', ],
+          ['Goals Assesment',14],
+          ['Mid Year Assesment',123],
+          ['Yearly Feedback', 74],
+
+        ]);
+
+        var options = {
+            title: 'Number of Responses for volunteer feedback surveys',
+            chartArea: { width: '50%' },
+            hAxis: {
+                title: 'Number of responses',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Survey Assesments'
+            }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
+
+        chart.draw(data, options);
+    }
+    </script>
+</div>
+
+@* Funcion attendance *@
+<div id="Funct" class="tabcontent">
+    <center>
+
+        <div id="chart_div5" style="width:800px; height:800px"></div>
+    </center>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['City', 'Class of 2017', ],
+          ['Who Am I',48],
+          ['Destiny Building', 69],
+          ['Gender Bias', 142],
+          ['Be A Better You', 45],
+          ['How to Get Hired', 50]
+        ]);
+
+        var options = {
+            title: 'Function Attendace of Registered TWRLA Members',
+            chartArea: { width: '50%' },
+            hAxis: {
+                title: 'Number of Students',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Function Events'
+            }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div5'));
+
+        chart.draw(data, options);
+    }
+    </script>
+</div>
+
+@*User Statsitcs*@
+<div id="User" class="tabcontent">
+    <center>
+
+        <p>Report Generated for the month of April 2017</p>
+        <div id="chart_div6" style="width:800px; height:400px"></div>
+    </center>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', { packages: ['corechart', 'line'] });
+    google.charts.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');
+        data.addColumn('number', 'Register TWRLA Users');
+
+        data.addRows([
+          [0, 0], [1, 10], [10, 23], [11, 33], [16, 40], [22, 55],[25,50],[26,85],[31,98]
+
+
+        ]);
+
+        var options = {
+            hAxis: {
+                title: 'April'
+            },
+            vAxis: {
+                title: 'Number of Users'
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div6'));
+
+        chart.draw(data, options);
+    }
+    </script>
+</div>
+
+@*Student Progress*@
+<div id="Student" class="tabcontent">
+   
+    <hr>
+    <table class="table">
+        <tr>
+            <th>
+                Student Number
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Progress Status
+            </th>
+            <th>
+                Progress Score
+            </th>
+            <th></th>
+        </tr>
+
+
+        <tr>
+            <td>
+                <!-- Record # 1 -->
+                17355612
+            </td>
+            <td>
+                Caira
+            </td>
+            <td>
+                Milkbottom
+            </td>
+            <td>
+                <span class="badge badge-success">Progressing</span>
+            </td>
+            <td>
+                57%
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 2 -->
+                14992949
+            </td>
+            <td>
+                Tinyko
+            </td>
+            <td>
+                Vilakazi
+            </td>
+            <td>
+                <span class="badge badge-danger">No Progress</span>
+            </td>
+            <td>
+                33%
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 3 -->
+                15511549
+            </td>
+            <td>
+                Cailn
+            </td>
+            <td>
+                Van Rensburg
+            </td>
+            <td>
+                <span class="badge badge-success">Progressing</span>
+            </td>
+            <td>
+                65%
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 4 -->
+                14935058
+            </td>
+            <td>
+                Simphwe
+            </td>
+            <td>
+                Mholbo
+            </td>
+            <td>
+                <span class="badge badge-danger">No Progress</span>
+            </td>
+            <td>
+                12%
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 5 -->
+                16938416
+            </td>
+            <td>
+                Achal
+            </td>
+            <td>
+                Signh
+            </td>
+            <td>
+                <span class="badge badge-danger">No Progress</span>
+            </td>
+            <td>
+                45%
+            </td>
+        </tr>
+
+
+
+    </table>
+
+
+</div>
+
+
+@* Styles and javascript for the page *@
+<style>
+
+    /* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    /*display: none;*/
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+<script>
+
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.VenueType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Index</h2>
+
+@* Search Button for 'Venue Type Description'*@
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchStringVT", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+
+        <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VenueType_Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VenueType_Description)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", new { id=item.VenueTypeID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+
+            <a href="@Url.Action("Details", new { id=item.VenueTypeID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+
+            <a href="@Url.Action("Delete", new { id=item.VenueTypeID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+
+           
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                @Html.ActionLink("Add a new Venue Type", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+            </div>
+        </div>
+    </div>
+</div>

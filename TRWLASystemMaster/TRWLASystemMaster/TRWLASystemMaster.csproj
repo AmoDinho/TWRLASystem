@@ -332,6 +332,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\!Logo.png" />
+    <Content Include="Images\16807420_1291174587644258_3526314092082453225_n.jpg" />
+    <Content Include="Images\Copy of IMG-20170209-WA0000.jpg" />
+    <Content Include="Images\girls.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\Static Page 2%402x.png" />
+    <Content Include="Images\Static Page2.png" />
+    <Content Include="Images\train.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -396,6 +404,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\trwla mvc.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\core\bootstrap.min.js" />
     <Content Include="Scripts\core\jquery.3.2.1.min.js" />
