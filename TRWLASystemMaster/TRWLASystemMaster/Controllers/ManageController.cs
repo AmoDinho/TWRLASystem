@@ -10,13 +10,14 @@ using TRWLASystemMaster.Models.ViewModel;
 using TRWLASystemMaster.Models.EntityManager;
 using System.Web.Security;
 using TRWLASystemMaster.Security;
+using static TRWLASystemMaster.Models.ViewModel.UserProfileView;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class ManageController : Controller
     {
 
-       // [AuthorizeRoles("Admin")]
+        [AuthorizeRoles("Admin")]
         public ActionResult ManageUser()
         {
             if (User.Identity.IsAuthenticated)
@@ -32,7 +33,7 @@ namespace TRWLASystemMaster.Controllers
         }
     }
 
-       
+       //IDENTITY CODE STRUCTURE
 
 
 
