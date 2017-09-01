@@ -199,6 +199,60 @@ namespace TRWLASystemMaster.Models.EntityManager
             }
         }
 
+
+        /// Get All User Types
+
+        public List<LookUpUserType> GetAllUserTypes()
+        {
+            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
+            {
+                var usertypes = db.UserTypes.Select(o => new LookUpUserType
+                {
+                    UserTypeID = o.UserTypeID,
+                    AccessRight = o.AccessRight,
+                    Description = o.Description
+
+                }).ToList();
+
+                return usertypes;
+            }
+
+        }
+
+        //Get all Residences
+        public List<LookUpRes> GetAllRes()
+        {
+            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
+            {
+                var residences = db.Residences.Select(o => new LookUpRes
+                {
+                    ResID = o.ResID,
+                    Res_Name = o.Res_Name
+
+                }).ToList();
+
+                return residences;
+            }
+
+        }
+
+        //Get Answers
+
+        public List<LookupSecurityAnswer> Getansers()
+        {
+            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
+            {
+                var secanswers = db.SecurityAnswers.Select(o => new LookupSecurityAnswer
+                {
+                    SecurityAnswerID = o.SecurityAnswerID,
+                    Security_Question = o.Security_Question,
+                    Security_Answer = o.Security_Answer
+                }).ToList();
+
+                return secanswers;
+            }
+
+        }
         // get user ID 
 
         public int GetUserID(string loginName)
@@ -270,51 +324,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
 
 
-        //////
-        /// <summary>
-        /// /
-        /// 
-        /// 
-        /// 
-        /// Get All User Types
-        /// </summary>
-        /// 
-        /// 
-
-
-        public List<LookUpUserType> GetAllUserTypes()
-        {
-            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
-            {
-                var usertypes = db.UserTypes.Select(o => new LookUpUserType
-                {
-                   UserTypeID =o.UserTypeID,
-                   AccessRight = o.AccessRight,
-                   Description = o.Description
-                  
-                }).ToList();
-
-                return usertypes;
-            }
-
-        }
-
-        //Get all Residences
-        public List<LookUpRes> GetAllRes()
-        {
-            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
-            {
-                var residences = db.Residences.Select(o => new LookUpRes
-                {
-                   ResID = o.ResID,
-                   Res_Name = o.Res_Name
-
-                }).ToList();
-
-                return residences;
-            }
-
-        }
+     
 
 
 
@@ -326,13 +336,9 @@ namespace TRWLASystemMaster.Models.EntityManager
 
             List < UserProfileView > profiles = GetAllUserProfiles();
             List <LOOKUPAvailableRole > roles = GetAllRoles();
-            
             List<LookUpUserType> usertypes = GetAllUserTypes();
-
-
             List<LookUpRes> residences = GetAllRes();
-
-            List<LookupSecurityAnswer> secanswers = new List<LookupSecurityAnswer>();
+            List<LookupSecurityAnswer> secanswers = Getansers();
 
 
             int? userAssignedRoleID = 0, userID = 0;
@@ -344,10 +350,10 @@ namespace TRWLASystemMaster.Models.EntityManager
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
             {
                 userAssignedRoleID = db.SYSUserRoles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().LOOKUPRoleID;
-                user_usertype = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().UserTypeID;
+                user_usertype = db.UserTypes.Where(o => o.UserTypeID == userID)?.FirstOrDefault().UserTypeID;
 
-                user_resid = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().ResID;
-                user_secq = db.SYSUserProfiles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().SecurityAnswerID;
+                user_resid = db.Residences.Where(o => o.ResID == userID)?.FirstOrDefault().ResID;
+                user_secq = db.SecurityAnswers.Where(o => o.SecurityAnswerID== userID)?.FirstOrDefault().SecurityAnswerID;
             }
 
            
@@ -390,7 +396,46 @@ namespace TRWLASystemMaster.Models.EntityManager
         }
 
 
+        //GetUserProfile
+        public UserProfileView GetUserProfile(int userID)
+        {
+            UserProfileView UPV = new UserProfileView();
+            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
+            {
+                var user = db.SYSUsers.Find(userID);
+                if (user != null)
+                {
+                    UPV.SYSUserID = user.SYSUserID;
+                    UPV.LoginName = user.LoginName;
+                    UPV.Password = user.PasswordEncryptedText;
 
+                    var SUP = db.SYSUserProfiles.Find(userID);
+                    if (SUP != null)
+                    {
+                        UPV.FirstName = SUP.FirstName;
+                        UPV.LastName = SUP.LastName;
+                        UPV.Phonenumber = SUP.Phonenumber;
+                        //UPV.YearOfStudy = SUP.YearOfStudy;
+                        UPV.Degree = SUP.Degree;
+                        UPV.DoB = SUP.DoB;
+                        UPV.Email = SUP.Email;
+                        UPV.SecurityAnswerID = SUP.SecurityAnswerID;
+                        UPV.UserTypeID = SUP.UserTypeID;
+                        UPV.ResID = SUP.ResID;
+                    }
+
+                    var SUR = db.SYSUserRoles.Find(userID);
+                    if (SUR != null)
+                    {
+                        UPV.LOOKUPRoleID = SUR.LOOKUPRoleID;
+                        UPV.RoleName = SUR.LOOKUPRole.RoleName;
+                        UPV.IsRoleActive = SUR.IsActive;
+                    }
+                }
+            }
+
+            return UPV;
+        }
 
 
 

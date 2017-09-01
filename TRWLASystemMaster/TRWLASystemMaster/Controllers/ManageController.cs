@@ -16,8 +16,8 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ManageController : Controller
     {
-
-        [AuthorizeRoles("Admin")]
+        //Manage User
+        //[AuthorizeRoles("Admin")]
         public ActionResult ManageUser()
         {
             if (User.Identity.IsAuthenticated)
@@ -31,7 +31,44 @@ namespace TRWLASystemMaster.Controllers
             return View();    
             //return RedirectToAction("Index", "Home");
         }
+
+
+        /// <summary>
+        /// EDITT USER ACCOUNT
+        /// </summary>
+        /// <returns></returns>
+
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            string loginName = User.Identity.Name;
+            UserManager UM = new UserManager();
+            UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
+            return View(UPV);
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult EditProfile(UserProfileView profile)
+        {
+            if (ModelState.IsValid)
+            {
+                UserManager UM = new UserManager();
+                //UM.UpdateUserAccount(profile);
+
+                ViewBag.Status = "Update Sucessful!";
+            }
+            return View(profile);
+        }
     }
+
+    ///
+    //
+    ///  dELTETE USER ACCOUNT
+    ////
+
+
 
        //IDENTITY CODE STRUCTURE
 

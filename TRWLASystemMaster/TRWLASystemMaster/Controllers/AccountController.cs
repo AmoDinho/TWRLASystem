@@ -47,6 +47,8 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+
+        //Register Action 
         [HttpPost]
         public ActionResult Register(UserSignUpView USV)
         {
@@ -87,6 +89,8 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+        //Register Volunteer
+
         [HttpPost]
         public ActionResult RegisterVol(UserSignUpViewVol USV)
         {
@@ -115,6 +119,7 @@ namespace TRWLASystemMaster.Controllers
 
         }
 
+        //Login/////
         public ActionResult Login()
         {
             return View();
@@ -157,6 +162,8 @@ namespace TRWLASystemMaster.Controllers
 
         }
 
+
+        //Sign Out
 
         [Authorize]
         public ActionResult SignOut()
