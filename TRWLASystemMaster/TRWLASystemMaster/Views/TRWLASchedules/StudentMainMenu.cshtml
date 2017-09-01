@@ -92,7 +92,7 @@
     </script>*@
 
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
     TRWLASystemMaster.Models.DB.Progress myprog = new TRWLASystemMaster.Models.DB.Progress();
 
@@ -217,7 +217,7 @@
             </div>
         </div>
     }
-}
+}*@
 
 <div class="row" @*id="showMe" style="display:none;*@>
 
@@ -297,7 +297,7 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                foreach (var s in item.RSVPSchedules.Where(p => p.StudentID == 2).Where(p => p.RSVP_Event.Attended == null))
+                foreach (var s in item.RSVPSchedules.Where(p => p.SYSUserProfileID == Convert.ToInt32(TempData["User"])).Where(p => p.RSVP_Event.Attended == null))
                 {
                     <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
                         <h4>
@@ -349,21 +349,6 @@
                         </div>
                 }
             }
-        </div>
-    </div>
-
-</div>
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Create</button>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Log Event Attedance</button>
-            </div>
         </div>
     </div>
 </div>

@@ -17,10 +17,10 @@ namespace TRWLASystemMaster.Models.DB
         public int RsvpScheduleID { get; set; }
         public int rsvpID { get; set; }
         public int ScheduleID { get; set; }
-        public int StudentID { get; set; }
+        public Nullable<int> SYSUserProfileID { get; set; }
     
         public virtual RSVP_Event RSVP_Event { get; set; }
         public virtual TRWLASchedule TRWLASchedule { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual SYSUserProfile SYSUserProfile { get; set; }
     }
 }

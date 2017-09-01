@@ -36,7 +36,7 @@ namespace TRWLASystemMaster.Controllers
         /// 
         /// </summary>
        
-        private TWRLADB_Staging_V2Entities18 db = new TWRLADB_Staging_V2Entities18();
+        private TWRLADB_Staging_V2Entities19 db = new TWRLADB_Staging_V2Entities19();
         //Register Student
         public ActionResult Register()
         {
@@ -63,7 +63,11 @@ namespace TRWLASystemMaster.Controllers
                         USV.UserTypeID = 1;
                         UM.AddUserAccount(USV);
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                        
+
+                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
+                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+                        TempData["User"] = myUserP.SYSUserProfileID;
+
                         return RedirectToAction("StudentMainMenu", "TRWLASchedules");
 
                     }
@@ -106,6 +110,11 @@ namespace TRWLASystemMaster.Controllers
                     {
                         USV.UserTypeID = 2;
                         UM.AddUserAccount(USV);
+
+                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
+                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+                        TempData["User"] = myUserP.SYSUserProfileID;
+
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
                         return RedirectToAction("Index", "TRWLASchedules");
 

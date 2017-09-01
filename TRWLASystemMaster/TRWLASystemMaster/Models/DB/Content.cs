@@ -6,7 +6,6 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.DB
 {
@@ -23,16 +22,9 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int ContentID { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Content_Name")]
         public string Content_Name { get; set; }
         public string Content_Link { get; set; }
-        [Required]
         public int Content_Status { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Content_Description")]
         public string Content_Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

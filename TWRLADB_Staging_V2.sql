@@ -622,6 +622,8 @@ create table Attendance
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
@@ -641,6 +643,8 @@ create table RSVP_Event
 		LectureID int null,
 		ComEngID int null,
 		Attended int null,
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
@@ -654,8 +658,8 @@ create table RSVPSchedule
 	RsvpScheduleID int identity (1,1) primary key,
 	rsvpID int not null,
 	ScheduleID int not null,
-	StudentID int not null,
-	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 	FOREIGN KEY (rsvpID) REFERENCES RSVP_Event(rsvpID),
 	FOREIGN KEY (ScheduleID) REFERENCES TRWLASchedule(ScheduleID)
 )
@@ -672,9 +676,9 @@ create table LectureReview
 	reviewID int identity (1,1) primary key,
 	Review varchar(500) not null,
 	RatingID int not null,
-	StudentID int not null,
 	LectureID int not null,
-	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
 	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
 )
@@ -694,8 +698,8 @@ create table EventMessage
 	TimeMes time not null,
 	NumberMess int not null,
 	VolunteerID int null,
-	StudentID int null,
-	FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
 )
 go

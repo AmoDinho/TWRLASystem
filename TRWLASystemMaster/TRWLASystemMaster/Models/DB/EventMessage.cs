@@ -20,8 +20,10 @@ namespace TRWLASystemMaster.Models.DB
         public int NumberMess { get; set; }
         public Nullable<int> VolunteerID { get; set; }
         public Nullable<int> StudentID { get; set; }
+        public Nullable<int> SYSUserProfileID { get; set; }
     
         public virtual Student Student { get; set; }
+        public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual Volunteer Volunteer { get; set; }
     }
 }

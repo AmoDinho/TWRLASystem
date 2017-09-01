@@ -1,0 +1,6 @@
+[Required(ErrorMessage = "Your must provide a PhoneNumber")]
+[Display(Name = "Home Phone")]
+[DataType(DataType.PhoneNumber)]
+[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+
+[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]

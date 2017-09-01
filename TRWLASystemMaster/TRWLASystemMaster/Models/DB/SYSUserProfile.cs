@@ -17,7 +17,12 @@ namespace TRWLASystemMaster.Models.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SYSUserProfile()
         {
+            this.Attendances = new HashSet<Attendance>();
+            this.EventMessages = new HashSet<EventMessage>();
+            this.LectureReviews = new HashSet<LectureReview>();
             this.Progresses = new HashSet<Progress>();
+            this.RSVP_Event = new HashSet<RSVP_Event>();
+            this.RSVPSchedules = new HashSet<RSVPSchedule>();
             this.Students = new HashSet<Student>();
         }
     
@@ -40,8 +45,18 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<int> ResID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attendance> Attendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventMessage> EventMessages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LectureReview> LectureReviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Progress> Progresses { get; set; }
         public virtual Residence Residence { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
         public virtual SecurityAnswer SecurityAnswer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }

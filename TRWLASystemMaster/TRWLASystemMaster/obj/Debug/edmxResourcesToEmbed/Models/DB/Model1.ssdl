@@ -22,6 +22,7 @@
     <Property Name="FunctionID" Type="int" />
     <Property Name="LectureID" Type="int" />
     <Property Name="ComEngID" Type="int" />
+    <Property Name="SYSUserProfileID" Type="int" />
   </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
@@ -58,6 +59,7 @@
     <Property Name="NumberMess" Type="int" Nullable="false" />
     <Property Name="VolunteerID" Type="int" />
     <Property Name="StudentID" Type="int" />
+    <Property Name="SYSUserProfileID" Type="int" />
   </EntityType>
   <EntityType Name="FunctionEvent">
     <Key>
@@ -108,8 +110,8 @@
     <Property Name="reviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Review" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="RatingID" Type="int" Nullable="false" />
-    <Property Name="StudentID" Type="int" Nullable="false" />
     <Property Name="LectureID" Type="int" Nullable="false" />
+    <Property Name="SYSUserProfileID" Type="int" />
   </EntityType>
   <EntityType Name="LOOKUPRole">
     <Key>
@@ -163,6 +165,7 @@
     <Property Name="LectureID" Type="int" />
     <Property Name="ComEngID" Type="int" />
     <Property Name="Attended" Type="int" />
+    <Property Name="SYSUserProfileID" Type="int" />
   </EntityType>
   <EntityType Name="RSVPSchedule">
     <Key>
@@ -171,7 +174,7 @@
     <Property Name="RsvpScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="rsvpID" Type="int" Nullable="false" />
     <Property Name="ScheduleID" Type="int" Nullable="false" />
-    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="SYSUserProfileID" Type="int" />
   </EntityType>
   <EntityType Name="SecurityAnswer">
     <Key>
@@ -382,6 +385,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Attendanc__SYSUs__08B54D69">
+    <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Attendanc__Volun__619B8048">
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
     <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
@@ -427,6 +442,18 @@
       </Principal>
       <Dependent Role="EventMessage">
         <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventMess__SYSUs__07C12930">
+    <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="0..1" />
+    <End Role="EventMessage" Type="Self.EventMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Principal>
+      <Dependent Role="EventMessage">
+        <PropertyRef Name="SYSUserProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -502,7 +529,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LectureRe__Lectu__76969D2E">
+  <Association Name="FK__LectureRe__Lectu__0C85DE4D">
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="1" />
     <End Role="LectureReview" Type="Self.LectureReview" Multiplicity="*" />
     <ReferentialConstraint>
@@ -514,7 +541,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LectureRe__Ratin__778AC167">
+  <Association Name="FK__LectureRe__Ratin__0D7A0286">
     <End Role="RatingType" Type="Self.RatingType" Multiplicity="1" />
     <End Role="LectureReview" Type="Self.LectureReview" Multiplicity="*" />
     <ReferentialConstraint>
@@ -526,15 +553,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__LectureRe__Stude__75A278F5">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+  <Association Name="FK__LectureRe__SYSUs__0B91BA14">
+    <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="0..1" />
     <End Role="LectureReview" Type="Self.LectureReview" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="StudentID" />
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
       </Principal>
       <Dependent Role="LectureReview">
-        <PropertyRef Name="StudentID" />
+        <PropertyRef Name="SYSUserProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -598,6 +625,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__RSVP_Even__SYSUs__04E4BC85">
+    <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="0..1" />
+    <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Principal>
+      <Dependent Role="RSVP_Event">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__RSVP_Even__Volun__68487DD7">
     <End Role="Volunteer" Type="Self.Volunteer" Multiplicity="0..1" />
     <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
@@ -610,7 +649,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVPSched__rsvpI__6FE99F9F">
+  <Association Name="FK__RSVPSched__rsvpI__114A936A">
     <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="1" />
     <End Role="RSVPSchedule" Type="Self.RSVPSchedule" Multiplicity="*" />
     <ReferentialConstraint>
@@ -622,7 +661,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVPSched__Sched__70DDC3D8">
+  <Association Name="FK__RSVPSched__Sched__123EB7A3">
     <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="1" />
     <End Role="RSVPSchedule" Type="Self.RSVPSchedule" Multiplicity="*" />
     <ReferentialConstraint>
@@ -634,15 +673,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RSVPSched__Stude__6EF57B66">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+  <Association Name="FK__RSVPSched__SYSUs__10566F31">
+    <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="0..1" />
     <End Role="RSVPSchedule" Type="Self.RSVPSchedule" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="StudentID" />
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
       </Principal>
       <Dependent Role="RSVPSchedule">
-        <PropertyRef Name="StudentID" />
+        <PropertyRef Name="SYSUserProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -909,6 +948,10 @@
       <End Role="Student" EntitySet="Student" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
+    <AssociationSet Name="FK__Attendanc__SYSUs__08B54D69" Association="Self.FK__Attendanc__SYSUs__08B54D69">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
     <AssociationSet Name="FK__Attendanc__Volun__619B8048" Association="Self.FK__Attendanc__Volun__619B8048">
       <End Role="Volunteer" EntitySet="Volunteer" />
       <End Role="Attendance" EntitySet="Attendance" />
@@ -923,6 +966,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__EventMess__Stude__7B5B524B" Association="Self.FK__EventMess__Stude__7B5B524B">
       <End Role="Student" EntitySet="Student" />
+      <End Role="EventMessage" EntitySet="EventMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventMess__SYSUs__07C12930" Association="Self.FK__EventMess__SYSUs__07C12930">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
       <End Role="EventMessage" EntitySet="EventMessage" />
     </AssociationSet>
     <AssociationSet Name="FK__EventMess__Volun__7C4F7684" Association="Self.FK__EventMess__Volun__7C4F7684">
@@ -949,16 +996,16 @@
       <End Role="Venue" EntitySet="Venue" />
       <End Role="Lecture" EntitySet="Lecture" />
     </AssociationSet>
-    <AssociationSet Name="FK__LectureRe__Lectu__76969D2E" Association="Self.FK__LectureRe__Lectu__76969D2E">
+    <AssociationSet Name="FK__LectureRe__Lectu__0C85DE4D" Association="Self.FK__LectureRe__Lectu__0C85DE4D">
       <End Role="Lecture" EntitySet="Lecture" />
       <End Role="LectureReview" EntitySet="LectureReview" />
     </AssociationSet>
-    <AssociationSet Name="FK__LectureRe__Ratin__778AC167" Association="Self.FK__LectureRe__Ratin__778AC167">
+    <AssociationSet Name="FK__LectureRe__Ratin__0D7A0286" Association="Self.FK__LectureRe__Ratin__0D7A0286">
       <End Role="RatingType" EntitySet="RatingType" />
       <End Role="LectureReview" EntitySet="LectureReview" />
     </AssociationSet>
-    <AssociationSet Name="FK__LectureRe__Stude__75A278F5" Association="Self.FK__LectureRe__Stude__75A278F5">
-      <End Role="Student" EntitySet="Student" />
+    <AssociationSet Name="FK__LectureRe__SYSUs__0B91BA14" Association="Self.FK__LectureRe__SYSUs__0B91BA14">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
       <End Role="LectureReview" EntitySet="LectureReview" />
     </AssociationSet>
     <AssociationSet Name="FK__Progress__SYSUse__02FC7413" Association="Self.FK__Progress__SYSUse__02FC7413">
@@ -981,20 +1028,24 @@
       <End Role="Student" EntitySet="Student" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
+    <AssociationSet Name="FK__RSVP_Even__SYSUs__04E4BC85" Association="Self.FK__RSVP_Even__SYSUs__04E4BC85">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
+      <End Role="RSVP_Event" EntitySet="RSVP_Event" />
+    </AssociationSet>
     <AssociationSet Name="FK__RSVP_Even__Volun__68487DD7" Association="Self.FK__RSVP_Even__Volun__68487DD7">
       <End Role="Volunteer" EntitySet="Volunteer" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVPSched__rsvpI__6FE99F9F" Association="Self.FK__RSVPSched__rsvpI__6FE99F9F">
+    <AssociationSet Name="FK__RSVPSched__rsvpI__114A936A" Association="Self.FK__RSVPSched__rsvpI__114A936A">
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
       <End Role="RSVPSchedule" EntitySet="RSVPSchedule" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVPSched__Sched__70DDC3D8" Association="Self.FK__RSVPSched__Sched__70DDC3D8">
+    <AssociationSet Name="FK__RSVPSched__Sched__123EB7A3" Association="Self.FK__RSVPSched__Sched__123EB7A3">
       <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
       <End Role="RSVPSchedule" EntitySet="RSVPSchedule" />
     </AssociationSet>
-    <AssociationSet Name="FK__RSVPSched__Stude__6EF57B66" Association="Self.FK__RSVPSched__Stude__6EF57B66">
-      <End Role="Student" EntitySet="Student" />
+    <AssociationSet Name="FK__RSVPSched__SYSUs__10566F31" Association="Self.FK__RSVPSched__SYSUs__10566F31">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
       <End Role="RSVPSchedule" EntitySet="RSVPSchedule" />
     </AssociationSet>
     <AssociationSet Name="FK__Student__ResID__31EC6D26" Association="Self.FK__Student__ResID__31EC6D26">

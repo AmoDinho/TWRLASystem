@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities18">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities19">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -23,6 +23,7 @@
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -62,6 +63,7 @@
           <ScalarProperty Name="NumberMess" ColumnName="NumberMess" />
           <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,8 +118,8 @@
           <ScalarProperty Name="reviewID" ColumnName="reviewID" />
           <ScalarProperty Name="Review" ColumnName="Review" />
           <ScalarProperty Name="RatingID" ColumnName="RatingID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -177,6 +179,7 @@
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
           <ScalarProperty Name="Attended" ColumnName="Attended" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -186,7 +189,7 @@
           <ScalarProperty Name="RsvpScheduleID" ColumnName="RsvpScheduleID" />
           <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
           <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

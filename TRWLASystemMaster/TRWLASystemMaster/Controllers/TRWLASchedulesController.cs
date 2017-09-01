@@ -22,7 +22,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities18 db = new TWRLADB_Staging_V2Entities18();
+        private TWRLADB_Staging_V2Entities19 db = new TWRLADB_Staging_V2Entities19();
 
         public ActionResult StudentMainMenu(string sortOrder, string searchString, string F, string CO, string L, string all)
         {
@@ -172,14 +172,14 @@ namespace TRWLASystemMaster.Controllers
         public IList<ClassAttendance> GetClassAttendance()
         {
             var at = (from l in db.RSVP_Event
-                      join s in db.Students on l.StudentID equals s.StudentID
+                      join s in db.SYSUserProfiles on l.SYSUserProfileID equals s.SYSUserProfileID
                       select new ClassAttendance
                       {
-                          Name = s.Student_Name,
-                          Surname = s.Student_Surname,
+                          Name = s.FirstName,
+                          Surname = s.LastName,
                           EventCount = db.RSVP_Event.Count(),
-                          StudentID = s.StudentID,
-                          PersonalCount = (db.RSVP_Event.Distinct().Where(p => p.StudentID == s.StudentID).Count()) / (db.RSVP_Event.Count()) * 100
+                          StudentID = s.SYSUserProfileID,
+                          PersonalCount = (db.RSVP_Event.Distinct().Where(p => p.SYSUserProfileID == s.SYSUserProfileID).Count()) / (db.RSVP_Event.Count()) * 100
                       }).ToList();
 
             return at;
@@ -187,19 +187,16 @@ namespace TRWLASystemMaster.Controllers
 
         public IList<Demographic> GetDemo()
         {
-            var at = (from l in db.Students
+            var at = (from l in db.SYSUserProfiles
                       join r in db.Residences on l.ResID equals r.ResID
-                      join st in db.StudentTypes on l.StudentTypeID equals st.StudentTypeID
                       select new Demographic
                       {
                           StudNo = l.StudentNumber,
-                          Name = l.Student_Name,
-                          Surname = l.Student_Surname,
-                          DoB = l.Student_DoB,
+                          Name = l.FirstName,
+                          Surname = l.LastName,
+                          DoB = l.DoB,
                           Degree = l.Degree,
-                          Grad = l.Graduate,
-                          Res = r.Res_Name,
-                          StudType = st.StudentTypeDescription
+                          Res = r.Res_Name
                       }).ToList();
 
             return at;
@@ -213,7 +210,7 @@ namespace TRWLASystemMaster.Controllers
                       {
                           EventName = l.Lecture.Lecture_Name,
                           EventDate = l.Lecture.Lecture_Date,
-                          Student_Name = l.Student.Student_Name
+                          Student_Name = l.SYSUserProfile.FirstName
                       }).ToList();
             return at;
         }
@@ -225,7 +222,7 @@ namespace TRWLASystemMaster.Controllers
                               {
                                   EventName = s.FunctionEvent.Function_Name,
                                   EventDate = s.FunctionEvent.Function_Date,
-                                  Student_Name = s.Student.Student_Name
+                                  Student_Name = s.SYSUserProfile.FirstName
                               }).ToList();
             return attendance;
         }
@@ -240,7 +237,7 @@ namespace TRWLASystemMaster.Controllers
                           {
                               EventName = m.ComEngEvent.ComEng_Name,
                               EventDate = m.ComEngEvent.ComEng_Date,
-                              Student_Name = m.Student.Student_Name
+                              Student_Name = m.SYSUserProfile.FirstName
                           }).ToList();
             return attend;
         }
@@ -248,19 +245,16 @@ namespace TRWLASystemMaster.Controllers
         public IList<NoAttend> GetNoAttendance()
         {
             var attend = (from m in db.RSVP_Event
-                          join s in db.Students on m.StudentID equals s.StudentID
-                          join st in db.StudentTypes on s.StudentTypeID equals st.StudentTypeID
+                          join s in db.SYSUserProfiles on m.SYSUserProfileID equals s.SYSUserProfileID
                           where m.Attended == null
                           select new NoAttend
                           {
                               StudNo = s.StudentNumber,
-                              Name = s.Student_Name,
-                              Surname = s.Student_Surname,
-                              DoB = s.Student_DoB,
+                              Name = s.FirstName,
+                              Surname = s.LastName,
+                              DoB = s.DoB,
                               Degree = s.Degree,
-                              Grad = s.Graduate,
                               Res = s.Residence.Res_Name,
-                              StudType = st.StudentTypeDescription,
                               FunctionDate = m.FunctionEvent.Function_Date,
                               LectureDate = m.Lecture.Lecture_Date,
                               ComEngDate = m.ComEngEvent.ComEng_Date
@@ -407,7 +401,7 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult ClassAttendance()
         {
-            var _contenxt = new TWRLADB_Staging_V2Entities18();
+            var _contenxt = new TWRLADB_Staging_V2Entities19();
             ArrayList xValue = new ArrayList();
             ArrayList yValue = new ArrayList();
 
@@ -483,21 +477,21 @@ namespace TRWLASystemMaster.Controllers
                 {
                     foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
                     {
-                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                         mess.TimeMes = DateTime.Now.TimeOfDay;
 
 
 
                         try
                         {
-                            int k = Convert.ToInt32(rsvp.StudentID);
+                            int k = Convert.ToInt32(rsvp.SYSUserProfileID);
 
-                            Student myStu = db.Students.Find(k);
+                            SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.SYSUserProfile.Email);
+                            msg.To.Add(myStu.Email);
                             msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
-                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+                            msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
                             SmtpClient smtp = new SmtpClient();
 
@@ -527,18 +521,18 @@ namespace TRWLASystemMaster.Controllers
                 {
                     foreach (var s in select.Where(p => p.LectureID == rsvp.LectureID))
                     {
-                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                         try
                         {
-                            int k = Convert.ToInt32(rsvp.StudentID);
+                            int k = Convert.ToInt32(rsvp.SYSUserProfileID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                            Student myStu = db.Students.Find(k);
+                            SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.SYSUserProfile.Email);
+                            msg.To.Add(myStu.Email);
                             msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
-                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+                            msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
                             SmtpClient smtp = new SmtpClient();
 
@@ -565,18 +559,18 @@ namespace TRWLASystemMaster.Controllers
                 {
                     foreach (var s in select.Where(p => p.ComEngID == rsvp.ComEngID))
                     {
-                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                         try
                         {
-                            int k = Convert.ToInt32(rsvp.StudentID);
+                            int k = Convert.ToInt32(rsvp.SYSUserProfileID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                            Student myStu = db.Students.Find(k);
+                            SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.SYSUserProfile.Email);
+                            msg.To.Add(myStu.Email);
                             msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
-                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+                            msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
                             SmtpClient smtp = new SmtpClient();
 
@@ -611,18 +605,18 @@ namespace TRWLASystemMaster.Controllers
                 {
                     foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
                     {
-                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                         try
                         {
-                            int k = Convert.ToInt32(rsvp.StudentID);
+                            int k = Convert.ToInt32(rsvp.SYSUserProfileID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                            Student myStu = db.Students.Find(k);
+                            SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.SYSUserProfile.Email);
+                            msg.To.Add(myStu.Email);
                             msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
-                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+                            msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
                             SmtpClient smtp = new SmtpClient();
 
@@ -649,18 +643,18 @@ namespace TRWLASystemMaster.Controllers
                 {
                     foreach (var s in select.Where(p => p.LectureID == rsvp.LectureID))
                     {
-                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                         try
                         {
-                            int k = Convert.ToInt32(rsvp.StudentID);
+                            int k = Convert.ToInt32(rsvp.SYSUserProfileID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                            Student myStu = db.Students.Find(k);
+                            SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.SYSUserProfile.Email);
+                            msg.To.Add(myStu.Email);
                             msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
-                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+                            msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
                             SmtpClient smtp = new SmtpClient();
 
@@ -687,18 +681,18 @@ namespace TRWLASystemMaster.Controllers
                 {
                     foreach (var s in select.Where(p => p.ComEngID == rsvp.ComEngID))
                     {
-                        mess.StudentID = Convert.ToInt32(s.StudentID);
+                        mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                         try
                         {
-                            int k = Convert.ToInt32(rsvp.StudentID);
+                            int k = Convert.ToInt32(rsvp.SYSUserProfileID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                            Student myStu = db.Students.Find(k);
+                            SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                             MailMessage msg = new MailMessage();
                             msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(myStu.SYSUserProfile.Email);
+                            msg.To.Add(myStu.Email);
                             msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
-                            msg.Body = "Dear " + myStu.Student_Name + "\n\n " + mess.Msg;
+                            msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
                             SmtpClient smtp = new SmtpClient();
 
@@ -734,7 +728,7 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult ViewNotification()
         {
             var mes = from n in db.EventMessages
-                      where n.StudentID == 2
+                      where n.SYSUserProfileID == Convert.ToInt32(TempData["User"])
                       select n;
 
             //Timer myTime = new Timer();
@@ -775,29 +769,29 @@ namespace TRWLASystemMaster.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
 
-            var stud = from s in db.Students
-                       join r in db.RSVP_Event on s.StudentID equals r.StudentID
-                       where s.StudentID != r.StudentID
+            var stud = from s in db.SYSUserProfiles
+                       join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
+                       where s.SYSUserProfileID != r.SYSUserProfileID
                        select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                stud = stud.Where(s => s.Student_Name.Contains(searchString));
+                stud = stud.Where(s => s.FirstName.Contains(searchString));
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
                     break;
                 case "sur_desc":
-                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
                     break;
                 case "Surname":
-                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
                     break;
                 default:
-                    stud = stud.OrderByDescending(s => s.Student_Name.Contains(searchString));
+                    stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
                     break;
             }
 
@@ -810,7 +804,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            SYSUserProfile student = db.SYSUserProfiles.Find(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -826,7 +820,7 @@ namespace TRWLASystemMaster.Controllers
 
             int stude = Convert.ToInt32(TempData["NewStudent"]);
 
-            Student stud = db.Students.Find(id);
+            SYSUserProfile stud = db.SYSUserProfiles.Find(id);
             RSVP_Event ev = db.RSVP_Event.Find(stude);
 
 
@@ -839,19 +833,19 @@ namespace TRWLASystemMaster.Controllers
                     if (ev.FunctionID != null)
                     {
                         att.FunctionID = ev.FunctionID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         db.Attendances.Add(att);
                     }
                     else if (ev.LectureID != null)
                     {
                         att.LectureID = ev.LectureID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         db.Attendances.Add(att);
                     }
                     else
                     {
                         att.ComEngID = ev.ComEngID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         db.Attendances.Add(att);
                     }
 
@@ -866,25 +860,25 @@ namespace TRWLASystemMaster.Controllers
                     if (ev.FunctionID != null)
                     {
                         att.FunctionID = ev.FunctionID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         db.Attendances.Add(att);
                     }
                     else if (ev.LectureID != null)
                     {
                         att.LectureID = ev.LectureID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         db.Attendances.Add(att);
                     }
                     else
                     {
                         att.ComEngID = ev.ComEngID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         db.Attendances.Add(att);
                     }
                 }
                 db.SaveChanges();
 
-                TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.Student_Name;
+                TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.FirstName;
             }
             catch (Exception)
             {
@@ -904,8 +898,8 @@ namespace TRWLASystemMaster.Controllers
 
             if (tRWLASchedule.FunctionID != null)
             {
-                var evnt = from s in db.Students
-                           join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                var evnt = from s in db.SYSUserProfiles
+                           join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
                            join t in db.TRWLASchedules on r.FunctionID equals t.FunctionID
                            where r.FunctionID == tRWLASchedule.FunctionID
                            select r;
@@ -915,22 +909,22 @@ namespace TRWLASystemMaster.Controllers
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    evnt = evnt.Where(s => s.Student.Student_Name.Contains(searchString));
+                    evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
                 }
 
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     case "sur_desc":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     case "Surname":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     default:
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                 }
 
@@ -939,8 +933,8 @@ namespace TRWLASystemMaster.Controllers
             }
             else if (tRWLASchedule.LectureID != null)
             {
-                var evnt = from s in db.Students
-                           join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                var evnt = from s in db.SYSUserProfiles
+                           join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
                            join t in db.TRWLASchedules on r.LectureID equals t.LectureID
                            where r.LectureID == tRWLASchedule.LectureID
                            select r;
@@ -949,22 +943,22 @@ namespace TRWLASystemMaster.Controllers
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    evnt = evnt.Where(s => s.Student.Student_Name.Contains(searchString));
+                    evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
                 }
 
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     case "sur_desc":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     case "Surname":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     default:
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                 }
 
@@ -973,8 +967,8 @@ namespace TRWLASystemMaster.Controllers
             }
             else
             {
-                var evnt = from s in db.Students
-                           join r in db.RSVP_Event on s.StudentID equals r.StudentID
+                var evnt = from s in db.SYSUserProfiles
+                           join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
                            join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
                            where r.ComEngID == tRWLASchedule.ComEngID
                            select r;
@@ -983,22 +977,22 @@ namespace TRWLASystemMaster.Controllers
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    evnt = evnt.Where(s => s.Student.Student_Name.Contains(searchString));
+                    evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
                 }
 
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     case "sur_desc":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     case "Surname":
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                     default:
-                        evnt = evnt.OrderByDescending(s => s.Student.Student_Name.Contains(searchString));
+                        evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
                         break;
                 }
 
@@ -1013,7 +1007,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(studid);
+            SYSUserProfile student = db.SYSUserProfiles.Find(studid);
             if (student == null)
             {
                 return HttpNotFound();
@@ -1026,7 +1020,7 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult AttendanceConfirmed(Attendance att, int evid, int studid)
         {
 
-            Student stud = db.Students.Find(studid);
+            SYSUserProfile stud = db.SYSUserProfiles.Find(studid);
             RSVP_Event ev = db.RSVP_Event.Find(evid);
 
 
@@ -1039,21 +1033,21 @@ namespace TRWLASystemMaster.Controllers
                     if (ev.FunctionID != null)
                     {
                         att.FunctionID = ev.FunctionID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         ev.Attended = 1;
                         db.Attendances.Add(att);
                     }
                     else if (ev.LectureID != null)
                     {
                         att.LectureID = ev.LectureID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         ev.Attended = 1;
                         db.Attendances.Add(att);
                     }
                     else
                     {
                         att.ComEngID = ev.ComEngID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         ev.Attended = 1;
                         db.Attendances.Add(att);
                     }
@@ -1069,28 +1063,28 @@ namespace TRWLASystemMaster.Controllers
                     if (ev.FunctionID != null)
                     {
                         att.FunctionID = ev.FunctionID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         ev.Attended = 1;
                         db.Attendances.Add(att);
                     }
                     else if (ev.LectureID != null)
                     {
                         att.LectureID = ev.LectureID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         ev.Attended = 1;
                         db.Attendances.Add(att);
                     }
                     else
                     {
                         att.ComEngID = ev.ComEngID;
-                        att.StudentID = stud.StudentID;
+                        att.SYSUserProfileID = stud.SYSUserProfileID;
                         ev.Attended = 1;
                         db.Attendances.Add(att);
                     }
                 }
                 db.SaveChanges();
 
-                TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.Student_Name;
+                TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.FirstName;
             }
             catch (Exception)
             {
@@ -1123,8 +1117,7 @@ namespace TRWLASystemMaster.Controllers
                 if (i == 0)
                 {
                     LecRev.LectureID = lec.LectureID;
-                    LecRev.StudentID = 2;
-                    
+                    LecRev.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
 
                     db.LectureReviews.Add(LecRev);
                     db.SaveChanges();
@@ -1137,7 +1130,7 @@ namespace TRWLASystemMaster.Controllers
                     int k = max + 1;
                     LecRev.LectureID = lec.LectureID;
                     LecRev.reviewID = k;
-                    LecRev.StudentID = 2;
+                    LecRev.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
 
                     db.LectureReviews.Add(LecRev);
                     db.SaveChanges();
@@ -1208,7 +1201,7 @@ namespace TRWLASystemMaster.Controllers
             if (i == 0)
             {
                 //this is what adds data to the table
-                @event.StudentID = 2;
+                @event.SYSUserProfileID = Convert.ToInt32(TempData["User"]); ;
 
                 if (tRWLASchedule.FunctionID != null)
                 {
@@ -1217,7 +1210,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.StudentID = 2;
+                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1228,12 +1221,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.StudentID == 2)
+                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.StudentID == 2)
+                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
                         }
@@ -1249,7 +1242,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.StudentID = 2;
+                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1260,12 +1253,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.StudentID == 2)
+                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.StudentID != 2)
+                        else if (s.SYSUserProfileID != Convert.ToInt32(TempData["User"]))
                         {
 
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
@@ -1282,7 +1275,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.StudentID = 2;
+                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1294,12 +1287,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.StudentID == 2)
+                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.StudentID == 2)
+                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
 
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
@@ -1315,7 +1308,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 int max = db.RSVP_Event.Max(p => p.rsvpID);
                 int l = max + 1;
-                @event.StudentID = 2;
+                @event.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
 
                 if (tRWLASchedule.FunctionID != null)
                 {
@@ -1325,7 +1318,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.StudentID = 2;
+                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1337,12 +1330,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.StudentID == 2)
+                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.StudentID == 2)
+                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
                         }
@@ -1360,7 +1353,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.StudentID = 2;
+                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1372,12 +1365,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.StudentID == 2)
+                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.StudentID == 2)
+                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
 
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
@@ -1396,7 +1389,7 @@ namespace TRWLASystemMaster.Controllers
                     RSVPSchedule mysched = new RSVPSchedule();
                     mysched.rsvpID = @event.rsvpID;
                     mysched.ScheduleID = id;
-                    mysched.StudentID = 2;
+                    mysched.SYSUserProfileID = Convert.ToInt32(TempData["User"]);
                     db.RSVPSchedules.Add(mysched);
                     db.RSVP_Event.Add(@event);
 
@@ -1408,12 +1401,12 @@ namespace TRWLASystemMaster.Controllers
                             TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
                             return RedirectToAction("Index");
                         }
-                        if (s.StudentID == 2)
+                        if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvpFAIL"] = "You have already RSVPd to this event";
                             return RedirectToAction("Index");
                         }
-                        else if (s.StudentID == 2)
+                        else if (s.SYSUserProfileID == Convert.ToInt32(TempData["User"]))
                         {
                             TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
                         }
@@ -1583,21 +1576,21 @@ namespace TRWLASystemMaster.Controllers
 
                 var email = from s in db.RSVP_Event
                             where s.FunctionID == tRWLASchedule.FunctionID
-                            select s.StudentID;
+                            select s.SYSUserProfileID;
 
                 foreach (var s in email)
                 {
                     try
                     {
-                        Student recipient = db.Students.Find(s);
+                        SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
 
                         FunctionEvent func = db.FunctionEvents.Find(Convert.ToInt32(tRWLASchedule.FunctionID));
 
                         MailMessage msg = new MailMessage();
                         msg.From = new MailAddress("u15213626@tuks.co.za");
-                        msg.To.Add(recipient.SYSUserProfile.Email);
+                        msg.To.Add(recipient.Email);
                         msg.Subject = func.Function_Name + " Cancellation";
-                        msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                        msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                         SmtpClient smtp = new SmtpClient();
 
@@ -1631,20 +1624,20 @@ namespace TRWLASystemMaster.Controllers
 
                 var email = from s in db.RSVP_Event
                             where s.LectureID == tRWLASchedule.LectureID
-                            select s.StudentID;
+                            select s.SYSUserProfileID;
 
                 foreach (var s in email)
                 {
                     try
                     {
-                        Student recipient = db.Students.Find(s);
+                        SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
                         Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
 
                         MailMessage msg = new MailMessage();
                         msg.From = new MailAddress("u15213626@tuks.co.za");
-                        msg.To.Add(recipient.SYSUserProfile.Email);
+                        msg.To.Add(recipient.Email);
                         msg.Subject = lec.Lecture_Name + " Cancellation";
-                        msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                        msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                         SmtpClient smtp = new SmtpClient();
 
@@ -1682,20 +1675,20 @@ namespace TRWLASystemMaster.Controllers
 
                 var email = from s in db.RSVP_Event
                             where s.ComEngID == tRWLASchedule.ComEngID
-                            select s.StudentID;
+                            select s.SYSUserProfileID;
 
                 foreach (var s in email)
                 {
                     try
                     {
-                        Student recipient = db.Students.Find(s);
+                        SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
                         ComEngEvent com = db.ComEngEvents.Find(tRWLASchedule.ComEngID);
 
                         MailMessage msg = new MailMessage();
                         msg.From = new MailAddress("u15213626@tuks.co.za");
-                        msg.To.Add(recipient.SYSUserProfile.Email);
+                        msg.To.Add(recipient.Email);
                         msg.Subject = com.ComEng_Name + " Cancellation";
-                        msg.Body = "Dear " + recipient.Student_Name + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                        msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                         SmtpClient smtp = new SmtpClient();
 

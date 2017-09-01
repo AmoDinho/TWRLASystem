@@ -19,9 +19,7 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.Attendances = new HashSet<Attendance>();
             this.EventMessages = new HashSet<EventMessage>();
-            this.LectureReviews = new HashSet<LectureReview>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
-            this.RSVPSchedules = new HashSet<RSVPSchedule>();
         }
     
         public int StudentID { get; set; }
@@ -43,13 +41,9 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventMessage> EventMessages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LectureReview> LectureReviews { get; set; }
         public virtual Residence Residence { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual UserType UserType { get; set; }

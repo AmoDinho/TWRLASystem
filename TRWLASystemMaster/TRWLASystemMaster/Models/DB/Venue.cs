@@ -6,8 +6,6 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
-
 
 namespace TRWLASystemMaster.Models.DB
 {
@@ -25,13 +23,8 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int VenueID { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Venue_Name")]
         public string Venue_Name { get; set; }
-        [Required]
         public int AddressID { get; set; }
-        [Required]
         public int VenueTypeID { get; set; }
     
         public virtual Address Address { get; set; }
