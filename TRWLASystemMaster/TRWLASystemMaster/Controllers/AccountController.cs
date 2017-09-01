@@ -21,6 +21,21 @@ namespace TRWLASystemMaster.Controllers
 
     public class AccountController : Controller
     {
+        //
+        /// <summary>
+        /// ACCOUNT CONTROLLER:
+        /// 
+        /// 
+        /// 
+        ///  Register 
+        ///  
+        /// Login
+        /// 
+        /// Sign out 
+        /// 
+        /// 
+        /// </summary>
+       
         private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
         //Register Student
         public ActionResult Register()

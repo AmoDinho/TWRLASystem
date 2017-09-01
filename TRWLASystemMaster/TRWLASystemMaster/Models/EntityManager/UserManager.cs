@@ -7,9 +7,15 @@ using TRWLASystemMaster.Models.ViewModel;
 
 namespace TRWLASystemMaster.Models.EntityManager
 {
+
+    /// <summary>
+    /// USEER MANAGEMENT CLASS
+    /// 
+    /// 
+    /// </summary>
     public class UserManager
     {
-        //Student
+        //Student sIGN uPP
         public void AddUserAccount(UserSignUpView user)
         {
 
@@ -69,7 +75,7 @@ namespace TRWLASystemMaster.Models.EntityManager
             }
         }
 
-        //Volunteer
+        //Volunteer Sign Up
         public void AddUserAccount(UserSignUpViewVol user)
         {
 
@@ -128,6 +134,8 @@ namespace TRWLASystemMaster.Models.EntityManager
             }
         }
 
+        //MEHTOD:Does Login Exist?
+
         public bool IsLoginNameExist(string loginName)
         {
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
@@ -136,6 +144,7 @@ namespace TRWLASystemMaster.Models.EntityManager
             }
         }
 
+        //Get User Password
         public string GetUserPassword(string loginName)
         {
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
@@ -149,7 +158,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         }
 
 
-
+        //What role is this user?
 
         public bool IsUserInRole(string loginName, string roleName)
         {
@@ -174,7 +183,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
         }
 
-
+        //List for getting Roles
         public List < LOOKUPAvailableRole > GetAllRoles()
         {
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
@@ -190,6 +199,8 @@ namespace TRWLASystemMaster.Models.EntityManager
             }
         }
 
+        // get user ID 
+
         public int GetUserID(string loginName)
         {
             using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
@@ -200,6 +211,13 @@ namespace TRWLASystemMaster.Models.EntityManager
             return 0;
         }
 
+        /// <summary>
+        /// /COLLECTIONS 
+        /// </summary>
+        /// <returns></returns>
+
+
+            //GET USER PROFILES
         public List<UserProfileView> GetAllUserProfiles()
         {
             List < UserProfileView > profiles = new List < UserProfileView > ();
@@ -250,14 +268,69 @@ namespace TRWLASystemMaster.Models.EntityManager
             return profiles;
         }
 
+
+
+        //////
+        /// <summary>
+        /// /
+        /// 
+        /// 
+        /// 
+        /// Get All User Types
+        /// </summary>
+        /// 
+        /// 
+
+
+        public List<LookUpUserType> GetAllUserTypes()
+        {
+            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
+            {
+                var usertypes = db.UserTypes.Select(o => new LookUpUserType
+                {
+                   UserTypeID =o.UserTypeID,
+                   AccessRight = o.AccessRight,
+                   Description = o.Description
+                  
+                }).ToList();
+
+                return usertypes;
+            }
+
+        }
+
+        //Get all Residences
+        public List<LookUpRes> GetAllRes()
+        {
+            using (TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17())
+            {
+                var residences = db.Residences.Select(o => new LookUpRes
+                {
+                   ResID = o.ResID,
+                   Res_Name = o.Res_Name
+
+                }).ToList();
+
+                return residences;
+            }
+
+        }
+
+
+
+        //USER DATAVIEW 
         public UserDataView GetUserDataView(string loginName)
         {
             UserDataView UDV = new UserDataView();
+
+
             List < UserProfileView > profiles = GetAllUserProfiles();
             List <LOOKUPAvailableRole > roles = GetAllRoles();
-            List<LookUpUserType> usertypes = new List<LookUpUserType>();
+            
+            List<LookUpUserType> usertypes = GetAllUserTypes();
 
-            List<LookUpRes> residences = new List<LookUpRes>();
+
+            List<LookUpRes> residences = GetAllRes();
 
             List<LookupSecurityAnswer> secanswers = new List<LookupSecurityAnswer>();
 
