@@ -13,10 +13,10 @@ namespace TRWLASystemMaster.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TWRLADB_Staging_V2Entities17 : DbContext
+    public partial class TWRLADB_Staging_V2Entities18 : DbContext
     {
-        public TWRLADB_Staging_V2Entities17()
-            : base("name=TWRLADB_Staging_V2Entities17")
+        public TWRLADB_Staging_V2Entities18()
+            : base("name=TWRLADB_Staging_V2Entities18")
         {
         }
     

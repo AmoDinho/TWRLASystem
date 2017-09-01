@@ -22,7 +22,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities17 db = new TWRLADB_Staging_V2Entities17();
+        private TWRLADB_Staging_V2Entities18 db = new TWRLADB_Staging_V2Entities18();
 
         // GET: TRWLASchedules
         [AllowAnonymous]
@@ -337,7 +337,7 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult ClassAttendance()
         {
-            var _contenxt = new TWRLADB_Staging_V2Entities17();
+            var _contenxt = new TWRLADB_Staging_V2Entities18();
             ArrayList xValue = new ArrayList();
             ArrayList yValue = new ArrayList();
 

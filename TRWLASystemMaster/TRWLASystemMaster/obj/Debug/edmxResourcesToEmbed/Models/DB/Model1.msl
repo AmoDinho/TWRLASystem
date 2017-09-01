@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities17">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities18">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -250,10 +250,6 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
-          <ScalarProperty Name="ResID" ColumnName="ResID" />
-          <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
-          <ScalarProperty Name="Degree" ColumnName="Degree" />
-          <ScalarProperty Name="Graduate" ColumnName="Graduate" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
@@ -268,6 +264,9 @@
           <ScalarProperty Name="RowCreatedDateTime" ColumnName="RowCreatedDateTime" />
           <ScalarProperty Name="RowModifiedSYSUserID" ColumnName="RowModifiedSYSUserID" />
           <ScalarProperty Name="RowModifiedDateTime" ColumnName="RowModifiedDateTime" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
+          <ScalarProperty Name="ResID" ColumnName="ResID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
