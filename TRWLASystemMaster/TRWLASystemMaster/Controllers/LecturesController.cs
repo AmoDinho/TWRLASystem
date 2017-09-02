@@ -18,32 +18,53 @@ namespace TRWLASystemMaster.Controllers
         // GET: Lectures
         public ActionResult Index()
         {
-            var lectures = db.Lectures.Include(l => l.Content).Include(l => l.Residence).Include(l => l.Venue);
-            return View(lectures.ToList());
+            try
+            {
+                var lectures = db.Lectures.Include(l => l.Content).Include(l => l.Residence).Include(l => l.Venue);
+                return View(lectures.ToList());
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: Lectures/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Lecture lecture = db.Lectures.Find(id);
+                if (lecture == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lecture);
             }
-            Lecture lecture = db.Lectures.Find(id);
-            if (lecture == null)
+            catch
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(lecture);
         }
 
         // GET: Lectures/Create
         public ActionResult Create()
         {
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name");
-            ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name");
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name");
-            return View();
+            try
+            {
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name");
+                ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name");
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name");
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // POST: Lectures/Create
@@ -53,63 +74,76 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LectureID,Lecture_Name,Lecture_Summary,Lecture_Description,Lecture_Date,Lecture_StartTime,Lecture_EndTime,Lecture_Theme,VenueID,ResidenceID,ContentID")] Lecture lecture)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                int i = db.Lectures.Count();
-
-                if (i != 0)
+                if (ModelState.IsValid)
                 {
-                    int max = db.Lectures.Max(p => p.LectureID);
-                    int k = max + 1;
-                    lecture.LectureID = k;
+                    int i = db.Lectures.Count();
 
-                    lecture.Lecture_Name = lecture.Lecture_Name + " (L)";
-                    db.Lectures.Add(lecture);
-                    TRWLASchedule mySchedule = new TRWLASchedule();
-                    mySchedule.LectureID = lecture.LectureID;
-                    db.TRWLASchedules.Add(mySchedule);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "TRWLASchedules");
+                    if (i != 0)
+                    {
+                        int max = db.Lectures.Max(p => p.LectureID);
+                        int k = max + 1;
+                        lecture.LectureID = k;
+
+                        lecture.Lecture_Name = lecture.Lecture_Name + " (L)";
+                        db.Lectures.Add(lecture);
+                        TRWLASchedule mySchedule = new TRWLASchedule();
+                        mySchedule.LectureID = lecture.LectureID;
+                        db.TRWLASchedules.Add(mySchedule);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "TRWLASchedules");
+                    }
+
+                    else
+                    {
+                        lecture.Lecture_Name = lecture.Lecture_Name + " (L)";
+                        db.Lectures.Add(lecture);
+                        TRWLASchedule mySchedule = new TRWLASchedule();
+                        mySchedule.LectureID = lecture.LectureID;
+                        db.TRWLASchedules.Add(mySchedule);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "TRWLASchedules");
+                    }
+
+
+
                 }
 
-                else
-                {
-                    lecture.Lecture_Name = lecture.Lecture_Name + " (L)";
-                    db.Lectures.Add(lecture);
-                    TRWLASchedule mySchedule = new TRWLASchedule();
-                    mySchedule.LectureID = lecture.LectureID;
-                    db.TRWLASchedules.Add(mySchedule);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "TRWLASchedules");
-                }
-
-
-
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
+                ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", lecture.VenueID);
+                return View(lecture);
             }
-
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
-            ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", lecture.VenueID);
-            return View(lecture);
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: Lectures/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Lecture lecture = db.Lectures.Find(id);
+                if (lecture == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
+                ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", lecture.VenueID);
+                return View(lecture);
             }
-            Lecture lecture = db.Lectures.Find(id);
-            if (lecture == null)
+            catch
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
-            ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", lecture.VenueID);
-            return View(lecture);
         }
 
         // POST: Lectures/Edit/5
@@ -119,16 +153,23 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "LectureID,Lecture_Name,Lecture_Summary,Lecture_Description,Lecture_Date,Lecture_StartTime,Lecture_EndTime,Lecture_Theme,VenueID,ResidenceID,ContentID")] Lecture lecture)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(lecture).State = EntityState.Modified;
-                db.SaveChanges();
-                RedirectToAction("Index", "TRWLASchedules");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(lecture).State = EntityState.Modified;
+                    db.SaveChanges();
+                    RedirectToAction("Index", "TRWLASchedules");
+                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
+                ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", lecture.VenueID);
+                return View(lecture);
             }
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
-            ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", lecture.VenueID);
-            return View(lecture);
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: Lectures/Delete/5
@@ -151,10 +192,17 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Lecture lecture = db.Lectures.Find(id);
-            db.Lectures.Remove(lecture);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Lecture lecture = db.Lectures.Find(id);
+                db.Lectures.Remove(lecture);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         protected override void Dispose(bool disposing)

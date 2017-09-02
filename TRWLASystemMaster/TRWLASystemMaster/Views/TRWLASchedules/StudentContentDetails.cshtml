@@ -51,7 +51,8 @@
 
 
     @using (Html.BeginForm("Download", "Contents", FormMethod.Get))
-    { <input type="submit" value="Download Content" class="btn" /> }
+    { @*<input type="submit" value="Download Content" class="btn" />*@
+        <div class="btn">Download Content</div>}
 
 </div>
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">

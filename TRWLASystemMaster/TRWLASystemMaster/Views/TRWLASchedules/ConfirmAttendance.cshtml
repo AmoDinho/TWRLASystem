@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.DB.Student
+﻿@model TRWLASystemMaster.Models.DB.SYSUserProfile
 
 @{
     ViewBag.Title = "ConfirmAttendance";
@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h2>Confirm Attendance of @Html.DisplayFor(p => p.Student_Name)</h2>
+    <h2>Confirm Attendance of @Html.DisplayFor(p => p.FirstName)</h2>
 </div>
 
 <div>
@@ -26,7 +26,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Student_Name)
+            @Html.DisplayFor(model => model.FirstName)
         </dd>
 
         <dt>
@@ -34,7 +34,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Student_Surname)
+            @Html.DisplayFor(model => model.LastName)
         </dd>
 
         <dt>
@@ -43,14 +43,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Residence.Res_Name)
-        </dd>
-
-        <dt>
-            @Html.Label("Graduate:")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Graduate)
         </dd>
 
         <dt>
@@ -75,7 +67,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Student_DoB)
+            @Html.DisplayFor(model => model.DoB)
         </dd>
 
     </dl>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "ErrorPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>ErrorPage</h2>
+</div>
+
+<h4>Oh no, something went wrong.</h4>
+
+<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let us start again</button>
+

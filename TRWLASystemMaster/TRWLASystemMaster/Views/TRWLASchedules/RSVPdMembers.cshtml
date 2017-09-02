@@ -52,23 +52,23 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Student_Name)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Student_Surname)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.StudentNumber)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.StudentNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.AspNetUser.Email)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.Email)
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Degree)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.Degree)
             </td>
             <td>
-                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, evid = item.rsvpID }, null)
+                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.SYSUserProfile.SYSUserProfileID, evid = item.rsvpID }, null)
             </td>
         </tr>
     }

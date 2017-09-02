@@ -610,6 +610,7 @@
     <Content Include="Views\TRWLASchedules\StudentContent.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentContentDetails.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentGuestSpeaker.cshtml" />
+    <Content Include="Views\TRWLASchedules\ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

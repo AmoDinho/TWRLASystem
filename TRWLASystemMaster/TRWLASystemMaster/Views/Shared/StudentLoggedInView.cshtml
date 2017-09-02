@@ -44,15 +44,14 @@
                             <li><a href='@Url.Action("StudentContent", "TRWLASchedules")'>Content</a></li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Gallery", "Gallery", "Events")</li>
                 </ul>
                 @Html.Partial("Stud_LoginPartial")
             </div>
         </div>
     </div>
-    @RenderBody()
+    
     <div class="container body-content">
-        
+        @RenderBody()
         @*
             <footer class="panel-footer">
                 <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>

@@ -52,58 +52,72 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ComEngID,ComEng_Name,ComEng_Summary,ComEng_Description,ComEng_Date,ComEnge_StartTime,ComEng_EndTime,ComEng_Theme,VenueID,ContentID")] ComEngEvent comEngEvent)
         {
-            if (ModelState.IsValid)
+            try
             {
-                int i = db.ComEngEvents.Count();
-
-                if (i != 0)
+                if (ModelState.IsValid)
                 {
-                    int max = db.ComEngEvents.Max(p => p.ComEngID);
-                    int k = max + 1;
-                    comEngEvent.ComEngID = k;
+                    int i = db.ComEngEvents.Count();
 
-                    comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
-                    db.ComEngEvents.Add(comEngEvent);
+                    if (i != 0)
+                    {
+                        int max = db.ComEngEvents.Max(p => p.ComEngID);
+                        int k = max + 1;
+                        comEngEvent.ComEngID = k;
 
-                    TRWLASchedule mySchedule = new TRWLASchedule();
-                    mySchedule.ComEngID = comEngEvent.ComEngID;
-                    db.TRWLASchedules.Add(mySchedule);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "TRWLASchedules");
+                        comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
+                        db.ComEngEvents.Add(comEngEvent);
+
+                        TRWLASchedule mySchedule = new TRWLASchedule();
+                        mySchedule.ComEngID = comEngEvent.ComEngID;
+                        db.TRWLASchedules.Add(mySchedule);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "TRWLASchedules");
+                    }
+                    else
+                    {
+                        comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
+                        db.ComEngEvents.Add(comEngEvent);
+                        TRWLASchedule mySchedule = new TRWLASchedule();
+                        mySchedule.ComEngID = comEngEvent.ComEngID;
+                        db.TRWLASchedules.Add(mySchedule);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "TRWLASchedules");
+
+                    }
                 }
-                else
-                {
-                    comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
-                    db.ComEngEvents.Add(comEngEvent);
-                    TRWLASchedule mySchedule = new TRWLASchedule();
-                    mySchedule.ComEngID = comEngEvent.ComEngID;
-                    db.TRWLASchedules.Add(mySchedule);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "TRWLASchedules");
 
-                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
+                return View(comEngEvent);
             }
-
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
-            return View(comEngEvent);
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: ComEngEvents/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ComEngEvent comEngEvent = db.ComEngEvents.Find(id);
+                if (comEngEvent == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
+                return View(comEngEvent);
             }
-            ComEngEvent comEngEvent = db.ComEngEvents.Find(id);
-            if (comEngEvent == null)
+            catch
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
-            return View(comEngEvent);
         }
 
         // POST: ComEngEvents/Edit/5
@@ -113,15 +127,22 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ComEngID,ComEng_Name,ComEng_Summary,ComEng_Description,ComEng_Date,ComEnge_StartTime,ComEng_EndTime,ComEng_Theme,VenueID,ContentID")] ComEngEvent comEngEvent)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(comEngEvent).State = EntityState.Modified;
-                db.SaveChanges();
-                RedirectToAction("Index", "TRWLASchedules");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(comEngEvent).State = EntityState.Modified;
+                    db.SaveChanges();
+                    RedirectToAction("Index", "TRWLASchedules");
+                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
+                return View(comEngEvent);
             }
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
-            return View(comEngEvent);
+            catch
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: ComEngEvents/Delete/5

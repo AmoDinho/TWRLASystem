@@ -6,25 +6,26 @@
 }
 
 <div class="jumbotron">
-    <h2>@Context.User.Identity.Name</h2>
+    <h2>Welcome to the TRWLA Management System</h2>
 </div>
 
 @*<div id="divUserListContainer">
         @Html.Action("ManageUserPartial", "Manage");
     </div>*@
+@if (Session["User"] != null)
+{
 
 
 
-
-@if (TempData["rsvp"] != null)
+if (TempData["rsvp"] != null)
 {
     <h4>@TempData["rsvp"]</h4>
 }
-@if (TempData["rsvpFAIL"] != null)
+if (TempData["rsvpFAIL"] != null)
 {
     <h4>@TempData["rsvpFAIL"]</h4>
 }
-@if (TempData["Attended"] != null)
+if (TempData["Attended"] != null)
 {
     <h4>@TempData["Attended"]</h4>
 }
@@ -49,23 +50,23 @@
     </div>
     <div class="form-group">
         <div>
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">All</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">All</button>
 
         </div>
     </div>
     <div class="form-group">
         <div>
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagements</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagements</button>
         </div>
     </div>
     <div class="form-group">
         <div>
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lectures</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lectures</button>
         </div>
     </div>
     <div class="form-group">
         <div>
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Functions</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Functions</button>
         </div>
     </div>
 </div>
@@ -219,7 +220,8 @@
     }
 }*@
 
-<div class="row" @*id="showMe" style="display:none;*@>
+
+    <div class="row" @*id="showMe" style="display:none;*@>
 
     <div class="col-md-6" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-bottom:10px; height:500px; overflow-y:auto;">
         <h3 style="text-align:center;">Upcoming TRWLA Events</h3>
@@ -351,4 +353,12 @@
             }
         </div>
     </div>
+
 </div>
+}
+@if (Session["User"] == null)
+{
+    <h4>Something Went Wrong</h4>
+    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let us start again</button>
+}
+
