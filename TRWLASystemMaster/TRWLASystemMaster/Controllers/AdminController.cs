@@ -15,16 +15,16 @@ namespace TRWLASystemMaster.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-
-            var grad = from g in DB.Students
-                       select g;
+           
+            //var grad = from g in DB.Students
+            //           select g;
 
 
            
-            grad = grad.Where(h => h.Graduate.Contains('1'));
+            //grad = grad.Where(h => h.Graduate.Contains('1'));
                        
 
-            return View(grad);
+            return View();
         }
 
 
