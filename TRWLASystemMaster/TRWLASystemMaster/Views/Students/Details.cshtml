@@ -12,20 +12,20 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.StudentNumber)
+            Student Number  @*@Html.DisplayNameFor(model => model.StudentNumber)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.StudentNumber)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Graduate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Graduate)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Degree)
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.YearOfStudy)
+            Academic Commencement Date   @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Name)
+            Student Name   @*@Html.DisplayNameFor(model => model.Student_Name)*@
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Surname)
+            Student Surname  @*@Html.DisplayNameFor(model => model.Student_Surname)*@
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Phone)
+            Phone Number      @*@Html.DisplayNameFor(model => model.Student_Phone)*@
         </dt>
 
         <dd>
@@ -68,23 +68,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_DoB)
+            DoB   @*@Html.DisplayNameFor(model => model.Student_DoB)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Student_DoB)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ActiveStatus)
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ActiveStatus)*
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ActiveStatus)
-        </dd>
+        </dd>*@
 
         <dt>
-            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+            Residence      @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
         </dt>
 
         <dd>
@@ -92,15 +92,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
+            Student Type      @*@Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StudentType.StudentTypeDescription)
+                @Html.DisplayFor(model => model.StudentType.StudentTypeDescription)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UserType.Description)
+            User Type   @*@Html.DisplayNameFor(model => model.UserType.Description)*@
         </dt>
 
         <dd>
@@ -109,7 +109,4 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<button type="button" class="btn" onclick="location.href='@Url.Action("Index")'">Back</button>
