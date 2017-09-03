@@ -16,6 +16,14 @@
 <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">View Student Types</button>
 
 <hr />
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Name: @Html.TextBox("SearchStringS") <input style="border-radius:4px; width:300px; color:black; border-color:white" />
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
+
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@

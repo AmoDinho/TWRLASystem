@@ -13,12 +13,23 @@ namespace TRWLASystemMaster.Controllers
     public class VolunteersController : Controller
     {
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
-
+        
         // GET: Volunteers
-        public ActionResult Index()
+        public ActionResult Index(string searchStringVol)
         {
-            var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
-            return View(volunteers.ToList());
+
+            var voltype = from vu in db.Volunteers
+                          select vu;
+
+            if (!String.IsNullOrEmpty(searchStringVol))
+            {
+                voltype = voltype.Where(s => s.Volunteer_Name.Contains(searchStringVol));
+
+            }
+
+            return View(voltype.ToList());
+            //    var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
+            //    return View(volunteers.ToList());
         }
 
         // GET: Volunteers/Details/5

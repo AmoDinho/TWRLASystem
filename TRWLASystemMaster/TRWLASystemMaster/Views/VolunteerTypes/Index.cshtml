@@ -5,12 +5,26 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
+
+<div class="jumbotron">
+
+    <h2> Volunteer Type- Home</h2>
+
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+@* Search Button for VolunteerType Description  '*@
+@using (Html.BeginForm())
+{
+    <p class="form-group">
+        Find by Descrtiption: @Html.TextBox("searchStringVS", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
+<table class="table"> 
     <tr>
         <th>
             Volunteer Type     @*@Html.DisplayNameFor(model => model.VolunteerType_Description)*@

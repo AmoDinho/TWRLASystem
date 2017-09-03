@@ -15,10 +15,23 @@ namespace TRWLASystemMaster.Controllers
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         // GET: Students
-        public ActionResult Index()
+        public ActionResult Index(string SearchStringS)
         {
-            var students = db.Students.Include(s => s.Residence).Include(s => s.StudentType).Include(s => s.UserType);
-            return View(students.ToList());
+            //var students = db.Students.Include(s => s.Residence).Include(s => s.StudentType).Include(s => s.UserType);
+            //return View(students.ToList());
+            var stu = from su in db.Students
+                      select su;
+
+            if (!String.IsNullOrEmpty(SearchStringS))
+            {
+                stu = stu.Where(s => s.Degree.Contains(SearchStringS));
+
+            }
+
+
+
+            return View(stu.ToList());
+
         }
 
         // GET: Students/Details/5

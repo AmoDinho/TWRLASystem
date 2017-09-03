@@ -17,6 +17,14 @@
 </div>
 <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'">View Volunteer Types</button>
 <hr />
+@using (Html.BeginForm())
+{
+    <p class="form-group">
+        Find by name: @Html.TextBox("searchStringVol", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+      
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
 <table class="table">
     <tr>
         <th>
