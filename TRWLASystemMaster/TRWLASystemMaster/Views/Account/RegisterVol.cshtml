@@ -76,11 +76,33 @@
             <div class="form-group">
                     <input type="submit" class="btn" value="Register" />
             </div>
+            <hr />
             <div class="form-group">
                     <button type="button" class="btn" onclick="location.href='@Url.Action("SelectVolStud", "Select")'">Return</button>
             </div>
         </div>
-    </div>
+  
+    
+
+        <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group">
+                        <button type="button" class="btn" onclick="location.href='@Url.Action("SelectVolStud", "Select")'">Return</button>
+                    </div>
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group">
+                        <input type="submit" class="btn" value="Register" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+      </div>
+
+
+
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

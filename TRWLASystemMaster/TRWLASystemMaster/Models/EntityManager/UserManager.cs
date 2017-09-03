@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using TRWLASystemMaster.Models.DB;
 using TRWLASystemMaster.Models.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.EntityManager
 {
@@ -134,6 +135,96 @@ namespace TRWLASystemMaster.Models.EntityManager
             }
         }
 
+
+        public void UpdateUserAccount(UserProfileView user)
+        {
+
+            using (TWRLADB_Staging_V2Entities19 db = new TWRLADB_Staging_V2Entities19())
+            {
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+
+                        SYSUser SU = db.SYSUsers.Find(user.SYSUserID);
+                        SU.LoginName = user.LoginName;
+                        SU.PasswordEncryptedText = user.Password;
+                        SU.RowCreatedSYSUserID = user.SYSUserID;
+                        SU.RowModifiedSYSUserID = user.SYSUserID;
+                        SU.RowCreatedDateTime = DateTime.Now;
+                        SU.RowModifiedDateTime = DateTime.Now;
+
+                        db.SaveChanges();
+
+                        var userProfile = db.SYSUserProfiles.Where(o => o.SYSUserID == user.SYSUserID);
+                        if (userProfile.Any())
+                        {
+                            SYSUserProfile SUP = userProfile.FirstOrDefault();
+                            SUP.SYSUserID = SU.SYSUserID;
+                            SUP.FirstName = user.FirstName;
+                            SUP.LastName = user.LastName;
+                            //SUP.Gender = user.Gender;
+                            SUP.UserTypeID = user.UserTypeID;
+                            SUP.Email = user.Email;
+                            SUP.DoB = user.DoB;
+                            SUP.ResID = user.ResID;
+
+                            SUP.YearOfStudy = user.YearOfStudy;
+                            SUP.Degree = user.Degree;
+                            SUP.SecurityAnswerID = user.SecurityAnswerID;
+                            SUP.StudentNumber = user.StudentNumber;
+
+
+                            SUP.Phonenumber = user.Phonenumber;
+
+
+                            SUP.RowCreatedSYSUserID = user.SYSUserID;
+                            SUP.RowModifiedSYSUserID = user.SYSUserID;
+                            SUP.RowCreatedDateTime = DateTime.Now;
+                            SUP.RowModifiedDateTime = DateTime.Now;
+
+                            db.SaveChanges();
+                        }
+
+                        if (user.LOOKUPRoleID > 0)
+                        {
+                            var userRole = db.SYSUserRoles.Where(o => o.SYSUserID == user.SYSUserID);
+                            SYSUserRole SUR = null;
+                            if (userRole.Any())
+                            {
+                                SUR = userRole.FirstOrDefault();
+                                SUR.LOOKUPRoleID = user.LOOKUPRoleID;
+                                SUR.SYSUserID = user.SYSUserID;
+                                SUR.IsActive = true;
+                                SUR.RowCreatedSYSUserID = user.SYSUserID;
+                                SUR.RowModifiedSYSUserID = user.SYSUserID;
+                                SUR.RowCreatedDateTime = DateTime.Now;
+                                SUR.RowModifiedDateTime = DateTime.Now;
+                            }
+                            else
+                            {
+                                SUR = new SYSUserRole();
+                                SUR.LOOKUPRoleID = user.LOOKUPRoleID;
+                                SUR.SYSUserID = user.SYSUserID;
+                                SUR.IsActive = true;
+                                SUR.RowCreatedSYSUserID = user.SYSUserID;
+                                SUR.RowModifiedSYSUserID = user.SYSUserID;
+                                SUR.RowCreatedDateTime = DateTime.Now;
+                                SUR.RowModifiedDateTime = DateTime.Now;
+                                db.SYSUserRoles.Add(SUR);
+                            }
+
+                            db.SaveChanges();
+                        }
+                        dbContextTransaction.Commit();
+                    }
+                    catch
+                    {
+                        dbContextTransaction.Rollback();
+                    }
+                }
+            }
+        }
         //MEHTOD:Does Login Exist?
 
         public bool IsLoginNameExist(string loginName)
@@ -321,12 +412,6 @@ namespace TRWLASystemMaster.Models.EntityManager
 
             return profiles;
         }
-
-
-
-     
-
-
 
         //USER DATAVIEW 
         public UserDataView GetUserDataView(string loginName)

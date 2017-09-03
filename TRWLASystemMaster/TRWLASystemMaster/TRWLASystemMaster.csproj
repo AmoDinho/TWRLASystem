@@ -611,6 +611,7 @@
     <Content Include="Views\TRWLASchedules\StudentContentDetails.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentGuestSpeaker.cshtml" />
     <Content Include="Views\TRWLASchedules\ErrorPage.cshtml" />
+    <Content Include="Views\Manage\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

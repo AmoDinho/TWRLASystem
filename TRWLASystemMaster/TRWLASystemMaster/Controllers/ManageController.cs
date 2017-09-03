@@ -38,7 +38,7 @@ namespace TRWLASystemMaster.Controllers
         /// </summary>
         /// <returns></returns>
 
-        [Authorize]
+       // [Authorize]
         public ActionResult EditProfile()
         {
             string loginName = User.Identity.Name;
@@ -49,13 +49,13 @@ namespace TRWLASystemMaster.Controllers
 
 
         [HttpPost]
-        [Authorize]
+     //   [Authorize]
         public ActionResult EditProfile(UserProfileView profile)
         {
             if (ModelState.IsValid)
             {
                 UserManager UM = new UserManager();
-                //UM.UpdateUserAccount(profile);
+                UM.UpdateUserAccount(profile);
 
                 ViewBag.Status = "Update Sucessful!";
             }
