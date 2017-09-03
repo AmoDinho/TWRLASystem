@@ -395,6 +395,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\boniwe.jpg" />
+    <Content Include="Image\girls.jpg" />
+    <Content Include="Image\logo.png" />
+    <Content Include="Image\train.jpg" />
     <Content Include="Models\DB\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -622,6 +626,9 @@
     <Content Include="Views\Volunteers\StudentVolView.cshtml" />
     <Content Include="Views\Alumni\Index.cshtml" />
     <Content Include="Views\Shared\ErrorLogIn.cshtml" />
+    <Content Include="Views\Home\CommServe.cshtml" />
+    <Content Include="Views\Home\Network.cshtml" />
+    <Content Include="Views\Home\Skills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

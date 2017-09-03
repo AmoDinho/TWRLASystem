@@ -8,6 +8,10 @@ namespace TRWLASystemMaster
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Clear();
+            bundles.ResetAll();
+            BundleTable.EnableOptimizations = true;
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -32,8 +36,11 @@ namespace TRWLASystemMaster
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/now-ui-kit.css",
-                      "~/Content/site.css",
-                      "~/Content/Custom.css"));
+                      "~/Content/site.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/Custom").Include(
+                       "~/Content/Custom.css")); 
         }
     }
 }
