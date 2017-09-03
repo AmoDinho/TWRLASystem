@@ -195,6 +195,10 @@ namespace TRWLASystemMaster.Controllers
         }
 
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
         //Sign Out
 
         [Authorize]
