@@ -1,96 +1,160 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.DB.Student>
-
-
-@{
+﻿@{
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
+
+<div class="jumbotron">
+
+    <h1>Register & Deregister Admin</h1>
+</div>
+
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.StudentNumber)
+            Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Graduate)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Degree)
+            Surname
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.YearOfStudy)
+            Admin Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Student_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student_Surname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student_Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student_DoB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActiveStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Residence.Res_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserType.Description)
+            Register/Deregister
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Graduate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Degree)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearOfStudy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_DoB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActiveStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Residence.Res_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentType.StudentTypeDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserType.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StudentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
-            </td>
-        </tr>
-    }
+
+    <tr>
+        <td>
+            <!-- Record # 1 -->
+            1
+        </td>
+        <td>
+            Caira
+        </td>
+        <td>
+            Milkbottom
+        </td>
+        <td>
+            <span class="badge badge-success">Active</span>
+        </td>
+        <td>
+            <input type="checkbox" name="checkbox" class="bootstrap-switch"
+                   data-on-label="On"
+                   data-off-label="Off" />
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 2 -->
+            2
+        </td>
+        <td>
+            Tinyko
+        </td>
+        <td>
+            Vilakazi
+        </td>
+        <td>
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+        <td>
+            <input type="checkbox" name="checkbox" class="bootstrap-switch"
+                   data-on-label="On"
+                   data-off-label="Off" />
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 3 -->
+            3
+        </td>
+        <td>
+            Cailn
+        </td>
+        <td>
+            Van Rensburg
+        </td>
+        <td>
+            <span class="badge badge-success">Active</span>
+        </td>
+        <td>
+            <input type="checkbox" name="checkbox" class="bootstrap-switch"
+                   data-on-label="On"
+                   data-off-label="Off" />
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 4 -->
+            4
+        </td>
+        <td>
+            Simphwe
+        </td>
+        <td>
+            Mholbo
+        </td>
+        <td>
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+        <td>
+            <input type="checkbox" name="checkbox" class="bootstrap-switch"
+                   data-on-label="On"
+                   data-off-label="Off" />
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <!-- Record # 5 -->
+            5
+        </td>
+        <td>
+            Achal
+        </td>
+        <td>
+            Signh
+        </td>
+        <td>
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+        <td>
+            <input type="checkbox" name="checkbox" data-toggle="modal" data-target="#myModal3" class="bootstrap-switch"
+                   data-on-label="On"
+                   data-off-label="Off" />
+        </td>
+    </tr>
+
+
 
 </table>
+
+
+@* Error Modal *@
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><span class="badge badge-warning">Error</span></h4>
+            </div>
+            <div class="modal-body">
+                No volunteers match your search criteria.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Try Again</button>
+
+            </div>
+        </div>
+    </div>
+</div>

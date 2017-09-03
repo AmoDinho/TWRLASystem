@@ -32,6 +32,24 @@ namespace TRWLASystemMaster.Controllers
             //    return View(volunteers.ToList());
         }
 
+        public ActionResult StudentVolView(string searchStringVol)
+        {
+
+            var voltype = from vu in db.Volunteers
+                          select vu;
+
+            if (!String.IsNullOrEmpty(searchStringVol))
+            {
+                voltype = voltype.Where(s => s.Volunteer_Name.Contains(searchStringVol));
+
+            }
+
+            return View(voltype.ToList());
+            //    var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
+            //    return View(volunteers.ToList());
+        }
+   
+
         // GET: Volunteers/Details/5
         public ActionResult Details(int? id)
         {

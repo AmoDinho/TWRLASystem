@@ -35,7 +35,7 @@
                         <ul class="dropdown-menu">
                             <li><a href='@Url.Action("Index","Students")'>Students</a></li>
                             <li><a href='@Url.Action("Index","Volunteers")'>Volunteers</a></li>
-                            <li><a href='#'>Alumni</a></li>
+                            <li><a href='@Url.Action("Index","Alumni")'>Alumni</a></li>
                             <li><a href="#">@Html.ActionLink("Send Notification", "SelectRecip","TRWLASchedules")</a></li>
                         </ul>
                     </li>
@@ -53,7 +53,7 @@
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">@Html.ActionLink("Content", "Index", "Contents")</a></li>
+                            <li><a href='@Url.Action("Index", "Contents")'>Content</a></li>
                         </ul>
                     </li>
                     <li role="presentation" class="dropdown">
