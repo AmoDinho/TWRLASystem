@@ -621,6 +621,7 @@
     <Content Include="Views\Volunteers\Index.cshtml" />
     <Content Include="Views\Volunteers\StudentVolView.cshtml" />
     <Content Include="Views\Alumni\Index.cshtml" />
+    <Content Include="Views\Shared\ErrorLogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

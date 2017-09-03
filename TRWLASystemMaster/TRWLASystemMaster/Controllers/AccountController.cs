@@ -141,8 +141,8 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult Login(UserLoginView ULV, string returnUrl)
         {
 
-            //try
-            //{
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
@@ -186,11 +186,11 @@ namespace TRWLASystemMaster.Controllers
 
                 // If we got this far, something failed, redisplay form  
                 return View(ULV);
-           // }
-            //catch (Exception ex)
-            //{
-            //    return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-            //}
+           }
+           catch (Exception ex)
+           {
+               return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Register"));
+            }
 
         }
 

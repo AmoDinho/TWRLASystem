@@ -99,10 +99,10 @@ namespace TRWLASystemMaster.Models.ViewModel
     {
         [Key]
         public int SYSUserID { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "The Login ID Field is Required")]
         [Display(Name = "Login ID")]
         public string LoginName { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "The password Field is required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
