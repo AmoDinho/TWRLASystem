@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class VenuesController : Controller
     {
-        private TWRLADB_Staging_V2Entities19 db = new TWRLADB_Staging_V2Entities19();
+        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         // GET: Venues
         public ActionResult Index(string searchStringV)

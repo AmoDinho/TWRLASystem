@@ -259,6 +259,7 @@
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Controllers\VenueTypesController.cs" />
     <Compile Include="Controllers\VolunteersController.cs" />
+    <Compile Include="Controllers\VolunteerTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -542,11 +543,6 @@
     <Content Include="Views\StudentTypes\Details.cshtml" />
     <Content Include="Views\StudentTypes\Edit.cshtml" />
     <Content Include="Views\StudentTypes\Index.cshtml" />
-    <Content Include="Views\Volunteers\Create.cshtml" />
-    <Content Include="Views\Volunteers\Delete.cshtml" />
-    <Content Include="Views\Volunteers\Details.cshtml" />
-    <Content Include="Views\Volunteers\Edit.cshtml" />
-    <Content Include="Views\Volunteers\Index.cshtml" />
     <Content Include="Views\TRWLASchedules\Create.cshtml" />
     <Content Include="Views\TRWLASchedules\Delete.cshtml" />
     <Content Include="Views\TRWLASchedules\Details.cshtml" />
@@ -582,11 +578,6 @@
     <Content Include="Views\TRWLASchedules\LogAttendance.cshtml" />
     <Content Include="Views\TRWLASchedules\RSVPdMembers.cshtml" />
     <Content Include="Views\TRWLASchedules\ConfirmAttendance.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
-    <Content Include="Views\Students\Delete.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\TRWLASchedules\ClassAttendance.cshtml" />
     <Content Include="Views\TRWLASchedules\FunctionAttendance.cshtml" />
     <Content Include="Views\TRWLASchedules\ComAttendance.cshtml" />
@@ -612,6 +603,21 @@
     <Content Include="Views\TRWLASchedules\StudentGuestSpeaker.cshtml" />
     <Content Include="Views\TRWLASchedules\ErrorPage.cshtml" />
     <Content Include="Views\Manage\EditProfile.cshtml" />
+    <Content Include="Views\VolunteerTypes\Create.cshtml" />
+    <Content Include="Views\VolunteerTypes\Delete.cshtml" />
+    <Content Include="Views\VolunteerTypes\Details.cshtml" />
+    <Content Include="Views\VolunteerTypes\Edit.cshtml" />
+    <Content Include="Views\VolunteerTypes\Index.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Volunteers\Create.cshtml" />
+    <Content Include="Views\Volunteers\Delete.cshtml" />
+    <Content Include="Views\Volunteers\Details.cshtml" />
+    <Content Include="Views\Volunteers\Edit.cshtml" />
+    <Content Include="Views\Volunteers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

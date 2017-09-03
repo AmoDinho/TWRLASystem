@@ -22,7 +22,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities19 db = new TWRLADB_Staging_V2Entities19();
+        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         public ActionResult ErrorPage()
         {
@@ -468,7 +468,7 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult ClassAttendance()
         {
             try {
-                var _contenxt = new TWRLADB_Staging_V2Entities19();
+                var _contenxt = new TWRLADB_Staging_V2Entities();
                 ArrayList xValue = new ArrayList();
                 ArrayList yValue = new ArrayList();
 

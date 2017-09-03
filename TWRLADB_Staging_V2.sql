@@ -122,13 +122,13 @@ CREATE TABLE [dbo].[SYSUserProfile](
     [LastName] [varchar](35) NOT NULL,
 	UserTypeID int not null,
     [Email] [varchar](225) NOT NULL,
-	[DoB] [datetime]  NOT NULL,
+	[DoB] [date]  NOT NULL,
 	[Phonenumber] [varchar](50) NOT NULL,
 
 	SecurityAnswerID int NOT NULL,
 	Graduate varchar(10) null,
     Degree varchar(35) null,
-    YearOfStudy datetime null,
+    YearOfStudy date null,
 	
     [RowCreatedSYSUserID] [int] NOT NULL,
     [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
@@ -196,12 +196,12 @@ YearOfStudy date not null,
 Student_Name varchar(35) not null,
 Student_Surname varchar(35) not null,
 Student_Phone varchar(10) not null,
-Student_DoB datetime not null,
+Student_DoB date not null,
 ActiveStatus varchar(25)not null,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null,
---SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
 )
 go
 
@@ -250,7 +250,7 @@ VolunteerID int IDENTITY(1,1) PRIMARY KEY,
 Volunteer_Name varchar(35) not null,
 Volunteer_Surname varchar(35) not null,
 Volunteer_Phone varchar(10) not null,
-Volunteer_DoB datetime not null,
+Volunteer_DoB date not null,
 ActiveStatus varchar(25)not null,
 UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not null
@@ -640,43 +640,43 @@ GO
 */
 --Graduates
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18','Active', 1, 2, 1)
+Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '10/18/1996','Active', 1, 2, 1)
 go
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(11216389, 1, 'Bsc:Zoology', '2012', 'May','Pennyfeather', '0834074027', ' 1993/10/09', 'Active', 4, 1, 1)
+Values(11216389, 1, 'Bsc:Zoology', '2012', 'May','Pennyfeather', '0834074027', ' 10/09/1993', 'Active', 4, 1, 1)
 go
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(15511549, 1, 'BA:PPE', '2015', 'Cailn','Van Rensburg', '0742587456', '1996/12/02', 'Active', 2, 1, 2)
+Values(15511549, 1, 'BA:PPE', '2015', 'Cailn','Van Rensburg', '0742587456', '12/02/1996', 'Active', 2, 1, 2)
 go
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18', 'Active', 3, 1, 2)
+Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '10/18/1996', 'Active', 3, 1, 2)
 go
 
 
 --Students
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(14935058, 0, 'LLB', '2012', 'Simphwe','Mholbo', ' 0864789456', '1953/12/09', 'Active', 6, 1, 2)
+Values(14935058, 0, 'LLB', '2012', 'Simphwe','Mholbo', ' 0864789456', '12/09/1953', 'Active', 6, 1, 2)
 go
 
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(41526389, 0, 'BSC:IT', '2014', ' Tinyko','Vilakazi', ' 083589745', '1993/10/09', 'Active', 7, 1, 2)
+Values(41526389, 0, 'BSC:IT', '2014', ' Tinyko','Vilakazi', ' 083589745', '10/09/1993', 'Active', 7, 1, 2)
 go
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(23568947, 0, 'BSC:Food Scienece', '2013', 'Enguhla','Phebve', '0781980322', '1995/10/10', 'Active', 8, 1, 2)
+Values(23568947, 0, 'BSC:Food Scienece', '2013', 'Enguhla','Phebve', '0781980322', '10/10/1995', 'Active', 8, 1, 2)
 go
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(21548796, 0, 'Bcom:SupplyChain', '2014', 'Maya','Sandros', '0213654789', '1994/03/10', 'Active', 2, 1, 2)
+Values(21548796, 0, 'Bcom:SupplyChain', '2014', 'Maya','Sandros', '0213654789', '03/10/1994', 'Active', 2, 1, 2)
 go
 
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(12635487, 0, 'BEng:Electrical', '2013', 'Gauye','Buillgue', '031258963', '1992/10/10', 'Active', 4, 1, 2)
+Values(12635487, 0, 'BEng:Electrical', '2013', 'Gauye','Buillgue', '031258963', '10/10/1992', 'Active', 4, 1, 2)
 go
 ---Volunteer----
 /*
@@ -695,25 +695,25 @@ GO
 */
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Vuyo','Renene','0741258963','1994/06/12','Active',2,1)
+values('Vuyo','Renene','0741258963','06/12/1994','Active',2,1)
 GO
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Marice','Clarie','082111223','1995/02/09','Active',2,1)
+values('Marice','Clarie','082111223','02/09/1995','Active',2,1)
 GO
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Nyomi','Khumalo','0891225963','1992/02/06','Active',2,1)
-GO
-
-
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Ciara','Simple','0721852369','1994/11/12','Active',2,1)
+values('Nyomi','Khumalo','0891225963','02/06/1992','Active',2,1)
 GO
 
 
 insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Nomsa','Van Der Burg','0821020360','1995/13/02','Active',2,1)
+values('Ciara','Simple','0721852369','11/12/1994','Active',2,1)
+GO
+
+
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
+values('Nomsa','Van Der Burg','0821020360','13/02/1995','Active',2,1)
 GO
 
 
@@ -978,7 +978,7 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Admin','Admin',1,1)  
   
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1,1)  
+VALUES (1,'Vinz','Durano','02/03/1994',2,'vinz@tuks.co.za','0741028963',1,1,1)  
  
   
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -991,7 +991,7 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Admin2','Admin2',2,2)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
+VALUES (2,'Sarah','Swart','02/08/1995',2,'sarah@tuks.co.za','0821478961',1,2,2)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1008,7 +1008,7 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Student1','Student2',3,3)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
+VALUES (3,'Noma','Hear','10/11/1995',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1021,7 +1021,7 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Student2','Student3',4,4)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
+VALUES (4,'Marche','De Waal','06/14/1994',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  

@@ -11,7 +11,7 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class EventMessage
     {
         public int MessID { get; set; }
@@ -19,10 +19,8 @@ namespace TRWLASystemMaster.Models.DB
         public System.TimeSpan TimeMes { get; set; }
         public int NumberMess { get; set; }
         public Nullable<int> VolunteerID { get; set; }
-        public Nullable<int> StudentID { get; set; }
         public Nullable<int> SYSUserProfileID { get; set; }
     
-        public virtual Student Student { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual Volunteer Volunteer { get; set; }
     }

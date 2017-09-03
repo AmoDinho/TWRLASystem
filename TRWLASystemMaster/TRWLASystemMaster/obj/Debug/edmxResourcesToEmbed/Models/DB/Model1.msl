@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities19">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -62,7 +62,6 @@
           <ScalarProperty Name="TimeMes" ColumnName="TimeMes" />
           <ScalarProperty Name="NumberMess" ColumnName="NumberMess" />
           <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
-          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -218,7 +217,6 @@
           <ScalarProperty Name="ResID" ColumnName="ResID" />
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="StudentTypeID" ColumnName="StudentTypeID" />
-          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -263,12 +261,13 @@
           <ScalarProperty Name="DoB" ColumnName="DoB" />
           <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
           <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
+          <ScalarProperty Name="Graduate" ColumnName="Graduate" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
           <ScalarProperty Name="RowCreatedSYSUserID" ColumnName="RowCreatedSYSUserID" />
           <ScalarProperty Name="RowCreatedDateTime" ColumnName="RowCreatedDateTime" />
           <ScalarProperty Name="RowModifiedSYSUserID" ColumnName="RowModifiedSYSUserID" />
           <ScalarProperty Name="RowModifiedDateTime" ColumnName="RowModifiedDateTime" />
-          <ScalarProperty Name="Degree" ColumnName="Degree" />
-          <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
           <ScalarProperty Name="ResID" ColumnName="ResID" />
         </MappingFragment>
       </EntityTypeMapping>

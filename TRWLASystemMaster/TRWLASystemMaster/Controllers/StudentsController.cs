@@ -6,14 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using TRWLASystemMaster.Models;
 using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class StudentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities19 db = new TWRLADB_Staging_V2Entities19();
+        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         // GET: Students
         public ActionResult Index()
@@ -40,7 +39,6 @@ namespace TRWLASystemMaster.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
-          
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription");
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description");
@@ -52,7 +50,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentID,StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_DoB,ActiveStatus,Id,ResID,UserTypeID,StudentTypeID")] Student student)
+        public ActionResult Create([Bind(Include = "StudentID,StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_DoB,ActiveStatus,ResID,UserTypeID,StudentTypeID")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +59,6 @@ namespace TRWLASystemMaster.Controllers
                 return RedirectToAction("Index");
             }
 
-            
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", student.ResID);
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription", student.StudentTypeID);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", student.UserTypeID);
@@ -80,7 +77,6 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
-          
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", student.ResID);
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription", student.StudentTypeID);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", student.UserTypeID);
@@ -92,7 +88,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentID,StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_DoB,ActiveStatus,Id,ResID,UserTypeID,StudentTypeID")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentID,StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_DoB,ActiveStatus,ResID,UserTypeID,StudentTypeID")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +96,6 @@ namespace TRWLASystemMaster.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-        
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", student.ResID);
             ViewBag.StudentTypeID = new SelectList(db.StudentTypes, "StudentTypeID", "StudentTypeDescription", student.StudentTypeID);
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", student.UserTypeID);

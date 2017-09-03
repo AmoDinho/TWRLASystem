@@ -10,116 +10,107 @@ using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
-    public class VolunteersController : Controller
+    public class VolunteerTypesController : Controller
     {
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
-        // GET: Volunteers
+        // GET: VolunteerTypes
         public ActionResult Index()
         {
-            var volunteers = db.Volunteers.Include(v => v.UserType).Include(v => v.VolunteerType);
-            return View(volunteers.ToList());
+            return View(db.VolunteerTypes.ToList());
         }
 
-        // GET: Volunteers/Details/5
+        // GET: VolunteerTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Volunteer volunteer = db.Volunteers.Find(id);
-            if (volunteer == null)
+            VolunteerType volunteerType = db.VolunteerTypes.Find(id);
+            if (volunteerType == null)
             {
                 return HttpNotFound();
             }
-            return View(volunteer);
+            return View(volunteerType);
         }
 
-        // GET: Volunteers/Create
+        // GET: VolunteerTypes/Create
         public ActionResult Create()
         {
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description");
-            ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description");
             return View();
         }
 
-        // POST: Volunteers/Create
+        // POST: VolunteerTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
+        public ActionResult Create([Bind(Include = "VolunteerTypeID,VolunteerType_Description")] VolunteerType volunteerType)
         {
             if (ModelState.IsValid)
             {
-                db.Volunteers.Add(volunteer);
+                db.VolunteerTypes.Add(volunteerType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
-            ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
-            return View(volunteer);
+            return View(volunteerType);
         }
 
-        // GET: Volunteers/Edit/5
+        // GET: VolunteerTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Volunteer volunteer = db.Volunteers.Find(id);
-            if (volunteer == null)
+            VolunteerType volunteerType = db.VolunteerTypes.Find(id);
+            if (volunteerType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
-            ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
-            return View(volunteer);
+            return View(volunteerType);
         }
 
-        // POST: Volunteers/Edit/5
+        // POST: VolunteerTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VolunteerID,Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID")] Volunteer volunteer)
+        public ActionResult Edit([Bind(Include = "VolunteerTypeID,VolunteerType_Description")] VolunteerType volunteerType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(volunteer).State = EntityState.Modified;
+                db.Entry(volunteerType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", volunteer.UserTypeID);
-            ViewBag.VolunteerTypeID = new SelectList(db.VolunteerTypes, "VolunteerTypeID", "VolunteerType_Description", volunteer.VolunteerTypeID);
-            return View(volunteer);
+            return View(volunteerType);
         }
 
-        // GET: Volunteers/Delete/5
+        // GET: VolunteerTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Volunteer volunteer = db.Volunteers.Find(id);
-            if (volunteer == null)
+            VolunteerType volunteerType = db.VolunteerTypes.Find(id);
+            if (volunteerType == null)
             {
                 return HttpNotFound();
             }
-            return View(volunteer);
+            return View(volunteerType);
         }
 
-        // POST: Volunteers/Delete/5
+        // POST: VolunteerTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Volunteer volunteer = db.Volunteers.Find(id);
-            db.Volunteers.Remove(volunteer);
+            VolunteerType volunteerType = db.VolunteerTypes.Find(id);
+            db.VolunteerTypes.Remove(volunteerType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
