@@ -201,7 +201,7 @@ ActiveStatus varchar(25)not null,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null,
-SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) null
 )
 go
 
@@ -572,6 +572,42 @@ go
 				  */
 				  ---INSERT TEST RECORDS----
 
+				  				  --rESIDENCES
+
+				  insert into Residence(Res_Name)
+values('Magritjie')
+go
+
+insert into Residence(Res_Name)
+values('Madelief')
+go
+
+insert into Residence(Res_Name)
+values('Klaradyn')
+go
+
+insert into Residence(Res_Name)
+values('Vividus Ladies')
+go
+
+--Residence---
+
+insert into Residence(Res_Name)
+values('Nerina')
+GO
+
+insert into Residence(Res_Name)
+values('Asterhof')
+GO
+
+insert into Residence(Res_Name)
+values('Erika')
+GO
+
+insert into Residence(Res_Name)
+values('Jasmyn')
+GO
+
 --User Tyupe--
 
 
@@ -749,6 +785,8 @@ GO
 				  */
 
 
+
+
 				  ---insert into: ADDRESS TABLE---
 
 
@@ -895,39 +933,6 @@ go
 
 --Residences--
 
-insert into Residence(Res_Name)
-values('Magritjie')
-go
-
-insert into Residence(Res_Name)
-values('Madelief')
-go
-
-insert into Residence(Res_Name)
-values('Klaradyn')
-go
-
-insert into Residence(Res_Name)
-values('Vividus Ladies')
-go
-
---Residence---
-
-insert into Residence(Res_Name)
-values('Nerina')
-GO
-
-insert into Residence(Res_Name)
-values('Asterhof')
-GO
-
-insert into Residence(Res_Name)
-values('Erika')
-GO
-
-insert into Residence(Res_Name)
-values('Jasmyn')
-GO
 
 
 
