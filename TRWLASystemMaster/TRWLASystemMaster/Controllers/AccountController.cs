@@ -53,9 +53,9 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult Register(UserSignUpView USV)
         {
 
-            //try
-            //{
-            //    if (ModelState.IsValid)
+            try
+            {
+               if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
@@ -75,13 +75,13 @@ namespace TRWLASystemMaster.Controllers
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
                 return View();
-          //  }
+           }
 
             
-           ////catch (Exception ex)
-           //// {
-           //     return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-           //// }
+           catch (Exception ex)
+           {
+                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+          }
         }
 
 
@@ -101,8 +101,8 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult RegisterVol(UserSignUpViewVol USV)
         {
 
-            try
-            {
+        //    try
+       //     {
                 if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
@@ -123,11 +123,11 @@ namespace TRWLASystemMaster.Controllers
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
                 return View();
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-            }
+         //   }
+         //   catch (Exception ex)
+           // {
+                //return View("ErrorSign", new HandleErrorInfo(ex, "Account", "Register"));
+           // }
 
         }
 

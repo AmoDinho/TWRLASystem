@@ -629,6 +629,7 @@
     <Content Include="Views\Home\CommServe.cshtml" />
     <Content Include="Views\Home\Network.cshtml" />
     <Content Include="Views\Home\Skills.cshtml" />
+    <Content Include="Views\Shared\ErrorSign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
