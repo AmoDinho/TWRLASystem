@@ -15,9 +15,18 @@ namespace TRWLASystemMaster.Controllers
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
 
         // GET: VolunteerTypes
-        public ActionResult Index()
+        public ActionResult Index(string searchStringVS)
         {
-            return View(db.VolunteerTypes.ToList());
+            var voltype = from vu in db.VolunteerTypes
+                          select vu;
+
+            if (!String.IsNullOrEmpty(searchStringVS))
+            {
+                voltype = voltype.Where(s => s.VolunteerType_Description.Contains(searchStringVS));
+
+            }
+
+            return View(voltype.ToList());
         }
 
         // GET: VolunteerTypes/Details/5

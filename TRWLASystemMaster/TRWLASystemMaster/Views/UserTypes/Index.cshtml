@@ -12,47 +12,219 @@
 
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessRight)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'UserType')">User Type</button>
+
+    <button class="tablinks" onclick="openCity(event, 'UniCo')">Unique Code</button>
+    </div>
+
+<div id="UserType" class="tabcontent">
+
+
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccessRight)
-            </td>
-            <td>
-
-                <a href="@Url.Action("Edit", new { id=item.UserTypeID  })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-
-                <a href="@Url.Action("Details", new { id=item.UserTypeID  })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
-
-                <a href="@Url.Action("Delete", new { id=item.UserTypeID  })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
-
-
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessRight)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessRight)
+                </td>
+                <td>
 
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-          <button class="btn">@Html.ActionLink("Add a new User Type", "Create") </button>    
+                    <a href="@Url.Action("Edit", new { id=item.UserTypeID  })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+
+                    <a href="@Url.Action("Details", new { id=item.UserTypeID  })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+
+                    <a href="@Url.Action("Delete", new { id=item.UserTypeID  })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div>
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "UserTypes")'">Add a new User Type</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
+
+
+
+<div id="UniCo" class="tabcontent">
+    <ceneter><p>Unique codes can only be used once</p></ceneter>
+
+    @* Generate Unique Code For vols'*@
+    @using (Html.BeginForm())
+    {
+        <p>
+            <button class="btn btn-round btn-round" style="color:#9b16d8">Generate Unique Code</button>
+        </p>
+    }
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                Code
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+
+
+        <tr>
+            <td>
+                <!-- Record # 1 -->
+                124357
+            </td>
+            <td>
+                <span class="badge badge-success">Active</span>
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>
+                <!-- Record # 2 -->
+                258478
+            </td>
+            <td>
+                <span class="badge badge-danger">Inactive</span>
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                <!-- Record #  3-->
+                123546
+            </td>
+            <td>
+                <span class="badge badge-success">Active</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 4 -->
+                859756
+            </td>
+            <td>
+                <span class="badge badge-danger">Inactive</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 5 -->
+                745896
+            </td>
+            <td>
+                <span class="badge badge-success">Active</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 6 -->
+                1452369
+            </td>
+            <td>
+                <span class="badge badge-danger">Inactive</span>
+            </td>
+        </tr>
+
+    </table>
+
+
+    </div>
+
+
+
+    @* Styles and javascript for the page *@
+    <style>
+        /* Style the tab */
+        div.tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons inside the tab */
+            div.tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+            }
+
+                /* Change background color of buttons on hover */
+                div.tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                div.tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            /*display: none;*/
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+    <script>
+
+        function openCity(evt, cityName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+ 
+@Scripts.Render("~/bundles/bootstrap")

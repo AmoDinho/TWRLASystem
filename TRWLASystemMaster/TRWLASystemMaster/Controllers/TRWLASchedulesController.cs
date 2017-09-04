@@ -206,6 +206,7 @@ namespace TRWLASystemMaster.Controllers
         {
             var at = (from l in db.SYSUserProfiles
                       join r in db.Residences on l.ResID equals r.ResID
+                      where l.UserTypeID == 1
                       select new Demographic
                       {
                           StudNo = l.StudentNumber,
@@ -890,7 +891,10 @@ namespace TRWLASystemMaster.Controllers
                 var trwla = from s in db.TRWLASchedules
                             select s;
 
-                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date < DateTime.Now || p.FunctionEvent.Function_Date < DateTime.Now || p.Lecture.Lecture_Date < DateTime.Now);
+                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date <= DateTime.Now || p.FunctionEvent.Function_Date <= DateTime.Now || p.Lecture.Lecture_Date <= DateTime.Now);
+
+
+
 
                 return View(trwla.ToList());
             }
@@ -973,7 +977,7 @@ namespace TRWLASystemMaster.Controllers
                 int stude = Convert.ToInt32(TempData["NewStudent"]);
 
                 SYSUserProfile stud = db.SYSUserProfiles.Find(id);
-                RSVP_Event ev = db.RSVP_Event.Find(stude);
+                TRWLASchedule ev = db.TRWLASchedules.Find(stude);
 
 
                 int i = db.Attendances.Count();

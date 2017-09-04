@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.DB.Student
+﻿@model TRWLASystemMaster.Models.DB.SYSUserProfile
 
 @{
     ViewBag.Title = "StudentDetails";
@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h2>Details of @Html.DisplayFor(model => model.Student_Name)</h2>
+    <h2>Details of @Html.DisplayFor(model => model.FirstName)</h2>
 </div>
 
 <div>
@@ -38,28 +38,28 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Name)
+            @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Student_Name)
+            @Html.DisplayFor(model => model.FirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_Surname)
+            @Html.DisplayNameFor(model => model.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Student_Surname)
+            @Html.DisplayFor(model => model.LastName)
         </dd>
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.Student_DoB)
+            @Html.DisplayNameFor(model => model.DoB)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Student_DoB)
+            @Html.DisplayFor(model => model.DoB)
         </dd>
 
         <dt>

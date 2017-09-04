@@ -101,7 +101,7 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SUP.UserTypeID = user.UserTypeID;
                 SUP.Email = user.Email;
                 SUP.DoB = user.DoB;
-                SUP.ResID = user.ResID;
+               // SUP.ResID = user.ResID;
            
                 SUP.SecurityAnswerID = user.SecurityAnswerID;
 

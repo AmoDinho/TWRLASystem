@@ -32,6 +32,11 @@ namespace TRWLASystemMaster.Controllers
 
 
             return View(ven.ToList());
+
+
+
+
+
         }
 
         // GET: Venues/Details/5
@@ -52,7 +57,7 @@ namespace TRWLASystemMaster.Controllers
         // GET: Venues/Create
         public ActionResult Create()
         {
-            ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber");
+            ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetName");
             ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description");
             return View();
         }

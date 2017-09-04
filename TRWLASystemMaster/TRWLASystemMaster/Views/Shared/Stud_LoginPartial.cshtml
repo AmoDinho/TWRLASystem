@@ -22,12 +22,12 @@ else
 
         1- Add Image of Messagebox & User Profile Image
         2- add drop down components: *Link to profile *Log out*@
-        <li><a><i class="fa fa-envelope-o fa-1x"></i></a></li>
+        <li><a href='@Url.Action("ViewNotification", "TRWLASchedules")'><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
         <li><a href='@Url.Action("EditProfile", "Manage")'><i class="fa fa-user fa-fw"> </i></a></li>
         <li>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bars fa-fw"></i>Menu<span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bars fa-fw"></i>User<span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-power-off"></i> @Html.ActionLink("Sign Out", "SignOut", "Account") </a></li>
+                <li><a href='@Url.Action("SignOut", "Account")'><i class="fa fa-power-off"></i> Sign Out</a></li>
             </ul>
         </li>
     </ul>

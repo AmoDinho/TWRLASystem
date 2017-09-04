@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "StudentLoggedInView";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title TRWLA Student Portal</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/lib")
+    @Styles.Render("~/Content/Custom")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -35,8 +38,8 @@
                         <ul class="dropdown-menu"></ul>
                     </li>
                     <li role="presentation" class="dropdown">
-                        <a href='@Url.Action("Index", "Volunteers")' class="dropdown-toggle" data-toggle="dropdown">Volunteer<b class="caret"></b></a>
-                        <ul class="dropdown-menu"></ul>
+                        <a href='#' >Volunteer</a>
+                       
                     </li>
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>

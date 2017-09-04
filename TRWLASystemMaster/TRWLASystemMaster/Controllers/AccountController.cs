@@ -53,9 +53,9 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult Register(UserSignUpView USV)
         {
 
-            //try
-            //{
-            //    if (ModelState.IsValid)
+            try
+            {
+               if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
@@ -75,13 +75,13 @@ namespace TRWLASystemMaster.Controllers
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
                 return View();
-          //  }
+           }
 
             
-           ////catch (Exception ex)
-           //// {
-           //     return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-           //// }
+           catch (Exception ex)
+           {
+                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+          }
         }
 
 
@@ -101,8 +101,8 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult RegisterVol(UserSignUpViewVol USV)
         {
 
-            try
-            {
+           try
+         {
                 if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
@@ -124,10 +124,10 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View();
             }
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-            }
+           catch (Exception ex)
+           {
+               return View("ErrorSign", new HandleErrorInfo(ex, "Account", "Register"));
+           }
 
         }
 
@@ -137,64 +137,83 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+        //Login Post 
         [HttpPost]
         public ActionResult Login(UserLoginView ULV, string returnUrl)
         {
 
-            //try
-            //{
-                if (ModelState.IsValid)
+            try
+            {
+                try
                 {
-                    UserManager UM = new UserManager();
-                    string password = UM.GetUserPassword(ULV.LoginName);
-
-                    var username = from n in db.SYSUsers
-                                   where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
-                                   select n;
-
-                    SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
-                    SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-                    
-
-                    if (string.IsNullOrEmpty(password))
-                        ModelState.AddModelError("", "The user login or password provided is incorrect.");
-                    else
+                    if (ModelState.IsValid)
                     {
-                        if (ULV.Password.Equals(password))
-                        {
-                            FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
+                        UserManager UM = new UserManager();
+                        string password = UM.GetUserPassword(ULV.LoginName);
 
-                            if (Convert.ToInt32(myUserP.UserTypeID) == 1)
-                            {
-                                Session["User"] = myUserP.SYSUserProfileID;
-                                return RedirectToAction("StudentMainMenu", "TRWLASchedules");
-                            }
-                            else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
-                            {
-                                Session["User"] = myUserP.SYSUserProfileID;
-                                return RedirectToAction("Index", "TRWLASchedules");
-                            }
-                            
-                            
-                        }
+                        var username = from n in db.SYSUsers
+                                       where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
+                                       select n;
+
+                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
+                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+
+
+                        if (string.IsNullOrEmpty(password))
+                            ModelState.AddModelError("", "The user login or password provided is incorrect.");
                         else
                         {
-                            ModelState.AddModelError("", "The password provided is incorrect.");
+                            if (ULV.Password.Equals(password))
+                            {
+                                FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
+
+                                if (Convert.ToInt32(myUserP.UserTypeID) == 1)
+                                {
+                                    Session["User"] = myUserP.SYSUserProfileID;
+                                    return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                                }
+                                else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
+                                {
+                                    Session["User"] = myUserP.SYSUserProfileID;
+                                    return RedirectToAction("Index", "TRWLASchedules");
+                                }
+
+
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "The password provided is incorrect.");
+                            }
                         }
                     }
+                    return View(ULV);
+
+                }
+                catch (Exception ex)
+                {
+                    return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Register"));
                 }
 
+
+
                 // If we got this far, something failed, redisplay form  
-                return View(ULV);
-           // }
-            //catch (Exception ex)
-            //{
-            //    return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-            //}
+               
+            }
+             catch (System.OutOfMemoryException e)
+            {
+                return View("ErrorLogIn", new HandleErrorInfo(e, "Account", "Register"));
+            }
+
+
+           
 
         }
 
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
         //Sign Out
 
         [Authorize]

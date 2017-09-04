@@ -1,72 +1,137 @@
 ﻿
-@model TRWLASystemMaster.Models.ViewModel.UserDataView
+
 
 @{
     //ViewBag.Title = "ManageUserPartial";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Manage Users </h2>
+<div class="jumbotron">
 
-<div>
-    <h1>List of Users</h1>
-    <table class="table table-striped table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Login ID</th>
-                <th>Password</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>UserType</th>
-                <th colspan="2">Role</th>
 
-                <th>Security Answer</th>
-                <th>Student Number</th>
-                <th>Degree</th>
-                <th>Year Of Study</th>
-                <th>Res</th>
-                <th>Email</th>
-                <th>DoB</th>
-                <th>Phone number</th>
+    <h2>Assign Admin Roles </h2>
+</div>
+<div id="Admin" class="tabcontent">
 
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach (var i in Model.UserProfile)
-            {
-                <tr>
-                    <td> @Html.DisplayFor(m => i.SYSUserID)</td>
-                    <td> @Html.DisplayFor(m => i.LoginName)</td>
-                    <td> @Html.DisplayFor(m => i.Password)</td>
-                    <td> @Html.DisplayFor(m => i.FirstName)</td>
-                    <td> @Html.DisplayFor(m => i.LastName)</td>
-                    <td> @Html.DisplayFor(m => i.UserTypeID)</td>
 
-                    <td> @Html.DisplayFor(m => i.SecurityAnswerID)</td>
-                    <td> @Html.DisplayFor(m => i.StudentNumber)</td>
-                    <td> @Html.DisplayFor(m => i.Degree)</td>
-                    <td> @Html.DisplayFor(m => i.YearOfStudy)
-                    <td>
+    <table class="table">
+        <tr>
+            <th>
+                Number
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Admin Status
+            </th>
+            <th>
+                Register/Deregister
+            </th>
+            <th></th>
+        </tr>
 
-                    <td> @Html.DisplayFor(m => i.ResID)
-                    <td>
 
-                    <td> @Html.DisplayFor(m => i.Email)
-                    <td>
-                    <td> @Html.DisplayFor(m => i.DoB)
-                    <td>
-                    <td> @Html.DisplayFor(m => i.Phonenumber)
-                    <td>
+        <tr>
+            <td>
+                <!-- Record # 1 -->
+                1
+            </td>
+            <td>
+                Caira
+            </td>
+            <td>
+                Milkbottom
+            </td>
+            <td>
+                <span class="badge badge-success">Active</span>
+            </td>
+            <td>
+                <input type="checkbox" name="checkbox" class="bootstrap-switch" />
+            </td>
+        </tr>
 
-                    <td> @Html.DisplayFor(m => i.RoleName)</td>
-                    <td> @Html.HiddenFor(m => i.LOOKUPRoleID)</td>
-                    <td><a href="javascript:void(0)" class="lnkEdit">Edit</a></td>
-                    <td><a href="javascript:void(0)" class="lnkDelete">Delete</a></td>
-                </tr>
-            }
-        </tbody>
+        <tr>
+            <td>
+                <!-- Record # 2 -->
+                2
+            </td>
+            <td>
+                Tinyko
+            </td>
+            <td>
+                Vilakazi
+            </td>
+            <td>
+                <span class="badge badge-danger">Inactive</span>
+            </td>
+            <td>
+                <input type="checkbox" name="checkbox" class="bootstrap-switch" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 3 -->
+                3
+            </td>
+            <td>
+                Cailn
+            </td>
+            <td>
+                Van Rensburg
+            </td>
+            <td>
+                <span class="badge badge-success">Active</span>
+            </td>
+            <td>
+                <input type="checkbox" name="checkbox" class="bootstrap-switch" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 4 -->
+                4
+            </td>
+            <td>
+                Simphwe
+            </td>
+            <td>
+                Mholbo
+            </td>
+            <td>
+                <span class="badge badge-danger">Inactive</span>
+            </td>
+            <td>
+                <input type="checkbox" name="checkbox" class="bootstrap-switch" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <!-- Record # 5 -->
+                5
+            </td>
+            <td>
+                Achal
+            </td>
+            <td>
+                Signh
+            </td>
+            <td>
+                <span class="badge badge-danger">Inactive</span>
+            </td>
+            <td>
+                <input type="checkbox" name="checkbox" data-toggle="modal" data-target="#myModal3" class="bootstrap-switch" />
+            </td>
+        </tr>
+
+
+
     </table>
+
 </div>
