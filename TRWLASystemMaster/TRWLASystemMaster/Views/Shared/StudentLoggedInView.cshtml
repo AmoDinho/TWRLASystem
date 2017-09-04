@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "StudentLoggedInView";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 <!DOCTYPE html>
@@ -37,8 +38,8 @@
                         <ul class="dropdown-menu"></ul>
                     </li>
                     <li role="presentation" class="dropdown">
-                        <a href='@Url.Action("StudentVolView", "Volunteers")' class="dropdown-toggle" data-toggle="dropdown">Volunteer<b class="caret"></b></a>
-                        <ul class="dropdown-menu"></ul>
+                        <a href='@Url.Action("StudentVolView", "Volunteers")' >Volunteer</a>
+                       
                     </li>
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>
