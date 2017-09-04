@@ -11,15 +11,19 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class LectureReview
     {
         public int reviewID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Review")]
         public string Review { get; set; }
+        [Required]
         public int RatingID { get; set; }
+        public int StudentID { get; set; }
         public int LectureID { get; set; }
-        public Nullable<int> SYSUserProfileID { get; set; }
-    
+
         public virtual Lecture Lecture { get; set; }
         public virtual RatingType RatingType { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }

@@ -10,6 +10,7 @@
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class FunctionEvent
@@ -21,18 +22,35 @@ namespace TRWLASystemMaster.Models.DB
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.TRWLASchedules = new HashSet<TRWLASchedule>();
         }
-    
+
         public int FunctionID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function_Name")]
         public string Function_Name { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function_Summary")]
         public string Function_Summary { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function_Description")]
         public string Function_Description { get; set; }
+        [Required]
         public System.DateTime Function_Date { get; set; }
+        [Required]
         public System.TimeSpan Function_StartTime { get; set; }
+        [Required]
         public System.TimeSpan Function_EndTime { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Function_Theme")]
         public string Function_Theme { get; set; }
+        [Required]
         public Nullable<int> GuestSpeakerID { get; set; }
+        [Required]
         public Nullable<int> VenueID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual GuestSpeaker GuestSpeaker { get; set; }

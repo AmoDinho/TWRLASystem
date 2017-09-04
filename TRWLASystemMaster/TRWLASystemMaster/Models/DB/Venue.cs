@@ -10,6 +10,7 @@
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class Venue
@@ -21,12 +22,17 @@ namespace TRWLASystemMaster.Models.DB
             this.FunctionEvents = new HashSet<FunctionEvent>();
             this.Lectures = new HashSet<Lecture>();
         }
-    
+
         public int VenueID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Venue_Name")]
         public string Venue_Name { get; set; }
+        [Required]
         public int AddressID { get; set; }
+        [Required]
         public int VenueTypeID { get; set; }
-    
+
         public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComEngEvent> ComEngEvents { get; set; }

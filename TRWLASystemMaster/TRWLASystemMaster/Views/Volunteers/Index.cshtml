@@ -77,7 +77,9 @@
         <td>
             @*<a href="@Url.Action("Edit", new { id=item.VolunteerID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>*@ 
             <a href="@Url.Action("Details", new { id=item.VolunteerID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> 
-               @*@Html.ActionLink("Edit", "Edit", new { id=item.VolunteerID }) |
+            <a href="@Url.Action("Delete", new { id=item.VolunteerID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>              
+    
+    @*@Html.ActionLink("Edit", "Edit", new { id=item.VolunteerID }) |
             @Html.ActionLink("Details", "Details", new { id=item.VolunteerID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerID })*@
         </td>

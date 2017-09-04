@@ -22,8 +22,9 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string RoleName { get; set; }
 
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "A Username is Required")]
         [Display(Name = "Username")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string LoginName { get; set; }
         [Required(ErrorMessage = "*")]
         [Display(Name = "Password")]
