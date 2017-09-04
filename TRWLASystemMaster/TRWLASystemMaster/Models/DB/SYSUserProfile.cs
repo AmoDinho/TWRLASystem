@@ -23,6 +23,7 @@ namespace TRWLASystemMaster.Models.DB
             this.Progresses = new HashSet<Progress>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.RSVPSchedules = new HashSet<RSVPSchedule>();
+            this.Students = new HashSet<Student>();
         }
     
         public int SYSUserProfileID { get; set; }
@@ -60,5 +61,7 @@ namespace TRWLASystemMaster.Models.DB
         public virtual SecurityAnswer SecurityAnswer { get; set; }
         public virtual SYSUser SYSUser { get; set; }
         public virtual UserType UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

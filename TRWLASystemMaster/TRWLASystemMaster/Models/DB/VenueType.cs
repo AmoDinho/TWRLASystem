@@ -11,7 +11,7 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class VenueType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +19,12 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.Venues = new HashSet<Venue>();
         }
-    
+
         public int VenueTypeID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "VenueType_Description")]
         public string VenueType_Description { get; set; }
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Venue> Venues { get; set; }
     }

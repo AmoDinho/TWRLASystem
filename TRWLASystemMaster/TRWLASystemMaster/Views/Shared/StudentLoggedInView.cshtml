@@ -1,6 +1,5 @@
 ﻿@{
-    ViewBag.Title = "StudentLoggedInView";
-    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
+    ViewBag.Title = "VolunteerLoggedInPage";
 }
 
 <!DOCTYPE html>
@@ -10,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title TRWLA Student Portal</title>
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/lib")
     @Styles.Render("~/Content/Custom")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -24,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TRWLA Management System", "StudentMainMenu", "TRWLASchedules", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("TRWLA", "Index", "TRWLASchedules", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -35,24 +33,39 @@
                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
-                        <ul class="dropdown-menu"></ul>
+                        <ul class="dropdown-menu">
+                            <li><a href='@Url.Action("StudentMainMenu","TRWLASchedules")'>Home</a></li>
+                            </ul>
                     </li>
                     <li role="presentation" class="dropdown">
-                        <a href='#' >Volunteer</a>
-                       
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Volunteers<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='@Url.Action("StudentVolView","Volunteers")'>Volunteers</a></li>
+                           </ul>
                     </li>
+
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href='@Url.Action("StudentContent", "TRWLASchedules")'>Content</a></li>
                         </ul>
                     </li>
+                    @*<li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("Class Attendance", "ClassAttendance", "TRWLASchedules")</a></li>
+                            <li><a href="#">@Html.ActionLink("Function Attendance", "FunctionAttendance", "TRWLASchedules")</a></li>
+                            <li><a href="#">@Html.ActionLink("Lecture Attendance", "LecAttendance", "TRWLASchedules")</a></li>
+                            <li><a href="#">@Html.ActionLink("Community Engagement Attendance", "ComAttendance", "TRWLASchedules")</a></li>
+                            <li><a href="#">@Html.ActionLink("Student Demographics", "StudentDemographic", "TRWLASchedules")</a></li>
+                            <li><a href="#">@Html.ActionLink("No Attendance", "NoAttend", "TRWLASchedules")</a></li>
+                        </ul>
+                    </li>*@
                 </ul>
                 @Html.Partial("Stud_LoginPartial")
             </div>
         </div>
     </div>
-    
     <div class="container body-content">
         @RenderBody()
         @*
@@ -60,17 +73,30 @@
                 <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
             </footer>*@
     </div>
-   
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
-    @*@RenderSection("scripts", required: false)*@
-
-    @*<script>
+    <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
-    </script>*@
+    </script>
 </body>
 </html>
 <script src="https://use.fontawesome.com/dead28a296.js"></script>
+
+@*
+    How to do the dropdown, Just need to fix css
+
+
+    <li class="@Html.ActionLink("Home", "Index", "Home") dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Storage<span class="caret"></span>
+       </a>
+       <ul class="dropdown-menu" role="menu">
+           <li>@Html.ActionLink("About", "About", "Home")</li>
+           <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+       </ul>
+    </li>*@   

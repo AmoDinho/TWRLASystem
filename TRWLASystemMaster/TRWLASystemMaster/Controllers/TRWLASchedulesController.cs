@@ -1530,7 +1530,7 @@ namespace TRWLASystemMaster.Controllers
                         }
 
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("StudentMainMenu");
                     }
                     else if (tRWLASchedule.LectureID != null)
                     {

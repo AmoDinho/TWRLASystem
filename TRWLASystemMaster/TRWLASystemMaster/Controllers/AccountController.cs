@@ -61,6 +61,7 @@ namespace TRWLASystemMaster.Controllers
                     if (!UM.IsLoginNameExist(USV.LoginName))
                     {
                         USV.UserTypeID = 1;
+                        
                         UM.AddUserAccount(USV);
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
 

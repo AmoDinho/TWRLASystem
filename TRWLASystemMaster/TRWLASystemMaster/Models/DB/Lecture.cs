@@ -6,12 +6,11 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Lecture
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,19 +21,38 @@ namespace TRWLASystemMaster.Models.DB
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.TRWLASchedules = new HashSet<TRWLASchedule>();
         }
-    
+
+
         public int LectureID { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Lecture_Name")]
         public string Lecture_Name { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Lecture_Summary")]
         public string Lecture_Summary { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Lecture_Description")]
         public string Lecture_Description { get; set; }
+        [Required]
         public System.DateTime Lecture_Date { get; set; }
+        [Required]
         public System.TimeSpan Lecture_StartTime { get; set; }
+        [Required]
         public System.TimeSpan Lecture_EndTime { get; set; }
+        [Required]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Lecture_Theme")]
         public string Lecture_Theme { get; set; }
+        [Required]
         public Nullable<int> VenueID { get; set; }
+        [Required]
         public Nullable<int> ResidenceID { get; set; }
+        [Required]
         public Nullable<int> ContentID { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Content Content { get; set; }

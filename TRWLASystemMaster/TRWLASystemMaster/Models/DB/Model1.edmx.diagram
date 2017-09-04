@@ -80,6 +80,7 @@
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__UserT__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__VenueType__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Volun__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

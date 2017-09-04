@@ -245,7 +245,7 @@
     <Property Name="Student_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Student_Surname" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Student_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Student_DoB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Student_DoB" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ActiveStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ResID" Type="Int32" Nullable="false" />
     <Property Name="UserTypeID" Type="Int32" Nullable="false" />
@@ -255,6 +255,8 @@
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Stude__6B24EA82" FromRole="Student" ToRole="RSVP_Event" />
     <NavigationProperty Name="StudentType" Relationship="Self.FK__Student__Student__34C8D9D1" FromRole="Student" ToRole="StudentType" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__Student__UserTyp__33D4B598" FromRole="Student" ToRole="UserType" />
+    <Property Name="SYSUserProfileID" Type="Int32" />
+    <NavigationProperty Name="SYSUserProfile" Relationship="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A" FromRole="Student" ToRole="SYSUserProfile" />
   </EntityType>
   <EntityType Name="StudentMilestone">
     <Key>
@@ -296,12 +298,12 @@
     <Property Name="LastName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserTypeID" Type="Int32" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="DoB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DoB" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SecurityAnswerID" Type="Int32" Nullable="false" />
     <Property Name="Graduate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Degree" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
-    <Property Name="YearOfStudy" Type="DateTime" Precision="0" />
+    <Property Name="YearOfStudy" Type="DateTime" Precision="3" />
     <Property Name="RowCreatedSYSUserID" Type="Int32" Nullable="false" />
     <Property Name="RowCreatedDateTime" Type="DateTime" Precision="3" />
     <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
@@ -317,6 +319,7 @@
     <NavigationProperty Name="SecurityAnswer" Relationship="Self.FK__SYSUserPr__Secur__24927208" FromRole="SYSUserProfile" ToRole="SecurityAnswer" />
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
+    <NavigationProperty Name="Students" Relationship="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A" FromRole="SYSUserProfile" ToRole="Student" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>
@@ -387,7 +390,7 @@
     <Property Name="Volunteer_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Volunteer_Surname" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Volunteer_Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Volunteer_DoB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Volunteer_DoB" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ActiveStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserTypeID" Type="Int32" Nullable="false" />
     <Property Name="VolunteerTypeID" Type="Int32" Nullable="false" />
@@ -1177,5 +1180,21 @@
       <End Role="VolunteerType" EntitySet="VolunteerTypes" />
       <End Role="Volunteer" EntitySet="Volunteers" />
     </AssociationSet>
+    <AssociationSet Name="FK__Student__SYSUser__35BCFE0A" Association="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__Student__SYSUser__35BCFE0A">
+    <End Type="TWRLADB_Staging_V2Model.SYSUserProfile" Role="SYSUserProfile" Multiplicity="0..1" />
+    <End Type="TWRLADB_Staging_V2Model.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

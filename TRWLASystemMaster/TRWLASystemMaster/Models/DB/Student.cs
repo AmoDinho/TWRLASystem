@@ -34,6 +34,7 @@ namespace TRWLASystemMaster.Models.DB
         public int ResID { get; set; }
         public int UserTypeID { get; set; }
         public int StudentTypeID { get; set; }
+        public Nullable<int> SYSUserProfileID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
@@ -42,5 +43,6 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual UserType UserType { get; set; }
+        public virtual SYSUserProfile SYSUserProfile { get; set; }
     }
 }
