@@ -10,7 +10,6 @@
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class Content
@@ -21,20 +20,13 @@ namespace TRWLASystemMaster.Models.DB
             this.ComEngEvents = new HashSet<ComEngEvent>();
             this.Lectures = new HashSet<Lecture>();
         }
-
+    
         public int ContentID { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Content_Name")]
         public string Content_Name { get; set; }
         public string Content_Link { get; set; }
-        [Required]
         public int Content_Status { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Content_Description")]
         public string Content_Description { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComEngEvent> ComEngEvents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
