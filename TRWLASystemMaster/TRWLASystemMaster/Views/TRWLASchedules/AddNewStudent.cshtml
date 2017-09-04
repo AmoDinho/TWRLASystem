@@ -44,31 +44,34 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StudentNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Degree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.YearOfStudy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Residence.Res_Name)
-        </td>
-        <td>
-            @Html.ActionLink("Add New Student", "StudentDetails", new { id = item.SYSUserProfileID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Where(p => p.UserTypeID == 1))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Degree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfStudy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Residence.Res_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Add New Student", "StudentDetails", new { id = item.SYSUserProfileID })
+            </td>
+        </tr>
+
+    }
+
 
 </table>
 
