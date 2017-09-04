@@ -9,49 +9,13 @@
     <h2>ClassAttendance</h2>
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Surname
-        </th>
-        <th>Email</th>
-        <th>
-            Progress
-        </th>
-        <th>
-            Total Number of Events
-        </th>
-        <th></th>
-    </tr>
+<div>
+    <img src="@Url.Action("ClassAttendance")"/>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventCount)
-            </td>
-            
-            <td></td>
-            
-        </tr>
-    }
-
-</table>
-
+    <div class="form-group">
+        <div style="margin-right:5px; float:right;">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        </div>
+    </div>
+</div>
 

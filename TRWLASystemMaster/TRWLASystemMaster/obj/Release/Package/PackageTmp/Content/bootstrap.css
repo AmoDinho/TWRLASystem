@@ -1201,11 +1201,6 @@ pre code {
   border: 2px solid transparent;		
   }
 
-    .col-md-4:hover {
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-        -webkit-transition: .25s ease-in-out;
-        -moz-transition: .25s ease-in-out;
-    }
     .gallery {
   width: 640px;
   margin: 0 auto;

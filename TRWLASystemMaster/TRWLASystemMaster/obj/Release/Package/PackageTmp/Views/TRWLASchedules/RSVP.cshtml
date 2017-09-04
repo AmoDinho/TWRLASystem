@@ -1,8 +1,8 @@
-﻿@model TRWLASystemMaster.Models.TRWLASchedule
+﻿@model TRWLASystemMaster.Models.DB.TRWLASchedule
 
 @{
     ViewBag.Title = "RSVP";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 @if (Model.FunctionID != null)
@@ -280,7 +280,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'">Return</button>
 
         </div>
     </div>

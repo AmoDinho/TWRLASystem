@@ -1,0 +1,99 @@
+﻿@model TRWLASystemMaster.Models.ViewModel.UserSignUpViewVol
+@{
+    ViewBag.Title = "RegisterVol";
+}
+
+<div class="jumbotron"><h2>Register as a Volunteer</h2></div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Username:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LoginName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Password:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("First Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Last Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Email:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Date of Birth:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.DoB, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(m => m.DoB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Phone Number:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Phonenumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Phonenumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Security Question:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SecurityAnswerID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SecurityAnswerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+  
+        @*<div class="form-group">
+            @Html.LabelFor(m => m.ResID, "ResID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ResID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ResID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default btn-round" style="color:#9b16d8" @*data-toggle="modal" data-target="#myModal"*@ value="Register" />
+            </div>
+        </div>
+      </div>
+
+  
+      
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

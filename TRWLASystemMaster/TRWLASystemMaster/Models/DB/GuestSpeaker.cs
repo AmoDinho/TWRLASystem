@@ -29,15 +29,14 @@ namespace TRWLASystemMaster.Models.DB
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "GuestSpeaker_Surname")]
         public string GuestSpeaker_Surname { get; set; }
-        [Required(ErrorMessage = "Your must provide a PhoneNumber")]
-        [Display(Name = "Guest Speaker Phone Number")]
+        [Display(Name = " GuestSpeaker_Phone")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        [Required(ErrorMessage = "Phone Number is Required!")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone number is not valid.")]
         public string GuestSpeaker_Phone { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
+        [Required(ErrorMessage = "Your Email address is required")]
         [Display(Name = "GuestSpeaker_Email")]
+        [EmailAddress]
         public string GuestSpeaker_Email { get; set; }
         [Required]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

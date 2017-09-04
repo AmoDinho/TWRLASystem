@@ -1,0 +1,69 @@
+﻿
+@model TRWLASystemMaster.Models.DB.GuestSpeaker
+
+@{
+    ViewBag.Title = "StudentGuestSpeaker";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h2>
+</div>
+
+@if (TempData["notice"] != null)
+{
+    <h4>@TempData["notice"]</h4>
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name:
+        </dt>
+
+        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.GuestSpeaker_Name)
+        </dd>
+        <dt>
+            Surname:
+        </dt>
+        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.GuestSpeaker_Surname)
+        </dd>
+        <dt>
+            Phone Number:
+        </dt>
+        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.GuestSpeaker_Phone)
+        </dd>
+        <dt>
+            Email:
+        </dt>
+        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.GuestSpeaker_Email)
+        </dd>
+        <dt>
+            Picture Link:
+        </dt>
+        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.GuestSpeaker_PictureLink)
+        </dd>
+    </dl>
+    <div style="background-image:url((@Html.DisplayFor(model => model.GuestSpeaker_PictureLink))" />
+</div>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("StudentEventDetails", "TRWLASchedules", new { id = Convert.ToInt32(@TempData["EventIdNeeded"]) })'">Return</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+

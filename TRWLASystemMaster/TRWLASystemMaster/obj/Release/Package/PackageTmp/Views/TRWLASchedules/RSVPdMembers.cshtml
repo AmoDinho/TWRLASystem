@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.RSVP_Event>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.RSVP_Event>
 
 @{
     ViewBag.Title = "RSVPdMembers";
@@ -9,10 +9,24 @@
     <h2>RSVPd Members</h2>
 </div>
 
+<div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.Label("Find by name:") @Html.TextBox("searchString"@*, "", new { placeholder = "Name of Event" }*@)
+                <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+            </p>
+        }
+    </div>
+</div>
+
 @if (TempData["Attend"] != null)
 {
     <h4>@TempData["Attend"]</h4>
 }
+
+
 
 <table class="table">
     <tr>
@@ -38,23 +52,23 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Student_Name)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Student_Surname)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.StudentNumber)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.StudentNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.AspNetUser.Email)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.Email)
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Student.Degree)
+                @Html.DisplayFor(modelItem => item.SYSUserProfile.Degree)
             </td>
             <td>
-                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.Student.StudentID, evid = item.rsvpID }, null)
+                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.SYSUserProfile.SYSUserProfileID, evid = item.rsvpID }, null)
             </td>
         </tr>
     }
@@ -64,7 +78,10 @@
 
 
 <div class="form-inline" style="float:right;">
-    <div style="margin-right:5px;">
+    <div class="form-group" style="margin-right:5px;">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("AddNewStudent", "TRWLASchedules")'">Add New Student</button>
+    </div>
+    <div class="form-group" style="margin-right:5px;">
         <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
     </div>
 </div>

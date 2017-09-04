@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.Content>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.Content>
 
 @{
     ViewBag.Title = "Index";
@@ -77,8 +77,10 @@
                 @Html.DisplayFor(modelItem => item.Content_Description)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ContentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ContentID })
+                <a href="@Url.Action("Edit", new { id=item.ContentID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+
+                <a href="@Url.Action("Details", new { id=item.ContentID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+              
             </td>
         </tr>
     }

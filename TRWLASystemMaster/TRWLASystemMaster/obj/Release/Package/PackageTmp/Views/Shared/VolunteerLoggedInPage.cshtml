@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title TRWLA Student Portal</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Custom")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -21,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TRWLA Management System", "Index", "TRWLASchedules", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("TRWLA", "Index", "TRWLASchedules", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -33,28 +34,27 @@
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Members<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Students</a></li>
-                            <li><a href="#">Volunteers</a></li>
-                            <li><a href="#">Alumni</a></li>
+                            <li><a href='@Url.Action("Index","Students")'>Students</a></li>
+                            <li><a href='@Url.Action("Index","Volunteers")'>Volunteers</a></li>
+                            <li><a href='@Url.Action("Index","Alumni")'>Alumni</a></li>
                             <li><a href="#">@Html.ActionLink("Send Notification", "SelectRecip","TRWLASchedules")</a></li>
                         </ul>
                     </li>
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">@Html.ActionLink("Create","EventType","TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Manage Events", "Index", "TRWLASchedules")</a></li>
-                            <li><a href="#">Manage Venues</a></li>
-                            <li><a href="#">Log Attendance</a></li>
-                            <li><a href="#">@Html.ActionLink("Manage Guest Speakers", "Index", "GuestSpeaker")</a></li>
+                            <li><a href='@Url.Action("EventType","TRWLASchedules")'>Create Event</a></li>
+                            <li><a href='@Url.Action("Index", "TRWLASchedules")'>Manage Events</a></li>
+                            <li><a href='@Url.Action("Index", "Venues")'>Manage Venues</a></li>
+                            <li><a href='@Url.Action("LogAttendance", "TRWLASchedules")'>Log Attendance</a></li>
+                            <li><a href='@Url.Action("Index", "GuestSpeaker")'>Manage Guest Speakers</a></li>
                         </ul>
                     </li>
 
                     <li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reading Content<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">@Html.ActionLink("Content", "Index", "Contents")</a></li>
-                            <li><a href="#">E-Library</a></li>
+                            <li><a href='@Url.Action("Index", "Contents")'>Content</a></li>
                         </ul>
                     </li>
                     <li role="presentation" class="dropdown">

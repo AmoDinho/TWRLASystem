@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Graduate List</h2>
+
+</div>
+
+<p>You can generate a list of graduates in the acadmey that will quailfy based on the requirements you have set.</p>
+
+@** Search Button for 'RES NAME'*@
+@using (Html.BeginForm())
+{
+    <p>
+        Search Alumni: @Html.TextBox("SearchString")
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+
+    </p>
+}
+<hr />
+<button value="Search" class="btn btn-default btn-round">Generate Graduate List</button>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+         First Name  
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            Email Address
+        </th>
+        <th></th>
+    </tr>
+
+    <!-- Record 1-->
+    <tr>
+        <td>
+            Ciara
+        </td>
+        <td>
+            Mash
+        </td>
+        <td>
+            0147258786
+        </td>
+        <td>
+            u14284795@tuks.co.za
+        </td>
+    </tr>
+
+    <!-- Record 2-->
+
+    <tr>
+        <td>
+            Una
+        </td>
+        <td>
+            De Burger
+        </td>
+        <td>
+            07895847
+        </td>
+        <td>
+            u14254786@tuks.co.za
+        </td>
+    </tr>
+
+    <!-- Record 3-->
+
+    <tr>
+
+        <td>
+            Sinqo
+        </td>
+        <td>
+            Renwilie
+        </td>
+        <td>
+            0174536985
+        </td>
+        <td>
+            u18789654@tuks.co.za
+        </td>
+    </tr>
+
+
+    <!-- Record 4-->
+
+    <tr>
+
+        <td>
+            Martina
+        </td>
+        <td>
+            Khiosi
+        </td>
+        <td>
+            0214785963
+        </td>
+        <td>
+            u103658@tuks.co.za
+        </td>
+    </tr>
+
+
+    <!-- Record 5-->
+    <tr>
+        <td>
+            Ellie
+        </td>
+        <td>
+            Martuns
+        </td>
+        <td>
+            0612587963
+        </td>
+        <td>
+            u10285478@tuks.co.za
+        </td>
+    </tr>
+
+
+
+</table>

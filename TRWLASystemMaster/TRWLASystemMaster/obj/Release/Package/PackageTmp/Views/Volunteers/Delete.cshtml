@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.Volunteer
+﻿@model TRWLASystemMaster.Models.DB.Volunteer
 
 @{
     ViewBag.Title = "Delete";
@@ -50,14 +50,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.ActiveStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
         </dd>
 
         <dt>

@@ -1,55 +1,69 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.Student>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.Student>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
+
+<div class="jumbotron">
+
+    <h2>Students - Home</h2>
+
+</div>
+
+<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">View Student Types</button>
+
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Name: @Html.TextBox("SearchStringS") <input style="border-radius:4px; width:300px; color:black; border-color:white" />
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
+
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.StudentNumber)
+            Student Number     @Html.DisplayNameFor(model => model.StudentNumber)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Graduate)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Degree)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.YearOfStudy)
+         Academic Commencement Date   @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Student_Name)
+           Student Name @*@Html.DisplayNameFor(model => model.Student_Name)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Student_Surname)
+          Student Surname  @*@Html.DisplayNameFor(model => model.Student_Surname)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Student_Phone)
+          Phone Number  @*@Html.DisplayNameFor(model => model.Student_Phone)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Student_DoB)
+          DoB  @*@Html.DisplayNameFor(model => model.Student_DoB)*@
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ActiveStatus)
+        </th>*@
+        <th>
+          Residence  @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+         Student Type   @*@Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Residence.Res_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserType.Description)
+        User Type    @*@Html.DisplayNameFor(model => model.UserType.Description)*@
         </th>
         <th></th>
     </tr>
@@ -59,9 +73,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.StudentNumber)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Graduate)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Degree)
         </td>
@@ -80,12 +94,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Student_DoB)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.ActiveStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Residence.Res_Name)
         </td>
@@ -96,9 +107,9 @@
             @Html.DisplayFor(modelItem => item.UserType.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StudentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StudentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StudentID })
+            @*<a href="@Url.Action("Edit", new { id=item.StudentID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>*@ 
+            <a href="@Url.Action("Details", new { id=item.StudentID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> 
+            <a href="@Url.Action("Delete", new { id=item.StudentID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
         </td>
     </tr>
 }

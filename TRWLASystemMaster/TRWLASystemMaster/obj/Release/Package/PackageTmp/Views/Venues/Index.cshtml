@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.Venue>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.Venue>
+
 
 @{
     ViewBag.Title = "Index";
@@ -6,72 +7,77 @@
 }
 
 
-
-
-
 <div class="jumbotron">
-
     <h2>Venues</h2>
-
 </div>
-@* Search Button for 'Venue Name'*@
-@using (Html.BeginForm())
-{
-    <p>
-        Find by name: @Html.TextBox("searchStringV", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
 
-        <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
-    </p>
-}
+<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">View Venue Types</button>
+<hr />
 
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Venue_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address.StreetNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VenueType.VenueType_Description)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+    @* Search Button for 'Venue Name'*@
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address.StreetNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueType.VenueType_Description)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new { id=item.VenueID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+        <p>
+            Find by name: @Html.TextBox("searchStringV", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
 
-                <a href="@Url.Action("Details", new { id=item.VenueID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
-
-                <a href="@Url.Action("Delete", new { id=item.VenueID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
-
-
-
-            </td>
-        </tr>
+            <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+        </p>
     }
 
-</table>
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                @Html.ActionLink("Add a new Venue", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+
+
+    <table class="table">
+        <tr>
+            <th>
+             Venue Name   @*@Html.DisplayNameFor(model => model.Venue_Name)*@
+            </th>
+            <th>
+               Street Name @*@Html.DisplayNameFor(model => model.Address.)*@
+            </th>
+            <th>
+                Description   @*@Html.DisplayNameFor(model => model.VenueType.VenueType_Description)*@
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.StreetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueType.VenueType_Description)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id=item.VenueID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+
+                    <a href="@Url.Action("Details", new { id=item.VenueID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+
+                    <a href="@Url.Action("Delete", new { id=item.VenueID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div>
+
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Venues")'">Create a New Venue</button>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+
+  
+

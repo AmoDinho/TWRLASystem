@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.SYSUserProfile>
+
+@{
+    ViewBag.Title = "AddNewStudent";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h2>Add New Student</h2>
+</div>
+
+<div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-group">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.Label("Find by name:") @Html.TextBox("searchString"@*, "", new { placeholder = "Name of Event" }*@)
+                <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+            </p>
+        }
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Student Number
+        </th>
+        <th>
+            Degree
+        </th>
+        <th>
+            Year of Study
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Residence
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(p => p.UserTypeID == 1))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Degree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfStudy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Residence.Res_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Add New Student", "StudentDetails", new { id = item.SYSUserProfileID })
+            </td>
+        </tr>
+
+    }
+
+
+</table>
+
+<div class="form-group" style="margin-right:5px; float:right;">
+    <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+</div>

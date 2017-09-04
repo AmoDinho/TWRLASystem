@@ -1,111 +1,124 @@
-﻿@model TRWLASystemMaster.Models.RegisterViewModel
+﻿@model TRWLASystemMaster.Models.ViewModel.UserSignUpView
 @{
 //ViewBag.Title = "Register";
 }
 
-<div class="jumbotron"><h2>@ViewBag.Title</h2></div>
+<div class="jumbotron"><h2>Register As a Student</h2></div>
 
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default btn-round" style = "color:#9b16d8"@*data-toggle="modal" data-target="#myModal"*@ value="Register" />
-        </div>
-    </div>
-
-    //Modal for selecting between student and volunteer
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">What are you registering as?</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="radio">
-                        <input type="radio" name="radio1" id="radio1" value="option1">
-                        <label for="radio1">
-                            Student
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" name="radio2" id="radio2" value="option2">
-                        <label for="radio2">
-                            Volunteer
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Continue</button>
-
-                </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Username:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LoginName, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-
-    //Modal for unique code
-    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Enter Unique Code</h4>
-                </div>
-                <div class="modal-body">
-                   <input type="text" style = "border-radius:4px; width:300px; color:black; border-color:white"/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Continue</button>
-
-                </div>
+        <div class="form-group">
+            @Html.Label("Password:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-
-    //Error Modals
-
-    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"><span class="badge badge-warning">Error</span></h4>
-                </div>
-                <div class="modal-body">
-                    The unique code you have entered has already expired.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Try Again</button>
-
-                </div>
+        <div class="form-group">
+            @Html.Label("First Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.Label("Last Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        <div class="form-group">
+            @Html.Label("Student Number:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.StudentNumber, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Phone Number:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Phonenumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Phonenumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Date of Birth:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.DoB, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(m => m.DoB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Academic Commencement Date:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.YearOfStudy, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(m => m.YearOfStudy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Degree:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Degree, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Degree, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Security Question:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SecurityAnswerID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SecurityAnswerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Residence:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ResID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ResID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn" value="Register" />
+                </div>
+                </div>
+            
+        </div>
+    
+
+
+            }
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

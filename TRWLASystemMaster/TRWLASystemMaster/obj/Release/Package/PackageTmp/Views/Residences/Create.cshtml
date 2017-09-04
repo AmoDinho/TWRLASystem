@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.Residence
+﻿@model TRWLASystemMaster.Models.DB.Residence
 
 @{
     ViewBag.Title = "Create";
@@ -35,9 +35,18 @@
     </div>
 }
 
-<div>
-    <button>@Html.ActionLink("Back", "Index") </button>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button class="btn"> @Html.ActionLink("Back", "Index") </button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

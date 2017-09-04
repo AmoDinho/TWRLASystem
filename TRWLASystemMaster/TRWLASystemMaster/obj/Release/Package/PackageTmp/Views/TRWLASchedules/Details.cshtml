@@ -1,4 +1,4 @@
-﻿@model TRWLASystemMaster.Models.TRWLASchedule
+﻿@model TRWLASystemMaster.Models.DB.TRWLASchedule
 
 @{
     ViewBag.Title = "Details";
@@ -196,7 +196,8 @@
                         @foreach (var rev in review)
                         {
                         <tr>
-                            <td>@rev.Student.Student_Name</td>
+                            <td>@rev.SYSUserProfile.FirstName
+                            </td>
                             <td>@rev.Review</td>
                             <td>@rev.RatingType.Rating</td>
                         </tr>
@@ -288,9 +289,6 @@
 
 </div>
 <div class="form-inline" style="float:right;">
-    <div class="form-group">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("RSVP", "TRWLASchedules", new { id = Model.ScheduleID })'">RSVP</button>
-    </div>
     <div class="form-group">
         <div style="margin-right:5px;">
             @if (Model.FunctionID != null)

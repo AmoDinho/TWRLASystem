@@ -22,6 +22,10 @@ namespace TRWLASystemMaster.Models.DB
         public int RatingID { get; set; }
         public int StudentID { get; set; }
         public int LectureID { get; set; }
+        public int SYSUserProfileID
+        {
+            get; set;
+        }
 
         public virtual Lecture Lecture { get; set; }
         public virtual RatingType RatingType { get; set; }

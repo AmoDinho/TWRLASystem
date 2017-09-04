@@ -1,81 +1,89 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.Volunteer>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.Volunteer>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>Register Volunteers</h2>
-</div>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-@Html.ActionLink("ForgotPassword", "ForgotPassword", "Account")
+</p>*@
 
+<div class="jumbotron">
+
+    <h2> Volunteers - Home</h2>
+
+</div>
+<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'">View Volunteer Types</button>
+<hr />
+@using (Html.BeginForm())
+{
+    <p class="form-group">
+        Find by name: @Html.TextBox("searchStringVol", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+      
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Volunteer_Name)
+       Name    @*@Html.DisplayNameFor(model => model.Volunteer_Name)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Volunteer_Surname)
+          Surname  @*@Html.DisplayNameFor(model => model.Volunteer_Surname)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Volunteer_Phone)
+         Phone Number   @*@Html.DisplayNameFor(model => model.Volunteer_Phone)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Volunteer_DoB)
+          DoB  @*@Html.DisplayNameFor(model => model.Volunteer_DoB)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ActiveStatus)
+          Active Status  @*@Html.DisplayNameFor(model => model.ActiveStatus)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            User Type   @*@Html.DisplayNameFor(model => model.UserType.Description)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserType.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VolunteerType.VolunteerType_Description)
+            VolunteerType    @*@Html.DisplayNameFor(model => model.VolunteerType.VolunteerType_Description)*@
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Volunteer_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Volunteer_Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Volunteer_Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Volunteer_DoB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActiveStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserType.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolunteerType.VolunteerType_Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.VolunteerID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.VolunteerID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.VolunteerID })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volunteer_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volunteer_Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volunteer_Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volunteer_DoB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActiveStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserType.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolunteerType.VolunteerType_Description)
+        </td>
+        <td>
+            @*<a href="@Url.Action("Edit", new { id=item.VolunteerID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>*@ 
+            <a href="@Url.Action("Details", new { id=item.VolunteerID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> 
+            <a href="@Url.Action("Delete", new { id=item.VolunteerID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>              
+    
+    @*@Html.ActionLink("Edit", "Edit", new { id=item.VolunteerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VolunteerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VolunteerID })*@
+        </td>
+    </tr>
+}
 
 </table>

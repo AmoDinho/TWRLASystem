@@ -4,8 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SelectVolStud</h2>
+<div class="jumbotron">
+    <h2>Sign Up!</h2>
+</div>
 
-<button> @Html.ActionLink("Volunteer", "EnterUniCode", "UniqueCode") </button >
 
-<button> @Html.ActionLink("Student ", "Create", "Students") </button>
+<div>
+    <h4> Please select whether you are signing up as Student or Volunteer.</h4>
+</div>
+
+<button type="button" class="btn" onclick="location.href='@Url.Action("RegisterVol", "Account")'">Register as a Volunteer</button>
+
+<button type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Register as a Student</button>
