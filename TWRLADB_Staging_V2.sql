@@ -122,13 +122,13 @@ CREATE TABLE [dbo].[SYSUserProfile](
     [LastName] [varchar](35) NOT NULL,
 	UserTypeID int not null,
     [Email] [varchar](225) NOT NULL,
-	[DoB] [date]  NOT NULL,
+	[DoB] [datetime]  NOT NULL,
 	[Phonenumber] [varchar](50) NOT NULL,
 
 	SecurityAnswerID int NOT NULL,
 	Graduate varchar(10) null,
     Degree varchar(35) null,
-    YearOfStudy date null,
+    YearOfStudy datetime null,
 	
     [RowCreatedSYSUserID] [int] NOT NULL,
     [RowCreatedDateTime] [datetime] DEFAULT GETDATE(),
@@ -196,7 +196,7 @@ YearOfStudy date not null,
 Student_Name varchar(35) not null,
 Student_Surname varchar(35) not null,
 Student_Phone varchar(10) not null,
-Student_DoB date not null,
+Student_DoB datetime not null,
 ActiveStatus varchar(25)not null,
  ResID int FOREIGN KEY REFERENCES Residence(ResID) not null,
  UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
@@ -250,7 +250,9 @@ VolunteerID int IDENTITY(1,1) PRIMARY KEY,
 Volunteer_Name varchar(35) not null,
 Volunteer_Surname varchar(35) not null,
 Volunteer_Phone varchar(10) not null,
-Volunteer_DoB date not null,
+
+Volunteer_DoB datetime not null,
+
 ActiveStatus varchar(25)not null,
 UserTypeID int FOREIGN KEY REFERENCES UserType(UserTypeID) not null,
 VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not null
@@ -302,6 +304,167 @@ go
 --(
 --AuditID int identity(1,1)
 --)
+
+
+
+
+
+
+
+
+
+				  /* TEST RECORDS!!! - 
+				  
+				  PLEASE START INSERTING INTO THE TABLES HERE :D :D :D
+				  
+				  
+				  */
+				  ---INSERT TEST RECORDS----
+
+--User Tyupe--
+
+
+insert into UserType(Description, AccessRight)
+values('Student','Strict')
+GO
+
+insert into UserType(Description, AccessRight)
+values('Volunteer','Flexiable')
+GO
+
+
+
+
+
+
+--Student Type--
+
+insert into StudentType(StudentTypeDescription)
+values('Undergrad')
+GO
+
+insert into StudentType(StudentTypeDescription)
+values('Postgrad')
+GO
+
+
+--Volunteer Type---
+
+insert into VolunteerType(VolunteerType_Description)
+values('Facilitator')
+GO
+
+insert into VolunteerType(VolunteerType_Description)
+values('Mentor')
+GO
+
+insert into VolunteerType(VolunteerType_Description)
+values('Boardmember')
+GO
+
+
+
+--Residence---
+
+insert into Residence(Res_Name)
+values('Nerina')
+GO
+
+insert into Residence(Res_Name)
+values('Asterhof')
+GO
+
+insert into Residence(Res_Name)
+values('Erika')
+GO
+
+insert into Residence(Res_Name)
+values('Jasmyn')
+GO
+
+insert into Residence(Res_Name)
+values('Klaradyn')
+GO
+
+
+insert into Residence(Res_Name)
+values('Magritjie')
+go
+
+insert into Residence(Res_Name)
+values('Klaradyn')
+go
+
+insert into Residence(Res_Name)
+values('Vividus Ladies')
+go
+
+--Insert into Aspnetusers--
+
+
+
+---Student---
+/*
+insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
+values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
+GO
+insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
+values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
+GO
+insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
+values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
+GO
+insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
+values('14284783','1','Informatics','2017/01/01','Siobhann','Tatum','074100249','u14284783@tuks.co.za','1994/04/06','January','None active',1,2,2)
+GO
+insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
+values('1422','2','BSC Zoology','2017/06/21','Manion','Flom','07784249','u1587985@tuks.co.za','1994/04/06','march','None active',1,2,2)
+GO
+*/
+
+
+
+
+---Volunteer----
+/*
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
+values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
+GO
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
+values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
+GO
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
+values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
+GO
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
+values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
+GO 
+*/
+
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID)
+values('Vuyo','Renene','0741258963','1994/06/12','None',4,1,1)
+GO
+
+--Security question---
+
+ insert into SecurityAnswer(Security_Question,Security_Answer)
+ values('What is your mothers maden name','Kelebogile')
+ go
+
+				  
+				  /* TEST RECORDS!!! - 
+				  
+				  PLEASE END YOUR INSERTS HERERERERERERERERE :D - LIFE IS ALWAYS BEUTIFUL 
+				  
+				  
+				  */
+
+
+
+	-------------------------=== Events Management ===---------------------
+		  
+		  
+
 
 		   -- Address
 
@@ -540,206 +703,6 @@ create table EventMessage
 	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
 )
 go
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				  /* TEST RECORDS!!! - 
-				  
-				  PLEASE START INSERTING INTO THE TABLES HERE :D :D :D
-				  
-				  
-				  */
-				  ---INSERT TEST RECORDS----
-
---User Tyupe--
-
-
-insert into UserType(Description, AccessRight)
-values('Student','Strict')
-GO
-
-insert into UserType(Description, AccessRight)
-values('Volunteer','Flexiable')
-GO
-
-
-
-
-
-
---Student Type--
-
-insert into StudentType(StudentTypeDescription)
-values('Undergrad')
-GO
-
-insert into StudentType(StudentTypeDescription)
-values('Postgrad')
-GO
-
-
---Volunteer Type---
-
-insert into VolunteerType(VolunteerType_Description)
-values('Facilitator')
-GO
-
-insert into VolunteerType(VolunteerType_Description)
-values('Mentor')
-GO
-
-insert into VolunteerType(VolunteerType_Description)
-values('Boardmember')
-GO
-
-
-
-
---Insert into Aspnetusers--
-
-
-
----Student---
-/*
-insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
-values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
-GO
-insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
-values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
-GO
-insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
-values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
-GO
-insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
-values('14284783','1','Informatics','2017/01/01','Siobhann','Tatum','074100249','u14284783@tuks.co.za','1994/04/06','January','None active',1,2,2)
-GO
-insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
-values('1422','2','BSC Zoology','2017/06/21','Manion','Flom','07784249','u1587985@tuks.co.za','1994/04/06','march','None active',1,2,2)
-GO
-*/
---Graduates
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '10/18/1996','Active', 1, 2, 1)
-go
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(11216389, 1, 'Bsc:Zoology', '2012', 'May','Pennyfeather', '0834074027', ' 10/09/1993', 'Active', 4, 1, 1)
-go
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(15511549, 1, 'BA:PPE', '2015', 'Cailn','Van Rensburg', '0742587456', '12/02/1996', 'Active', 2, 1, 2)
-go
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '10/18/1996', 'Active', 3, 1, 2)
-go
-
-
---Students
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(14935058, 0, 'LLB', '2012', 'Simphwe','Mholbo', ' 0864789456', '12/09/1953', 'Active', 6, 1, 2)
-go
-
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(41526389, 0, 'BSC:IT', '2014', ' Tinyko','Vilakazi', ' 083589745', '10/09/1993', 'Active', 7, 1, 2)
-go
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(23568947, 0, 'BSC:Food Scienece', '2013', 'Enguhla','Phebve', '0781980322', '10/10/1995', 'Active', 8, 1, 2)
-go
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(21548796, 0, 'Bcom:SupplyChain', '2014', 'Maya','Sandros', '0213654789', '03/10/1994', 'Active', 2, 1, 2)
-go
-
-
-insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, ResID, UserTypeID, StudentTypeID)
-Values(12635487, 0, 'BEng:Electrical', '2013', 'Gauye','Buillgue', '031258963', '10/10/1992', 'Active', 4, 1, 2)
-go
----Volunteer----
-/*
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
-values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
-GO
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
-values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
-GO
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
-values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
-GO
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,Volunteer_Password,ActiveStatus)
-values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
-GO 
-*/
-
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Vuyo','Renene','0741258963','06/12/1994','Active',2,1)
-GO
-
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Marice','Clarie','082111223','02/09/1995','Active',2,1)
-GO
-
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Nyomi','Khumalo','0891225963','02/06/1992','Active',2,1)
-GO
-
-
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Ciara','Simple','0721852369','11/12/1994','Active',2,1)
-GO
-
-
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
-values('Nomsa','Van Der Burg','0821020360','13/02/1995','Active',2,1)
-GO
-
-
-
-
---Security question---
-
- insert into SecurityAnswer(Security_Question,Security_Answer)
- values('What is your mothers maden name','Kelebogile')
- go
-
-				  
-				  /* TEST RECORDS!!! - 
-				  
-				  PLEASE END YOUR INSERTS HERERERERERERERERE :D - LIFE IS ALWAYS BEUTIFUL 
-				  
-				  
-				  */
-
-
-
-	-------------------------=== Events Management ===---------------------
-		  
-		  
-
-
 					
 				  /* TEST RECORDS!!! - 
 				  
@@ -837,12 +800,9 @@ go
 
 --Guest Speaker
 insert into GuestSpeaker(GuestSpeaker_Name,GuestSpeaker_Surname,GuestSpeaker_Phone,GuestSpeaker_Email,GuestSpeaker_PictureLink)
-values('Bob' , 'Buider','0741258','me@me.co.za','http:fdelink+=')
+values('Bob' , 'Buider','0741258','me@me.co.za','jgjgfjjg/gjgj')
 go
 
-insert into GuestSpeaker(GuestSpeaker_Name,GuestSpeaker_Surname,GuestSpeaker_Phone,GuestSpeaker_Email,GuestSpeaker_PictureLink)
-values('Lucy' , 'Dragon','021369854','Lucy@nedbank.co.za','http:link+ir/')
-go
 				  /* TEST RECORDS!!! - 
 				  
 				  PLEASE END YOUR INSERTS HERERERERERERERERE :D - LIFE IS ALWAYS BEUTIFUL 
@@ -893,8 +853,6 @@ go
 delete from VenueType where VenueTypeID = 5
 go
 
---Residences--
-
 insert into Residence(Res_Name)
 values('Magritjie')
 go
@@ -911,39 +869,24 @@ insert into Residence(Res_Name)
 values('Vividus Ladies')
 go
 
---Residence---
-
-insert into Residence(Res_Name)
-values('Nerina')
-GO
-
-insert into Residence(Res_Name)
-values('Asterhof')
-GO
-
-insert into Residence(Res_Name)
-values('Erika')
-GO
-
-insert into Residence(Res_Name)
-values('Jasmyn')
-GO
-
-
-
-
---Content---
-
 insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
 values('Looking Forward', 'www.google.com', 1, 'Taking the plunge')
 go
 
+insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
+values('Looking Backward', 'www.google.com', 1, 'Taking the plunge together')
+go
 
 insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
 values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
 go
 
 
+insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, Id, ResID, UserTypeID, StudentTypeID)
+Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027', '1996/10/18', 1, 2, 8, 2, 1)
+
+ 
+go
 
 insert into SecurityAnswer(Security_Question, Security_Answer)
 values('What is the Maiden Name of your Mother', 'Wallace')
@@ -978,7 +921,7 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Admin','Admin',1,1)  
   
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (1,'Vinz','Durano','02/03/1994',2,'vinz@tuks.co.za','0741028963',1,1,1)  
+VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1,1)  
  
   
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -991,11 +934,11 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Admin2','Admin2',2,2)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (2,'Sarah','Swart','02/08/1995',2,'sarah@tuks.co.za','0821478961',1,2,2)  
+VALUES (3,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (2,1,1,2,2)
+VALUES (3,1,1,2,2)
 
 
 
@@ -1008,11 +951,11 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Student1','Student2',3,3)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,'Noma','Hear','10/11/1995',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
+VALUES (4,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,2,1,3,3)
+VALUES (4,2,1,3,3)
 
 
 ---Student2---
@@ -1021,8 +964,8 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Student2','Student3',4,4)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,'Marche','De Waal','06/14/1994',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
+VALUES (5,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,2,1,4,4)
+VALUES (5,2,1,4,4)
