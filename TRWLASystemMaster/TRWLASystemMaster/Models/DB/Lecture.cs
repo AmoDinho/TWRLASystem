@@ -46,7 +46,6 @@ namespace TRWLASystemMaster.Models.DB
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Lecture_Theme")]
         public string Lecture_Theme { get; set; }
-        [Required]
         public Nullable<int> VenueID { get; set; }
         [Required]
         public Nullable<int> ResidenceID { get; set; }
