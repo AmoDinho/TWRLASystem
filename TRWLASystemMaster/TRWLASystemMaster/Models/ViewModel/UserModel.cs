@@ -172,7 +172,7 @@ namespace TRWLASystemMaster.Models.ViewModel
             [Required(ErrorMessage = "*")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
-        public int UserTypeID { get; set; }
+            public int UserTypeID { get; set; }
 
 
         public int SecurityAnswerID { get; set; }

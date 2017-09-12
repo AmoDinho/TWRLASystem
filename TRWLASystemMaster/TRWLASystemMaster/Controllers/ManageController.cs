@@ -41,7 +41,9 @@ namespace TRWLASystemMaster.Controllers
         /// <returns></returns>
 
         // [Authorize]
-        public ActionResult EditProfile()
+
+            //Add an ID for the SYSUserProfile and make a call from the database using that UserProfileID as in ComEngEventsController(Edit)
+        public ActionResult EditProfile(int? id)
         {
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
@@ -55,28 +57,28 @@ namespace TRWLASystemMaster.Controllers
         }
 
 
-        //[HttpPost]
-        ////   [Authorize]
-        //public ActionResult EditProfile(UserProfileView profile)
-        //{
-        //    //try
-        //    //{
-        //    //    if (ModelState.IsValid)
-        //    //    {
-        //    //        UserManager UM = new UserManager();
-        //    //        UM.UpdateUserAccount(profile);
+        [HttpPost]
+        //[Authorize]
+        public ActionResult EditProfile(UserProfileView profile)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UserManager UM = new UserManager();
+                    UM.UpdateUserAccount(profile);
 
-        //    //        ViewBag.Status = "Update Sucessful!";
-        //    //    }
-        //    //    return View(profile);
-        //    //}
-            
-        //    //catch (Exception ex)
-        //    //{
-        //    //    return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-        //    //}
+                    ViewBag.Status = "Update Sucessful!";
+                }
+                return View(profile);
+            }
 
-        //}
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+            }
+
+        }
 
         ///
         //
