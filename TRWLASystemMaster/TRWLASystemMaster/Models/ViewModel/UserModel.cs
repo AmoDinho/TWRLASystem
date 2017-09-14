@@ -195,19 +195,6 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "Phone Number")]
         public string Phonenumber { get; set; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 

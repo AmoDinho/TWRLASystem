@@ -365,7 +365,7 @@ namespace TRWLASystemMaster.Models.EntityManager
             //GET USER PROFILES
         public List<UserProfileView> GetAllUserProfiles()
         {
-            List < UserProfileView > profiles = new List < UserProfileView > ();
+            List <UserProfileView > profiles = new List < UserProfileView > ();
 
             using (TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities())
             {
@@ -380,7 +380,7 @@ namespace TRWLASystemMaster.Models.EntityManager
                     UPV.Password = u.PasswordEncryptedText;
 
                     var SUP = db.SYSUserProfiles.Find(u.SYSUserID);
-                    if (SUP != null)
+                    if (SUP !=null)
                     {
                         UPV.FirstName = SUP.FirstName;
                         UPV.LastName = SUP.LastName;

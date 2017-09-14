@@ -50,10 +50,13 @@ namespace TRWLASystemMaster.Controllers
             ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
-            string loginName = User.Identity.Name;
-            UserManager UM = new UserManager();
-            UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
-            return View(UPV);
+            SYSUserProfile pro = db.SYSUserProfiles.Find(id);
+
+            //string loginName = User.Identity.Name;
+            //UserManager UM = new UserManager();
+            //UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
+
+            return View(/*UPV*/pro);
         }
 
 
