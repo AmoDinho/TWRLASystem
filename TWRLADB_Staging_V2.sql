@@ -703,9 +703,6 @@ create table EventMessage
 	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
 )
 go
-<<<<<<< HEAD
-=======
-
 
 
 
@@ -941,7 +938,7 @@ GO
 		  
 
 
->>>>>>> 298ad3413dcbefe5d3ae2e65506712408be3f26e
+
 					
 				  /* TEST RECORDS!!! - 
 				  
@@ -1094,7 +1091,7 @@ go
 delete from VenueType where VenueTypeID = 5
 go
 
-<<<<<<< HEAD
+
 insert into Residence(Res_Name)
 values('Magritjie')
 go
@@ -1110,7 +1107,7 @@ go
 insert into Residence(Res_Name)
 values('Vividus Ladies')
 go
-=======
+
 --Residences--
 
 
@@ -1118,7 +1115,7 @@ go
 
 
 --Content---
->>>>>>> 298ad3413dcbefe5d3ae2e65506712408be3f26e
+
 
 insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
 values('Looking Forward', 'www.google.com', 1, 'Taking the plunge')
@@ -1185,11 +1182,11 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Admin2','Admin2',2,2)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
+VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,1,1,2,2)
+VALUES (2,1,1,2,2)
 
 
 
@@ -1202,11 +1199,11 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Student1','Student2',3,3)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
+VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,2,1,3,3)
+VALUES (3,2,1,3,3)
 
 
 ---Student2---
@@ -1215,8 +1212,8 @@ INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowMo
 VALUES ('Student2','Student3',4,4)  
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (5,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
+VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (5,2,1,4,4)
+VALUES (4,2,1,4,4)

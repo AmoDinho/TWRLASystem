@@ -12,6 +12,9 @@ using System.Web.Security;
 using TRWLASystemMaster.Security;
 using static TRWLASystemMaster.Models.ViewModel.UserProfileView;
 using TRWLASystemMaster.Models.DB;
+using System.Data.Entity;
+using System.Net;
+using System.Data.Entity.Infrastructure;
 
 namespace TRWLASystemMaster.Controllers
 {
@@ -62,26 +65,49 @@ namespace TRWLASystemMaster.Controllers
 
         [HttpPost]
         //[Authorize]
-        public ActionResult EditProfile(UserProfileView profile)
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile([Bind(Include = "SYSUserProfileID,StudentNumber,FirstName,LastName,UserTypeID,Email,DoB,Phonenumber,SecurityAnswerID,Degree,YearOfStudy,ResID")]  SYSUserProfile pro /*UserProfileView profile*/)
         {
             try
-            {
-                if (ModelState.IsValid)
                 {
-                    UserManager UM = new UserManager();
-                    UM.UpdateUserAccount(profile);
 
-                    ViewBag.Status = "Update Sucessful!";
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(pro).State = EntityState.Modified;
+                        db.SaveChanges();
+                        //UserManager UM = new UserManager();
+                        //UM.UpdateUserAccount(profile);
+
+                        ViewBag.Status = "Update Sucessful!";
+                    }
+                    ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+                    ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+                    ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+
+                    return View(pro/*profile*/);
                 }
-                return View(profile);
+                catch (DbUpdateConcurrencyException ex)
+                {
+                var emp = ex.Entries.Single();
+                emp.OriginalValues.SetValues(emp.GetDatabaseValues());
+                db.SaveChanges();
+                return View("Error",new HandleErrorInfo(ex, "Account", "Register"));
+                //saveFailed = true;
+                //ex.Entries.Single().Reload();
+                //Safely ignore this exception
             }
 
-            catch (Exception ex)
-            {
-                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-            }
+                //catch (Exception ex)
+                //{
+                //    return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+                //}
 
-        }
+
+            }
+          
+
+
+        
 
         ///
         //
