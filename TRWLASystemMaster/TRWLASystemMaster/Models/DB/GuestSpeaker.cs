@@ -5,13 +5,13 @@
 //     Manual changes to this file may cause unexpected behavior in your application.
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
-//----namespace TRWLASystemMaster.Models.DB
+//------------------------------------------------------------------------------
+
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
-
+    
     public partial class GuestSpeaker
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,29 +19,14 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.FunctionEvents = new HashSet<FunctionEvent>();
         }
-
+    
         public int GuestSpeakerID { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "GuestSpeaker_Name")]
         public string GuestSpeaker_Name { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "GuestSpeaker_Surname")]
         public string GuestSpeaker_Surname { get; set; }
-        [Display(Name = " GuestSpeaker_Phone")]
-        [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage = "Phone Number is Required!")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone number is not valid.")]
         public string GuestSpeaker_Phone { get; set; }
-        [Required(ErrorMessage = "Your Email address is required")]
-        [Display(Name = "GuestSpeaker_Email")]
-        [EmailAddress]
         public string GuestSpeaker_Email { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "GuestSpeaker_PictureLink")]
         public string GuestSpeaker_PictureLink { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FunctionEvent> FunctionEvents { get; set; }
     }

@@ -12,16 +12,10 @@ namespace TRWLASystemMaster.Models.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class LectureReview
+    public partial class UniqueCode
     {
-        public int reviewID { get; set; }
-        public string Review { get; set; }
-        public int RatingID { get; set; }
-        public int LectureID { get; set; }
-        public Nullable<int> SYSUserProfileID { get; set; }
-    
-        public virtual Lecture Lecture { get; set; }
-        public virtual RatingType RatingType { get; set; }
-        public virtual SYSUserProfile SYSUserProfile { get; set; }
+        public int UniID { get; set; }
+        public int Code { get; set; }
+        public System.DateTime stamptime { get; set; }
     }
 }

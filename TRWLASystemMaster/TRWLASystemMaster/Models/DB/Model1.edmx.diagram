@@ -81,6 +81,7 @@
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__VenueType__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Volun__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.UniqueCode" Width="1.5" PointX="8.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

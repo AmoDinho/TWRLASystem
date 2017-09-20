@@ -10,7 +10,6 @@
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class VolunteerType
@@ -22,9 +21,6 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int VolunteerTypeID { get; set; }
-        [Required]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Volunteer Type Description")]
         public string VolunteerType_Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1184,6 +1184,7 @@
       <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
       <End Role="Student" EntitySet="Students" />
     </AssociationSet>
+    <EntitySet Name="UniqueCodes" EntityType="TWRLADB_Staging_V2Model.UniqueCode" />
   </EntityContainer>
   <Association Name="FK__Student__SYSUser__35BCFE0A">
     <End Type="TWRLADB_Staging_V2Model.SYSUserProfile" Role="SYSUserProfile" Multiplicity="0..1" />
@@ -1197,4 +1198,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="UniqueCode">
+    <Key>
+      <PropertyRef Name="UniID" />
+    </Key>
+    <Property Name="UniID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="Int32" Nullable="false" />
+    <Property Name="stamptime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
 </Schema>

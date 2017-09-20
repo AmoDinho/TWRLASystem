@@ -1,0 +1,23 @@
+﻿@model TRWLASystemMaster.Models.DB.UniqueCode
+@{
+    ViewBag.Title = "VerifyCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>VerifyCode</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Code, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Code, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Verify" style="color:#9b16d8" class="btn btn-default btn-round" />
+    </div>
+}

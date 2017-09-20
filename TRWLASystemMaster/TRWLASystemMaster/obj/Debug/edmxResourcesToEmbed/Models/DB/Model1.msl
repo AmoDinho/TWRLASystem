@@ -368,5 +368,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UniqueCodes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.UniqueCode">
+        <MappingFragment StoreEntitySet="UniqueCode">
+          <ScalarProperty Name="stamptime" ColumnName="stamptime" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="UniID" ColumnName="UniID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
