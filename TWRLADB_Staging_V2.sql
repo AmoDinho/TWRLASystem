@@ -185,6 +185,16 @@ REFERENCES [dbo].[SYSUser] ([SYSUserID])
 GO
 
 
+
+create table UniqueCode
+(
+UniID int IDENTITY(1,1) PRIMARY KEY not null,
+Code int not null,
+stamptime datetime not null
+
+)
+go
+
   ------Student -----
 create table Student
 (
@@ -378,9 +388,6 @@ insert into Residence(Res_Name)
 values('Erika')
 GO
 
-insert into Residence(Res_Name)
-values('Jasmyn')
-GO
 
 insert into Residence(Res_Name)
 values('Klaradyn')
@@ -392,35 +399,18 @@ values('Magritjie')
 go
 
 insert into Residence(Res_Name)
-values('Klaradyn')
+values('Madelief')
 go
+
 
 insert into Residence(Res_Name)
 values('Vividus Ladies')
 go
 
---Insert into Aspnetusers--
 
 
 
----Student---
-/*
-insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
-values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
-GO
-insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
-values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
-GO
-insert into Student(StudentNumber,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,UserTypeID,StudentTypeID)
-values('14284783','Informatics','2017/01/01','Siobhann','Tatum','07410298689','u14284783@tuks.co.za','1994/04/06','January','1','2')
-GO
-insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
-values('14284783','1','Informatics','2017/01/01','Siobhann','Tatum','074100249','u14284783@tuks.co.za','1994/04/06','January','None active',1,2,2)
-GO
-insert into Student(StudentNumber,Graduate,Degree,YearOfStudy,Student_Name,Student_Surname,Student_Phone,Student_Email,Student_DoB,Student_Password,ActiveStatus,UserTypeID,StudentTypeID,ResID)
-values('1422','2','BSC Zoology','2017/06/21','Manion','Flom','07784249','u1587985@tuks.co.za','1994/04/06','march','None active',1,2,2)
-GO
-*/
+
 
 
 
@@ -441,7 +431,7 @@ values('Vuyo','Renene','0741258963','v@twrla','1994/06/12','myguy','None')
 GO 
 */
 
-insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,Id,UserTypeID,VolunteerTypeID)
+insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer_DoB,ActiveStatus,UserTypeID,VolunteerTypeID)
 values('Vuyo','Renene','0741258963','1994/06/12','None',4,1,1)
 GO
 
@@ -736,50 +726,8 @@ go
 
 				  				  --rESIDENCES
 
-				  insert into Residence(Res_Name)
-values('Magritjie')
-go
+	
 
-insert into Residence(Res_Name)
-values('Madelief')
-go
-
-insert into Residence(Res_Name)
-values('Klaradyn')
-go
-
-insert into Residence(Res_Name)
-values('Vividus Ladies')
-go
-
---Residence---
-
-insert into Residence(Res_Name)
-values('Nerina')
-GO
-
-insert into Residence(Res_Name)
-values('Asterhof')
-GO
-
-insert into Residence(Res_Name)
-values('Erika')
-GO
-
-insert into Residence(Res_Name)
-values('Jasmyn')
-GO
-
---User Tyupe--
-
-
-insert into UserType(Description, AccessRight)
-values('Student','Strict')
-GO
-
-insert into UserType(Description, AccessRight)
-values('Volunteer','Flexiable')
-GO
 
 
 
@@ -1092,21 +1040,7 @@ delete from VenueType where VenueTypeID = 5
 go
 
 
-insert into Residence(Res_Name)
-values('Magritjie')
-go
 
-insert into Residence(Res_Name)
-values('Madelief')
-go
-
-insert into Residence(Res_Name)
-values('Klaradyn')
-go
-
-insert into Residence(Res_Name)
-values('Vividus Ladies')
-go
 
 --Residences--
 
@@ -1217,3 +1151,15 @@ VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES (4,2,1,4,4)
+
+
+---Unique Code ----
+INSERT INTO UniqueCode(Code,stamptime)
+VALUES('12345','2017/09/20')
+
+
+INSERT INTO UniqueCode(Code,stamptime)
+VALUES('25864','2017/09/22')
+
+INSERT INTO UniqueCode(Code,stamptime)
+VALUES('89752','2017/09/26')
