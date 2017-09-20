@@ -27,7 +27,7 @@ namespace TRWLASystemMaster.Controllers
           {
              ven = ven.Where(s => s.Venue_Name.Contains(searchStringV));
 
-                             }
+          }
 
 
 

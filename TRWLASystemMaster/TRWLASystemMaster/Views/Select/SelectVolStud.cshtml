@@ -13,6 +13,32 @@
     <h4> Please select whether you are signing up as Student or Volunteer.</h4>
 </div>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("RegisterVol", "Account")'">Register as a Volunteer</button>
+<button type="button" class="btn" data-toggle="modal" data-target="#Create" >Register as a Volunteer</button>
 
 <button type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Register as a Student</button>
+
+
+<div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Create Community Engagement Event</h4>
+            </div>
+            <div class="modal-body">
+               @using (Html.BeginForm())
+               {
+                @Html.TextBox("searchStringV", null)
+               }
+
+                 <input type="password"/>
+            </div>
+            <div class="modal-footer form-inline">
+                <div class="form-actions no-color ">
+                    <button type="submit" value="Create" onclick="location.href='@Url.Action("RegisterVol", "Account")'" class="btn">Create</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
