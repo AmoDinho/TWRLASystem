@@ -27,6 +27,15 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult NewUniCode()
         {
 
+          
+
+            return View(db.UniqueCodes.ToList());
+        }
+
+
+        public ActionResult AddCode()
+        {
+
             Random rnd = new Random();
 
             UniqueCode unic = new UniqueCode();
@@ -37,12 +46,7 @@ namespace TRWLASystemMaster.Controllers
             db.UniqueCodes.Add(unic);
             db.SaveChanges();
 
-            return View(db.UniqueCodes.ToList());
-        }
-
-
-        public ActionResult AddCode()
-        {
+            ViewBag.Message = unic;
             return View();
         }
     }
