@@ -17,7 +17,14 @@ namespace TRWLASystemMaster.Controllers
 
         // GET: UserTypes
         public ActionResult Index()
-        {
+        {/*
+            genrate randnum 1-5 digits
+            insert datedate time
+
+            
+
+            */
+    
             return View(db.UserTypes.ToList());
         }
 

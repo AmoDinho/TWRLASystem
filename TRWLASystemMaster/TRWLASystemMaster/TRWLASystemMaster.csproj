@@ -632,6 +632,8 @@
     <Content Include="Views\Home\Skills.cshtml" />
     <Content Include="Views\Shared\ErrorSign.cshtml" />
     <Content Include="Views\Select\VerifyCode.cshtml" />
+    <Content Include="Views\UniqueCode\NewUniCode.cshtml" />
+    <Content Include="Views\UniqueCode\AddCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
