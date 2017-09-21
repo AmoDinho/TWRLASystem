@@ -65,12 +65,15 @@ namespace TRWLASystemMaster.Controllers
                        select c;
 
 
-            if (code != null)
+            if (code.ToList().Count == 1)
             {
-                RedirectToAction("RegisterVol", "Account");
+
+                return RedirectToAction("RegisterVol", "Account");
             }
 
-            return View(code);
+
+
+            return View(vc);
 
         }
     }
