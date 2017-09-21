@@ -29,6 +29,29 @@ namespace TRWLASystemMaster.Controllers
         [HttpPost]
         public ActionResult VerifyCode(UniqueCode vc)
         {
+            /*Soluntion to test what is in the db
+             * 
+             * using (var context = new MyAppUsersEntities())
+            {
+                var user = from u in context.Users
+                           where u.UserName == username
+                           select u;
+
+                if (user.ToList().Count == 1)
+                {
+                    if (user.First().Password == CreatePasswordHash(password, user.First().Salt))
+                    {
+                        Session["logged"] = user.First().UserName;
+                        return RedirectToAction("ShowProducts", "Products");
+                    }
+                }
+            }
+             * 
+             * 
+             * 
+             * */
+
+
 
             //if(!ModelState.IsValid)
             //{

@@ -35,6 +35,9 @@ namespace TRWLASystemMaster.Controllers
         /// 
         /// 
         /// </summary>
+        /// 
+
+
        
         private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
         //Register Student
@@ -112,7 +115,10 @@ namespace TRWLASystemMaster.Controllers
                         USV.UserTypeID = 2;
                         UM.AddUserAccount(USV);
 
+                        //Adding hashing here
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
+
+
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
                         Session["User"] = myUserP.SYSUserProfileID;
 
@@ -223,6 +229,10 @@ namespace TRWLASystemMaster.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
         internal class ChallengeResult : ActionResult
         {
             private string provider;
