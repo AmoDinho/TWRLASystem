@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ComEngEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
 
         // GET: ComEngEvents
         public ActionResult Index()
@@ -56,6 +56,8 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+
                     int i = db.ComEngEvents.Count();
 
                     if (i != 0)
@@ -63,6 +65,12 @@ namespace TRWLASystemMaster.Controllers
                         int max = db.ComEngEvents.Max(p => p.ComEngID);
                         int k = max + 1;
                         comEngEvent.ComEngID = k;
+
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.ComEngID = k;
+                        db.AuditLogs.Add(myAudit);
 
                         comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
                         db.ComEngEvents.Add(comEngEvent);
@@ -75,6 +83,13 @@ namespace TRWLASystemMaster.Controllers
                     }
                     else
                     {
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.ComEngID = 1;
+
+                        db.AuditLogs.Add(myAudit);
+
                         comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
                         db.ComEngEvents.Add(comEngEvent);
                         TRWLASchedule mySchedule = new TRWLASchedule();

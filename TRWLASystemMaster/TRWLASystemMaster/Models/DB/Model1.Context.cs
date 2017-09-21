@@ -13,10 +13,10 @@ namespace TRWLASystemMaster.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TWRLADB_Staging_V2Entities : DbContext
+    public partial class TWRLADB_Staging_V2Entities1 : DbContext
     {
-        public TWRLADB_Staging_V2Entities()
-            : base("name=TWRLADB_Staging_V2Entities")
+        public TWRLADB_Staging_V2Entities1()
+            : base("name=TWRLADB_Staging_V2Entities1")
         {
         }
     
@@ -27,6 +27,7 @@ namespace TRWLASystemMaster.Models.DB
     
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
+        public virtual DbSet<AuditLog> AuditLogs { get; set; }
         public virtual DbSet<ComEngEvent> ComEngEvents { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
         public virtual DbSet<EventMessage> EventMessages { get; set; }
@@ -49,12 +50,12 @@ namespace TRWLASystemMaster.Models.DB
         public virtual DbSet<SYSUserProfile> SYSUserProfiles { get; set; }
         public virtual DbSet<SYSUserRole> SYSUserRoles { get; set; }
         public virtual DbSet<TRWLASchedule> TRWLASchedules { get; set; }
+        public virtual DbSet<UniqueCode> UniqueCodes { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
         public virtual DbSet<Venue> Venues { get; set; }
         public virtual DbSet<VenueType> VenueTypes { get; set; }
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<VolunteerFeedback> VolunteerFeedbacks { get; set; }
         public virtual DbSet<VolunteerType> VolunteerTypes { get; set; }
-        public virtual DbSet<UniqueCode> UniqueCodes { get; set; }
     }
 }

@@ -273,6 +273,9 @@
     <Compile Include="Models\DB\Attendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\AuditLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\ComEngEvent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
