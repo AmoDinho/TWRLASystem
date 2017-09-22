@@ -36,10 +36,8 @@
           <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DateDone" Type="datetime" Nullable="false" />
           <Property Name="TypeTran" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TableAff" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
-          <Property Name="FunctionID" Type="int" />
-          <Property Name="ComEngID" Type="int" />
-          <Property Name="LectureID" Type="int" />
         </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
@@ -437,43 +435,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AuditLog__ComEng__05D8E0BE">
-          <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComEngEvent">
-              <PropertyRef Name="ComEngID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="ComEngID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AuditLog__Functi__04E4BC85">
-          <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FunctionEvent">
-              <PropertyRef Name="FunctionID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="FunctionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AuditLog__Lectur__06CD04F7">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="LectureID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="LectureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AuditLog__SYSUse__02FC7413">
+        <Association Name="FK__AuditLog__SYSUse__09A971A2">
           <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="1" />
           <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
           <ReferentialConstraint>
@@ -998,19 +960,7 @@
             <End Role="Volunteer" EntitySet="Volunteer" />
             <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__ComEng__05D8E0BE" Association="Self.FK__AuditLog__ComEng__05D8E0BE">
-            <End Role="ComEngEvent" EntitySet="ComEngEvent" />
-            <End Role="AuditLog" EntitySet="AuditLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__Functi__04E4BC85" Association="Self.FK__AuditLog__Functi__04E4BC85">
-            <End Role="FunctionEvent" EntitySet="FunctionEvent" />
-            <End Role="AuditLog" EntitySet="AuditLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__Lectur__06CD04F7" Association="Self.FK__AuditLog__Lectur__06CD04F7">
-            <End Role="Lecture" EntitySet="Lecture" />
-            <End Role="AuditLog" EntitySet="AuditLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__SYSUse__02FC7413" Association="Self.FK__AuditLog__SYSUse__02FC7413">
+          <AssociationSet Name="FK__AuditLog__SYSUse__09A971A2" Association="Self.FK__AuditLog__SYSUse__09A971A2">
             <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
             <End Role="AuditLog" EntitySet="AuditLog" />
           </AssociationSet>
@@ -1210,14 +1160,9 @@
           <Property Name="AuditID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateDone" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TypeTran" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TableAff" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" />
-          <Property Name="FunctionID" Type="Int32" />
-          <Property Name="ComEngID" Type="Int32" />
-          <Property Name="LectureID" Type="Int32" />
-          <NavigationProperty Name="ComEngEvent" Relationship="Self.FK__AuditLog__ComEng__05D8E0BE" FromRole="AuditLog" ToRole="ComEngEvent" />
-          <NavigationProperty Name="FunctionEvent" Relationship="Self.FK__AuditLog__Functi__04E4BC85" FromRole="AuditLog" ToRole="FunctionEvent" />
-          <NavigationProperty Name="Lecture" Relationship="Self.FK__AuditLog__Lectur__06CD04F7" FromRole="AuditLog" ToRole="Lecture" />
-          <NavigationProperty Name="SYSUserProfile" Relationship="Self.FK__AuditLog__SYSUse__02FC7413" FromRole="AuditLog" ToRole="SYSUserProfile" />
+          <NavigationProperty Name="SYSUserProfile" Relationship="Self.FK__AuditLog__SYSUse__09A971A2" FromRole="AuditLog" ToRole="SYSUserProfile" />
         </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
@@ -1234,7 +1179,6 @@
           <Property Name="VenueID" Type="Int32" />
           <Property Name="ContentID" Type="Int32" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__ComEn__693CA210" FromRole="ComEngEvent" ToRole="Attendance" />
-          <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__ComEng__05D8E0BE" FromRole="ComEngEvent" ToRole="AuditLog" />
           <NavigationProperty Name="Content" Relationship="Self.FK__ComEngEve__Conte__59063A47" FromRole="ComEngEvent" ToRole="Content" />
           <NavigationProperty Name="Venue" Relationship="Self.FK__ComEngEve__Venue__5812160E" FromRole="ComEngEvent" ToRole="Venue" />
           <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__ComEn__6EF57B66" FromRole="ComEngEvent" ToRole="RSVP_Event" />
@@ -1280,7 +1224,6 @@
           <Property Name="GuestSpeakerID" Type="Int32" />
           <Property Name="VenueID" Type="Int32" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Funct__6754599E" FromRole="FunctionEvent" ToRole="Attendance" />
-          <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__Functi__04E4BC85" FromRole="FunctionEvent" ToRole="AuditLog" />
           <NavigationProperty Name="GuestSpeaker" Relationship="Self.FK__FunctionE__Guest__5CD6CB2B" FromRole="FunctionEvent" ToRole="GuestSpeaker" />
           <NavigationProperty Name="Venue" Relationship="Self.FK__FunctionE__Venue__5BE2A6F2" FromRole="FunctionEvent" ToRole="Venue" />
           <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Funct__6D0D32F4" FromRole="FunctionEvent" ToRole="RSVP_Event" />
@@ -1314,7 +1257,6 @@
           <Property Name="ResidenceID" Type="Int32" />
           <Property Name="ContentID" Type="Int32" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Lectu__68487DD7" FromRole="Lecture" ToRole="Attendance" />
-          <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__Lectur__06CD04F7" FromRole="Lecture" ToRole="AuditLog" />
           <NavigationProperty Name="Content" Relationship="Self.FK__Lecture__Content__5535A963" FromRole="Lecture" ToRole="Content" />
           <NavigationProperty Name="Residence" Relationship="Self.FK__Lecture__Residen__5441852A" FromRole="Lecture" ToRole="Residence" />
           <NavigationProperty Name="Venue" Relationship="Self.FK__Lecture__VenueID__534D60F1" FromRole="Lecture" ToRole="Venue" />
@@ -1501,7 +1443,7 @@
           <Property Name="RowModifiedDateTime" Type="DateTime" Precision="3" />
           <Property Name="ResID" Type="Int32" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__SYSUs__6477ECF3" FromRole="SYSUserProfile" ToRole="Attendance" />
-          <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__SYSUse__02FC7413" FromRole="SYSUserProfile" ToRole="AuditLog" />
+          <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__SYSUse__09A971A2" FromRole="SYSUserProfile" ToRole="AuditLog" />
           <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__SYSUs__7E37BEF6" FromRole="SYSUserProfile" ToRole="EventMessage" />
           <NavigationProperty Name="LectureReviews" Relationship="Self.FK__LectureRe__SYSUs__787EE5A0" FromRole="SYSUserProfile" ToRole="LectureReview" />
           <NavigationProperty Name="Progresses" Relationship="Self.FK__Progress__SYSUse__276EDEB3" FromRole="SYSUserProfile" ToRole="Progress" />
@@ -1712,43 +1654,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AuditLog__ComEng__05D8E0BE">
-          <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComEngEvent">
-              <PropertyRef Name="ComEngID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="ComEngID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AuditLog__Functi__04E4BC85">
-          <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FunctionEvent">
-              <PropertyRef Name="FunctionID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="FunctionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AuditLog__Lectur__06CD04F7">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="LectureID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="LectureID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AuditLog__SYSUse__02FC7413">
+        <Association Name="FK__AuditLog__SYSUse__09A971A2">
           <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="1" />
           <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2204,7 +2110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TWRLADB_Staging_V2Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TWRLADB_Staging_V2Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
@@ -2265,19 +2171,7 @@
             <End Role="Volunteer" EntitySet="Volunteers" />
             <End Role="Attendance" EntitySet="Attendances" />
           </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__ComEng__05D8E0BE" Association="Self.FK__AuditLog__ComEng__05D8E0BE">
-            <End Role="ComEngEvent" EntitySet="ComEngEvents" />
-            <End Role="AuditLog" EntitySet="AuditLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__Functi__04E4BC85" Association="Self.FK__AuditLog__Functi__04E4BC85">
-            <End Role="FunctionEvent" EntitySet="FunctionEvents" />
-            <End Role="AuditLog" EntitySet="AuditLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__Lectur__06CD04F7" Association="Self.FK__AuditLog__Lectur__06CD04F7">
-            <End Role="Lecture" EntitySet="Lectures" />
-            <End Role="AuditLog" EntitySet="AuditLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AuditLog__SYSUse__02FC7413" Association="Self.FK__AuditLog__SYSUse__02FC7413">
+          <AssociationSet Name="FK__AuditLog__SYSUse__09A971A2" Association="Self.FK__AuditLog__SYSUse__09A971A2">
             <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
             <End Role="AuditLog" EntitySet="AuditLogs" />
           </AssociationSet>
@@ -2435,7 +2329,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities1">
+        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities2">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -2468,10 +2362,8 @@
                 <ScalarProperty Name="AuditID" ColumnName="AuditID" />
                 <ScalarProperty Name="DateDone" ColumnName="DateDone" />
                 <ScalarProperty Name="TypeTran" ColumnName="TypeTran" />
+                <ScalarProperty Name="TableAff" ColumnName="TableAff" />
                 <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
-                <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-                <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-                <ScalarProperty Name="LectureID" ColumnName="LectureID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

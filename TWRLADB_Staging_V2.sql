@@ -1163,3 +1163,16 @@ VALUES('25864','2017/09/22')
 
 INSERT INTO UniqueCode(Code,stamptime)
 VALUES('89752','2017/09/26')
+
+USE TWRLADB_Staging_V2
+go
+
+CREATE TABLE AuditLog
+(
+	AuditID int identity (1,1) Primary key,
+	DateDone datetime not null,
+	TypeTran varchar(50) not null,
+	TableAff varchar(50) not null,
+	SYSUserProfileID int not null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID)
+)

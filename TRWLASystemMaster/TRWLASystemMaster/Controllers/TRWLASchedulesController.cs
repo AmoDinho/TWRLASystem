@@ -22,11 +22,80 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
         public ActionResult ErrorPage()
         {
             return View();
+        }
+
+        //AuditLog View
+        // GET: TRWLASchedules
+        [AllowAnonymous]
+        public ActionResult AuditLog(string sortOrder, string searchString, string Create, string Update, string Delete, string all)
+        {
+            try
+            {
+
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+                ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+                var auditLog = from s in db.AuditLogs
+                               select s;
+
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    auditLog = auditLog.Where(s => s.TypeTran.Contains(searchString));
+                }
+
+
+
+                if (!String.IsNullOrEmpty(Create))
+                {
+                    auditLog = auditLog.Where(s => s.TypeTran.Contains("Create"));
+                }
+
+                if (!String.IsNullOrEmpty(Update))
+                {
+                    auditLog = auditLog.Where(s => s.TypeTran.Contains("Update"));
+                }
+
+                if (!String.IsNullOrEmpty(Delete))
+                {
+                    auditLog = auditLog.Where(s => s.TypeTran.Contains("Delete"));
+                }
+
+                if (!String.IsNullOrEmpty(all))
+                {
+                    auditLog = auditLog.Where(s => s.TypeTran.Contains("Create")
+                            || s.TableAff.Contains("Update")
+                            || s.TableAff.Contains("Delete"));
+                }
+
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        auditLog = auditLog.OrderByDescending(s => s.TypeTran.Contains(searchString));
+                        break;
+                    case "sur_desc":
+                        auditLog = auditLog.OrderByDescending(s => s.TypeTran.Contains(searchString));
+                        break;
+                    case "Surname":
+                        auditLog = auditLog.OrderByDescending(s => s.TypeTran.Contains(searchString));
+                        break;
+                    default:
+                        auditLog = auditLog.OrderByDescending(s => s.TypeTran.Contains(searchString));
+                        break;
+                }
+                
+                return View(auditLog.ToList());
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage");
+            }
         }
 
         public ActionResult StudentMainMenu(string sortOrder, string searchString, string F, string CO, string L, string all)
@@ -326,6 +395,15 @@ namespace TRWLASystemMaster.Controllers
                 Response.Output.Write(objStringWriter.ToString());
                 Response.Flush();
                 Response.End();
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "ReportDownload";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "FunctionEvents";
+                db.AuditLogs.Add(myAudit);
+                db.SaveChanges();
+
                 return View("Index");
             }
             catch
@@ -353,6 +431,15 @@ namespace TRWLASystemMaster.Controllers
                 Response.Output.Write(objStringWriter.ToString());
                 Response.Flush();
                 Response.End();
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "ReportDownload";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "Lecture";
+                db.AuditLogs.Add(myAudit);
+                db.SaveChanges();
+
                 return View("Index");
             }
             catch
@@ -380,6 +467,15 @@ namespace TRWLASystemMaster.Controllers
                 Response.Output.Write(objStringWriter.ToString());
                 Response.Flush();
                 Response.End();
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "ReportDownload";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "ComEngEvents";
+                db.AuditLogs.Add(myAudit);
+                db.SaveChanges();
+
                 return View("Index");
             }
             catch
@@ -407,6 +503,15 @@ namespace TRWLASystemMaster.Controllers
                 Response.Output.Write(objStringWriter.ToString());
                 Response.Flush();
                 Response.End();
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "ReportDownload";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "SYSUserProfile";
+                db.AuditLogs.Add(myAudit);
+                db.SaveChanges();
+
                 return View("Index");
             }
             catch
@@ -434,6 +539,15 @@ namespace TRWLASystemMaster.Controllers
                 Response.Output.Write(objStringWriter.ToString());
                 Response.Flush();
                 Response.End();
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "ReportDownload";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "RSVP_Event";
+                db.AuditLogs.Add(myAudit);
+                db.SaveChanges();
+
                 return View("Index");
             }
             catch
@@ -469,7 +583,7 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult ClassAttendance()
         {
             try {
-                var _contenxt = new TWRLADB_Staging_V2Entities1();
+                var _contenxt = new TWRLADB_Staging_V2Entities2();
                 ArrayList xValue = new ArrayList();
                 ArrayList yValue = new ArrayList();
 
@@ -583,6 +697,8 @@ namespace TRWLASystemMaster.Controllers
 
                 if (i == 0)
                 {
+                    
+
                     if (rsvp.FunctionID != null)
                     {
                         foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
@@ -829,6 +945,12 @@ namespace TRWLASystemMaster.Controllers
 
 
                 }
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "Create";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "EventMessages";
+                db.AuditLogs.Add(myAudit);
 
                 db.SaveChanges();
                 return RedirectToAction("Index", "TRWLASchedules");
@@ -1032,6 +1154,19 @@ namespace TRWLASystemMaster.Controllers
                             db.Attendances.Add(att);
                         }
                     }
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Create";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Attendance";
+                    db.AuditLogs.Add(myAudit);
+
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "RSVP_Event";
+                    db.AuditLogs.Add(myAudit);
+
                     db.SaveChanges();
 
                     TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.FirstName;
@@ -1259,6 +1394,19 @@ namespace TRWLASystemMaster.Controllers
                             db.Attendances.Add(att);
                         }
                     }
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Create";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Attendance";
+                    db.AuditLogs.Add(myAudit);
+
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "RSVP_Event";
+                    db.AuditLogs.Add(myAudit);
+
                     db.SaveChanges();
 
                     TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.FirstName;
@@ -1313,6 +1461,14 @@ namespace TRWLASystemMaster.Controllers
                         LecRev.SYSUserProfileID = user;
 
                         db.LectureReviews.Add(LecRev);
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "LectureReview";
+                        db.AuditLogs.Add(myAudit);
+
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
@@ -1324,6 +1480,13 @@ namespace TRWLASystemMaster.Controllers
                         LecRev.LectureID = lec.LectureID;
                         LecRev.reviewID = k;
                         LecRev.SYSUserProfileID = user;
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "LectureReview";
+                        db.AuditLogs.Add(myAudit);
 
                         db.LectureReviews.Add(LecRev);
                         db.SaveChanges();
@@ -1495,6 +1658,12 @@ namespace TRWLASystemMaster.Controllers
                                 TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.FunctionEvent.Function_Name;
                             }
                         }
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
 
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
@@ -1528,7 +1697,12 @@ namespace TRWLASystemMaster.Controllers
                                 TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.Lecture.Lecture_Name;
                             }
                         }
-
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
@@ -1562,7 +1736,12 @@ namespace TRWLASystemMaster.Controllers
                                 TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.ComEngEvent.ComEng_Name;
                             }
                         }
-
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
@@ -1605,7 +1784,12 @@ namespace TRWLASystemMaster.Controllers
                             }
 
                         }
-
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
@@ -1641,7 +1825,12 @@ namespace TRWLASystemMaster.Controllers
                             }
 
                         }
-
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
@@ -1676,6 +1865,13 @@ namespace TRWLASystemMaster.Controllers
                             }
 
                         }
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
+
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
@@ -1886,6 +2082,8 @@ namespace TRWLASystemMaster.Controllers
 
                     FunctionEvent functions = db.FunctionEvents.Find(tRWLASchedule.FunctionID);
 
+                    db.TRWLASchedules.Remove(tRWLASchedule);
+
 
                     var email = from s in db.RSVP_Event
                                 where s.FunctionID == tRWLASchedule.FunctionID
@@ -1920,13 +2118,17 @@ namespace TRWLASystemMaster.Controllers
                         {
                             ViewBag.Status = "Problem while sending email, Please check details.";
                         }
+
+
+                        RSVP_Event function = db.RSVP_Event.FirstOrDefault(l => l.FunctionID == tRWLASchedule.FunctionID);
+
+
+                        db.RSVP_Event.Remove(function);
+                        db.RSVPSchedules.Remove(rsvp);
                     }
 
-                    RSVP_Event function = db.RSVP_Event.FirstOrDefault(l => l.FunctionID == tRWLASchedule.FunctionID);
 
-                    db.RSVP_Event.Remove(function);
-                    db.TRWLASchedules.Remove(tRWLASchedule);
-                    db.RSVPSchedules.Remove(rsvp);
+                    
                     db.FunctionEvents.Remove(functions);
 
                 }
@@ -1934,6 +2136,7 @@ namespace TRWLASystemMaster.Controllers
                 {
 
                     Lecture lectures = db.Lectures.Find(Convert.ToInt32(tRWLASchedule.LectureID));
+                    db.TRWLASchedules.Remove(tRWLASchedule);
 
                     var email = from s in db.RSVP_Event
                                 where s.LectureID == tRWLASchedule.LectureID
@@ -1967,13 +2170,15 @@ namespace TRWLASystemMaster.Controllers
                         {
                             ViewBag.Status = "Problem while sending email, Please check details.";
                         }
+
+                        RSVP_Event lecture = db.RSVP_Event.FirstOrDefault(l => l.LectureID == tRWLASchedule.LectureID);
+                        db.RSVPSchedules.Remove(rsvp);
+                        db.RSVP_Event.Remove(lecture);
                     }
 
-                    RSVP_Event lecture = db.RSVP_Event.FirstOrDefault(l => l.LectureID == tRWLASchedule.LectureID);
 
-                    db.TRWLASchedules.Remove(tRWLASchedule);
-                    db.RSVPSchedules.Remove(rsvp);
-                    db.RSVP_Event.Remove(lecture);
+                    
+                    
                     db.Lectures.Remove(lectures);
 
 
@@ -1982,9 +2187,15 @@ namespace TRWLASystemMaster.Controllers
                 }
                 else if (tRWLASchedule.ComEngID != null)
                 {
-
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Delete";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "ComEngEvent";
+                    db.AuditLogs.Add(myAudit);
 
                     ComEngEvent comeng = db.ComEngEvents.Find(Convert.ToInt32(tRWLASchedule.ComEngID));
+                    db.TRWLASchedules.Remove(tRWLASchedule);
 
                     var email = from s in db.RSVP_Event
                                 where s.ComEngID == tRWLASchedule.ComEngID
@@ -2018,20 +2229,17 @@ namespace TRWLASystemMaster.Controllers
                         {
                             ViewBag.Status = "Problem while sending email, Please check details.";
                         }
-
                         RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.ComEngID == tRWLASchedule.ComEngID);
-
-                        db.TRWLASchedules.Remove(tRWLASchedule);
                         db.RSVPSchedules.Remove(rsvp);
                         db.RSVP_Event.Remove(comu);
-                        db.ComEngEvents.Remove(comeng);
-
-
-
-
 
                     }
+                    
 
+                    
+                    
+                    
+                    db.ComEngEvents.Remove(comeng);
                     //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
 
 

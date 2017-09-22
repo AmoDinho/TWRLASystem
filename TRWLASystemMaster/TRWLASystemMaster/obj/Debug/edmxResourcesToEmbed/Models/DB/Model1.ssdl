@@ -31,10 +31,8 @@
     <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DateDone" Type="datetime" Nullable="false" />
     <Property Name="TypeTran" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TableAff" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
-    <Property Name="FunctionID" Type="int" />
-    <Property Name="ComEngID" Type="int" />
-    <Property Name="LectureID" Type="int" />
   </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
@@ -432,43 +430,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AuditLog__ComEng__05D8E0BE">
-    <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
-    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ComEngEvent">
-        <PropertyRef Name="ComEngID" />
-      </Principal>
-      <Dependent Role="AuditLog">
-        <PropertyRef Name="ComEngID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AuditLog__Functi__04E4BC85">
-    <End Role="FunctionEvent" Type="Self.FunctionEvent" Multiplicity="0..1" />
-    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FunctionEvent">
-        <PropertyRef Name="FunctionID" />
-      </Principal>
-      <Dependent Role="AuditLog">
-        <PropertyRef Name="FunctionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AuditLog__Lectur__06CD04F7">
-    <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
-    <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Lecture">
-        <PropertyRef Name="LectureID" />
-      </Principal>
-      <Dependent Role="AuditLog">
-        <PropertyRef Name="LectureID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AuditLog__SYSUse__02FC7413">
+  <Association Name="FK__AuditLog__SYSUse__09A971A2">
     <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="1" />
     <End Role="AuditLog" Type="Self.AuditLog" Multiplicity="*" />
     <ReferentialConstraint>
@@ -993,19 +955,7 @@
       <End Role="Volunteer" EntitySet="Volunteer" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
-    <AssociationSet Name="FK__AuditLog__ComEng__05D8E0BE" Association="Self.FK__AuditLog__ComEng__05D8E0BE">
-      <End Role="ComEngEvent" EntitySet="ComEngEvent" />
-      <End Role="AuditLog" EntitySet="AuditLog" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AuditLog__Functi__04E4BC85" Association="Self.FK__AuditLog__Functi__04E4BC85">
-      <End Role="FunctionEvent" EntitySet="FunctionEvent" />
-      <End Role="AuditLog" EntitySet="AuditLog" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AuditLog__Lectur__06CD04F7" Association="Self.FK__AuditLog__Lectur__06CD04F7">
-      <End Role="Lecture" EntitySet="Lecture" />
-      <End Role="AuditLog" EntitySet="AuditLog" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AuditLog__SYSUse__02FC7413" Association="Self.FK__AuditLog__SYSUse__02FC7413">
+    <AssociationSet Name="FK__AuditLog__SYSUse__09A971A2" Association="Self.FK__AuditLog__SYSUse__09A971A2">
       <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
       <End Role="AuditLog" EntitySet="AuditLog" />
     </AssociationSet>

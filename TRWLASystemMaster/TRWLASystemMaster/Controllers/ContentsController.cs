@@ -14,7 +14,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ContentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
         //public FileActionResult Downloads()
         //{
@@ -150,6 +150,12 @@ namespace TRWLASystemMaster.Controllers
                     {
                         int k = db.Contents.Max(p => p.ContentID);
                         int max = k + 1;
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "Content";
+                        db.AuditLogs.Add(myAudit);
 
                         content.Content_Status = 1;
                         try
@@ -161,9 +167,18 @@ namespace TRWLASystemMaster.Controllers
                                 if (file != null && file.ContentLength > 0)
                                 {
                                     var fileName = Path.GetFileName(file.FileName);
-                                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                                    content.Content_Link = path.ToString(); ;
-                                    file.SaveAs(path);
+
+                                    if (fileName.Contains(".pdf"))
+                                    {
+                                        var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                                        content.Content_Link = path.ToString(); ;
+                                        file.SaveAs(path);
+                                    }
+                                    else
+                                    {
+                                        TempData["Notice"] = "Select a pdf document to upload";
+                                        return View("Create");
+                                    }
                                 }
                             }
                             ViewBag.Message = "File Uploaded Successfully!!";
@@ -181,6 +196,14 @@ namespace TRWLASystemMaster.Controllers
                     }
                     else if (i == 0)
                     {
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "Content";
+                        db.AuditLogs.Add(myAudit);
+
                         try
                         {
                             if (Request.Files.Count > 0)
@@ -253,6 +276,13 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Content";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Entry(content).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -298,6 +328,13 @@ namespace TRWLASystemMaster.Controllers
 
                 try
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Delete";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Content";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Contents.Remove(content);
                     db.SaveChanges();
                     return RedirectToAction("Index");

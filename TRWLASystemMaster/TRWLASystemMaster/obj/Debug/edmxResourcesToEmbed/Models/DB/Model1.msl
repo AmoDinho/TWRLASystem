@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities1">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities2">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -33,10 +33,8 @@
           <ScalarProperty Name="AuditID" ColumnName="AuditID" />
           <ScalarProperty Name="DateDone" ColumnName="DateDone" />
           <ScalarProperty Name="TypeTran" ColumnName="TypeTran" />
+          <ScalarProperty Name="TableAff" ColumnName="TableAff" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
-          <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-          <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-          <ScalarProperty Name="LectureID" ColumnName="LectureID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

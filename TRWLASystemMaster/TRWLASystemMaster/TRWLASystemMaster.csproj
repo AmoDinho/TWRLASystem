@@ -265,6 +265,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AttachmentAttribute.cs" />
     <Compile Include="Models\AttendanceViewModel.cs" />
     <Compile Include="Models\ClassAttendance.cs" />
     <Compile Include="Models\DB\Address.cs">
@@ -635,6 +636,8 @@
     <Content Include="Views\Home\Skills.cshtml" />
     <Content Include="Views\Shared\ErrorSign.cshtml" />
     <Content Include="Views\Select\VerifyCode.cshtml" />
+    <Content Include="Views\TRWLASchedules\AuditLog.cshtml" />
+    <Content Include="Views\TRWLASchedules\MyProgress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

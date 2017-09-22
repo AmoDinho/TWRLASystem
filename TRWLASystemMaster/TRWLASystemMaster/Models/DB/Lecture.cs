@@ -11,14 +11,14 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+
+    using System.ComponentModel.DataAnnotations;
     public partial class Lecture
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lecture()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.AuditLogs = new HashSet<AuditLog>();
             this.LectureReviews = new HashSet<LectureReview>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.TRWLASchedules = new HashSet<TRWLASchedule>();
@@ -28,6 +28,9 @@ namespace TRWLASystemMaster.Models.DB
         public string Lecture_Name { get; set; }
         public string Lecture_Summary { get; set; }
         public string Lecture_Description { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Lecture_Date { get; set; }
         public System.TimeSpan Lecture_StartTime { get; set; }
         public System.TimeSpan Lecture_EndTime { get; set; }
@@ -38,8 +41,6 @@ namespace TRWLASystemMaster.Models.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AuditLog> AuditLogs { get; set; }
         public virtual Content Content { get; set; }
         public virtual Residence Residence { get; set; }
         public virtual Venue Venue { get; set; }

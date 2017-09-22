@@ -11,14 +11,14 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+
+    using System.ComponentModel.DataAnnotations;
     public partial class ComEngEvent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ComEngEvent()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.AuditLogs = new HashSet<AuditLog>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.TRWLASchedules = new HashSet<TRWLASchedule>();
         }
@@ -27,6 +27,8 @@ namespace TRWLASystemMaster.Models.DB
         public string ComEng_Name { get; set; }
         public string ComEng_Summary { get; set; }
         public string ComEng_Description { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime ComEng_Date { get; set; }
         public System.TimeSpan ComEnge_StartTime { get; set; }
         public System.TimeSpan ComEng_EndTime { get; set; }
@@ -36,8 +38,6 @@ namespace TRWLASystemMaster.Models.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AuditLog> AuditLogs { get; set; }
         public virtual Content Content { get; set; }
         public virtual Venue Venue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

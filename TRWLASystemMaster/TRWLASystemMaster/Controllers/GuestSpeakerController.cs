@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class GuestSpeakerController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
         public ActionResult Details(int? id)
         {
@@ -107,6 +107,14 @@ namespace TRWLASystemMaster.Controllers
 
                     if (i != 0)
                     {
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "GuestSpeaker";
+                        db.AuditLogs.Add(myAudit);
+
                         int k = db.GuestSpeakers.Max(p => p.GuestSpeakerID);
                         int max = k + 1;
 
@@ -168,6 +176,14 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "GuestSpeaker";
+                    db.AuditLogs.Add(myAudit);
+
+
                     db.Entry(guestSpeaker).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");

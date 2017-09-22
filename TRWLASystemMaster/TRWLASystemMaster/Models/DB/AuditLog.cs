@@ -17,14 +17,9 @@ namespace TRWLASystemMaster.Models.DB
         public int AuditID { get; set; }
         public System.DateTime DateDone { get; set; }
         public string TypeTran { get; set; }
+        public string TableAff { get; set; }
         public int SYSUserProfileID { get; set; }
-        public Nullable<int> FunctionID { get; set; }
-        public Nullable<int> ComEngID { get; set; }
-        public Nullable<int> LectureID { get; set; }
     
-        public virtual ComEngEvent ComEngEvent { get; set; }
-        public virtual FunctionEvent FunctionEvent { get; set; }
-        public virtual Lecture Lecture { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace TRWLASystemMaster.Controllers
 
 
        
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
         //Register Student
         public ActionResult Register()
         {

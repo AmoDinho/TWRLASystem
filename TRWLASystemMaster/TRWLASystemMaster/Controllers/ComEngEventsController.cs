@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ComEngEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
         // GET: ComEngEvents
         public ActionResult Index()
@@ -69,7 +69,7 @@ namespace TRWLASystemMaster.Controllers
                         myAudit.DateDone = DateTime.Now;
                         myAudit.TypeTran = "Create";
                         myAudit.SYSUserProfileID = (int)Session["User"];
-                        myAudit.ComEngID = k;
+                        myAudit.TableAff = "ComEngEvent";
                         db.AuditLogs.Add(myAudit);
 
                         comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
@@ -86,9 +86,9 @@ namespace TRWLASystemMaster.Controllers
                         myAudit.DateDone = DateTime.Now;
                         myAudit.TypeTran = "Create";
                         myAudit.SYSUserProfileID = (int)Session["User"];
-                        myAudit.ComEngID = 1;
-
+                        myAudit.TableAff = "ComEngEvent";
                         db.AuditLogs.Add(myAudit);
+                        
 
                         comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
                         db.ComEngEvents.Add(comEngEvent);
@@ -146,6 +146,13 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "ComEngEvent";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Entry(comEngEvent).State = EntityState.Modified;
                     db.SaveChanges();
                     RedirectToAction("Index", "TRWLASchedules");
@@ -180,6 +187,9 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+            
+
             ComEngEvent comEngEvent = db.ComEngEvents.Find(id);
             db.ComEngEvents.Remove(comEngEvent);
             db.SaveChanges();

@@ -16,7 +16,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class FunctionEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
 
         // GET: FunctionEvents
@@ -87,6 +87,14 @@ namespace TRWLASystemMaster.Controllers
 
                     if (i != 0)
                     {
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "FunctionEvent";
+                        db.AuditLogs.Add(myAudit);
+
+
                         int max = db.FunctionEvents.Max(p => p.FunctionID);
                         int k = max + 1;
                         functionEvent.FunctionID = k;
@@ -103,6 +111,14 @@ namespace TRWLASystemMaster.Controllers
 
                     else
                     {
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "FunctionEvent";
+
+                        db.AuditLogs.Add(myAudit);
                         functionEvent.Function_Name = functionEvent.Function_Name + " (F)";
 
                         db.FunctionEvents.Add(functionEvent);
@@ -194,6 +210,13 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "FunctionEvent";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Entry(functionEvent).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index", "TRWLASchedules");

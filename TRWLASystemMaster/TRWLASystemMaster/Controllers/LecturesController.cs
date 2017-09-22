@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class LecturesController : Controller
     {
-        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
+        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
 
         // GET: Lectures
         public ActionResult Index()
@@ -82,6 +82,15 @@ namespace TRWLASystemMaster.Controllers
 
                     if (i != 0)
                     {
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "Lecture";
+
+                        db.AuditLogs.Add(myAudit);
+
                         int max = db.Lectures.Max(p => p.LectureID);
                         int k = max + 1;
                         lecture.LectureID = k;
@@ -157,6 +166,13 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Lecture";
+
+
                     db.Entry(lecture).State = EntityState.Modified;
                     db.SaveChanges();
                     RedirectToAction("Index", "TRWLASchedules");

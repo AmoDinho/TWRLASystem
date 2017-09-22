@@ -9,6 +9,11 @@
     <h2>Upload Content</h2>
 </div>
 
+@if (TempData["Notice"] != null)
+{
+    @TempData["Notice"]
+}
+
 @using (Html.BeginForm("Create","Contents", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -25,7 +30,7 @@
         </div>
 
         <div class="editor-field">
-            <input type="file" name="file" />
+            <input type="file" name="file" id="user_profile_pic" />
         </div>
 
 

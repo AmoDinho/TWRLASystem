@@ -1,0 +1,9 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">EventName</th><th scope="col">EventDate</th><th scope="col">Student_Name</th>
+		</tr><tr>
+			<td>Seeing The Future (CE)</td><td>9/5/2017 12:00:00 AM</td><td>Christine</td>
+		</tr>
+	</table>
+</div>
