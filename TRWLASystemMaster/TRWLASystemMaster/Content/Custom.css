@@ -52,7 +52,10 @@ h2
 {
     font-family: "Open Sans";
     color: black;
-    font-size: 30px;
+    font-size: 300%; 
+    z-index:3;
+    position:relative;
+    background-color:transparent;
 }
 
 h3
@@ -832,10 +835,11 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
 }
 
 .quote {
-  background: #fb3958;
+  background: 	#4717f6;
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:10;
 }
 .quote:after {
   background: inherit;
@@ -849,10 +853,11 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   transform: skewY(6deg);
   transform-origin: 80%;
   z-index: -3;
+  opacity:10;
 }   
 
 .quote1 {
-  background: #ffc838;
+  background: #e7efdd;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -866,13 +871,13 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   left: 0;
   position: absolute;
   right: 0;
-  transform: skewY(15.5deg);
-  transform-origin: 80%;
+  transform: skewY(13deg);
+  transform-origin: 50%;
   z-index: -2;
 }   
 
 .quote2 {
-  background: #fbad50;
+  background: #a239ca;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -893,7 +898,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
 }   
 
 .quoteform {
-  background: #fb3958;
+  background: 	#4717f6;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -912,10 +917,11 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   z-index: -3;
   margin-left:-110px;
   margin-right:-100px;
+  opacity:4;
 }   
 
 .quote1form {
-  background: #fbad50;
+  background: #e7efdd;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -938,7 +944,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
 }   
 
 .quote2form {
-  background: #ffc838;
+  background: #a239ca;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -953,6 +959,79 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   position: absolute;
   right: 0;
   transform: skewY(15.5deg);
+  transform-origin: 50%;
+  z-index: -2;
+
+  
+  margin-left:-110px;
+  margin-right:-100px;
+  
+}   
+
+
+/*//HomePage*/
+.quotehome {
+  background: 	#4717f6;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.quotehome:after {
+  background: inherit;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transform: skewY(-3deg);
+  transform-origin: 60%;
+  z-index: -3;
+  margin-left:-110px;
+  margin-right:-100px;
+  opacity:4;
+}   
+
+.quote1home {
+  background: #e7efdd;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.quote1home:after {
+ background: inherit;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transform: skewY(-4deg);
+  transform-origin: 40%;
+  z-index: -2;
+  
+  margin-left:-110px;
+  margin-right:-100px;
+}   
+
+.quote2home {
+  background: #a239ca;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.quote2home:after {
+ background: inherit;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  transform: skewY(-9deg);
   transform-origin: 50%;
   z-index: -2;
 

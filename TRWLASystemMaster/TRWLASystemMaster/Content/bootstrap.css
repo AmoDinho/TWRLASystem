@@ -1246,21 +1246,21 @@ pre code {
 
   .col-md-5-Function {
     width: 30%;
-    background-color:#fb3958;
+    background-color:	#4717f6;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius:10px;
   }
 
   .col-md-5-Lecture {
     width: 30%;
-    background-color:#ffc838;
+    background-color:#cfd7c6;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius:10px;
   }
 
   .col-md-5-Com {
     width: 30%;
-    background-color:#fbad50;
+    background-color:#a239ca;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius:10px;
   }
