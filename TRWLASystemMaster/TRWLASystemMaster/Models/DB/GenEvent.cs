@@ -12,37 +12,30 @@ namespace TRWLASystemMaster.Models.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Lecture
+    public partial class GenEvent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Lecture()
+        public GenEvent()
         {
             this.Attendances = new HashSet<Attendance>();
-            this.LectureReviews = new HashSet<LectureReview>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.TRWLASchedules = new HashSet<TRWLASchedule>();
         }
     
-        public int LectureID { get; set; }
-        public string Lecture_Name { get; set; }
-        public string Lecture_Summary { get; set; }
-        public string Lecture_Description { get; set; }
-        public System.DateTime Lecture_Date { get; set; }
-        public System.TimeSpan Lecture_StartTime { get; set; }
-        public System.TimeSpan Lecture_EndTime { get; set; }
-        public string Lecture_Theme { get; set; }
+        public int GenID { get; set; }
+        public string Gen_Name { get; set; }
+        public string Gen_Summary { get; set; }
+        public string Gen_Description { get; set; }
+        public System.DateTime Gen_Date { get; set; }
+        public System.TimeSpan Gen_StartTime { get; set; }
+        public System.TimeSpan Gen_EndTime { get; set; }
+        public string Gene_Theme { get; set; }
         public Nullable<int> VenueID { get; set; }
-        public Nullable<int> ResidenceID { get; set; }
-        public Nullable<int> ContentID { get; set; }
-        public Nullable<int> EVTYPE { get; set; }
+        public Nullable<int> Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
-        public virtual Content Content { get; set; }
-        public virtual Residence Residence { get; set; }
         public virtual Venue Venue { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LectureReview> LectureReviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

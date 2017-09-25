@@ -19,6 +19,7 @@ namespace TRWLASystemMaster.Models.DB
         public string TypeTran { get; set; }
         public string TableAff { get; set; }
         public int SYSUserProfileID { get; set; }
+        public string Duration { get; set; }
     
         public virtual SYSUserProfile SYSUserProfile { get; set; }
     }

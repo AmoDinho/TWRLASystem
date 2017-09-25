@@ -11,8 +11,7 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class ComEngEvent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,14 +26,13 @@ namespace TRWLASystemMaster.Models.DB
         public string ComEng_Name { get; set; }
         public string ComEng_Summary { get; set; }
         public string ComEng_Description { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime ComEng_Date { get; set; }
         public System.TimeSpan ComEnge_StartTime { get; set; }
         public System.TimeSpan ComEng_EndTime { get; set; }
         public string ComEng_Theme { get; set; }
         public Nullable<int> VenueID { get; set; }
         public Nullable<int> ContentID { get; set; }
+        public Nullable<int> EVTYPE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

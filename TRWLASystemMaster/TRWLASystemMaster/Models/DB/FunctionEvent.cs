@@ -11,8 +11,7 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class FunctionEvent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,15 +26,13 @@ namespace TRWLASystemMaster.Models.DB
         public string Function_Name { get; set; }
         public string Function_Summary { get; set; }
         public string Function_Description { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Function_Date { get; set; }
         public System.TimeSpan Function_StartTime { get; set; }
         public System.TimeSpan Function_EndTime { get; set; }
         public string Function_Theme { get; set; }
         public Nullable<int> GuestSpeakerID { get; set; }
         public Nullable<int> VenueID { get; set; }
+        public Nullable<int> EVTYPE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

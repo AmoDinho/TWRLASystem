@@ -23,6 +23,7 @@
     <Property Name="LectureID" Type="int" />
     <Property Name="ComEngID" Type="int" />
     <Property Name="SYSUserProfileID" Type="int" />
+    <Property Name="GenID" Type="int" />
   </EntityType>
   <EntityType Name="AuditLog">
     <Key>
@@ -33,6 +34,7 @@
     <Property Name="TypeTran" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="TableAff" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
+    <Property Name="Duration" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
@@ -48,6 +50,7 @@
     <Property Name="ComEng_Theme" Type="varchar" MaxLength="25" />
     <Property Name="VenueID" Type="int" />
     <Property Name="ContentID" Type="int" />
+    <Property Name="EVTYPE" Type="int" />
   </EntityType>
   <EntityType Name="Content">
     <Key>
@@ -84,6 +87,22 @@
     <Property Name="Function_Theme" Type="varchar" MaxLength="25" />
     <Property Name="GuestSpeakerID" Type="int" />
     <Property Name="VenueID" Type="int" />
+    <Property Name="EVTYPE" Type="int" />
+  </EntityType>
+  <EntityType Name="GenEvent">
+    <Key>
+      <PropertyRef Name="GenID" />
+    </Key>
+    <Property Name="GenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gen_Name" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="Gen_Summary" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Gen_Description" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Gen_Date" Type="datetime" Nullable="false" />
+    <Property Name="Gen_StartTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Gen_EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Gene_Theme" Type="varchar" MaxLength="25" />
+    <Property Name="VenueID" Type="int" />
+    <Property Name="Type" Type="int" />
   </EntityType>
   <EntityType Name="GuestSpeaker">
     <Key>
@@ -111,6 +130,7 @@
     <Property Name="VenueID" Type="int" />
     <Property Name="ResidenceID" Type="int" />
     <Property Name="ContentID" Type="int" />
+    <Property Name="EVTYPE" Type="int" />
   </EntityType>
   <EntityType Name="LectureReview">
     <Key>
@@ -178,6 +198,7 @@
     <Property Name="AllDay" Type="bit" />
     <Property Name="Attended" Type="int" />
     <Property Name="SYSUserProfileID" Type="int" />
+    <Property Name="GenID" Type="int" />
   </EntityType>
   <EntityType Name="RSVPSchedule">
     <Key>
@@ -284,6 +305,7 @@
     <Property Name="FunctionID" Type="int" />
     <Property Name="LectureID" Type="int" />
     <Property Name="ComEngID" Type="int" />
+    <Property Name="GenID" Type="int" />
   </EntityType>
   <EntityType Name="UniqueCode">
     <Key>
@@ -379,6 +401,18 @@
       </Principal>
       <Dependent Role="Attendance">
         <PropertyRef Name="FunctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Attendanc__GenID__18EBB532">
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="0..1" />
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenEvent">
+        <PropertyRef Name="GenID" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="GenID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -514,6 +548,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__GenEvent__VenueI__17036CC0">
+    <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="VenueID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="VenueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Lecture__Content__5535A963">
     <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
@@ -619,6 +665,18 @@
       </Principal>
       <Dependent Role="RSVP_Event">
         <PropertyRef Name="FunctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RSVP_Even__GenID__19DFD96B">
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="0..1" />
+    <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenEvent">
+        <PropertyRef Name="GenID" />
+      </Principal>
+      <Dependent Role="RSVP_Event">
+        <PropertyRef Name="GenID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -838,6 +896,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__TRWLASche__GenID__17F790F9">
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="0..1" />
+    <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenEvent">
+        <PropertyRef Name="GenID" />
+      </Principal>
+      <Dependent Role="TRWLASchedule">
+        <PropertyRef Name="GenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__TRWLASche__Lectu__60A75C0F">
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="0..1" />
     <End Role="TRWLASchedule" Type="Self.TRWLASchedule" Multiplicity="*" />
@@ -906,6 +976,7 @@
     <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventMessage" EntityType="Self.EventMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FunctionEvent" EntityType="Self.FunctionEvent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GenEvent" EntityType="Self.GenEvent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GuestSpeaker" EntityType="Self.GuestSpeaker" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LectureReview" EntityType="Self.LectureReview" Schema="dbo" store:Type="Tables" />
@@ -937,6 +1008,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__Attendanc__Funct__6754599E" Association="Self.FK__Attendanc__Funct__6754599E">
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Attendanc__GenID__18EBB532" Association="Self.FK__Attendanc__GenID__18EBB532">
+      <End Role="GenEvent" EntitySet="GenEvent" />
       <End Role="Attendance" EntitySet="Attendance" />
     </AssociationSet>
     <AssociationSet Name="FK__Attendanc__Lectu__68487DD7" Association="Self.FK__Attendanc__Lectu__68487DD7">
@@ -983,6 +1058,10 @@
       <End Role="Venue" EntitySet="Venue" />
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
     </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__VenueI__17036CC0" Association="Self.FK__GenEvent__VenueI__17036CC0">
+      <End Role="Venue" EntitySet="Venue" />
+      <End Role="GenEvent" EntitySet="GenEvent" />
+    </AssociationSet>
     <AssociationSet Name="FK__Lecture__Content__5535A963" Association="Self.FK__Lecture__Content__5535A963">
       <End Role="Content" EntitySet="Content" />
       <End Role="Lecture" EntitySet="Lecture" />
@@ -1017,6 +1096,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__RSVP_Even__Funct__6D0D32F4" Association="Self.FK__RSVP_Even__Funct__6D0D32F4">
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
+      <End Role="RSVP_Event" EntitySet="RSVP_Event" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RSVP_Even__GenID__19DFD96B" Association="Self.FK__RSVP_Even__GenID__19DFD96B">
+      <End Role="GenEvent" EntitySet="GenEvent" />
       <End Role="RSVP_Event" EntitySet="RSVP_Event" />
     </AssociationSet>
     <AssociationSet Name="FK__RSVP_Even__Lectu__6E01572D" Association="Self.FK__RSVP_Even__Lectu__6E01572D">
@@ -1089,6 +1172,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__TRWLASche__Funct__5FB337D6" Association="Self.FK__TRWLASche__Funct__5FB337D6">
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
+      <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TRWLASche__GenID__17F790F9" Association="Self.FK__TRWLASche__GenID__17F790F9">
+      <End Role="GenEvent" EntitySet="GenEvent" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedule" />
     </AssociationSet>
     <AssociationSet Name="FK__TRWLASche__Lectu__60A75C0F" Association="Self.FK__TRWLASche__Lectu__60A75C0F">

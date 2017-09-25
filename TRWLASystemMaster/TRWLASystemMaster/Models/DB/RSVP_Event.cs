@@ -31,6 +31,7 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<bool> AllDay { get; set; }
         public Nullable<int> Attended { get; set; }
         public Nullable<int> SYSUserProfileID { get; set; }
+        public Nullable<int> GenID { get; set; }
     
         public virtual ComEngEvent ComEngEvent { get; set; }
         public virtual FunctionEvent FunctionEvent { get; set; }
@@ -38,5 +39,6 @@ namespace TRWLASystemMaster.Models.DB
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
+        public virtual GenEvent GenEvent { get; set; }
     }
 }

@@ -289,6 +289,9 @@
     <Compile Include="Models\DB\FunctionEvent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\GenEvent.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\GuestSpeaker.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

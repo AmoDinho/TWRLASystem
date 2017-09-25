@@ -21,6 +21,7 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<int> LectureID { get; set; }
         public Nullable<int> ComEngID { get; set; }
         public Nullable<int> SYSUserProfileID { get; set; }
+        public Nullable<int> GenID { get; set; }
     
         public virtual ComEngEvent ComEngEvent { get; set; }
         public virtual FunctionEvent FunctionEvent { get; set; }
@@ -28,5 +29,6 @@ namespace TRWLASystemMaster.Models.DB
         public virtual Student Student { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual Volunteer Volunteer { get; set; }
+        public virtual GenEvent GenEvent { get; set; }
     }
 }

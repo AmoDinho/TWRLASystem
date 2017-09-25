@@ -540,11 +540,26 @@ create table Lecture
 	VenueID int null,
 	ResidenceID int null,
 	ContentID int null,
+	Type int not null,
 	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
 	FOREIGN KEY (ResidenceID) REFERENCES Residence(ResID),
 	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
 )
 GO
+
+create table GenEvent
+(
+	GenID int identity(1,1) primary key,
+	Gen_Name varchar(35) not null,
+	Gen_Summary varchar(100) not null,
+	Gen_Description varchar(300) not null,
+	Gen_Date datetime not null,
+	Gen_StartTime time not null,
+	Gen_EndTime time not null,
+	Gene_Theme varchar(25) null,
+	VenueID int null,
+	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID)
+)
 ---	[dbo].[ComEngEvent]
 
 
@@ -562,6 +577,7 @@ create table ComEngEvent
 	ComEng_Theme varchar(25) null,
 	VenueID int null,
 	ContentID int null,
+	Type int not null,
 	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
 	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
 )
@@ -583,6 +599,7 @@ create table FunctionEvent
 	Function_Theme varchar(25) null,
 	GuestSpeakerID int null,
 	VenueID int null,
+	Type int not null,
 	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
 	FOREIGN KEY (GuestSpeakerID) REFERENCES GuestSpeaker(GuestSpeakerID)
 )

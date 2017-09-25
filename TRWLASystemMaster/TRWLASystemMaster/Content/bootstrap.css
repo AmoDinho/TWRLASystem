@@ -1253,7 +1253,7 @@ pre code {
 
   .col-md-5-Lecture {
     width: 30%;
-    background-color:#cfd7c6;
+    background-color:#ffdb58;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius:10px;
   }
@@ -5929,11 +5929,16 @@ body.modal-open,
   opacity: 0;
   filter: alpha(opacity=0);
   visibility: visible;
+  
+    z-index:3;
+    position:relative;
+    background-color:transparent;
 }
 
 .tooltip.in {
   opacity: 0.9;
   filter: alpha(opacity=90);
+
 }
 
 .tooltip.top {
@@ -5972,6 +5977,10 @@ body.modal-open,
   height: 0;
   border-color: transparent;
   border-style: solid;
+  
+    z-index:3;
+    position:relative;
+    background-color:transparent;
 }
 
 .tooltip.top .tooltip-arrow {
