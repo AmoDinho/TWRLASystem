@@ -1,0 +1,129 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.RSVP_Event>
+
+@{
+    ViewBag.Title = "StudentDashboard";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
+}
+@*<head>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $(".set-width-btn").click(function(){
+        var newWidth = $("50%").val();
+        $(".function").width(newWidth);
+    });
+});
+    </script>
+</head>*@
+
+<div class="jumbotron" style="margin-bottom:50px;">
+    <h1> @ViewBag.Name's Dashboard</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @if (TempData["NoEvent"] != null)
+        {
+            @TempData["NoEvent"];
+        }
+                @using (Html.BeginForm())
+        {
+                    string lecture = TempData["Lectureus"].ToString();
+                    string function = TempData["Functionus"].ToString();
+                    string com = TempData["Comus"].ToString();
+                    string gen = TempData["Genus"].ToString();
+
+        <h2> My Progress</h2>
+        <div class="function" style="background-color:#4717f6; width:@(function)%; height:20px;"></div>
+        <div class="lecture" style="background-color:#ffdb58;"></div>
+        <div class="com" style="background-color:#a239ca"></div>
+
+                }
+    </div>
+</div>
+
+<div class="row" @*id="showMe" style="display:none;*@>
+    <div class="col-md-6 form-inline" style="margin-bottom:10px; height:500px; overflow-y:auto;">
+        <h2 style="text-align:left; margin-bottom:30px;">My upcoming events</h2>
+        @foreach (var item in Model.Where(p => p.Attended == null))
+        {
+            string cssClass = "col-md-5-Function";
+
+            if (item.FunctionID != null)
+            {
+                cssClass = "col-md-5-Function";
+            }
+            else if (item.ComEngID != null)
+            {
+                cssClass = "col-md-5-Com";
+            }
+            else if (item.LectureID != null)
+            {
+                cssClass = "col-md-5-Lecture";
+            }
+            <div class="@cssClass form-group" style="margin-top:10px;">
+                <h4 data-toggle="tooltip"  title="@Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:MMMM/dd/yyyy}")
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date, "{0:MMMM/dd/yyyy}")
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date) 
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime) 
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime) to @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                    @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)" style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
+
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                </h4>
+            </div>
+            }
+    </div>
+    <div class="col-md-6 form-inline" style="margin-bottom:10px; height:500px; overflow-y:auto;">
+        <h2 style="text-align:left; margin-bottom:30px;">Events I have attended</h2>
+        @foreach (var item in Model.Where(p => p.Attended != null))
+        {
+            string cssClass = "col-md-5-Function";
+
+            if (item.FunctionID != null)
+            {
+                cssClass = "col-md-5-Function";
+            }
+            else if (item.ComEngID != null)
+            {
+                cssClass = "col-md-5-Com";
+            }
+            else if (item.LectureID != null)
+            {
+                cssClass = "col-md-5-Lecture";
+            }
+            <div class="@cssClass form-group" style="margin-top:10px;">
+                <h4 data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:MMMM/dd/yyyy}")
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date, "{0:MMMM/dd/yyyy}")
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date)
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime) to @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
+                    @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)" style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
+
+                    @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
+                    @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                </h4>
+            </div>
+        }
+    </div>
+
+</div>
+<div style="float:right; margin-bottom:20px; margin-top:50px;">
+    <button data-toggle="tooltip" title="Return to the Main Menu" type="button" style="float:right;" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'">Return</button>
+</div>

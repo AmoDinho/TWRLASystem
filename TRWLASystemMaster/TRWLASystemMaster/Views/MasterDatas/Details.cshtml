@@ -1,0 +1,54 @@
+﻿@model TRWLASystemMaster.Models.DB.MasterData
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>TRWLA Master Data</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6" style="margin-right:30px; margin-bottom:40px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2 style="text-align:left;">Graduation Requirements</h2>
+        <h3>Lecture Event Attendance</h3>
+        <p>Students will be required to attend <strong>@Html.DisplayFor(model => model.LecAttend)</strong> Lecture type events.</p>
+        <h3>Function Event Attendance</h3>
+        <p>Students will be required to attend <strong>@Html.DisplayFor(model => model.FuncAttend)</strong> Function type events.</p>
+        <h3>Community Engagement Event Attendance</h3>
+        <p>Students will be required to attend <strong>@Html.DisplayFor(model => model.ComAttend)</strong> Community Engagement type events.</p>
+        <h3>General Event Attendance</h3>
+        <hp>Students will be required to attend <strong>@Html.DisplayFor(model => model.GenAttend)</strong> General type events.</hp>
+    </div>
+
+    <div class="col-md-6" style="margin-right:30px; margin-bottom:40px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2 style="text-align:left">
+            New User Registration
+        </h2>
+        <p>New users will only be able to register until <strong>@Html.DisplayFor(model => model.RegDate)</strong>.</p>
+    </div>
+
+    <div class="col-md-6" style="margin-right:30px; margin-bottom:40px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2 style="text-align:left">
+            Log Student Attendance
+        </h2>
+        <p>Volunteers may only log the attendance of a student at an event <strong>@Html.DisplayFor(model => model.LogAttendTime)</strong> hour/s before the event starts.</p>
+    </div>
+
+    <div class="col-md-6" style="margin-right:30px; margin-bottom:40px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2 style="text-align:left">
+            Cancel Event
+        </h2>
+        <p>Volunteers will only be able to cancel an event <strong>@Html.DisplayFor(model => model.cancelevent)</strong> day/s before it is due to start.</p>
+    </div>
+</div>
+
+<div style="float:right; margin-bottom:20px; margin-top:50px;">
+    <button style="margin-right:20px;" data-toggle="tooltip" title="Edit TRWLA Master Data" type="button" style="float:right;" class="btn" onclick="location.href='@Url.Action("Edit", "MasterDatas", new { id = 1 })'">Edit</button>
+    <button data-toggle="tooltip" title="Return to the Main Menu" type="button" style="float:right;" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+</div>

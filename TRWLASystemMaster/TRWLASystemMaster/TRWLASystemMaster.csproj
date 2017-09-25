@@ -248,6 +248,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LecturesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MasterDatasController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ResidencesController.cs" />
     <Compile Include="Controllers\SelectController.cs" />
@@ -304,6 +305,9 @@
     <Compile Include="Models\DB\LOOKUPRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\MasterData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\Milestone.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -323,6 +327,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\Progress.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\progressbar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\RatingType.cs">
@@ -641,6 +648,12 @@
     <Content Include="Views\Select\VerifyCode.cshtml" />
     <Content Include="Views\TRWLASchedules\AuditLog.cshtml" />
     <Content Include="Views\TRWLASchedules\MyProgress.cshtml" />
+    <Content Include="Views\TRWLASchedules\StudentDashboard.cshtml" />
+    <Content Include="Views\MasterDatas\Create.cshtml" />
+    <Content Include="Views\MasterDatas\Delete.cshtml" />
+    <Content Include="Views\MasterDatas\Details.cshtml" />
+    <Content Include="Views\MasterDatas\Edit.cshtml" />
+    <Content Include="Views\MasterDatas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

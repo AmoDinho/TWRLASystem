@@ -414,5 +414,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MasterDatas">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.MasterData">
+        <MappingFragment StoreEntitySet="MasterData">
+          <ScalarProperty Name="cancelevent" ColumnName="cancelevent" />
+          <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="GenAttend" ColumnName="GenAttend" />
+          <ScalarProperty Name="ComAttend" ColumnName="ComAttend" />
+          <ScalarProperty Name="FuncAttend" ColumnName="FuncAttend" />
+          <ScalarProperty Name="LecAttend" ColumnName="LecAttend" />
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="progressbars">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.progressbar">
+        <MappingFragment StoreEntitySet="progressbar">
+          <ScalarProperty Name="GenProg" ColumnName="GenProg" />
+          <ScalarProperty Name="ComProg" ColumnName="ComProg" />
+          <ScalarProperty Name="FuncProg" ColumnName="FuncProg" />
+          <ScalarProperty Name="LecProg" ColumnName="LecProg" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+          <ScalarProperty Name="ProgBarID" ColumnName="ProgBarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

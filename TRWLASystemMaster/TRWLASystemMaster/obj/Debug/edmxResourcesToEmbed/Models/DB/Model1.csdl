@@ -340,6 +340,7 @@
     <NavigationProperty Name="Students" Relationship="Self.FK__Student__SYSUser__37A5467C" FromRole="SYSUserProfile" ToRole="Student" />
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
+    <NavigationProperty Name="progressbars" Relationship="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88" FromRole="SYSUserProfile" ToRole="progressbar" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>
@@ -1229,6 +1230,12 @@
       <End Role="GenEvent" EntitySet="GenEvents" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
     </AssociationSet>
+    <EntitySet Name="MasterDatas" EntityType="TWRLADB_Staging_V2Model.MasterData" />
+    <EntitySet Name="progressbars" EntityType="TWRLADB_Staging_V2Model.progressbar" />
+    <AssociationSet Name="FK__progressb__SYSUs__1EA48E88" Association="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
+      <End Role="progressbar" EntitySet="progressbars" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="GenEvent">
     <Key>
@@ -1294,6 +1301,43 @@
       </Principal>
       <Dependent Role="TRWLASchedule">
         <PropertyRef Name="GenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MasterData">
+    <Key>
+      <PropertyRef Name="MasterID" />
+    </Key>
+    <Property Name="MasterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LecAttend" Type="Int32" Nullable="false" />
+    <Property Name="FuncAttend" Type="Int32" Nullable="false" />
+    <Property Name="ComAttend" Type="Int32" Nullable="false" />
+    <Property Name="GenAttend" Type="Int32" Nullable="false" />
+    <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
+    <Property Name="cancelevent" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="progressbar">
+    <Key>
+      <PropertyRef Name="ProgBarID" />
+    </Key>
+    <Property Name="ProgBarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" />
+    <Property Name="LecProg" Type="Int32" Nullable="false" />
+    <Property Name="FuncProg" Type="Int32" Nullable="false" />
+    <Property Name="ComProg" Type="Int32" Nullable="false" />
+    <Property Name="GenProg" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SYSUserProfile" Relationship="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88" FromRole="progressbar" ToRole="SYSUserProfile" />
+  </EntityType>
+  <Association Name="FK__progressb__SYSUs__1EA48E88">
+    <End Type="TWRLADB_Staging_V2Model.SYSUserProfile" Role="SYSUserProfile" Multiplicity="1" />
+    <End Type="TWRLADB_Staging_V2Model.progressbar" Role="progressbar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Principal>
+      <Dependent Role="progressbar">
+        <PropertyRef Name="SYSUserProfileID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

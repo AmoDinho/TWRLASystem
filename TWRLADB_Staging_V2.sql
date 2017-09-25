@@ -612,9 +612,11 @@ create table TRWLASchedule
 	FunctionID int null,
 	LectureID int null,
 	ComEngID int null,
+	GenID int null,
 	FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
 	FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
+	FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
 )
 GO
 
@@ -629,13 +631,15 @@ create table Attendance
 		FunctionID int null,
 		LectureID int null,
 		ComEngID int null,
+		GenID int null,
 	SYSUserProfileID int null,
 	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
-		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID)
+		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
+		FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
 )
 GO	
 
@@ -650,13 +654,15 @@ create table RSVP_Event
 		LectureID int null,
 		ComEngID int null,
 		Attended int null,
-	SYSUserProfileID int null,
-	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
+		GenID int null,
+		SYSUserProfileID int null,
+		FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
 		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
 		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
 		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
 		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
-		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID)
+		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
+		FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
 )	
 GO	
 
@@ -1193,3 +1199,31 @@ CREATE TABLE AuditLog
 	SYSUserProfileID int not null,
 	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID)
 )
+
+create table progressbar
+(
+	ProgBarID int identity (1,1) primary key,
+	SYSUserProfileID int not null,
+	LecProg int not null,
+	FuncProg int not null,
+	ComProg int not null,
+	GenProg int not null,
+
+	foreign key (SYSUserProfileID) references SYSUserProfile(SYSUserProfileID)
+)
+
+create table MasterData
+(
+	MasterID int identity (1,1) primary key,
+	LecAttend int not null,
+	FuncAttend int not null,
+	ComAttend int not null,
+	GenAttend int not null,
+	RegDate date not null,
+	CancelEvent date not null,
+	LogAttendTime int not null
+)
+
+alter table MasterData
+add cancelevent int not null
+go

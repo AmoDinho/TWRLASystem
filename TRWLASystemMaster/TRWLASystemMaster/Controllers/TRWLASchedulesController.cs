@@ -29,6 +29,46 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+        public ActionResult StudentDashboard(int? id)
+        {
+            try
+            {
+                var Master = from s in db.RSVP_Event
+                             where s.SYSUserProfileID == id
+                             select s;
+                var user = (int)Session["User"];
+
+                SYSUserProfile myuser = db.SYSUserProfiles.Find(id);
+
+                try
+                {
+                    progressbar myprog = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == user);
+                    MasterData mymaster = db.MasterDatas.Find(1);
+
+                    var lec = myprog.LecProg;
+                    var func = myprog.FuncProg;
+                    var com = myprog.ComProg;
+                    var gen = myprog.GenProg;
+
+                    TempData["Lectureus"] = (Convert.ToInt32(lec) / Convert.ToInt32(mymaster.LecAttend)) * 100;
+                    TempData["Functionus"] = (Convert.ToInt32(func) / Convert.ToInt32(mymaster.FuncAttend)) * 100;
+                    TempData["Comus"] = (Convert.ToInt32(com) / Convert.ToInt32(mymaster.ComAttend)) * 100;
+                    TempData["Genus"] = (Convert.ToInt32(gen) / Convert.ToInt32(mymaster.GenAttend)) * 100;
+                }
+                catch
+                {
+                    TempData["NoEvent"] = "You have yet to attend an event";
+                }
+
+                ViewBag.Name = myuser.FirstName;
+
+                return View(Master.ToList());
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage");
+            }
+        }
         //AuditLog View
         // GET: TRWLASchedules
         [AllowAnonymous]
@@ -164,8 +204,9 @@ namespace TRWLASystemMaster.Controllers
                             || s.ComEngEvent.ComEng_Name.Contains(searchString));
                         break;
                 }
+                DateTime mydate = DateTime.Now.AddDays(-1);
 
-                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.ComEngEvent.ComEng_Date >= DateTime.Now);
+                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate);
 
                 return View(tRWLASchedules.ToList());
             }
@@ -243,7 +284,9 @@ namespace TRWLASystemMaster.Controllers
                         break;
                 }
 
-                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.ComEngEvent.ComEng_Date >= DateTime.Now);
+                DateTime mydate = DateTime.Now.AddDays(-1);
+
+                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate);
 
                 return View(tRWLASchedules.ToList());
             }
@@ -1101,6 +1144,10 @@ namespace TRWLASystemMaster.Controllers
                 SYSUserProfile stud = db.SYSUserProfiles.Find(id);
                 TRWLASchedule ev = db.TRWLASchedules.Find(stude);
 
+                
+                var FindUser = (int)Session["User"];
+
+                progressbar prog = new progressbar();
 
                 int i = db.Attendances.Count();
 
@@ -1112,18 +1159,99 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.FuncProg = myProgress.FuncProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.FuncProg = prog.FuncProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             db.Attendances.Add(att);
                         }
                         else if (ev.LectureID != null)
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.LecProg = myProgress.LecProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.LecProg = prog.LecProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
+                            db.Attendances.Add(att);
+                        }
+                        else if (ev.ComEngID != null)
+                        {
+                            att.ComEngID = ev.ComEngID;
+                            att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.ComProg = myProgress.ComProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.ComProg = prog.ComProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             db.Attendances.Add(att);
                         }
                         else
                         {
-                            att.ComEngID = ev.ComEngID;
+                            att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.GenProg = myProgress.GenProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.GenProg = prog.GenProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             db.Attendances.Add(att);
                         }
 
@@ -1139,18 +1267,100 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.FuncProg = myProgress.FuncProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.FuncProg = prog.FuncProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             db.Attendances.Add(att);
                         }
                         else if (ev.LectureID != null)
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stude);
+                                myProgress.LecProg = myProgress.LecProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.LecProg = prog.LecProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
+                            db.Attendances.Add(att);
+                        }
+                        else if (ev.ComEngID != null)
+                        {
+                            att.ComEngID = ev.ComEngID;
+                            att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.ComProg = myProgress.ComProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.ComProg = prog.ComProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             db.Attendances.Add(att);
                         }
                         else
                         {
-                            att.ComEngID = ev.ComEngID;
+                            att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
+                                myProgress.GenProg = myProgress.GenProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = stude;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.GenProg = prog.GenProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             db.Attendances.Add(att);
                         }
                     }
@@ -1334,7 +1544,9 @@ namespace TRWLASystemMaster.Controllers
             {
                 SYSUserProfile stud = db.SYSUserProfiles.Find(studid);
                 RSVP_Event ev = db.RSVP_Event.Find(evid);
+                var FindUser = (int)Session["User"];
 
+                progressbar prog = new progressbar();
 
                 int i = db.Attendances.Count();
 
@@ -1346,6 +1558,24 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.FuncProg = myProgress.FuncProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.FuncProg = prog.FuncProg + 1;
+
+                                db.progressbars.Add(prog);
+
+                            }
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1353,13 +1583,76 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.LecProg = myProgress.LecProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.LecProg = prog.LecProg + 1;
+
+                                db.progressbars.Add(prog);
+
+
+                            }
+                            ev.Attended = 1;
+                            db.Attendances.Add(att);
+                        }
+                        else if (ev.ComEngID != null)
+                        {
+                            att.ComEngID = ev.ComEngID;
+                            att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.ComProg = myProgress.ComProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.ComProg = prog.ComProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
                         else
                         {
-                            att.ComEngID = ev.ComEngID;
+                            att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.GenProg = myProgress.GenProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.GenProg = prog.GenProg + 1;
+
+                                db.progressbars.Add(prog);
+
+
+                            }
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1376,6 +1669,26 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
+                            {
+                                myProgress.FuncProg = myProgress.FuncProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.FuncProg = prog.FuncProg + 1;
+
+                                db.progressbars.Add(prog);
+
+                            }
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1383,13 +1696,75 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.LecProg = myProgress.LecProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.LecProg = prog.LecProg + 1;
+
+                                db.progressbars.Add(prog);
+                            }
+
+                            ev.Attended = 1;
+                            db.Attendances.Add(att);
+                        }
+                        else if (ev.ComEngID != null)
+                        {
+                            att.ComEngID = ev.ComEngID;
+                            att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.ComProg = myProgress.ComProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.ComProg = prog.ComProg + 1;
+
+                                db.progressbars.Add(prog);
+
+                            }
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
                         else
                         {
-                            att.ComEngID = ev.ComEngID;
+                            att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            {
+                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+                                myProgress.GenProg = myProgress.GenProg + 1;
+                            }
+                            else
+                            {
+                                prog.SYSUserProfileID = studid;
+                                prog.FuncProg = 0;
+                                prog.LecProg = 0;
+                                prog.ComProg = 0;
+                                prog.GenProg = 0;
+
+                                prog.GenProg = prog.GenProg + 1;
+
+                                db.progressbars.Add(prog);
+
+
+                            }
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1745,6 +2120,45 @@ namespace TRWLASystemMaster.Controllers
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
+                    else if (tRWLASchedule.GenID != null)
+                    {
+                        @event.GenID = tRWLASchedule.GenID;
+
+                        RSVPSchedule mysched = new RSVPSchedule();
+                        mysched.rsvpID = @event.rsvpID;
+                        mysched.ScheduleID = id;
+                        mysched.SYSUserProfileID = user;
+                        db.RSVPSchedules.Add(mysched);
+                        db.RSVP_Event.Add(@event);
+
+                        foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.GenID))
+                        {
+
+                            if (s.Attended != null)
+                            {
+                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
+                                return RedirectToAction("StudentMainMenu");
+                            }
+                            if (s.SYSUserProfileID == user)
+                            {
+                                TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                                return RedirectToAction("StudentMainMenu");
+                            }
+                            else if (s.SYSUserProfileID == user)
+                            {
+
+                                TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.GenEvent.Gen_Name;
+                            }
+                        }
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
+                        db.SaveChanges();
+                        return RedirectToAction("StudentMainMenu");
+                    }
                     return RedirectToAction("StudentMainMenu");
                 }
                 else
@@ -1875,7 +2289,45 @@ namespace TRWLASystemMaster.Controllers
                         db.SaveChanges();
                         return RedirectToAction("StudentMainMenu");
                     }
+                    else if (tRWLASchedule.GenID != null)
+                    {
+                        @event.GenID = tRWLASchedule.GenID;
 
+                        RSVPSchedule mysched = new RSVPSchedule();
+                        mysched.rsvpID = @event.rsvpID;
+                        mysched.ScheduleID = id;
+                        mysched.SYSUserProfileID = user;
+                        db.RSVPSchedules.Add(mysched);
+                        db.RSVP_Event.Add(@event);
+
+                        foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.GenID))
+                        {
+
+                            if (s.Attended != null)
+                            {
+                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
+                                return RedirectToAction("StudentMainMenu");
+                            }
+                            if (s.SYSUserProfileID == user)
+                            {
+                                TempData["rsvpFAIL"] = "You have already RSVPd to this event";
+                                return RedirectToAction("StudentMainMenu");
+                            }
+                            else if (s.SYSUserProfileID == user)
+                            {
+
+                                TempData["rsvp"] = "You have successfully RSVPd to the event: " + tRWLASchedule.GenEvent.Gen_Name;
+                            }
+                        }
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "RSVP_Event";
+                        db.AuditLogs.Add(myAudit);
+                        db.SaveChanges();
+                        return RedirectToAction("StudentMainMenu");
+                    }
                     return RedirectToAction("Index");
                 }
             }

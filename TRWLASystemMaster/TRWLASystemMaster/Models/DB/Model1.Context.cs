@@ -58,5 +58,7 @@ namespace TRWLASystemMaster.Models.DB
         public virtual DbSet<VolunteerFeedback> VolunteerFeedbacks { get; set; }
         public virtual DbSet<VolunteerType> VolunteerTypes { get; set; }
         public virtual DbSet<GenEvent> GenEvents { get; set; }
+        public virtual DbSet<MasterData> MasterDatas { get; set; }
+        public virtual DbSet<progressbar> progressbars { get; set; }
     }
 }

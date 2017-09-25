@@ -154,6 +154,19 @@
     <Property Name="RowModifiedSYSUserID" Type="int" Nullable="false" />
     <Property Name="RowModifiedDateTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="MasterData">
+    <Key>
+      <PropertyRef Name="MasterID" />
+    </Key>
+    <Property Name="MasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LecAttend" Type="int" Nullable="false" />
+    <Property Name="FuncAttend" Type="int" Nullable="false" />
+    <Property Name="ComAttend" Type="int" Nullable="false" />
+    <Property Name="GenAttend" Type="int" Nullable="false" />
+    <Property Name="RegDate" Type="date" Nullable="false" />
+    <Property Name="LogAttendTime" Type="int" Nullable="false" />
+    <Property Name="cancelevent" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Milestone">
     <Key>
       <PropertyRef Name="MilestoneID" />
@@ -168,6 +181,17 @@
     <Property Name="ProgressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
     <Property Name="ProgressCount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="progressbar">
+    <Key>
+      <PropertyRef Name="ProgBarID" />
+    </Key>
+    <Property Name="ProgBarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
+    <Property Name="LecProg" Type="int" Nullable="false" />
+    <Property Name="FuncProg" Type="int" Nullable="false" />
+    <Property Name="ComProg" Type="int" Nullable="false" />
+    <Property Name="GenProg" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RatingType">
     <Key>
@@ -644,6 +668,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__progressb__SYSUs__1EA48E88">
+    <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="1" />
+    <End Role="progressbar" Type="Self.progressbar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYSUserProfile">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Principal>
+      <Dependent Role="progressbar">
+        <PropertyRef Name="SYSUserProfileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__RSVP_Even__ComEn__6EF57B66">
     <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
     <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
@@ -981,8 +1017,10 @@
     <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LectureReview" EntityType="Self.LectureReview" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOOKUPRole" EntityType="Self.LOOKUPRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Milestone" EntityType="Self.Milestone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Progress" EntityType="Self.Progress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="progressbar" EntityType="Self.progressbar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RatingType" EntityType="Self.RatingType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Residence" EntityType="Self.Residence" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RSVP_Event" EntityType="Self.RSVP_Event" Schema="dbo" store:Type="Tables" />
@@ -1089,6 +1127,10 @@
     <AssociationSet Name="FK__Progress__SYSUse__276EDEB3" Association="Self.FK__Progress__SYSUse__276EDEB3">
       <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
       <End Role="Progress" EntitySet="Progress" />
+    </AssociationSet>
+    <AssociationSet Name="FK__progressb__SYSUs__1EA48E88" Association="Self.FK__progressb__SYSUs__1EA48E88">
+      <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
+      <End Role="progressbar" EntitySet="progressbar" />
     </AssociationSet>
     <AssociationSet Name="FK__RSVP_Even__ComEn__6EF57B66" Association="Self.FK__RSVP_Even__ComEn__6EF57B66">
       <End Role="ComEngEvent" EntitySet="ComEngEvent" />

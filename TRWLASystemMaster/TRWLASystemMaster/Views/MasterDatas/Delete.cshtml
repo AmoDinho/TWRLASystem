@@ -1,0 +1,81 @@
+﻿@model TRWLASystemMaster.Models.DB.MasterData
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MasterData</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LecAttend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LecAttend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FuncAttend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuncAttend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComAttend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComAttend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenAttend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenAttend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogAttendTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogAttendTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cancelevent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cancelevent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

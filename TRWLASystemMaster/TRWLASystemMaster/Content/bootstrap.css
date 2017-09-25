@@ -1267,10 +1267,12 @@ pre code {
 
 
   .col-md-6 {
-    width: 50%;
-  }
+        width: 50%;
+         margin:auto;
+    }
   .col-md-7 {
     width: 58.333333333333336%;
+    margin:auto;
   }
   .col-md-8 {
     width: 66.66666666666666%;

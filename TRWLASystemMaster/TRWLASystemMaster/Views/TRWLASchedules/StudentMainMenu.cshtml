@@ -28,16 +28,16 @@
 
 
 
-if (TempData["rsvp"] != null)
-{
+    if (TempData["rsvp"] != null)
+    {
     <h4>@TempData["rsvp"]</h4>
-}
-if (TempData["rsvpFAIL"] != null)
-{
+    }
+    if (TempData["rsvpFAIL"] != null)
+    {
     <h4>@TempData["rsvpFAIL"]</h4>
-}
-if (TempData["Attended"] != null)
-{
+    }
+    if (TempData["Attended"] != null)
+    {
     <h4>@TempData["Attended"]</h4>
     }
     <div class="row" @*id="showMe" style="display:none;*@>
@@ -46,13 +46,18 @@ if (TempData["Attended"] != null)
                 <div class="form-group">
                     <h2 style="z-index:100; position:relative; background-color:transparent;">Search Events</h2>
                     @using (Html.BeginForm())
-                    {
-                        <p>
-                            @Html.TextBox("searchString", "", new { placeholder = "Name of Event", @class = "form-control" })
-                            <button type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
-                        </p>
+                {
+                        <div class="form-inline" style="margin-bottom:10px;">
+                            <p data-toggle="tooltip" title="Search by name" class="form-group">
+                                @Html.TextBox("searchString", "", new { placeholder = "Name of Event", @class = "form-control", style = "width:100%;" })
+                            </p>
+
+                            <p class="form-group">
+                                <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+                            </p>
+                        </div>
                     }
-                    <select id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px">
+                    <select style="width:100%;" data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:90%;">
                         <option value="">Filter by...</option>
                         <option value="@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">Show All</option>
                         <option value="@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagement Events</option>
@@ -60,12 +65,12 @@ if (TempData["Attended"] != null)
                         <option value="@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Function Events</option>
                     </select>
                 </div>
-                <div class="form-group" style="z-index:100; position:relative; background-color:transparent; margin-left:50px;">
-                    <h2 style="z-index:100; position:relative; background-color:transparent; margin-top:-50px; ">My Progress</h2>
+                <div class="form-group" style="z-index:100; position:relative; background-color:transparent; margin-left:50px; margin-top:20px;">
+                    <h2 style="z-index:100; position:relative; background-color:transparent; margin-top:-50px; ">My Dashboard</h2>
                     <div class="form-inline">
-                        <div class="form-group">
+                        <div class="form-group" style="width:100%;">
                             <div>
-                                <button id="button1" type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'"><i class="fa fa-tasks" aria-hidden="true"></i></button>
+                                <button style="width:100%;"  data-toggle="tooltip" title="View your Dashboard" id="button1" type="button" class="btn" onclick="location.href='@Url.Action("StudentDashboard", "TRWLASchedules", new { id = (int)Session["User"] })'"><i class="fa fa-tachometer" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -75,7 +80,7 @@ if (TempData["Attended"] != null)
     </div>
     <div class="row" @*id="showMe" style="display:none;*@>
         <h2 style="text-align:left;">Upcoming TRWLA Events</h2>
-    <div class="col-md-7" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); margin-bottom:10px; height:500px; overflow-y:auto;">
+    <div class="col-md-12 form-inline" style="margin-bottom:10px; height:500px; overflow-y:auto;">
         
         @foreach (var item in Model)
         {
@@ -140,8 +145,8 @@ if (TempData["Attended"] != null)
                     @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
                 </h4>
                 <h4 style="z-index:100; position:relative; background-color:transparent;">
-                    <a href="@Url.Action("Details", new { id=item.ScheduleID })" data-toggle="tooltip" title="Details" style="margin-left:20px;"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                    <a href="@Url.Action("RSVP", new { id=item.ScheduleID })" data-toggle="tooltip" title="RSVP" style="margin-left:20px;"><i class="fa fa-check" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Details", new { id = item.ScheduleID })" data-toggle="tooltip" title="Details" style="margin-left:20px;"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("RSVP", new { id = item.ScheduleID })" data-toggle="tooltip" title="RSVP" style="margin-left:20px;"><i class="fa fa-check" aria-hidden="true"></i></a>
 
                     @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">
                             RSVP
@@ -154,71 +159,8 @@ if (TempData["Attended"] != null)
                 </h4>
             </div>
         }
-
     </div>
-
-    <div class="col-md-4" style="box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3); float:right; margin-left:3px;margin-bottom:10px; height:500px; overflow-y:auto;">
-        <h3 style="text-align:center;">My Upcoming Events</h3>
-
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                foreach (var s in item.RSVPSchedules.Where(p => p.SYSUserProfileID == (int)Session["User"]).Where(p => p.RSVP_Event.Attended == null))
-                {
-                    <div class="col-md-5" style="margin-bottom:20px; margin-top:10px;">
-                        <h4>
-                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
-                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
-                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
-                        </h4>
-
-                        <p>
-                            <strong>Summary:</strong>
-                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
-                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
-                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
-                        </p>
-                        <p>
-                            <strong>
-                                Date of the Event:
-                            </strong>
-                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
-                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
-                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
-                        </p>
-                        <p>
-                            <strong>
-                                Time of Event:
-                            </strong>
-                            @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime) to @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
-                            @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime) to @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
-                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime) to @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
-
-                        </p>
-                        <p>
-                            <strong>
-                                Venue Name:
-                            </strong>
-                            @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
-                            @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
-                            @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
-                        </p>
-                        <p>
-                            @Html.ActionLink("Details", "StudentEventDetails", new { id = item.ScheduleID })
-
-                            @if (item.LectureID != null)
-                            {
-                            <p>|  @Html.ActionLink("Write a Review", "WriteReview", new { id = item.ScheduleID })</p>
-                            }
-
-                            </p>
-                        </div>
-                }
-            }
         </div>
-    </div>
-
-</div>
 }
 @if (Session["User"] == null)
 {

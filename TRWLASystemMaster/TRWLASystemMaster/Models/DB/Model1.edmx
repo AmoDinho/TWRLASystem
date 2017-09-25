@@ -159,6 +159,19 @@
           <Property Name="RowModifiedSYSUserID" Type="int" Nullable="false" />
           <Property Name="RowModifiedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="MasterData">
+          <Key>
+            <PropertyRef Name="MasterID" />
+          </Key>
+          <Property Name="MasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LecAttend" Type="int" Nullable="false" />
+          <Property Name="FuncAttend" Type="int" Nullable="false" />
+          <Property Name="ComAttend" Type="int" Nullable="false" />
+          <Property Name="GenAttend" Type="int" Nullable="false" />
+          <Property Name="RegDate" Type="date" Nullable="false" />
+          <Property Name="LogAttendTime" Type="int" Nullable="false" />
+          <Property Name="cancelevent" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Milestone">
           <Key>
             <PropertyRef Name="MilestoneID" />
@@ -173,6 +186,17 @@
           <Property Name="ProgressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
           <Property Name="ProgressCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="progressbar">
+          <Key>
+            <PropertyRef Name="ProgBarID" />
+          </Key>
+          <Property Name="ProgBarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
+          <Property Name="LecProg" Type="int" Nullable="false" />
+          <Property Name="FuncProg" Type="int" Nullable="false" />
+          <Property Name="ComProg" Type="int" Nullable="false" />
+          <Property Name="GenProg" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RatingType">
           <Key>
@@ -649,6 +673,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__progressb__SYSUs__1EA48E88">
+          <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="1" />
+          <End Role="progressbar" Type="Self.progressbar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSUserProfile">
+              <PropertyRef Name="SYSUserProfileID" />
+            </Principal>
+            <Dependent Role="progressbar">
+              <PropertyRef Name="SYSUserProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__RSVP_Even__ComEn__6EF57B66">
           <End Role="ComEngEvent" Type="Self.ComEngEvent" Multiplicity="0..1" />
           <End Role="RSVP_Event" Type="Self.RSVP_Event" Multiplicity="*" />
@@ -986,8 +1022,10 @@
           <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LectureReview" EntityType="Self.LectureReview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOOKUPRole" EntityType="Self.LOOKUPRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterData" EntityType="Self.MasterData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Milestone" EntityType="Self.Milestone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Progress" EntityType="Self.Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="progressbar" EntityType="Self.progressbar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RatingType" EntityType="Self.RatingType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Residence" EntityType="Self.Residence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RSVP_Event" EntityType="Self.RSVP_Event" Schema="dbo" store:Type="Tables" />
@@ -1094,6 +1132,10 @@
           <AssociationSet Name="FK__Progress__SYSUse__276EDEB3" Association="Self.FK__Progress__SYSUse__276EDEB3">
             <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
             <End Role="Progress" EntitySet="Progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK__progressb__SYSUs__1EA48E88" Association="Self.FK__progressb__SYSUs__1EA48E88">
+            <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
+            <End Role="progressbar" EntitySet="progressbar" />
           </AssociationSet>
           <AssociationSet Name="FK__RSVP_Even__ComEn__6EF57B66" Association="Self.FK__RSVP_Even__ComEn__6EF57B66">
             <End Role="ComEngEvent" EntitySet="ComEngEvent" />
@@ -1548,6 +1590,7 @@
           <NavigationProperty Name="Students" Relationship="Self.FK__Student__SYSUser__37A5467C" FromRole="SYSUserProfile" ToRole="Student" />
           <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
           <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
+          <NavigationProperty Name="progressbars" Relationship="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88" FromRole="SYSUserProfile" ToRole="progressbar" />
         </EntityType>
         <EntityType Name="SYSUserRole">
           <Key>
@@ -2437,6 +2480,12 @@
             <End Role="GenEvent" EntitySet="GenEvents" />
             <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
           </AssociationSet>
+          <EntitySet Name="MasterDatas" EntityType="TWRLADB_Staging_V2Model.MasterData" />
+          <EntitySet Name="progressbars" EntityType="TWRLADB_Staging_V2Model.progressbar" />
+          <AssociationSet Name="FK__progressb__SYSUs__1EA48E88" Association="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88">
+            <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
+            <End Role="progressbar" EntitySet="progressbars" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="GenEvent">
           <Key>
@@ -2502,6 +2551,43 @@
             </Principal>
             <Dependent Role="TRWLASchedule">
               <PropertyRef Name="GenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MasterData">
+          <Key>
+            <PropertyRef Name="MasterID" />
+          </Key>
+          <Property Name="MasterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LecAttend" Type="Int32" Nullable="false" />
+          <Property Name="FuncAttend" Type="Int32" Nullable="false" />
+          <Property Name="ComAttend" Type="Int32" Nullable="false" />
+          <Property Name="GenAttend" Type="Int32" Nullable="false" />
+          <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
+          <Property Name="cancelevent" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="progressbar">
+          <Key>
+            <PropertyRef Name="ProgBarID" />
+          </Key>
+          <Property Name="ProgBarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" />
+          <Property Name="LecProg" Type="Int32" Nullable="false" />
+          <Property Name="FuncProg" Type="Int32" Nullable="false" />
+          <Property Name="ComProg" Type="Int32" Nullable="false" />
+          <Property Name="GenProg" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SYSUserProfile" Relationship="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88" FromRole="progressbar" ToRole="SYSUserProfile" />
+        </EntityType>
+        <Association Name="FK__progressb__SYSUs__1EA48E88">
+          <End Type="TWRLADB_Staging_V2Model.SYSUserProfile" Role="SYSUserProfile" Multiplicity="1" />
+          <End Type="TWRLADB_Staging_V2Model.progressbar" Role="progressbar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSUserProfile">
+              <PropertyRef Name="SYSUserProfileID" />
+            </Principal>
+            <Dependent Role="progressbar">
+              <PropertyRef Name="SYSUserProfileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2921,6 +3007,32 @@
                 <ScalarProperty Name="Gen_Summary" ColumnName="Gen_Summary" />
                 <ScalarProperty Name="Gen_Name" ColumnName="Gen_Name" />
                 <ScalarProperty Name="GenID" ColumnName="GenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterDatas">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.MasterData">
+              <MappingFragment StoreEntitySet="MasterData">
+                <ScalarProperty Name="cancelevent" ColumnName="cancelevent" />
+                <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="GenAttend" ColumnName="GenAttend" />
+                <ScalarProperty Name="ComAttend" ColumnName="ComAttend" />
+                <ScalarProperty Name="FuncAttend" ColumnName="FuncAttend" />
+                <ScalarProperty Name="LecAttend" ColumnName="LecAttend" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="progressbars">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.progressbar">
+              <MappingFragment StoreEntitySet="progressbar">
+                <ScalarProperty Name="GenProg" ColumnName="GenProg" />
+                <ScalarProperty Name="ComProg" ColumnName="ComProg" />
+                <ScalarProperty Name="FuncProg" ColumnName="FuncProg" />
+                <ScalarProperty Name="LecProg" ColumnName="LecProg" />
+                <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+                <ScalarProperty Name="ProgBarID" ColumnName="ProgBarID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
