@@ -473,11 +473,19 @@
     <Content Include="Scripts\core\bootstrap.min.js" />
     <Content Include="Scripts\core\jquery.3.2.1.min.js" />
     <Content Include="Scripts\core\tether.min.js" />
+    <Content Include="Scripts\BitString.as" />
+    <Content Include="Scripts\bower.json" />
+    <Content Include="Scripts\JPGEncoder.as" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.webcam.js" />
+    <Content Include="Scripts\jquery.webcam.min.js" />
+    <Content Include="Scripts\jscam.swf" />
+    <Content Include="Scripts\jscam.xml" />
+    <Content Include="Scripts\jscam_canvas_only.swf" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\now-ui-kit.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -634,6 +642,12 @@
     <Content Include="Views\Select\VerifyCode.cshtml" />
     <Content Include="Views\UniqueCode\NewUniCode.cshtml" />
     <Content Include="Views\UniqueCode\AddCode.cshtml" />
+    <Content Include="Views\Account\CameraBooth.cshtml" />
+    <Content Include="Views\Account\PhotoBooth.cshtml" />
+    <Content Include="Scripts\jscam.as" />
+    <Content Include="Scripts\Makefile" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\webcam.jquery.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
