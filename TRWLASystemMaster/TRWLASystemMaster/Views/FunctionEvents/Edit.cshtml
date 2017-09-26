@@ -111,9 +111,9 @@
                     </div>
                     <div class="modal-footer form-inline">
                         <div class="form-actions no-color ">
-                            <button type="submit" value="Create" class="btn">Confirm</button>
+                            <button data-toggle="tooltip" title="Update Event" type="submit" value="Create" class="btn">Confirm</button>
                         </div>
-                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                        <button data-toggle="tooltip" title="Make Changes" type="button" class="btn" data-dismiss="modal">Edit</button>
                     </div>
                 </div>
             </div>
@@ -130,6 +130,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "GuestSpeaker")'">Return</button>
+                <button data-toggle="tooltip" title="Return to the Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "GuestSpeaker")'">Return</button>
             </div>
         </div>

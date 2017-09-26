@@ -5,82 +5,120 @@
     Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="jumbotron">
+<h1>Edit Master Data</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+    </div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>MasterData</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MasterID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LecAttend, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.Label("Lecture", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" data-toggle="tooltip" title="The number of lecture events
+                 that a student must attend
+                 in order to graduate">
                 @Html.EditorFor(model => model.LecAttend, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LecAttend, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FuncAttend, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Function", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FuncAttend, new { htmlAttributes = new { @class = "form-control" } })
+                <p data-toggle="tooltip" title="The number of function events
+                  that a student must attend
+                 in order to graduate">
+                    @Html.EditorFor(model => model.FuncAttend, new { htmlAttributes = new { @class = "form-control" } })
+                </p>
                 @Html.ValidationMessageFor(model => model.FuncAttend, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ComAttend, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Community Engagement", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ComAttend, new { htmlAttributes = new { @class = "form-control" } })
+                <div data-toggle="tooltip" title="The number of community engagement events
+                  that a student must attend
+                 in order to graduate">
+                    @Html.EditorFor(model => model.ComAttend, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
                 @Html.ValidationMessageFor(model => model.ComAttend, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GenAttend, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.Label("General", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" data-toggle="tooltip" title="The number of general events
+              that a student must attend">
                 @Html.EditorFor(model => model.GenAttend, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GenAttend, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RegDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RegDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.Label("Registration Date", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" data-toggle="tooltip" title="The last date that a new user may be registered">
+                @Html.EditorFor(model => model.RegDate, new { htmlAttributes = new { @class = "form-control", type="date" } })
                 @Html.ValidationMessageFor(model => model.RegDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LogAttendTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.Label("Log Event Attendance", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" data-toggle="tooltip" title="The number of hours before an event starts that 
+             a volunteer may begin to log event attendance">
                 @Html.EditorFor(model => model.LogAttendTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LogAttendTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.cancelevent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="form-group" >
+            @Html.Label("Cancel Event", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" data-toggle="tooltip" title="The number of days before an event
+             is due to start that a volunteer
+             may cancel the event">
                 @Html.EditorFor(model => model.cancelevent, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.cancelevent, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Update Master Data</h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure that you want to update TRWLA's Master Data?
+                    </div>
+                    <div class="modal-footer form-inline">
+                            <button type="submit" value="Create" class="btn form-group" style="margin-right:10px;">Confirm</button>
+                        <button type="button" class="btn" data-dismiss="modal form-group">Edit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+    <div class="form-group">
+        <div style="margin-right:5px;">
+            <button data-toggle="modal" title="Update the TRWLA Master Data" class="btn btn-default" data-target="#Create">
+                Update
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <button data-toggle="tooltip" title="Return to the Master Data" type="button" class="btn" onclick="location.href='@Url.Action("Details", "MasterDatas", new { id = 1 })'">Return</button>
+    </div>
 </div>

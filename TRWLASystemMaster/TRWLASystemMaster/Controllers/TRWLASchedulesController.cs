@@ -50,10 +50,10 @@ namespace TRWLASystemMaster.Controllers
                     var com = myprog.ComProg;
                     var gen = myprog.GenProg;
 
-                    TempData["Lectureus"] = (Convert.ToInt32(lec) / Convert.ToInt32(mymaster.LecAttend)) * 100;
-                    TempData["Functionus"] = (Convert.ToInt32(func) / Convert.ToInt32(mymaster.FuncAttend)) * 100;
-                    TempData["Comus"] = (Convert.ToInt32(com) / Convert.ToInt32(mymaster.ComAttend)) * 100;
-                    TempData["Genus"] = (Convert.ToInt32(gen) / Convert.ToInt32(mymaster.GenAttend)) * 100;
+                    ViewBag.Lecture = ((Convert.ToDecimal(lec) / Convert.ToDecimal(mymaster.LecAttend)) * 100);
+                    ViewBag.Function = ((Convert.ToDecimal(func) / Convert.ToDecimal(mymaster.FuncAttend)) * 100);
+                    ViewBag.Com = ((Convert.ToDecimal(com) / Convert.ToDecimal(mymaster.ComAttend)) * 100);
+                    ViewBag.Gen = ((Convert.ToDecimal(gen) / Convert.ToDecimal(mymaster.GenAttend)) * 100);
                 }
                 catch
                 {
@@ -1160,14 +1160,15 @@ namespace TRWLASystemMaster.Controllers
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1176,6 +1177,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.FuncProg = prog.FuncProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1184,14 +1186,15 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.LecProg = myProgress.LecProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1200,6 +1203,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.LecProg = prog.LecProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1209,14 +1213,15 @@ namespace TRWLASystemMaster.Controllers
                             att.ComEngID = ev.ComEngID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.ComProg = myProgress.ComProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1225,6 +1230,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.ComProg = prog.ComProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1234,14 +1240,15 @@ namespace TRWLASystemMaster.Controllers
                             att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.GenProg = myProgress.GenProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1250,6 +1257,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.GenProg = prog.GenProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1268,14 +1276,15 @@ namespace TRWLASystemMaster.Controllers
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1284,6 +1293,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.FuncProg = prog.FuncProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1293,14 +1303,15 @@ namespace TRWLASystemMaster.Controllers
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stude);
                                 myProgress.LecProg = myProgress.LecProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1309,6 +1320,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.LecProg = prog.LecProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1318,14 +1330,15 @@ namespace TRWLASystemMaster.Controllers
                             att.ComEngID = ev.ComEngID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.ComProg = myProgress.ComProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1334,6 +1347,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.ComProg = prog.ComProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1343,14 +1357,15 @@ namespace TRWLASystemMaster.Controllers
                             att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == stude))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == FindUser);
                                 myProgress.GenProg = myProgress.GenProg + 1;
                             }
                             else
                             {
-                                prog.SYSUserProfileID = stude;
+                                prog.SYSUserProfileID = stud.SYSUserProfileID;
                                 prog.FuncProg = 0;
                                 prog.LecProg = 0;
                                 prog.ComProg = 0;
@@ -1359,6 +1374,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.GenProg = prog.GenProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             db.Attendances.Add(att);
@@ -1558,9 +1574,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.FunctionID = ev.FunctionID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
                             }
                             else
@@ -1583,9 +1600,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.LecProg = myProgress.LecProg + 1;
                             }
                             else
@@ -1600,7 +1618,6 @@ namespace TRWLASystemMaster.Controllers
 
                                 db.progressbars.Add(prog);
 
-
                             }
                             ev.Attended = 1;
                             db.Attendances.Add(att);
@@ -1609,9 +1626,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.ComEngID = ev.ComEngID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.ComProg = myProgress.ComProg + 1;
                             }
                             else
@@ -1625,6 +1643,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.ComProg = prog.ComProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             ev.Attended = 1;
@@ -1634,9 +1653,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.GenProg = myProgress.GenProg + 1;
                             }
                             else
@@ -1650,7 +1670,6 @@ namespace TRWLASystemMaster.Controllers
                                 prog.GenProg = prog.GenProg + 1;
 
                                 db.progressbars.Add(prog);
-
 
                             }
                             ev.Attended = 1;
@@ -1696,9 +1715,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.LecProg = myProgress.LecProg + 1;
                             }
                             else
@@ -1712,6 +1732,7 @@ namespace TRWLASystemMaster.Controllers
                                 prog.LecProg = prog.LecProg + 1;
 
                                 db.progressbars.Add(prog);
+
                             }
 
                             ev.Attended = 1;
@@ -1721,9 +1742,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.ComEngID = ev.ComEngID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.ComProg = myProgress.ComProg + 1;
                             }
                             else
@@ -1746,9 +1768,10 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
-                            if (db.progressbars.Any(p => p.SYSUserProfileID == studid))
+                            progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
+
+                            if (myProgress != null)
                             {
-                                progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == studid);
                                 myProgress.GenProg = myProgress.GenProg + 1;
                             }
                             else
@@ -1762,7 +1785,6 @@ namespace TRWLASystemMaster.Controllers
                                 prog.GenProg = prog.GenProg + 1;
 
                                 db.progressbars.Add(prog);
-
 
                             }
                             ev.Attended = 1;

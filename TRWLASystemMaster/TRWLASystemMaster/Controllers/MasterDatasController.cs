@@ -82,9 +82,16 @@ namespace TRWLASystemMaster.Controllers
         {
             if (ModelState.IsValid)
             {
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "Update";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "MasterData";
+                db.AuditLogs.Add(myAudit);
+
                 db.Entry(masterData).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = 1 });
             }
             return View(masterData);
         }
