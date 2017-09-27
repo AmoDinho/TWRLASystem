@@ -43,9 +43,8 @@ namespace TRWLASystemMaster.Models.ViewModel
       
 
         [Display(Name = " StudentNumber")]
-        [DataType(DataType.PhoneNumber)] 
-        [Required(ErrorMessage = "Student Number Required!")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered student number is not valid.")]
+      
+        [StringLength(8, ErrorMessage = "The {0} must be at least {8} characters long.", MinimumLength = 6)]
         public string StudentNumber { get; set; }
 
        
