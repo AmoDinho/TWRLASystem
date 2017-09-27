@@ -25,8 +25,12 @@ namespace TRWLASystemMaster.Controllers
 
 
         // GET: SYSUserProfiles
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string sortOrder, string F)
         {
+
+            ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+
             var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SecurityAnswer).Include(s => s.SYSUser).Include(s => s.UserType);
 
             if (!String.IsNullOrEmpty(searchString))
@@ -35,6 +39,13 @@ namespace TRWLASystemMaster.Controllers
                         || s.UserType.Description.Contains(searchString)
                         );
             }
+            //id="UrlList" onchange="doNavigate()"
+
+            if (!String.IsNullOrEmpty(F))
+            {
+                sYSUserProfiles = sYSUserProfiles.Where(s => s.Graduate.Contains(F));
+            }
+
 
             return View(sYSUserProfiles.ToList());
         }

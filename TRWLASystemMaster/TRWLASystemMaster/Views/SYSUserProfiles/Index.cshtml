@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@*VolunteerLoggedInPage.cshtml*@
 <h2>User Portal</h2>
 
 
@@ -24,7 +24,11 @@
     </div>
 }
 
-
+<select data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:90%;">
+    <option value="">Filter by...</option>
+    <option value="@Url.Action("Index", "SYSUserProfiles", new { F = ViewBag.SurnameSortParm })'">Graduates</option>
+    
+</select>
 
 <table class="table">
     <tr>
