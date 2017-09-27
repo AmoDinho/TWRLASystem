@@ -1175,3 +1175,6 @@ VALUES('25864','2017/09/22')
 
 INSERT INTO UniqueCode(Code,stamptime)
 VALUES('89752','2017/09/26')
+
+ALTER TABLE  SYSUserProfile
+ADD RowVersion timestamp not null;

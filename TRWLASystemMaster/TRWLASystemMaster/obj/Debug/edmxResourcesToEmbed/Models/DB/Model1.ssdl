@@ -249,6 +249,7 @@
     <Property Name="RowModifiedSYSUserID" Type="int" Nullable="false" />
     <Property Name="RowModifiedDateTime" Type="datetime" />
     <Property Name="ResID" Type="int" />
+    <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>

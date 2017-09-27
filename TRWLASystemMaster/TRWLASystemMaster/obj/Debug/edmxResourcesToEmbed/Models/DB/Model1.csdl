@@ -320,6 +320,7 @@
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
     <NavigationProperty Name="Students" Relationship="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A" FromRole="SYSUserProfile" ToRole="Student" />
+    <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>

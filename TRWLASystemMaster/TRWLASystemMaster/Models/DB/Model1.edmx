@@ -254,6 +254,7 @@
           <Property Name="RowModifiedSYSUserID" Type="int" Nullable="false" />
           <Property Name="RowModifiedDateTime" Type="datetime" />
           <Property Name="ResID" Type="int" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="SYSUserRole">
           <Key>
@@ -1443,6 +1444,7 @@
           <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
           <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
           <NavigationProperty Name="Students" Relationship="TWRLADB_Staging_V2Model.FK__Student__SYSUser__35BCFE0A" FromRole="SYSUserProfile" ToRole="Student" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="SYSUserRole">
           <Key>
@@ -2586,6 +2588,7 @@
           <EntitySetMapping Name="SYSUserProfiles">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
               <MappingFragment StoreEntitySet="SYSUserProfile">
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
                 <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
                 <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
                 <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
