@@ -8,7 +8,11 @@
 <h2>User Portal</h2>
 
 
-
+<script>
+    function doNavigate() {
+        window.location.href = document.getElementById("UrlList").value;
+    };
+</script>
 
 
 @using (Html.BeginForm())
@@ -26,7 +30,7 @@
 
 <select data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:90%;">
     <option value="">Filter by...</option>
-    <option value="@Url.Action("Index", "SYSUserProfiles", new { F = ViewBag.SurnameSortParm })'">Graduates</option>
+    <option value="@Url.Action("Index", "SYSUserProfiles", new { Graduated = ViewBag.SurnameSortParm })'">Graduates</option>
     
 </select>
 
