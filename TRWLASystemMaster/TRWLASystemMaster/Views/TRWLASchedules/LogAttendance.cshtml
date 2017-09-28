@@ -6,7 +6,10 @@
 }
 
 <div class="jumbotron">
-    <h2>Log Event Attendance</h2>
+    <h1>Log Event Attendance</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 <h4>Please select an event</h4>
@@ -62,7 +65,8 @@
                 @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
             </td>
             <td>
-                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
+                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID }) | 
+                @Html.ActionLink("Donwload RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
             </td>
         </tr>
     }

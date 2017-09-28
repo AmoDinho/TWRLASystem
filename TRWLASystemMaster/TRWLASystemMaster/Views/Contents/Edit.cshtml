@@ -6,7 +6,10 @@
 }
 
 <div class="jumbotron">
-    <h2>Update @Html.DisplayFor(model => model.Content_Name)</h2>
+    <h1>Update '@Html.DisplayFor(model => model.Content_Name)'</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 @using (Html.BeginForm())
@@ -20,34 +23,26 @@
 
         <div class="form-group">
             @Html.Label("Name", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div data-toggle="tooltip" title="Update the Content Name" style="width:50%;">
                 @Html.EditorFor(model => model.Content_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Content_Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Content Link", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content_Link, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content_Link, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.Label("Content Status", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                Locked: @Html.RadioButtonFor(model => model.Content_Status, 1)
-                <br />
-                <br />
-                Unlocked: @Html.RadioButtonFor(model => model.Content_Status, 0)
+            <div style="width:50%;" class="row">
+                <div><i data-toggle="tooltip" title="This will lock the content.
+                       Students won't be able to view it." class="fa fa-lock" aria-hidden="true"></i>  @Html.RadioButtonFor(model => model.Content_Status, 1)</div>
+                <div> <i data-toggle="tooltip" title="This unlock the content.
+                       Students will be able to view it." class="fa fa-unlock" aria-hidden="true"></i> @Html.RadioButtonFor(model => model.Content_Status, 0)</div>
                 @Html.ValidationMessageFor(model => model.Content_Status, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Content Description", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div data-toggle="tooltip" title="Update the Content Description" style="width:50%;">
                 @Html.EditorFor(model => model.Content_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Content_Description, "", new { @class = "text-danger" })
             </div>
@@ -67,9 +62,9 @@
                 </div>
                 <div class="modal-footer form-inline">
                     <div class="form-actions no-color ">
-                        <button type="submit" value="Create" class="btn">Confirm</button>
+                        <button data-toggle="tooltip" title="Update Content" type="submit" value="Create" class="btn">Confirm</button>
                     </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <button data-toggle="tooltip" title="Make Ammendments" type="button" class="btn" data-dismiss="modal">Edit</button>
                 </div>
             </div>
         </div>
@@ -79,11 +74,11 @@
     <div class="form-group">
         <div style="margin-right:5px;">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                Update Event
+                Update Content
             </button>
         </div>
     </div>
     <div class="form-group">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents")'">Return</button>
+        <button data-toggle="tooltip" title="Return to TRWLA Content" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents")'">Return</button>
     </div>
 </div>

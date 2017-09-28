@@ -35,7 +35,8 @@ else
         <li><a href='@Url.Action("ManageUser", "Manage")'><i class="fa fa-lock" aria-hidden="true"></i> Register Admin</a></li>
         <li><a href='@Url.Action( "Index", "UserTypes")'><i class="fa fa-user-plus fa-fw"></i> Assign User Types</a></li>
         <li><a href='@Url.Action( "AuditLog", "TRWLASchedules")'><i class="fa fa-folder-open" aria-hidden="true"></i> Audit Log </a></li>
-        <li><a href='@Url.Action( "Details", "MasterDatas", new { id = 1 })'><i class="fa fa-database" aria-hidden="true"></i> Master Data </a></li>
+        <li><a href='@Url.Action( "Details", "MasterDatas", new { id = 1 })'><i class="fa fa-asterisk" aria-hidden="true"></i> Master Data </a></li>
+        <li><a href='@Url.Action( "ExportData", "TRWLASchedules")'><i class="fa fa-database" aria-hidden="true"></i> Backup and Recovery </a></li>
         <li class="divider"></li>
         <li><a href='@Url.Action( "SignOut", "Account")'><i class="fa fa-power-off"></i> Sign Out </a></li>
     </ul>

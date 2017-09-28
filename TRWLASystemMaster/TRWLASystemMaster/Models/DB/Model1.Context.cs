@@ -12,6 +12,8 @@ namespace TRWLASystemMaster.Models.DB
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class TWRLADB_Staging_V2Entities2 : DbContext
     {
@@ -60,5 +62,13 @@ namespace TRWLASystemMaster.Models.DB
         public virtual DbSet<GenEvent> GenEvents { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
         public virtual DbSet<progressbar> progressbars { get; set; }
+    
+        public virtual int BackUp(string path)
+        {
+            var pathParameter = path != null ?
+                new ObjectParameter("path", path) :
+                new ObjectParameter("path", typeof(string));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BackUp", pathParameter);
+        }
     }
 }

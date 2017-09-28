@@ -1236,6 +1236,9 @@
       <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
       <End Role="progressbar" EntitySet="progressbars" />
     </AssociationSet>
+    <FunctionImport Name="BackUp">
+      <Parameter Name="path" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="GenEvent">
     <Key>

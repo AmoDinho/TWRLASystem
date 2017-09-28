@@ -1009,6 +1009,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BackUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="path" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="TWRLADB_Staging_V2ModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
@@ -2486,6 +2489,9 @@
             <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
             <End Role="progressbar" EntitySet="progressbars" />
           </AssociationSet>
+          <FunctionImport Name="BackUp">
+            <Parameter Name="path" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="GenEvent">
           <Key>
@@ -3036,6 +3042,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BackUp" FunctionName="TWRLADB_Staging_V2Model.Store.BackUp" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

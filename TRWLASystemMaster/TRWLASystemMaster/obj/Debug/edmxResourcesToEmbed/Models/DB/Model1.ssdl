@@ -1004,6 +1004,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="BackUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="path" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <EntityContainer Name="TWRLADB_Staging_V2ModelStoreContainer">
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />

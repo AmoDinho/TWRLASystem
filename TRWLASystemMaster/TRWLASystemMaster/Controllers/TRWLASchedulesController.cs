@@ -17,12 +17,32 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using TRWLASystemMaster.Models.DB;
 using System.Collections;
+using Microsoft.SqlServer.Server;
+using System.Data.SqlClient;
+using System.Xml;
+using System.Web.Script.Services;
+using System.Web.Services;
 
 namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
         private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
+        
+
+        public ActionResult ExportData()
+        {
+            return View();
+        }
+
+        public ActionResult BackupConfirmed()
+        {
+            
+
+            return View();
+        }
+
+
 
         public ActionResult ErrorPage()
         {
@@ -1415,9 +1435,6 @@ namespace TRWLASystemMaster.Controllers
             {
                 TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
 
-
-
-
                 TempData["NewStudent"] = id;
 
                 if (tRWLASchedule.FunctionID != null)
@@ -1530,6 +1547,8 @@ namespace TRWLASystemMaster.Controllers
                 return RedirectToAction("ErrorPage");
             }
         }
+
+
 
         public ActionResult ConfirmAttendance(int? studid, int? evid)
         {
