@@ -89,6 +89,30 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.DacFx.x64.140.3745.1\lib\net46\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Utilities, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.DacFx.x64.140.3745.1\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.DacFx.x64.140.3745.1\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.DacFx.x64.140.3745.1\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.DacFx.x64.140.3745.1\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.DacFx.x64.140.3745.1\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -100,6 +124,8 @@
       <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Instrumentation" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DataVisualization">
@@ -168,6 +194,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -241,6 +268,7 @@
     <Compile Include="Controllers\CheckPasswordController.cs" />
     <Compile Include="Controllers\ComEngEventsController.cs" />
     <Compile Include="Controllers\ContentsController.cs" />
+    <Compile Include="Controllers\CsvFileResult.cs" />
     <Compile Include="Controllers\DeactivateAccController.cs" />
     <Compile Include="Controllers\ElibraryController.cs" />
     <Compile Include="Controllers\FunctionEventsController.cs" />
@@ -272,7 +300,7 @@
     <Compile Include="Models\Backup_BackupDB.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Models\ClassAttendance.cs" />
+    <Compile Include="Models\ClassAttendanceReport.cs" />
     <Compile Include="Models\DB\Address.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -280,6 +308,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\AuditLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\ClassAttendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\ComEngEvent.cs">
@@ -488,9 +519,27 @@
     <None Include="Properties\PublishProfiles\trwla mvc.pubxml" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
     <Content Include="Scripts\core\bootstrap.min.js" />
     <Content Include="Scripts\core\jquery.3.2.1.min.js" />
     <Content Include="Scripts\core\tether.min.js" />
+    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="Scripts\dx.viz.debug.js" />
+    <Content Include="Scripts\dx.viz.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\jquery-2.2.3.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -504,6 +553,15 @@
     <Content Include="Scripts\nouislider.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\vectormap-data\africa.js" />
+    <Content Include="Scripts\vectormap-data\canada.js" />
+    <Content Include="Scripts\vectormap-data\eurasia.js" />
+    <Content Include="Scripts\vectormap-data\europe.js" />
+    <Content Include="Scripts\vectormap-data\usa.js" />
+    <Content Include="Scripts\vectormap-data\world.js" />
+    <Content Include="Scripts\vectormap-utils\dx.vectormaputils.debug.js" />
+    <Content Include="Scripts\vectormap-utils\dx.vectormaputils.js" />
+    <Content Include="Scripts\vectormap-utils\dx.vectormaputils.node.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

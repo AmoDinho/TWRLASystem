@@ -41,6 +41,14 @@
           <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
           <Property Name="Duration" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ClassAttendance">
+          <Key>
+            <PropertyRef Name="CAPK" />
+          </Key>
+          <Property Name="CAPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="attend" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
             <PropertyRef Name="ComEngID" />
@@ -1016,6 +1024,7 @@
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassAttendance" EntityType="Self.ClassAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComEngEvent" EntityType="Self.ComEngEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventMessage" EntityType="Self.EventMessage" Schema="dbo" store:Type="Tables" />
@@ -2490,8 +2499,9 @@
             <End Role="progressbar" EntitySet="progressbars" />
           </AssociationSet>
           <FunctionImport Name="BackUp">
-            <Parameter Name="path" Mode="In" Type="String" />
+          <Parameter Name="path" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="ClassAttendances" EntityType="TWRLADB_Staging_V2Model.ClassAttendance" />
         </EntityContainer>
         <EntityType Name="GenEvent">
           <Key>
@@ -2597,6 +2607,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClassAttendance">
+          <Key>
+            <PropertyRef Name="CAPK" />
+          </Key>
+          <Property Name="CAPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="attend" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3043,6 +3061,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="BackUp" FunctionName="TWRLADB_Staging_V2Model.Store.BackUp" />
+          <EntitySetMapping Name="ClassAttendances">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
+              <MappingFragment StoreEntitySet="ClassAttendance">
+                <ScalarProperty Name="attend" ColumnName="attend" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CAPK" ColumnName="CAPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

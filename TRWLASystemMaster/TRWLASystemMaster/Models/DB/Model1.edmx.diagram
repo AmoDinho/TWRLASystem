@@ -90,6 +90,7 @@
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.MasterData" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.progressbar" Width="1.5" PointX="11.25" PointY="28.75" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ClassAttendance" Width="1.5" PointX="7.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

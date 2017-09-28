@@ -62,12 +62,14 @@ namespace TRWLASystemMaster.Models.DB
         public virtual DbSet<GenEvent> GenEvents { get; set; }
         public virtual DbSet<MasterData> MasterDatas { get; set; }
         public virtual DbSet<progressbar> progressbars { get; set; }
+        public virtual DbSet<ClassAttendance> ClassAttendances { get; set; }
     
         public virtual int BackUp(string path)
         {
             var pathParameter = path != null ?
                 new ObjectParameter("path", path) :
                 new ObjectParameter("path", typeof(string));
+    
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BackUp", pathParameter);
         }
     }

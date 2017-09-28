@@ -441,5 +441,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="BackUp" FunctionName="TWRLADB_Staging_V2Model.Store.BackUp" />
+    <EntitySetMapping Name="ClassAttendances">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
+        <MappingFragment StoreEntitySet="ClassAttendance">
+          <ScalarProperty Name="attend" ColumnName="attend" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CAPK" ColumnName="CAPK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

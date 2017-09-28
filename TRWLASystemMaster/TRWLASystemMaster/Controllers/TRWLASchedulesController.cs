@@ -23,6 +23,7 @@ using System.Xml;
 using System.Web.Script.Services;
 using System.Web.Services;
 
+
 namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
@@ -156,6 +157,16 @@ namespace TRWLASystemMaster.Controllers
             {
                 return RedirectToAction("ErrorPage");
             }
+        }
+
+        public ActionResult AuditLogXML()
+        {
+
+
+            IEnumerable < AuditLog > dataList = db.AuditLogs;
+            return new CsvFileResult<AuditLog>(dataList, "AuditLog.txt");
+
+            
         }
 
         public ActionResult StudentMainMenu(string sortOrder, string searchString, string F, string CO, string L, string all)
@@ -318,11 +329,11 @@ namespace TRWLASystemMaster.Controllers
 
         //Begginning of Report Generation 
 
-        public IList<ClassAttendance> GetClassAttendance()
+        public IList<ClassAttendanceReport> GetClassAttendance()
         {
                 var at = (from l in db.RSVP_Event
                           join s in db.SYSUserProfiles on l.SYSUserProfileID equals s.SYSUserProfileID
-                          select new ClassAttendance
+                          select new ClassAttendanceReport
                           {
                               Name = s.FirstName,
                               Surname = s.LastName,
@@ -645,20 +656,33 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult ClassAttendance()
         {
-            try {
-                var _contenxt = new TWRLADB_Staging_V2Entities2();
-                ArrayList xValue = new ArrayList();
-                ArrayList yValue = new ArrayList();
+            try
+            {
+                int totals = 0;
 
-                var results = (from c in _contenxt.Progresses select c);
-                results.ToList().ForEach(rs => xValue.Add(rs.SYSUserProfile.StudentNumber));
-                results.ToList().ForEach(rs => yValue.Add(rs.ProgressCount));
+                var total = from s in db.ClassAttendances
+                            select s.attend;
+
+                foreach (var o in total)
+                {
+                    totals = totals + o;
+                }
+
+                ClassAttendance myfunc = db.ClassAttendances.Find(1);
+                ClassAttendance mylec = db.ClassAttendances.Find(2);
+                ClassAttendance mycom = db.ClassAttendances.Find(3);
+                ClassAttendance mygen = db.ClassAttendances.Find(4);
+
+                int func = myfunc.attend;
+                int lec = mylec.attend;
+                int com = mycom.attend;
+                int gen = mygen.attend;
 
 
-                new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
-                    .AddTitle("Class Attendance for Students")
-                    .AddSeries("Default", chartType: "Column", xValue: xValue, yValues: yValue)
-                    .Write("jpeg");
+                ViewBag.Function = Convert.ToDecimal(func) / totals * 100;
+                ViewBag.Lecture = Convert.ToDecimal(lec) / totals * 100;
+                ViewBag.Com = Convert.ToDecimal(com) / totals * 100;
+                ViewBag.Gen = Convert.ToDecimal(gen) / totals * 100;
 
                 return View();
             }
@@ -1158,6 +1182,7 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
+                
 
                 int stude = Convert.ToInt32(TempData["NewStudent"]);
 
@@ -1200,6 +1225,11 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+
+                            myclass.attend = myclass.attend + 1;
+                           
+
                             db.Attendances.Add(att);
                         }
                         else if (ev.LectureID != null)
@@ -1225,6 +1255,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1253,6 +1287,10 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+
+                            myclass.attend = myclass.attend + 1;
+
                             db.Attendances.Add(att);
                         }
                         else
@@ -1279,6 +1317,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1316,6 +1357,10 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+
+                            myclass.attend = myclass.attend + 1;
+
                             db.Attendances.Add(att);
                         }
                         else if (ev.LectureID != null)
@@ -1342,6 +1387,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1369,6 +1417,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1396,6 +1447,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1612,6 +1666,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+
+                            myclass.attend = myclass.attend + 1;
+
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1638,6 +1696,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+
+                            myclass.attend = myclass.attend + 1;
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1664,6 +1725,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+
+                            myclass.attend = myclass.attend + 1;
 
                             ev.Attended = 1;
                             db.Attendances.Add(att);
@@ -1691,6 +1755,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+
+                            myclass.attend = myclass.attend + 1;
+
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1727,6 +1795,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+
+                            myclass.attend = myclass.attend + 1;
+
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1753,6 +1825,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+
+                            myclass.attend = myclass.attend + 1;
 
                             ev.Attended = 1;
                             db.Attendances.Add(att);
@@ -1780,6 +1855,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+
+
+                            myclass.attend = myclass.attend + 1;
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }
@@ -1806,6 +1885,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+
+                            myclass.attend = myclass.attend + 1;
+
                             ev.Attended = 1;
                             db.Attendances.Add(att);
                         }

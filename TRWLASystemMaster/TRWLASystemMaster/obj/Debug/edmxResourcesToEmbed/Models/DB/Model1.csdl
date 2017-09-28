@@ -1239,6 +1239,7 @@
     <FunctionImport Name="BackUp">
       <Parameter Name="path" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="ClassAttendances" EntityType="TWRLADB_Staging_V2Model.ClassAttendance" />
   </EntityContainer>
   <EntityType Name="GenEvent">
     <Key>
@@ -1344,4 +1345,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ClassAttendance">
+    <Key>
+      <PropertyRef Name="CAPK" />
+    </Key>
+    <Property Name="CAPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="attend" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>
