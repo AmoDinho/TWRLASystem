@@ -718,6 +718,8 @@
     <Content Include="Views\MasterDatas\Index.cshtml" />
     <Content Include="Views\TRWLASchedules\ExportData.cshtml" />
     <Content Include="Views\TRWLASchedules\DownloadRSVPdMembers.cshtml" />
+    <Content Include="Views\UniqueCode\AddCode.cshtml" />
+    <Content Include="Views\UniqueCode\NewUniCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

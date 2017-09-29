@@ -33,6 +33,7 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<int> VenueID { get; set; }
         public Nullable<int> ContentID { get; set; }
         public Nullable<int> EVTYPE { get; set; }
+        public int Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

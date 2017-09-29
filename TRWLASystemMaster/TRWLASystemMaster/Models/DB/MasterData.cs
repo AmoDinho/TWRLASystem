@@ -22,5 +22,6 @@ namespace TRWLASystemMaster.Models.DB
         public System.DateTime RegDate { get; set; }
         public int LogAttendTime { get; set; }
         public int cancelevent { get; set; }
+        public System.DateTime CancelEvent { get; set; }
     }
 }
