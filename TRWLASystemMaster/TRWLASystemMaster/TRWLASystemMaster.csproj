@@ -720,6 +720,7 @@
     <Content Include="Views\TRWLASchedules\DownloadRSVPdMembers.cshtml" />
     <Content Include="Views\UniqueCode\AddCode.cshtml" />
     <Content Include="Views\UniqueCode\NewUniCode.cshtml" />
+    <Content Include="Views\Account\CameraBooth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
