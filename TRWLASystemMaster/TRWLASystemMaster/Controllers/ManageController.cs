@@ -64,50 +64,70 @@ namespace TRWLASystemMaster.Controllers
 
 
         [HttpPost]
-        //[Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile([Bind(Include = "SYSUserProfileID,StudentNumber,FirstName,LastName,UserTypeID,Email,DoB,Phonenumber,SecurityAnswerID,Degree,YearOfStudy,ResID")]  SYSUserProfile pro /*UserProfileView profile*/)
+        public async Task<ActionResult> EditProfile(int? id, byte[] rowVersion)
         {
-            try
+            string[] fieldsToBind = new string[] { "StudentNumber", "FirstName", "LastName", "UserTypeID", "Email", "DoB", "Phonenumber", "SecurityAnswerID", "Degree", "YearOfStudy", "ResID", "RowVersion" };
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var userToUpdate = await db.SYSUserProfiles.FindAsync(id);
+
+            if (userToUpdate == null)
+            {
+                SYSUserProfile deletedDepartment = new SYSUserProfile();
+                TryUpdateModel(deletedDepartment, fieldsToBind);
+                ModelState.AddModelError(string.Empty,
+                    "Unable to save changes. The department was deleted by another user.");
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+                ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+
+                return View(deletedDepartment);
+            }
+
+
+            if (TryUpdateModel(userToUpdate, fieldsToBind))
+            {
+                try
                 {
-
-                    if (ModelState.IsValid)
-                    {
-                        db.Entry(pro).State = EntityState.Modified;
-                        db.SaveChanges();
-                        //UserManager UM = new UserManager();
-                        //UM.UpdateUserAccount(profile);
-
-                        ViewBag.Status = "Update Sucessful!";
-                    }
-                    ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-                    ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
-                    ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
-
-                    return View(pro/*profile*/);
+                    db.Entry(userToUpdate).OriginalValues["RowVersion"] = rowVersion;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index", "TRWLASchedules");
                 }
+
                 catch (DbUpdateConcurrencyException ex)
                 {
-                var emp = ex.Entries.Single();
-                emp.OriginalValues.SetValues(emp.GetDatabaseValues());
-                db.SaveChanges();
-                return View("Error",new HandleErrorInfo(ex, "Account", "Register"));
-                //saveFailed = true;
-                //ex.Entries.Single().Reload();
-                //Safely ignore this exception
+                    var entry = ex.Entries.Single();
+                    var clientValues = (SYSUserProfile)entry.Entity;
+                    var databaseEntry = entry.GetDatabaseValues();
+
+                    if (databaseEntry == null)
+                    {
+                        ModelState.AddModelError(string.Empty,
+                    "Unable to save changes. The department was deleted by another user.");
+                    }
+                    else
+                    {
+                        var databaseValues = (SYSUserProfile)databaseEntry.ToObject();
+
+                        userToUpdate.RowVersion = databaseValues.RowVersion;
+                    }
+                }
             }
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
-                //catch (Exception ex)
-                //{
-                //    return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-                //}
+            return View(userToUpdate);
 
-
-            }
-          
+        }
 
 
-        
+
 
         ///
         //
