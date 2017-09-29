@@ -283,6 +283,7 @@
     <Compile Include="Controllers\SelectController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentTypesController.cs" />
+    <Compile Include="Controllers\SYSUserProfilesController.cs" />
     <Compile Include="Controllers\TRWLASchedulesController.cs" />
     <Compile Include="Controllers\UniqueCodeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -721,6 +722,11 @@
     <Content Include="Views\UniqueCode\AddCode.cshtml" />
     <Content Include="Views\UniqueCode\NewUniCode.cshtml" />
     <Content Include="Views\Account\CameraBooth.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Create.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Delete.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Details.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Edit.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

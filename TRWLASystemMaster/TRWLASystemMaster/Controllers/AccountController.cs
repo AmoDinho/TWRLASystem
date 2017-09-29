@@ -152,10 +152,10 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult Login(UserLoginView ULV, string returnUrl)
         {
 
-            try
-            {
-                try
-                {
+            //try
+            //{
+            //    try
+            //    {
                     if (ModelState.IsValid)
                     {
                         UserManager UM = new UserManager();
@@ -198,21 +198,21 @@ namespace TRWLASystemMaster.Controllers
                     }
                     return View(ULV);
 
-                }
-                catch (Exception ex)
-                {
-                    return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Register"));
-                }
+               // }
+            //    catch (Exception ex)
+            //    {
+            //        return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Register"));
+            //    }
 
 
 
-                // If we got this far, something failed, redisplay form  
+            //    // If we got this far, something failed, redisplay form  
                
-            }
-             catch (System.OutOfMemoryException e)
-            {
-                return View("ErrorLogIn", new HandleErrorInfo(e, "Account", "Register"));
-            }
+            //}
+            // catch (System.OutOfMemoryException e)
+            //{
+            //    return View("ErrorLogIn", new HandleErrorInfo(e, "Account", "Register"));
+            //}
 
 
            

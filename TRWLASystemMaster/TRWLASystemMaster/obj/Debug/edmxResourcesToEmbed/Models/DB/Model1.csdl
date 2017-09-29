@@ -65,6 +65,7 @@
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__ComEn__6EF57B66" FromRole="ComEngEvent" ToRole="RSVP_Event" />
     <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__ComEn__619B8048" FromRole="ComEngEvent" ToRole="TRWLASchedule" />
     <Property Name="EVTYPE" Type="Int32" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Content">
     <Key>
@@ -111,6 +112,7 @@
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Funct__6D0D32F4" FromRole="FunctionEvent" ToRole="RSVP_Event" />
     <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__Funct__5FB337D6" FromRole="FunctionEvent" ToRole="TRWLASchedule" />
     <Property Name="EVTYPE" Type="Int32" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="GuestSpeaker">
     <Key>
@@ -147,6 +149,7 @@
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__Lectu__6E01572D" FromRole="Lecture" ToRole="RSVP_Event" />
     <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__Lectu__60A75C0F" FromRole="Lecture" ToRole="TRWLASchedule" />
     <Property Name="EVTYPE" Type="Int32" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="LectureReview">
     <Key>
@@ -231,6 +234,10 @@
     <NavigationProperty Name="RSVPSchedules" Relationship="Self.FK__RSVPSched__rsvpI__72C60C4A" FromRole="RSVP_Event" ToRole="RSVPSchedule" />
     <Property Name="GenID" Type="Int32" />
     <NavigationProperty Name="GenEvent" Relationship="TWRLADB_Staging_V2Model.FK__RSVP_Even__GenID__19DFD96B" FromRole="RSVP_Event" ToRole="GenEvent" />
+    <Property Name="VolunteerID" Type="Int32" />
+    <Property Name="StudentID" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="TWRLADB_Staging_V2Model.FK__RSVP_Even__Stude__72C60C4A" FromRole="RSVP_Event" ToRole="Student" />
+    <NavigationProperty Name="Volunteer" Relationship="TWRLADB_Staging_V2Model.FK__RSVP_Even__Volun__71D1E811" FromRole="RSVP_Event" ToRole="Volunteer" />
   </EntityType>
   <EntityType Name="RSVPSchedule">
     <Key>
@@ -276,6 +283,7 @@
     <NavigationProperty Name="StudentType" Relationship="Self.FK__Student__Student__36B12243" FromRole="Student" ToRole="StudentType" />
     <NavigationProperty Name="SYSUserProfile" Relationship="Self.FK__Student__SYSUser__37A5467C" FromRole="Student" ToRole="SYSUserProfile" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__Student__UserTyp__35BCFE0A" FromRole="Student" ToRole="UserType" />
+    <NavigationProperty Name="RSVP_Event" Relationship="TWRLADB_Staging_V2Model.FK__RSVP_Even__Stude__72C60C4A" FromRole="Student" ToRole="RSVP_Event" />
   </EntityType>
   <EntityType Name="StudentMilestone">
     <Key>
@@ -341,6 +349,7 @@
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
     <NavigationProperty Name="progressbars" Relationship="TWRLADB_Staging_V2Model.FK__progressb__SYSUs__1EA48E88" FromRole="SYSUserProfile" ToRole="progressbar" />
+    <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>
@@ -430,6 +439,7 @@
     <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__Volun__7F2BE32F" FromRole="Volunteer" ToRole="EventMessage" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__Volunteer__UserT__4222D4EF" FromRole="Volunteer" ToRole="UserType" />
     <NavigationProperty Name="VolunteerType" Relationship="Self.FK__Volunteer__Volun__4316F928" FromRole="Volunteer" ToRole="VolunteerType" />
+    <NavigationProperty Name="RSVP_Event" Relationship="TWRLADB_Staging_V2Model.FK__RSVP_Even__Volun__71D1E811" FromRole="Volunteer" ToRole="RSVP_Event" />
   </EntityType>
   <EntityType Name="VolunteerFeedback">
     <Key>
@@ -1240,6 +1250,14 @@
       <Parameter Name="path" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="ClassAttendances" EntityType="TWRLADB_Staging_V2Model.ClassAttendance" />
+    <AssociationSet Name="FK__RSVP_Even__Stude__72C60C4A" Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__Stude__72C60C4A">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="RSVP_Event" EntitySet="RSVP_Event" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RSVP_Even__Volun__71D1E811" Association="TWRLADB_Staging_V2Model.FK__RSVP_Even__Volun__71D1E811">
+      <End Role="Volunteer" EntitySet="Volunteers" />
+      <End Role="RSVP_Event" EntitySet="RSVP_Event" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="GenEvent">
     <Key>
@@ -1320,6 +1338,7 @@
     <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
     <Property Name="cancelevent" Type="Int32" Nullable="false" />
+    <Property Name="CancelEvent" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
   <EntityType Name="progressbar">
     <Key>
@@ -1353,4 +1372,28 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="attend" Type="Int32" Nullable="false" />
   </EntityType>
+  <Association Name="FK__RSVP_Even__Stude__72C60C4A">
+    <End Type="TWRLADB_Staging_V2Model.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="TWRLADB_Staging_V2Model.RSVP_Event" Role="RSVP_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="RSVP_Event">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RSVP_Even__Volun__71D1E811">
+    <End Type="TWRLADB_Staging_V2Model.Volunteer" Role="Volunteer" Multiplicity="0..1" />
+    <End Type="TWRLADB_Staging_V2Model.RSVP_Event" Role="RSVP_Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteer">
+        <PropertyRef Name="VolunteerID" />
+      </Principal>
+      <Dependent Role="RSVP_Event">
+        <PropertyRef Name="VolunteerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

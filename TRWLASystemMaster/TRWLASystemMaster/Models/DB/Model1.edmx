@@ -3115,6 +3115,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ClassAttendances">
+            <EntityTypeMapping TypeName="IsTypeOf(TWRLADB_Staging_V2Model.ClassAttendance)">
+              <MappingFragment StoreEntitySet="SYSUserProfile" >
+                <ScalarProperty Name="attend" ColumnName="SYSUserProfileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
