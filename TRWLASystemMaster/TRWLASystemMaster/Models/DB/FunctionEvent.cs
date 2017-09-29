@@ -32,7 +32,6 @@ namespace TRWLASystemMaster.Models.DB
         public string Function_Theme { get; set; }
         public Nullable<int> GuestSpeakerID { get; set; }
         public Nullable<int> VenueID { get; set; }
-        public Nullable<int> EVTYPE { get; set; }
         public int Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -28,9 +28,9 @@ namespace TRWLASystemMaster.Models.DB
     
         public virtual ComEngEvent ComEngEvent { get; set; }
         public virtual FunctionEvent FunctionEvent { get; set; }
+        public virtual GenEvent GenEvent { get; set; }
         public virtual Lecture Lecture { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
-        public virtual GenEvent GenEvent { get; set; }
     }
 }

@@ -22,10 +22,10 @@ namespace TRWLASystemMaster.Models.DB
             this.EventMessages = new HashSet<EventMessage>();
             this.LectureReviews = new HashSet<LectureReview>();
             this.Progresses = new HashSet<Progress>();
+            this.progressbars = new HashSet<progressbar>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.RSVPSchedules = new HashSet<RSVPSchedule>();
             this.Students = new HashSet<Student>();
-            this.progressbars = new HashSet<progressbar>();
         }
     
         public int SYSUserProfileID { get; set; }
@@ -58,6 +58,8 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<LectureReview> LectureReviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Progress> Progresses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<progressbar> progressbars { get; set; }
         public virtual Residence Residence { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
@@ -68,7 +70,5 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<Student> Students { get; set; }
         public virtual SYSUser SYSUser { get; set; }
         public virtual UserType UserType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<progressbar> progressbars { get; set; }
     }
 }

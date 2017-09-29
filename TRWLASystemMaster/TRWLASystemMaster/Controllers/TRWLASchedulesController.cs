@@ -28,7 +28,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities2 db = new TWRLADB_Staging_V2Entities2();
+        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
         
 
         public ActionResult ExportData()
@@ -658,33 +658,23 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                int totals = 0;
+                var _contenxt = new TWRLADB_Staging_V2Entities();
+                ArrayList xValue = new ArrayList();
+                ArrayList yValue = new ArrayList();
 
-                var total = from s in db.ClassAttendances
-                            select s.attend;
-
-                foreach (var o in total)
-                {
-                    totals = totals + o;
-                }
-
-                ClassAttendance myfunc = db.ClassAttendances.Find(1);
-                ClassAttendance mylec = db.ClassAttendances.Find(2);
-                ClassAttendance mycom = db.ClassAttendances.Find(3);
-                ClassAttendance mygen = db.ClassAttendances.Find(4);
-
-                int func = myfunc.attend;
-                int lec = mylec.attend;
-                int com = mycom.attend;
-                int gen = mygen.attend;
+                var results = (from c in _contenxt.Progresses select c);
+                results.ToList().ForEach(rs => xValue.Add(rs.SYSUserProfile.StudentNumber));
+                results.ToList().ForEach(rs => yValue.Add(rs.ProgressCount));
 
 
-                ViewBag.Function = Convert.ToDecimal(func) / totals * 100;
-                ViewBag.Lecture = Convert.ToDecimal(lec) / totals * 100;
-                ViewBag.Com = Convert.ToDecimal(com) / totals * 100;
-                ViewBag.Gen = Convert.ToDecimal(gen) / totals * 100;
+                new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
+                    .AddTitle("Class Attendance for Students")
+                    .AddSeries("Default", chartType: "Column", xValue: xValue, yValues: yValue)
+                    .Write("jpeg");
 
                 return View();
+
+                
             }
             catch
             {
@@ -1225,9 +1215,7 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
-                            ClassAttendance myclass = db.ClassAttendances.Find(1);
-
-                            myclass.attend = myclass.attend + 1;
+                            
                            
 
                             db.Attendances.Add(att);
@@ -1256,9 +1244,7 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
-                            ClassAttendance myclass = db.ClassAttendances.Find(2);
-
-                            myclass.attend = myclass.attend + 1;
+                           
 
                             db.Attendances.Add(att);
                         }
@@ -1287,9 +1273,7 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
-                            ClassAttendance myclass = db.ClassAttendances.Find(3);
-
-                            myclass.attend = myclass.attend + 1;
+                            
 
                             db.Attendances.Add(att);
                         }
@@ -1317,9 +1301,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(4);
-
-                            myclass.attend = myclass.attend + 1;
+                           
 
                             db.Attendances.Add(att);
                         }
@@ -1357,9 +1339,7 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
-                            ClassAttendance myclass = db.ClassAttendances.Find(1);
-
-                            myclass.attend = myclass.attend + 1;
+                           
 
                             db.Attendances.Add(att);
                         }
@@ -1387,9 +1367,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(2);
-
-                            myclass.attend = myclass.attend + 1;
+                            
 
                             db.Attendances.Add(att);
                         }
@@ -1417,9 +1395,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(3);
-
-                            myclass.attend = myclass.attend + 1;
+                          
 
                             db.Attendances.Add(att);
                         }
@@ -1447,9 +1423,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(4);
-
-                            myclass.attend = myclass.attend + 1;
+                            
 
                             db.Attendances.Add(att);
                         }
@@ -1666,9 +1640,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(1);
-
-                            myclass.attend = myclass.attend + 1;
+                           
 
                             ev.Attended = 1;
                             db.Attendances.Add(att);
@@ -1696,10 +1668,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(2);
-
-                            myclass.attend = myclass.attend + 1;
-                            ev.Attended = 1;
+                            
                             db.Attendances.Add(att);
                         }
                         else if (ev.ComEngID != null)
@@ -1725,11 +1694,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(3);
-
-                            myclass.attend = myclass.attend + 1;
-
-                            ev.Attended = 1;
+                            
                             db.Attendances.Add(att);
                         }
                         else
@@ -1755,11 +1720,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(4);
-
-                            myclass.attend = myclass.attend + 1;
-
-                            ev.Attended = 1;
+                           
                             db.Attendances.Add(att);
                         }
 
@@ -1795,11 +1756,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(1);
-
-                            myclass.attend = myclass.attend + 1;
-
-                            ev.Attended = 1;
+                            
                             db.Attendances.Add(att);
                         }
                         else if (ev.LectureID != null)
@@ -1825,11 +1782,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(2);
-
-                            myclass.attend = myclass.attend + 1;
-
-                            ev.Attended = 1;
+                         
                             db.Attendances.Add(att);
                         }
                         else if (ev.ComEngID != null)
@@ -1855,11 +1808,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(3);
-
-
-                            myclass.attend = myclass.attend + 1;
-                            ev.Attended = 1;
+                          
                             db.Attendances.Add(att);
                         }
                         else
@@ -1885,11 +1834,7 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            ClassAttendance myclass = db.ClassAttendances.Find(4);
-
-                            myclass.attend = myclass.attend + 1;
-
-                            ev.Attended = 1;
+                            
                             db.Attendances.Add(att);
                         }
                     }

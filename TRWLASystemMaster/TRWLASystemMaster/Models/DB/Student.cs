@@ -39,10 +39,10 @@ namespace TRWLASystemMaster.Models.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Residence Residence { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         public virtual StudentType StudentType { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual UserType UserType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
     }
 }

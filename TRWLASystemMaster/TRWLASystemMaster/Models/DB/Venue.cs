@@ -19,8 +19,8 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.ComEngEvents = new HashSet<ComEngEvent>();
             this.FunctionEvents = new HashSet<FunctionEvent>();
-            this.Lectures = new HashSet<Lecture>();
             this.GenEvents = new HashSet<GenEvent>();
+            this.Lectures = new HashSet<Lecture>();
         }
     
         public int VenueID { get; set; }
@@ -34,9 +34,9 @@ namespace TRWLASystemMaster.Models.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FunctionEvent> FunctionEvents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GenEvent> GenEvents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lecture> Lectures { get; set; }
         public virtual VenueType VenueType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GenEvent> GenEvents { get; set; }
     }
 }
