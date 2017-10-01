@@ -1,0 +1,161 @@
+﻿@model TRWLASystemMaster.Models.DB.SYSUserProfile
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SYSUserProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phonenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Graduate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Graduate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Degree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearOfStudy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearOfStudy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowCreatedSYSUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowCreatedSYSUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowCreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowCreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowModifiedSYSUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowModifiedSYSUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowModifiedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowModifiedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residence.Res_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityAnswer.Security_Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityAnswer.Security_Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYSUser.LoginName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYSUser.LoginName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

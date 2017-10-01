@@ -31,7 +31,6 @@
     <EntitySetMapping Name="AuditLogs">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AuditLog">
         <MappingFragment StoreEntitySet="AuditLog">
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
           <ScalarProperty Name="AuditID" ColumnName="AuditID" />
           <ScalarProperty Name="DateDone" ColumnName="DateDone" />
           <ScalarProperty Name="TypeTran" ColumnName="TypeTran" />
@@ -43,7 +42,7 @@
     <EntitySetMapping Name="ComEngEvents">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ComEngEvent">
         <MappingFragment StoreEntitySet="ComEngEvent">
-          <ScalarProperty Name="EVTYPE" ColumnName="EVTYPE" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
           <ScalarProperty Name="ComEng_Name" ColumnName="ComEng_Name" />
           <ScalarProperty Name="ComEng_Summary" ColumnName="ComEng_Summary" />
@@ -83,7 +82,7 @@
     <EntitySetMapping Name="FunctionEvents">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.FunctionEvent">
         <MappingFragment StoreEntitySet="FunctionEvent">
-          <ScalarProperty Name="EVTYPE" ColumnName="EVTYPE" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="Function_Name" ColumnName="Function_Name" />
           <ScalarProperty Name="Function_Summary" ColumnName="Function_Summary" />
@@ -112,7 +111,7 @@
     <EntitySetMapping Name="Lectures">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Lecture">
         <MappingFragment StoreEntitySet="Lecture">
-          <ScalarProperty Name="EVTYPE" ColumnName="EVTYPE" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="Lecture_Name" ColumnName="Lecture_Name" />
           <ScalarProperty Name="Lecture_Summary" ColumnName="Lecture_Summary" />
@@ -187,16 +186,13 @@
     <EntitySetMapping Name="RSVP_Event">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.RSVP_Event">
         <MappingFragment StoreEntitySet="RSVP_Event">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
           <ScalarProperty Name="GenID" ColumnName="GenID" />
           <ScalarProperty Name="rsvpID" ColumnName="rsvpID" />
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="AllDay" ColumnName="AllDay" />
           <ScalarProperty Name="Attended" ColumnName="Attended" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
@@ -272,6 +268,7 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
@@ -401,7 +398,6 @@
     <EntitySetMapping Name="GenEvents">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.GenEvent">
         <MappingFragment StoreEntitySet="GenEvent">
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
           <ScalarProperty Name="Gene_Theme" ColumnName="Gene_Theme" />
           <ScalarProperty Name="Gen_EndTime" ColumnName="Gen_EndTime" />
@@ -417,7 +413,7 @@
     <EntitySetMapping Name="MasterDatas">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.MasterData">
         <MappingFragment StoreEntitySet="MasterData">
-          <ScalarProperty Name="cancelevent" ColumnName="cancelevent" />
+          <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
           <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
           <ScalarProperty Name="RegDate" ColumnName="RegDate" />
           <ScalarProperty Name="GenAttend" ColumnName="GenAttend" />
@@ -440,13 +436,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="BackUp" FunctionName="TWRLADB_Staging_V2Model.Store.BackUp" />
     <EntitySetMapping Name="ClassAttendances">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
-        <MappingFragment StoreEntitySet="ClassAttendance">
-          <ScalarProperty Name="attend" ColumnName="attend" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="CAPK" ColumnName="CAPK" />
+      <EntityTypeMapping TypeName="IsTypeOf(TWRLADB_Staging_V2Model.ClassAttendance)">
+        <MappingFragment StoreEntitySet="SYSUserProfile">
+          <ScalarProperty Name="attend" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

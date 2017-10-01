@@ -18,6 +18,7 @@ namespace TRWLASystemMaster.Models.DB
         public Student()
         {
             this.Attendances = new HashSet<Attendance>();
+            this.RSVP_Event = new HashSet<RSVP_Event>();
         }
     
         public int StudentID { get; set; }
@@ -41,5 +42,7 @@ namespace TRWLASystemMaster.Models.DB
         public virtual StudentType StudentType { get; set; }
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual UserType UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
     }
 }

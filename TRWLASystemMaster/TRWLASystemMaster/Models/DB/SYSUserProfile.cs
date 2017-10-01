@@ -46,6 +46,7 @@ namespace TRWLASystemMaster.Models.DB
         public int RowModifiedSYSUserID { get; set; }
         public Nullable<System.DateTime> RowModifiedDateTime { get; set; }
         public Nullable<int> ResID { get; set; }
+        public byte[] RowVersion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

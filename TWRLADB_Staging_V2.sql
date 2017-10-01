@@ -1176,6 +1176,18 @@ INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, Ro
 VALUES (4,2,1,4,4)
 
 
+---Student 3-----
+
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Student3','Student4',5,5)  
+
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896',3,'17845796','Soil Science','2017/01/01',2,5,5)  
+
+
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (5,2,1,5,5)
+
 ---Unique Code ----
 INSERT INTO UniqueCode(Code,stamptime)
 VALUES('12345','2017/09/20')
@@ -1186,6 +1198,9 @@ VALUES('25864','2017/09/22')
 
 INSERT INTO UniqueCode(Code,stamptime)
 VALUES('89752','2017/09/26')
+
+ALTER TABLE  SYSUserProfile
+ADD RowVersion timestamp not null;
 
 USE TWRLADB_Staging_V2
 go
