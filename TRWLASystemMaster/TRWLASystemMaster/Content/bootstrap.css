@@ -2114,6 +2114,7 @@ textarea.input-lg {
   }
 }
 
+
 .form-horizontal .control-label,
 .form-horizontal .radio,
 .form-horizontal .checkbox,
@@ -5779,6 +5780,7 @@ body.modal-open,
   margin-right: 15px;
 }
 
+
 .modal {
   position: relative;
   top: 0;
@@ -5814,11 +5816,13 @@ body.modal-open,
   width: auto;
   padding: 10px;
   left:0;
+  position:absolute;
+  background-color:transparent;
 }
 
 .modal-content {
   position: relative;
-  background-color: #ffffff;
+  background-color: transparent;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
@@ -5836,16 +5840,19 @@ body.modal-open,
   left: 0;
   z-index: 1030;
   background-color: #000000;
+  opacity:0.5 !important;
 }
 
 .modal-backdrop.fade {
-  opacity: 0;
-  filter: alpha(opacity=0);
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  background-color: #000000;
 }
 
 .modal-backdrop.in {
   opacity: 0.5;
   filter: alpha(opacity=50);
+  background-color: #000000;
 }
 
 .modal-header {

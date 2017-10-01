@@ -41,38 +41,38 @@
             <div class="form-inline">
                 @if (lec == "")
                 {
-                    <div data-toggle="tooltip" title="Percentage of students who attend Lectures" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#ffdb58; width:7%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-graduation-cap" aria-hidden="true"></i>0%</div>
+                    <div data-toggle="tooltip" title="Percentage of students who attend Lectures" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#ffdb58; width:7%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-bookmark" aria-hidden="true"></i>0%</div>
                 }
                 @if (lec != "")
                 {
-                    <div data-toggle="tooltip" title="Percentage of students who attend Lectures" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#ffdb58; width:@lec%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-graduation-cap" aria-hidden="true"></i>@lec%</div>
+                    <div data-toggle="tooltip" title="Percentage of students who attend Lectures" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#ffdb58; width:@lec%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-bookmark" aria-hidden="true"></i>@lec%</div>
                 }
             </div>
 
             <div class="form-inline">
                 @if (com == "")
                 {
-                    <div data-toggle="tooltip" title="Percentage of students who attend Community Engagements" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#a239ca; width:7%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-comments" aria-hidden="true"></i>0%</div>
+                    <div data-toggle="tooltip" title="Percentage of students who attend Community Engagements" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#a239ca; width:7%; height:30px; color:white;"><i style="margin-right:5px; margin-left:5px; color:white;" class="fa fa-globe" aria-hidden="true"></i>0%</div>
                 }
                 @if (com != "")
                 {
-                    <div data-toggle="tooltip" title="Percentage of students who attend Community Engagements" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#a239ca; width:@com%; height:30px; color:white;"><i style="margin-right:5px; color:white;" class="fa fa-comments" aria-hidden="true"></i>@com%</div>
+                    <div data-toggle="tooltip" title="Percentage of students who attend Community Engagements" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#a239ca; width:@com%; height:30px; color:white;"><i style="margin-right:5px; margin-left:5px; color:white;" class="fa fa-globe" aria-hidden="true"></i>@com%</div>
                 }
             </div>
 
             <div class="form-inline">
                 @if (gen == "")
                 {
-                    <div data-toggle="tooltip" title="Percentage of students who attend General Events" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#a239ca; width:7%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-circle-thin" aria-hidden="true"></i>0%</div>
+                    <div data-toggle="tooltip" title="Percentage of students who attend General Events" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#778899; width:7%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-asterisk" aria-hidden="true"></i>0%</div>
                 }
                 @if (gen != "")
                 {
-                    <div data-toggle="tooltip" title="Percentage of students who attend General Events" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#a239ca; width:@gen%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-circle-thin" aria-hidden="true"></i>@gen%</div>
+                    <div data-toggle="tooltip" title="Percentage of students who attend General Events" role="progressbar" class="form-group" style="border-radius:3px; margin-bottom: 10px; background-color:#778899; width:@gen%; height:30px; color:white;"><i style="margin-left:5px; margin-right:5px; color:white;" class="fa fa-asterisk" aria-hidden="true"></i>@gen%</div>
                 }
             </div>
 
             <hr />
-            <p style="margin-left:auto;">Percentage of Students (%)</p>
+            <p style="text-align:center; width:100%; font-weight:bold;">Percentage of Students (%)</p>
             <div class="col-md-12 form-inline">
                 <div class="form-group col-md-5" style="margin:30px;">
                     @if (func == "")
@@ -119,14 +119,14 @@
                 <div class="form-group col-md-5" style="margin:30px;">
                     @if (gen == "")
                 {
-                        <h2 style="color:#4717f6;">0%</h2>
+                        <h2 style="color:#778899;">0%</h2>
                         <p>of students who RSVP to General Events attend them</p>
 
 
                     }
                     @if (gen != "")
                     {
-                        <h2 style="color:#4717f6;">@gen%</h2>
+                        <h2 style="color:#778899;">@gen%</h2>
                         <p>of students who RSVP to General Events attend them</p>
                     }
                 </div>

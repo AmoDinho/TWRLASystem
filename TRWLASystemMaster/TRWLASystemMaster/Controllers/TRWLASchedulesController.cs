@@ -1083,8 +1083,11 @@ namespace TRWLASystemMaster.Controllers
                 var trwla = from s in db.TRWLASchedules
                             select s;
 
-                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.Lecture.Lecture_Date >= DateTime.Now);
+                DateTime mydate = DateTime.Now.AddDays(0);
 
+                trwla = trwla.Where(p => p.Lecture.Lecture_Date == mydate || p.FunctionEvent.Function_Date == mydate || p.ComEngEvent.ComEng_Date == mydate);
+
+                
                 return View(trwla.ToList());
             }
             catch
@@ -1100,7 +1103,10 @@ namespace TRWLASystemMaster.Controllers
                 var trwla = from s in db.TRWLASchedules
                             select s;
 
-                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date <= DateTime.Now || p.FunctionEvent.Function_Date <= DateTime.Now || p.Lecture.Lecture_Date <= DateTime.Now);
+                DateTime mydate = DateTime.Now.AddDays(-7);
+                DateTime today = DateTime.Now.AddDays(0);
+
+                trwla = trwla.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate || p.Lecture.Lecture_Date < today || p.FunctionEvent.Function_Date < today || p.ComEngEvent.ComEng_Date < today);
 
 
 
