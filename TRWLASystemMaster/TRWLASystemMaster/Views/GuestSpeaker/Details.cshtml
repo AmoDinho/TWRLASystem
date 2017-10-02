@@ -6,7 +6,10 @@
 }
 
 <div class="jumbotron">
-    <h2>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h2>
+    <h1>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 @if (TempData["notice"] != null)
@@ -15,7 +18,6 @@
 }
 
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             Name:
@@ -55,22 +57,20 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div class="btn btn-default btn-round" style="color:#9b16d8">
-                @Html.ActionLink("Update", "Edit", new { id = Model.GuestSpeakerID })
-            </div>
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GuestSpeaker", new { id = Model.GuestSpeakerID })'">Update</button>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Delete" style="color:#9b16d8">
-                Delete Guest Speaker
+            <button class="btn btn-default btn-round" data-toggle="modal" data-target="#Delete">
+                Delete
             </button>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
             <div>
-                @Html.ActionLink("Return", "Index", "GuestSpeakers1", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })
+                @Html.ActionLink("Return", "Index", "GuestSpeakers1", new { @class = "btn btn-default btn-round" })
             </div>
         </div>
     </div>
@@ -86,17 +86,20 @@
             <div class="modal-body">
                 Are you sure that you want to delete @Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information off of the system?
             </div>
-            <div class="modal-footer form-inline">
-                @using (Html.BeginForm())
-            {
-                    @Html.AntiForgeryToken()
-                    <div class="form-actions no-color ">
-                        <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete Guest Speaker</button>
-                    </div>
-
-
-                }
-                <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
+            <div class="modal-footer">
+                <div class="form-inline">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color form-group">
+                            <button type="submit" value="Delete" class="btn">Delete</button>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        </div>
+                    }
+                    
+                </div>
             </div>
         </div>
     </div>

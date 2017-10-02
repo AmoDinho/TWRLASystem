@@ -9,7 +9,7 @@
     font-size: 15px;
     line-height: 1.7em;
     color: black;
-    background-color: white;
+    background-color: transparent;
 }
 
 p 
@@ -254,7 +254,7 @@ h4
 }
 
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333333;
+  color: white;
   padding-bottom:2em;
   border-bottom: solid 3px white;
   background-color: transparent;
@@ -374,8 +374,8 @@ h4
 }*/
 
 .nav.navbar-nav li a:hover {
- font-weight: bold;
- color: black;
+    font-weight:bold;
+ color: white;
 }
 /*Make caret change colour on hover*/
 .navbar-inverse .navbar-nav > .dropdown > a:hover .caret {
@@ -456,6 +456,12 @@ h4
    align-items:center;
    padding-left:25%;
    background-color: transparent;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
+    margin-top:250px;
 }
 
 .panel-footer {
@@ -856,6 +862,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   position: relative;
   z-index: 1;
   opacity:10;
+  opacity:0.9;
 }
 .quote:after {
   background: inherit;
@@ -877,6 +884,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quote1:after {
  background: inherit;
@@ -897,6 +905,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quote2:after {
  background: inherit;
@@ -918,6 +927,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quoteform:before
 {
@@ -927,6 +937,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   margin-left:-110px;
   margin-right:-100px;
   opacity:4;
+  opacity:0.9;
 }
 
 .quoteform:after {
@@ -951,6 +962,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quote1form:after {
  background: inherit;
@@ -974,6 +986,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quote2form:after {
  background: inherit;
@@ -1001,6 +1014,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quotehome:after {
   background: inherit;
@@ -1024,6 +1038,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quote1home:after {
  background: inherit;
@@ -1047,6 +1062,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
+  opacity:0.9;
 }
 .quote2home:after {
  background: inherit;
@@ -1065,7 +1081,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   margin-left:-110px;
   margin-right:-100px;
   
-}   
+}  
 /*
  +    Photobooth
  +*/

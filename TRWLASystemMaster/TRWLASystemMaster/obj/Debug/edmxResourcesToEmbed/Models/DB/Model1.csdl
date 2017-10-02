@@ -201,8 +201,8 @@
     <Property Name="ComAttend" Type="Int32" Nullable="false" />
     <Property Name="GenAttend" Type="Int32" Nullable="false" />
     <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="CancelEvent" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
+    <Property Name="CancelEvent" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Milestone">
     <Key>
@@ -1128,7 +1128,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TWRLADB_Staging_V2Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TWRLADB_Staging_V2Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />

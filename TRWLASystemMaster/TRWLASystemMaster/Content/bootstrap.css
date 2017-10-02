@@ -4038,7 +4038,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #555555;
+  color: white;
   cursor: default;
   background-color: #ffffff;
   border: 1px solid #dddddd;
@@ -4574,7 +4574,7 @@ color: grey;
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: black;
+  color: white;
   background-color: #e7e7e7;
 }
 

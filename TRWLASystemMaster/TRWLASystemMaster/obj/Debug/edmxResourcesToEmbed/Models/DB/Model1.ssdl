@@ -162,8 +162,8 @@
     <Property Name="ComAttend" Type="int" Nullable="false" />
     <Property Name="GenAttend" Type="int" Nullable="false" />
     <Property Name="RegDate" Type="date" Nullable="false" />
-    <Property Name="CancelEvent" Type="date" Nullable="false" />
     <Property Name="LogAttendTime" Type="int" Nullable="false" />
+    <Property Name="CancelEvent" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Milestone">
     <Key>

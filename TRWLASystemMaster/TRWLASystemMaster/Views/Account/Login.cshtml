@@ -22,7 +22,7 @@
                 <div class="form-horizontal" style="margin:auto; display:block; background-color:transparent;">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(Model => Model.LoginName, new { @class = "col-md-2 control-label" })
+                        @Html.Label("Username", new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.TextBoxFor(Model => Model.LoginName, new { @class = "form-control" })
                             @Html.ValidationMessageFor(Model => Model.LoginName, "", new { @class = "text-danger" })

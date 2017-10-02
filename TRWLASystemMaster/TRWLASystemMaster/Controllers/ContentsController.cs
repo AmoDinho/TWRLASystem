@@ -14,7 +14,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ContentsController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities3 db = new TWRLADB_Staging_V2Entities3();
 
         //public FileActionResult Downloads()
         //{

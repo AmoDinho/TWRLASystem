@@ -6,6 +6,8 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.DB
 {
@@ -26,6 +28,9 @@ namespace TRWLASystemMaster.Models.DB
         public string Function_Name { get; set; }
         public string Function_Summary { get; set; }
         public string Function_Description { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+
         public System.DateTime Function_Date { get; set; }
         public System.TimeSpan Function_StartTime { get; set; }
         public System.TimeSpan Function_EndTime { get; set; }

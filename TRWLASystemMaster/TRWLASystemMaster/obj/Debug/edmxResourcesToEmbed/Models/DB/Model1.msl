@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities3">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -174,8 +174,8 @@
           <ScalarProperty Name="ComAttend" ColumnName="ComAttend" />
           <ScalarProperty Name="GenAttend" ColumnName="GenAttend" />
           <ScalarProperty Name="RegDate" ColumnName="RegDate" />
-          <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
           <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
+          <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

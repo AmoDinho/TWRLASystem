@@ -6,38 +6,79 @@
 }
 
 <div class="jumbotron">
-
-    <h2>Details of a venue</h2>
-
+    <h1>Details of a venue</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 <div>
 
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Venue_Name)
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.Venue_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VenueType)
+        </dt>
+
+        <dd class="form-control" style="width:200px; overflow-y:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.VenueType.VenueType_Description)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Address.StreetNumber)
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.Address.StreetNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.VenueType.VenueType_Description)
+            @Html.DisplayNameFor(model => model.Address.StreetName)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.VenueType.VenueType_Description)
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.Address.StreetName))
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Suburb)
+        </dt>
+
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.Address.Suburb)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.City)
+        </dt>
+
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.Address.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.Province)
+        </dt>
+
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.Address.Province)
+        </dd>
+
+
+
+
+
+
+
+
 
     </dl>
 </div>
@@ -45,13 +86,13 @@
 
 
 
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button class="btn">@Html.ActionLink("Edit", "Edit", new { id = Model.VenueID }) </button>
-                <button class="btn">@Html.ActionLink("Back", "Index")</button>
+<div style="float:right; margin-bottom:20px; margin-top:10px;">
+            <div class="form-inline">
+                <div class="form-group">
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Venues", new { id = Model.VenueID })'">Update</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Venues")'">Return</button>
+                </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>

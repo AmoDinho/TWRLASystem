@@ -274,7 +274,6 @@
     <Compile Include="Controllers\FunctionEventsController.cs" />
     <Compile Include="Controllers\GuestSpeakerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Kimiakesht.cs" />
     <Compile Include="Controllers\LecturesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MasterDatasController.cs" />

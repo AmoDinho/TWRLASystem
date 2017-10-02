@@ -20,7 +20,7 @@ namespace TRWLASystemMaster.Models.DB
         public int ComAttend { get; set; }
         public int GenAttend { get; set; }
         public System.DateTime RegDate { get; set; }
-        public System.DateTime CancelEvent { get; set; }
         public int LogAttendTime { get; set; }
+        public int CancelEvent { get; set; }
     }
 }

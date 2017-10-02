@@ -28,7 +28,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities3 db = new TWRLADB_Staging_V2Entities3();
         
 
         public ActionResult ExportData()
@@ -658,7 +658,7 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                var _contenxt = new TWRLADB_Staging_V2Entities();
+                var _contenxt = new TWRLADB_Staging_V2Entities3();
                 ArrayList xValue = new ArrayList();
                 ArrayList yValue = new ArrayList();
 
@@ -1073,7 +1073,10 @@ namespace TRWLASystemMaster.Controllers
                 var trwla = from s in db.TRWLASchedules
                             select s;
 
-                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date >= DateTime.Now || p.FunctionEvent.Function_Date >= DateTime.Now || p.Lecture.Lecture_Date >= DateTime.Now);
+                DateTime mydate = DateTime.Now.AddDays(-1);
+                DateTime myfuture = DateTime.Now.AddDays(1);
+
+                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate || p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture);
 
                 return View(trwla.ToList());
             }
@@ -1610,6 +1613,8 @@ namespace TRWLASystemMaster.Controllers
                 var FindUser = (int)Session["User"];
 
                 progressbar prog = new progressbar();
+
+                ev.Attended = 1;
 
                 int i = db.Attendances.Count();
 

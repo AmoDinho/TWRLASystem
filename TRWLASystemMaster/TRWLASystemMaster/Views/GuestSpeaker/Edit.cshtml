@@ -6,7 +6,10 @@
 }
 
 <div class="jumbotron">
-    <h2>Edit @Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h2>
+    <h1>Edit @Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
@@ -15,7 +18,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.GuestSpeakerID)
 
@@ -73,10 +75,12 @@
                     Are you sure that you want to update this Guest Speaker's Information?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color ">
+                    <div class="form-actions no-color form-group">
                         <button type="submit" value="Create" class="btn">Confirm</button>
                     </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,7 +90,7 @@
     <div class="form-group">
         <div style="margin-right:5px;">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                Update Event
+                Update
             </button>
         </div>
     </div>
