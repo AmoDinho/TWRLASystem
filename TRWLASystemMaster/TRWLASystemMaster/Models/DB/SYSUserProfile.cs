@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class SYSUserProfile
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -47,6 +48,9 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<System.DateTime> RowModifiedDateTime { get; set; }
         public Nullable<int> ResID { get; set; }
         public byte[] RowVersion { get; set; }
+        public byte[] ImageData { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public string ImageMimeType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

@@ -303,6 +303,8 @@
     <Property Name="RowModifiedDateTime" Type="datetime" />
     <Property Name="ResID" Type="int" />
     <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="ImageData" Type="varbinary(max)" />
+    <Property Name="ImageMimeType" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>

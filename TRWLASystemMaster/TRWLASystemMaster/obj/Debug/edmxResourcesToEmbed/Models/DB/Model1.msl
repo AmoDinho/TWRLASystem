@@ -309,6 +309,8 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />

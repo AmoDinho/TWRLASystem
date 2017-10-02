@@ -56,7 +56,7 @@ namespace TRWLASystemMaster.Controllers
 
         //Register Action 
         [HttpPost]
-        public ActionResult Register(UserSignUpView USV)
+        public ActionResult Register(UserSignUpView USV,HttpPostedFileBase image)
         {
 
             try
@@ -66,6 +66,12 @@ namespace TRWLASystemMaster.Controllers
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
                     {
+                        if(image !=null)
+                        {
+                            USV.ImageMimeType = image.ContentType;
+                            USV.ImageData = new byte[image.ContentLength];
+                            image.InputStream.Read(USV.ImageData, 0, image.ContentLength);
+                        }
                         USV.UserTypeID = 1;
                         
                         UM.AddUserAccount(USV);
@@ -79,6 +85,7 @@ namespace TRWLASystemMaster.Controllers
 
                     }
                     else
+
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
                 return View();
@@ -91,7 +98,18 @@ namespace TRWLASystemMaster.Controllers
           }
         }
 
-
+        public FileContentResult GetImage(int sysuserID)
+        {
+            SYSUserProfile prod = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserProfileID == sysuserID);
+            if (prod != null)
+            {
+                return File(prod.ImageData, prod.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         //Register Volunteer
         public ActionResult RegisterVol()

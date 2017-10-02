@@ -384,6 +384,8 @@
     <NavigationProperty Name="Students" Relationship="Self.FK__Student__SYSUser__37A5467C" FromRole="SYSUserProfile" ToRole="Student" />
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
+    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ImageMimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using Microsoft.SqlServer.Dac.Model;
 
 namespace TRWLASystemMaster.Models.ViewModel
 {
@@ -43,7 +45,7 @@ namespace TRWLASystemMaster.Models.ViewModel
       
 
         [Display(Name = " StudentNumber")]
-        [DataType(DataType.PhoneNumber)] 
+        [DataType(System.ComponentModel.DataAnnotations.DataType.PhoneNumber)] 
         [Required(ErrorMessage = "Student Number Required!")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
@@ -55,7 +57,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string Degree { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Academic Commencement Date")]
-        [DataType(DataType.Date)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Date)]
         public DateTime YearOfStudy { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
@@ -68,15 +70,20 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string Email { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "DoB")]
-        [DataType(DataType.Date)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Date)]
         public DateTime DoB { get; set; }
        
 
-        [DataType(DataType.PhoneNumber)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Phone Number Required!")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Phonenumber { get; set; }
+
+        public byte[] ImageData { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public string ImageMimeType { get; set; }
+
     }
 
     //UserSignUpViewVol
@@ -113,11 +120,11 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string Email { get; set; }
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "DoB")]
-        [DataType(DataType.Date)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Date)]
         public DateTime DoB { get; set; }
 
 
-        [DataType(DataType.PhoneNumber)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Phone Number Required!")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
@@ -136,7 +143,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string LoginName { get; set; }
 
         [Required(ErrorMessage = "The password Field is required")]
-        [DataType(DataType.Password)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
     }
@@ -214,13 +221,13 @@ namespace TRWLASystemMaster.Models.ViewModel
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
+        [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         [Required]
         public string ReturnToken { get; set; }

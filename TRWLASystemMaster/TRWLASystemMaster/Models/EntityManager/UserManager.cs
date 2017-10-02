@@ -48,7 +48,8 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SUP.StudentNumber = user.StudentNumber;
           
                 SUP.Phonenumber = user.Phonenumber;
-              
+                SUP.ImageData = user.ImageData;
+                SUP.ImageMimeType = user.ImageMimeType;
 
                 SUP.RowCreatedSYSUserID = user.SYSUserID > 0 ? user.SYSUserID : 1;
                 SUP.RowModifiedSYSUserID = user.SYSUserID > 0 ? user.SYSUserID : 1;
