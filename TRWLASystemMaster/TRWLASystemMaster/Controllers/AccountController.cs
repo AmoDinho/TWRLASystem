@@ -71,10 +71,21 @@ namespace TRWLASystemMaster.Controllers
                             USV.ImageMimeType = image.ContentType;
                             USV.ImageData = new byte[image.ContentLength];
                             image.InputStream.Read(USV.ImageData, 0, image.ContentLength);
+
+                            //var filename = image.FileName;
+                            //var filePathOriginal = Server.MapPath("/Content");
+                            //string savedFileName = Path.Combine(filePathOriginal);
+
+
+                            var uploadDir = "~/Content";
+                                var imagePath = Path.Combine(Server.MapPath(uploadDir));
+
+                            image.SaveAs(imagePath);
                         }
                         USV.UserTypeID = 1;
                         
                         UM.AddUserAccount(USV);
+                    
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
 
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
@@ -88,7 +99,7 @@ namespace TRWLASystemMaster.Controllers
 
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
-                return View();
+                return View(USV);
            }
 
             
