@@ -6,8 +6,6 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.DB
 {
@@ -20,6 +18,7 @@ namespace TRWLASystemMaster.Models.DB
         public GuestSpeaker()
         {
             this.FunctionEvents = new HashSet<FunctionEvent>();
+            this.GenEvents = new HashSet<GenEvent>();
         }
     
         public int GuestSpeakerID { get; set; }
@@ -31,5 +30,7 @@ namespace TRWLASystemMaster.Models.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FunctionEvent> FunctionEvents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GenEvent> GenEvents { get; set; }
     }
 }

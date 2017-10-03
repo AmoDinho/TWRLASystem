@@ -75,6 +75,7 @@
     <Property Name="Content_Status" Type="Int32" Nullable="false" />
     <Property Name="Content_Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="ComEngEvents" Relationship="Self.FK__ComEngEve__Conte__5BE2A6F2" FromRole="Content" ToRole="ComEngEvent" />
+    <NavigationProperty Name="GenEvents" Relationship="Self.FK__GenEvent__Conten__282DF8C2" FromRole="Content" ToRole="GenEvent" />
     <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Content__5535A963" FromRole="Content" ToRole="Lecture" />
   </EntityType>
   <EntityType Name="EventMessage">
@@ -124,7 +125,13 @@
     <Property Name="Gen_EndTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="Gene_Theme" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="VenueID" Type="Int32" />
+    <Property Name="ResID" Type="Int32" />
+    <Property Name="ContentID" Type="Int32" />
+    <Property Name="GuestSpeakerID" Type="Int32" />
     <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__GenID__6E01572D" FromRole="GenEvent" ToRole="Attendance" />
+    <NavigationProperty Name="Content" Relationship="Self.FK__GenEvent__Conten__282DF8C2" FromRole="GenEvent" ToRole="Content" />
+    <NavigationProperty Name="GuestSpeaker" Relationship="Self.FK__GenEvent__GuestS__29221CFB" FromRole="GenEvent" ToRole="GuestSpeaker" />
+    <NavigationProperty Name="Residence" Relationship="Self.FK__GenEvent__ResID__2739D489" FromRole="GenEvent" ToRole="Residence" />
     <NavigationProperty Name="Venue" Relationship="Self.FK__GenEvent__VenueI__5812160E" FromRole="GenEvent" ToRole="Venue" />
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__GenID__76969D2E" FromRole="GenEvent" ToRole="RSVP_Event" />
     <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__GenID__656C112C" FromRole="GenEvent" ToRole="TRWLASchedule" />
@@ -140,6 +147,7 @@
     <Property Name="GuestSpeaker_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="GuestSpeaker_PictureLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="FunctionEvents" Relationship="Self.FK__FunctionE__Guest__5FB337D6" FromRole="GuestSpeaker" ToRole="FunctionEvent" />
+    <NavigationProperty Name="GenEvents" Relationship="Self.FK__GenEvent__GuestS__29221CFB" FromRole="GuestSpeaker" ToRole="GenEvent" />
   </EntityType>
   <EntityType Name="Lecture">
     <Key>
@@ -247,6 +255,7 @@
     </Key>
     <Property Name="ResID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Res_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="GenEvents" Relationship="Self.FK__GenEvent__ResID__2739D489" FromRole="Residence" ToRole="GenEvent" />
     <NavigationProperty Name="Lectures" Relationship="Self.FK__Lecture__Residen__5441852A" FromRole="Residence" ToRole="Lecture" />
     <NavigationProperty Name="Students" Relationship="Self.FK__Student__ResID__34C8D9D1" FromRole="Residence" ToRole="Student" />
     <NavigationProperty Name="SYSUserProfiles" Relationship="Self.FK__SYSUserPr__ResID__239E4DCF" FromRole="Residence" ToRole="SYSUserProfile" />
@@ -660,6 +669,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__GenEvent__Conten__282DF8C2">
+    <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ContentID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="ContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Lecture__Content__5535A963">
     <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
     <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
@@ -741,6 +762,30 @@
       </Principal>
       <Dependent Role="TRWLASchedule">
         <PropertyRef Name="FunctionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GenEvent__GuestS__29221CFB">
+    <End Role="GuestSpeaker" Type="Self.GuestSpeaker" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuestSpeaker">
+        <PropertyRef Name="GuestSpeakerID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="GuestSpeakerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GenEvent__ResID__2739D489">
+    <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Residence">
+        <PropertyRef Name="ResID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="ResID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1128,7 +1173,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TWRLADB_Staging_V2Entities3" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TWRLADB_Staging_V2Entities4" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
@@ -1216,6 +1261,10 @@
       <End Role="ComEngEvent" EntitySet="ComEngEvents" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
     </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__Conten__282DF8C2" Association="Self.FK__GenEvent__Conten__282DF8C2">
+      <End Role="Content" EntitySet="Contents" />
+      <End Role="GenEvent" EntitySet="GenEvents" />
+    </AssociationSet>
     <AssociationSet Name="FK__Lecture__Content__5535A963" Association="Self.FK__Lecture__Content__5535A963">
       <End Role="Content" EntitySet="Contents" />
       <End Role="Lecture" EntitySet="Lectures" />
@@ -1243,6 +1292,14 @@
     <AssociationSet Name="FK__TRWLASche__Funct__628FA481" Association="Self.FK__TRWLASche__Funct__628FA481">
       <End Role="FunctionEvent" EntitySet="FunctionEvents" />
       <End Role="TRWLASchedule" EntitySet="TRWLASchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__GuestS__29221CFB" Association="Self.FK__GenEvent__GuestS__29221CFB">
+      <End Role="GuestSpeaker" EntitySet="GuestSpeakers" />
+      <End Role="GenEvent" EntitySet="GenEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__ResID__2739D489" Association="Self.FK__GenEvent__ResID__2739D489">
+      <End Role="Residence" EntitySet="Residences" />
+      <End Role="GenEvent" EntitySet="GenEvents" />
     </AssociationSet>
     <AssociationSet Name="FK__GenEvent__VenueI__5812160E" Association="Self.FK__GenEvent__VenueI__5812160E">
       <End Role="Venue" EntitySet="Venues" />

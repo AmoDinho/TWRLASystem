@@ -17,6 +17,7 @@ namespace TRWLASystemMaster.Models.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Residence()
         {
+            this.GenEvents = new HashSet<GenEvent>();
             this.Lectures = new HashSet<Lecture>();
             this.Students = new HashSet<Student>();
             this.SYSUserProfiles = new HashSet<SYSUserProfile>();
@@ -25,6 +26,8 @@ namespace TRWLASystemMaster.Models.DB
         public int ResID { get; set; }
         public string Res_Name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GenEvent> GenEvents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lecture> Lectures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

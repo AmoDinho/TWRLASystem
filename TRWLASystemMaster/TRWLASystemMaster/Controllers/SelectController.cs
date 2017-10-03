@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
     public class SelectController : Controller
     {
 
-        private TWRLADB_Staging_V2Entities3 db = new TWRLADB_Staging_V2Entities3();
+        private TWRLADB_Staging_V2Entities4 db = new TWRLADB_Staging_V2Entities4();
         // GET: Select
         public ActionResult SelectVolStud()
         {
@@ -27,7 +27,7 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult VerifyCode(UniqueCode vc)
+        public ActionResult VerifyCode(string uniqe)
         {
             /*Soluntion to test what is in the db
              * 
@@ -60,17 +60,24 @@ namespace TRWLASystemMaster.Controllers
             //}
 
             //return View();
-            var code = from c in db.UniqueCodes
-                       where c.Code == vc.Code
-                       select c;
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(uniqe) ? "name_desc" : "";
+
+            int variable = Convert.ToInt32(uniqe);
+
+            int code = (from c in db.UniqueCodes
+                       where c.Code == variable
+                        select c).Count();
 
 
-            if (code != null)
+            if (code != 0)
             {
-                RedirectToAction("RegisterVol", "Account");
+                return RedirectToAction("RegisterVol", "Account");
             }
-
-            return View(code);
+            else
+            {
+                return View();
+            }
 
         }
     }

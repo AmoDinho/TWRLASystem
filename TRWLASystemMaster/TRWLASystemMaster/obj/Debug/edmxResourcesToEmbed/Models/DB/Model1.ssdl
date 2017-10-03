@@ -101,6 +101,9 @@
     <Property Name="Gen_EndTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="Gene_Theme" Type="varchar" MaxLength="25" />
     <Property Name="VenueID" Type="int" />
+    <Property Name="ResID" Type="int" />
+    <Property Name="ContentID" Type="int" />
+    <Property Name="GuestSpeakerID" Type="int" />
   </EntityType>
   <EntityType Name="GuestSpeaker">
     <Key>
@@ -565,6 +568,42 @@
       </Principal>
       <Dependent Role="FunctionEvent">
         <PropertyRef Name="VenueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GenEvent__Conten__282DF8C2">
+    <End Role="Content" Type="Self.Content" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="ContentID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="ContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GenEvent__GuestS__29221CFB">
+    <End Role="GuestSpeaker" Type="Self.GuestSpeaker" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GuestSpeaker">
+        <PropertyRef Name="GuestSpeakerID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="GuestSpeakerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GenEvent__ResID__2739D489">
+    <End Role="Residence" Type="Self.Residence" Multiplicity="0..1" />
+    <End Role="GenEvent" Type="Self.GenEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Residence">
+        <PropertyRef Name="ResID" />
+      </Principal>
+      <Dependent Role="GenEvent">
+        <PropertyRef Name="ResID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1115,6 +1154,18 @@
     <AssociationSet Name="FK__FunctionE__Venue__5EBF139D" Association="Self.FK__FunctionE__Venue__5EBF139D">
       <End Role="Venue" EntitySet="Venue" />
       <End Role="FunctionEvent" EntitySet="FunctionEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__Conten__282DF8C2" Association="Self.FK__GenEvent__Conten__282DF8C2">
+      <End Role="Content" EntitySet="Content" />
+      <End Role="GenEvent" EntitySet="GenEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__GuestS__29221CFB" Association="Self.FK__GenEvent__GuestS__29221CFB">
+      <End Role="GuestSpeaker" EntitySet="GuestSpeaker" />
+      <End Role="GenEvent" EntitySet="GenEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GenEvent__ResID__2739D489" Association="Self.FK__GenEvent__ResID__2739D489">
+      <End Role="Residence" EntitySet="Residence" />
+      <End Role="GenEvent" EntitySet="GenEvent" />
     </AssociationSet>
     <AssociationSet Name="FK__GenEvent__VenueI__5812160E" Association="Self.FK__GenEvent__VenueI__5812160E">
       <End Role="Venue" EntitySet="Venue" />

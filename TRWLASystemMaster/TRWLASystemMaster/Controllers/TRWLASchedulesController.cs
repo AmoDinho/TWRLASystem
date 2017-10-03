@@ -28,7 +28,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
-        private TWRLADB_Staging_V2Entities3 db = new TWRLADB_Staging_V2Entities3();
+        private TWRLADB_Staging_V2Entities4 db = new TWRLADB_Staging_V2Entities4();
         
 
         public ActionResult ExportData()
@@ -658,7 +658,7 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                var _contenxt = new TWRLADB_Staging_V2Entities3();
+                var _contenxt = new TWRLADB_Staging_V2Entities4();
                 ArrayList xValue = new ArrayList();
                 ArrayList yValue = new ArrayList();
 

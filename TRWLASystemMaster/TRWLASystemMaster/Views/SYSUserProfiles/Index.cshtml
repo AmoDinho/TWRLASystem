@@ -5,9 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*VolunteerLoggedInPage.cshtml*@
-<h2>User Portal</h2>
+<div class="jumbotron">
+    <h1>Student Management</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
 
-
+@* Click on student details, takes user to student Dashboard for master data. *@
 <script>
     function doNavigate() {
         window.location.href = document.getElementById("UrlList").value;
@@ -28,11 +33,7 @@
     </div>
 }
 
-<select data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:90%;">
-    <option value="">Filter by...</option>
-    <option value="@Url.Action("Index", "SYSUserProfiles", new { Graduated = ViewBag.SurnameSortParm })'">Graduates</option>
-
-</select>
+<h2>Active Students</h2>
 <table class="table">
     <tr>
         <th>
@@ -71,7 +72,92 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(p => p.Graduate == null && p.UserTypeID == 1 ))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phonenumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Graduate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Degree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearOfStudy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Residence.Res_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserType.Description)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Details", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+
+
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<h2>Graduated Students</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phonenumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Graduate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearOfStudy)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserType.Description)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Where(p => p.Graduate != null && p.UserTypeID == 1))
     {
         <tr>
             <td>

@@ -1235,7 +1235,7 @@ create table MasterData
 	ComAttend int not null,
 	GenAttend int not null,
 	RegDate date not null,
-	CancelEvent date not null,
+	CancelEvent int not null,
 	LogAttendTime int not null
 )
 

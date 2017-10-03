@@ -6,8 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
@@ -28,9 +27,6 @@ namespace TRWLASystemMaster.Models.DB
         public string Lecture_Name { get; set; }
         public string Lecture_Summary { get; set; }
         public string Lecture_Description { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
-
         public System.DateTime Lecture_Date { get; set; }
         public System.TimeSpan Lecture_StartTime { get; set; }
         public System.TimeSpan Lecture_EndTime { get; set; }

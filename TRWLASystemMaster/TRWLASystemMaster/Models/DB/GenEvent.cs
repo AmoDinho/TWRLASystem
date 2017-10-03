@@ -31,9 +31,15 @@ namespace TRWLASystemMaster.Models.DB
         public System.TimeSpan Gen_EndTime { get; set; }
         public string Gene_Theme { get; set; }
         public Nullable<int> VenueID { get; set; }
+        public Nullable<int> ResID { get; set; }
+        public Nullable<int> ContentID { get; set; }
+        public Nullable<int> GuestSpeakerID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual Content Content { get; set; }
+        public virtual GuestSpeaker GuestSpeaker { get; set; }
+        public virtual Residence Residence { get; set; }
         public virtual Venue Venue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }

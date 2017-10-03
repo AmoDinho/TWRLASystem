@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities3">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities4">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -108,6 +108,9 @@
           <ScalarProperty Name="Gen_EndTime" ColumnName="Gen_EndTime" />
           <ScalarProperty Name="Gene_Theme" ColumnName="Gene_Theme" />
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+          <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="GuestSpeakerID" ColumnName="GuestSpeakerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

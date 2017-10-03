@@ -42,7 +42,7 @@ namespace TRWLASystemMaster.Controllers
 
 
        
-        private TWRLADB_Staging_V2Entities3 db = new TWRLADB_Staging_V2Entities3();
+        private TWRLADB_Staging_V2Entities4 db = new TWRLADB_Staging_V2Entities4();
         //Register Student
         public ActionResult Register()
         {
@@ -238,7 +238,7 @@ namespace TRWLASystemMaster.Controllers
 
 
                 MailMessage msg = new MailMessage();
-                msg.From = new MailAddress("u14284783@tuks.co.za");
+                msg.From = new MailAddress("u15213626@tuks.co.za");
                 msg.To.Add(model.Email);
                 msg.Subject = " Reset Password Link";
                 msg.Body = "Dear " + model.Email + "\n\n You have requested to reset your password for to your account (   <a href =\"" + callbackUrl + "\">here</a>\n\n Kind Regards,\nTRLWA Management";
@@ -248,7 +248,7 @@ namespace TRWLASystemMaster.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("u14284783@tuks.co.za", "Rootsms4");
+                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                 smtp.EnableSsl = true;
                 smtp.Send(msg);
 
