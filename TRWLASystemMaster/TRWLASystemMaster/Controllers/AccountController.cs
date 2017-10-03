@@ -307,9 +307,9 @@ namespace TRWLASystemMaster.Controllers
 
             //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
 
-      
+            return View(secans);
 
-            return View(ans);
+            //return View(ans);
         }
 
 
