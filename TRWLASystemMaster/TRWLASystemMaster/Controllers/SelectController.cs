@@ -72,6 +72,10 @@ namespace TRWLASystemMaster.Controllers
 
             if (code != 0)
             {
+                UniqueCode myCode = db.UniqueCodes.FirstOrDefault(p => p.Code == variable);
+                db.UniqueCodes.Remove(myCode);
+                db.SaveChanges();
+
                 return RedirectToAction("RegisterVol", "Account");
             }
             else
