@@ -12,16 +12,12 @@ namespace TRWLASystemMaster.Models.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class MasterData
+    public partial class ClassAttendance
     {
-        public int MasterID { get; set; }
-        public int LecAttend { get; set; }
-        public int FuncAttend { get; set; }
-        public int ComAttend { get; set; }
-        public int GenAttend { get; set; }
-        public System.DateTime RegDate { get; set; }
-        public int LogAttendTime { get; set; }
-        public int CancelEvent { get; set; }
-        public string PassFactor { get; set; }
+        public int AtPK { get; set; }
+        public int Funcion { get; set; }
+        public int Lecture { get; set; }
+        public int Com { get; set; }
+        public int Gen { get; set; }
     }
 }

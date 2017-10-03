@@ -40,9 +40,16 @@ namespace TRWLASystemMaster.Controllers
         /// </summary>
         /// 
 
+        public ActionResult LogOff()
+        {
+            Session["User"] = null; //it's my session variable
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut(); //you write this when you use FormsAuthentication
+            return RedirectToAction("Login", "Account");
+        }
 
-       
-        private TWRLADB_Staging_V2Entities4 db = new TWRLADB_Staging_V2Entities4();
+        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
         //Register Student
         public ActionResult Register()
         {
@@ -144,6 +151,7 @@ namespace TRWLASystemMaster.Controllers
         //Login/////
         public ActionResult Login()
         {
+            Session["User"] = "Default";
             return View();
         }
 

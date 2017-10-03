@@ -18,7 +18,7 @@ namespace TRWLASystemMaster.Security
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             bool authorize = false;
-            using (TWRLADB_Staging_V2Entities4 db = new TWRLADB_Staging_V2Entities4())
+            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
             {
                 UserManager UM = new UserManager();
                 foreach (var roles in userAssignedRoles)

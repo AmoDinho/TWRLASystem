@@ -12,8 +12,24 @@
     @Styles.Render("~/Content/Custom")
     @Scripts.Render("~/bundles/modernizr")
 
+    <script>
+    //session end
+    var sessionTimeoutWarning = @Session.Timeout- 1;
+
+    var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+    setTimeout('SessionEnd()', sTimeout);
+
+    function SessionEnd() {
+        window.location = "/Account/LogOff";
+    }
+    </script>
+
 </head>
 <body>
+    @if (Session["User"] == null)
+    {
+        Html.RenderAction("ErrorPage", "TRWLASchedules");
+    }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">

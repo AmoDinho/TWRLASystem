@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class SYSUserProfilesController : Controller
     {
-        private TWRLADB_Staging_V2Entities4 db = new TWRLADB_Staging_V2Entities4();
+        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
         //
         /// <summary>
         /// To do :

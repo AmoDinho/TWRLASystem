@@ -35,6 +35,16 @@
     <Property Name="TableAff" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="ClassAttendance">
+    <Key>
+      <PropertyRef Name="AtPK" />
+    </Key>
+    <Property Name="AtPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Funcion" Type="int" Nullable="false" />
+    <Property Name="Lecture" Type="int" Nullable="false" />
+    <Property Name="Com" Type="int" Nullable="false" />
+    <Property Name="Gen" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
       <PropertyRef Name="ComEngID" />
@@ -167,6 +177,7 @@
     <Property Name="RegDate" Type="date" Nullable="false" />
     <Property Name="LogAttendTime" Type="int" Nullable="false" />
     <Property Name="CancelEvent" Type="int" Nullable="false" />
+    <Property Name="PassFactor" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Milestone">
     <Key>
@@ -1067,6 +1078,7 @@
     <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassAttendance" EntityType="Self.ClassAttendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComEngEvent" EntityType="Self.ComEngEvent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventMessage" EntityType="Self.EventMessage" Schema="dbo" store:Type="Tables" />

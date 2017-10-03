@@ -40,6 +40,16 @@
           <Property Name="TableAff" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ClassAttendance">
+          <Key>
+            <PropertyRef Name="AtPK" />
+          </Key>
+          <Property Name="AtPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Funcion" Type="int" Nullable="false" />
+          <Property Name="Lecture" Type="int" Nullable="false" />
+          <Property Name="Com" Type="int" Nullable="false" />
+          <Property Name="Gen" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
             <PropertyRef Name="ComEngID" />
@@ -172,6 +182,7 @@
           <Property Name="RegDate" Type="date" Nullable="false" />
           <Property Name="LogAttendTime" Type="int" Nullable="false" />
           <Property Name="CancelEvent" Type="int" Nullable="false" />
+          <Property Name="PassFactor" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Milestone">
           <Key>
@@ -1072,6 +1083,7 @@
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditLog" EntityType="Self.AuditLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassAttendance" EntityType="Self.ClassAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComEngEvent" EntityType="Self.ComEngEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Content" EntityType="Self.Content" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventMessage" EntityType="Self.EventMessage" Schema="dbo" store:Type="Tables" />
@@ -1374,6 +1386,16 @@
           <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SYSUserProfile" Relationship="Self.FK__AuditLog__SYSUse__09A971A2" FromRole="AuditLog" ToRole="SYSUserProfile" />
         </EntityType>
+        <EntityType Name="ClassAttendance">
+          <Key>
+            <PropertyRef Name="AtPK" />
+          </Key>
+          <Property Name="AtPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Funcion" Type="Int32" Nullable="false" />
+          <Property Name="Lecture" Type="Int32" Nullable="false" />
+          <Property Name="Com" Type="Int32" Nullable="false" />
+          <Property Name="Gen" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
             <PropertyRef Name="ComEngID" />
@@ -1541,6 +1563,7 @@
           <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
           <Property Name="CancelEvent" Type="Int32" Nullable="false" />
+          <Property Name="PassFactor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Milestone">
           <Key>
@@ -2503,10 +2526,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TWRLADB_Staging_V2Entities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TWRLADB_Staging_V2Entities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+          <EntitySet Name="ClassAttendances" EntityType="Self.ClassAttendance" />
           <EntitySet Name="ComEngEvents" EntityType="Self.ComEngEvent" />
           <EntitySet Name="Contents" EntityType="Self.Content" />
           <EntitySet Name="EventMessages" EntityType="Self.EventMessage" />
@@ -2765,7 +2789,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities4">
+        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities5">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -2801,6 +2825,17 @@
                 <ScalarProperty Name="TypeTran" ColumnName="TypeTran" />
                 <ScalarProperty Name="TableAff" ColumnName="TableAff" />
                 <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassAttendances">
+            <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
+              <MappingFragment StoreEntitySet="ClassAttendance">
+                <ScalarProperty Name="AtPK" ColumnName="AtPK" />
+                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+                <ScalarProperty Name="Lecture" ColumnName="Lecture" />
+                <ScalarProperty Name="Com" ColumnName="Com" />
+                <ScalarProperty Name="Gen" ColumnName="Gen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2944,6 +2979,7 @@
                 <ScalarProperty Name="RegDate" ColumnName="RegDate" />
                 <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
                 <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
+                <ScalarProperty Name="PassFactor" ColumnName="PassFactor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities4">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities5">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -36,6 +36,17 @@
           <ScalarProperty Name="TypeTran" ColumnName="TypeTran" />
           <ScalarProperty Name="TableAff" ColumnName="TableAff" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassAttendances">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
+        <MappingFragment StoreEntitySet="ClassAttendance">
+          <ScalarProperty Name="AtPK" ColumnName="AtPK" />
+          <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+          <ScalarProperty Name="Lecture" ColumnName="Lecture" />
+          <ScalarProperty Name="Com" ColumnName="Com" />
+          <ScalarProperty Name="Gen" ColumnName="Gen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -179,6 +190,7 @@
           <ScalarProperty Name="RegDate" ColumnName="RegDate" />
           <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
           <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
+          <ScalarProperty Name="PassFactor" ColumnName="PassFactor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

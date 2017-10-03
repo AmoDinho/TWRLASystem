@@ -44,6 +44,16 @@
     <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SYSUserProfile" Relationship="Self.FK__AuditLog__SYSUse__09A971A2" FromRole="AuditLog" ToRole="SYSUserProfile" />
   </EntityType>
+  <EntityType Name="ClassAttendance">
+    <Key>
+      <PropertyRef Name="AtPK" />
+    </Key>
+    <Property Name="AtPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Funcion" Type="Int32" Nullable="false" />
+    <Property Name="Lecture" Type="Int32" Nullable="false" />
+    <Property Name="Com" Type="Int32" Nullable="false" />
+    <Property Name="Gen" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
       <PropertyRef Name="ComEngID" />
@@ -211,6 +221,7 @@
     <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
     <Property Name="CancelEvent" Type="Int32" Nullable="false" />
+    <Property Name="PassFactor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Milestone">
     <Key>
@@ -1173,10 +1184,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TWRLADB_Staging_V2Entities4" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TWRLADB_Staging_V2Entities5" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
+    <EntitySet Name="ClassAttendances" EntityType="Self.ClassAttendance" />
     <EntitySet Name="ComEngEvents" EntityType="Self.ComEngEvent" />
     <EntitySet Name="Contents" EntityType="Self.Content" />
     <EntitySet Name="EventMessages" EntityType="Self.EventMessage" />
