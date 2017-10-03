@@ -558,7 +558,13 @@ create table GenEvent
 	Gen_EndTime time not null,
 	Gene_Theme varchar(25) null,
 	VenueID int null,
-	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID)
+	ResID int null,
+	ContentID int null,
+	GuestSpeakerID int null,
+	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
+	FOREIGN KEY (ResID) REFERENCES Residence(ResID),
+	FOREIGN KEY (ContentID ) REFERENCES Content(ContentID),
+	FOREIGN KEY (GuestSpeakerID) REFERENCES GuestSpeaker(GuestSpeakerID)
 )
 ---	[dbo].[ComEngEvent]
 
@@ -1236,7 +1242,8 @@ create table MasterData
 	GenAttend int not null,
 	RegDate date not null,
 	CancelEvent int not null,
-	LogAttendTime int not null
+	LogAttendTime int not null,
+	PassFactor varchar(5) null
 )
 
 alter table MasterData

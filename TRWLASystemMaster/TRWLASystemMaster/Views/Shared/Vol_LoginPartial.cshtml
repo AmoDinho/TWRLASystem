@@ -10,12 +10,13 @@
         @*<li>@Html.ActionLink("User Profile", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
 
         @*'@Url.Action("Index", "UserProfile")'*@
-
+        <li><a><i class="fa fa-question" aria-hidden="true"></i></a></li>
         <li><a href='@Url.Action("EditProfile", "Manage", new { id = (int)Session["User"] })'><i class="fa fa-user fa-fw"> </i></a></li>
         <li> 
     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bars fa-fw"></i>User<span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
     <ul class="dropdown-menu">
         @*<li><a href="#"><i class="fa fa-folder-open-o fa-fw"></i> Reports</a></li>*@
+        
         <li><a href='@Url.Action("ManageUser", "Manage")'><i class="fa fa-lock" aria-hidden="true"></i> Register Admin</a></li>
         <li><a href='@Url.Action( "Index", "UserTypes")'><i class="fa fa-user-plus fa-fw"></i> Assign User Types</a></li>
         <li class="divider"></li>
