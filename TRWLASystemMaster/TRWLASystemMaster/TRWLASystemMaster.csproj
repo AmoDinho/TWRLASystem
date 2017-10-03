@@ -725,6 +725,7 @@
     <Content Include="Views\SYSUserProfiles\Edit.cshtml" />
     <Content Include="Views\SYSUserProfiles\Index.cshtml" />
     <Content Include="Views\Account\SecuirtyAnswer.cshtml" />
+    <Content Include="Views\Manage\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

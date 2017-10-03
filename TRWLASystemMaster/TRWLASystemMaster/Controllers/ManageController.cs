@@ -50,7 +50,7 @@ namespace TRWLASystemMaster.Controllers
         {
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
             SYSUserProfile pro = db.SYSUserProfiles.Find(id);
@@ -133,7 +133,39 @@ namespace TRWLASystemMaster.Controllers
         //
         ///  dELTETE USER ACCOUNT
         ////
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUserProfile nuser = db.SYSUserProfiles.Find(id);
+            
+            if (nuser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(nuser);
+        }
 
+        // POST: UserTypes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            try
+            {
+                SYSUserProfile user = db.SYSUserProfiles.Find(id);
+                db.SYSUserProfiles.Remove(user);
+                db.SaveChanges();
+                return RedirectToAction("Index","Home");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+        }
 
 
         //IDENTITY CODE STRUCTURE
