@@ -90,14 +90,6 @@ StudentTypeDescription varchar(25) not null
 )
 go
 
----SecurityAnswer---
-create table SecurityAnswer
- (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
- Security_Answer varchar(25) not null
---StudentID int references Student(StudentID)
- )
- go
 
 
 CREATE TABLE [dbo].[SYSUser](
@@ -125,7 +117,7 @@ CREATE TABLE [dbo].[SYSUserProfile](
 	[DoB] [datetime]  NOT NULL,
 	[Phonenumber] [varchar](50) NOT NULL,
 
-	SecurityAnswerID int NOT NULL,
+	
 	Graduate varchar(10) null,
     Degree varchar(35) null,
     YearOfStudy datetime null,
@@ -138,7 +130,7 @@ CREATE TABLE [dbo].[SYSUserProfile](
 	
 	ResID int FOREIGN KEY REFERENCES Residence(ResID)  null,
 
-	FOREIGN KEY (SecurityAnswerID) REFERENCES SecurityAnswer(SecurityAnswerID)
+	
     )
 GO
 
@@ -215,15 +207,7 @@ SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) nul
 )
 go
 
----SecurityAnswer---
-create table SecurityAnswer
- (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
- Security_Answer varchar(25) not null,
-StudentID int FOREIGN KEY REFERENCES Student(StudentID)
---StudentID int references Student(StudentID)
- )
- go
+
 
     ---Milestone---     
 create table Milestone
@@ -243,6 +227,17 @@ MilestoneID int references Milestone(MilestoneID),
 primary key(/*StudentID*/ MilestoneID)
 )
 go
+
+---SecurityAnswer---
+create table SecurityAnswer
+ (SecurityAnswerID int identity(1,1) primary key,
+ Security_Question varchar(150) not null,
+ Security_Answer varchar(25) not null,
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
+ )
+ go
+
+
 
   --- VolunteerType  ----
 create table VolunteerType
@@ -435,11 +430,6 @@ insert into Volunteer(Volunteer_Name,Volunteer_Surname,Volunteer_Phone,Volunteer
 values('Vuyo','Renene','0741258963','1994/06/12','None',4,1,1)
 GO
 
---Security question---
-
- insert into SecurityAnswer(Security_Question,Security_Answer)
- values('What is your mothers maden name','Kelebogile')
- go
 
 				  
 				  /* TEST RECORDS!!! - 
@@ -888,11 +878,6 @@ GO
 
 
 
---Security question---
-
- insert into SecurityAnswer(Security_Question,Security_Answer)
- values('What is your mothers maden name','Kelebogile')
- go
 
 				  
 				  /* TEST RECORDS!!! - 
@@ -1093,21 +1078,6 @@ Values(15213626, 1, 'Bcom Informatics', '2017', 'Christine','Oakes', '0834074027
  
 go
 
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is the Maiden Name of your Mother', 'Wallace')
-go
-
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is first dogs name?', 'Cadbury')
-go
-
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is the name of your street where you were born', 'Linksfield')
-go
-
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is was your favourite sport in high school', 'Swimming')
-go
 
 /*Look up Roles*/
 
@@ -1125,8 +1095,8 @@ INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModified
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Admin','Admin',1,1)  
   
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1,1)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1)  
  
   
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1138,8 +1108,8 @@ VALUES (1,1,1,1,1)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Admin2','Admin2',2,2)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',2,2)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1155,8 +1125,8 @@ VALUES (2,1,1,2,2)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student1','Student2',3,3)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456','14284783','BCom','2017/01/01',4,3,3)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1168,8 +1138,8 @@ VALUES (3,2,1,3,3)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student2','Student3',4,4)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258','14847834','BCom','2017/01/01',2,4,4)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1181,12 +1151,35 @@ VALUES (4,2,1,4,4)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student3','Student4',5,5)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896',3,'17845796','Soil Science','2017/01/01',2,5,5)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896','17845796','Soil Science','2017/01/01',2,5,5)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES (5,2,1,5,5)
+
+
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is the Maiden Name of your Mother', 'Wallace',1)
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is first dogs name?', 'Cadbury',2)
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is the name of your street where you were born', 'Linksfield',3)
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is was your favourite sport in high school', 'Swimming',4)
+go
+
+
+
+
+
 
 ---Unique Code ----
 INSERT INTO UniqueCode(Code,stamptime)

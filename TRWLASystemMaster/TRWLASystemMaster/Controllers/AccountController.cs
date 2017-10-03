@@ -48,7 +48,7 @@ namespace TRWLASystemMaster.Controllers
         {
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+         
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             return View();
         }
@@ -126,7 +126,7 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult RegisterVol()
         {
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+           
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             return View();
         }
@@ -261,91 +261,82 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(Models.ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+
+
+            var email = from c in db.SYSUserProfiles
+                       where c.Email == model.Email
+                       select c;
+
+
+            if (email.ToList().Count == 1)
             {
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { Id = confirmationToken }, protocol: Request.Url.Scheme);
 
-
-                MailMessage msg = new MailMessage();
-                msg.From = new MailAddress("u14284783@tuks.co.za");
-                msg.To.Add(model.Email);
-                msg.Subject = " Reset Password Link";
-                msg.Body = "Dear " + model.Email + "\n\n You have requested to reset your password for to your account (   <a href =\"" + callbackUrl + "\">here</a>\n\n Kind Regards,\nTRLWA Management";
-
-                SmtpClient smtp = new SmtpClient("xxx.xxx.xxx.xxx", 587);
-
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("u14284783@tuks.co.za", "Rootsms4");
-                smtp.EnableSsl = true;
-                smtp.Send(msg);
-
-                //   var token = WebSecurity.GeneratePasswordResetToken(Users.UserName);
-
-
-                ModelState.Clear();
-
-
-                ViewBag.Status = "Email Sent Successfully.";
-                return View("ForgotPasswordConfirmation");
-
-                //var user = await UserManager.FindByNameAsync(model.Email);
-                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                //{
-                //    // Don't reveal that the user does not exist or is not confirmed
-                //    return View("ForgotPasswordConfirmation");
-                //}
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("SecuirtyAnswer", "Account");
             }
 
+
+
+            return View(email);
             // If we got this far, something failed, redisplay form
-            return View(model);
+           
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+        //Secuirty Answer get
         [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
+        public ActionResult SecuirtyAnswer(SecurityAnswer secans)
         {
+
+
             return View();
         }
 
-        //// GET: /Account/ResetPassword
-        //[AllowAnonymous]
-        //public ActionResult ResetPassword(string rt)
+
+        ////Secuirty Answer Post
+        //[HttpPost]
+        //public ActionResult SecuirtyAnswer()
         //{
-        //    ResetPasswordModel model = new ResetPasswordModel();
-        //    model.ReturnToken = rt;
-        //    return View(model);
+
+        //    return View();
         //}
 
+        //// GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string rt)
+        {
+           
+            return View();
+        }
+
         //// POST: /Account/ResetPassword
-        //[HttpPost]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword()
+        {
+            if (ModelState.IsValid)
+            {
+               
+            }
+
+            return View();
+        }
+
+
+
+        //
+        // GET: /Account/ForgotPasswordConfirmation
         //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ResetPassword(ResetPasswordModel model)
+        //public ActionResult ForgotPasswordConfirmation()
         //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, model.Password);
-        //        if (resetResponse)
-        //        {
-        //            ViewBag.Message = "Successfully Changed";
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = "Something went horribly wrong!";
-        //        }
-        //    }
-        //    return View(model);
+        //    return View();
         //}
+
+
+
+
+
+
+
 
         //Sign Out
 
