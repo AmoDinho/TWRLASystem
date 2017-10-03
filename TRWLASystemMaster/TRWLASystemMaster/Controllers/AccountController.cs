@@ -42,7 +42,7 @@ namespace TRWLASystemMaster.Controllers
 
 
        
-        private TWRLADB_Staging_V2Entities db = new TWRLADB_Staging_V2Entities();
+        private TWRLADB_Staging_V2Entities1 db = new TWRLADB_Staging_V2Entities1();
         //Register Student
         public ActionResult Register()
         {
@@ -109,18 +109,18 @@ namespace TRWLASystemMaster.Controllers
           }
         }
 
-        public FileContentResult GetImage(int sysuserID)
-        {
-            SYSUserProfile prod = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserProfileID == sysuserID);
-            if (prod != null)
-            {
-                return File(prod.ImageData, prod.ImageMimeType);
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //public FileContentResult GetImage(int sysuserID)
+        //{
+        //    SYSUserProfile prod = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserProfileID == sysuserID);
+        //    if (prod != null)
+        //    {
+        //        return File(prod.ImageData, prod.ImageMimeType);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
         //Register Volunteer
         public ActionResult RegisterVol()
@@ -267,10 +267,19 @@ namespace TRWLASystemMaster.Controllers
                        where c.Email == model.Email
                        select c;
 
+            //TempData["user"] = email;
+            //  var user = db.SYSUserProfiles.Where(O => O.Email.Equals(email));
+
+
+            SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
+
+            int ID = myUser.SYSUserProfileID;
+
+            TempData["User"] = ID;
 
             if (email.ToList().Count == 1)
             {
-
+                
                 return RedirectToAction("SecuirtyAnswer", "Account");
             }
 
@@ -285,9 +294,22 @@ namespace TRWLASystemMaster.Controllers
         [AllowAnonymous]
         public ActionResult SecuirtyAnswer(SecurityAnswer secans)
         {
+            var user = TempData["User"];
 
+            var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID.Equals(user));
 
-            return View();
+            //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
+            //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
+
+            //var ans = from a in db.SecurityAnswers
+            //          where a.SYSUserProfileID = 
+            //SecurityAnswer secans = db.SecurityAnswers.Find(id);
+
+            //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
+      
+
+            return View(ans);
         }
 
 

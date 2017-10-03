@@ -11,8 +11,7 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
-
+    
     public partial class SYSUserProfile
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,6 +25,7 @@ namespace TRWLASystemMaster.Models.DB
             this.progressbars = new HashSet<progressbar>();
             this.RSVP_Event = new HashSet<RSVP_Event>();
             this.RSVPSchedules = new HashSet<RSVPSchedule>();
+            this.SecurityAnswers = new HashSet<SecurityAnswer>();
             this.Students = new HashSet<Student>();
         }
     
@@ -38,7 +38,6 @@ namespace TRWLASystemMaster.Models.DB
         public string Email { get; set; }
         public System.DateTime DoB { get; set; }
         public string Phonenumber { get; set; }
-        public int SecurityAnswerID { get; set; }
         public string Graduate { get; set; }
         public string Degree { get; set; }
         public Nullable<System.DateTime> YearOfStudy { get; set; }
@@ -48,9 +47,6 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<System.DateTime> RowModifiedDateTime { get; set; }
         public Nullable<int> ResID { get; set; }
         public byte[] RowVersion { get; set; }
-        public byte[] ImageData { get; set; }
-        [HiddenInput(DisplayValue = false)]
-        public string ImageMimeType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
@@ -69,7 +65,8 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RSVPSchedule> RSVPSchedules { get; set; }
-        public virtual SecurityAnswer SecurityAnswer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SecurityAnswer> SecurityAnswers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         public virtual SYSUser SYSUser { get; set; }

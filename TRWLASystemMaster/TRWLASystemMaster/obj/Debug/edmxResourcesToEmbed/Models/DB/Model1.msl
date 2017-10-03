@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities1">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -255,6 +255,7 @@
           <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
           <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
           <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -309,8 +310,6 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
-          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
-          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
@@ -320,7 +319,6 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="DoB" ColumnName="DoB" />
           <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-          <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
           <ScalarProperty Name="Graduate" ColumnName="Graduate" />
           <ScalarProperty Name="Degree" ColumnName="Degree" />
           <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
