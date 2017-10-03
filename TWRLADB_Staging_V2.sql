@@ -1117,15 +1117,7 @@ VALUES (2,1,1,2,2)
 
 
 ---test
-INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES ('Admin3','Admin3',6,6)  
-
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (6,'Chole','Purco','1995/02/08',2,'sarah@tuks.co.za','0821478961',6,6)  
-
-
-INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (6,1,1,6,6)
+  
 
 
 
