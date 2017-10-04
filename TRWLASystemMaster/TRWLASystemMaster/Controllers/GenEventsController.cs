@@ -46,6 +46,15 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult GU()
+        {
+            TempData["Gu"] = 1;
+            int gu = (int)TempData["Gu"];
+            return Json(gu);
+        }
+
         // POST: GenEvents/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

@@ -125,12 +125,12 @@
             <div class="col-md-10">
                 <div class="form-inline">
                     <div class="form-group">
-                        @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control", @id = "gudrop" })
                         @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
                         <p>Exclude: @Html.RadioButtonFor(model => model.GuestSpeakerID, @TempData["Gu"] = 1)</p>
-                        <input type="radio" id="Gu" />
+                        <input type="radio" id="Gu" onclick="doNavigate()" />
                     </div>
                 </div>
 
@@ -150,7 +150,32 @@
 </div>
 
 <script>
-    $('#gu').click(function () {
-        if ($('#radio_button').is(':checked')) { alert("it's checked"); }
+    $(document).ready(function () {
+        if ($("#gu").prop("checked")) {
+            alert("it's checked");
+        }
     });
+
+    function doNavigate() {
+        $.ajax({
+            url: "GetEventsController/GU", // or <%=Url helper method can't remember
+            type: "POST",
+            dataType: "json",
+
+            complete: function () {
+                alert("it's checked");
+            },
+
+            success: function (data) {
+                alert("it's checked");
+            },
+
+            error: function () {
+                alert("it failed");
+            },
+        });
+
+
+
+    };
 </script>
