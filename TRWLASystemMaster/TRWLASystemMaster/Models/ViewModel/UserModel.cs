@@ -45,10 +45,11 @@ namespace TRWLASystemMaster.Models.ViewModel
         public int UserTypeID { get; set; }
 
    
-        [Display(Name = " StudentNumber")]
-        [DataType(DataType.PhoneNumber)] 
+        //[Display(Name = "StudentNumber")]
+        [DataType(DataType.Custom)] 
         [Required(ErrorMessage = "Student Number Required!")]
-        [RegularExpression(@"^\(?([0-8]{3})\)?[-. ]?([0-8]{3})[-. ]?([0-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
+        [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
+       //  [RegularExpression(@"^\(?([0-8]{3})\)?[-. ]?([0-8]{3})[-. ]?([0-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
 
        
