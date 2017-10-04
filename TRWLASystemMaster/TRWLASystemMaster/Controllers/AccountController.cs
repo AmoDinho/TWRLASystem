@@ -76,6 +76,7 @@ namespace TRWLASystemMaster.Controllers
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
                         Session["User"] = myUserP.SYSUserProfileID;
 
+                        TempData["nUse"] = myUserP.SYSUserProfileID;
                         return RedirectToAction("SecurityQuestion", "Account");
 
                     }
@@ -301,12 +302,13 @@ namespace TRWLASystemMaster.Controllers
 
             //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
 
-            //  secans.Security_Question = Convert.ToString(ques);
+            // secans.Security_Question = Convert.ToString(ques);
 
+            
             ViewBag.Question = ques;
-
-
-            return View(ques.ToList());
+       
+             
+            return View();
 
             //return View(ans);
         }
@@ -327,8 +329,9 @@ namespace TRWLASystemMaster.Controllers
        // [HttpPost]
         public ActionResult SecurityQuestion()
         {
+            int ID = Convert.ToInt32(TempData["nUse"]);
             ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
-
+           // SecurityAnswer sans = db.SecurityAnswers
            
             return View();
         }
