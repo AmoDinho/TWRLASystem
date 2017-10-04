@@ -732,6 +732,9 @@
     <Content Include="Views\GenEvents\Index.cshtml" />
     <Content Include="Views\Manage\Delete.cshtml" />
     <Content Include="Views\SYSUserProfiles\Volunteers.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Account\SecuirtyAnswer.cshtml" />
+    <Content Include="Views\Account\SecurityQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
