@@ -40,14 +40,7 @@ namespace TRWLASystemMaster.Controllers
         /// </summary>
         /// 
 
-        public ActionResult LogOff()
-        {
-            Session["User"] = null; //it's my session variable
-            Session.Clear();
-            Session.Abandon();
-            FormsAuthentication.SignOut(); //you write this when you use FormsAuthentication
-            return RedirectToAction("Login", "Account");
-        }
+
 
         private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
         //Register Student
@@ -55,7 +48,6 @@ namespace TRWLASystemMaster.Controllers
         {
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             return View();
         }
@@ -68,44 +60,60 @@ namespace TRWLASystemMaster.Controllers
 
             try
             {
-               if (ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
                     {
+
                         USV.UserTypeID = 1;
-                        
+
                         UM.AddUserAccount(USV);
+
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
 
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
                         Session["User"] = myUserP.SYSUserProfileID;
 
-                        return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                        TempData["nUse"] = myUserP.SYSUserProfileID;
+                        return RedirectToAction("SecurityQuestion", "Account");
 
                     }
                     else
+
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
-                return RedirectToAction("Register", "Account");
+                return View(USV);
             }
 
-            
-           catch (Exception ex)
-           {
+
+            catch (Exception ex)
+            {
                 return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
-          }
+            }
         }
 
-
+        //public FileContentResult GetImage(int sysuserID)
+        //{
+        //    SYSUserProfile prod = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserProfileID == sysuserID);
+        //    if (prod != null)
+        //    {
+        //        return File(prod.ImageData, prod.ImageMimeType);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
         //Register Volunteer
         public ActionResult RegisterVol()
         {
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+
             return View();
         }
 
@@ -115,8 +123,8 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult RegisterVol(UserSignUpViewVol USV)
         {
 
-           try
-         {
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
@@ -141,17 +149,16 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View();
             }
-           catch (Exception ex)
-           {
-               return View("ErrorSign", new HandleErrorInfo(ex, "Account", "Register"));
-           }
+            catch (Exception ex)
+            {
+                return View("ErrorSign", new HandleErrorInfo(ex, "Account", "Register"));
+            }
 
         }
 
         //Login/////
         public ActionResult Login()
         {
-            Session["User"] = "Default";
             return View();
         }
 
@@ -164,49 +171,49 @@ namespace TRWLASystemMaster.Controllers
             //{
             //    try
             //    {
-                    if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                UserManager UM = new UserManager();
+                string password = UM.GetUserPassword(ULV.LoginName);
+
+                var username = from n in db.SYSUsers
+                               where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
+                               select n;
+
+                SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
+                SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+
+
+                if (string.IsNullOrEmpty(password))
+                    ModelState.AddModelError("", "The user login or password provided is incorrect.");
+                else
+                {
+                    if (ULV.Password.Equals(password))
                     {
-                        UserManager UM = new UserManager();
-                        string password = UM.GetUserPassword(ULV.LoginName);
+                        FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
 
-                        var username = from n in db.SYSUsers
-                                       where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
-                                       select n;
-
-                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
-                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-
-
-                        if (string.IsNullOrEmpty(password))
-                            ModelState.AddModelError("", "The user login or password provided is incorrect.");
-                        else
+                        if (Convert.ToInt32(myUserP.UserTypeID) == 1)
                         {
-                            if (ULV.Password.Equals(password))
-                            {
-                                FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
-
-                                if (Convert.ToInt32(myUserP.UserTypeID) == 1)
-                                {
-                                    Session["User"] = myUserP.SYSUserProfileID;
-                                    return RedirectToAction("StudentMainMenu", "TRWLASchedules");
-                                }
-                                else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
-                                {
-                                    Session["User"] = myUserP.SYSUserProfileID;
-                                    return RedirectToAction("Index", "TRWLASchedules");
-                                }
-
-
-                            }
-                            else
-                            {
-                                ModelState.AddModelError("", "The password provided is incorrect.");
-                            }
+                            Session["User"] = myUserP.SYSUserProfileID;
+                            return RedirectToAction("StudentMainMenu", "TRWLASchedules");
                         }
-                    }
-                    return View(ULV);
+                        else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
+                        {
+                            Session["User"] = myUserP.SYSUserProfileID;
+                            return RedirectToAction("Index", "TRWLASchedules");
+                        }
 
-               // }
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The password provided is incorrect.");
+                    }
+                }
+            }
+            return View(ULV);
+
+            // }
             //    catch (Exception ex)
             //    {
             //        return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Register"));
@@ -215,7 +222,7 @@ namespace TRWLASystemMaster.Controllers
 
 
             //    // If we got this far, something failed, redisplay form  
-               
+
             //}
             // catch (System.OutOfMemoryException e)
             //{
@@ -223,7 +230,7 @@ namespace TRWLASystemMaster.Controllers
             //}
 
 
-           
+
 
         }
 
@@ -240,91 +247,149 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(Models.ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+
+
+            var email = from c in db.SYSUserProfiles
+                        where c.Email == model.Email
+                        select c;
+
+            //TempData["user"] = email;
+            //  var user = db.SYSUserProfiles.Where(O => O.Email.Equals(email));
+
+
+
+
+
+
+
+
+            if (email.ToList().Count == 1)
             {
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { Id = confirmationToken }, protocol: Request.Url.Scheme);
+                SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
 
 
-                MailMessage msg = new MailMessage();
-                msg.From = new MailAddress("u15213626@tuks.co.za");
-                msg.To.Add(model.Email);
-                msg.Subject = " Reset Password Link";
-                msg.Body = "Dear " + model.Email + "\n\n You have requested to reset your password for to your account (   <a href =\"" + callbackUrl + "\">here</a>\n\n Kind Regards,\nTRLWA Management";
-
-                SmtpClient smtp = new SmtpClient("xxx.xxx.xxx.xxx", 587);
-
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                smtp.EnableSsl = true;
-                smtp.Send(msg);
-
-                //   var token = WebSecurity.GeneratePasswordResetToken(Users.UserName);
-
-
-                ModelState.Clear();
-
-
-                ViewBag.Status = "Email Sent Successfully.";
-                return View("ForgotPasswordConfirmation");
-
-                //var user = await UserManager.FindByNameAsync(model.Email);
-                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                //{
-                //    // Don't reveal that the user does not exist or is not confirmed
-                //    return View("ForgotPasswordConfirmation");
-                //}
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                int ID = myUser.SYSUserProfileID;
+                TempData["User"] = ID;
+                return RedirectToAction("SecuirtyAnswer", "Account");
             }
 
+
+
+            return View(email);
             // If we got this far, something failed, redisplay form
-            return View(model);
+
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+        //Secuirty Answer get
         [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
+        public ActionResult SecuirtyAnswer()
         {
+            int user = Convert.ToInt32(TempData["User"]);
+
+            //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
+
+            var ques = from q in db.SecurityAnswers
+                       where q.SYSUserProfileID == user
+                       select q.Security_Question;
+
+
+            //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
+            //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
+
+            //var ans = from a in db.SecurityAnswers
+            //          where a.SYSUserProfileID = 
+            //SecurityAnswer secans = db.SecurityAnswers.Find(id);
+
+            //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
+            // secans.Security_Question = Convert.ToString(ques);
+
+
+            ViewBag.Question = ques;
+
+
+            return View();
+
+            //return View(ans);
+        }
+
+
+        ////Secuirty Answer Post
+        //[HttpPost]
+        //public ActionResult SecuirtyAnswer()
+        //{
+
+        //    return View();
+        //}
+
+
+
+
+
+        // [HttpPost]
+        public ActionResult SecurityQuestion()
+        {
+            int ID = Convert.ToInt32(TempData["nUse"]);
+            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            // SecurityAnswer sans = db.SecurityAnswers
+
             return View();
         }
 
+        [HttpPost]
+        public ActionResult SecurityQuestion([Bind(Include = "SecurityAnswerID,Security_Question,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                db.SecurityAnswers.Add(seans);
+                db.SaveChanges();
+                return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+            }
+
+
+            return View(seans);
+        }
+
         //// GET: /Account/ResetPassword
-        //[AllowAnonymous]
-        //public ActionResult ResetPassword(string rt)
-        //{
-        //    ResetPasswordModel model = new ResetPasswordModel();
-        //    model.ReturnToken = rt;
-        //    return View(model);
-        //}
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string rt)
+        {
+
+            return View();
+        }
 
         //// POST: /Account/ResetPassword
-        //[HttpPost]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword()
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View();
+        }
+
+
+
+        //
+        // GET: /Account/ForgotPasswordConfirmation
         //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ResetPassword(ResetPasswordModel model)
+        //public ActionResult ForgotPasswordConfirmation()
         //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, model.Password);
-        //        if (resetResponse)
-        //        {
-        //            ViewBag.Message = "Successfully Changed";
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = "Something went horribly wrong!";
-        //        }
-        //    }
-        //    return View(model);
+        //    return View();
         //}
+
+
+
+
+
+
+
 
         //Sign Out
 
