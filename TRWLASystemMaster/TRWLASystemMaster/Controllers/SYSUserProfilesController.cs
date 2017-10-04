@@ -52,6 +52,23 @@ namespace TRWLASystemMaster.Controllers
             return View(sYSUserProfiles.ToList());
         }
 
+        public ActionResult Volunteers(string searchString)
+        {
+            var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SYSUser).Include(s => s.UserType);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sYSUserProfiles = sYSUserProfiles.Where(s => s.FirstName.Contains(searchString));
+                        
+
+            }
+
+            return View(sYSUserProfiles.ToList());
+
+        }
+
+
+
         // GET: SYSUserProfiles/Details/5
         public ActionResult Details(int? id)
         {
