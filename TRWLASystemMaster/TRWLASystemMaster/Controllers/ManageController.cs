@@ -14,6 +14,8 @@ using static TRWLASystemMaster.Models.ViewModel.UserProfileView;
 using TRWLASystemMaster.Models.DB;
 using System.Data.Entity;
 using System.Net;
+using System.Diagnostics;
+using System.Data.Entity.Validation;
 using System.Data.Entity.Infrastructure;
 
 namespace TRWLASystemMaster.Controllers
@@ -45,12 +47,12 @@ namespace TRWLASystemMaster.Controllers
 
         // [Authorize]
 
-            //Add an ID for the SYSUserProfile and make a call from the database using that UserProfileID as in ComEngEventsController(Edit)
+        //Add an ID for the SYSUserProfile and make a call from the database using that UserProfileID as in ComEngEventsController(Edit)
         public ActionResult EditProfile(int? id)
         {
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
             SYSUserProfile pro = db.SYSUserProfiles.Find(id);
@@ -83,7 +85,7 @@ namespace TRWLASystemMaster.Controllers
                 ModelState.AddModelError(string.Empty,
                     "Unable to save changes. The department was deleted by another user.");
                 ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-                ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
                 ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
                 return View(deletedDepartment);
@@ -127,13 +129,102 @@ namespace TRWLASystemMaster.Controllers
         }
 
 
+        //Change password
 
+
+        public ActionResult ChangePassword(int? id)
+        {
+
+            SYSUser us = db.SYSUsers.Find(id);
+            return View(us);
+
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "SYSUserID,LoginName ,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sysuser, int? id)
+        {
+            /* 
+             
+              
+            var pass = from p in db.SYSUsers
+                       where p.PasswordEncryptedText == model.password
+                       select c;
+            if(pass == db.sysuser.passwod)
+            {
+              
+            }
+             
+             */
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //SYSUser us = db.SYSUsers.Find(id);
+                    db.Entry(sysuser).State = EntityState.Added;
+                    db.SaveChanges();
+                    return RedirectToAction("EditProfile", "Manage");
+
+                }
+
+            }
+
+
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+            }
+
+
+            return View(sysuser);
+        }
 
         ///
         //
         ///  dELTETE USER ACCOUNT
         ////
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUserProfile nuser = db.SYSUserProfiles.Find(id);
 
+            if (nuser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(nuser);
+        }
+
+        // POST: UserTypes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            try
+            {
+                SYSUserProfile user = db.SYSUserProfiles.Find(id);
+                db.SYSUserProfiles.Remove(user);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+            }
+        }
 
 
         //IDENTITY CODE STRUCTURE
