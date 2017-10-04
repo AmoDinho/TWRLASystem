@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -42,13 +42,11 @@
         </EntityType>
         <EntityType Name="ClassAttendance">
           <Key>
-            <PropertyRef Name="AtPK" />
+            <PropertyRef Name="CAPK" />
           </Key>
-          <Property Name="AtPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Funcion" Type="int" Nullable="false" />
-          <Property Name="Lecture" Type="int" Nullable="false" />
-          <Property Name="Com" Type="int" Nullable="false" />
-          <Property Name="Gen" Type="int" Nullable="false" />
+          <Property Name="CAPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="attend" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
@@ -119,6 +117,7 @@
           <Property Name="ResID" Type="int" />
           <Property Name="ContentID" Type="int" />
           <Property Name="GuestSpeakerID" Type="int" />
+          <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="GuestSpeaker">
           <Key>
@@ -1337,8 +1336,7 @@
             <End Role="Volunteer" EntitySet="Volunteer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TWRLADB_Staging_V2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1388,13 +1386,11 @@
         </EntityType>
         <EntityType Name="ClassAttendance">
           <Key>
-            <PropertyRef Name="AtPK" />
+            <PropertyRef Name="CAPK" />
           </Key>
-          <Property Name="AtPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Funcion" Type="Int32" Nullable="false" />
-          <Property Name="Lecture" Type="Int32" Nullable="false" />
-          <Property Name="Com" Type="Int32" Nullable="false" />
-          <Property Name="Gen" Type="Int32" Nullable="false" />
+          <Property Name="CAPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="attend" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ComEngEvent">
           <Key>
@@ -1487,6 +1483,7 @@
           <NavigationProperty Name="Venue" Relationship="Self.FK__GenEvent__VenueI__5812160E" FromRole="GenEvent" ToRole="Venue" />
           <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__GenID__76969D2E" FromRole="GenEvent" ToRole="RSVP_Event" />
           <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__GenID__656C112C" FromRole="GenEvent" ToRole="TRWLASchedule" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="GuestSpeaker">
           <Key>
@@ -2831,11 +2828,9 @@
           <EntitySetMapping Name="ClassAttendances">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
               <MappingFragment StoreEntitySet="ClassAttendance">
-                <ScalarProperty Name="AtPK" ColumnName="AtPK" />
-                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
-                <ScalarProperty Name="Lecture" ColumnName="Lecture" />
-                <ScalarProperty Name="Com" ColumnName="Com" />
-                <ScalarProperty Name="Gen" ColumnName="Gen" />
+                <ScalarProperty Name="attend" ColumnName="attend" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="CAPK" ColumnName="CAPK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2899,6 +2894,7 @@
           <EntitySetMapping Name="GenEvents">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.GenEvent">
               <MappingFragment StoreEntitySet="GenEvent">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="GenID" ColumnName="GenID" />
                 <ScalarProperty Name="Gen_Name" ColumnName="Gen_Name" />
                 <ScalarProperty Name="Gen_Summary" ColumnName="Gen_Summary" />

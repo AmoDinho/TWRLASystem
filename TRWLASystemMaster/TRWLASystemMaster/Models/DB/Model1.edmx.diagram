@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ffc6fe73256e4693b17155b24b1e049b" Name="Diagram1">
+      <Diagram DiagramId="ffc6fe73256e4693b17155b24b1e049b" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Address" Width="1.5" PointX="1.5" PointY="31.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Attendance" Width="1.5" PointX="14.25" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AuditLog" Width="1.5" PointX="11.25" PointY="16.5" IsExpanded="true" />

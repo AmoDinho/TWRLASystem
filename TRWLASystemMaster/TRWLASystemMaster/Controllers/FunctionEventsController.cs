@@ -98,7 +98,7 @@ namespace TRWLASystemMaster.Controllers
                         int max = db.FunctionEvents.Max(p => p.FunctionID);
                         int k = max + 1;
                         functionEvent.FunctionID = k;
-                        functionEvent.Function_Name = functionEvent.Function_Name + " (F)";
+                        functionEvent.Type = 1;
 
 
                         db.FunctionEvents.Add(functionEvent);
@@ -119,7 +119,7 @@ namespace TRWLASystemMaster.Controllers
                         myAudit.TableAff = "FunctionEvent";
 
                         db.AuditLogs.Add(myAudit);
-                        functionEvent.Function_Name = functionEvent.Function_Name + " (F)";
+                        functionEvent.Type = 1;
 
                         db.FunctionEvents.Add(functionEvent);
                         TRWLASchedule mySchedule = new TRWLASchedule();

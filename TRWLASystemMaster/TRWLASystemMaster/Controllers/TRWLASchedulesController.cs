@@ -66,15 +66,27 @@ namespace TRWLASystemMaster.Controllers
                     progressbar myprog = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == user);
                     MasterData mymaster = db.MasterDatas.Find(1);
 
-                    var lec = myprog.LecProg;
-                    var func = myprog.FuncProg;
-                    var com = myprog.ComProg;
-                    var gen = myprog.GenProg;
+                    if (myprog != null)
+                    {
 
-                    ViewBag.Lecture = ((Convert.ToDecimal(lec) / Convert.ToDecimal(mymaster.LecAttend)) * 100);
-                    ViewBag.Function = ((Convert.ToDecimal(func) / Convert.ToDecimal(mymaster.FuncAttend)) * 100);
-                    ViewBag.Com = ((Convert.ToDecimal(com) / Convert.ToDecimal(mymaster.ComAttend)) * 100);
-                    ViewBag.Gen = ((Convert.ToDecimal(gen) / Convert.ToDecimal(mymaster.GenAttend)) * 100);
+                        var lec = myprog.LecProg;
+                        var func = myprog.FuncProg;
+                        var com = myprog.ComProg;
+                        var gen = myprog.GenProg;
+
+
+                        ViewBag.Lecture = ((Convert.ToDecimal(lec) / Convert.ToDecimal(mymaster.LecAttend)) * 100);
+                        ViewBag.Function = ((Convert.ToDecimal(func) / Convert.ToDecimal(mymaster.FuncAttend)) * 100);
+                        ViewBag.Com = ((Convert.ToDecimal(com) / Convert.ToDecimal(mymaster.ComAttend)) * 100);
+                        ViewBag.Gen = ((Convert.ToDecimal(gen) / Convert.ToDecimal(mymaster.GenAttend)) * 100);
+                    }
+                    else
+                    {
+                        ViewBag.Lecture = 0;
+                        ViewBag.Function = 0;
+                        ViewBag.Com = 0;
+                        ViewBag.Gen = 0;
+                    }
                 }
                 catch
                 {
@@ -248,7 +260,7 @@ namespace TRWLASystemMaster.Controllers
         }
         // GET: TRWLASchedules
         [AllowAnonymous]
-        public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string all)
+        public ActionResult Index(string sortOrder, string searchString, string F, string CO, string L, string G, string all)
         {
             try
             {
@@ -271,17 +283,22 @@ namespace TRWLASystemMaster.Controllers
 
                 if (!String.IsNullOrEmpty(F))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Function_Name.Contains("(F)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Type == 1);
+                }
+
+                if (!String.IsNullOrEmpty(G))
+                {
+                    tRWLASchedules = tRWLASchedules.Where(s => s.GenEvent.Type == 4);
                 }
 
                 if (!String.IsNullOrEmpty(CO))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.ComEng_Name.Contains("(CE)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.Type == 3 );
                 }
 
                 if (!String.IsNullOrEmpty(L))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Type == 2 );
                 }
 
                 if (!String.IsNullOrEmpty(all))
@@ -357,8 +374,13 @@ namespace TRWLASystemMaster.Controllers
                           Surname = l.LastName,
                           DoB = l.DoB,
                           Degree = l.Degree,
-                          Res = r.Res_Name
+                          Res = r.Res_Name,
+                          email = l.Email
                       }).ToList();
+
+            int count =  at.Count();
+
+            ViewBag.StudentCount = count;
 
             return at;
         }
@@ -366,12 +388,21 @@ namespace TRWLASystemMaster.Controllers
         public IList<AttendanceViewModel> GetLectureAttendance()
         {
             var at = (from l in db.Attendances
+                      join s in db.SYSUserProfiles on l.SYSUserProfileID equals s.SYSUserProfileID
+                      join le in db.Lectures on l.LectureID equals le.LectureID
                       where l.LectureID != null
                       select new AttendanceViewModel
                       {
                           EventName = l.Lecture.Lecture_Name,
                           EventDate = l.Lecture.Lecture_Date,
-                          Student_Name = l.SYSUserProfile.FirstName
+                          StartTime = le.Lecture_StartTime,
+                          EndTime = le.Lecture_EndTime,
+                          Residence = le.Residence.Res_Name,
+                          specific = le.Content.Content_Name,
+                          StudentNp = s.StudentNumber,
+                          Student_Name = l.SYSUserProfile.FirstName,
+                          LastName = s.LastName,
+
                       }).ToList();
             return at;
         }
@@ -383,7 +414,13 @@ namespace TRWLASystemMaster.Controllers
                               {
                                   EventName = s.FunctionEvent.Function_Name,
                                   EventDate = s.FunctionEvent.Function_Date,
-                                  Student_Name = s.SYSUserProfile.FirstName
+                                  StartTime = s.FunctionEvent.Function_StartTime,
+                                  EndTime = s.FunctionEvent.Function_EndTime,
+                                  Residence = s.FunctionEvent.Venue.Venue_Name,
+                                  specific = s.FunctionEvent.GuestSpeaker.GuestSpeaker_Name,
+                                  Student_Name = s.SYSUserProfile.FirstName,
+                                  LastName = s.SYSUserProfile.LastName,
+                                  StudentNp = s.SYSUserProfile.StudentNumber
                               }).ToList();
             return attendance;
         }
@@ -392,13 +429,19 @@ namespace TRWLASystemMaster.Controllers
 
         public IList<AttendanceViewModel> GetComAttendance()
         {
-            var attend = (from m in db.Attendances
-                          where m.ComEngID != null
+            var attend = (from s in db.Attendances
+                          where s.ComEngID != null
                           select new AttendanceViewModel
                           {
-                              EventName = m.ComEngEvent.ComEng_Name,
-                              EventDate = m.ComEngEvent.ComEng_Date,
-                              Student_Name = m.SYSUserProfile.FirstName
+                              EventName = s.ComEngEvent.ComEng_Name,
+                              EventDate = s.ComEngEvent.ComEng_Date,
+                              StartTime = s.ComEngEvent.ComEnge_StartTime,
+                              EndTime = s.ComEngEvent.ComEng_EndTime,
+                              Residence = s.ComEngEvent.Venue.Venue_Name,
+                              specific = s.ComEngEvent.Content.Content_Name,
+                              Student_Name = s.SYSUserProfile.FirstName,
+                              LastName = s.SYSUserProfile.LastName,
+                              StudentNp = s.SYSUserProfile.StudentNumber
                           }).ToList();
             return attend;
         }
@@ -630,6 +673,11 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
+        public ActionResult MainReportPage()
+        {
+            return View();
+        }
+
         public ActionResult StudentDemographic()
         {
             try
@@ -658,19 +706,23 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                var _contenxt = new TWRLADB_Staging_V2Entities5();
-                ArrayList xValue = new ArrayList();
-                ArrayList yValue = new ArrayList();
+                int s = (from n in db.RSVP_Event
+                         select n).Count();
 
-                var results = (from c in _contenxt.Progresses select c);
-                results.ToList().ForEach(rs => xValue.Add(rs.SYSUserProfile.StudentNumber));
-                results.ToList().ForEach(rs => yValue.Add(rs.ProgressCount));
+                ClassAttendance myfunc = db.ClassAttendances.Find(1);
+                ClassAttendance mylec = db.ClassAttendances.Find(2);
+                ClassAttendance mycom = db.ClassAttendances.Find(3);
+                ClassAttendance mygen = db.ClassAttendances.Find(4);
+                
+                int func = myfunc.attend;
+                int lec = mylec.attend;
+                int com = mycom.attend;
+                int gen = mygen.attend;
 
-
-                new Chart(width: 600, height: 400, theme: ChartTheme.Blue)
-                    .AddTitle("Class Attendance for Students")
-                    .AddSeries("Default", chartType: "Column", xValue: xValue, yValues: yValue)
-                    .Write("jpeg");
+                ViewBag.Function = Convert.ToDecimal(func) / s * 100;
+                ViewBag.Lecture = Convert.ToDecimal(lec) / s * 100;
+                ViewBag.Com = Convert.ToDecimal(com) / s * 100;
+                ViewBag.Gen = Convert.ToDecimal(gen) / s * 100;
 
                 return View();
 
@@ -1074,9 +1126,9 @@ namespace TRWLASystemMaster.Controllers
                             select s;
 
                 DateTime mydate = DateTime.Now.AddDays(-1);
-                DateTime myfuture = DateTime.Now.AddDays(1);
+                DateTime myfuture = DateTime.Now;
 
-                trwla = trwla.Where(p => p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate || p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture);
+                trwla = trwla.Where(p => (p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate) && (p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture));
 
                 return View(trwla.ToList());
             }
@@ -1218,6 +1270,8 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+                            myclass.attend = myclass.attend + 1;
                             
                            
 
@@ -1247,7 +1301,8 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
-                           
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1276,7 +1331,8 @@ namespace TRWLASystemMaster.Controllers
 
                             }
 
-                            
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1304,7 +1360,10 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                           
+
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+                            myclass.attend = myclass.attend + 1;
+
 
                             db.Attendances.Add(att);
                         }
@@ -1341,8 +1400,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+                            myclass.attend = myclass.attend + 1;
 
-                           
 
                             db.Attendances.Add(att);
                         }
@@ -1370,7 +1430,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1398,7 +1459,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                          
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+                            myclass.attend = myclass.attend + 1;
 
                             db.Attendances.Add(att);
                         }
@@ -1426,8 +1488,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            
 
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+                            myclass.attend = myclass.attend + 1;
                             db.Attendances.Add(att);
                         }
                     }
@@ -1645,7 +1708,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                           
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+                            myclass.attend = myclass.attend + 1;
 
                             ev.Attended = 1;
                             db.Attendances.Add(att);
@@ -1673,7 +1737,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+                            myclass.attend = myclass.attend + 1;
                             db.Attendances.Add(att);
                         }
                         else if (ev.ComEngID != null)
@@ -1699,7 +1764,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+                            myclass.attend = myclass.attend + 1;
+
                             db.Attendances.Add(att);
                         }
                         else
@@ -1725,7 +1792,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                           
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+                            myclass.attend = myclass.attend + 1;
                             db.Attendances.Add(att);
                         }
 
@@ -1761,7 +1829,9 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            
+                            ClassAttendance myclass = db.ClassAttendances.Find(1);
+                            myclass.attend = myclass.attend + 1;
+
                             db.Attendances.Add(att);
                         }
                         else if (ev.LectureID != null)
@@ -1787,7 +1857,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                         
+                            ClassAttendance myclass = db.ClassAttendances.Find(2);
+                            myclass.attend = myclass.attend + 1;
                             db.Attendances.Add(att);
                         }
                         else if (ev.ComEngID != null)
@@ -1813,7 +1884,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                          
+                            ClassAttendance myclass = db.ClassAttendances.Find(3);
+                            myclass.attend = myclass.attend + 1;
                             db.Attendances.Add(att);
                         }
                         else
@@ -1839,7 +1911,8 @@ namespace TRWLASystemMaster.Controllers
                                 db.progressbars.Add(prog);
 
                             }
-                            
+                            ClassAttendance myclass = db.ClassAttendances.Find(4);
+                            myclass.attend = myclass.attend + 1;
                             db.Attendances.Add(att);
                         }
                     }
@@ -2092,11 +2165,11 @@ namespace TRWLASystemMaster.Controllers
 
                         foreach (var s in db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.FunctionID))
                         {
-                            if (s.Attended == null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            //if (s.Attended == null)
+                            //{
+                            //    TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
+                            //    return RedirectToAction("StudentMainMenu");
+                            //}
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2130,11 +2203,11 @@ namespace TRWLASystemMaster.Controllers
 
                         foreach (var s in db.RSVP_Event.Where(p => p.ComEngID == tRWLASchedule.ComEngID))
                         {
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            //if (s.Attended != null)
+                            //{
+                            //    TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
+                            //    return RedirectToAction("StudentMainMenu");
+                            //}
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2169,11 +2242,11 @@ namespace TRWLASystemMaster.Controllers
                         foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.LectureID))
                         {
 
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            //if (s.Attended != null)
+                            //{
+                            //    TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
+                            //    return RedirectToAction("StudentMainMenu");
+                            //}
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2208,11 +2281,11 @@ namespace TRWLASystemMaster.Controllers
                         foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.GenID))
                         {
 
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            //if (s.Attended != null)
+                            //{
+                            //    TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
+                            //    return RedirectToAction("StudentMainMenu");
+                            //}
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2255,12 +2328,6 @@ namespace TRWLASystemMaster.Controllers
 
                         foreach (var s in db.RSVP_Event.Where(p => p.FunctionID == tRWLASchedule.FunctionID))
                         {
-
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2295,12 +2362,7 @@ namespace TRWLASystemMaster.Controllers
 
                         foreach (var s in db.RSVP_Event.Where(p => p.ComEngID == tRWLASchedule.ComEngID))
                         {
-
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2336,12 +2398,7 @@ namespace TRWLASystemMaster.Controllers
 
                         foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.LectureID))
                         {
-
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";
@@ -2376,12 +2433,7 @@ namespace TRWLASystemMaster.Controllers
 
                         foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.GenID))
                         {
-
-                            if (s.Attended != null)
-                            {
-                                TempData["Attended"] = "You have already attended this event and cannot RSVP again.";
-                                return RedirectToAction("StudentMainMenu");
-                            }
+                            
                             if (s.SYSUserProfileID == user)
                             {
                                 TempData["rsvpFAIL"] = "You have already RSVPd to this event";

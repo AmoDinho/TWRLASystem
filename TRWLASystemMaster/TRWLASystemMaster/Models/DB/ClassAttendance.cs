@@ -14,10 +14,8 @@ namespace TRWLASystemMaster.Models.DB
     
     public partial class ClassAttendance
     {
-        public int AtPK { get; set; }
-        public int Funcion { get; set; }
-        public int Lecture { get; set; }
-        public int Com { get; set; }
-        public int Gen { get; set; }
+        public int CAPK { get; set; }
+        public string EventType { get; set; }
+        public int attend { get; set; }
     }
 }

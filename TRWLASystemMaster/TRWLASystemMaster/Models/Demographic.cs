@@ -25,13 +25,11 @@ namespace TRWLASystemMaster.Models
         public string Degree
         { get; set; }
 
-        public string Grad
+        public string email
         { get; set; }
 
         public string Res
         { get; set; }
-
-        public string StudType
-        { get; set; }
+        
     }
 }

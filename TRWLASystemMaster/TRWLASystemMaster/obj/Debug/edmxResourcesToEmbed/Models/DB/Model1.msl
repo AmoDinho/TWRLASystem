@@ -42,11 +42,9 @@
     <EntitySetMapping Name="ClassAttendances">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
         <MappingFragment StoreEntitySet="ClassAttendance">
-          <ScalarProperty Name="AtPK" ColumnName="AtPK" />
-          <ScalarProperty Name="Funcion" ColumnName="Funcion" />
-          <ScalarProperty Name="Lecture" ColumnName="Lecture" />
-          <ScalarProperty Name="Com" ColumnName="Com" />
-          <ScalarProperty Name="Gen" ColumnName="Gen" />
+          <ScalarProperty Name="attend" ColumnName="attend" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="CAPK" ColumnName="CAPK" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -110,6 +108,7 @@
     <EntitySetMapping Name="GenEvents">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.GenEvent">
         <MappingFragment StoreEntitySet="GenEvent">
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="GenID" ColumnName="GenID" />
           <ScalarProperty Name="Gen_Name" ColumnName="Gen_Name" />
           <ScalarProperty Name="Gen_Summary" ColumnName="Gen_Summary" />

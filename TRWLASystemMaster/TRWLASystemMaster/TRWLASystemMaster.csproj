@@ -726,6 +726,7 @@
     <Content Include="Views\SYSUserProfiles\Details.cshtml" />
     <Content Include="Views\SYSUserProfiles\Edit.cshtml" />
     <Content Include="Views\SYSUserProfiles\Index.cshtml" />
+    <Content Include="Views\TRWLASchedules\MainReportPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

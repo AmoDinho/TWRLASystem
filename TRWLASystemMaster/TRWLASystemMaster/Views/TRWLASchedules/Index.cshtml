@@ -50,7 +50,7 @@
 
 
 <div class="row" @*id="showMe" style="display:none;*@>
-    <div class="col-md-12">
+    <div class="col-md-12" style="align-items:center;">
         <div class="form-inline">
             <div class="form-group">
                 <h2 style="z-index:100; position:relative; background-color:transparent;">Search Events</h2>
@@ -66,7 +66,7 @@
                     </p>
                         </div>
                 }
-                <select data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:90%;">
+                <select data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:280px;">
                     <option value="">Filter by...</option>
                     <option value="@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">Show All</option>
                     <option value="@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagement Events</option>
@@ -129,7 +129,7 @@
                     <h4 style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
                         @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
                         @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
-                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
+                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Summary, new { @style = "width:10%" })
                     </h4>
 
                     <div class="form-inline" style="z-index:100; position:relative; background-color:transparent; text-align:center;">

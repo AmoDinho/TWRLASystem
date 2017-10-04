@@ -557,6 +557,7 @@ create table GenEvent
 	Gen_StartTime time not null,
 	Gen_EndTime time not null,
 	Gene_Theme varchar(25) null,
+	Type int not null,
 	VenueID int null,
 	ResID int null,
 	ContentID int null,
@@ -1248,4 +1249,27 @@ create table MasterData
 
 alter table MasterData
 add cancelevent int not null
+go
+
+Create table ClassAttendance
+(
+	CAPK int identity not null primary key,
+	EventType varchar(50) not null,
+	attend int not null
+)
+
+insert into ClassAttendance(EventType, attend)
+values('Function', 0)
+go
+
+insert into ClassAttendance(EventType, attend)
+values('Lecture', 0)
+go
+
+insert into ClassAttendance(EventType, attend)
+values('Community Engagement', 0)
+go
+
+insert into ClassAttendance(EventType, attend)
+values('General Event', 0)
 go

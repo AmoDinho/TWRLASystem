@@ -37,13 +37,11 @@
   </EntityType>
   <EntityType Name="ClassAttendance">
     <Key>
-      <PropertyRef Name="AtPK" />
+      <PropertyRef Name="CAPK" />
     </Key>
-    <Property Name="AtPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Funcion" Type="int" Nullable="false" />
-    <Property Name="Lecture" Type="int" Nullable="false" />
-    <Property Name="Com" Type="int" Nullable="false" />
-    <Property Name="Gen" Type="int" Nullable="false" />
+    <Property Name="CAPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="attend" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
@@ -114,6 +112,7 @@
     <Property Name="ResID" Type="int" />
     <Property Name="ContentID" Type="int" />
     <Property Name="GuestSpeakerID" Type="int" />
+    <Property Name="Type" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="GuestSpeaker">
     <Key>

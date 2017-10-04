@@ -7,49 +7,89 @@
 
 @using (Html.BeginForm("ExportToExcel1", "TRWLASchedules", FormMethod.Post))
 {
-    <div class="jumbotron">
-        <h2>Function Attendance Report</h2>
+    <div class="jumbotron" style="margin-bottom:150px;">
+        <h1>Function Attendance Report</h1>
+        <div class="quoteform"></div>
+        <div class="quote1form"></div>
+        <div class="quote2form"></div>
     </div>
+    <div class="row" style="height:500px; overflow-y:auto;">
+        <table class="table">
+            <tr>
+                <th>
+                    Name of Event
+                </th>
+                <th>
+                    Date of Event
+                </th>
+                <th>
+                    Start of the Event
+                </th>
+                <th>
+                    End of the Event
+                </th>
+                <th>
+                    Venue
+                </th>
+                <th>
+                    Content
+                </th>
+                <th>
+                    Student Number
+                </th>
+                <th>
+                    Student Name
+                </th>
+                <th>
+                    Student Surname
+                </th>
+            </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            Name of Event
-        </th>
-        <th>
-            Date of Event
-        </th>
-        <th>
-            Student Attendee
-        </th>
-    </tr>
+            @foreach (var item in Model.OrderBy(p => p.EventName))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Residence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.specific)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentNp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                </tr>
+            }
+        </table>
+        </div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_Name)
-            </td>
-        </tr>
-    }
-    <tr>
-        <td colspan="4">
-            <br />
-            <br />
-            <input type="submit" value="Export to Excel" class="btn" style="float:right;"/>
-        </td>
-    </tr>  
-</table>
+        <div class="form-inline" style="float:right; margin-bottom:20px;">
+            <div class="form-group">
+                <input data-toggle="tooltip" title="Export Report to Excel" type="submit" value="Export to Excel" class="btn" />
+            </div>
+
+            <div class="form-group">
+                <div style="margin-right:5px; float:right;">
+                    <button data-toggle="tooltip" title="Return to Report Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("MainReportPage", "TRWLASchedules")'">Return</button>
+                </div>
+            </div>
+        </div>
 }
 
-<div class="form-group">
-    <div style="margin-right:5px; float:right;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
-    </div>
-</div>

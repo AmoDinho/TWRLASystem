@@ -95,7 +95,7 @@ namespace TRWLASystemMaster.Controllers
                         int k = max + 1;
                         lecture.LectureID = k;
 
-                        lecture.Lecture_Name = lecture.Lecture_Name + " (L)";
+                        lecture.Type = 2;
                         db.Lectures.Add(lecture);
                         TRWLASchedule mySchedule = new TRWLASchedule();
                         mySchedule.LectureID = lecture.LectureID;
@@ -106,7 +106,7 @@ namespace TRWLASystemMaster.Controllers
 
                     else
                     {
-                        lecture.Lecture_Name = lecture.Lecture_Name + " (L)";
+                        lecture.Type = 2;
                         db.Lectures.Add(lecture);
                         TRWLASchedule mySchedule = new TRWLASchedule();
                         mySchedule.LectureID = lecture.LectureID;

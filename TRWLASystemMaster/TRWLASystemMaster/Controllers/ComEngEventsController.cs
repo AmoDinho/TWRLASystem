@@ -72,7 +72,7 @@ namespace TRWLASystemMaster.Controllers
                         myAudit.TableAff = "ComEngEvent";
                         db.AuditLogs.Add(myAudit);
 
-                        comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
+                        comEngEvent.Type = 3;
                         db.ComEngEvents.Add(comEngEvent);
 
                         TRWLASchedule mySchedule = new TRWLASchedule();
@@ -88,9 +88,9 @@ namespace TRWLASystemMaster.Controllers
                         myAudit.SYSUserProfileID = (int)Session["User"];
                         myAudit.TableAff = "ComEngEvent";
                         db.AuditLogs.Add(myAudit);
-                        
 
-                        comEngEvent.ComEng_Name = comEngEvent.ComEng_Name + " (CE)";
+
+                        comEngEvent.Type = 3;
                         db.ComEngEvents.Add(comEngEvent);
                         TRWLASchedule mySchedule = new TRWLASchedule();
                         mySchedule.ComEngID = comEngEvent.ComEngID;

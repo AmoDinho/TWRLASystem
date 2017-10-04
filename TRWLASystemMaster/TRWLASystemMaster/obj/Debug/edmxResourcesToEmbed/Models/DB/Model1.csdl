@@ -46,13 +46,11 @@
   </EntityType>
   <EntityType Name="ClassAttendance">
     <Key>
-      <PropertyRef Name="AtPK" />
+      <PropertyRef Name="CAPK" />
     </Key>
-    <Property Name="AtPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Funcion" Type="Int32" Nullable="false" />
-    <Property Name="Lecture" Type="Int32" Nullable="false" />
-    <Property Name="Com" Type="Int32" Nullable="false" />
-    <Property Name="Gen" Type="Int32" Nullable="false" />
+    <Property Name="CAPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="attend" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="ComEngEvent">
     <Key>
@@ -145,6 +143,7 @@
     <NavigationProperty Name="Venue" Relationship="Self.FK__GenEvent__VenueI__5812160E" FromRole="GenEvent" ToRole="Venue" />
     <NavigationProperty Name="RSVP_Event" Relationship="Self.FK__RSVP_Even__GenID__76969D2E" FromRole="GenEvent" ToRole="RSVP_Event" />
     <NavigationProperty Name="TRWLASchedules" Relationship="Self.FK__TRWLASche__GenID__656C112C" FromRole="GenEvent" ToRole="TRWLASchedule" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="GuestSpeaker">
     <Key>
