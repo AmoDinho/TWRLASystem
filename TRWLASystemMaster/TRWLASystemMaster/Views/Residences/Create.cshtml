@@ -6,10 +6,14 @@
 }
 
 
+
+
 <div class="jumbotron">
     <h2>Create a Residence</h2>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
-
 
 @using (Html.BeginForm())
 {
@@ -20,7 +24,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Res_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+      <label class = "control-label col-md-2">Res Name</label>      @*@Html.LabelFor(model => model.Res_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Res_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Res_Name, "", new { @class = "text-danger" })

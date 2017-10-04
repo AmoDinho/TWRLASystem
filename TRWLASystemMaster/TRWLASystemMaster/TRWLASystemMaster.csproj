@@ -301,6 +301,7 @@
     <Compile Include="Models\Backup_BackupDB.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Models\ChangePassword.cs" />
     <Compile Include="Models\ClassAttendanceReport.cs" />
     <Compile Include="Models\DB\Attendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
