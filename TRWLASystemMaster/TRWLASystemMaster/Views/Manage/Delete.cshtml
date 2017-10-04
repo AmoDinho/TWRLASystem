@@ -1,0 +1,143 @@
+﻿@model TRWLASystemMaster.Models.DB.SYSUserProfile
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Deactivate Account</h2>
+
+
+<div>
+    <p>
+        You are about to deactivate your account. Please be aware that all your data will be permantely deleted.
+        It will be not be retriveable after you complete this action.
+
+    </p>
+    <hr />
+
+    @*<dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StudentNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DoB)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DoB)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Phonenumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phonenumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Graduate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Graduate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Degree)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Degree)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.YearOfStudy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.YearOfStudy)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Residence.Res_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Residence.Res_Name)
+            </dd>
+
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserType.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserType.Description)
+            </dd>
+
+        </dl>*@
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deactivate My Account" class="btn btn-default alert-danger" data-toggle="modal" data-target="#Create" />
+
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Deactivate Account</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure that you want to deactivate your account ?
+            </div>
+            <div class="modal-footer form-inline">
+                <div class="form-actions no-color ">
+                    <button type="submit" value="Delete" class="btn">Confirm</button>
+                </div>
+                <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

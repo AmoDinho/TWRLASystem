@@ -730,6 +730,7 @@
     <Content Include="Views\GenEvents\Details.cshtml" />
     <Content Include="Views\GenEvents\Edit.cshtml" />
     <Content Include="Views\GenEvents\Index.cshtml" />
+    <Content Include="Views\Manage\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
