@@ -74,19 +74,24 @@ namespace TRWLASystemMaster.Controllers
 
                     genEvent.Type = 4;
 
-                    if ((int)TempData["Venue"] == 1)
+                    int v = (int)TempData["Venue"];
+                    int c = (int)TempData["Con"];
+                    int g = (int)TempData["Gu"];
+                    int r = (int)TempData["Res"];
+
+                    if (v == 1)
                     {
                         genEvent.VenueID = null;
                     }
-                    if ((int)@TempData["Con"] == 1)
+                    if (c == 1)
                     {
                         genEvent.ContentID = null;
                     }
-                    if ((int)@TempData["Gu"] == 1)
+                    if (g == 1)
                     {
                         genEvent.GuestSpeakerID = null;
                     }
-                    if ((int)@TempData["Res"] == 1)
+                    if (r == 1)
                     {
                         genEvent.ResID = null;
                     }
@@ -109,6 +114,29 @@ namespace TRWLASystemMaster.Controllers
                     db.AuditLogs.Add(myAudit);
 
                     genEvent.Type = 4;
+
+                    int v = (int)TempData["Venue"];
+                    int c = (int)TempData["Con"];
+                    int g = (int)TempData["Gu"];
+                    int r = (int)TempData["Res"];
+
+                    if (v == 1)
+                    {
+                        genEvent.VenueID = null;
+                    }
+                    if (c == 1)
+                    {
+                        genEvent.ContentID = null;
+                    }
+                    if (g == 1)
+                    {
+                        genEvent.GuestSpeakerID = null;
+                    }
+                    if (r == 1)
+                    {
+                        genEvent.ResID = null;
+                    }
+
                     db.GenEvents.Add(genEvent);
 
                     TRWLASchedule mySchedule = new TRWLASchedule();

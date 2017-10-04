@@ -17,11 +17,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>GenEvent</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Name:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Name, "", new { @class = "text-danger" })
@@ -29,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Summary, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Summary", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Summary, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Summary, "", new { @class = "text-danger" })
@@ -37,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Description:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Description, "", new { @class = "text-danger" })
@@ -45,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Date:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                 @Html.ValidationMessageFor(model => model.Gen_Date, "", new { @class = "text-danger" })
@@ -53,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Start Time:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_StartTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                 @Html.ValidationMessageFor(model => model.Gen_StartTime, "", new { @class = "text-danger" })
@@ -61,7 +59,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("End Time:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_EndTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                 @Html.ValidationMessageFor(model => model.Gen_EndTime, "", new { @class = "text-danger" })
@@ -69,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gene_Theme, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Theme:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gene_Theme, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gene_Theme, "", new { @class = "text-danger" })
@@ -77,7 +75,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VenueID, "VenueID", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.Label("Venue:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="form-inline">
                     <div class="form-group">
@@ -85,18 +84,14 @@
                         @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
-                        <p>Include: @Html.RadioButtonFor(model => model.VenueID, @TempData["Venue"] = 0)</p>
-                    </div>
-                    <div class="form-group" style="margin-left:30px;">
                         <p>Exclude: @Html.RadioButtonFor(model => model.VenueID, @TempData["Venue"] = 1)</p>
                     </div>
                 </div>
             </div>
-            
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ResID, "ResID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Residence:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="form-inline">
                     <div class="form-group">
@@ -104,27 +99,19 @@
                         @Html.ValidationMessageFor(model => model.ResID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
-                        <p>Include: @Html.RadioButtonFor(model => model.ResID, @TempData["Res"] = 0)</p>
-                    </div>
-                    <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.ResID, @TempData["Res"] = 1)</p>
+                        <p>Exclude: @Html.RadioButtonFor(model => model.ResID, @TempData["Res"] = 1)</p> 
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContentID, "ContentID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Content:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="form-inline">
                     <div class="form-group">
                         @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="form-group" style="margin-left:30px;">
-                        <p>Include: @Html.RadioButtonFor(model => model.ContentID, @TempData["Con"] = 0)</p>
-
                     </div>
                     <div style="margin-left:30px;" class="form-group">
                         <p>Exclude: @Html.RadioButtonFor(model => model.ContentID, @TempData["Con"] = 1)</p>
@@ -134,7 +121,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.GuestSpeakerID, "GuestSpeakerID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Guest Speaker:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="form-inline">
                     <div class="form-group">
@@ -142,24 +129,27 @@
                         @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
-                        <p>Include: @Html.RadioButtonFor(model => model.GuestSpeakerID, @TempData["Gu"] = 0)</p>
-                    </div>
-                    <div class="form-group" style="margin-left:30px;">
                         <p>Exclude: @Html.RadioButtonFor(model => model.GuestSpeakerID, @TempData["Gu"] = 1)</p>
                     </div>
-                    </div>
-                    
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
             </div>
         </div>
-        }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    $('#element').click(function () {
+        if ($('#radio_button').is(':checked')) { alert("it's checked"); }
+    });
+</script>
