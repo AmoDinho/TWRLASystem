@@ -731,6 +731,7 @@
     <Content Include="Views\GenEvents\Edit.cshtml" />
     <Content Include="Views\GenEvents\Index.cshtml" />
     <Content Include="Views\Manage\Delete.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Volunteers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
