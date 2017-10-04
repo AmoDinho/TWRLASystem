@@ -130,6 +130,7 @@
                     </div>
                     <div class="form-group" style="margin-left:30px;">
                         <p>Exclude: @Html.RadioButtonFor(model => model.GuestSpeakerID, @TempData["Gu"] = 1)</p>
+                        <input type="radio" id="Gu" />
                     </div>
                 </div>
 
@@ -149,7 +150,7 @@
 </div>
 
 <script>
-    $('#element').click(function () {
+    $('#gu').click(function () {
         if ($('#radio_button').is(':checked')) { alert("it's checked"); }
     });
 </script>
