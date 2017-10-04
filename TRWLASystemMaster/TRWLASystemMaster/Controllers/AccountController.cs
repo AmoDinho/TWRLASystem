@@ -49,7 +49,7 @@ namespace TRWLASystemMaster.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
         //Register Student
         public ActionResult Register()
         {
@@ -88,8 +88,8 @@ namespace TRWLASystemMaster.Controllers
                     else
                         ModelState.AddModelError("", "Login Name already taken.");
                 }
-                return View();
-           }
+                return RedirectToAction("Register", "Account");
+            }
 
             
            catch (Exception ex)

@@ -14,17 +14,11 @@ namespace TRWLASystemMaster.Models.DB
     
     public partial class SecurityAnswer
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SecurityAnswer()
-        {
-            this.SYSUserProfiles = new HashSet<SYSUserProfile>();
-        }
-    
         public int SecurityAnswerID { get; set; }
         public string Security_Question { get; set; }
         public string Security_Answer { get; set; }
+        public int SYSUserProfileID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SYSUserProfile> SYSUserProfiles { get; set; }
+        public virtual SYSUserProfile SYSUserProfile { get; set; }
     }
 }

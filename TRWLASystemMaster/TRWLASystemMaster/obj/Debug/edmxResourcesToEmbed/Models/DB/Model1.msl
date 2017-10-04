@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities5">
-    <EntitySetMapping Name="Addresses">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
-        <MappingFragment StoreEntitySet="Address">
-          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
-          <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
-          <ScalarProperty Name="StreetName" ColumnName="StreetName" />
-          <ScalarProperty Name="Suburb" ColumnName="Suburb" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Province" ColumnName="Province" />
-          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities7">
     <EntitySetMapping Name="Attendances">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
@@ -42,9 +29,9 @@
     <EntitySetMapping Name="ClassAttendances">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
         <MappingFragment StoreEntitySet="ClassAttendance">
-          <ScalarProperty Name="attend" ColumnName="attend" />
-          <ScalarProperty Name="EventType" ColumnName="EventType" />
           <ScalarProperty Name="CAPK" ColumnName="CAPK" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="attend" ColumnName="attend" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -108,7 +95,6 @@
     <EntitySetMapping Name="GenEvents">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.GenEvent">
         <MappingFragment StoreEntitySet="GenEvent">
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="GenID" ColumnName="GenID" />
           <ScalarProperty Name="Gen_Name" ColumnName="Gen_Name" />
           <ScalarProperty Name="Gen_Summary" ColumnName="Gen_Summary" />
@@ -117,6 +103,7 @@
           <ScalarProperty Name="Gen_StartTime" ColumnName="Gen_StartTime" />
           <ScalarProperty Name="Gen_EndTime" ColumnName="Gen_EndTime" />
           <ScalarProperty Name="Gene_Theme" ColumnName="Gene_Theme" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
           <ScalarProperty Name="ResID" ColumnName="ResID" />
           <ScalarProperty Name="ContentID" ColumnName="ContentID" />
@@ -187,8 +174,8 @@
           <ScalarProperty Name="ComAttend" ColumnName="ComAttend" />
           <ScalarProperty Name="GenAttend" ColumnName="GenAttend" />
           <ScalarProperty Name="RegDate" ColumnName="RegDate" />
-          <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
           <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
+          <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
           <ScalarProperty Name="PassFactor" ColumnName="PassFactor" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -269,6 +256,7 @@
           <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
           <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
           <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -323,6 +311,7 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
@@ -332,7 +321,6 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="DoB" ColumnName="DoB" />
           <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-          <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
           <ScalarProperty Name="Graduate" ColumnName="Graduate" />
           <ScalarProperty Name="Degree" ColumnName="Degree" />
           <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
@@ -341,7 +329,6 @@
           <ScalarProperty Name="RowModifiedSYSUserID" ColumnName="RowModifiedSYSUserID" />
           <ScalarProperty Name="RowModifiedDateTime" ColumnName="RowModifiedDateTime" />
           <ScalarProperty Name="ResID" ColumnName="ResID" />
-          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -393,7 +380,12 @@
         <MappingFragment StoreEntitySet="Venue">
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
           <ScalarProperty Name="Venue_Name" ColumnName="Venue_Name" />
-          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="StreeNumber" ColumnName="StreeNumber" />
+          <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+          <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
           <ScalarProperty Name="VenueTypeID" ColumnName="VenueTypeID" />
         </MappingFragment>
       </EntityTypeMapping>

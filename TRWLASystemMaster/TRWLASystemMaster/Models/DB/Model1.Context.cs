@@ -13,10 +13,10 @@ namespace TRWLASystemMaster.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TWRLADB_Staging_V2Entities5 : DbContext
+    public partial class TWRLADB_Staging_V2Entities7 : DbContext
     {
-        public TWRLADB_Staging_V2Entities5()
-            : base("name=TWRLADB_Staging_V2Entities5")
+        public TWRLADB_Staging_V2Entities7()
+            : base("name=TWRLADB_Staging_V2Entities7")
         {
         }
     
@@ -25,7 +25,6 @@ namespace TRWLASystemMaster.Models.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<AuditLog> AuditLogs { get; set; }
         public virtual DbSet<ClassAttendance> ClassAttendances { get; set; }

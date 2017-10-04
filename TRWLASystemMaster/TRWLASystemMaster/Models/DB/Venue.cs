@@ -25,10 +25,14 @@ namespace TRWLASystemMaster.Models.DB
     
         public int VenueID { get; set; }
         public string Venue_Name { get; set; }
-        public int AddressID { get; set; }
+        public string StreeNumber { get; set; }
+        public string StreetName { get; set; }
+        public string Suburb { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string PostCode { get; set; }
         public int VenueTypeID { get; set; }
     
-        public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComEngEvent> ComEngEvents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

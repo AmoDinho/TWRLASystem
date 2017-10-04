@@ -20,7 +20,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         public void AddUserAccount(UserSignUpView user)
         {
 
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
 
                 SYSUser SU = new SYSUser();
@@ -44,7 +44,6 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SUP.ResID = user.ResID;
                 SUP.YearOfStudy = user.YearOfStudy;
                 SUP.Degree = user.Degree;
-                SUP.SecurityAnswerID = user.SecurityAnswerID;
                 SUP.StudentNumber = user.StudentNumber;
           
                 SUP.Phonenumber = user.Phonenumber;
@@ -80,7 +79,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         public void AddUserAccount(UserSignUpViewVol user)
         {
 
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
 
                 SYSUser SU = new SYSUser();
@@ -103,7 +102,6 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SUP.DoB = user.DoB;
                // SUP.ResID = user.ResID;
            
-                SUP.SecurityAnswerID = user.SecurityAnswerID;
 
 
                 SUP.Phonenumber = user.Phonenumber;
@@ -139,7 +137,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         public void UpdateUserAccount(UserProfileView user)
         {
 
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 using (var dbContextTransaction = db.Database.BeginTransaction())
                 {
@@ -171,7 +169,6 @@ namespace TRWLASystemMaster.Models.EntityManager
 
                             SUP.YearOfStudy = user.YearOfStudy;
                             SUP.Degree = user.Degree;
-                            SUP.SecurityAnswerID = user.SecurityAnswerID;
                             SUP.StudentNumber = user.StudentNumber;
 
 
@@ -229,7 +226,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
         public bool IsLoginNameExist(string loginName)
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 return db.SYSUsers.Where(o => o.LoginName.Equals(loginName)).Any();
             }
@@ -238,7 +235,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         //Get User Password
         public string GetUserPassword(string loginName)
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var user = db.SYSUsers.Where(o => o.LoginName.ToLower().Equals(loginName));
                 if (user.Any())
@@ -253,7 +250,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
         public bool IsUserInRole(string loginName, string roleName)
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 SYSUser SU = db.SYSUsers.Where(o => o.LoginName.ToLower().Equals(loginName))?.FirstOrDefault();
                 if (SU != null)
@@ -277,7 +274,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         //List for getting Roles
         public List < LOOKUPAvailableRole > GetAllRoles()
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var roles = db.LOOKUPRoles.Select(o => new LOOKUPAvailableRole
                 {
@@ -295,7 +292,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
         public List<LookUpUserType> GetAllUserTypes()
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var usertypes = db.UserTypes.Select(o => new LookUpUserType
                 {
@@ -313,7 +310,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         //Get all Residences
         public List<LookUpRes> GetAllRes()
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var residences = db.Residences.Select(o => new LookUpRes
                 {
@@ -331,7 +328,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
         public List<LookupSecurityAnswer> Getansers()
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var secanswers = db.SecurityAnswers.Select(o => new LookupSecurityAnswer
                 {
@@ -348,7 +345,7 @@ namespace TRWLASystemMaster.Models.EntityManager
 
         public int GetUserID(string loginName)
         {
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var user = db.SYSUsers.Where(o => o.LoginName.Equals(loginName));
                 if (user.Any()) return user.FirstOrDefault().SYSUserID;
@@ -367,7 +364,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         {
             List <UserProfileView > profiles = new List < UserProfileView > ();
 
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 UserProfileView UPV;
                 var users = db.SYSUsers.ToList();
@@ -389,7 +386,6 @@ namespace TRWLASystemMaster.Models.EntityManager
                         UPV.Email = SUP.Email;
                         UPV.Phonenumber = SUP.Phonenumber;
                         UPV.UserTypeID = SUP.UserTypeID;
-                        UPV.SecurityAnswerID = SUP.SecurityAnswerID;
                         UPV.StudentNumber = SUP.StudentNumber;
                         UPV.Degree = SUP.Degree;
                         
@@ -432,7 +428,7 @@ namespace TRWLASystemMaster.Models.EntityManager
             int? user_secq= 0;
 
             userID = GetUserID(loginName);
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 userAssignedRoleID = db.SYSUserRoles.Where(o => o.SYSUserID == userID)?.FirstOrDefault().LOOKUPRoleID;
                 user_usertype = db.UserTypes.Where(o => o.UserTypeID == userID)?.FirstOrDefault().UserTypeID;
@@ -485,7 +481,7 @@ namespace TRWLASystemMaster.Models.EntityManager
         public UserProfileView GetUserProfile(int userID)
         {
             UserProfileView UPV = new UserProfileView();
-            using (TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5())
+            using (TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7())
             {
                 var user = db.SYSUsers.Find(userID);
                 if (user != null)
@@ -504,7 +500,6 @@ namespace TRWLASystemMaster.Models.EntityManager
                         UPV.Degree = SUP.Degree;
                         UPV.DoB = SUP.DoB;
                         UPV.Email = SUP.Email;
-                        UPV.SecurityAnswerID = SUP.SecurityAnswerID;
                         UPV.UserTypeID = SUP.UserTypeID;
                         //I added this here Amo because it would not convert ?int to int.
                         UPV.ResID = Convert.ToInt32(SUP.ResID);

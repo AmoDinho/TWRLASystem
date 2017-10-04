@@ -10,10 +10,12 @@
     @Html.ActionLink("Create New", "Create")
 </p>*@
 
-<div class="jumbotron">
+<div class="jumbotron" style="margin-bottom:150px">
 
-    <h2> Volunteers - Home</h2>
-
+    <h1> Volunteers </h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'">View Volunteer Types</button>
 <hr />
@@ -22,7 +24,7 @@
     <p class="form-group">
         Find by name: @Html.TextBox("searchStringVol", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
       
-        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i></button>
     </p>
 }
 <table class="table">
@@ -37,16 +39,13 @@
          Phone Number   @*@Html.DisplayNameFor(model => model.Volunteer_Phone)*@
         </th>
         <th>
-          DoB  @*@Html.DisplayNameFor(model => model.Volunteer_DoB)*@
+          Date of Birth  @*@Html.DisplayNameFor(model => model.Volunteer_DoB)*@
         </th>
         <th>
           Active Status  @*@Html.DisplayNameFor(model => model.ActiveStatus)*@
         </th>
         <th>
-            User Type   @*@Html.DisplayNameFor(model => model.UserType.Description)*@
-        </th>
-        <th>
-            VolunteerType    @*@Html.DisplayNameFor(model => model.VolunteerType.VolunteerType_Description)*@
+            Volunteer Type    @*@Html.DisplayNameFor(model => model.VolunteerType.VolunteerType_Description)*@
         </th>
         <th></th>
     </tr>
@@ -69,9 +68,6 @@
             @Html.DisplayFor(modelItem => item.ActiveStatus)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserType.Description)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.VolunteerType.VolunteerType_Description)
         </td>
         <td>
@@ -87,3 +83,8 @@
 }
 
 </table>
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index")'">Return</button>
+    </div>
+</div>

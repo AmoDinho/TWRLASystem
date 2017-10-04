@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class VenuesController : Controller
     {
-        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
 
         // GET: Venues
         public ActionResult Index(string searchStringV)
@@ -57,7 +57,6 @@ namespace TRWLASystemMaster.Controllers
         // GET: Venues/Create
         public ActionResult Create()
         {
-            ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetName");
             ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description");
             return View();
         }
@@ -67,7 +66,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID")] Venue venue)
+        public ActionResult Create([Bind(Include = "VenueID,Venue_Name,VenueTypeID,StreetNumber, StreetName, Suburb, City, Province, PostCode")] Venue venue)
         {
             try
             {
@@ -95,8 +94,7 @@ namespace TRWLASystemMaster.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-
-                ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
+                
                 ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
                 return View(venue);
             }
@@ -119,7 +117,6 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
             ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
             return View(venue);
         }
@@ -129,7 +126,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID")] Venue venue)
+        public ActionResult Edit([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID,StreetNumber, StreetName, Suburb, City, Province, PostCode")] Venue venue)
         {
             try
             {
@@ -139,7 +136,6 @@ namespace TRWLASystemMaster.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                ViewBag.AddressID = new SelectList(db.Addresses, "AddressID", "StreetNumber", venue.AddressID);
                 ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
                 return View(venue);
             }
@@ -167,7 +163,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         // POST: Venues/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

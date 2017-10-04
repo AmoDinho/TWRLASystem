@@ -4,118 +4,119 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StudentNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Graduate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Graduate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Degree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Degree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.YearOfStudy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YearOfStudy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Student_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Student_Surname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student_Surname)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Student_Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student_Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Student_DoB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Student_DoB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ActiveStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ActiveStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Residence.Res_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Residence.Res_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StudentType.StudentTypeDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserType.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserType.Description)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="jumbotron" style="margin-bottom:150px">
+    <h1>Are you sure you want to delete this student?</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+    <div>
         </div>
-    }
-</div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentNumber)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.StudentNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Graduate)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Graduate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Degree)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Degree)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.YearOfStudy)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;" >
+                @Html.DisplayFor(model => model.YearOfStudy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Student_Name)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Student_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Student_Surname)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Student_Surname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Student_Phone)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Student_Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Student_DoB)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Student_DoB)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ActiveStatus)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.ActiveStatus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Residence.Res_Name)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.Residence.Res_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.StudentType.StudentTypeDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserType.Description)
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.UserType.Description)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>

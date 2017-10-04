@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class UserTypesController : Controller
     {
-        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
 
         // GET: UserTypes
         public ActionResult Index()

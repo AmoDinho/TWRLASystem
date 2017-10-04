@@ -90,14 +90,7 @@ StudentTypeDescription varchar(25) not null
 )
 go
 
----SecurityAnswer---
-create table SecurityAnswer
- (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
- Security_Answer varchar(25) not null
---StudentID int references Student(StudentID)
- )
- go
+
 
 
 CREATE TABLE [dbo].[SYSUser](
@@ -125,7 +118,7 @@ CREATE TABLE [dbo].[SYSUserProfile](
 	[DoB] [datetime]  NOT NULL,
 	[Phonenumber] [varchar](50) NOT NULL,
 
-	SecurityAnswerID int NOT NULL,
+	
 	Graduate varchar(10) null,
     Degree varchar(35) null,
     YearOfStudy datetime null,
@@ -138,9 +131,17 @@ CREATE TABLE [dbo].[SYSUserProfile](
 	
 	ResID int FOREIGN KEY REFERENCES Residence(ResID)  null,
 
-	FOREIGN KEY (SecurityAnswerID) REFERENCES SecurityAnswer(SecurityAnswerID)
+	
     )
-GO
+
+---SecurityAnswer---
+create table SecurityAnswer
+ (SecurityAnswerID int identity(1,1) primary key,
+ Security_Question varchar(150) not null,
+ Security_Answer varchar(25) not null,
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
+ )
+ go
 
  Create table Progress
 (
@@ -214,16 +215,6 @@ StudentTypeID int FOREIGN KEY REFERENCES StudentType(StudentTypeID) not null,
 SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) null
 )
 go
-
----SecurityAnswer---
-create table SecurityAnswer
- (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
- Security_Answer varchar(25) not null,
-StudentID int FOREIGN KEY REFERENCES Student(StudentID)
---StudentID int references Student(StudentID)
- )
- go
 
     ---Milestone---     
 create table Milestone
@@ -456,20 +447,7 @@ GO
 		  
 
 
-		   -- Address
 
-	
-create table Address
-(
-	AddressID int identity(1,1) primary key,
-	StreetNumber varchar(10) not null,
-	StreetName varchar(35) not null,
-	Suburb varchar(150) not null,
-	City varchar(35) not null,
-	Province varchar(35) null,
-	PostCode varchar(9) null,
-)
-go
 --vENUE tYPE
 create table VenueType
 (
@@ -483,9 +461,13 @@ create table Venue
 (
 	VenueID int identity(1,1) primary key,
 	Venue_Name varchar(35) not null,
-	AddressID int not null,
+	StreeNumber varchar(10) null,
+StreetName varchar(35) null,
+Suburb varchar(35) null,
+City varchar(35) null,
+Province varchar(35) null,
+PostCode varchar(9) null,
 	VenueTypeID int not null,
-	FOREIGN KEY (AddressID) REFERENCES Address(AddressID),
 	FOREIGN KEY (VenueTypeID) REFERENCES VenueType(VenueTypeID),
 )
 GO
@@ -928,21 +910,6 @@ GO
 
 
 
-				  ---insert into: ADDRESS TABLE---
-
-
-				  insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
-values('31', '22nd Street', 'Menlo Park', 'Pretori', 'Gauteng', '0081')
-GO
-
-insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
-values('5A', 'Arcadia Street', 'Arcadia', 'Pretoria', 'Gauteng', '2130')
-GO
-
-insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
-values('17', 'Chris Corner', 'Kichenbrandish', 'Pretoria', 'Gauteng', '2103')
-GO
-
 ---insert into: RatingType Table---
 insert into RatingType(Rating)
 values('Excellent')
@@ -982,42 +949,10 @@ insert into VenueType(VenueType_Description)
 values('House')
 go
 
-
-  ---insert into: VENUE TABLE---
-insert into venue(Venue_Name, AddressID, VenueTypeID)
-values('Duxbury Palace', 3, 4)
-go
-
-insert into venue(Venue_Name, AddressID, VenueTypeID)
-values('Rautenbach Hall', 2, 2)
-go
-
-insert into venue(Venue_Name, AddressID, VenueTypeID)
-values('IT 4-5', 1, 3)
-go
-
-
   ---DELETE FROM: VENUETYPE TABLE---
 delete from VenueType where VenueTypeID = 5
 go
 
-  ---insert into:CONTENT TABLE---
-insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
-values('Looking Forward', 'www.google.com', 1, 'Taking the plunge')
-go
-
-insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
-values('Looking Backward', 'www.google.com', 1, 'Taking the plunge together')
-go
-
-insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
-values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
-go
-
---Guest Speaker
-insert into GuestSpeaker(GuestSpeaker_Name,GuestSpeaker_Surname,GuestSpeaker_Phone,GuestSpeaker_Email,GuestSpeaker_PictureLink)
-values('Bob' , 'Buider','0741258','me@me.co.za','jgjgfjjg/gjgj')
-go
 
 				  /* TEST RECORDS!!! - 
 				  
@@ -1025,73 +960,6 @@ go
 				  
 				  
 				  */
-
-insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
-values('31', '22nd Street', 'Menlo Park', 'Pretori', 'Gauteng', '0081')
-GO
-
-insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
-values('5A', 'Arcadia Street', 'Arcadia', 'Pretoria', 'Gauteng', '2130')
-GO
-
-insert into Address(StreetNumber, StreetName, Suburb, City, Province, PostCode)
-values('17', 'Chris Corner', 'Kichenbrandish', 'Pretoria', 'Gauteng', '2103')
-GO
-
-insert into VenueType(VenueType_Description)
-values('Resturant')
-go
-
-insert into VenueType(VenueType_Description)
-values('Hall')
-go
-
-insert into VenueType(VenueType_Description)
-values('Lecture Hall')
-go
-
-insert into VenueType(VenueType_Description)
-values('House')
-go
-
-insert into venue(Venue_Name, AddressID, VenueTypeID)
-values('Duxbury Palace', 3, 4)
-go
-
-insert into venue(Venue_Name, AddressID, VenueTypeID)
-values('Rautenbach Hall', 2, 2)
-go
-
-insert into venue(Venue_Name, AddressID, VenueTypeID)
-values('IT 4-5', 1, 3)
-go
-
-delete from VenueType where VenueTypeID = 5
-go
-
-
-
-
---Residences--
-
-
-
-
-
---Content---
-
-
-insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
-values('Looking Forward', 'www.google.com', 1, 'Taking the plunge')
-go
-
-insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
-values('Looking Backward', 'www.google.com', 1, 'Taking the plunge together')
-go
-
-insert into Content(Content_Name, Content_Link, Content_Status, Content_Description)
-values('Strike a pose', 'www.google.com', 1, 'Making everything better for you')
-go
 
 
 insert into Student(StudentNumber, Graduate, Degree, YearOfStudy, Student_Name, Student_Surname, Student_Phone, Student_DoB, ActiveStatus, Id, ResID, UserTypeID, StudentTypeID)
@@ -1115,7 +983,15 @@ go
 insert into SecurityAnswer(Security_Question, Security_Answer)
 values('What is was your favourite sport in high school', 'Swimming')
 go
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [ContentID]
+      ,[Content_Name]
+      ,[Content_Link]
+      ,[Content_Status]
+      ,[Content_Description]
+  FROM [TWRLADB_Staging_V2].[dbo].[Content]
 
+  
 /*Look up Roles*/
 
 INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModifiedSYSUserID)
@@ -1132,8 +1008,8 @@ INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModified
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Admin','Admin',1,1)  
   
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1,1)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1)  
  
   
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1145,8 +1021,8 @@ VALUES (1,1,1,1,1)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Admin2','Admin2',2,2)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',1,2,2)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',2,2)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1162,8 +1038,8 @@ VALUES (2,1,1,2,2)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student1','Student2',3,3)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',4,3,3)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456',1,'14284783','BCom','2017/01/01',3,3)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1175,8 +1051,8 @@ VALUES (3,2,1,3,3)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student2','Student3',4,4)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',2,4,4)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258',3,'14847834','BCom','2017/01/01',4,4)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1188,8 +1064,8 @@ VALUES (4,2,1,4,4)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student3','Student4',5,5)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,SecurityAnswerID,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896',3,'17845796','Soil Science','2017/01/01',2,5,5)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896',3,'17845796','Soil Science','2017/01/01',5,5)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -1209,8 +1085,6 @@ VALUES('89752','2017/09/26')
 ALTER TABLE  SYSUserProfile
 ADD RowVersion timestamp not null;
 
-USE TWRLADB_Staging_V2
-go
 
 CREATE TABLE AuditLog
 (
@@ -1247,9 +1121,6 @@ create table MasterData
 	PassFactor varchar(5) null
 )
 
-alter table MasterData
-add cancelevent int not null
-go
 
 Create table ClassAttendance
 (
@@ -1261,7 +1132,7 @@ Create table ClassAttendance
 insert into ClassAttendance(EventType, attend)
 values('Function', 0)
 go
-
+Fr
 insert into ClassAttendance(EventType, attend)
 values('Lecture', 0)
 go
@@ -1273,3 +1144,6 @@ go
 insert into ClassAttendance(EventType, attend)
 values('General Event', 0)
 go
+
+ALTER TABLE  SYSUserProfile
+ADD RowVersion timestamp not null;

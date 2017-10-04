@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ComEngEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
 
         // GET: ComEngEvents
         public ActionResult Index()
@@ -65,6 +65,7 @@ namespace TRWLASystemMaster.Controllers
                         int max = db.ComEngEvents.Max(p => p.ComEngID);
                         int k = max + 1;
                         comEngEvent.ComEngID = k;
+
 
                         myAudit.DateDone = DateTime.Now;
                         myAudit.TypeTran = "Create";

@@ -272,6 +272,7 @@
     <Compile Include="Controllers\DeactivateAccController.cs" />
     <Compile Include="Controllers\ElibraryController.cs" />
     <Compile Include="Controllers\FunctionEventsController.cs" />
+    <Compile Include="Controllers\GenEventsController.cs" />
     <Compile Include="Controllers\GuestSpeakerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LecturesController.cs" />
@@ -301,9 +302,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Models\ClassAttendanceReport.cs" />
-    <Compile Include="Models\DB\Address.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DB\Attendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -727,6 +725,11 @@
     <Content Include="Views\SYSUserProfiles\Edit.cshtml" />
     <Content Include="Views\SYSUserProfiles\Index.cshtml" />
     <Content Include="Views\TRWLASchedules\MainReportPage.cshtml" />
+    <Content Include="Views\GenEvents\Create.cshtml" />
+    <Content Include="Views\GenEvents\Delete.cshtml" />
+    <Content Include="Views\GenEvents\Details.cshtml" />
+    <Content Include="Views\GenEvents\Edit.cshtml" />
+    <Content Include="Views\GenEvents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

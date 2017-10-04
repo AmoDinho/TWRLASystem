@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class SYSUserProfilesController : Controller
     {
-        private TWRLADB_Staging_V2Entities5 db = new TWRLADB_Staging_V2Entities5();
+        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
         //
         /// <summary>
         /// To do :
@@ -31,7 +31,7 @@ namespace TRWLASystemMaster.Controllers
             ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
 
 
-            var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SecurityAnswer).Include(s => s.SYSUser).Include(s => s.UserType);
+            var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SYSUser).Include(s => s.UserType);
 
             if (!String.IsNullOrEmpty(searchString))
             {

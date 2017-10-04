@@ -51,7 +51,7 @@
              Venue Name   @*@Html.DisplayNameFor(model => model.Venue_Name)*@
             </th>
             <th>
-               Street Name @*@Html.DisplayNameFor(model => model.Address.)*@
+               Address @*@Html.DisplayNameFor(model => model.Address.)*@
             </th>
             <th>
                 Description   @*@Html.DisplayNameFor(model => model.VenueType.VenueType_Description)*@
@@ -66,7 +66,7 @@
                     @Html.DisplayFor(modelItem => item.Venue_Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address.StreetName)
+                    @Html.DisplayFor(modelItem => item.StreeNumber) @Html.DisplayFor(modelItem => item.StreetName), @Html.DisplayFor(modelItem => item.Suburb), @Html.DisplayFor(modelItem => item.City)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VenueType.VenueType_Description)
@@ -74,9 +74,7 @@
                 <td>
                     <a href="@Url.Action("Edit", new { id=item.VenueID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
 
-                    <a href="@Url.Action("Details", new { id=item.VenueID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
-
-                    <a href="@Url.Action("Delete", new { id=item.VenueID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
+                    <a href="@Url.Action("Details", new { id=item.VenueID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
 
 
@@ -90,7 +88,7 @@
             <div class="col-md-offset-2 col-md-10">
                 <div>
 
-                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">View Venue Types</button>
+                    <button data-toggle="tooltip" title="Got to Venue Types " type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">View Venue Types</button>
 
                 </div>
             </div>
@@ -99,7 +97,7 @@
             <div class="col-md-offset-2 col-md-10">
                 <div>
 
-                    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Venues")'">Create a New Venue</button>
+                    <button data-toggle="tooltip" title="Create a venue" type="button" class="btn" onclick="location.href='@Url.Action("Create", "Venues")'">Create a New Venue</button>
 
                 </div>
             </div>

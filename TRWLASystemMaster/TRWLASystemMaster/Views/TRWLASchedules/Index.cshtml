@@ -100,21 +100,25 @@
     <div class="form-inline">
 
         @foreach (var item in Model)
-            {
-                string cssClass = "col-md-5-Function";
+        {
+            string cssClass = "col-md-5-Function";
 
-                if (item.FunctionID != null)
-                {
-                    cssClass = "col-md-5-Function";
-                }
-                else if (item.ComEngID != null)
-                {
-                    cssClass = "col-md-5-Com";
-                }
-                else if (item.LectureID != null)
-                {
-                    cssClass = "col-md-5-Lecture";
-                }
+            if (item.FunctionID != null)
+            {
+                cssClass = "col-md-5-Function";
+            }
+            else if (item.ComEngID != null)
+            {
+                cssClass = "col-md-5-Com";
+            }
+            else if (item.LectureID != null)
+            {
+                cssClass = "col-md-5-Lecture";
+            }
+            else if (item.GenID != null)
+            {
+                cssClass = "col-md-5-Gen";
+            }
                 <div class="@cssClass form-group" style="margin-bottom:15px; margin-top:10px;">
                     <h4 style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
                         @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:MMMM/dd/yyyy}")
