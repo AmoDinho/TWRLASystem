@@ -84,7 +84,7 @@
                         @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.VenueID, @TempData["Venue"] = 1)</p>
+                        <p>Exclude: @Html.RadioButtonFor(model => model.option1, "Ignore")</p>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                         @Html.ValidationMessageFor(model => model.ResID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.ResID, @TempData["Res"] = 1)</p> 
+                        <p>Exclude: @Html.RadioButtonFor(model => model.option2, "Ignore")</p> 
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                         @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
                     </div>
                     <div style="margin-left:30px;" class="form-group">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.ContentID, @TempData["Con"] = 1)</p>
+                        <p>Exclude: @Html.RadioButtonFor(model => model.option3, "Ignore")</p>
 
                     </div>
                 </div>
@@ -129,8 +129,7 @@
                         @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.GuestSpeakerID, @TempData["Gu"] = 1)</p>
-                        <input type="radio" id="Gu" onclick="doNavigate()" />
+                        <p>Exclude: @Html.RadioButtonFor(model => model.option4, "Ignore")</p>
                     </div>
                 </div>
 

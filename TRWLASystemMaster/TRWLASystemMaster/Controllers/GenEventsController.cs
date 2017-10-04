@@ -46,21 +46,13 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
-
-        [HttpPost]
-        public ActionResult GU()
-        {
-            TempData["Gu"] = 1;
-            int gu = (int)TempData["Gu"];
-            return Json(gu);
-        }
-
+        
         // POST: GenEvents/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GenID,Gen_Name,Gen_Summary,Gen_Description,Gen_Date,Gen_StartTime,Gen_EndTime,Gene_Theme,VenueID,ResID,ContentID,GuestSpeakerID,Type")] GenEvent genEvent)
+        public ActionResult Create([Bind(Include = "GenID,Gen_Name,Gen_Summary,Gen_Description,Gen_Date,Gen_StartTime,Gen_EndTime,Gene_Theme,VenueID,ResID,ContentID,GuestSpeakerID,Type, option1, optipn2, option3, option4")] GenEvent genEvent)
         {
             if (ModelState.IsValid)
             {
@@ -82,25 +74,21 @@ namespace TRWLASystemMaster.Controllers
                     db.AuditLogs.Add(myAudit);
 
                     genEvent.Type = 4;
+                    
 
-                    int v = (int)TempData["Venue"];
-                    int c = (int)TempData["Con"];
-                    int g = (int)TempData["Gu"];
-                    int r = (int)TempData["Res"];
-
-                    if (v == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.VenueID = null;
                     }
-                    if (c == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.ContentID = null;
                     }
-                    if (g == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.GuestSpeakerID = null;
                     }
-                    if (r == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.ResID = null;
                     }
@@ -123,25 +111,20 @@ namespace TRWLASystemMaster.Controllers
                     db.AuditLogs.Add(myAudit);
 
                     genEvent.Type = 4;
-
-                    int v = (int)TempData["Venue"];
-                    int c = (int)TempData["Con"];
-                    int g = (int)TempData["Gu"];
-                    int r = (int)TempData["Res"];
-
-                    if (v == 1)
+                    
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.VenueID = null;
                     }
-                    if (c == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.ContentID = null;
                     }
-                    if (g == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.GuestSpeakerID = null;
                     }
-                    if (r == 1)
+                    if (genEvent.option1 == "Ignore")
                     {
                         genEvent.ResID = null;
                     }
