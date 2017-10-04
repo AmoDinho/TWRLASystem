@@ -151,9 +151,12 @@ namespace TRWLASystemMaster.Controllers
             var pass = from p in db.SYSUsers
                        where p.PasswordEncryptedText == model.password
                        select c;
+
+
             if(pass == db.sysuser.passwod)
             {
               
+
             }
              
              */
