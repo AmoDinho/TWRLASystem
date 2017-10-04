@@ -48,7 +48,6 @@ namespace TRWLASystemMaster.Controllers
         {
 
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-         
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
             return View();
         }
@@ -56,7 +55,7 @@ namespace TRWLASystemMaster.Controllers
 
         //Register Action 
         [HttpPost]
-        public ActionResult Register(UserSignUpView USV,HttpPostedFileBase image)
+        public ActionResult Register(UserSignUpView USV)
         {
 
             try
@@ -66,22 +65,7 @@ namespace TRWLASystemMaster.Controllers
                     UserManager UM = new UserManager();
                     if (!UM.IsLoginNameExist(USV.LoginName))
                     {
-                        if(image !=null)
-                        {
-                            USV.ImageMimeType = image.ContentType;
-                            USV.ImageData = new byte[image.ContentLength];
-                            image.InputStream.Read(USV.ImageData, 0, image.ContentLength);
-
-                            //var filename = image.FileName;
-                            //var filePathOriginal = Server.MapPath("/Content");
-                            //string savedFileName = Path.Combine(filePathOriginal);
-
-
-                            var uploadDir = "~/Content";
-                                var imagePath = Path.Combine(Server.MapPath(uploadDir));
-
-                            image.SaveAs(imagePath);
-                        }
+                        
                         USV.UserTypeID = 1;
                         
                         UM.AddUserAccount(USV);
@@ -92,7 +76,7 @@ namespace TRWLASystemMaster.Controllers
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
                         Session["User"] = myUserP.SYSUserProfileID;
 
-                        return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                        return RedirectToAction("SecurityQuestion", "Account");
 
                     }
                     else
@@ -128,6 +112,7 @@ namespace TRWLASystemMaster.Controllers
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
            
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+
             return View();
         }
 
@@ -271,15 +256,19 @@ namespace TRWLASystemMaster.Controllers
             //  var user = db.SYSUserProfiles.Where(O => O.Email.Equals(email));
 
 
-            SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
+            
 
-            int ID = myUser.SYSUserProfileID;
+            
 
-            TempData["User"] = ID;
+           
 
             if (email.ToList().Count == 1)
             {
-                
+                SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
+
+
+                int ID = myUser.SYSUserProfileID;
+                TempData["User"] = ID;
                 return RedirectToAction("SecuirtyAnswer", "Account");
             }
 
@@ -292,12 +281,16 @@ namespace TRWLASystemMaster.Controllers
 
         //Secuirty Answer get
         [AllowAnonymous]
-        public ActionResult SecuirtyAnswer(SecurityAnswer secans)
+        public ActionResult SecuirtyAnswer()
         {
            int user = Convert.ToInt32(TempData["User"]);
 
-            var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user).ToList();
-            
+            //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
+
+            var ques = from q in db.SecurityAnswers
+                       where q.SYSUserProfileID == user
+                       select q.Security_Question;
+
 
             //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
             //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
@@ -308,8 +301,12 @@ namespace TRWLASystemMaster.Controllers
 
             //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
 
-            secans.Security_Question = Convert.ToString(ans);
-            return View(secans);
+            //  secans.Security_Question = Convert.ToString(ques);
+
+            ViewBag.Question = ques;
+
+
+            return View(ques.ToList());
 
             //return View(ans);
         }
@@ -322,6 +319,35 @@ namespace TRWLASystemMaster.Controllers
 
         //    return View();
         //}
+
+
+
+
+
+       // [HttpPost]
+        public ActionResult SecurityQuestion()
+        {
+            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
+           
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SecurityQuestion([Bind(Include ="SecurityAnswerID,Security_Question,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
+        {
+
+
+            if(ModelState.IsValid)
+            {
+                db.SecurityAnswers.Add(seans);
+                db.SaveChanges();
+                return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+            }
+
+
+            return View(seans);
+        }
 
         //// GET: /Account/ResetPassword
         [AllowAnonymous]
