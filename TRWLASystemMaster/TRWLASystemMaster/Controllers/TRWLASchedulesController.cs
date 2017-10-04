@@ -269,7 +269,7 @@ namespace TRWLASystemMaster.Controllers
                 ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
                 ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
-                var tRWLASchedules = db.TRWLASchedules.Include(t => t.ComEngEvent).Include(t => t.FunctionEvent).Include(t => t.Lecture);
+                var tRWLASchedules = db.TRWLASchedules.Include(t => t.ComEngEvent).Include(t => t.FunctionEvent).Include(t => t.Lecture).Include(t => t.GenEvent);
 
 
                 if (!String.IsNullOrEmpty(searchString))
@@ -334,7 +334,7 @@ namespace TRWLASystemMaster.Controllers
 
                 DateTime mydate = DateTime.Now.AddDays(-1);
 
-                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate);
+                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate|| p.GenEvent.Gen_Date >= mydate);
 
                 return View(tRWLASchedules.ToList());
             }
