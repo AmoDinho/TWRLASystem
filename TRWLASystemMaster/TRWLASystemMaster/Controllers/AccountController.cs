@@ -294,9 +294,10 @@ namespace TRWLASystemMaster.Controllers
         [AllowAnonymous]
         public ActionResult SecuirtyAnswer(SecurityAnswer secans)
         {
-            var user = TempData["User"];
+           int user = Convert.ToInt32(TempData["User"]);
 
-            var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID.Equals(user));
+            var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user).ToList();
+            
 
             //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
             //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
@@ -307,6 +308,7 @@ namespace TRWLASystemMaster.Controllers
 
             //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
 
+            secans.Security_Question = Convert.ToString(ans);
             return View(secans);
 
             //return View(ans);
@@ -343,7 +345,7 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
-
+       
 
         //
         // GET: /Account/ForgotPasswordConfirmation
@@ -360,7 +362,7 @@ namespace TRWLASystemMaster.Controllers
 
 
 
-        //Sign Out
+            //Sign Out
 
         [Authorize]
         public ActionResult SignOut()
