@@ -142,7 +142,7 @@ namespace TRWLASystemMaster.Controllers
                         Session["User"] = myUserP.SYSUserProfileID;
 
                         FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                        return RedirectToAction("Index", "TRWLASchedules");
+                        return RedirectToAction("SecurityQuestion", "TRWLASchedules");
 
                     }
                     else
@@ -217,7 +217,8 @@ namespace TRWLASystemMaster.Controllers
              }
                 catch (Exception ex)
                 {
-                    return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Login"));
+                    TempData["notice"] = "Your username or passworid is incorrect";
+                    return View();
                 }
 
 
@@ -407,7 +408,20 @@ namespace TRWLASystemMaster.Controllers
                 seans.SYSUserProfileID = ID;
                 db.SecurityAnswers.Add(seans);
                 db.SaveChanges();
-                return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+
+                SYSUserProfile myuser = db.SYSUserProfiles.Find(ID);
+
+                if (myuser.UserTypeID == 1)
+                {
+
+                    return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                }
+                else if (myuser.UserTypeID == 2)
+                {
+                    return RedirectToAction("index", "TRWLASchedules");
+                }
+
+                
             }
 
 

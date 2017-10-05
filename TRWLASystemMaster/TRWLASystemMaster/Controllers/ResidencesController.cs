@@ -175,23 +175,31 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                AuditLog myAudit = new AuditLog();
-                myAudit.DateDone = DateTime.Now;
-                myAudit.TypeTran = "Delete";
-                myAudit.SYSUserProfileID = (int)Session["User"];
-                myAudit.TableAff = "Residence";
-
                 Residence residence = db.Residences.Find(id);
-                db.Residences.Remove(residence);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Delete";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Residence";
 
+                    db.Residences.Remove(residence);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception)
+                {
+                    TempData["notice"] = "Please note: The residence has users assigned to it thus you are unable to delete it";
+                    return View(residence);
+                }
+            }
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
             }
-        }
+            }
 
         protected override void Dispose(bool disposing)
         {

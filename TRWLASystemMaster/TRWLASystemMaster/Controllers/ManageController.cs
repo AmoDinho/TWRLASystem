@@ -64,6 +64,8 @@ namespace TRWLASystemMaster.Controllers
             return View(/*UPV*/pro);
         }
 
+        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -128,68 +130,91 @@ namespace TRWLASystemMaster.Controllers
 
         }
 
-
-        //Change password
-
-
-        public ActionResult ChangePassword(int? id)
+        public ActionResult ManageStudentProfile(int? id)
         {
 
-            SYSUser us = db.SYSUsers.Find(id);
-            return View(us);
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+            //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
+            SYSUserProfile pro = db.SYSUserProfiles.Find(id);
 
+            //string loginName = User.Identity.Name;
+            //UserManager UM = new UserManager();
+            //UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
+
+            return View(/*UPV*/pro);
         }
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword([Bind(Include = "SYSUserID,LoginName ,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sysuser, int? id)
+        public async Task<ActionResult> ManageStudentProfile(int? id, byte[] rowVersion)
         {
-            /* 
-             
-              
-            var pass = from p in db.SYSUsers
-                       where p.PasswordEncryptedText == model.password
-                       select c;
+            string[] fieldsToBind = new string[] { "StudentNumber", "FirstName", "LastName", "UserTypeID", "Email", "DoB", "Phonenumber", "SecurityAnswerID", "Degree", "YearOfStudy", "ResID", "RowVersion" };
 
-
-            if(pass == db.sysuser.passwod)
+            if (id == null)
             {
-              
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             
-             */
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    //SYSUser us = db.SYSUsers.Find(id);
-                    db.Entry(sysuser).State = EntityState.Added;
-                    db.SaveChanges();
-                    return RedirectToAction("EditProfile", "Manage");
 
+            var userToUpdate = await db.SYSUserProfiles.FindAsync(id);
+
+            if (userToUpdate == null)
+            {
+                SYSUserProfile deletedDepartment = new SYSUserProfile();
+                TryUpdateModel(deletedDepartment, fieldsToBind);
+                ModelState.AddModelError(string.Empty,
+                    "Unable to save changes. The department was deleted by another user.");
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+
+                return View(deletedDepartment);
+            }
+
+
+            if (TryUpdateModel(userToUpdate, fieldsToBind))
+            {
+                try
+                {
+                    db.Entry(userToUpdate).OriginalValues["RowVersion"] = rowVersion;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index", "TRWLASchedules");
                 }
 
-            }
-
-
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    foreach (var validationError in validationErrors.ValidationErrors)
+                    var entry = ex.Entries.Single();
+                    var clientValues = (SYSUserProfile)entry.Entity;
+                    var databaseEntry = entry.GetDatabaseValues();
+
+                    if (databaseEntry == null)
                     {
-                        Trace.TraceInformation("Property: {0} Error: {1}",
-                                                validationError.PropertyName,
-                                                validationError.ErrorMessage);
+                        ModelState.AddModelError(string.Empty,
+                    "Unable to save changes. The department was deleted by another user.");
+                    }
+                    else
+                    {
+                        var databaseValues = (SYSUserProfile)databaseEntry.ToObject();
+
+                        userToUpdate.RowVersion = databaseValues.RowVersion;
                     }
                 }
             }
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
+            return View(userToUpdate);
 
-            return View(sysuser);
         }
+
+
+        //Change password
+
 
         ///
         //
@@ -218,6 +243,13 @@ namespace TRWLASystemMaster.Controllers
             try
             {
                 SYSUserProfile user = db.SYSUserProfiles.Find(id);
+                SecurityAnswer my = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user.SYSUserProfileID);
+                SYSUser us = db.SYSUsers.FirstOrDefault(p => p.SYSUserID == user.SYSUserID);
+                SYSUserRole rol = db.SYSUserRoles.FirstOrDefault(p => p.SYSUserID == user.SYSUserID);
+
+                db.SYSUsers.Remove(us);
+                db.SYSUserRoles.Remove(rol);
+                db.SecurityAnswers.Remove(my);
                 db.SYSUserProfiles.Remove(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
@@ -229,6 +261,78 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
+        //Change password
+
+
+        public ActionResult ChangePassword(int? id)
+        {
+            TempData["id"] = id;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUser us = db.SYSUsers.Find(id);
+            if (us == null)
+            {
+                return HttpNotFound();
+            }
+            return View(us);
+
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "SYSUserID,LoginName ,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sysuser)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //SYSUser us = db.SYSUsers.Find(id);
+                    db.Entry(sysuser).State = EntityState.Added;
+                    db.SaveChanges();
+
+                    int idd = (int)TempData["id"];
+
+                    SYSUserProfile myuser = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == idd);
+
+                    if (myuser.UserTypeID == 1)
+                    {
+                        return RedirectToAction("ManageStudentProfile", "Manage", new { id = myuser.SYSUserProfileID });
+                    }
+                    else
+                    {
+                        return RedirectToAction("EditProfile", "Manage", new { id = myuser.SYSUserProfileID });
+
+                    }
+
+
+
+                }
+
+            }
+
+
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+            }
+
+
+            return View(sysuser);
+        }
+
+
+        // [HttpPost]
 
         //IDENTITY CODE STRUCTURE
 

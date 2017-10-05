@@ -740,6 +740,7 @@
     <Content Include="Views\Account\SecuirtyAnswer.cshtml" />
     <Content Include="Views\Account\SecurityQuestion.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Manage\ManageStudentProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,11 @@
     <div class="quote2home"></div>
 </div>
 
+@if (TempData["notice"] != null)
+{
+    <h4>@TempData["Notice"]</h4>
+}
+
 <div class="row" style="margin:auto; background-color:transparent;">
 
     <div class="col-md-8" style="margin:auto; display:block; background-color:transparent;">
