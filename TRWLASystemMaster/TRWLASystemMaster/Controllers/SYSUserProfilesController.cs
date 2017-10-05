@@ -25,28 +25,17 @@ namespace TRWLASystemMaster.Controllers
 
 
         // GET: SYSUserProfiles
-        public ActionResult Index(string searchString, string sortOrder, string Graduated)
+        public ActionResult Index(string searchStrings)
         {
-
-            ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
-
-
+            
             var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SYSUser).Include(s => s.UserType);
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchStrings))
             {
-                sYSUserProfiles = sYSUserProfiles.Where(s => s.UserType.Description.Contains(searchString)
-                        || s.UserType.Description.Contains(searchString)
-                        );
+                sYSUserProfiles = sYSUserProfiles.Where(s => s.FirstName.Contains(searchStrings));
             }
 
             //id="UrlList" onchange="doNavigate()"
-
-            if (!String.IsNullOrEmpty(Graduated))
-            {
-
-                sYSUserProfiles = sYSUserProfiles.Where(s => s.Graduate.Contains("(Graduated)"));
-            }
 
 
             return View(sYSUserProfiles.ToList());
