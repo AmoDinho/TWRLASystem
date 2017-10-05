@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class StudentTypesController : Controller
     {
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
 
         // GET: StudentTypes
         public ActionResult Index(string searchStringST)

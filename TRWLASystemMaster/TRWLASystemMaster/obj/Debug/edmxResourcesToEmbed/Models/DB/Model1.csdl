@@ -376,6 +376,7 @@
     <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
     <Property Name="RowModifiedDateTime" Type="DateTime" Precision="3" />
     <Property Name="ResID" Type="Int32" />
+    <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__SYSUs__6754599E" FromRole="SYSUserProfile" ToRole="Attendance" />
     <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__SYSUse__08B54D69" FromRole="SYSUserProfile" ToRole="AuditLog" />
     <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__SYSUs__04E4BC85" FromRole="SYSUserProfile" ToRole="EventMessage" />
@@ -389,7 +390,6 @@
     <NavigationProperty Name="Students" Relationship="Self.FK__Student__SYSUser__37A5467C" FromRole="SYSUserProfile" ToRole="Student" />
     <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
     <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
-    <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="SYSUserRole">
     <Key>
@@ -1162,7 +1162,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TWRLADB_Staging_V2Entities7" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="TWRLADB_Staging_V2Entities8" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attendances" EntityType="Self.Attendance" />
     <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
     <EntitySet Name="ClassAttendances" EntityType="Self.ClassAttendance" />

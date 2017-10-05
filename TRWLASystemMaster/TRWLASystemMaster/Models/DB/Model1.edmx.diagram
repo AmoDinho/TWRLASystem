@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8d0b89cc8e7a4b69a99f4fb8a87c126c" Name="Diagram1">
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Attendance" Width="1.5" PointX="14.25" PointY="17.375" IsExpanded="true" />
+      <Diagram DiagramId="4a64ab5e8eec4354b63f6a8292d90136" Name="Diagram1">
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Attendance" Width="1.5" PointX="14.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AuditLog" Width="1.5" PointX="11.25" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ClassAttendance" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ComEngEvent" Width="1.5" PointX="6" PointY="11.375" IsExpanded="true" />
@@ -21,7 +21,7 @@
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Milestone" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Progress" Width="1.5" PointX="11.25" PointY="22.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.progressbar" Width="1.5" PointX="11.25" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.RatingType" Width="1.5" PointX="15" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.RatingType" Width="1.5" PointX="15" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Residence" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.RSVP_Event" Width="1.5" PointX="14.25" PointY="22.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.RSVPSchedule" Width="1.5" PointX="19.5" PointY="19.25" IsExpanded="true" />
@@ -30,7 +30,7 @@
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.StudentMilestone" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.StudentType" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.SYSUser" Width="1.5" PointX="6.75" PointY="25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.SYSUserProfile" Width="1.5" PointX="9" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.SYSUserProfile" Width="1.5" PointX="9" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.SYSUserRole" Width="1.5" PointX="9" PointY="27" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.TRWLASchedule" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.UniqueCode" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />

@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
     public class SelectController : Controller
     {
 
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
         // GET: TWRLADB_Staging_V2Entities7
         public ActionResult SelectVolStud()
         {

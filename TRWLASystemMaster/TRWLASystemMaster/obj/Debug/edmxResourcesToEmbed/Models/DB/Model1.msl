@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities7">
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities8">
     <EntitySetMapping Name="Attendances">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
@@ -311,7 +311,6 @@
     <EntitySetMapping Name="SYSUserProfiles">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
         <MappingFragment StoreEntitySet="SYSUserProfile">
-          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
@@ -329,6 +328,7 @@
           <ScalarProperty Name="RowModifiedSYSUserID" ColumnName="RowModifiedSYSUserID" />
           <ScalarProperty Name="RowModifiedDateTime" ColumnName="RowModifiedDateTime" />
           <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
