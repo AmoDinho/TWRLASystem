@@ -326,7 +326,7 @@ namespace TRWLASystemMaster.Controllers
                 return at;
         }
 
-        public IList<Demographic> GetDemo()
+        public IList<Demographic> GetDemo(string namesearchString, string resname)
         {
             var at = (from l in db.SYSUserProfiles
                       join r in db.Residences on l.ResID equals r.ResID
@@ -344,12 +344,55 @@ namespace TRWLASystemMaster.Controllers
 
             int count =  at.Count();
 
+            if (namesearchString == null)
+            {
+                TempData["name"] = "";
+            }
+            else if (namesearchString != null)
+            {
+                TempData["name"] = namesearchString;
+            }
+
+            if (resname == null)
+            {
+
+                TempData["res"] = "";
+            }
+            else if (resname != null)
+            {
+
+                TempData["res"] = resname;
+            }
+
+
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in at
+                           where s.Name.Contains(namesearchString)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in at
+                           where s.Res.Contains(resname)
+                           select s;
+
+                return newl.ToList();
+            }
+
+
             ViewBag.StudentCount = count;
+
+
 
             return at;
         }
 
-        public IList<AttendanceViewModel> GetLectureAttendance()
+        public IList<AttendanceViewModel> GetLectureAttendance(string namesearchString, string resname)
         {
             var at = (from l in db.Attendances
                       join s in db.SYSUserProfiles on l.SYSUserProfileID equals s.SYSUserProfileID
@@ -368,9 +411,49 @@ namespace TRWLASystemMaster.Controllers
                           LastName = s.LastName,
 
                       }).ToList();
+
+            if (namesearchString == null)
+            {
+                TempData["name"] = "";
+            }
+            else if (namesearchString != null)
+            {
+                TempData["name"] = namesearchString;
+            }
+
+            if (resname == null)
+            {
+
+                TempData["res"] = "";
+            }
+            else if (resname != null)
+            {
+
+                TempData["res"] = resname;
+            }
+
+
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in at
+                           where s.EventName.Contains(namesearchString)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in at
+                           where s.EventName.Contains(resname)
+                           select s;
+
+                return newl.ToList();
+            }
             return at;
         }
-        public IList<AttendanceViewModel> GetFunctionAttendance()
+        public IList<AttendanceViewModel> GetFunctionAttendance(string namesearchString, string resname)
         {
             var attendance = (from s in db.Attendances
                               where s.FunctionID != null
@@ -386,12 +469,53 @@ namespace TRWLASystemMaster.Controllers
                                   LastName = s.SYSUserProfile.LastName,
                                   StudentNp = s.SYSUserProfile.StudentNumber
                               }).ToList();
+
+            if (namesearchString == null)
+            {
+                TempData["name"] = "";
+            }
+            else if (namesearchString != null)
+            {
+                TempData["name"] = namesearchString;
+            }
+
+            if (resname == null)
+            {
+
+                TempData["res"] = "";
+            }
+            else if (resname != null)
+            {
+
+                TempData["res"] = resname;
+            }
+
+
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attendance
+                           where s.EventName.Contains(namesearchString)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attendance
+                           where s.EventName.Contains(resname)
+                           select s;
+
+                return newl.ToList();
+            }
+
             return attendance;
         }
 
 
 
-        public IList<AttendanceViewModel> GetComAttendance()
+        public IList<AttendanceViewModel> GetComAttendance(string namesearchString, string resname)
         {
             var attend = (from s in db.Attendances
                           where s.ComEngID != null
@@ -407,14 +531,57 @@ namespace TRWLASystemMaster.Controllers
                               LastName = s.SYSUserProfile.LastName,
                               StudentNp = s.SYSUserProfile.StudentNumber
                           }).ToList();
+
+            if (namesearchString == null)
+            {
+                TempData["name"] = "";
+            }
+            else if (namesearchString != null)
+            {
+                TempData["name"] = namesearchString;
+            }
+
+            if (resname == null)
+            {
+
+                TempData["res"] = "";
+            }
+            else if (resname != null)
+            {
+
+                TempData["res"] = resname;
+            }
+
+
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attend
+                           where s.EventName.Contains(namesearchString)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attend
+                           where s.EventName.Contains(resname)
+                           select s;
+
+                return newl.ToList();
+            }
+
             return attend;
         }
 
-        public IList<NoAttend> GetNoAttendance()
+        public IList<NoAttend> GetNoAttendance(string namesearchString, string resname)
         {
+            DateTime mydate = DateTime.Now;
+
             var attend = (from m in db.RSVP_Event
                           join s in db.SYSUserProfiles on m.SYSUserProfileID equals s.SYSUserProfileID
-                          where m.Attended == null
+                          where m.Attended == null && (m.FunctionEvent.Function_Date < mydate || m.ComEngEvent.ComEng_Date < mydate || m.GenEvent.Gen_Date < mydate || m.Lecture.Lecture_Date < mydate)
                           select new NoAttend
                           {
                               StudNo = s.StudentNumber,
@@ -428,6 +595,46 @@ namespace TRWLASystemMaster.Controllers
                               ComEngDate = m.ComEngEvent.ComEng_Date
                           }).ToList();
 
+            if (namesearchString == null)
+            {
+                TempData["name"] = "";
+            }
+            else if (namesearchString != null)
+            {
+                TempData["name"] = namesearchString;
+            }
+
+            if (resname == null)
+            {
+
+                TempData["res"] = "";
+            }
+            else if (resname != null)
+            {
+
+                TempData["res"] = resname;
+            }
+
+
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attend
+                           where s.Name.Contains(namesearchString)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attend
+                           where s.Res.Contains(resname)
+                           select s;
+
+                return newl.ToList();
+            }
+
             return attend;
         }
 
@@ -437,7 +644,7 @@ namespace TRWLASystemMaster.Controllers
             try
             {
                 var gv = new GridView();
-                gv.DataSource = this.GetFunctionAttendance();
+                gv.DataSource = this.GetFunctionAttendance(TempData["name"].ToString(), TempData["res"].ToString());
                 gv.DataBind();
 
                 Response.ClearContent();
@@ -498,7 +705,7 @@ namespace TRWLASystemMaster.Controllers
             try {
 
                 var gv = new GridView();
-                gv.DataSource = this.GetLectureAttendance();
+                gv.DataSource = this.GetLectureAttendance(TempData["name"].ToString(), TempData["res"].ToString());
                 gv.DataBind();
                 Response.ClearContent();
                 Response.Buffer = true;
@@ -534,7 +741,7 @@ namespace TRWLASystemMaster.Controllers
             try
             {
                 var gv = new GridView();
-                gv.DataSource = this.GetComAttendance();
+                gv.DataSource = this.GetComAttendance(TempData["name"].ToString(), TempData["res"].ToString());
                 gv.DataBind();
                 Response.ClearContent();
                 Response.Buffer = true;
@@ -570,7 +777,7 @@ namespace TRWLASystemMaster.Controllers
             try
             {
                 var gv = new GridView();
-                gv.DataSource = this.GetDemo();
+                gv.DataSource = this.GetDemo(TempData["name"].ToString(), TempData["res"].ToString());
                 gv.DataBind();
                 Response.ClearContent();
                 Response.Buffer = true;
@@ -606,7 +813,7 @@ namespace TRWLASystemMaster.Controllers
             try
             {
                 var gv = new GridView();
-                gv.DataSource = this.GetNoAttendance();
+                gv.DataSource = this.GetNoAttendance(TempData["name"].ToString(), TempData["res"].ToString());
                 gv.DataBind();
                 Response.ClearContent();
                 Response.Buffer = true;
@@ -642,11 +849,11 @@ namespace TRWLASystemMaster.Controllers
             return View();
         }
 
-        public ActionResult StudentDemographic()
+        public ActionResult StudentDemographic(string namesearchString, string resname)
         {
             try
             {
-                return View(this.GetDemo());
+                return View(this.GetDemo(namesearchString, resname));
             }
             catch
             {
@@ -654,11 +861,11 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
-        public ActionResult NoAttend()
+        public ActionResult NoAttend(string namesearchString, string resname)
         {
             try
             {
-                return View(this.GetNoAttendance());
+                return View(this.GetNoAttendance(namesearchString, resname));
             }
             catch
             {
@@ -698,11 +905,11 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
-        public ActionResult FunctionAttendance()
+        public ActionResult FunctionAttendance(string namesearchString, string resname)
         {
             try
             {
-                return View(this.GetFunctionAttendance());
+                return View(this.GetFunctionAttendance(namesearchString, resname));
             }
             catch
             {
@@ -710,11 +917,11 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
-        public ActionResult ComAttendance()
+        public ActionResult ComAttendance(string namesearchString, string resname)
         {
             try
             {
-                return View(this.GetComAttendance());
+                return View(this.GetComAttendance(namesearchString, resname));
             }
             catch
             {
@@ -722,11 +929,11 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
-        public ActionResult LecAttendance()
+        public ActionResult LecAttendance(string namesearchString, string resname)
         {
             try
             {
-                return View(this.GetLectureAttendance());
+                return View(this.GetLectureAttendance(namesearchString, resname));
             }
             catch
             {
