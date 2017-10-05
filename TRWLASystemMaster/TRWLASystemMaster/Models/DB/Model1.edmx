@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
             <PropertyRef Name="attendanceID" />
@@ -1312,7 +1312,8 @@
             <End Role="Volunteer" EntitySet="Volunteer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TWRLADB_Staging_V2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1692,6 +1693,7 @@
           <Property Name="RowModifiedSYSUserID" Type="Int32" Nullable="false" />
           <Property Name="RowModifiedDateTime" Type="DateTime" Precision="3" />
           <Property Name="ResID" Type="Int32" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__SYSUs__6754599E" FromRole="SYSUserProfile" ToRole="Attendance" />
           <NavigationProperty Name="AuditLogs" Relationship="Self.FK__AuditLog__SYSUse__08B54D69" FromRole="SYSUserProfile" ToRole="AuditLog" />
           <NavigationProperty Name="EventMessages" Relationship="Self.FK__EventMess__SYSUs__04E4BC85" FromRole="SYSUserProfile" ToRole="EventMessage" />
@@ -1705,7 +1707,6 @@
           <NavigationProperty Name="Students" Relationship="Self.FK__Student__SYSUser__37A5467C" FromRole="SYSUserProfile" ToRole="Student" />
           <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__286302EC" FromRole="SYSUserProfile" ToRole="SYSUser" />
           <NavigationProperty Name="UserType" Relationship="Self.FK__SYSUserPr__UserT__29572725" FromRole="SYSUserProfile" ToRole="UserType" />
-          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="SYSUserRole">
           <Key>
@@ -2478,7 +2479,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TWRLADB_Staging_V2Entities7" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TWRLADB_Staging_V2Entities8" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="AuditLogs" EntityType="Self.AuditLog" />
           <EntitySet Name="ClassAttendances" EntityType="Self.ClassAttendance" />
@@ -2736,7 +2737,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities7">
+        <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities8">
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
@@ -3047,7 +3048,6 @@
           <EntitySetMapping Name="SYSUserProfiles">
             <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SYSUserProfile">
               <MappingFragment StoreEntitySet="SYSUserProfile">
-                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
                 <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
                 <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
                 <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
@@ -3065,6 +3065,7 @@
                 <ScalarProperty Name="RowModifiedSYSUserID" ColumnName="RowModifiedSYSUserID" />
                 <ScalarProperty Name="RowModifiedDateTime" ColumnName="RowModifiedDateTime" />
                 <ScalarProperty Name="ResID" ColumnName="ResID" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -22,7 +22,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ManageController : Controller
     {
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
         //Manage User
         //[AuthorizeRoles("Admin")]
         public ActionResult ManageUser()
