@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron" style="text-align:left; margin-bottom:100px;">
-    <h1>@ViewBag.Title</h1>
+    <h1>@Html.DisplayFor(model => model.FirstName)'s profile</h1>
     <div class="quotehome"></div>
     <div class="quote1home"></div>
     <div class="quote2home"></div>
@@ -20,7 +20,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>@Html.DisplayFor(model => model.FirstName)'s profile</h4>
+           
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.SYSUserProfileID)
@@ -192,15 +192,16 @@ else
 
 
 <hr />
-<h3><label class="alert-danger">Danger Zone</label></h3>
-
-<hr />
-
+<h3><label style="margin-bottom:30px;" class="alert-danger">Danger Zone</label></h3>
 
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <button style="margin-bottom:30px;" type="button" class="btn" onclick="location.href='@Url.Action("Delete", "Manage",new { id=Model.SYSUserProfileID })'">Deactivate Your Account</button>
 
-        <button type="button" class="btn" onclick="location.href='@Url.Action("ChangePassword", "Manage",new { id=Model.SYSUserID })'">Change Your Password</button>
+        <button style="margin-bottom:30px;" type="button" class="btn" onclick="location.href='@Url.Action("ChangePassword", "Manage",new { id=Model.SYSUserID })'">Change Your Password</button>
     </div>
 </div>
+
+<hr />
+    
+

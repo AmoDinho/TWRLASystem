@@ -441,9 +441,6 @@ GO
 
 --Security question---
 
- insert into SecurityAnswer(Security_Question,Security_Answer)
- values('What is your mothers maden name','Kelebogile')
- go
 
 				  
 				  /* TEST RECORDS!!! - 
@@ -892,18 +889,8 @@ VALUES (2,1,1,2,2)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student1','Student2',3,3)  
 
-<<<<<<< HEAD
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-
 VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456','14284783','BCom','2017/01/01',5,3,3)  
-=======
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-<<<<<<< HEAD
-VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456','14284783','BCom','2017/01/01',1,3,3)  
-=======
-VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456','14284783','BCom','2017/01/01',5,3,3)  
->>>>>>> 5b17ece8e4fc6e2390db857b646136e1eafbc044
->>>>>>> 7f72d70a954032892c70cf3a98daf2445dc55b64
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -917,16 +904,7 @@ VALUES ('Student2','Student3',4,4)
 
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 
-
-<<<<<<< HEAD
 VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258','14847834','BCom','2017/01/01',4,4,4)  
-=======
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-
-VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258','14847834','BCom','2017/01/01',6,4,4)  
-=======
-VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258','14847834','BCom','2017/01/01',4,4,4)  
->>>>>>> 7f72d70a954032892c70cf3a98daf2445dc55b64
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
@@ -938,12 +916,7 @@ VALUES (4,2,1,4,4)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student3','Student4',5,5)  
 
-
 INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-
-VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896','17845796','Soil Science','2017/01/01',4,5,5)  
-=======
-VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896','17845796','Soil Science','2017/01/01',2,5,5)  
 
 
 VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896','17845796','Soil Science','2017/01/01',2,5,5)  
@@ -1052,3 +1025,52 @@ VALUES ('None', 'NULL', 'NULL', 'NULL', 'NULL')
 
 INSERT INTO Content(Content_Name, Content_Link, Content_Status, Content_Description)
 VALUES ('None', 'NULL',1,'NULL')
+
+---Security Inserts--
+
+   insert into SecurityQuestion(Question)
+ values('What was your childhood nickname')
+ go
+
+
+   insert into SecurityQuestion(Question)
+ values('What is your favorite movie?')
+ go
+
+
+
+  insert into SecurityQuestion(Question)
+ values('What was your favorite food as a child?')
+ go
+
+
+
+  insert into SecurityQuestion(Question)
+ values('In what town was your first job?')
+ go
+
+ --Security Answer
+
+  insert into SecurityAnswer(Security_Answer,QuestionID,SYSUserProfileID)
+ values('Cali',4,1)
+ go
+
+
+
+  insert into SecurityAnswer(Security_Answer,QuestionID,SYSUserProfileID)
+ values('Mac and cheese',3,2)
+ go
+
+
+  insert into SecurityAnswer(Security_Answer,QuestionID,SYSUserProfileID)
+ values('Star Wars',2,3)
+ go
+
+
+  insert into SecurityAnswer(Security_Answer,QuestionID,SYSUserProfileID)
+ values('Amodinho',1,4)
+ go
+
+
+
+
