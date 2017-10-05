@@ -247,10 +247,10 @@ namespace TRWLASystemMaster.Controllers
                 SYSUser us = db.SYSUsers.FirstOrDefault(p => p.SYSUserID == user.SYSUserID);
                 SYSUserRole rol = db.SYSUserRoles.FirstOrDefault(p => p.SYSUserID == user.SYSUserID);
 
+                user.SYSUserID = 13;
                 db.SYSUsers.Remove(us);
-                db.SYSUserRoles.Remove(rol);
-                db.SecurityAnswers.Remove(my);
-                db.SYSUserProfiles.Remove(user);
+                //db.SYSUserProfiles.Remove(user);
+                //db.SecurityAnswers.Remove(my);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
@@ -290,7 +290,7 @@ namespace TRWLASystemMaster.Controllers
                 if (ModelState.IsValid)
                 {
                     //SYSUser us = db.SYSUsers.Find(id);
-                    db.Entry(sysuser).State = EntityState.Added;
+                    db.Entry(sysuser).State = EntityState.Modified;
                     db.SaveChanges();
 
                     int idd = (int)TempData["id"];
