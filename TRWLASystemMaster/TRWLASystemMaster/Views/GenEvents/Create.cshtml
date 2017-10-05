@@ -12,6 +12,12 @@
     <div class="quote2form"></div>
 </div>
 
+<style>
+    .MakeWide {
+        width: 200px;
+    }
+</style>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -74,107 +80,75 @@
             </div>
         </div>
 
-        <div class="form-group">
 
-            @Html.Label("Venue:", new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.Label("Guest Speaker:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="form-inline">
-                    <div class="form-group">
-                        @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.option1, "Ignore")</p>
-                    </div>
-                </div>
+                @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control MakeWide" })
+                @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Residence:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="form-inline">
-                    <div class="form-group">
                         @Html.DropDownList("ResID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ResID, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.option2, "Ignore")</p> 
-                    </div>
-                </div>
+             </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.Label("Venue:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                        @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="form-group">
             @Html.Label("Content:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="form-inline">
-                    <div class="form-group">
                         @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
-                    </div>
-                    <div style="margin-left:30px;" class="form-group">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.option3, "Ignore")</p>
-
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="form-group">
-            @Html.Label("Guest Speaker:", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="form-inline">
+    </div>
+
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Create General Event</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to create this event?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color form-group">
+                        <button type="submit" value="Create" class="btn">Create</button>
+                    </div>
                     <div class="form-group">
-                        @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control", @id = "gudrop" })
-                        @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group" style="margin-left:30px;">
-                        <p>Exclude: @Html.RadioButtonFor(model => model.option4, "Ignore")</p>
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div style="margin-right:5px;">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Create Event
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Return</button>
+    </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        if ($("#gu").prop("checked")) {
-            alert("it's checked");
-        }
-    });
-
-    function doNavigate() {
-        $.ajax({
-            url: "GetEventsController/GU", // or <%=Url helper method can't remember
-            type: "POST",
-            dataType: "json",
-
-            complete: function () {
-                alert("it's checked");
-            },
-
-            success: function (data) {
-                alert("it's checked");
-            },
-
-            error: function () {
-                alert("it failed");
-            },
-        });
-
-
-
-    };
-</script>

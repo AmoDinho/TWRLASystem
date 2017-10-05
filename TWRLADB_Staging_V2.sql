@@ -368,6 +368,10 @@ GO
 --Residence---
 
 insert into Residence(Res_Name)
+  Values ('None')
+GO
+
+insert into Residence(Res_Name)
 values('Nerina')
 GO
 

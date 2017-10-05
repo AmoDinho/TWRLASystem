@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="jumbotron" style="margin-bottom:150px;">
+    <h1>Update @Html.DisplayFor(model => model.GenEvent.Gen_Name)</h1>
+</div>
 
 @using (Html.BeginForm())
 {
@@ -18,7 +20,7 @@
         @Html.HiddenFor(model => model.GenID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Name:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Name, "", new { @class = "text-danger" })
@@ -26,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Summary, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Summary:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Summary, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Summary, "", new { @class = "text-danger" })
@@ -34,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+           @Html.Label("Description:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Description, "", new { @class = "text-danger" })
@@ -42,7 +44,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Date:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_Date, "", new { @class = "text-danger" })
@@ -50,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Start:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_StartTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_StartTime, "", new { @class = "text-danger" })
@@ -58,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gen_EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("End:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gen_EndTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gen_EndTime, "", new { @class = "text-danger" })
@@ -66,7 +68,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gene_Theme, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Theme:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Gene_Theme, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Gene_Theme, "", new { @class = "text-danger" })
@@ -74,7 +76,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VenueID, "VenueID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Venue:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
@@ -82,7 +84,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ResID, "ResID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Residence:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ResID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ResID, "", new { @class = "text-danger" })
@@ -90,7 +92,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContentID, "ContentID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Content:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
@@ -98,29 +100,47 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GuestSpeakerID, "GuestSpeakerID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Guest Speaker:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Update Event</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to update this event?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color ">
+                        <button type="submit" value="Create" class="btn">Confirm</button>
+                    </div>
+                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div style="margin-right:5px;">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Update Event
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 ">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        </div>
+    </div>
 </div>

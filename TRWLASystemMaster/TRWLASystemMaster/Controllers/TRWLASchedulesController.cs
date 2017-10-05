@@ -2686,7 +2686,7 @@ namespace TRWLASystemMaster.Controllers
                             smtp.Host = "smtp.gmail.com";
                             smtp.Port = 587;
                             smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                             smtp.EnableSsl = true;
                             smtp.Send(msg);
 
@@ -2758,6 +2758,59 @@ namespace TRWLASystemMaster.Controllers
                     
                     
                     db.Lectures.Remove(lectures);
+
+
+
+
+                }
+                else if (tRWLASchedule.GenID != null)
+                {
+
+                    GenEvent gen = db.GenEvents.Find(Convert.ToInt32(tRWLASchedule.LectureID));
+                    db.TRWLASchedules.Remove(tRWLASchedule);
+
+                    var email = from s in db.RSVP_Event
+                                where s.LectureID == tRWLASchedule.LectureID
+                                select s.SYSUserProfileID;
+
+                    foreach (var s in email)
+                    {
+                        try
+                        {
+                            SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
+                            GenEvent gen1 = db.GenEvents.Find(tRWLASchedule.LectureID);
+
+                            MailMessage msg = new MailMessage();
+                            msg.From = new MailAddress("u15213626@tuks.co.za");
+                            msg.To.Add(recipient.Email);
+                            msg.Subject = gen1.Gen_Name + " Cancellation";
+                            msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + gen1.Gen_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                            SmtpClient smtp = new SmtpClient();
+
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.Port = 587;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                            smtp.EnableSsl = true;
+                            smtp.Send(msg);
+
+                            ModelState.Clear();
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.Status = "Problem while sending email, Please check details.";
+                        }
+
+                        RSVP_Event gens = db.RSVP_Event.FirstOrDefault(l => l.GenID == tRWLASchedule.GenID);
+                        db.RSVPSchedules.Remove(rsvp);
+                        db.RSVP_Event.Remove(gens);
+                    }
+
+
+
+
+                    db.GenEvents.Remove(gen);
 
 
 

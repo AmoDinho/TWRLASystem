@@ -40,7 +40,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(p => p.ResID != 8))
     {
         <tr>
             <td>

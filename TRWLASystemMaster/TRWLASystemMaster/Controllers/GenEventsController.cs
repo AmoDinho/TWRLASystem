@@ -103,14 +103,12 @@ namespace TRWLASystemMaster.Controllers
                     mySchedule.GenID = genEvent.GenID;
                     db.TRWLASchedules.Add(mySchedule);
                     db.SaveChanges();
+
+                   
                     return RedirectToAction("Index", "TRWLASchedules");
 
 
                 }
-
-                db.GenEvents.Add(genEvent);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
             ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);

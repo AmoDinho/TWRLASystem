@@ -180,7 +180,7 @@
                 @Html.DisplayFor(model => model.GenEvent.Gene_Theme)
             </dd>
 
-            @if (Model.GenEvent.GuestSpeakerID != null)
+            @if (Model.GenEvent.GuestSpeakerID != 1)
             {
                 <dt>
                     @Html.Label("Guest Speaker:")
@@ -191,7 +191,7 @@
                 </dd>
             }
 
-            @if (Model.GenEvent.VenueID != null)
+            @if (Model.GenEvent.VenueID != 2)
             {
                 <dt>
                     @Html.Label("Venue:")
@@ -202,7 +202,7 @@
                 </dd>
             }
 
-            @if (Model.GenEvent.ContentID != null)
+            @if (Model.GenEvent.ContentID != 1)
             {
             <dt>
                 @Html.Label("Assigned Content:")
@@ -213,7 +213,7 @@
             </dd>
             }
 
-        @if (Model.GenEvent.ResID != null)
+        @if (Model.GenEvent.ResID != 8)
         {
             <dt>
                 @Html.Label("Residence:")
@@ -425,6 +425,10 @@
             @if (Model.ComEngID != null)
             {
                 <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "ComEngEvents", new { id = Model.ComEngID })'">Update</button>
+            }
+            @if (Model.GenID != null)
+            {
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GenEvents", new { id = Model.GenID })'">Update</button>
             }
         </div>
     </div>

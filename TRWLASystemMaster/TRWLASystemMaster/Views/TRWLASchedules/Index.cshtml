@@ -169,8 +169,19 @@
                         @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
                         @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
                         @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
-                        @Html.DisplayFor(modelItem => item.GenEvent.Venue.Venue_Name)
-                        @Html.DisplayFor(modelItem => item.GenEvent.Residence.Res_Name)
+                        @if (item.GenID != null)
+                        {
+                                if (item.GenEvent.VenueID != 2)
+                                    {
+                                         @Html.DisplayFor(modelItem => item.GenEvent.Venue.Venue_Name)
+                                    }
+
+                                if (item.GenEvent.ResID != 8)
+                                    {
+                                         @Html.DisplayFor(modelItem => item.GenEvent.Residence.Res_Name)
+                                    }
+                        }
+
                     </h4>
                     <h4 style="z-index:100; position:relative; background-color:transparent;">
                         <a href="@Url.Action("Details", new { id=item.ScheduleID })" data-toggle="tooltip" title="Details" style="margin-left:20px;"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
