@@ -290,9 +290,7 @@ namespace TRWLASystemMaster.Controllers
 
             //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
 
-            var ques = from q in db.SecurityAnswers
-                       where q.SYSUserProfileID == user
-                       select q.Security_Question;
+            SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
 
 
             //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
@@ -307,7 +305,7 @@ namespace TRWLASystemMaster.Controllers
             // secans.Security_Question = Convert.ToString(ques);
 
 
-            ViewBag.Question = ques;
+            TempData["Question"]= myanswer.Security_Question;
 
 
             return View();
@@ -317,12 +315,24 @@ namespace TRWLASystemMaster.Controllers
 
 
         ////Secuirty Answer Post
-        //[HttpPost]
-        //public ActionResult SecuirtyAnswer()
-        //{
+        [HttpPost]
+        public ActionResult SecuirtyAnswer(string answer)
+        {
+            var ans = from c in db.SecurityAnswers
+                        where c.Security_Answer == answer
+                        select c;
 
-        //    return View();
-        //}
+            if(ans.ToList().Count == 1)
+            {
+
+                return RedirectToAction("ResetPassword", "Account");
+
+
+            }
+
+
+                return View(ans);
+        }
 
 
 

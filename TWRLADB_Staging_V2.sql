@@ -813,21 +813,7 @@ GO
 				  PLEASE END YOUR INSERTS HERERERERERERERERE :D - LIFE IS ALWAYS BEUTIFUL */
 	
 
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is the Maiden Name of your Mother', 'Wallace')
-go
 
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is first dogs name?', 'Cadbury')
-go
-
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is the name of your street where you were born', 'Linksfield')
-go
-
-insert into SecurityAnswer(Security_Question, Security_Answer)
-values('What is was your favourite sport in high school', 'Swimming')
-go
 /****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP 1000 [ContentID]
       ,[Content_Name]
@@ -1018,3 +1004,20 @@ VALUES ('None', 'NULL', 'NULL', 'NULL', 'NULL')
 
 INSERT INTO Content(Content_Name, Content_Link, Content_Status, Content_Description)
 VALUES ('None', 'NULL',1,'NULL')
+
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is the Maiden Name of your Mother', 'Wallace',1)
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is first dogs name?', 'Cadbury',2)
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is the name of your street where you were born', 'Linksfield',3)
+go
+
+insert into SecurityAnswer(Security_Question, Security_Answer,SYSUserProfileID)
+values('What is was your favourite sport in high school', 'Swimming',4)
+go
