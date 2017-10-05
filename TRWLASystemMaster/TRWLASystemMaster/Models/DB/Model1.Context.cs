@@ -60,5 +60,6 @@ namespace TRWLASystemMaster.Models.DB
         public virtual DbSet<Volunteer> Volunteers { get; set; }
         public virtual DbSet<VolunteerFeedback> VolunteerFeedbacks { get; set; }
         public virtual DbSet<VolunteerType> VolunteerTypes { get; set; }
+        public virtual DbSet<SecurityQuestion> SecurityQuestions { get; set; }
     }
 }

@@ -12,14 +12,18 @@ namespace TRWLASystemMaster.Models.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class SecurityAnswer
+    public partial class SecurityQuestion
     {
-        public int SecurityAnswerID { get; set; }
-        public string Security_Answer { get; set; }
-        public int SYSUserProfileID { get; set; }
-        public int QuestionID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SecurityQuestion()
+        {
+            this.SecurityAnswers = new HashSet<SecurityAnswer>();
+        }
     
-        public virtual SYSUserProfile SYSUserProfile { get; set; }
-        public virtual SecurityQuestion SecurityQuestion { get; set; }
+        public int QuestionID { get; set; }
+        public string Question { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SecurityAnswer> SecurityAnswers { get; set; }
     }
 }

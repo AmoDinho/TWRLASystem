@@ -253,8 +253,8 @@
     <EntitySetMapping Name="SecurityAnswers">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityAnswer">
         <MappingFragment StoreEntitySet="SecurityAnswer">
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
           <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
-          <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
           <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
@@ -439,6 +439,14 @@
         <MappingFragment StoreEntitySet="VolunteerType">
           <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
           <ScalarProperty Name="VolunteerType_Description" ColumnName="VolunteerType_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityQuestions">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityQuestion">
+        <MappingFragment StoreEntitySet="SecurityQuestion">
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -234,9 +234,16 @@
       <PropertyRef Name="SecurityAnswerID" />
     </Key>
     <Property Name="SecurityAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Security_Question" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Security_Answer" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="SYSUserProfileID" Type="int" Nullable="false" />
+    <Property Name="QuestionID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SecurityQuestion">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -838,6 +845,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__SecurityA__Quest__123EB7A3">
+    <End Role="SecurityQuestion" Type="Self.SecurityQuestion" Multiplicity="1" />
+    <End Role="SecurityAnswer" Type="Self.SecurityAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="SecurityAnswer">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__SecurityA__SYSUs__24927208">
     <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="1" />
     <End Role="SecurityAnswer" Type="Self.SecurityAnswer" Multiplicity="*" />
@@ -1076,6 +1095,7 @@
     <EntitySet Name="RSVP_Event" EntityType="Self.RSVP_Event" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RSVPSchedule" EntityType="Self.RSVPSchedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SecurityAnswer" EntityType="Self.SecurityAnswer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecurityQuestion" EntityType="Self.SecurityQuestion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentMilestone" EntityType="Self.StudentMilestone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StudentType" EntityType="Self.StudentType" Schema="dbo" store:Type="Tables" />
@@ -1233,6 +1253,10 @@
     <AssociationSet Name="FK__RSVPSched__SYSUs__787EE5A0" Association="Self.FK__RSVPSched__SYSUs__787EE5A0">
       <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
       <End Role="RSVPSchedule" EntitySet="RSVPSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SecurityA__Quest__123EB7A3" Association="Self.FK__SecurityA__Quest__123EB7A3">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+      <End Role="SecurityAnswer" EntitySet="SecurityAnswer" />
     </AssociationSet>
     <AssociationSet Name="FK__SecurityA__SYSUs__24927208" Association="Self.FK__SecurityA__SYSUs__24927208">
       <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />

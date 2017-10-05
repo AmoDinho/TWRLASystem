@@ -18,6 +18,7 @@ using TRWLASystemMaster.Models.DB;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.IO;
 using System.Net.Mail;
+using System.Net;
 
 namespace TRWLASystemMaster.Controllers
 {
@@ -256,7 +257,7 @@ namespace TRWLASystemMaster.Controllers
             //TempData["user"] = email;
             //  var user = db.SYSUserProfiles.Where(O => O.Email.Equals(email));
 
-
+            int count = email.Count();
 
 
 
@@ -270,6 +271,13 @@ namespace TRWLASystemMaster.Controllers
 
                 int ID = myUser.SYSUserProfileID;
                 TempData["User"] = ID;
+
+
+                SYSUser ures = db.SYSUsers.FirstOrDefault(c => c.SYSUserID == myUser.SYSUserID);
+
+                int ID2 = ures.SYSUserID;
+                TempData["User2"] = ID2;
+
                 return RedirectToAction("SecuirtyAnswer", "Account");
             }
 
@@ -288,9 +296,7 @@ namespace TRWLASystemMaster.Controllers
 
             //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
 
-            var ques = from q in db.SecurityAnswers
-                       where q.SYSUserProfileID == user
-                       select q.Security_Question;
+            SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
 
 
             //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
@@ -305,7 +311,7 @@ namespace TRWLASystemMaster.Controllers
             // secans.Security_Question = Convert.ToString(ques);
 
 
-            ViewBag.Question = ques;
+            TempData["Question"] = myanswer.SecurityQuestion.Question;
 
 
             return View();
@@ -315,34 +321,90 @@ namespace TRWLASystemMaster.Controllers
 
 
         ////Secuirty Answer Post
-        //[HttpPost]
-        //public ActionResult SecuirtyAnswer()
-        //{
+        [HttpPost]
+        public ActionResult SecuirtyAnswer(string answer)
+        {
+            int user = Convert.ToInt32(TempData["User"]);
 
-        //    return View();
-        //}
+            //var ans = from c in db.SecurityAnswers
+            //         where c.Security_Answer.Contains(answer) && c.SYSUserProfileID == user
+            //         select c;
+
+
+            //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
+
+
+
+            var s = from n in db.SecurityAnswers
+                    where n.Security_Answer == answer && n.SYSUserProfileID == user
+                    select n.Security_Answer;
 
 
 
 
+            if (s != null)
+            {
+
+                return RedirectToAction("Edit", "Account");
+
+
+            }
+
+
+            return View(s);
+        }
+
+
+
+        public ActionResult Edit(int? id)
+        {
+            id = Convert.ToInt32(TempData["User2"]);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            SYSUser sYSUser = db.SYSUsers.Find(id);
+            if (sYSUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sYSUser);
+        }
+
+        // POST: SYSUsers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "SYSUserID,LoginName,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sYSUser)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(sYSUser).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Login", "Account");
+            }
+            return View(sYSUser);
+        }
 
         // [HttpPost]
         public ActionResult SecurityQuestion()
         {
-            int ID = Convert.ToInt32(TempData["nUse"]);
-            ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
-            // SecurityAnswer sans = db.SecurityAnswers
+            ViewBag.QuestionID = new SelectList(db.SecurityQuestions, "QuestionID", "Question");
+            
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult SecurityQuestion([Bind(Include = "SecurityAnswerID,Security_Question,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
+        public ActionResult SecurityQuestion([Bind(Include = "SecurityAnswerID,QuestionID,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
         {
 
-
+            int ID = Convert.ToInt32(TempData["nUse"]);
             if (ModelState.IsValid)
             {
+                seans.SYSUserProfileID = ID;
                 db.SecurityAnswers.Add(seans);
                 db.SaveChanges();
                 return RedirectToAction("StudentMainMenu", "TRWLASchedules");

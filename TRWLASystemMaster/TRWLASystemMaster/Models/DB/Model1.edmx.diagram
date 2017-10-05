@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4a64ab5e8eec4354b63f6a8292d90136" Name="Diagram1">
+      <Diagram DiagramId="4a64ab5e8eec4354b63f6a8292d90136" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.Attendance" Width="1.5" PointX="14.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.AuditLog" Width="1.5" PointX="11.25" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.ClassAttendance" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -94,6 +94,8 @@
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__UserT__412EB0B6" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Venue__VenueType__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__Volunteer__Volun__4222D4EF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TWRLADB_Staging_V2Model.SecurityQuestion" Width="1.5" PointX="0.75" PointY="7.875" />
+        <AssociationConnector Association="TWRLADB_Staging_V2Model.FK__SecurityA__Quest__123EB7A3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

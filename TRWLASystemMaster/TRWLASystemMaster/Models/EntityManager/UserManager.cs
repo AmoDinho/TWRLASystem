@@ -333,7 +333,7 @@ namespace TRWLASystemMaster.Models.EntityManager
                 var secanswers = db.SecurityAnswers.Select(o => new LookupSecurityAnswer
                 {
                     SecurityAnswerID = o.SecurityAnswerID,
-                    Security_Question = o.Security_Question,
+                    Security_Question = o.SecurityQuestion.Question,
                     Security_Answer = o.Security_Answer
                 }).ToList();
 

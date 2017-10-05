@@ -296,10 +296,11 @@
       <PropertyRef Name="SecurityAnswerID" />
     </Key>
     <Property Name="SecurityAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Security_Question" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Security_Answer" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SYSUserProfile" Relationship="Self.FK__SecurityA__SYSUs__24927208" FromRole="SecurityAnswer" ToRole="SYSUserProfile" />
+    <Property Name="QuestionID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SecurityQuestion" Relationship="TWRLADB_Staging_V2Model.FK__SecurityA__Quest__123EB7A3" FromRole="SecurityAnswer" ToRole="SecurityQuestion" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -1414,5 +1415,30 @@
       <End Role="VolunteerType" EntitySet="VolunteerTypes" />
       <End Role="Volunteer" EntitySet="Volunteers" />
     </AssociationSet>
+    <EntitySet Name="SecurityQuestions" EntityType="TWRLADB_Staging_V2Model.SecurityQuestion" />
+    <AssociationSet Name="FK__SecurityA__Quest__123EB7A3" Association="TWRLADB_Staging_V2Model.FK__SecurityA__Quest__123EB7A3">
+      <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+      <End Role="SecurityAnswer" EntitySet="SecurityAnswers" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="SecurityQuestion">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SecurityAnswers" Relationship="TWRLADB_Staging_V2Model.FK__SecurityA__Quest__123EB7A3" FromRole="SecurityQuestion" ToRole="SecurityAnswer" />
+  </EntityType>
+  <Association Name="FK__SecurityA__Quest__123EB7A3">
+    <End Type="TWRLADB_Staging_V2Model.SecurityQuestion" Role="SecurityQuestion" Multiplicity="1" />
+    <End Type="TWRLADB_Staging_V2Model.SecurityAnswer" Role="SecurityAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityQuestion">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="SecurityAnswer">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
