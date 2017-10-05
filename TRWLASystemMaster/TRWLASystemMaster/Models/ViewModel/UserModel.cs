@@ -26,26 +26,30 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "Username")]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string LoginName { get; set; }
-        [Required(ErrorMessage = "*")]
+
+        
         [Display(Name = "Password")]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Your First Name is required")]
         [Display(Name = "First Name")]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FirstName { get; set; }
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Required(ErrorMessage = "Your Last Name is required")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public int UserTypeID { get; set; }
 
-        [Required(ErrorMessage = "Your Last Name is required")]
-        public int SecurityAnswerID { get; set; }
-      
-
-        [Display(Name = " StudentNumber")]
-        [DataType(DataType.PhoneNumber)] 
+   
+        //[Display(Name = "StudentNumber")]
+        [DataType(DataType.Custom)] 
         [Required(ErrorMessage = "Student Number Required!")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered student number is not valid.")]
+        [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
+       //  [RegularExpression(@"^\(?([1-8]{3})\)?[-. ]?([1-8]{3})[-. ]?([1-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
 
        
@@ -53,6 +57,8 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "Degree")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string Degree { get; set; }
+
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "Academic Commencement Date")]
         [DataType(DataType.Date)]
@@ -66,6 +72,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "DoB")]
         [DataType(DataType.Date)]
@@ -90,12 +97,15 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Required(ErrorMessage = "*")]
         [Display(Name = "Username")]
         public string LoginName { get; set; }
+
         [Required(ErrorMessage = "*")]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Your First Name is required")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
         [Required(ErrorMessage = "Your Last Name is required")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
@@ -111,6 +121,8 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
+
+
         [Required(ErrorMessage = "This field is required")]
         [Display(Name = "DoB")]
         [DataType(DataType.Date)]

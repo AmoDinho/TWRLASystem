@@ -5,11 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="jumbotron" style="text-align:left; margin-bottom:100px;">
+    <h1>@Html.DisplayFor(model => model.FirstName)'s @ViewBag.Title</h1>
+    <div class="quotehome"></div>
+    <div class="quote1home"></div>
+    <div class="quote2home"></div>
+</div>
+
+
 
 <div>
-    <h4>SYSUserProfile</h4>
+   
     <hr />
+
+
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.StudentNumber)
@@ -83,37 +93,7 @@
             @Html.DisplayFor(model => model.YearOfStudy)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RowCreatedSYSUserID)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RowCreatedSYSUserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RowCreatedDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowCreatedDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RowModifiedSYSUserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowModifiedSYSUserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RowModifiedDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RowModifiedDateTime)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Residence.Res_Name)
@@ -123,33 +103,19 @@
             @Html.DisplayFor(model => model.Residence.Res_Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SecurityAnswer.Security_Question)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SecurityAnswer.Security_Question)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SYSUser.LoginName)
-        </dt>
+      
 
-        <dd>
-            @Html.DisplayFor(model => model.SYSUser.LoginName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserType.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserType.Description)
-        </dd>
-
+      
     </dl>
+    
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SYSUserProfileID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "SYSUserProfiles")'">Back</button>
+
+       
+    </div>
+</div>
