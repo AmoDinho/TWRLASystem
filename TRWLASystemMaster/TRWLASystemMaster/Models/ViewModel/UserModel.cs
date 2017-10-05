@@ -49,7 +49,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         [DataType(DataType.Custom)] 
         [Required(ErrorMessage = "Student Number Required!")]
         [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
-       //  [RegularExpression(@"^\(?([0-8]{3})\)?[-. ]?([0-8]{3})[-. ]?([0-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
+       //  [RegularExpression(@"^\(?([1-8]{3})\)?[-. ]?([1-8]{3})[-. ]?([1-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
 
        
