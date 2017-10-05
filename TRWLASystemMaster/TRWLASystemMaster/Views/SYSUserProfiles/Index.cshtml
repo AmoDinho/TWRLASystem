@@ -2,11 +2,11 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+} 
 @*VolunteerLoggedInPage.cshtml*@
 <div class="jumbotron">
-    <h1>Student Management</h1>
+    <h1>Students</h1>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
@@ -24,7 +24,7 @@
 {
     <div class="form-inline" style="margin-bottom:10px;">
         <p data-toggle="tooltip" title="Search by name" class="form-group">
-            @Html.TextBox("searchString", "", new { placeholder = "Volunteer/Student", @class = "form-control", style = "width:100%;" })
+            @Html.TextBox("searchString", "", new { placeholder = "Student Name", @class = "form-control", style = "width:100%;" })
         </p>
 
         <p class="form-group">
@@ -37,6 +37,7 @@
 <table class="table">
     <tr>
         <th>
+<<<<<<< HEAD
          Student Number   @*@Html.DisplayNameFor(model => model.StudentNumber)*@
         </th>
         <th>
@@ -44,23 +45,34 @@
         </th>
         <th>
         Last Name    @*@Html.DisplayNameFor(model => model.LastName)*@
+=======
+            Student Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            Name
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DoB)
+            Surname
         </th>
         <th>
+            Phone Number
+        </th>
+        <th>
+<<<<<<< HEAD
             Phone Number    @*@Html.DisplayNameFor(model => model.Phonenumber)*@
+=======
+            Email Address
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Graduate)
+            Date of Birth
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Degree)
+            Degree
         </th>
         <th>
+<<<<<<< HEAD
             Year Of Study  @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
         </th>
 
@@ -69,6 +81,13 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserType.Description)
+=======
+            Year of Study
+        </th>
+
+        <th>
+            Residence
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
         </th>
         <th></th>
     </tr>
@@ -85,16 +104,13 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Phonenumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DoB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phonenumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Graduate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Degree)
@@ -106,9 +122,12 @@
                 @Html.DisplayFor(modelItem => item.Residence.Res_Name)
             </td>
             <td>
+<<<<<<< HEAD
                 @Html.DisplayFor(modelItem => item.UserType.Description)
             </td>
             <td>
+=======
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
                 <a href="@Url.Action("Details", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
             </td>
@@ -120,6 +139,7 @@
 <table class="table">
     <tr>
         <th>
+<<<<<<< HEAD
             Student Number    @*@Html.DisplayNameFor(model => model.StudentNumber)*@
         </th>
         <th>
@@ -127,20 +147,34 @@
         </th>
         <th>
             Last Name   @*@Html.DisplayNameFor(model => model.LastName)*@
+=======
+            Student Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DoB)
+            Surname
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
         </th>
         <th>
+            Phone Number
+        </th>
+        <th>
+            Email Address
+        </th>
+        <th>
+<<<<<<< HEAD
             Phone number  @*@Html.DisplayNameFor(model => model.Phonenumber)*@
+=======
+            Date of Birth
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Graduate)
+            Degree
         </th>
         <th>
+<<<<<<< HEAD
             @Html.DisplayNameFor(model => model.Degree)
         </th>
         <th>
@@ -149,6 +183,13 @@
 
         <th>
             Res Name   @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
+=======
+            Year of Study
+        </th>
+
+        <th>
+            Residence
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
         </th>
       
         <th></th>
@@ -166,16 +207,13 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Phonenumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DoB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phonenumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Graduate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Degree)
@@ -186,12 +224,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Residence.Res_Name)
             </td>
+<<<<<<< HEAD
            
             <td>
 
+=======
+            <td>
+>>>>>>> b33a53cb96f21603144fb1d029c1c0741cb032d1
                 <a href="@Url.Action("Details", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-
-
             </td>
         </tr>
     }
