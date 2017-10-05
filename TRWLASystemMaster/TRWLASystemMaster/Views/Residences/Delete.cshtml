@@ -21,6 +21,7 @@
             @Html.ValidationMessageFor(model => model.Res_Name, "", new { @class = "text-danger" })
         </div>
     </div>
+    @TempData["Notice"]
 
     @using (Html.BeginForm())
     {
@@ -38,7 +39,6 @@
                 <button data-toggle="tooltip" title="Return to Residences" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Residences")'">Return</button>
             </div>
         </div>
-
 
 
 
@@ -64,6 +64,8 @@
             </div>
         </div>
 
+
+        
 
     }
 

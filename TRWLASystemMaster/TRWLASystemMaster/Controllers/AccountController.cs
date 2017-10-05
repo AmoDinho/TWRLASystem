@@ -214,9 +214,10 @@ namespace TRWLASystemMaster.Controllers
             return View(ULV);
 
              }
-                catch (Exception ex)
+                catch (Exception )
                 {
-                    return View("ErrorLogIn", new HandleErrorInfo(ex, "Account", "Login"));
+                    TempData["notice"] = " Your Username or Password is incorrect";
+                    return View(/*"ErrorLogIn", new HandleErrorInfo(ex, "Account", "Login")*/);
                 }
 
 

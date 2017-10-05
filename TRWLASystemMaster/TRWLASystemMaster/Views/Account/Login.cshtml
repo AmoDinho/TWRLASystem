@@ -16,6 +16,7 @@
 
     <div class="col-md-8" style="margin:auto; display:block; background-color:transparent;">
         <section id="loginForm" style="margin:auto; display:block; background-color:transparent;">
+            @TempData["Notice"]
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()

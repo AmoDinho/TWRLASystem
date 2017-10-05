@@ -173,19 +173,30 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             try
             {
-                AuditLog myAudit = new AuditLog();
-                myAudit.DateDone = DateTime.Now;
-                myAudit.TypeTran = "Delete";
-                myAudit.SYSUserProfileID = (int)Session["User"];
-                myAudit.TableAff = "Residence";
-
                 Residence residence = db.Residences.Find(id);
-                db.Residences.Remove(residence);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    //AuditLog myAudit = new AuditLog();
+                    //myAudit.DateDone = DateTime.Now;
+                    //myAudit.TypeTran = "Delete";
+                    //myAudit.SYSUserProfileID = (int)Session["User"];
+                    //myAudit.TableAff = "Residence";
+
+                    db.Residences.Remove(residence);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception)
+                {
+                    TempData["notice"] = " Please note: That the Residence has users assigned to it. Thus you are unable to delete it.";
+                    return View(residence);
+                }
             }
+            
 
             catch (Exception ex)
             {
