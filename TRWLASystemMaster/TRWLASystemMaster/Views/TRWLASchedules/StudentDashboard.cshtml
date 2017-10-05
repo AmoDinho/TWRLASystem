@@ -159,6 +159,12 @@
                     @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
                     @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
                     @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                    <br />
+
+                    @if (item.LectureID != null)
+                    {
+                        @Html.ActionLink("Write a Review", "WriteReview", "TRWLASchedules", new { id = item.rsvpID })
+                    }
                 </h4>
             </div>
         }

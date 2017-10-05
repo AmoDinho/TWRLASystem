@@ -207,7 +207,7 @@
     <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="CancelEvent" Type="Int32" Nullable="false" />
     <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
-    <Property Name="PassFactor" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="PassFactor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Milestone">
     <Key>

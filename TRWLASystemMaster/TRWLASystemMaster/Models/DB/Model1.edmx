@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TWRLADB_Staging_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
             <PropertyRef Name="attendanceID" />
@@ -169,7 +169,7 @@
           <Property Name="RegDate" Type="date" Nullable="false" />
           <Property Name="CancelEvent" Type="int" Nullable="false" />
           <Property Name="LogAttendTime" Type="int" Nullable="false" />
-          <Property Name="PassFactor" Type="varchar" MaxLength="5" />
+          <Property Name="PassFactor" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Milestone">
           <Key>
@@ -1312,8 +1312,7 @@
             <End Role="Volunteer" EntitySet="Volunteer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TWRLADB_Staging_V2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1524,7 +1523,7 @@
           <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CancelEvent" Type="Int32" Nullable="false" />
           <Property Name="LogAttendTime" Type="Int32" Nullable="false" />
-          <Property Name="PassFactor" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PassFactor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Milestone">
           <Key>

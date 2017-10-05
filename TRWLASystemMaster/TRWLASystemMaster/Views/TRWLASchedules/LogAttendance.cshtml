@@ -12,6 +12,10 @@
     <div class="quote2form"></div>
 </div>
 
+@if(TempData["Log"] != null)
+{
+    <h4>@TempData["Log"]</h4>
+}
 <h4>Please select an event</h4>
 
 <table class="table">

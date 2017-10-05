@@ -164,7 +164,7 @@
     <Property Name="RegDate" Type="date" Nullable="false" />
     <Property Name="CancelEvent" Type="int" Nullable="false" />
     <Property Name="LogAttendTime" Type="int" Nullable="false" />
-    <Property Name="PassFactor" Type="varchar" MaxLength="5" />
+    <Property Name="PassFactor" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Milestone">
     <Key>

@@ -118,10 +118,10 @@ namespace TRWLASystemMaster.Controllers
         public FilePathResult Download()
         {
                 int id = Convert.ToInt32(TempData["Image"]);
-
+                TempData["Image"] = id;
                 Content contnents = db.Contents.Find(id);
 
-                return new FilePathResult(contnents.Content_Link, System.Net.Mime.MediaTypeNames.Application.Octet);
+                return new FilePathResult(contnents.Content_Link, System.Net.Mime.MediaTypeNames.Application.Pdf);
             
 
         }

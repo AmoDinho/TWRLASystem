@@ -45,8 +45,12 @@
     </div>
 }
 
+@if (TempData["Log"] != null)
+{
+    <h2>@TempData["Log"]</h2>
+}
+
 <div>
-    <hr />
     @if (Model.FunctionID != null)
     {
         <dl class="dl-horizontal">
@@ -209,7 +213,7 @@
             </dt>
 
             <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-                @Html.DisplayFor(model => model.Lecture.Content.Content_Name)
+                @Html.DisplayFor(model => model.GenEvent.Content.Content_Name)
             </dd>
             }
 
@@ -220,7 +224,7 @@
             </dt>
 
             <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
-                @Html.DisplayFor(model => model.Lecture.Residence.Res_Name)
+                @Html.DisplayFor(model => model.GenEvent.Residence.Res_Name)
             </dd>
         }
 
@@ -460,12 +464,15 @@
                 @using (Html.BeginForm())
             {
                     @Html.AntiForgeryToken()
-                    <div class="form-actions no-color ">
+                    <div class="form-actions no-color form-group">
                         <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Cancel Event</button>
                     </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
+
+                    </div>
                 }
-                <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
-            </div>
+                 </div>
         </div>
     </div>
 </div>

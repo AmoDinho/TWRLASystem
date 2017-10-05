@@ -64,7 +64,7 @@ namespace TRWLASystemMaster.Controllers
                 try
                 {
                     progressbar myprog = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == user);
-                    MasterData mymaster = db.MasterDatas.Find(1);
+                    MasterData mymaster = db.MasterDatas.Find(9);
 
                     if (myprog != null)
                     {
@@ -1120,22 +1120,24 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult LogAttendance()
         {
-            try
+                
+                    try
             {
-                var trwla = from s in db.TRWLASchedules
-                            select s;
+                        var trwla = from s in db.TRWLASchedules
+                                    select s;
 
-                DateTime mydate = DateTime.Now.AddDays(-1);
-                DateTime myfuture = DateTime.Now;
+                        DateTime mydate = DateTime.Now.AddDays(-1);
+                        DateTime myfuture = DateTime.Now;
 
-                trwla = trwla.Where(p => (p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate) && (p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture));
+                        trwla = trwla.Where(p => (p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate) && (p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture));
 
-                return View(trwla.ToList());
-            }
-            catch
-            {
-                return RedirectToAction("ErrorPage");
-            }
+                        return View(trwla.ToList());
+                    }
+                    catch
+                    {
+                        return RedirectToAction("ErrorPage");
+                    }
+
         }
 
         public ActionResult LogAttendancePast()
@@ -1165,33 +1167,43 @@ namespace TRWLASystemMaster.Controllers
                 ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                 ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
 
-                var stud = from s in db.SYSUserProfiles
-                           join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
-                           where s.SYSUserProfileID != r.SYSUserProfileID
-                           select s;
+                int eventid = (int)TempData["NewStudentAdd"];
+                TempData["NewStudentAdd"] = eventid;
 
-                if (!String.IsNullOrEmpty(searchString))
+                TRWLASchedule mysc = db.TRWLASchedules.Find(eventid);
+
+                if (mysc.FunctionID != null)
                 {
-                    stud = stud.Where(s => s.FirstName.Contains(searchString));
-                }
+                    var rsvp = (from r in db.RSVP_Event
+                                join s in db.TRWLASchedules on r.FunctionID equals s.FunctionID
+                                join l in db.SYSUserProfiles on r.SYSUserProfileID equals l.SYSUserProfileID
+                                select l).ToList();
 
-                switch (sortOrder)
+                    var students = (from s in db.SYSUserProfiles
+                                    where s.UserTypeID == 1
+                                    select s).ToList();
+
+                    students.RemoveAll(x => rsvp.Contains(x));
+
+
+
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        var t = (from l in students
+                                where l.FirstName.Contains(searchString)
+                                select l).ToList();
+
+                        return View(t);
+                    }
+
+
+                    return View(students);
+                }
+                else
                 {
-                    case "name_desc":
-                        stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
-                        break;
-                    case "sur_desc":
-                        stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
-                        break;
-                    case "Surname":
-                        stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
-                        break;
-                    default:
-                        stud = stud.OrderByDescending(s => s.FirstName.Contains(searchString));
-                        break;
+                    return RedirectToAction("Index");
                 }
-
-                return View(stud.ToList());
             }
             catch
             {
@@ -1527,114 +1539,226 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
+
+                MasterData mydata = db.MasterDatas.Find(9);
+                int time = Convert.ToInt32(mydata.LogAttendTime);
+
+                int mytime = DateTime.Now.TimeOfDay.Hours;
+
                 TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
-
-                TempData["NewStudent"] = id;
-
                 if (tRWLASchedule.FunctionID != null)
                 {
-                    var evnt = from s in db.SYSUserProfiles
-                               join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
-                               join t in db.TRWLASchedules on r.FunctionID equals t.FunctionID
-                               where r.FunctionID == tRWLASchedule.FunctionID
-                               select r;
+                    int m = tRWLASchedule.FunctionEvent.Function_StartTime.Hours;
 
-                    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                    ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+                    int diff = m - mytime;
 
-                    if (!String.IsNullOrEmpty(searchString))
+                    if (diff > time)
                     {
-                        evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
+                        return RedirectToAction("LogAttendance");
                     }
-
-                    switch (sortOrder)
-                    {
-                        case "name_desc":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        case "sur_desc":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        case "Surname":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        default:
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                    }
-
-
-                    return View(evnt.ToList());
 
                 }
                 else if (tRWLASchedule.LectureID != null)
                 {
-                    var evnt = from s in db.SYSUserProfiles
-                               join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
-                               join t in db.TRWLASchedules on r.LectureID equals t.LectureID
-                               where r.LectureID == tRWLASchedule.LectureID
-                               select r;
-                    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                    ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+                    int m = tRWLASchedule.Lecture.Lecture_StartTime.Hours;
+                    int diff = m - mytime;
 
-                    if (!String.IsNullOrEmpty(searchString))
+                    if (diff > time)
                     {
-                        evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
+                        return RedirectToAction("LogAttendance");
                     }
 
-                    switch (sortOrder)
-                    {
-                        case "name_desc":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        case "sur_desc":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        case "Surname":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        default:
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                    }
-
-
-                    return View(evnt.ToList());
                 }
-                else
+                else if (tRWLASchedule.GenID != null)
                 {
-                    var evnt = from s in db.SYSUserProfiles
-                               join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
-                               join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
-                               where r.ComEngID == tRWLASchedule.ComEngID
-                               select r;
-                    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                    ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+                    int m = tRWLASchedule.GenEvent.Gen_StartTime.Hours;
+                    int diff = m - mytime;
 
-                    if (!String.IsNullOrEmpty(searchString))
+                    if (diff > time)
                     {
-                        evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
+                        return RedirectToAction("LogAttendance");
                     }
-
-                    switch (sortOrder)
-                    {
-                        case "name_desc":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        case "sur_desc":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        case "Surname":
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                        default:
-                            evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                            break;
-                    }
-
-
-                    return View(evnt.ToList());
                 }
+                else if (tRWLASchedule.ComEngID != null)
+                {
+                    int m = tRWLASchedule.ComEngEvent.ComEnge_StartTime.Hours;
+                    int diff = m - mytime;
+
+                    if (diff > time)
+                    {
+                        TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
+                        return RedirectToAction("LogAttendance");
+                    }
+                }
+
+                try
+                {
+
+                    TempData["NewStudent"] = id;
+
+                    if (tRWLASchedule.FunctionID != null)
+                    {
+                        var evnt = from s in db.SYSUserProfiles
+                                   join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
+                                   join t in db.TRWLASchedules on r.FunctionID equals t.FunctionID
+                                   where r.FunctionID == tRWLASchedule.FunctionID
+                                   select r;
+                        RSVP_Event myevent = db.RSVP_Event.FirstOrDefault(p => p.FunctionID == id);
+
+                        TempData["NewStudentAdd"] = tRWLASchedule.ScheduleID;
+
+
+                        ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                        ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+                        if (!String.IsNullOrEmpty(searchString))
+                        {
+                            evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        }
+
+                        switch (sortOrder)
+                        {
+                            case "name_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "sur_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "Surname":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            default:
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                        }
+
+
+                        return View(evnt.ToList());
+
+                    }
+                    else if (tRWLASchedule.LectureID != null)
+                    {
+                        var evnt = from s in db.SYSUserProfiles
+                                   join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
+                                   join t in db.TRWLASchedules on r.LectureID equals t.LectureID
+                                   where r.LectureID == tRWLASchedule.LectureID
+                                   select r;
+                        ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                        ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+                        
+
+                        TempData["NewStudentAdd"] = tRWLASchedule.ScheduleID;
+
+                        if (!String.IsNullOrEmpty(searchString))
+                        {
+                            evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        }
+
+                        switch (sortOrder)
+                        {
+                            case "name_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "sur_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "Surname":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            default:
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                        }
+
+
+                        return View(evnt.ToList());
+                    }
+                    else if (tRWLASchedule.ComEngID != null)
+                    {
+                        var evnt = from s in db.SYSUserProfiles
+                                   join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
+                                   join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
+                                   where r.ComEngID == tRWLASchedule.ComEngID
+                                   select r;
+                        ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                        ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+                        RSVP_Event myevent = db.RSVP_Event.FirstOrDefault(p => p.ComEngID == id);
+
+                        TempData["NewStudentAdd"] = tRWLASchedule.ScheduleID;
+
+                        if (!String.IsNullOrEmpty(searchString))
+                        {
+                            evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        }
+
+                        switch (sortOrder)
+                        {
+                            case "name_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "sur_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "Surname":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            default:
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                        }
+
+
+                        return View(evnt.ToList());
+                    }
+                    else if (tRWLASchedule.GenID != null)
+                    {
+                        var evnt = from s in db.SYSUserProfiles
+                                   join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
+                                   join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
+                                   where r.ComEngID == tRWLASchedule.ComEngID
+                                   select r;
+                        ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                        ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
+
+                        RSVP_Event myevent = db.RSVP_Event.FirstOrDefault(p => p.GenID == id);
+
+                        TempData["NewStudentAdd"] = tRWLASchedule.ScheduleID;
+
+                        if (!String.IsNullOrEmpty(searchString))
+                        {
+                            evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                        }
+
+                        switch (sortOrder)
+                        {
+                            case "name_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "sur_desc":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            case "Surname":
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                            default:
+                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
+                                break;
+                        }
+
+                        return View(evnt.ToList());
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return RedirectToAction("ErrorPage");
+                }
+
             }
             catch
             {
@@ -1950,7 +2074,7 @@ namespace TRWLASystemMaster.Controllers
             try
 
             {
-                TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+                RSVP_Event tRWLASchedule = db.RSVP_Event.Find(id);
                 Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
 
                 ViewBag.LectureName = lec.Lecture_Name;
@@ -2619,6 +2743,9 @@ namespace TRWLASystemMaster.Controllers
         // GET: TRWLASchedules/Delete/5
         public ActionResult Delete(int? id)
         {
+
+
+
             try
             {
                 if (id == null)
@@ -2647,237 +2774,332 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                //Finds the row in the table where the scheduleID is equal to this
+                MasterData mydata = db.MasterDatas.Find(9);
+                int time = Convert.ToInt32(mydata.CancelEvent);
+
+                int mytime = DateTime.Now.AddDays(-time).DayOfYear;
+
                 TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
-
-                //Finds the row/s in the table where the scheduleID found is equal to this
-                RSVPSchedule rsvp = db.RSVPSchedules.FirstOrDefault(p => p.ScheduleID == id);
-
-
-
                 if (tRWLASchedule.FunctionID != null)
                 {
+                    int m = tRWLASchedule.FunctionEvent.Function_Date.DayOfYear;
 
-                    FunctionEvent functions = db.FunctionEvents.Find(tRWLASchedule.FunctionID);
+                    int diff = m - mytime;
 
-                    db.TRWLASchedules.Remove(tRWLASchedule);
-
-
-                    var email = from s in db.RSVP_Event
-                                where s.FunctionID == tRWLASchedule.FunctionID
-                                select s.SYSUserProfileID;
-
-                    foreach (var s in email)
+                    if (diff >= time)
                     {
-                        try
-                        {
-                            SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
+                        TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
 
-                            FunctionEvent func = db.FunctionEvents.Find(Convert.ToInt32(tRWLASchedule.FunctionID));
-
-                            MailMessage msg = new MailMessage();
-                            msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(recipient.Email);
-                            msg.Subject = func.Function_Name + " Cancellation";
-                            msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
-
-                            SmtpClient smtp = new SmtpClient();
-
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.Port = 587;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                            smtp.EnableSsl = true;
-                            smtp.Send(msg);
-
-                            ModelState.Clear();
-                        }
-                        catch (Exception)
-                        {
-                            ViewBag.Status = "Problem while sending email, Please check details.";
-                        }
-
-
-                        RSVP_Event function = db.RSVP_Event.FirstOrDefault(l => l.FunctionID == tRWLASchedule.FunctionID);
-
-
-                        db.RSVP_Event.Remove(function);
-                        db.RSVPSchedules.Remove(rsvp);
+                        return View(tRWLASchedule);
                     }
-
-
-                    
-                    db.FunctionEvents.Remove(functions);
 
                 }
                 else if (tRWLASchedule.LectureID != null)
                 {
+                    int m = tRWLASchedule.Lecture.Lecture_Date.DayOfYear;
+                    int diff = m - mytime;
 
-                    Lecture lectures = db.Lectures.Find(Convert.ToInt32(tRWLASchedule.LectureID));
-                    db.TRWLASchedules.Remove(tRWLASchedule);
-
-                    var email = from s in db.RSVP_Event
-                                where s.LectureID == tRWLASchedule.LectureID
-                                select s.SYSUserProfileID;
-
-                    foreach (var s in email)
+                    if (diff >= time)
                     {
-                        try
-                        {
-                            SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-                            Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
-
-                            MailMessage msg = new MailMessage();
-                            msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(recipient.Email);
-                            msg.Subject = lec.Lecture_Name + " Cancellation";
-                            msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
-
-                            SmtpClient smtp = new SmtpClient();
-
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.Port = 587;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
-                            smtp.EnableSsl = true;
-                            smtp.Send(msg);
-
-                            ModelState.Clear();
-                        }
-                        catch (Exception)
-                        {
-                            ViewBag.Status = "Problem while sending email, Please check details.";
-                        }
-
-                        RSVP_Event lecture = db.RSVP_Event.FirstOrDefault(l => l.LectureID == tRWLASchedule.LectureID);
-                        db.RSVPSchedules.Remove(rsvp);
-                        db.RSVP_Event.Remove(lecture);
+                        TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
+                        return View(tRWLASchedule);
                     }
-
-
-                    
-                    
-                    db.Lectures.Remove(lectures);
-
-
-
 
                 }
                 else if (tRWLASchedule.GenID != null)
                 {
+                    int m = tRWLASchedule.GenEvent.Gen_Date.DayOfYear;
+                    int diff = m - mytime;
 
-                    GenEvent gen = db.GenEvents.Find(Convert.ToInt32(tRWLASchedule.LectureID));
-                    db.TRWLASchedules.Remove(tRWLASchedule);
-
-                    var email = from s in db.RSVP_Event
-                                where s.LectureID == tRWLASchedule.LectureID
-                                select s.SYSUserProfileID;
-
-                    foreach (var s in email)
+                    if (diff >= time)
                     {
-                        try
-                        {
-                            SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-                            GenEvent gen1 = db.GenEvents.Find(tRWLASchedule.LectureID);
-
-                            MailMessage msg = new MailMessage();
-                            msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(recipient.Email);
-                            msg.Subject = gen1.Gen_Name + " Cancellation";
-                            msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + gen1.Gen_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
-
-                            SmtpClient smtp = new SmtpClient();
-
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.Port = 587;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
-                            smtp.EnableSsl = true;
-                            smtp.Send(msg);
-
-                            ModelState.Clear();
-                        }
-                        catch (Exception)
-                        {
-                            ViewBag.Status = "Problem while sending email, Please check details.";
-                        }
-
-                        RSVP_Event gens = db.RSVP_Event.FirstOrDefault(l => l.GenID == tRWLASchedule.GenID);
-                        db.RSVPSchedules.Remove(rsvp);
-                        db.RSVP_Event.Remove(gens);
+                        TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
+                        return View(tRWLASchedule);
                     }
-
-
-
-
-                    db.GenEvents.Remove(gen);
-
-
-
-
                 }
                 else if (tRWLASchedule.ComEngID != null)
                 {
-                    AuditLog myAudit = new AuditLog();
-                    myAudit.DateDone = DateTime.Now;
-                    myAudit.TypeTran = "Delete";
-                    myAudit.SYSUserProfileID = (int)Session["User"];
-                    myAudit.TableAff = "ComEngEvent";
-                    db.AuditLogs.Add(myAudit);
+                    int m = tRWLASchedule.ComEngEvent.ComEng_Date.DayOfYear;
+                    int diff = m - mytime;
 
-                    ComEngEvent comeng = db.ComEngEvents.Find(Convert.ToInt32(tRWLASchedule.ComEngID));
-                    db.TRWLASchedules.Remove(tRWLASchedule);
-
-                    var email = from s in db.RSVP_Event
-                                where s.ComEngID == tRWLASchedule.ComEngID
-                                select s.SYSUserProfileID;
-
-                    foreach (var s in email)
+                    if (diff >= time)
                     {
-                        try
-                        {
-                            SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-                            ComEngEvent com = db.ComEngEvents.Find(tRWLASchedule.ComEngID);
-
-                            MailMessage msg = new MailMessage();
-                            msg.From = new MailAddress("u15213626@tuks.co.za");
-                            msg.To.Add(recipient.Email);
-                            msg.Subject = com.ComEng_Name + " Cancellation";
-                            msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
-
-                            SmtpClient smtp = new SmtpClient();
-
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.Port = 587;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
-                            smtp.EnableSsl = true;
-                            smtp.Send(msg);
-
-                            ModelState.Clear();
-                        }
-                        catch (Exception)
-                        {
-                            ViewBag.Status = "Problem while sending email, Please check details.";
-                        }
-                        RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.ComEngID == tRWLASchedule.ComEngID);
-                        db.RSVPSchedules.Remove(rsvp);
-                        db.RSVP_Event.Remove(comu);
-
+                        TempData["Log"] = "Days to event: " + mydata.CancelEvent +". You cannot delete this event";
+                        return View(tRWLASchedule);
                     }
-                    
-
-                    
-                    
-                    
-                    db.ComEngEvents.Remove(comeng);
-                    //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
-
-
                 }
 
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+                try
+                {
+
+                    //Finds the row/s in the table where the scheduleID found is equal to this
+                    RSVPSchedule rsvp = db.RSVPSchedules.FirstOrDefault(p => p.ScheduleID == id);
+
+
+
+                    if (tRWLASchedule.FunctionID != null)
+                    {
+
+                        FunctionEvent functions = db.FunctionEvents.Find(tRWLASchedule.FunctionID);
+
+                        db.TRWLASchedules.Remove(tRWLASchedule);
+
+
+                        var email = from s in db.RSVP_Event
+                                    where s.FunctionID == tRWLASchedule.FunctionID
+                                    select s.SYSUserProfileID;
+                        if (email != null)
+                        {
+                            foreach (var s in email)
+                            {
+                                try
+                                {
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
+
+                                    FunctionEvent func = db.FunctionEvents.Find(Convert.ToInt32(tRWLASchedule.FunctionID));
+
+                                    MailMessage msg = new MailMessage();
+                                    msg.From = new MailAddress("u15213626@tuks.co.za");
+                                    msg.To.Add(recipient.Email);
+                                    msg.Subject = func.Function_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                                    SmtpClient smtp = new SmtpClient();
+
+                                    smtp.Host = "smtp.gmail.com";
+                                    smtp.Port = 587;
+                                    smtp.UseDefaultCredentials = false;
+                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                    smtp.EnableSsl = true;
+                                    smtp.Send(msg);
+
+                                    ModelState.Clear();
+                                }
+                                catch (Exception)
+                                {
+                                    ViewBag.Status = "Problem while sending email, Please check details.";
+                                }
+                            }
+
+
+
+                        }
+
+
+
+                        db.FunctionEvents.Remove(functions);
+
+                        RSVP_Event function = db.RSVP_Event.FirstOrDefault(l => l.FunctionID == tRWLASchedule.FunctionID);
+
+                        if (function != null)
+                        {
+                            db.RSVPSchedules.Remove(rsvp);
+                            db.RSVP_Event.Remove(function);
+                        }
+
+
+                    }
+                    else if (tRWLASchedule.LectureID != null)
+                    {
+
+                        Lecture lectures = db.Lectures.Find(Convert.ToInt32(tRWLASchedule.LectureID));
+                        db.TRWLASchedules.Remove(tRWLASchedule);
+
+                        var email = from s in db.RSVP_Event
+                                    where s.LectureID == tRWLASchedule.LectureID
+                                    select s.SYSUserProfileID;
+                        if (email != null)
+                        {
+                            foreach (var s in email)
+                            {
+                                try
+                                {
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
+                                    Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
+
+                                    MailMessage msg = new MailMessage();
+                                    msg.From = new MailAddress("u15213626@tuks.co.za");
+                                    msg.To.Add(recipient.Email);
+                                    msg.Subject = lec.Lecture_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                                    SmtpClient smtp = new SmtpClient();
+
+                                    smtp.Host = "smtp.gmail.com";
+                                    smtp.Port = 587;
+                                    smtp.UseDefaultCredentials = false;
+                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                    smtp.EnableSsl = true;
+                                    smtp.Send(msg);
+
+                                    ModelState.Clear();
+                                }
+                                catch (Exception)
+                                {
+                                    ViewBag.Status = "Problem while sending email, Please check details.";
+                                }
+                            }
+
+
+                        }
+
+
+
+
+                        db.Lectures.Remove(lectures);
+                        RSVP_Event lecture = db.RSVP_Event.FirstOrDefault(l => l.LectureID == tRWLASchedule.LectureID);
+
+                        if (lecture != null)
+                        {
+                            db.RSVP_Event.Remove(lecture);
+                            db.RSVPSchedules.Remove(rsvp);
+                        }
+
+
+
+                    }
+
+                    else if (tRWLASchedule.ComEngID != null)
+                    {
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Delete";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "ComEngEvent";
+                        db.AuditLogs.Add(myAudit);
+
+                        ComEngEvent comeng = db.ComEngEvents.Find(Convert.ToInt32(tRWLASchedule.ComEngID));
+                        db.TRWLASchedules.Remove(tRWLASchedule);
+
+                        var email = from s in db.RSVP_Event
+                                    where s.ComEngID == tRWLASchedule.ComEngID
+                                    select s.SYSUserProfileID;
+
+                        if (email != null)
+                        {
+
+                            foreach (var s in email)
+                            {
+                                try
+                                {
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
+                                    ComEngEvent com = db.ComEngEvents.Find(tRWLASchedule.ComEngID);
+
+                                    MailMessage msg = new MailMessage();
+                                    msg.From = new MailAddress("u15213626@tuks.co.za");
+                                    msg.To.Add(recipient.Email);
+                                    msg.Subject = com.ComEng_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                                    SmtpClient smtp = new SmtpClient();
+
+                                    smtp.Host = "smtp.gmail.com";
+                                    smtp.Port = 587;
+                                    smtp.UseDefaultCredentials = false;
+                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                    smtp.EnableSsl = true;
+                                    smtp.Send(msg);
+
+                                    ModelState.Clear();
+                                }
+                                catch (Exception)
+                                {
+                                    ViewBag.Status = "Problem while sending email, Please check details.";
+                                }
+                            }
+
+
+                        }
+
+                        db.ComEngEvents.Remove(comeng);
+                        RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.ComEngID == tRWLASchedule.ComEngID);
+                        if (comu != null)
+                        {
+                            db.RSVP_Event.Remove(comu);
+                            db.RSVPSchedules.Remove(rsvp);
+                        }
+                        //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
+
+
+                    }
+                    else if (tRWLASchedule.GenID != null)
+                    {
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Delete";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "GenEvent";
+                        db.AuditLogs.Add(myAudit);
+
+                        GenEvent gen = db.GenEvents.Find(Convert.ToInt32(tRWLASchedule.GenID));
+                        db.TRWLASchedules.Remove(tRWLASchedule);
+
+                        var email = from s in db.RSVP_Event
+                                    where s.GenID == tRWLASchedule.GenID
+                                    select s.SYSUserProfileID;
+
+                        if (email != null)
+                        {
+
+                            foreach (var s in email)
+                            {
+                                try
+                                {
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
+                                    GenEvent genev = db.GenEvents.Find(tRWLASchedule.GenID);
+
+                                    MailMessage msg = new MailMessage();
+                                    msg.From = new MailAddress("u15213626@tuks.co.za");
+                                    msg.To.Add(recipient.Email);
+                                    msg.Subject = genev.Gen_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + genev.Gen_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+
+                                    SmtpClient smtp = new SmtpClient();
+
+                                    smtp.Host = "smtp.gmail.com";
+                                    smtp.Port = 587;
+                                    smtp.UseDefaultCredentials = false;
+                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                    smtp.EnableSsl = true;
+                                    smtp.Send(msg);
+
+                                    ModelState.Clear();
+                                }
+                                catch (Exception)
+                                {
+                                    ViewBag.Status = "Problem while sending email, Please check details.";
+                                }
+                            }
+
+
+
+
+
+
+                        }
+
+                        RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.GenID == tRWLASchedule.GenID);
+                        db.GenEvents.Remove(gen);
+
+                        if (comu != null)
+                        {
+                            db.RSVPSchedules.Remove(rsvp);
+                            db.RSVP_Event.Remove(comu);
+                        }
+                        //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
+
+
+                    }
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return RedirectToAction("ErrorPage");
+                }
             }
             catch
             {
