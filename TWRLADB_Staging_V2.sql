@@ -134,12 +134,21 @@ CREATE TABLE [dbo].[SYSUserProfile](
 	
     )
 
+
+create table SecurityQuestion
+(
+	QuestionID int identity (1,1) primary key,
+	Question varchar(100) not null
+	)
+
+
 ---SecurityAnswer---
 create table SecurityAnswer
  (SecurityAnswerID int identity(1,1) primary key,
- Security_Question varchar(150) not null,
  Security_Answer varchar(25) not null,
-SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null
+QuestionID INT NOT NULL,
+SYSUserProfileID INT FOREIGN KEY REFERENCES SYSUserProfile(SYSUserProfileID) not null,
+FOREIGN KEY (QuestionID) REFERENCES SecurityQuestion(QuestionID)
  )
  go
 
@@ -850,27 +859,27 @@ INSERT INTO LOOKUPRole (RoleName,RoleDescription,RowCreatedSYSUserID,RowModified
 --Volunteers--
 
 --vOL 1--
-INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES ('Admin','Admin',1,1)  
-  
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1)  
- 
-  
-INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Admin','Admin',1,1)  
+  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (1,'Vinz','Durano','1994/02/03',2,'vinz@tuks.co.za','0741028963',1,1)  
+ 
+  
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES (1,1,1,1,1)
- 
+ 
 
 
 --vOL 2---
-INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES ('Admin2','Admin2',2,2)  
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Admin2','Admin2',2,2)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',2,2)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (2,'Sarah','Swart','1995/02/08',2,'sarah@tuks.co.za','0821478961',2,2)  
 
 
-INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES (2,1,1,2,2)
 
 
@@ -880,28 +889,30 @@ VALUES (2,1,1,2,2)
 
 
 ---Student1---
-INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES ('Student1','Student2',3,3)  
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Student1','Student2',3,3)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 
-VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456','14284783','BCom','2017/01/01',5,3,3)  
+VALUES (3,'Noma','Hear','1995/10/11',1,'noma@tuks.co.za','0893123456','14284783','BCom','2017/01/01',5,3,3)  
 
 
-INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES (3,2,1,3,3)
 
 
 ---Student2---
 
-INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES ('Student2','Student3',4,4)  
+INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES ('Student2','Student3',4,4)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258','14847834','BCom','2017/01/01',4,4,4)  
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 
 
-INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+VALUES (4,'Marche','De Waal','1994/06/14',1,'march17@tuks.co.za','0587966258','14847834','BCom','2017/01/01',4,4,4)  
+
+
+INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES (4,2,1,4,4)
 
 
@@ -910,9 +921,12 @@ VALUES (4,2,1,4,4)
 INSERT INTO SYSUser (LoginName,PasswordEncryptedText, RowCreatedSYSUserID, RowModifiedSYSUserID)  
 VALUES ('Student3','Student4',5,5)  
 
-INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
-VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896','17845796','Soil Science','2017/01/01',2,5,5)  
 
+INSERT INTO SYSUserProfile (SYSUserID,FirstName,LastName,DoB,UserTypeID,Email,Graduate,Phonenumber,StudentNumber,Degree,YearOfStudy,ResID,RowCreatedSYSUserID, RowModifiedSYSUserID)  
+
+
+
+VALUES (5,'Michelle','Swart','1992/10/20',1,'swart@tuks.co.za','Graduated','0741025896','17845796','Soil Science','2017/01/01',2,5,5)  
 
 
 INSERT INTO SYSUserRole (SYSUserID,LOOKUPRoleID,IsActive,RowCreatedSYSUserID, RowModifiedSYSUserID)  
