@@ -44,6 +44,12 @@ namespace TRWLASystemMaster.Controllers
             {
                 return HttpNotFound();
             }
+
+            int res = (from s in db.SYSUserProfiles
+                       where s.ResID == id
+                       select s).Count();
+
+            ViewBag.Res = Convert.ToString(res);
             return View(residence);
         }
 

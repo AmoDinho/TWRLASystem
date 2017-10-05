@@ -73,7 +73,6 @@ h3
 h4
 {
     font-family: "Open Sans";
-    /*color: #cb74f7;*/
     color: black;
     font-size: 20px;
 }
@@ -421,7 +420,7 @@ h4
 
 .jumbotron {
   padding: 30px;
-  margin-bottom: 30px;
+  margin-bottom:100px;
   margin-top: 30px;
   font-size: 20px;
   font-weight: 200;

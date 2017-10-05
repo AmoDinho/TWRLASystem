@@ -3,11 +3,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>ErrorPage</h2>
+<div class="jumbotron" style="text-align:left; margin-bottom:100px;">
+    <h1>Oops!!!</h1>
+    <div class="quotehome"></div>
+    <div class="quote1home"></div>
+    <div class="quote2home"></div>
 </div>
+<h4>Something went wrong...</h4>
+<h5>While you were completeing your action we could not process your request.</h5>
 
-<h4>Oh no, something went wrong.</h4>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let us start again</button>
+<button type="button" class="btn" onclick="location.href='@Url.Action("Login", "Account")'">Back to Login</button>
 

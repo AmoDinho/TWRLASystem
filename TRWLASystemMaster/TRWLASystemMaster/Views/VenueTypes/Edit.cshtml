@@ -5,14 +5,17 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Edit</h2>
-
+<div class="jumbotron">
+    <h1>Update a Venue Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>VenueType</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.VenueTypeID)
@@ -25,14 +28,18 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 ">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                        Update
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 ">
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">Return</button>
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

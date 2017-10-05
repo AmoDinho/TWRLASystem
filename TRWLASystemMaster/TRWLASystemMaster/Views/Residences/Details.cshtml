@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-
-
-
 <div class="jumbotron" style="text-align:left; margin-bottom:100px;">
     <h1>@Html.DisplayFor(model => model.Res_Name) Details</h1>
     <div class="quoteform"></div>
@@ -15,17 +12,25 @@
     <div class="quote2form"></div>
 </div>
 
-
 <div>
- 
-        <div class="form-group">
-            <label class="control-label col-md-2"> Res Name</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Res_Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Res_Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Res Name:")
+        </dt>
+
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.Res_Name)
+        </dd>
+        <dt>
+            @Html.Label("Number of Students:")
+        </dt>
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
+            @ViewBag.Res
+        </dd>
+        </dl>
+
+</div>
 
     <div style="float:right; margin-bottom:20px; margin-top:10px;">
         <div class="form-inline">
@@ -33,12 +38,12 @@
                 <button data-toggle="tooltip" title="Edit Residence" type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Residences", new { id = Model.ResID })'">Update</button>
             </div>
             <div class="form-group">
-                <button class="btn btn-default" data-toggle="modal" data-target="#Delete">
+                <button data-toggle="tooltip" title="Delete Residence" type="button" class="btn btn-default" data-toggle="modal" data-target="#Delete">
                     Delete
                 </button>
             </div>
             <div class="form-group">
-                <button data-toggle="tooltip" title="Return to residences" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Residences")'">Return</button>
+                <button data-toggle="tooltip" title="Return to Residences" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Residences")'">Return</button>
             </div>
         </div>
     </div>
