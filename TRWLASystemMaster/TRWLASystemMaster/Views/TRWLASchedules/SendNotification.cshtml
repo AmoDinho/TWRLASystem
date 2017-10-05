@@ -35,10 +35,12 @@
                     Are you sure that you want to send this notification?
                 </div>
                 <div class="modal-footer form-inline">
-                        <div class="form-actions no-color ">
+                        <div class="form-actions no-color form-group">
                             <button type="submit" value="SendNotification" class="btn">Send Notification Event</button>
                         </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,13 +57,8 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Return</button>
+        <div class="form-group">
+            <button data-toggle="tooltip" title="Return to Recipient Selection" type="button" class="btn" onclick="location.href='@Url.Action("SelectRecip")'">Return</button>
         </div>
-    </div>
-</div>
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
-        <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("SelectRecip")'">Return</button>
     </div>
 </div>

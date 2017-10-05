@@ -513,6 +513,112 @@ namespace TRWLASystemMaster.Controllers
             return attendance;
         }
 
+        public IList<GeneralEventList> GetGenEventAttendance(string namesearchString, string resname)
+        {
+            var attendance = (from s in db.Attendances
+                              where s.GenID != null
+                              select new GeneralEventList
+                              {
+                                  EventName = s.GenEvent.Gen_Name,
+                                  Date = s.GenEvent.Gen_Date,
+                                  Start = s.GenEvent.Gen_StartTime,
+                                  End = s.GenEvent.Gen_EndTime,
+                                  Residence = s.GenEvent.Venue.Venue_Name,
+                                  StudentName = s.SYSUserProfile.FirstName,
+                                  StudentSurname = s.SYSUserProfile.LastName,
+                                  StudentNumber = s.SYSUserProfile.StudentNumber
+                              }).ToList();
+
+            if (namesearchString == null)
+            {
+                TempData["name"] = "";
+            }
+            else if (namesearchString != null)
+            {
+                TempData["name"] = namesearchString;
+            }
+
+            if (resname == null)
+            {
+
+                TempData["res"] = "";
+            }
+            else if (resname != null)
+            {
+
+                TempData["res"] = resname;
+            }
+
+
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attendance
+                           where s.EventName.Contains(namesearchString)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            if (!String.IsNullOrEmpty(namesearchString))
+            {
+                var newl = from s in attendance
+                           where s.EventName.Contains(resname)
+                           select s;
+
+                return newl.ToList();
+            }
+
+            return attendance;
+        }
+
+        public ActionResult GeneralEventReport(string namesearchString, string resname)
+        {
+            try
+            {
+                return View(this.GetGenEventAttendance(namesearchString, resname));
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage");
+            }
+        }
+
+        public ActionResult ExportToExcel6()
+        {
+            try
+            {
+                var gv = new GridView();
+                gv.DataSource = this.GetGenEventAttendance(TempData["name"].ToString(), TempData["res"].ToString());
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                string name = "General Event Attendance Report " + Convert.ToString(DateTime.Now);
+                Response.AddHeader("content-disposition", "attachment; filename=" + name + ".xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter objStringWriter = new StringWriter();
+                HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+                gv.RenderControl(objHtmlTextWriter);
+                Response.Output.Write(objStringWriter.ToString());
+                Response.Flush();
+                Response.End();
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "ReportDownload";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "RSVP_Event";
+                db.AuditLogs.Add(myAudit);
+                db.SaveChanges();
+
+                return View("Index");
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage");
+            }
+        }
 
 
         public IList<AttendanceViewModel> GetComAttendance(string namesearchString, string resname)
@@ -2558,11 +2664,13 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
+                
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+                TempData["EventIdNeeded"] = id;
                 if (tRWLASchedule == null)
                 {
                     return HttpNotFound();
@@ -2571,6 +2679,7 @@ namespace TRWLASystemMaster.Controllers
                 if (tRWLASchedule.FunctionID != null)
                 {
                     ViewBag.Name = tRWLASchedule.FunctionEvent.Function_Name;
+                    TempData["Guest"] = tRWLASchedule.FunctionEvent.GuestSpeakerID;
                 }
                 else if (tRWLASchedule.LectureID != null)
                 {

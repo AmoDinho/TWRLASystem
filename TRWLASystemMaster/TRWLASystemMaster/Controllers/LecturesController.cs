@@ -175,7 +175,7 @@ namespace TRWLASystemMaster.Controllers
 
                     db.Entry(lecture).State = EntityState.Modified;
                     db.SaveChanges();
-                    RedirectToAction("Index", "TRWLASchedules");
+                    return RedirectToAction("Index", "TRWLASchedules");
                 }
                 ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", lecture.ContentID);
                 ViewBag.ResidenceID = new SelectList(db.Residences, "ResID", "Res_Name", lecture.ResidenceID);

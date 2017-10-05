@@ -1,25 +1,25 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.NoAttend>
+﻿@model IEnumerable<TRWLASystemMaster.Models.GeneralEventList>
 
 
 @{
-    ViewBag.Title = "NoAttend";
+    ViewBag.Title = "GeneralEventReport";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
 <div class="jumbotron" style="margin-bottom:150px;">
-    <h1>No Attendendance Report</h1>
+    <h1>General Event Attendance Report</h1>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
-
 </div>
-<h2 style="z-index:100; position:relative; background-color:transparent;">Filter No Attendance</h2>
-<h3>By Student Name:</h3>
+
+<h2 style="z-index:100; position:relative; background-color:transparent;">Filter General Events</h2>
+<h3>By Event Name:</h3>
 @using (Html.BeginForm())
 {
     <div class="form-inline" style="margin-bottom:10px;">
         <p data-toggle="tooltip" title="Search by name" class="form-group">
-            @Html.TextBox("namesearchString", "", new { placeholder = "Name of Student", @class = "form-control", style = "width:100%;" })
+            @Html.TextBox("namesearchString", "", new { placeholder = "Name of Event", @class = "form-control", style = "width:100%;" })
         </p>
 
         <p class="form-group">
@@ -41,79 +41,65 @@
     </div>
 }
 
-@using (Html.BeginForm("ExportToExcel5", "TRWLASchedules", FormMethod.Post))
+@using (Html.BeginForm("ExportToExcel6", "TRWLASchedules", FormMethod.Post))
 {
     <div class="row" style="height:500px; overflow-y:auto;">
         <table class="table">
             <tr>
                 <th>
-                    Name
+                    Name of Event
                 </th>
                 <th>
-                    Surname
+                    Date of Event
+                </th>
+                <th>
+                    Start of the Event
+                </th>
+                <th>
+                    End of the Event
                 </th>
                 <th>
                     Student Number
                 </th>
                 <th>
-                    Date of Birth
+                    Student Name
                 </th>
                 <th>
-                    Degree
+                    Student Surname
                 </th>
-                <th>
-                    Graduate Status
-                </th>
-                <th>
-                    Residence
-                </th>
-                <th>
-                    Student Type
-                </th>
-                <th>
-                    Date of Missed Event
-                </th>
-                <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.OrderBy(p => p.EventName))
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.EventName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Surname)
+                        @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudNo)
+                        @Html.DisplayFor(modelItem => item.Start)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DoB, new { type = "date" })
+                        @Html.DisplayFor(modelItem => item.End)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Degree)
+                        @Html.DisplayFor(modelItem => item.Residence)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Grad)
+                        @Html.DisplayFor(modelItem => item.StudentNumber)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Res)
+                        @Html.DisplayFor(modelItem => item.StudentName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudType)
+                        @Html.DisplayFor(modelItem => item.StudentSurname)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FunctionDate)
-                        @Html.DisplayFor(modelItem => item.LectureDate)
-                        @Html.DisplayFor(modelItem => item.ComEngDate)
-                    </td>
-                    <td></td>
-
                 </tr>
             }
         </table>
-        </div>
+    </div>
 
         <div class="form-inline" style="float:right; margin-bottom:20px;">
             <div class="form-group">
@@ -126,4 +112,6 @@
                 </div>
             </div>
         </div>
-        }
+}
+
+

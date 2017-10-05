@@ -170,7 +170,7 @@
                     }
                 </h4>
                 <h4 style="z-index:100; position:relative; background-color:transparent;">
-                    <a href="@Url.Action("Details", new { id = item.ScheduleID })" data-toggle="tooltip" title="Details" style="margin-left:20px;"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("StudentEventDetails", new { id = item.ScheduleID })" data-toggle="tooltip" title="Details" style="margin-left:20px;"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
                     <a href="@Url.Action("RSVP", new { id = item.ScheduleID })" data-toggle="tooltip" title="RSVP" style="margin-left:20px;"><i class="fa fa-check" aria-hidden="true"></i></a>
 
                     @*<button class="btn-primary" data-toggle="modal" data-target="#NotGoing">

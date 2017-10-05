@@ -86,7 +86,9 @@
             <div class="col-md-10">
                 @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control MakeWide" })
                 @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
-
+                <div style="margin-top:10px; margin-left:10px;">
+                    @Html.ActionLink("Register Guest Speaker", "Create", "GuestSpeaker")
+                </div>
             </div>
         </div>
 
@@ -104,6 +106,9 @@
             <div class="col-md-10">
                         @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
+                <div style="margin-top:10px; margin-left:10px;">
+                    @Html.ActionLink("Add Venue", "Create", "Venues")
+                </div>
             </div>
         </div>
 
@@ -113,6 +118,9 @@
             <div class="col-md-10">
                         @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
+                <div style="margin-top:10px; margin-left:10px;">
+                    @Html.ActionLink("Upload Content", "Create", "Contents")
+                </div>
             </div>
         </div>
     </div>

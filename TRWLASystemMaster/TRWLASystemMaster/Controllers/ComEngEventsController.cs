@@ -156,7 +156,7 @@ namespace TRWLASystemMaster.Controllers
 
                     db.Entry(comEngEvent).State = EntityState.Modified;
                     db.SaveChanges();
-                    RedirectToAction("Index", "TRWLASchedules");
+                    return RedirectToAction("Index", "TRWLASchedules");
                 }
                 ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", comEngEvent.ContentID);
                 ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);

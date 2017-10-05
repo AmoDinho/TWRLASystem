@@ -428,6 +428,7 @@
     </Compile>
     <Compile Include="Models\Demographic.cs" />
     <Compile Include="Models\EntityManager\UserManager.cs" />
+    <Compile Include="Models\GeneralEventList.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LectureReviewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -738,6 +739,7 @@
     <Content Include="Views\Account\SecurityQuestion.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Manage\ManageStudentProfile.cshtml" />
+    <Content Include="Views\TRWLASchedules\GeneralEventReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
