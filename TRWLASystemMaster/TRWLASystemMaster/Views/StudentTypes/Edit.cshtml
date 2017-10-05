@@ -7,8 +7,15 @@
 
 <
 
+
+
+
+
 <div class="jumbotron">
     <h2>Update a Student Type</h2>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 @using (Html.BeginForm())
@@ -16,7 +23,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>StudentType</h4>
+       
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.StudentTypeID)

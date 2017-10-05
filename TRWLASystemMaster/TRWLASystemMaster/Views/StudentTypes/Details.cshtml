@@ -7,18 +7,26 @@
 
 
 
+
 <div class="jumbotron">
     <h2>Details of a Student Type</h2>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
+
 
 <div>
 
     <dl class="dl-horizontal">
         <dt>
-            @*@Html.DisplayNameFor(model => model.StudentTypeDescription)*@ Student Type
+            @Html.Label("Description") 
         </dt>
 
-       
+        <dd>
+            @Html.DisplayFor(model => model.StudentTypeDescription)
+        </dd>
+
     </dl>
 </div>
 
@@ -33,9 +41,19 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button class="btn"> @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID })</button>
-                <button class="btn">@Html.ActionLink("Back", "Index") </button>
+                
+                
             </div>
         </div>
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "SYSUserProfiles")'">Back</button>
+
+        @*<button class="btn"> @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID })</button>*@
     </div>
 </div>
