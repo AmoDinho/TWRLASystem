@@ -2,8 +2,13 @@
 @{
     ViewBag.Title = "RegisterVol";
 }
+<div class="jumbotron">
+    <h2>Register as a Volunteer</h2>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
 
-<div class="jumbotron"><h2>Register as a Volunteer</h2></div>
 
 
 @using (Html.BeginForm())
@@ -64,15 +69,6 @@
         </div>
 
 
-        <div class="form-group">
-            @Html.Label("Security Question:", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SecurityAnswerID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.SecurityAnswerID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-  
         @*<div class="form-group">
             @Html.LabelFor(m => m.ResID, "ResID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

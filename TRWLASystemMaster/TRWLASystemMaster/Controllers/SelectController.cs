@@ -80,6 +80,7 @@ namespace TRWLASystemMaster.Controllers
             }
             else
             {
+                TempData["notice"] = " Your Unique code is incorect or invaild";
                 return View();
             }
 
