@@ -18,6 +18,7 @@ using TRWLASystemMaster.Models.DB;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.IO;
 using System.Net.Mail;
+using System.Activities.Expressions;
 
 namespace TRWLASystemMaster.Controllers
 {
@@ -318,20 +319,34 @@ namespace TRWLASystemMaster.Controllers
         [HttpPost]
         public ActionResult SecuirtyAnswer(string answer)
         {
-            var ans = from c in db.SecurityAnswers
-                        where c.Security_Answer == answer
-                        select c;
+            int user = Convert.ToInt32(TempData["User"]);
 
-            if(ans.ToList().Count == 1)
+            //var ans = from c in db.SecurityAnswers
+            //         where c.Security_Answer.Contains(answer) && c.SYSUserProfileID == user
+            //         select c;
+
+
+            //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
+
+            
+
+            var s = from n in db.SecurityAnswers
+                    where n.Security_Answer == answer && n.SYSUserProfileID == user
+                    select n.Security_Answer;
+
+            
+
+
+            if (s!= null)
             {
 
-                return RedirectToAction("ResetPassword", "Account");
+                       return RedirectToAction("ResetPassword", "Account");
 
 
-            }
+                }
 
 
-                return View(ans);
+            return View(s);
         }
 
 
