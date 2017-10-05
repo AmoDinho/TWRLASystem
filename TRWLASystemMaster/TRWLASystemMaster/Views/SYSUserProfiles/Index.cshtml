@@ -37,19 +37,25 @@
 <table class="table">
     <tr>
         <th>
+
+         Student Number   @*@Html.DisplayNameFor(model => model.StudentNumber)*@
+        </th>
+        <th>
+            First Name  @*@Html.DisplayNameFor(model => model.FirstName)*@
+        </th>
+        <th>
+            Last Name    @*@Html.DisplayNameFor(model => model.LastName)*@
+        <th>
             Student Number
         </th>
+        
         <th>
-            Name
+
+            Phone Number    @*@Html.DisplayNameFor(model => model.Phonenumber)*@
         </th>
-        <th>
-            Surname
-        </th>
-        <th>
-            Phone Number
-        </th>
-        <th>
+             <th>
             Email Address
+
         </th>
         <th>
             Date of Birth
@@ -58,12 +64,15 @@
             Degree
         </th>
         <th>
-            Year of Study
+
+            Year Of Study  @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
         </th>
 
         <th>
-            Residence
+            Res Name  @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
         </th>
+       
+
         <th></th>
     </tr>
     @foreach (var item in Model.Where(p => p.Graduate == null && p.UserTypeID == 1 ))
@@ -97,6 +106,11 @@
                 @Html.DisplayFor(modelItem => item.Residence.Res_Name)
             </td>
             <td>
+
+                @Html.DisplayFor(modelItem => item.UserType.Description)
+            </td>
+            <td>
+
                 <a href="@Url.Action("Details", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
             </td>
@@ -108,14 +122,18 @@
 <table class="table">
     <tr>
         <th>
-            Student Number
+
+            Student Number    @*@Html.DisplayNameFor(model => model.StudentNumber)*@
         </th>
         <th>
-            Name
+            First Name   @*@Html.DisplayNameFor(model => model.FirstName)*@
         </th>
         <th>
-            Surname
+            Last Name   @*@Html.DisplayNameFor(model => model.LastName)*@
+
+            
         </th>
+        
         <th>
             Phone Number
         </th>
@@ -123,18 +141,28 @@
             Email Address
         </th>
         <th>
-            Date of Birth
+
+            Phone number  @*@Html.DisplayNameFor(model => model.Phonenumber)*@
+
+         
+
+        </th>
+      
+        <th>
+
+            @Html.DisplayNameFor(model => model.Degree)
         </th>
         <th>
-            Degree
-        </th>
-        <th>
-            Year of Study
+            Year Of Study  @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
         </th>
 
         <th>
-            Residence
+            Res Name   @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
+
+          
         </th>
+
+       
         <th></th>
     </tr>
     @foreach (var item in Model.Where(p => p.Graduate != null && p.UserTypeID == 1))
@@ -167,7 +195,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Residence.Res_Name)
             </td>
+
+           
             <td>
+
+
+            <td>
+
                 <a href="@Url.Action("Details", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
         </tr>

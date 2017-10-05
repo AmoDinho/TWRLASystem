@@ -46,31 +46,5 @@ namespace TRWLASystemMaster.Models.DB
         public virtual ICollection<RSVP_Event> RSVP_Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRWLASchedule> TRWLASchedules { get; set; }
-
-        public string option1
-        {
-            get;
-            set;
-        }
-
-        public string option2
-        {
-            get;
-            set;
-        }
-
-        public string option3
-        {
-            get;
-            set;
-        }
-
-        public string option4
-        {
-            get;
-            set;
-        }
-
-
     }
 }

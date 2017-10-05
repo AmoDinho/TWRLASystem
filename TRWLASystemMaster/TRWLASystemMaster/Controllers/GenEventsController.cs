@@ -12,7 +12,7 @@ namespace TRWLASystemMaster.Controllers
 {
     public class GenEventsController : Controller
     {
-        private TWRLADB_Staging_V2Entities7 db = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
 
         // GET: GenEvents
         public ActionResult Index()
@@ -76,22 +76,6 @@ namespace TRWLASystemMaster.Controllers
                     genEvent.Type = 4;
                     
 
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.VenueID = null;
-                    }
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.ContentID = null;
-                    }
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.GuestSpeakerID = null;
-                    }
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.ResID = null;
-                    }
 
 
                     db.GenEvents.Add(genEvent);
@@ -112,22 +96,6 @@ namespace TRWLASystemMaster.Controllers
 
                     genEvent.Type = 4;
                     
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.VenueID = null;
-                    }
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.ContentID = null;
-                    }
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.GuestSpeakerID = null;
-                    }
-                    if (genEvent.option1 == "Ignore")
-                    {
-                        genEvent.ResID = null;
-                    }
 
                     db.GenEvents.Add(genEvent);
 

@@ -10,7 +10,7 @@ namespace TRWLASystemMaster.Controllers
     public class AdminController : Controller
     {
 
-        private TWRLADB_Staging_V2Entities7 DB = new TWRLADB_Staging_V2Entities7();
+        private TWRLADB_Staging_V2Entities8 DB = new TWRLADB_Staging_V2Entities8();
 
         // GET: Admin
         public ActionResult Index()
