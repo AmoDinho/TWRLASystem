@@ -19,6 +19,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using System.IO;
 using System.Net.Mail;
 using System.Activities.Expressions;
+using System.Net;
 
 namespace TRWLASystemMaster.Controllers
 {
@@ -172,51 +173,51 @@ namespace TRWLASystemMaster.Controllers
             {
                 try
                 {
-            if (ModelState.IsValid)
-            {
-                UserManager UM = new UserManager();
-                string password = UM.GetUserPassword(ULV.LoginName);
-
-                var username = from n in db.SYSUsers
-                               where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
-                               select n;
-
-                SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
-                SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-
-
-                if (string.IsNullOrEmpty(password))
-                    ModelState.AddModelError("", "The user login or password provided is incorrect.");
-                else
-                {
-                    if (ULV.Password.Equals(password))
+                    if (ModelState.IsValid)
                     {
-                        FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
+                        UserManager UM = new UserManager();
+                        string password = UM.GetUserPassword(ULV.LoginName);
 
-                        if (Convert.ToInt32(myUserP.UserTypeID) == 1)
+                        var username = from n in db.SYSUsers
+                                       where n.LoginName == ULV.LoginName && n.PasswordEncryptedText == password
+                                       select n;
+
+                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
+                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+
+
+                        if (string.IsNullOrEmpty(password))
+                            ModelState.AddModelError("", "The user login or password provided is incorrect.");
+                        else
                         {
-                            Session["User"] = myUserP.SYSUserProfileID;
-                            return RedirectToAction("StudentMainMenu", "TRWLASchedules");
-                        }
-                        else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
-                        {
-                            Session["User"] = myUserP.SYSUserProfileID;
-                            return RedirectToAction("Index", "TRWLASchedules");
-                        }
+                            if (ULV.Password.Equals(password))
+                            {
+                                FormsAuthentication.SetAuthCookie(ULV.LoginName, false);
+
+                                if (Convert.ToInt32(myUserP.UserTypeID) == 1)
+                                {
+                                    Session["User"] = myUserP.SYSUserProfileID;
+                                    return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                                }
+                                else if (Convert.ToInt32(myUserP.UserTypeID) == 2)
+                                {
+                                    Session["User"] = myUserP.SYSUserProfileID;
+                                    return RedirectToAction("Index", "TRWLASchedules");
+                                }
 
 
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "The password provided is incorrect.");
+                            }
+                        }
                     }
-                    else
-                    {
-                        ModelState.AddModelError("", "The password provided is incorrect.");
-                    }
+                    return View(ULV);
+
                 }
-            }
-            return View(ULV);
 
-             }
-
-                catch (Exception )
+                catch (Exception)
                 {
                     TempData["notice"] = " Your Username or Password is incorrect";
                     return View(/*"ErrorLogIn", new HandleErrorInfo(ex, "Account", "Login")*/);
@@ -224,10 +225,10 @@ namespace TRWLASystemMaster.Controllers
 
 
 
-               // If we got this far, something failed, redisplay form  
+                // If we got this far, something failed, redisplay form  
 
             }
-             catch (System.OutOfMemoryException e)
+            catch (System.OutOfMemoryException e)
             {
                 return View("ErrorLogIn", new HandleErrorInfo(e, "Account", "Login"));
             }
@@ -273,6 +274,13 @@ namespace TRWLASystemMaster.Controllers
 
                 int ID = myUser.SYSUserProfileID;
                 TempData["User"] = ID;
+
+
+                SYSUser ures = db.SYSUsers.FirstOrDefault(c => c.SYSUserID == myUser.SYSUserID);
+
+                int ID2 = ures.SYSUserID;
+                TempData["User2"] = ID2;
+
                 return RedirectToAction("SecuirtyAnswer", "Account");
             }
 
@@ -306,7 +314,7 @@ namespace TRWLASystemMaster.Controllers
             // secans.Security_Question = Convert.ToString(ques);
 
 
-            TempData["Question"]= myanswer.Security_Question;
+            TempData["Question"] = myanswer.Security_Question;
 
 
             return View();
@@ -328,28 +336,59 @@ namespace TRWLASystemMaster.Controllers
 
             //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
 
-            
+
 
             var s = from n in db.SecurityAnswers
                     where n.Security_Answer == answer && n.SYSUserProfileID == user
                     select n.Security_Answer;
 
-            
 
 
-            if (s!= null)
+
+            if (s != null)
             {
 
-                       return RedirectToAction("ResetPassword", "Account");
+                return RedirectToAction("Edit", "Account" );
 
 
-                }
+            }
 
 
             return View(s);
         }
 
 
+        public ActionResult Edit(int? id)
+        {
+            id = Convert.ToInt32(TempData["User2"]);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            SYSUser sYSUser = db.SYSUsers.Find(id);
+            if (sYSUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sYSUser);
+        }
+
+        // POST: SYSUsers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "SYSUserID,LoginName,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sYSUser)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(sYSUser).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Login", "Account");
+            }
+            return View(sYSUser);
+        }
 
 
 
@@ -388,17 +427,34 @@ namespace TRWLASystemMaster.Controllers
         }
 
         //// POST: /Account/ResetPassword
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword()
+        public ActionResult ResetPassword([Bind(Include = "SYSUserID ,PasswordEncryptedText")] SYSUser newuser )
         {
+
+            int user = Convert.ToInt32(TempData["User2"]);
+
+
+            newuser.SYSUserID = user;
+
+           // SYSUser pass = db.SYSUsers.Find(user);
+
+
             if (ModelState.IsValid)
             {
+                
+
+                db.Entry(newuser).State = EntityState.Modified;
+                db.SaveChanges();
+                RedirectToAction("Login", "Account");
 
             }
 
-            return View();
+            return View(newuser);
+
+
         }
 
 

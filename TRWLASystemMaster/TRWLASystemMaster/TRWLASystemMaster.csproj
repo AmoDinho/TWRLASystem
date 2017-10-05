@@ -285,6 +285,7 @@
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentTypesController.cs" />
     <Compile Include="Controllers\SYSUserProfilesController.cs" />
+    <Compile Include="Controllers\SYSUsersController.cs" />
     <Compile Include="Controllers\TRWLASchedulesController.cs" />
     <Compile Include="Controllers\UniqueCodeController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -737,6 +738,11 @@
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Account\SecuirtyAnswer.cshtml" />
     <Content Include="Views\Account\SecurityQuestion.cshtml" />
+    <Content Include="Views\SYSUsers\Create.cshtml" />
+    <Content Include="Views\SYSUsers\Delete.cshtml" />
+    <Content Include="Views\SYSUsers\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\SYSUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
