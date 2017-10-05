@@ -181,7 +181,7 @@ namespace TRWLASystemMaster.Controllers
             
         }
 
-        public ActionResult StudentMainMenu(string sortOrder, string searchString, string F, string CO, string L, string all)
+        public ActionResult StudentMainMenu(string sortOrder, string searchString, string F, string CO, string L, string G, string all)
         {
             try
             {
@@ -190,66 +190,50 @@ namespace TRWLASystemMaster.Controllers
                 ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
                 ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
-                var tRWLASchedules = db.TRWLASchedules.Include(t => t.ComEngEvent).Include(t => t.FunctionEvent).Include(t => t.Lecture);
+                var tRWLASchedules = db.TRWLASchedules.Include(t => t.ComEngEvent).Include(t => t.FunctionEvent).Include(t => t.Lecture).Include(t => t.GenEvent);
 
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Function_Name.Contains(searchString)
                             || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
+                            || s.ComEngEvent.ComEng_Name.Contains(searchString)
+                            || s.GenEvent.Gen_Name.Contains(searchString));
                 }
 
 
 
                 if (!String.IsNullOrEmpty(F))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Function_Name.Contains("(F)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Type == 1);
                 }
 
                 if (!String.IsNullOrEmpty(CO))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.ComEng_Name.Contains("(CE)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.Type == 3 );
                 }
 
                 if (!String.IsNullOrEmpty(L))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Type == 2);
+                }
+
+                if (!String.IsNullOrEmpty(G))
+                {
+                    tRWLASchedules = tRWLASchedules.Where(s => s.GenEvent.Type == 4);
                 }
 
                 if (!String.IsNullOrEmpty(all))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)")
-                            || s.ComEngEvent.ComEng_Name.Contains("(CE)")
-                            || s.FunctionEvent.Function_Name.Contains("(F)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.GenEvent.Type == 4
+                            || s.Lecture.Type == 2
+                            || s.FunctionEvent.Type == 1
+                            || s.ComEngEvent.Type == 3);
                 }
-
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                    case "sur_desc":
-                        tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                    case "Surname":
-                        tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                    default:
-                        tRWLASchedules = tRWLASchedules.OrderBy(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                }
+                
                 DateTime mydate = DateTime.Now.AddDays(-1);
 
-                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate);
+                tRWLASchedules = tRWLASchedules.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate || p.GenEvent.Gen_Date >= mydate);
 
                 return View(tRWLASchedules.ToList());
             }
@@ -276,7 +260,8 @@ namespace TRWLASystemMaster.Controllers
                 {
                     tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Function_Name.Contains(searchString)
                             || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
+                            || s.ComEngEvent.ComEng_Name.Contains(searchString)
+                            || s.GenEvent.Gen_Name.Contains(searchString));
                 }
 
 
@@ -286,51 +271,30 @@ namespace TRWLASystemMaster.Controllers
                     tRWLASchedules = tRWLASchedules.Where(s => s.FunctionEvent.Type == 1);
                 }
 
+                if (!String.IsNullOrEmpty(CO))
+                {
+                    tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.Type == 3);
+                }
+
+                if (!String.IsNullOrEmpty(L))
+                {
+                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Type == 2);
+                }
+
                 if (!String.IsNullOrEmpty(G))
                 {
                     tRWLASchedules = tRWLASchedules.Where(s => s.GenEvent.Type == 4);
                 }
 
-                if (!String.IsNullOrEmpty(CO))
-                {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.ComEngEvent.Type == 3 );
-                }
-
-                if (!String.IsNullOrEmpty(L))
-                {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Type == 2 );
-                }
-
                 if (!String.IsNullOrEmpty(all))
                 {
-                    tRWLASchedules = tRWLASchedules.Where(s => s.Lecture.Lecture_Name.Contains("(L)")
-                            || s.ComEngEvent.ComEng_Name.Contains("(CE)")
-                            || s.FunctionEvent.Function_Name.Contains("(F)"));
+                    tRWLASchedules = tRWLASchedules.Where(s => s.GenEvent.Type == 4
+                            || s.Lecture.Type == 2
+                            || s.FunctionEvent.Type == 1
+                            || s.ComEngEvent.Type == 3);
                 }
 
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                    case "sur_desc":
-                        tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                    case "Surname":
-                        tRWLASchedules = tRWLASchedules.OrderByDescending(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                    default:
-                        tRWLASchedules = tRWLASchedules.OrderBy(s => s.FunctionEvent.Function_Name.Contains(searchString)
-                            || s.Lecture.Lecture_Name.Contains(searchString)
-                            || s.ComEngEvent.ComEng_Name.Contains(searchString));
-                        break;
-                }
+
 
                 DateTime mydate = DateTime.Now.AddDays(-1);
 
@@ -826,17 +790,13 @@ namespace TRWLASystemMaster.Controllers
 
                 if (i == 0)
                 {
-                    
-
                     if (rsvp.FunctionID != null)
                     {
                         foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
                         {
                             mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                             mess.TimeMes = DateTime.Now.TimeOfDay;
-
-
-
+                            
                             try
                             {
                                 int k = Convert.ToInt32(rsvp.SYSUserProfileID);
@@ -853,7 +813,7 @@ namespace TRWLASystemMaster.Controllers
                                 smtp.Host = "smtp.gmail.com";
                                 smtp.Port = 587;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(msg);
 
@@ -866,9 +826,7 @@ namespace TRWLASystemMaster.Controllers
                             {
                                 ViewBag.Status = "Problem while sending email, Please check details.";
                             }
-
-
-
+                            
                             db.EventMessages.Add(mess);
                         }
                     }
@@ -894,7 +852,7 @@ namespace TRWLASystemMaster.Controllers
                                 smtp.Host = "smtp.gmail.com";
                                 smtp.Port = 587;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(msg);
 
@@ -932,7 +890,46 @@ namespace TRWLASystemMaster.Controllers
                                 smtp.Host = "smtp.gmail.com";
                                 smtp.Port = 587;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                smtp.EnableSsl = true;
+                                smtp.Send(msg);
+
+                                ModelState.Clear();
+
+
+                                ViewBag.Status = "Email Sent Successfully.";
+                            }
+                            catch (Exception)
+                            {
+                                ViewBag.Status = "Problem while sending email, Please check details.";
+                            }
+                            db.EventMessages.Add(mess);
+                        }
+
+                    }
+                    else if (rsvp.GenID != null)
+                    {
+                        foreach (var s in select.Where(p => p.GenID == rsvp.GenID))
+                        {
+                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                            try
+                            {
+                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                mess.TimeMes = DateTime.Now.TimeOfDay;
+
+                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                MailMessage msg = new MailMessage();
+                                msg.From = new MailAddress("u15213626@tuks.co.za");
+                                msg.To.Add(myStu.Email);
+                                msg.Subject = rsvp.GenEvent.Gen_Name + " Notification";
+                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+
+                                SmtpClient smtp = new SmtpClient();
+
+                                smtp.Host = "smtp.gmail.com";
+                                smtp.Port = 587;
+                                smtp.UseDefaultCredentials = false;
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(msg);
 
@@ -978,7 +975,7 @@ namespace TRWLASystemMaster.Controllers
                                 smtp.Host = "smtp.gmail.com";
                                 smtp.Port = 587;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(msg);
 
@@ -1016,7 +1013,7 @@ namespace TRWLASystemMaster.Controllers
                                 smtp.Host = "smtp.gmail.com";
                                 smtp.Port = 587;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(msg);
 
@@ -1054,7 +1051,7 @@ namespace TRWLASystemMaster.Controllers
                                 smtp.Host = "smtp.gmail.com";
                                 smtp.Port = 587;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(msg);
 
@@ -1070,17 +1067,53 @@ namespace TRWLASystemMaster.Controllers
                             db.EventMessages.Add(mess);
                         }
                     }
+                    else if (rsvp.GenID != null)
+                    {
+                        foreach (var s in select.Where(p => p.GenID == rsvp.GenID))
+                        {
+                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                            try
+                            {
+                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                mess.TimeMes = DateTime.Now.TimeOfDay;
+
+                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                MailMessage msg = new MailMessage();
+                                msg.From = new MailAddress("u15213626@tuks.co.za");
+                                msg.To.Add(myStu.Email);
+                                msg.Subject = rsvp.GenEvent.Gen_Name + " Notification";
+                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+
+                                SmtpClient smtp = new SmtpClient();
+
+                                smtp.Host = "smtp.gmail.com";
+                                smtp.Port = 587;
+                                smtp.UseDefaultCredentials = false;
+                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                smtp.EnableSsl = true;
+                                smtp.Send(msg);
+
+                                ModelState.Clear();
 
 
+                                ViewBag.Status = "Email Sent Successfully.";
+                            }
+                            catch (Exception)
+                            {
+                                ViewBag.Status = "Problem while sending email, Please check details.";
+                            }
+                            db.EventMessages.Add(mess);
+                        }
 
+
+                    }
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Create";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "EventMessages";
+                    db.AuditLogs.Add(myAudit);
                 }
-                AuditLog myAudit = new AuditLog();
-                myAudit.DateDone = DateTime.Now;
-                myAudit.TypeTran = "Create";
-                myAudit.SYSUserProfileID = (int)Session["User"];
-                myAudit.TableAff = "EventMessages";
-                db.AuditLogs.Add(myAudit);
-
                 db.SaveChanges();
                 return RedirectToAction("Index", "TRWLASchedules");
             }
@@ -1129,7 +1162,7 @@ namespace TRWLASystemMaster.Controllers
                         DateTime mydate = DateTime.Now.AddDays(-1);
                         DateTime myfuture = DateTime.Now;
 
-                        trwla = trwla.Where(p => (p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate) && (p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture));
+                        trwla = trwla.Where(p => (p.ComEngEvent.ComEng_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.Lecture.Lecture_Date >= mydate || p.GenEvent.Gen_Date >= mydate) && (p.ComEngEvent.ComEng_Date < myfuture || p.FunctionEvent.Function_Date < myfuture || p.Lecture.Lecture_Date < myfuture  ||  p.GenEvent.Gen_Date < myfuture));
 
                         return View(trwla.ToList());
                     }
@@ -1177,6 +1210,7 @@ namespace TRWLASystemMaster.Controllers
                     var rsvp = (from r in db.RSVP_Event
                                 join s in db.TRWLASchedules on r.FunctionID equals s.FunctionID
                                 join l in db.SYSUserProfiles on r.SYSUserProfileID equals l.SYSUserProfileID
+                                where r.FunctionID == mysc.FunctionID
                                 select l).ToList();
 
                     var students = (from s in db.SYSUserProfiles
@@ -1185,14 +1219,11 @@ namespace TRWLASystemMaster.Controllers
 
                     students.RemoveAll(x => rsvp.Contains(x));
 
-
-
-
                     if (!String.IsNullOrEmpty(searchString))
                     {
                         var t = (from l in students
-                                where l.FirstName.Contains(searchString)
-                                select l).ToList();
+                                 where l.FirstName.Contains(searchString)
+                                 select l).ToList();
 
                         return View(t);
                     }
@@ -1200,10 +1231,99 @@ namespace TRWLASystemMaster.Controllers
 
                     return View(students);
                 }
+                else if (mysc.LectureID != null)
+                {
+                    var rsvple = (from r in db.RSVP_Event
+                                  join s in db.TRWLASchedules on r.FunctionID equals s.FunctionID
+                                  join l in db.SYSUserProfiles on r.SYSUserProfileID equals l.SYSUserProfileID
+                                  where r.LectureID == mysc.LectureID
+                                  select l).ToList();
+
+                    var studle = (from s in db.SYSUserProfiles
+                                  where s.UserTypeID == 1
+                                  select s).ToList();
+
+                    studle.RemoveAll(x => rsvple.Contains(x));
+
+
+
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        var t = (from l in studle
+                                 where l.FirstName.Contains(searchString)
+                                 select l).ToList();
+
+                        return View(t);
+                    }
+
+
+                    return View(studle);
+                }
+                else if (mysc.ComEngID != null)
+                {
+                    var rsvple = (from r in db.RSVP_Event
+                                  join s in db.TRWLASchedules on r.FunctionID equals s.FunctionID
+                                  join l in db.SYSUserProfiles on r.SYSUserProfileID equals l.SYSUserProfileID
+                                  where r.ComEngID == mysc.ComEngID
+                                  select l).ToList();
+
+                    var studle = (from s in db.SYSUserProfiles
+                                  where s.UserTypeID == 1
+                                  select s).ToList();
+
+                    studle.RemoveAll(x => rsvple.Contains(x));
+
+
+
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        var t = (from l in studle
+                                 where l.FirstName.Contains(searchString)
+                                 select l).ToList();
+
+                        return View(t);
+                    }
+
+
+                    return View(studle);
+                }
+                else if (mysc.GenID != null)
+                {
+                    var rsvple = (from r in db.RSVP_Event
+                                  join s in db.TRWLASchedules on r.FunctionID equals s.FunctionID
+                                  join l in db.SYSUserProfiles on r.SYSUserProfileID equals l.SYSUserProfileID
+                                  where r.GenID == mysc.GenID
+                                  select l).ToList();
+
+                    var studle = (from s in db.SYSUserProfiles
+                                  where s.UserTypeID == 1
+                                  select s).ToList();
+
+                    studle.RemoveAll(x => rsvple.Contains(x));
+
+
+
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        var t = (from l in studle
+                                 where l.FirstName.Contains(searchString)
+                                 select l).ToList();
+
+                        return View(t);
+                    }
+
+
+                    return View(studle);
+                }
                 else
                 {
                     return RedirectToAction("Index");
                 }
+
+
             }
             catch
             {

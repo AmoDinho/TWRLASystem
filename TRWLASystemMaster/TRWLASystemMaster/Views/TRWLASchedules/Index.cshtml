@@ -72,6 +72,7 @@
                     <option value="@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagement Events</option>
                     <option value="@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lecture Events</option>
                     <option value="@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Function Events</option>
+                    <option value="@Url.Action("Index", "TRWLASchedules", new { G = ViewBag.SurnameSortParm })'">General Events</option>
                 </select>
             </div>
             <div class="form-group" style="z-index:100; position:relative; background-color:transparent; margin-left:50px;">
@@ -148,6 +149,8 @@
                                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
                                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
                                 @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
+                                
+                                to
 
 
                             </h4>

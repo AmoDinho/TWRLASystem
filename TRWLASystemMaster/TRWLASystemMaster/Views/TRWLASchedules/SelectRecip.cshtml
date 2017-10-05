@@ -36,21 +36,25 @@
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_EndTime)
             </td>
             <td>
                 @Html.ActionLink("Select", "SendNotification", new { id = item.rsvpID })

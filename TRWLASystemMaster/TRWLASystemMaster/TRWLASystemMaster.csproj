@@ -711,15 +711,12 @@
     <Content Include="Views\Shared\ErrorSign.cshtml" />
     <Content Include="Views\Select\VerifyCode.cshtml" />
     <Content Include="Views\TRWLASchedules\AuditLog.cshtml" />
-    <Content Include="Views\TRWLASchedules\MyProgress.cshtml" />
     <Content Include="Views\TRWLASchedules\StudentDashboard.cshtml" />
     <Content Include="Views\MasterDatas\Create.cshtml" />
     <Content Include="Views\MasterDatas\Delete.cshtml" />
     <Content Include="Views\MasterDatas\Details.cshtml" />
     <Content Include="Views\MasterDatas\Edit.cshtml" />
     <Content Include="Views\MasterDatas\Index.cshtml" />
-    <Content Include="Views\TRWLASchedules\ExportData.cshtml" />
-    <Content Include="Views\TRWLASchedules\DownloadRSVPdMembers.cshtml" />
     <Content Include="Views\UniqueCode\AddCode.cshtml" />
     <Content Include="Views\UniqueCode\NewUniCode.cshtml" />
     <Content Include="Views\Account\CameraBooth.cshtml" />

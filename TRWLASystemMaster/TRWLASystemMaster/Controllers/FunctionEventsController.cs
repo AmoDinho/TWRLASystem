@@ -140,14 +140,14 @@ namespace TRWLASystemMaster.Controllers
                         msg.From = new MailAddress("u15213626@tuks.co.za");
                         msg.To.Add(guest.GuestSpeaker_Email);
                         msg.Subject = functionEvent.Function_Name + " Invitation";
-                        msg.Body = "Dear " + guest.GuestSpeaker_Name + "\n\n You have been invited to the following event (" + functionEvent.Function_Name + ") on the " + functionEvent.Function_Date.ToString("dd MM yyyy") + ".\n The event will take place from " + functionEvent.Function_StartTime + " until " + functionEvent.Function_EndTime + ". \n\n Should you wish to attend please reply to this email so that we can note your attendance. \n\n Kind Regards,\nTRLWA Management";
+                        msg.Body = "Dear " + guest.GuestSpeaker_Name + "\n\n You have been invited to the following event (" + functionEvent.Function_Name + ") on the " + functionEvent.Function_Date.ToString("dd/MM/yyyy") + ".\n The event will take place from " + functionEvent.Function_StartTime + " until " + functionEvent.Function_EndTime + ". \n\n Should you wish to attend please reply to this email so that we can note your attendance. \n\n Kind Regards,\nTRLWA Management";
 
                         SmtpClient smtp = new SmtpClient();
 
                         smtp.Host = "smtp.gmail.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                         smtp.EnableSsl = true;
                         smtp.Send(msg);
 

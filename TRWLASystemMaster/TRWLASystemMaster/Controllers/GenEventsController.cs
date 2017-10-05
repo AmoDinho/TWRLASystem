@@ -86,7 +86,7 @@ namespace TRWLASystemMaster.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index", "TRWLASchedules");
                 }
-                else
+                else if (i == 0)
                 {
                     myAudit.DateDone = DateTime.Now;
                     myAudit.TypeTran = "Create";
@@ -148,7 +148,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 db.Entry(genEvent).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "TRWLASchedules");
             }
             ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
             ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);

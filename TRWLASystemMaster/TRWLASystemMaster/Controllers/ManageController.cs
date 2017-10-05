@@ -182,7 +182,7 @@ namespace TRWLASystemMaster.Controllers
                 {
                     db.Entry(userToUpdate).OriginalValues["RowVersion"] = rowVersion;
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index", "TRWLASchedules");
+                    return RedirectToAction("StudentMainMenu", "TRWLASchedules");
                 }
 
                 catch (DbUpdateConcurrencyException ex)

@@ -7,7 +7,10 @@
 }
 
 <div class="jumbotron">
-    <h2>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h2>
+    <h1>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 @if (TempData["notice"] != null)

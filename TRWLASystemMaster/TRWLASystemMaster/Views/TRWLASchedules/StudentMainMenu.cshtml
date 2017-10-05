@@ -63,6 +63,7 @@
                         <option value="@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagement Events</option>
                         <option value="@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lecture Events</option>
                         <option value="@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Function Events</option>
+                        <option value="@Url.Action("Index", "TRWLASchedules", new { G = ViewBag.SurnameSortParm })'">General Events</option>
                     </select>
                 </div>
                 <div class="form-group" style="z-index:100; position:relative; background-color:transparent; margin-left:50px; margin-top:20px;">
@@ -98,21 +99,32 @@
             {
                 cssClass = "col-md-5-Lecture";
             }
+            else if (item.GenID != null)
+            {
+                cssClass = "col-md-5-Gen";
+            }
             <div class="@cssClass form-group" style="margin-bottom:15px; margin-top:10px;">
                 <h4 style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
                     @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:MMMM/dd/yyyy}")
                     @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date, "{0:MMMM/dd/yyyy}")
                     @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date)
+                    @Html.DisplayFor(modelItem => item.GenEvent.Gen_Date)
                 </h4>
                 <h4 style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
                     @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
                     @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
                     @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                    @Html.DisplayFor(modelItem => item.GenEvent.Gen_Name)
                 </h4>
                 <h4 style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
                     @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Summary, new { @style = "max-width:5px; text-overflow: ellipsis;" })
                     @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
-                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name, new { @style = "width:10%" })
+                    @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Summary, new { @style = "width:10%" })
+                    @Html.DisplayFor(modelItem => item.GenEvent.Gen_Summary)
+                    @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
+
+                    to
+
                 </h4>
 
                 <div class="form-inline" style="z-index:100; position:relative; background-color:transparent; text-align:center;">
@@ -121,8 +133,8 @@
 
                             @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
                             @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
-                            @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
-
+                                                        @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+                                                        @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
                             to
 
                         </h4>
@@ -135,6 +147,7 @@
                             @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
                             @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
 
+                            @Html.DisplayFor(modelItem => item.GenEvent.Gen_EndTime)
                         </h4>
                     </div>
                 </div>
@@ -143,6 +156,18 @@
                     @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
                     @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
                     @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+                    @if (item.GenID != null)
+                    {
+                        if (item.GenEvent.VenueID != 2)
+                        {
+                            @Html.DisplayFor(modelItem => item.GenEvent.Venue.Venue_Name)
+                        }
+
+                        if (item.GenEvent.ResID != 8)
+                        {
+                            @Html.DisplayFor(modelItem => item.GenEvent.Residence.Res_Name)
+                        }
+                    }
                 </h4>
                 <h4 style="z-index:100; position:relative; background-color:transparent;">
                     <a href="@Url.Action("Details", new { id = item.ScheduleID })" data-toggle="tooltip" title="Details" style="margin-left:20px;"><i class="fa fa-info-circle" aria-hidden="true"></i></a>

@@ -66,7 +66,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VenueID,Venue_Name,VenueTypeID,StreetNumber, StreetName, Suburb, City, Province, PostCode")] Venue venue)
+        public ActionResult Create([Bind(Include = "VenueID,Venue_Name,VenueTypeID,StreeNumber,StreetName,Suburb,City,Province,PostCode")] Venue venue)
         {
             try
             {
@@ -80,7 +80,12 @@ namespace TRWLASystemMaster.Controllers
                         int k = db.Venues.Max(p => p.VenueID);
                         int max = k + 1;
 
-
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "Venues";
+                        db.AuditLogs.Add(myAudit);
 
 
                         db.Venues.Add(venue);
@@ -89,6 +94,14 @@ namespace TRWLASystemMaster.Controllers
                     }
                     else
                     {
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "Venues";
+                        db.AuditLogs.Add(myAudit);
+
+
                         db.Venues.Add(venue);
                         db.SaveChanges();
                         return RedirectToAction("Index");
