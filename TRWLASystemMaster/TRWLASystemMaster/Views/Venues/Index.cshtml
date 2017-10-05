@@ -35,6 +35,13 @@
                         <p class="form-group">
                             <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
                         </p>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div>
+                                    <button data-toggle="tooltip" title="View Venue Types" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Venuetypes")'"><i class="fa fa-list-ol" aria-hidden="true" style="color:black;"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
@@ -87,18 +94,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div>
-
-                    <button data-toggle="tooltip" title="Got to Venue Types " type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">View Venue Types</button>
-
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div>
-
                     <button data-toggle="tooltip" title="Create a venue" type="button" class="btn" onclick="location.href='@Url.Action("Create", "Venues")'">Create a New Venue</button>
-
                 </div>
             </div>
         </div>
