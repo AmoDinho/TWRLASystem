@@ -22,14 +22,16 @@ namespace TRWLASystemMaster.Models.DB
             this.SYSUserProfiles = new HashSet<SYSUserProfile>();
             this.Volunteers = new HashSet<Volunteer>();
         }
-    
+
         public int UserTypeID { get; set; }
-        [Required(ErrorMessage = "An event name is required")]
-        [Display(Name = "event name")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "A Description is Required")]
+
         public string Description { get; set; }
+        [Required(ErrorMessage = "Access Right is Required")]
+
         public string AccessRight { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

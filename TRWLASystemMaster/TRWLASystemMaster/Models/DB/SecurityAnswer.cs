@@ -6,25 +6,24 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.DB
 {
+    using Microsoft.SqlServer.Dac.Model;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SecurityAnswer
     {
         public int SecurityAnswerID { get; set; }
 
-        [Required(ErrorMessage = "A security answer is Required")]
-        [Display(Name = "security answer")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Required(ErrorMessage = "An Answer is Required")]
         public string Security_Answer { get; set; }
+
         public int SYSUserProfileID { get; set; }
         public int QuestionID { get; set; }
-    
+
         public virtual SYSUserProfile SYSUserProfile { get; set; }
         public virtual SecurityQuestion SecurityQuestion { get; set; }
     }

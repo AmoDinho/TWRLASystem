@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class VolunteerType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,12 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.Volunteers = new HashSet<Volunteer>();
         }
-    
+
         public int VolunteerTypeID { get; set; }
+
+        [Required(ErrorMessage = "A Description is Required")]
         public string VolunteerType_Description { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Volunteer> Volunteers { get; set; }
     }

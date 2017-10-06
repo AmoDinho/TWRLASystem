@@ -9,9 +9,11 @@
 
 namespace TRWLASystemMaster.Models.DB
 {
+    using Microsoft.SqlServer.Dac.Model;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class StudentType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,12 @@ namespace TRWLASystemMaster.Models.DB
         {
             this.Students = new HashSet<Student>();
         }
-    
+
         public int StudentTypeID { get; set; }
+
+        [Required(ErrorMessage = "A Description is Required")]
         public string StudentTypeDescription { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
     }

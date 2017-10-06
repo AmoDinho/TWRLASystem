@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Models.ViewModel
     /// </summary>
     /// 
 
-        //User Sign up view
+    //User Sign up view
     public class UserSignUpView
     {
         [Key]
@@ -27,32 +27,34 @@ namespace TRWLASystemMaster.Models.ViewModel
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string LoginName { get; set; }
 
-        
+        [Required(ErrorMessage = "A Password is Required")]
         [Display(Name = "Password")]
         [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Your First Name is required")]
+        [Required(ErrorMessage = "Your  Name is required")]
         [Display(Name = "First Name")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FirstName { get; set; }
+
+
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Required(ErrorMessage = "Your Last Name is required")]
+        [Required(ErrorMessage = "Your Surname is required")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public int UserTypeID { get; set; }
 
-   
+
         //[Display(Name = "StudentNumber")]
         //[DataType(DataType.Custom)] 
-        [Required(ErrorMessage = "Student Number Required!")]
+        [Required(ErrorMessage = "Your Student Number is Required")]
         [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
-       //  [RegularExpression(@"^\(?([1-8]{3})\)?[-. ]?([1-8]{3})[-. ]?([1-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
+        //  [RegularExpression(@"^\(?([1-8]{3})\)?[-. ]?([1-8]{3})[-. ]?([1-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
 
-       
+
         [Required(ErrorMessage = "The degree field is required")]
         [Display(Name = "Degree")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -64,7 +66,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         [DataType(DataType.Date)]
         public DateTime YearOfStudy { get; set; }
 
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "Your Res is required")]
         [Display(Name = "Residence")]
         public int ResID { get; set; }
 
@@ -73,15 +75,14 @@ namespace TRWLASystemMaster.Models.ViewModel
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "DoB")]
+        [Required(ErrorMessage = "Your Date of Birth is required")]
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
-       
+
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
-        [Required(ErrorMessage = "Phone Number Required!")]
+        [Required(ErrorMessage = "Your Phone Number Required!")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Phonenumber { get; set; }
     }
@@ -94,26 +95,28 @@ namespace TRWLASystemMaster.Models.ViewModel
         public int LOOKUPRoleID { get; set; }
         public string RoleName { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "A Username is required")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Username")]
         public string LoginName { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "A Password is Required")]
         [Display(Name = "Password")]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Your First Name is required")]
-        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "Your  Name is required")]
+
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Your Last Name is required")]
-        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Your Surname is required")]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+
         public string LastName { get; set; }
 
         public int UserTypeID { get; set; }
-
-        [Required(ErrorMessage = "Your Last Name is required")]
-        public int SecurityAnswerID { get; set; }
 
 
 
@@ -123,8 +126,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string Email { get; set; }
 
 
-        [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "DoB")]
+        [Required(ErrorMessage = "Your Date of Birth is required")]
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
 
@@ -137,7 +139,7 @@ namespace TRWLASystemMaster.Models.ViewModel
     }
 
     //UserLoginView
-    
+
     public class UserLoginView
     {
         [Key]
@@ -155,7 +157,7 @@ namespace TRWLASystemMaster.Models.ViewModel
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Your Email is Required")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -175,25 +177,25 @@ namespace TRWLASystemMaster.Models.ViewModel
 
     public class UserProfileView
     {
-       
-            [Key]
-            public int SYSUserID { get; set; }
-            public int LOOKUPRoleID { get; set; }
-            public string RoleName { get; set; }
-            public bool? IsRoleActive { get; set; }
-            [Required(ErrorMessage = "*")]
-            [Display(Name = "Login ID")]
-            public string LoginName { get; set; }
-            [Required(ErrorMessage = "*")]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
-            [Required(ErrorMessage = "*")]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-            [Required(ErrorMessage = "*")]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-            public int UserTypeID { get; set; }
+
+        [Key]
+        public int SYSUserID { get; set; }
+        public int LOOKUPRoleID { get; set; }
+        public string RoleName { get; set; }
+        public bool? IsRoleActive { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Login ID")]
+        public string LoginName { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+        public int UserTypeID { get; set; }
 
 
         public int SecurityAnswerID { get; set; }
@@ -247,7 +249,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string ReturnToken { get; set; }
     }
 
-    
+
 
 
 
@@ -353,5 +355,4 @@ namespace TRWLASystemMaster.Models.ViewModel
 
 }
 
-   
 

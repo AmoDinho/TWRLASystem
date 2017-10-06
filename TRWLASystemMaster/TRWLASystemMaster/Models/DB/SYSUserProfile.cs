@@ -6,14 +6,13 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SYSUserProfile
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,24 +29,43 @@ namespace TRWLASystemMaster.Models.DB
             this.SecurityAnswers = new HashSet<SecurityAnswer>();
             this.Students = new HashSet<Student>();
         }
-    
+
         public int SYSUserProfileID { get; set; }
         public int SYSUserID { get; set; }
+        //[DataType(DataType.Custom)] 
+        [Required(ErrorMessage = "Your Student Number is Required")]
+        [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
+
         public string StudentNumber { get; set; }
+        [Required(ErrorMessage = "Your  Name is required")]
+        [Display(Name = "First Name")]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FirstName { get; set; }
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Your Surname is required")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public int UserTypeID { get; set; }
+        [Required(ErrorMessage = "Your Email address is required")]
+        [Display(Name = "Email")]
+        [EmailAddress]
         public string Email { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
 
+        [Required(ErrorMessage = "Your Date of Birth is required")]
+        [DataType(DataType.Date)]
         public System.DateTime DoB { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Your Phone Number Required!")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Phonenumber { get; set; }
-        public string Graduate { get; set; }
-        public string Degree { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
 
+        public string Graduate { get; set; }
+
+        [Required(ErrorMessage = "The degree field is required")]
+        [Display(Name = "Degree")]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        public string Degree { get; set; }
         public Nullable<System.DateTime> YearOfStudy { get; set; }
         public int RowCreatedSYSUserID { get; set; }
         public Nullable<System.DateTime> RowCreatedDateTime { get; set; }
@@ -55,7 +73,7 @@ namespace TRWLASystemMaster.Models.DB
         public Nullable<System.DateTime> RowModifiedDateTime { get; set; }
         public Nullable<int> ResID { get; set; }
         public byte[] RowVersion { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
