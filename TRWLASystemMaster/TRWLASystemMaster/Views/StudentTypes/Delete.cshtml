@@ -5,9 +5,13 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>Delete a Student Type</h2>
 
+
+<div class="jumbotron">
+    <h1>Delete a Student Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
@@ -15,33 +19,52 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>StudentType</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-       Student Type     @*@Html.DisplayNameFor(model => model.StudentTypeDescription)*@
+            Student Type     @*@Html.DisplayNameFor(model => model.StudentTypeDescription)*@
         </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StudentTypeDescription)
+        </dd>
 
-       
+
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+</div>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">Return</button>
+
+            </div>
+
         </div>
-    }
+    </div>
 </div>
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button class="btn">@Html.ActionLink("Back to List", "Index")</button>
+                <div>
+                    @using (Html.BeginForm())
+            {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" />
+
+                        </div>
+                    }
+                </div>
+
             </div>
         </div>
     </div>
