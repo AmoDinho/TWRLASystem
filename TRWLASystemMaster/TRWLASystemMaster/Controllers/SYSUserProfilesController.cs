@@ -88,6 +88,37 @@ namespace TRWLASystemMaster.Controllers
             return View(sYSUserProfile);
         }
 
+
+        public ActionResult Details_Students(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUserProfile sYSUserProfile = db.SYSUserProfiles.Find(id);
+            if (sYSUserProfile == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sYSUserProfile);
+        }
+
+      
+
+             public ActionResult Details_Volunteers(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUserProfile sYSUserProfile = db.SYSUserProfiles.Find(id);
+            if (sYSUserProfile == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sYSUserProfile);
+        }
+
     }
 }
 

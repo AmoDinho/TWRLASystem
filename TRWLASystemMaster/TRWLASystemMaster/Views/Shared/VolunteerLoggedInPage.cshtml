@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <button style="border:none;" class = "navbar-brand"  onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">ManageIT</button>
+                <button style="border:none;" class="navbar-brand" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">ManageIT</button>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -70,23 +70,23 @@
                         <a href='@Url.Action("Index", "Contents")'>Content</a>
                     </li>
                     @*<li role="presentation" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">@Html.ActionLink("Class Attendance", "ClassAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Function Attendance", "FunctionAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Lecture Attendance", "LecAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Community Engagement Attendance", "ComAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Student Demographics", "StudentDemographic", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("No Attendance", "NoAttend", "TRWLASchedules")</a></li>
-                        </ul>
-                    </li>*@
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">@Html.ActionLink("Class Attendance", "ClassAttendance", "TRWLASchedules")</a></li>
+                                <li><a href="#">@Html.ActionLink("Function Attendance", "FunctionAttendance", "TRWLASchedules")</a></li>
+                                <li><a href="#">@Html.ActionLink("Lecture Attendance", "LecAttendance", "TRWLASchedules")</a></li>
+                                <li><a href="#">@Html.ActionLink("Community Engagement Attendance", "ComAttendance", "TRWLASchedules")</a></li>
+                                <li><a href="#">@Html.ActionLink("Student Demographics", "StudentDemographic", "TRWLASchedules")</a></li>
+                                <li><a href="#">@Html.ActionLink("No Attendance", "NoAttend", "TRWLASchedules")</a></li>
+                            </ul>
+                        </li>*@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right open">
                     @* TO DO:
 
-            1- Add Image of Messagebox & User Profile Image
-            2- add drop down components: *REPORTS(ADMIN) * *Register Admin  *UserType(Admin) Log out*@
+                        1- Add Image of Messagebox & User Profile Image
+                        2- add drop down components: *REPORTS(ADMIN) * *Register Admin  *UserType(Admin) Log out*@
                     @*<li>@Html.ActionLink("Message", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
                     @*<li>@Html.ActionLink("User Profile", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
 
@@ -109,14 +109,14 @@
         </div>
     </div>
     <div class="container body-content">
-       @RenderBody()
-         @*
+        @RenderBody()
+        @*
             <footer class="panel-footer">
                 <p>&copy; @DateTime.Now.Year - TRWLA System Web Application</p>
             </footer>*@
     </div>
 
-  
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
@@ -132,8 +132,8 @@ $(document).ready(function(){
 
 @*
     How to do the dropdown, Just need to fix css
-    
-    
+
+
     <li class="@Html.ActionLink("Home", "Index", "Home") dropdown">
        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Storage<span class="caret"></span>
        </a>

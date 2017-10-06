@@ -742,6 +742,8 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Manage\ManageStudentProfile.cshtml" />
     <Content Include="Views\SYSUserProfiles\StudentsView.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Details_Students.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Details_Volunteers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

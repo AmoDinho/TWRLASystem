@@ -15,20 +15,12 @@
 
 
 <div>
-   
+
     <hr />
 
 
 
     <dl class="dl-horizontal">
-        <dt>
-            @Html.Label("StudentNumber")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StudentNumber)
-        </dd>
-
         <dt>
             @Html.Label("Name")
         </dt>
@@ -69,47 +61,16 @@
             @Html.DisplayFor(model => model.Phonenumber)
         </dd>
 
-     
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Degree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Degree)
-        </dd>
-
-        <dt>
-            @Html.Label("YearOfStudy")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.YearOfStudy)
-        </dd>
 
 
-
-        <dt>
-            @Html.Label("Res")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Residence.Res_Name)
-        </dd>
-
-
-
-      
-
-      
     </dl>
-    
+
 </div>
 
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "SYSUserProfiles")'">Back</button>
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Volunteers", "SYSUserProfiles")'">Back</button>
 
-       
+
     </div>
 </div>
