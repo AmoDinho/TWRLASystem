@@ -126,6 +126,14 @@ namespace TRWLASystemMaster.Controllers
 
         }
 
+        public FilePathResult Download2()
+        {
+
+            return new FilePathResult("~\\Help Manual\\User Manual - PDF.pdf", System.Net.Mime.MediaTypeNames.Application.Pdf);
+
+
+        }
+
         // GET: Contents1/Create
         public ActionResult Create()
         {

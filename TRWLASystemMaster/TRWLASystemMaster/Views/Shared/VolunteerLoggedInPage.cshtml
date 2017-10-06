@@ -70,28 +70,28 @@
                         <a href='@Url.Action("Index", "Contents")'>Content</a>
                     </li>
                     @*<li role="presentation" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">@Html.ActionLink("Class Attendance", "ClassAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Function Attendance", "FunctionAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Lecture Attendance", "LecAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Community Engagement Attendance", "ComAttendance", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("Student Demographics", "StudentDemographic", "TRWLASchedules")</a></li>
-                            <li><a href="#">@Html.ActionLink("No Attendance", "NoAttend", "TRWLASchedules")</a></li>
-                        </ul>
-                    </li>*@
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">@Html.ActionLink("Class Attendance", "ClassAttendance", "TRWLASchedules")</a></li>
+                        <li><a href="#">@Html.ActionLink("Function Attendance", "FunctionAttendance", "TRWLASchedules")</a></li>
+                        <li><a href="#">@Html.ActionLink("Lecture Attendance", "LecAttendance", "TRWLASchedules")</a></li>
+                        <li><a href="#">@Html.ActionLink("Community Engagement Attendance", "ComAttendance", "TRWLASchedules")</a></li>
+                        <li><a href="#">@Html.ActionLink("Student Demographics", "StudentDemographic", "TRWLASchedules")</a></li>
+                        <li><a href="#">@Html.ActionLink("No Attendance", "NoAttend", "TRWLASchedules")</a></li>
+                    </ul>
+                </li>*@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right open">
                     @* TO DO:
 
-            1- Add Image of Messagebox & User Profile Image
-            2- add drop down components: *REPORTS(ADMIN) * *Register Admin  *UserType(Admin) Log out*@
+                1- Add Image of Messagebox & User Profile Image
+                2- add drop down components: *REPORTS(ADMIN) * *Register Admin  *UserType(Admin) Log out*@
                     @*<li>@Html.ActionLink("Message", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
                     @*<li>@Html.ActionLink("User Profile", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
 
                     @*'@Url.Action("Index", "UserProfile")'*@
-                    <li><a><i class="fa fa-question" aria-hidden="true"></i></a></li>
+                    <li><a data-toggle="tooltip" data-placement="bottom" title="Help" href='@Url.Action("Download2", "Contents")' target="_blank"><i class="fa fa-question" aria-hidden="true" ></i></a></li>
                     <li><a href='@Url.Action("EditProfile", "Manage", new { id = (int)Session["User"] })'><i class="fa fa-user fa-fw"> </i></a></li>
                     <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bars fa-fw"></i>User<span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
@@ -106,6 +106,7 @@
                 </ul>
 
             </div>
+
         </div>
     </div>
     <div class="container body-content">
