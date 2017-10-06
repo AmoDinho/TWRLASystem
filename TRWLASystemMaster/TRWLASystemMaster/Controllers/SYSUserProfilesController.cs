@@ -27,7 +27,7 @@ namespace TRWLASystemMaster.Controllers
         // GET: SYSUserProfiles
         public ActionResult Index(string searchStrings)
         {
-            
+
             var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SYSUser).Include(s => s.UserType);
 
             if (!String.IsNullOrEmpty(searchStrings))
@@ -56,10 +56,56 @@ namespace TRWLASystemMaster.Controllers
 
         }
 
+        public ActionResult StudentsView(string searchString)
+        {
+            var sYSUserProfiles = db.SYSUserProfiles.Include(s => s.Residence).Include(s => s.SYSUser).Include(s => s.UserType);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sYSUserProfiles = sYSUserProfiles.Where(s => s.FirstName.Contains(searchString));
+
+
+            }
+
+            return View(sYSUserProfiles.ToList());
+
+        }
+
 
 
         // GET: SYSUserProfiles/Details/5
         public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUserProfile sYSUserProfile = db.SYSUserProfiles.Find(id);
+            if (sYSUserProfile == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sYSUserProfile);
+        }
+
+
+        public ActionResult Details_Students(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SYSUserProfile sYSUserProfile = db.SYSUserProfiles.Find(id);
+            if (sYSUserProfile == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sYSUserProfile);
+        }
+
+
+
+        public ActionResult Details_Volunteers(int? id)
         {
             if (id == null)
             {

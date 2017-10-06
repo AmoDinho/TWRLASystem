@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
-} 
+}
 @*VolunteerLoggedInPage.cshtml*@
 <div class="jumbotron">
     <h1>Students</h1>
@@ -24,7 +24,7 @@
 {
     <div class="form-inline" style="margin-bottom:10px;">
         <p data-toggle="tooltip" title="Search by name" class="form-group">
-            @Html.TextBox("searchStrings","", new { placeholder = "Student Name", @class = "form-control", style = "width:100%;" })
+            @Html.TextBox("searchStrings", "", new { placeholder = "Student Name", @class = "form-control", style = "width:100%;" })
         </p>
 
         <p class="form-group">
@@ -38,44 +38,48 @@
     <tr>
         <th>
 
-         Student Number   @*@Html.DisplayNameFor(model => model.StudentNumber)*@
+            Student Number   @*@Html.DisplayNameFor(model => model.StudentNumber)*@
         </th>
         <th>
-            First Name  @*@Html.DisplayNameFor(model => model.FirstName)*@
+            Name  @*@Html.DisplayNameFor(model => model.FirstName)*@
         </th>
         <th>
-            Last Name    @*@Html.DisplayNameFor(model => model.LastName)*@
+            Surname   @*@Html.DisplayNameFor(model => model.LastName)*@
         <th>
-            Student Number
+            Phone Number
         </th>
-        
-        <th>
 
-            Phone Number    @*@Html.DisplayNameFor(model => model.Phonenumber)*@
-        </th>
-             <th>
+
+        <th>
             Email Address
-
+            @*@Html.DisplayNameFor(model => model.Phonenumber)*@
         </th>
         <th>
             Date of Birth
+
+
         </th>
         <th>
             Degree
+
         </th>
         <th>
+            Year Of Study
 
-            Year Of Study  @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
+        </th>
+        <th>
+            Res Name
+            @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
         </th>
 
         <th>
-            Res Name  @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
+            User Type     @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
         </th>
-       
+
 
         <th></th>
     </tr>
-    @foreach (var item in Model.Where(p => p.Graduate == null && p.UserTypeID == 1 ))
+    @foreach (var item in Model.Where(p => p.Graduate == null && p.UserTypeID == 1))
     {
         <tr>
             <td>
@@ -119,7 +123,7 @@
 </table>
 <hr />
 
- <!-- --> <h2>Graduated Students</h2>
+<!-- --> <h2>Graduated Students</h2>
 <table class="table">
     <tr>
         <th>
@@ -132,9 +136,9 @@
         <th>
             Last Name   @*@Html.DisplayNameFor(model => model.LastName)*@
 
-            
+
         </th>
-        
+
         <th>
             Phone Number
         </th>
@@ -145,10 +149,10 @@
 
             Phone number  @*@Html.DisplayNameFor(model => model.Phonenumber)*@
 
-         
+
 
         </th>
-      
+
         <th>
 
             @Html.DisplayNameFor(model => model.Degree)
@@ -160,11 +164,11 @@
         <th>
             Res Name   @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
 
-          
+
         </th>
         <th>
             User Type
-       </th>
+        </th>
 
 
         <th></th>
@@ -200,12 +204,12 @@
                 @Html.DisplayFor(modelItem => item.Residence.Res_Name)
             </td>
 
-           
+
             <td>
-            
+
 
                 @Html.DisplayFor(modelItem => item.UserType.Description)
-            
+
 
             <td>
 
@@ -214,4 +218,3 @@
         </tr>
     }
 </table>
-

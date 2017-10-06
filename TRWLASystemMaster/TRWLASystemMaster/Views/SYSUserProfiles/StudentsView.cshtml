@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<TRWLASystemMaster.Models.DB.SYSUserProfile>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+    ViewBag.Title = "StudentsView";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
-@*VolunteerLoggedInPage.cshtml*@
+
+
 <div class="jumbotron">
     <h1>Volunteers</h1>
     <div class="quoteform"></div>
@@ -77,7 +78,7 @@
             </td>
             <td>
 
-                <a href="@Url.Action("Details_Volunteers", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                <a href="@Url.Action("Details_Students", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
 
             </td>

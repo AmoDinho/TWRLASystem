@@ -741,6 +741,9 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Manage\ManageStudentProfile.cshtml" />
     <Content Include="Views\TRWLASchedules\GeneralEventReport.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Details_Students.cshtml" />
+    <Content Include="Views\SYSUserProfiles\Details_Volunteers.cshtml" />
+    <Content Include="Views\SYSUserProfiles\StudentsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
