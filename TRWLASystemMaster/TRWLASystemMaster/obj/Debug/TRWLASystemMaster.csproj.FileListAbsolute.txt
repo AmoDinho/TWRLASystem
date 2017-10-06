@@ -827,3 +827,4 @@ C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\
 C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\bin\zh-TW\Microsoft.SqlServer.TransactSql.ScriptDom.resources.dll
 C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.dll
 C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.pdb
+C:\Users\admin\Documents\GitHub\TWRLASystem\TRWLASystemMaster\TRWLASystemMaster\obj\Debug\TRWLASystemMaster.csprojResolveAssemblyReference.cache

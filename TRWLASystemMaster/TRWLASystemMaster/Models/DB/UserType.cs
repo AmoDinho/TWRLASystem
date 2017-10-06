@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class UserType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,9 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int UserTypeID { get; set; }
+        [Required(ErrorMessage = "An event name is required")]
+        [Display(Name = "event name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string Description { get; set; }
         public string AccessRight { get; set; }
     
