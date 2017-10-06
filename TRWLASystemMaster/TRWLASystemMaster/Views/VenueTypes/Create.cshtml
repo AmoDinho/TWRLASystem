@@ -5,32 +5,40 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Create</h2>
+<div class="jumbotron">
+    <h1>Create a Venue Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>VenueType</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.VenueType_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2"> Venue Type Name:</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.VenueType_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.VenueType_Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="form-inline" style="float:right; margin-bottom:10px; margin-top:60px;">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 ">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                        Create
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 ">
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">Return</button>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
