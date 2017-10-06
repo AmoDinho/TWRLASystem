@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SYSUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,11 @@ namespace TRWLASystemMaster.Models.DB
     
         public int SYSUserID { get; set; }
         public string LoginName { get; set; }
+
+        [Required(ErrorMessage = "A Password is Required")]
+
+
+
         public string PasswordEncryptedText { get; set; }
         public int RowCreatedSYSUserID { get; set; }
         public Nullable<System.DateTime> RowCreatedDateTime { get; set; }

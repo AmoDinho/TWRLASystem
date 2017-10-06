@@ -11,7 +11,8 @@ namespace TRWLASystemMaster.Models.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class UserType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +24,12 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int UserTypeID { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "A Description is Required")]
+
         public string Description { get; set; }
+        [Required(ErrorMessage = "Access Right is Required")]
+
         public string AccessRight { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

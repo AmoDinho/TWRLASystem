@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h2>Details of a Volunteer Type</h2>
+    <h1>Details of a Volunteer Type</h1>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
@@ -33,10 +33,14 @@
 </p>*@
 
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "SYSUserProfiles")'">Back</button>
 
-        @*<button class="btn"> @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID })</button>*@
+<div class="form-inline" style="float:right; margin-bottom:50px; margin-top:60px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'">Return</button>
+
+            </div>
+        </div>
     </div>
 </div>

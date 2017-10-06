@@ -31,14 +31,14 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("First Name:", new { @class = "control-label col-md-2" })
+            @Html.Label("Name:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Last Name:", new { @class = "control-label col-md-2" })
+            @Html.Label("Surname:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
@@ -111,11 +111,16 @@
             </div>
 
         </div>*@
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn" value="Register" />
+        <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div>
+                        <input type="submit" class="btn btn-default " @*data-toggle="modal" data-target="#myModal"*@ value="Register" />
+                    </div>
+                </div>
             </div>
         </div>
+
 
     </div>
 
