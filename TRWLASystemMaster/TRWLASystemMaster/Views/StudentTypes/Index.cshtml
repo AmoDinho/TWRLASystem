@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h2>Student Type - Home</h2>
+    <h1>Student Type - Home</h1>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
@@ -54,7 +54,8 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-               <button class="btn btn-default">@Html.ActionLink("Add a new Student Type", "Create", new { @class = "btn btn-default btn-round", @style = "color:#9b16d8" })</button> 
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "StudentTypes")'">Add a new Student Type</button>
+               
             </div>
         </div>
     </div>
