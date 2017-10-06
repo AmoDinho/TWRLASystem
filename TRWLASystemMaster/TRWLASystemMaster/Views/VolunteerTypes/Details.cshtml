@@ -5,14 +5,20 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Details</h2>
+<div class="jumbotron">
+    <h1>Details of a Volunteer Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
 
 <div>
-    <h4>VolunteerType</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.VolunteerType_Description)
+            @Html.Label("Description")
         </dt>
 
         <dd>
@@ -21,7 +27,20 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerTypeID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerTypeID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+
+
+
+<div class="form-inline" style="float:right; margin-bottom:50px; margin-top:60px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'">Return</button>
+
+            </div>
+        </div>
+    </div>
+</div>

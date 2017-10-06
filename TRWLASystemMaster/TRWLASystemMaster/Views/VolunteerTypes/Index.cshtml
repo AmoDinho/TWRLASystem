@@ -6,12 +6,15 @@
 }
 
 
+
+
 <div class="jumbotron">
 
-    <h2> Volunteer Type- Home</h2>
-
+    <h1> Volunteer Type- Home</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
-
 
 
 @* Search Button for VolunteerType Description  '*@
@@ -22,7 +25,9 @@
         <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
     </p>
 }
-<table class="table"> 
+
+
+<table class="table">
     <tr>
         <th>
             Volunteer Type     @*@Html.DisplayNameFor(model => model.VolunteerType_Description)*@
@@ -30,30 +35,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VolunteerType_Description)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", new { id=item.VolunteerTypeID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerType_Description)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.VolunteerTypeID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
 
-            <a href="@Url.Action("Details", new { id=item.VolunteerTypeID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Details", new { id=item.VolunteerTypeID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
 
-            <a href="@Url.Action("Delete", new { id=item.VolunteerTypeID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Delete", new { id=item.VolunteerTypeID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
 
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
+
+
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "VolunteerTypes")'">Add a new Volunteer Type</button>
-               
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Volunteers")'">Return</button>
+
             </div>
         </div>
     </div>
@@ -63,7 +71,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Volunteers")'">Back</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "VolunteerTypes")'">Add a new Volunteer Type</button>
 
             </div>
         </div>
