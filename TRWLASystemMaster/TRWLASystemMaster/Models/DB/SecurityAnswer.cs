@@ -17,6 +17,10 @@ namespace TRWLASystemMaster.Models.DB
     public partial class SecurityAnswer
     {
         public int SecurityAnswerID { get; set; }
+
+        [Required(ErrorMessage = "A security answer is Required")]
+        [Display(Name = "security answer")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
         public string Security_Answer { get; set; }
         public int SYSUserProfileID { get; set; }
         public int QuestionID { get; set; }

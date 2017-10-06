@@ -302,6 +302,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\CheckDateRangeAttribute.cs" />
     <Compile Include="Models\ClassAttendanceReport.cs" />
     <Compile Include="Models\DB\Attendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>

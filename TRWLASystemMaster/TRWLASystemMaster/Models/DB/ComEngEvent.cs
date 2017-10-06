@@ -25,12 +25,35 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int ComEngID { get; set; }
+        [Required(ErrorMessage = "An event name is required")]
+        [Display(Name = "event name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string ComEng_Name { get; set; }
+        [Required(ErrorMessage = "A summary is required")]
+        [Display(Name = "summary")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         public string ComEng_Summary { get; set; }
+        [Required(ErrorMessage = "A description is required")]
+        [Display(Name = "description")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 20)]
         public string ComEng_Description { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+        [CheckDateRange]
         public System.DateTime ComEng_Date { get; set; }
+
+        [Required(ErrorMessage = "A start time is required")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public System.TimeSpan ComEnge_StartTime { get; set; }
+
+
+        [Required(ErrorMessage = "An end time is required")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public System.TimeSpan ComEng_EndTime { get; set; }
+
+        [Required(ErrorMessage = "A theme is required")]
+        [Display(Name = "theme")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string ComEng_Theme { get; set; }
         public Nullable<int> VenueID { get; set; }
         public Nullable<int> ContentID { get; set; }

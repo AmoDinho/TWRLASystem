@@ -7,6 +7,7 @@
 
 <div class="jumbotron">
     <h1>General Event</h1>
+    <h4>Create a General Event</h4>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
@@ -51,7 +52,7 @@
         <div class="form-group">
             @Html.Label("Date:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Gen_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.EditorFor(model => model.Gen_Date, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Gen_Date, "", new { @class = "text-danger" })
             </div>
         </div>

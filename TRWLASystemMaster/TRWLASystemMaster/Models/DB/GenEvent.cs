@@ -25,12 +25,32 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int GenID { get; set; }
+
+        [Required(ErrorMessage = "An event name is required")]
+        [Display(Name = "event name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string Gen_Name { get; set; }
+        [Required(ErrorMessage = "A summary is required")]
+        [Display(Name = "summary")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         public string Gen_Summary { get; set; }
+        [Required(ErrorMessage = "A description is required")]
+        [Display(Name = "description")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 20)]
         public string Gen_Description { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+        [CheckDateRange]
         public System.DateTime Gen_Date { get; set; }
+        [Required(ErrorMessage = "A start time is required")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public System.TimeSpan Gen_StartTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "An end time is required")]
         public System.TimeSpan Gen_EndTime { get; set; }
+        [Required(ErrorMessage = "A theme is required")]
+        [Display(Name = "theme")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string Gene_Theme { get; set; }
         public int Type { get; set; }
         public Nullable<int> VenueID { get; set; }

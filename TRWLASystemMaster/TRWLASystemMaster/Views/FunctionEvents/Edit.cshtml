@@ -44,13 +44,13 @@
             <div class="form-group">
                 @Html.Label("Date", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Function_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.EditorFor(model => model.Function_Date, new { htmlAttributes = new { @class = "form-control", required="required" } })
                     @Html.ValidationMessageFor(model => model.Function_Date, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.Label("Time", new { @class = "control-label col-md-2" })
+                @Html.Label("Start", new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
                     @Html.EditorFor(model => model.Function_StartTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                     @Html.ValidationMessageFor(model => model.Function_StartTime, "", new { @class = "text-danger" })
@@ -58,7 +58,7 @@
             </div>
 
             <div class="form-group">
-                @Html.Label("End Time:", new { @class = "control-label col-md-2}" })
+                @Html.Label("End", new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
                     @Html.EditorFor(model => model.Function_EndTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
                     @Html.ValidationMessageFor(model => model.Function_EndTime, "", new { @class = "text-danger" })
@@ -99,8 +99,8 @@
             </div>
         </div>
 
-        
-        </div>
+
+    </div>
 
         <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -125,15 +125,15 @@
         </div>
 }
 
-        <div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
-            <div class="form-group">
-                <div style="margin-right:5px;">
-                    <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                        Update Event
-                    </button>
-                </div>
-            </div>
-            <div class="form-group">
-                <button data-toggle="tooltip" title="Return to the Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
-            </div>
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+    <div class="form-group">
+        <div style="margin-right:5px;">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Update Event
+            </button>
         </div>
+    </div>
+    <div class="form-group">
+        <button data-toggle="tooltip" title="Return to the Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    </div>
+</div>

@@ -1697,6 +1697,23 @@ namespace TRWLASystemMaster.Controllers
 
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
+
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.FunctionID = ev.FunctionID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
+
+
                             if (myProgress != null)
                             {
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
@@ -1728,6 +1745,21 @@ namespace TRWLASystemMaster.Controllers
                             att.SYSUserProfileID = stud.SYSUserProfileID;
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.LectureID = ev.LectureID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
+
                             if (myProgress != null)
                             {
                                 myProgress.LecProg = myProgress.LecProg + 1;
@@ -1755,6 +1787,22 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.ComEngID = ev.ComEngID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.ComEngID = ev.ComEngID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
+
 
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
@@ -1785,6 +1833,21 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.GenID = ev.GenID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
 
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
@@ -1828,6 +1891,22 @@ namespace TRWLASystemMaster.Controllers
 
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.FunctionID = ev.FunctionID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
+                            
+
                             if (myProgress != null)
                             {
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
@@ -1855,6 +1934,21 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.LectureID = ev.LectureID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.LectureID = ev.LectureID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
 
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
@@ -1885,6 +1979,21 @@ namespace TRWLASystemMaster.Controllers
                             att.ComEngID = ev.ComEngID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
 
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.ComEngID = ev.ComEngID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
+
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
                             if (myProgress != null)
@@ -1913,6 +2022,21 @@ namespace TRWLASystemMaster.Controllers
                         {
                             att.GenID = ev.GenID;
                             att.SYSUserProfileID = stud.SYSUserProfileID;
+
+                            int count = db.RSVP_Event.Max(p => p.rsvpID);
+                            int k = count + 1;
+                            RSVP_Event @event = new RSVP_Event();
+                            @event.SYSUserProfileID = stud.SYSUserProfileID;
+                            @event.GenID = ev.GenID;
+                            @event.rsvpID = k;
+                            @event.Attended = 1;
+
+                            RSVPSchedule mysched = new RSVPSchedule();
+                            mysched.rsvpID = @event.rsvpID;
+                            mysched.ScheduleID = id;
+                            mysched.SYSUserProfileID = stud.SYSUserProfileID;
+                            db.RSVPSchedules.Add(mysched);
+                            db.RSVP_Event.Add(@event);
 
                             progressbar myProgress = db.progressbars.FirstOrDefault(p => p.SYSUserProfileID == stud.SYSUserProfileID);
 
@@ -1972,6 +2096,7 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
+                
 
                 MasterData mydata = db.MasterDatas.Find(9);
                 int time = Convert.ToInt32(mydata.LogAttendTime);
@@ -1982,7 +2107,7 @@ namespace TRWLASystemMaster.Controllers
                 if (tRWLASchedule.FunctionID != null)
                 {
                     int m = tRWLASchedule.FunctionEvent.Function_StartTime.Hours;
-
+                    ViewBag.Name = tRWLASchedule.FunctionEvent.Function_Name;
                     int diff = m - mytime;
 
                     if (diff > time)
@@ -1996,7 +2121,7 @@ namespace TRWLASystemMaster.Controllers
                 {
                     int m = tRWLASchedule.Lecture.Lecture_StartTime.Hours;
                     int diff = m - mytime;
-
+                    ViewBag.Name = tRWLASchedule.Lecture.Lecture_Name;
                     if (diff > time)
                     {
                         TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
@@ -2008,7 +2133,7 @@ namespace TRWLASystemMaster.Controllers
                 {
                     int m = tRWLASchedule.GenEvent.Gen_StartTime.Hours;
                     int diff = m - mytime;
-
+                    ViewBag.Name = tRWLASchedule.GenEvent.Gen_Name;
                     if (diff > time)
                     {
                         TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
@@ -2019,7 +2144,7 @@ namespace TRWLASystemMaster.Controllers
                 {
                     int m = tRWLASchedule.ComEngEvent.ComEnge_StartTime.Hours;
                     int diff = m - mytime;
-
+                    ViewBag.Name = tRWLASchedule.ComEngEvent.ComEng_Name;
                     if (diff > time)
                     {
                         TempData["Log"] = "You cannot log event attendance until it is " + time.ToString() + " hour/s before the event starts";
@@ -2151,8 +2276,8 @@ namespace TRWLASystemMaster.Controllers
                     {
                         var evnt = from s in db.SYSUserProfiles
                                    join r in db.RSVP_Event on s.SYSUserProfileID equals r.SYSUserProfileID
-                                   join t in db.TRWLASchedules on r.ComEngID equals t.ComEngID
-                                   where r.ComEngID == tRWLASchedule.ComEngID
+                                   join t in db.TRWLASchedules on r.GenID equals t.GenID
+                                   where r.GenID == tRWLASchedule.GenID
                                    select r;
                         ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
                         ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "sur_desc" : "Surname";
@@ -2164,22 +2289,6 @@ namespace TRWLASystemMaster.Controllers
                         if (!String.IsNullOrEmpty(searchString))
                         {
                             evnt = evnt.Where(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                        }
-
-                        switch (sortOrder)
-                        {
-                            case "name_desc":
-                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                                break;
-                            case "sur_desc":
-                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                                break;
-                            case "Surname":
-                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                                break;
-                            default:
-                                evnt = evnt.OrderByDescending(s => s.SYSUserProfile.FirstName.Contains(searchString));
-                                break;
                         }
 
                         return View(evnt.ToList());
@@ -2838,7 +2947,7 @@ namespace TRWLASystemMaster.Controllers
                         db.RSVPSchedules.Add(mysched);
                         db.RSVP_Event.Add(@event);
 
-                        foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.GenID))
+                        foreach (var s in db.RSVP_Event.Where(p => p.GenID == tRWLASchedule.GenID))
                         {
 
                             //if (s.Attended != null)
@@ -2991,7 +3100,7 @@ namespace TRWLASystemMaster.Controllers
                         db.RSVPSchedules.Add(mysched);
                         db.RSVP_Event.Add(@event);
 
-                        foreach (var s in db.RSVP_Event.Where(p => p.LectureID == tRWLASchedule.GenID))
+                        foreach (var s in db.RSVP_Event.Where(p => p.GenID == tRWLASchedule.GenID))
                         {
                             
                             if (s.SYSUserProfileID == user)

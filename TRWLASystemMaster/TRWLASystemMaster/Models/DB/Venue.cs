@@ -26,12 +26,40 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int VenueID { get; set; }
+
+        [Required(ErrorMessage = "A venue name is required")]
+        [Display(Name = "venue")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
         public string Venue_Name { get; set; }
+
+        [Required(ErrorMessage = "A street number is required")]
+        [Display(Name = "street number")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string StreeNumber { get; set; }
+
+        [Required(ErrorMessage = "A street name is required")]
+        [Display(Name = "street name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string StreetName { get; set; }
+
+        [Required(ErrorMessage = "A suburb is required")]
+        [Display(Name = "suburb")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string Suburb { get; set; }
+
+        [Required(ErrorMessage = "A city is required")]
+        [Display(Name = "city")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string City { get; set; }
+
+        [Required(ErrorMessage = "A province is required")]
+        [Display(Name = "province")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string Province { get; set; }
+
+        [Required(ErrorMessage = "A postcode is required")]
+        [Display(Name = "postcode")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
         public string PostCode { get; set; }
         public int VenueTypeID { get; set; }
     

@@ -22,7 +22,7 @@
 
         <div class="form-group">
             @Html.Label("Name", new { @class = "control-label col-md-2" })
-            <div data-toggle="tooltip" title="Update the Content Name" style="width:50%;">
+            <div data-toggle="tooltip" title="Update the Content Name">
                 @Html.EditorFor(model => model.Content_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Content_Name, "", new { @class = "text-danger" })
             </div>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            <div data-toggle="tooltip" title="Update the Content Name" style="width:50%;">
+            <div data-toggle="tooltip" title="Update the Content Name" >
                 @Html.HiddenFor(model => model.Content_Link, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Content_Link, "", new { @class = "text-danger" })
             </div>

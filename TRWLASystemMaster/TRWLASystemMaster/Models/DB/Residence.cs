@@ -26,6 +26,10 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int ResID { get; set; }
+
+        [Required(ErrorMessage = "A residence name is Required")]
+        [Display(Name = "residence name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
         public string Res_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -38,10 +38,16 @@ namespace TRWLASystemMaster.Models.DB
         public string LastName { get; set; }
         public int UserTypeID { get; set; }
         public string Email { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+
         public System.DateTime DoB { get; set; }
         public string Phonenumber { get; set; }
         public string Graduate { get; set; }
         public string Degree { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+
         public Nullable<System.DateTime> YearOfStudy { get; set; }
         public int RowCreatedSYSUserID { get; set; }
         public Nullable<System.DateTime> RowCreatedDateTime { get; set; }

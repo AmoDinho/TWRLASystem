@@ -24,9 +24,34 @@ namespace TRWLASystemMaster.Models.DB
         }
     
         public int GuestSpeakerID { get; set; }
+
+        [Required(ErrorMessage = "A name for the guest speaker is required")]
+        [Display(Name = "name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string GuestSpeaker_Name { get; set; }
+
+        [Required(ErrorMessage = "A surname for the guest speaker is required")]
+        [Display(Name = "surname")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string GuestSpeaker_Surname { get; set; }
+
+        [Required(ErrorMessage = "A phone number for the guest speaker is required")]
+        [Display(Name = "phone number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string GuestSpeaker_Phone { get; set; }
+
+        [Required(ErrorMessage = "An email address is required")]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$",
+        ErrorMessage = "Please Enter Correct Email Address")]
+        public string Email { get; set; }
+        [Required(ErrorMessage = "An email address is required")]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$",
+        ErrorMessage = "Please Enter Correct Email Address")]
         public string GuestSpeaker_Email { get; set; }
         public string GuestSpeaker_PictureLink { get; set; }
     
