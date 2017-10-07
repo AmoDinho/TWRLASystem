@@ -451,6 +451,8 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
+
+            ViewBag.Count = at.Count;
             return at;
         }
         public IList<AttendanceViewModel> GetFunctionAttendance(string namesearchString, string resname)
@@ -509,7 +511,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
-
+            ViewBag.Count = at.Count;
             return attendance;
         }
 
@@ -568,7 +570,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
-
+            ViewBag.Count = attendance.Count;
             return attendance;
         }
 
@@ -678,6 +680,8 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
+            ViewBag.Count = attend.Count;
+
             return attend;
         }
 
@@ -740,6 +744,13 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
+
+            int count = (from n in db.RSVP_Event
+                         where n.Attended != null
+                         select n).Count(); ;
+
+                ViewBag.Attend = count;
+                ViewBag.Count = attend.Count;
 
             return attend;
         }

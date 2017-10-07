@@ -41,6 +41,9 @@
     </div>
 }
 
+<h4>Total number of students who have RSVPd to events: @ViewBag.Attend</h4>
+<h4>Total number of students who have RSVPd to but not attended the event: @ViewBag.Count</h4>
+
 @using (Html.BeginForm("ExportToExcel5", "TRWLASchedules", FormMethod.Post))
 {
     <div class="row" style="height:500px; overflow-y:auto;">
