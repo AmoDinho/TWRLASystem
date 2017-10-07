@@ -8,9 +8,9 @@
 
 <div class="jumbotron" style="text-align:left; margin-bottom:100px;">
     <h1>@Html.DisplayFor(model => model.FirstName)'s profile</h1>
-    <div class="quotehome"></div>
-    <div class="quote1home"></div>
-    <div class="quote2home"></div>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 @if (Model.UserTypeID == 1)
@@ -21,8 +21,6 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.SYSUserProfileID)
             @*<div class="form-group">
@@ -104,14 +102,11 @@
                     </div>
                 </div>*@
 
-            <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div>
-                            <input type="submit" value="Save" class="btn btn-default" />
-
-                        </div>
-                    </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 ">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>
@@ -123,8 +118,6 @@ else
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
-
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.SYSUserProfileID)
 
@@ -179,10 +172,33 @@ else
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.Label("           ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <a href='@Url.Action("ChangePassword", "Manage",new { id=Model.SYSUserID })'>Change Password</a>
+                </div>
+            </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                @Html.Label("           ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <a href='@Url.Action("Delete", "Manage",new { id=Model.SYSUserProfileID })'>Deactivate Account</a>
+                </div>
+            </div>
+            
+            
+
+            
+            <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:-10px;">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="margin-right:10px;">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                    </div>
                 </div>
             </div>
 
@@ -215,26 +231,5 @@ else
 
 
 
-<hr />
-<h3><label style="margin-bottom:30px; margin-top:50px;" class="alert-danger">Danger Zone</label></h3>
-
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <button style="margin-bottom:30px;" type="button" class="btn" onclick="location.href='@Url.Action("Delete", "Manage",new { id=Model.SYSUserProfileID })'">Deactivate Your Account</button>
-
-        <button style="margin-bottom:30px;" type="button" class="btn" onclick="location.href='@Url.Action("ChangePassword", "Manage",new { id=Model.SYSUserID })'">Change Your Password</button>
-    </div>
-</div>
-
-<hr />
 
 
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:-10px;">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button style="margin-bottom:30px;" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
-            </div>
-        </div>
-    </div>
-</div>

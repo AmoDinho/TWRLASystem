@@ -24,7 +24,7 @@ namespace TRWLASystemMaster.Models.DB
 
         public int StudentTypeID { get; set; }
 
-        [Required(ErrorMessage = "A Description is Required")]
+        [Required(ErrorMessage = "A description is required")]
         public string StudentTypeDescription { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -432,10 +432,11 @@ h4
     
 }
 
+
 .jumbotron h1 {
     font-family: "Open Sans";
     font-weight: bold;
-    font-size: 90px;
+    font-size: 77px;
     line-height: 1;
     color: black;
     background-color: transparent;
@@ -444,7 +445,7 @@ h4
 .jumbotron h2 {
     font-family: "Open Sans";
     font-weight: bold;
-    font-size: 77px;
+    font-size: 60px;
     line-height: 1;
     color: black;
     background-color: transparent;

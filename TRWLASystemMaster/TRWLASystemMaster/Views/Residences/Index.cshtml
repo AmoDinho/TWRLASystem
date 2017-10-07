@@ -7,19 +7,16 @@
 
 
 <div class="jumbotron">
-    <h1> Residence's</h1>
+    <h1> Residences</h1>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
 </div>
-
-
-
 @* Search Button for 'RES NAME'*@
 
 @using (Html.BeginForm())
 {
-    <div class="form-inline" style="margin-bottom:10px;">
+    <div class="form-inline" style="margin-bottom:10px; margin-top:-60px;">
         <p data-toggle="tooltip" title="Search by name" class="form-group">
             @Html.TextBox("searchString", "", new { placeholder = "Res Name", @class = "form-control", style = "width:100%;" })
         </p>

@@ -44,8 +44,7 @@ namespace TRWLASystemMaster.Models.DB
         [Required(ErrorMessage = "An email address is required")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$",
-        ErrorMessage = "Please Enter Correct Email Address")]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", ErrorMessage = "Please Enter Correct Email Address")]
         public string GuestSpeaker_Email { get; set; }
         public string GuestSpeaker_PictureLink { get; set; }
     

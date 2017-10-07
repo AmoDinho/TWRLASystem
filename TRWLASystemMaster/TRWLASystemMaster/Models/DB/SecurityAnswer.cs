@@ -18,7 +18,7 @@ namespace TRWLASystemMaster.Models.DB
     {
         public int SecurityAnswerID { get; set; }
 
-        [Required(ErrorMessage = "An Answer is Required")]
+        [Required(ErrorMessage = "An answer is required")]
         public string Security_Answer { get; set; }
 
         public int SYSUserProfileID { get; set; }

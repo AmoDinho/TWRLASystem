@@ -22,26 +22,27 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string RoleName { get; set; }
 
 
-        [Required(ErrorMessage = "A Username is Required")]
-        [Display(Name = "Username")]
+        [Required(ErrorMessage = "A username is required")]
+        [Display(Name = "username")]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string LoginName { get; set; }
 
-        [Required(ErrorMessage = "A Password is Required")]
-        [Display(Name = "Password")]
-        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "A password is required")]
+        [Display(Name = "password")]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$", ErrorMessage = "You have entered an invalid password. It must contain: 2 upper case letters, 3 lower case letters, 1 special character and 2 digits")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Your  Name is required")]
-        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "Your  name is required")]
+        [Display(Name = "name")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FirstName { get; set; }
 
 
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Required(ErrorMessage = "Your Surname is required")]
-        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Your surname is required")]
+        [Display(Name = "surname")]
         public string LastName { get; set; }
 
         public int UserTypeID { get; set; }
@@ -49,40 +50,42 @@ namespace TRWLASystemMaster.Models.ViewModel
 
         //[Display(Name = "StudentNumber")]
         //[DataType(DataType.Custom)] 
-        [Required(ErrorMessage = "Your Student Number is Required")]
+        [Required(ErrorMessage = "Your student number is required")]
+        [Display(Name = "student number")]
         [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
         //  [RegularExpression(@"^\(?([1-8]{3})\)?[-. ]?([1-8]{3})[-. ]?([1-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
 
 
-        [Required(ErrorMessage = "The degree field is required")]
-        [Display(Name = "Degree")]
+        [Required(ErrorMessage = "Your degree is required")]
+        [Display(Name = "degree")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string Degree { get; set; }
 
 
-        [Required(ErrorMessage = "This field is required")]
-        [Display(Name = "Academic Commencement Date")]
+        [Required(ErrorMessage = "Your academic commencement date is required")]
+        [Display(Name = "academic commencement date")]
         [DataType(DataType.Date)]
         public DateTime YearOfStudy { get; set; }
 
-        [Required(ErrorMessage = "Your Res is required")]
+        [Required(ErrorMessage = "Your residence name is required")]
         [Display(Name = "Residence")]
         public int ResID { get; set; }
 
-        [Required(ErrorMessage = "Your Email address is required")]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Your email address is required")]
+        [Display(Name = "email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", ErrorMessage = "Please Enter Correct Email Address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Your Date of Birth is required")]
+        [Required(ErrorMessage = "Your date of birth is required")]
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
 
 
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone Number")]
-        [Required(ErrorMessage = "Your Phone Number Required!")]
+        [Display(Name = "phone number")]
+        [Required(ErrorMessage = "Your phone number required")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Phonenumber { get; set; }
     }
@@ -95,23 +98,25 @@ namespace TRWLASystemMaster.Models.ViewModel
         public int LOOKUPRoleID { get; set; }
         public string RoleName { get; set; }
 
-        [Required(ErrorMessage = "A Username is required")]
+        [Required(ErrorMessage = "A username is required")]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Username")]
+        [Display(Name = "username")]
         public string LoginName { get; set; }
 
-        [Required(ErrorMessage = "A Password is Required")]
-        [Display(Name = "Password")]
-        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "A password is required")]
+        [Display(Name = "password")]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$", ErrorMessage = "You have entered an invalid password. It must contain: 2 upper case letters, 3 lower case letters, 1 special character and 2 digits")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Your  Name is required")]
-
+        [Required(ErrorMessage = "Your  name is required")]
+        [Display(Name = "name")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Your Surname is required")]
+        [Required(ErrorMessage = "Your surname is required")]
+        [Display(Name = "surname")]
         [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
 
         public string LastName { get; set; }
@@ -120,20 +125,21 @@ namespace TRWLASystemMaster.Models.ViewModel
 
 
 
-        [Required(ErrorMessage = "Your Email address is required")]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Your email address is required")]
+        [Display(Name = "email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", ErrorMessage = "Please Enter Correct Email Address")]
         public string Email { get; set; }
 
 
-        [Required(ErrorMessage = "Your Date of Birth is required")]
+        [Required(ErrorMessage = "Your date of birth is required")]
         [DataType(DataType.Date)]
         public DateTime DoB { get; set; }
 
 
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone Number")]
-        [Required(ErrorMessage = "Phone Number Required!")]
+        [Display(Name = "phone number")]
+        [Required(ErrorMessage = "Your phone number is required")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Phonenumber { get; set; }
     }
@@ -145,21 +151,22 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Key]
         public int SYSUserID { get; set; }
         [StringLength(54, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 5)]
-        [Required(ErrorMessage = "The Login ID Field is Required")]
-        [Display(Name = "Login ID")]
+        [Required(ErrorMessage = "The username Field is Required")]
+        [Display(Name = "username")]
         public string LoginName { get; set; }
 
-        [Required(ErrorMessage = "The password Field is required")]
+        [Required(ErrorMessage = "The password field is required")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "password")]
         public string Password { get; set; }
     }
 
     public class ForgotPasswordViewModel
     {
-        [Required(ErrorMessage = "Your Email is Required")]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Your email address is required")]
+        [Display(Name = "email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$", ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }
     }
 

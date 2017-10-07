@@ -523,7 +523,7 @@ namespace TRWLASystemMaster.Controllers
                                   Date = s.GenEvent.Gen_Date,
                                   Start = s.GenEvent.Gen_StartTime,
                                   End = s.GenEvent.Gen_EndTime,
-                                  Residence = s.GenEvent.Venue.Venue_Name,
+                                  Residence = s.SYSUserProfile.Residence.Res_Name,
                                   StudentName = s.SYSUserProfile.FirstName,
                                   StudentSurname = s.SYSUserProfile.LastName,
                                   StudentNumber = s.SYSUserProfile.StudentNumber
