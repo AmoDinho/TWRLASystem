@@ -25,10 +25,6 @@
     </script>
 </head>
 <body>
-    @if (Session["User"] == null)
-    {
-        Html.RenderAction("ErrorPage", "TRWLASchedules");
-    }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -54,7 +50,7 @@
                     </li>
 
                     <li role="presentation" class="dropdown">
-                        <a href='@Url.Action("Content", "Contents")'>Content</a>
+                        <a href='@Url.Action("StudentContent", "TRWLASchedules")'>Content</a>
                     </li>
                     @*<li role="presentation" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>

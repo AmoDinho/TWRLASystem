@@ -32,24 +32,11 @@
         }
     </div>
 </div>
-<div class="form-inline" style="margin-bottom:20px;">
-    <div class="form-group">
-        <p>
-            @Html.Label("Filter by:")
-        </p>
-    </div>
-    <div class="form-group">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents", new { sortOrder = ViewBag.NameSortParm })'">Name</button>
-    </div>
-</div>
 
 <table class="table">
     <tr>
         <th>
             Name
-        </th>
-        <th>
-            Status
         </th>
         <th>
             Description
@@ -63,22 +50,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Content_Name)
             </td>
-            <td>
-                @if (item.Content_Status == 1)
-                {
-                    <p>Locked</p>
-                }
-                @if (item.Content_Status == 0)
-                {
-                    <p>Unlocked</p>
-                }
-
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Content_Description)
             </td>
             <td>
-                @Html.ActionLink("Details", "StudentContentDetails", new { id = item.ContentID })
+                <a href="@Url.Action("StudentContentDetails", new { id=item.ContentID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -87,6 +64,6 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'">Return</button>
+        <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
 </div>

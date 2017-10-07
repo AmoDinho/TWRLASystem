@@ -140,6 +140,8 @@ namespace TRWLASystemMaster.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 Lecture lecture = db.Lectures.Find(id);
+                ViewBag.date = lecture.Lecture_Date.ToString("dd MMMM yyyy");
+
                 if (lecture == null)
                 {
                     return HttpNotFound();

@@ -217,7 +217,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 catch (Exception)
                 {
-                    TempData["notice"] = "Your username or passworid is incorrect";
+                    TempData["notice"] = "Your username or password is incorrect";
                     return View();
                 }
 

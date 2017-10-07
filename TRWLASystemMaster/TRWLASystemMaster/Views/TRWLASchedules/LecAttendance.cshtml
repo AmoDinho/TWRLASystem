@@ -40,7 +40,7 @@
     </div>
 }
 
-<h4>Total number of students who have attended lectures: @ViewBag.Count</h4>
+<p>Total number of students who have attended lectures: <strong>@ViewBag.Count</strong></p>
     @using (Html.BeginForm("ExportToExcel2", "TRWLASchedules", FormMethod.Post))
     {
 

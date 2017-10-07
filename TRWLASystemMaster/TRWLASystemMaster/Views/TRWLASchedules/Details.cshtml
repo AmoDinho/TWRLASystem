@@ -53,7 +53,7 @@
 <div>
     @if (Model.FunctionID != null)
     {
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal" style="margin-top:-150px;">
             <dt>
                 @Html.Label("Name:")
             </dt>
@@ -128,7 +128,7 @@
     }
     @if (Model.GenID != null)
     {
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal" style="margin-top:-150px;">
             <dt>
                 @Html.Label("Name:")
             </dt>
@@ -232,7 +232,7 @@
     }
     @if (Model.LectureID != null)
     {
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal" style="margin-top:-150px;">
             <dt>
                 @Html.Label("Name:")
             </dt>
@@ -415,37 +415,37 @@
 
 
 </div>
-<div class="form-inline" style="float:right;">
+<div class="form-inline" style="float:right;margin-bottom:20px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px; ">
             @if (Model.FunctionID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "FunctionEvents", new { id = Model.FunctionID })'">Update</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "FunctionEvents", new { id = Model.FunctionID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
             @if (Model.LectureID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Lectures", new { id = Model.LectureID })'">Update</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Lectures", new { id = Model.LectureID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
             @if (Model.ComEngID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "ComEngEvents", new { id = Model.ComEngID })'">Update</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "ComEngEvents", new { id = Model.ComEngID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
             @if (Model.GenID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GenEvents", new { id = Model.GenID })'">Update</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GenEvents", new { id = Model.GenID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
         </div>
     </div>
     <div class="form-group">
         <div style="margin-right:5px;">
             <button class="btn btn-default" data-toggle="modal" data-target="#Delete" >
-                Cancel Event
+                <i class="fa fa-ban" aria-hidden="true"></i>
             </button>
         </div>
     </div>
     <div class="form-group">
         <div style="margin-right:5px;">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>
@@ -495,7 +495,7 @@
                         <button type="submit" value="RSVP" class="btn btn-default btn-simple form-group">Confirm RSVP</button>
                     </div>
                 }
-                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-info btn-simple" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>

@@ -126,6 +126,7 @@ namespace TRWLASystemMaster.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             GenEvent genEvent = db.GenEvents.Find(id);
+            ViewBag.date = genEvent.Gen_Date.ToString("dd MMMM yyyy");
             if (genEvent == null)
             {
                 return HttpNotFound();

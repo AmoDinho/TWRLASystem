@@ -77,21 +77,29 @@
 
 
 
-<div style="float:right; margin-bottom:20px; margin-top:10px;">
-            <div class="form-inline">
-                <div class="form-group">
-                    <button data-toggle="tooltip" title="Edit Venue" type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Venues", new { id = Model.VenueID })'">Update</button>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-default" data-toggle="modal" data-target="#Delete">
-                        Delete
-                    </button>
-                </div>
-                <div class="form-group">
-                    <button data-toggle="tooltip" title="Return to venues" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Venues")'">Return</button>
-                </div>
-                </div>
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div data-toggle="tooltip" title="Update">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Venues", new { id = Model.VenueID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" data-toggle="tooltip" title="Delete">
+            <button class="btn" data-toggle="modal" data-target="#Delete">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Content">
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Venues")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

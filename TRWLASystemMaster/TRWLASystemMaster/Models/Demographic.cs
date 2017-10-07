@@ -18,7 +18,7 @@ namespace TRWLASystemMaster.Models
         { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DoB
         { get; set; }
 

@@ -56,7 +56,7 @@ namespace TRWLASystemMaster.Controllers
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
             SYSUserProfile pro = db.SYSUserProfiles.Find(id);
-
+            ViewBag.date = pro.DoB.ToString("dd MMMM yyyy");
             //string loginName = User.Identity.Name;
             //UserManager UM = new UserManager();
             //UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
@@ -138,7 +138,7 @@ namespace TRWLASystemMaster.Controllers
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
             SYSUserProfile pro = db.SYSUserProfiles.Find(id);
-
+            ViewBag.date = pro.DoB.ToString("dd MMMM yyyy");
             //string loginName = User.Identity.Name;
             //UserManager UM = new UserManager();
             //UserProfileView UPV = UM.GetUserProfile(UM.GetUserID(loginName));
@@ -160,6 +160,7 @@ namespace TRWLASystemMaster.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            TempData["iddd"] = id;
             var userToUpdate = await db.SYSUserProfiles.FindAsync(id);
 
             if (userToUpdate == null)

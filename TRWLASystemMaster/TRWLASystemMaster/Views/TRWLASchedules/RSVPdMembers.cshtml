@@ -76,7 +76,7 @@
                 @Html.DisplayFor(modelItem => item.SYSUserProfile.Degree)
             </td>
             <td>
-                @Html.ActionLink("Log Attendance", "ConfirmAttendance", "TRWLASchedules", new { studid = item.SYSUserProfile.SYSUserProfileID, evid = item.rsvpID }, null)
+                <a href="@Url.Action("ConfirmAttendance", "TRWLASchedules", new { studid = item.SYSUserProfile.SYSUserProfileID, evid = item.rsvpID }, null)" data-toggle="tooltip" title="Add Student"><i class="fa fa-check" aria-hidden="true"></i></a>
             </td>
         </tr>
     }

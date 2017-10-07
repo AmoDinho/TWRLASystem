@@ -23,12 +23,12 @@ namespace TRWLASystemMaster.Models.ViewModel
 
 
         [Required(ErrorMessage = "A username is required")]
-        [Display(Name = "username")]
+        [Display(Name = "Username")]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string LoginName { get; set; }
 
         [Required(ErrorMessage = "A password is required")]
-        [Display(Name = "password")]
+        [Display(Name = "Password")]
         [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$", ErrorMessage = "You have entered an invalid password. It must contain: 2 upper case letters, 3 lower case letters, 1 special character and 2 digits")]
@@ -104,7 +104,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string LoginName { get; set; }
 
         [Required(ErrorMessage = "A password is required")]
-        [Display(Name = "password")]
+        [Display(Name = "Password")]
         [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$", ErrorMessage = "You have entered an invalid password. It must contain: 2 upper case letters, 3 lower case letters, 1 special character and 2 digits")]
@@ -157,7 +157,7 @@ namespace TRWLASystemMaster.Models.ViewModel
 
         [Required(ErrorMessage = "The password field is required")]
         [DataType(DataType.Password)]
-        [Display(Name = "password")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using System.ComponentModel.DataAnnotations;
 namespace TRWLASystemMaster.Models
 {
     public class GeneralEventList
@@ -12,19 +13,25 @@ namespace TRWLASystemMaster.Models
             get;
             set;
         }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+        [CheckDateRange]
         public DateTime Date
         {
             get;
             set;
         }
 
+        [Required(ErrorMessage = "A start time is required")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan Start
         {
             get;
             set;
         }
 
+        [Required(ErrorMessage = "A start time is required")]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan End
         {
             get;

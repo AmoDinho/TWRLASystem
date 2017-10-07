@@ -41,8 +41,8 @@
     </div>
 }
 
-<h4>Total number of students who have RSVPd to events: @ViewBag.Attend</h4>
-<h4>Total number of students who have RSVPd to but not attended the event: @ViewBag.Count</h4>
+<p>Total number of students who have RSVPd to events: <strong>@ViewBag.Attend</strong></p>
+<p>Total number of students who have RSVPd to but not attended the events: <strong>@ViewBag.Count</strong></p>
 
 @using (Html.BeginForm("ExportToExcel5", "TRWLASchedules", FormMethod.Post))
 {
@@ -65,18 +65,14 @@
                     Degree
                 </th>
                 <th>
-                    Graduate Status
-                </th>
-                <th>
                     Residence
                 </th>
                 <th>
-                    Student Type
+                    Name of Event
                 </th>
                 <th>
                     Date of Missed Event
                 </th>
-                <th></th>
             </tr>
 
             @foreach (var item in Model)
@@ -98,20 +94,21 @@
                         @Html.DisplayFor(modelItem => item.Degree)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Grad)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Res)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudType)
+                        @Html.DisplayFor(modelItem => item.FuncName)
+                        @Html.DisplayFor(modelItem => item.LecName)
+                        @Html.DisplayFor(modelItem => item.ComName)
+                        @Html.DisplayFor(modelItem => item.GenName)
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.FunctionDate)
                         @Html.DisplayFor(modelItem => item.LectureDate)
                         @Html.DisplayFor(modelItem => item.ComEngDate)
+                        @Html.DisplayFor(modelItem => item.GenDate)
                     </td>
-                    <td></td>
 
                 </tr>
             }

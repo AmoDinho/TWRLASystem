@@ -24,11 +24,13 @@ namespace TRWLASystemMaster.Models.DB
 
         public int SYSUserID { get; set; }
         public string LoginName { get; set; }
+        
 
-        [Required(ErrorMessage = "A Password is Required")]
-
-
-
+        [Required(ErrorMessage = "A password is required")]
+        [Display(Name = "Password")]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$", ErrorMessage = "You have entered an invalid password. It must contain: 2 upper case letters, 3 lower case letters, 1 special character and 2 digits")]
         public string PasswordEncryptedText { get; set; }
         public int RowCreatedSYSUserID { get; set; }
         public Nullable<System.DateTime> RowCreatedDateTime { get; set; }

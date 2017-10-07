@@ -12,22 +12,29 @@ namespace TRWLASystemMaster.Models
         { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> FunctionDate
         {
             get; set;
         }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> LectureDate
         {
             get; set;
         }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> ComEngDate
+        {
+            get; set;
+        }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> GenDate
         {
             get; set;
         }
@@ -39,7 +46,7 @@ namespace TRWLASystemMaster.Models
         { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DoB
         { get; set; }
 
@@ -52,7 +59,16 @@ namespace TRWLASystemMaster.Models
         public string Res
         { get; set; }
 
-        public string StudType
+        public string FuncName
+        { get; set; }
+
+        public string ComName
+        { get; set; }
+
+        public string LecName
+        { get; set; }
+
+        public string GenName
         { get; set; }
     }
 }

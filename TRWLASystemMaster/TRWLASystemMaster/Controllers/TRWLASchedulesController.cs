@@ -452,7 +452,7 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            ViewBag.Count = at.Count;
+            ViewBag.Count = at.GroupBy(p => p.StudentNp).Distinct().Count();
             return at;
         }
         public IList<AttendanceViewModel> GetFunctionAttendance(string namesearchString, string resname)
@@ -511,7 +511,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
-            ViewBag.Count = attendance.Count;
+            ViewBag.Count = attendance.GroupBy(p => p.StudentNp).Distinct().Count() ;
             return attendance;
         }
 
@@ -570,7 +570,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
-            ViewBag.Count = attendance.Count;
+            ViewBag.Count = attendance.GroupBy(p => p.StudentNumber).Distinct().Count();
             return attendance;
         }
 
@@ -680,7 +680,7 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            ViewBag.Count = attend.Count;
+            ViewBag.Count = attend.GroupBy(p => p.StudentNp).Distinct().Count();
 
             return attend;
         }
@@ -702,7 +702,12 @@ namespace TRWLASystemMaster.Controllers
                               Res = s.Residence.Res_Name,
                               FunctionDate = m.FunctionEvent.Function_Date,
                               LectureDate = m.Lecture.Lecture_Date,
-                              ComEngDate = m.ComEngEvent.ComEng_Date
+                              ComEngDate = m.ComEngEvent.ComEng_Date,
+                              GenDate = m.GenEvent.Gen_Date,
+                              FuncName = m.FunctionEvent.Function_Name,
+                              LecName = m.Lecture.Lecture_Name,
+                              ComName = m.ComEngEvent.ComEng_Name,
+                              GenName = m.GenEvent.Gen_Name
                           }).ToList();
 
             if (namesearchString == null)
@@ -750,7 +755,7 @@ namespace TRWLASystemMaster.Controllers
                          select n).Count(); ;
 
                 ViewBag.Attend = count;
-                ViewBag.Count = attend.Count;
+                ViewBag.Count = attend.GroupBy(p => p.StudNo).Distinct().Count();
 
             return attend;
         }
@@ -3336,13 +3341,15 @@ namespace TRWLASystemMaster.Controllers
                 int mytime = DateTime.Now.AddDays(-time).DayOfYear;
 
                 TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+
+
                 if (tRWLASchedule.FunctionID != null)
                 {
                     int m = tRWLASchedule.FunctionEvent.Function_Date.DayOfYear;
 
                     int diff = m - mytime;
 
-                    if (diff >= time)
+                    if (diff < time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
 
@@ -3355,7 +3362,7 @@ namespace TRWLASystemMaster.Controllers
                     int m = tRWLASchedule.Lecture.Lecture_Date.DayOfYear;
                     int diff = m - mytime;
 
-                    if (diff >= time)
+                    if (diff < time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
                         return View(tRWLASchedule);
@@ -3367,7 +3374,7 @@ namespace TRWLASystemMaster.Controllers
                     int m = tRWLASchedule.GenEvent.Gen_Date.DayOfYear;
                     int diff = m - mytime;
 
-                    if (diff >= time)
+                    if (diff < time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
                         return View(tRWLASchedule);
@@ -3378,7 +3385,7 @@ namespace TRWLASystemMaster.Controllers
                     int m = tRWLASchedule.ComEngEvent.ComEng_Date.DayOfYear;
                     int diff = m - mytime;
 
-                    if (diff >= time)
+                    if (diff < time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent +". You cannot delete this event";
                         return View(tRWLASchedule);
@@ -3400,27 +3407,32 @@ namespace TRWLASystemMaster.Controllers
 
                         FunctionEvent functions = db.FunctionEvents.Find(tRWLASchedule.FunctionID);
 
-                        db.TRWLASchedules.Remove(tRWLASchedule);
-
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Delete";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "FunctiionEvents";
+                        db.AuditLogs.Add(myAudit);
 
                         var email = from s in db.RSVP_Event
-                                    where s.FunctionID == tRWLASchedule.FunctionID
-                                    select s.SYSUserProfileID;
+                                    where s.FunctionID == functions.FunctionID
+                                    select s;
+
+                        db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
                             foreach (var s in email)
                             {
                                 try
                                 {
-                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-
-                                    FunctionEvent func = db.FunctionEvents.Find(Convert.ToInt32(tRWLASchedule.FunctionID));
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s.SYSUserProfileID);
+                                    
 
                                     MailMessage msg = new MailMessage();
                                     msg.From = new MailAddress("u15213626@tuks.co.za");
                                     msg.To.Add(recipient.Email);
-                                    msg.Subject = func.Function_Name + " Cancellation";
-                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + func.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                                    msg.Subject = functions.Function_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + functions.Function_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                                     SmtpClient smtp = new SmtpClient();
 
@@ -3461,25 +3473,30 @@ namespace TRWLASystemMaster.Controllers
                     {
 
                         Lecture lectures = db.Lectures.Find(Convert.ToInt32(tRWLASchedule.LectureID));
-                        db.TRWLASchedules.Remove(tRWLASchedule);
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Delete";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "Lectures";
+                        db.AuditLogs.Add(myAudit);
 
                         var email = from s in db.RSVP_Event
-                                    where s.LectureID == tRWLASchedule.LectureID
-                                    select s.SYSUserProfileID;
+                                    where s.LectureID == lectures.LectureID
+                                    select s;
+                        db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
                             foreach (var s in email)
                             {
                                 try
                                 {
-                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-                                    Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s.SYSUserProfileID);
 
                                     MailMessage msg = new MailMessage();
                                     msg.From = new MailAddress("u15213626@tuks.co.za");
                                     msg.To.Add(recipient.Email);
-                                    msg.Subject = lec.Lecture_Name + " Cancellation";
-                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + lec.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                                    msg.Subject = lectures.Lecture_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + lectures.Lecture_Name + " has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                                     SmtpClient smtp = new SmtpClient();
 
@@ -3509,8 +3526,9 @@ namespace TRWLASystemMaster.Controllers
 
                         if (lecture != null)
                         {
-                            db.RSVP_Event.Remove(lecture);
+                             db.RSVP_Event.Remove(lecture);
                             db.RSVPSchedules.Remove(rsvp);
+                           
                         }
 
 
@@ -3527,12 +3545,12 @@ namespace TRWLASystemMaster.Controllers
                         db.AuditLogs.Add(myAudit);
 
                         ComEngEvent comeng = db.ComEngEvents.Find(Convert.ToInt32(tRWLASchedule.ComEngID));
-                        db.TRWLASchedules.Remove(tRWLASchedule);
+                        
 
                         var email = from s in db.RSVP_Event
-                                    where s.ComEngID == tRWLASchedule.ComEngID
-                                    select s.SYSUserProfileID;
-
+                                    where s.ComEngID == comeng.ComEngID
+                                    select s;
+                        db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
 
@@ -3540,21 +3558,20 @@ namespace TRWLASystemMaster.Controllers
                             {
                                 try
                                 {
-                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-                                    ComEngEvent com = db.ComEngEvents.Find(tRWLASchedule.ComEngID);
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s.SYSUserProfileID);
 
                                     MailMessage msg = new MailMessage();
                                     msg.From = new MailAddress("u15213626@tuks.co.za");
                                     msg.To.Add(recipient.Email);
-                                    msg.Subject = com.ComEng_Name + " Cancellation";
-                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + com.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                                    msg.Subject = comeng.ComEng_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + comeng.ComEng_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                                     SmtpClient smtp = new SmtpClient();
 
                                     smtp.Host = "smtp.gmail.com";
                                     smtp.Port = 587;
                                     smtp.UseDefaultCredentials = false;
-                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                     smtp.EnableSsl = true;
                                     smtp.Send(msg);
 
@@ -3575,6 +3592,7 @@ namespace TRWLASystemMaster.Controllers
                         {
                             db.RSVP_Event.Remove(comu);
                             db.RSVPSchedules.Remove(rsvp);
+                            
                         }
                         //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
 
@@ -3590,12 +3608,12 @@ namespace TRWLASystemMaster.Controllers
                         db.AuditLogs.Add(myAudit);
 
                         GenEvent gen = db.GenEvents.Find(Convert.ToInt32(tRWLASchedule.GenID));
-                        db.TRWLASchedules.Remove(tRWLASchedule);
+                        
 
                         var email = from s in db.RSVP_Event
-                                    where s.GenID == tRWLASchedule.GenID
-                                    select s.SYSUserProfileID;
-
+                                    where s.GenID == gen.GenID
+                                    select s;
+                        db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
 
@@ -3603,14 +3621,13 @@ namespace TRWLASystemMaster.Controllers
                             {
                                 try
                                 {
-                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s);
-                                    GenEvent genev = db.GenEvents.Find(tRWLASchedule.GenID);
+                                    SYSUserProfile recipient = db.SYSUserProfiles.Find(s.SYSUserProfileID);
 
                                     MailMessage msg = new MailMessage();
                                     msg.From = new MailAddress("u15213626@tuks.co.za");
                                     msg.To.Add(recipient.Email);
-                                    msg.Subject = genev.Gen_Name + " Cancellation";
-                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + genev.Gen_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
+                                    msg.Subject = gen.Gen_Name + " Cancellation";
+                                    msg.Body = "Dear " + recipient.FirstName + "\n\n Please note that the event, " + gen.Gen_Name + ", has been cancelled until further notice. Thank you for your understanding in this matter. \n\n Regards, \n TRWLA Management.";
 
                                     SmtpClient smtp = new SmtpClient();
 
@@ -3641,8 +3658,9 @@ namespace TRWLASystemMaster.Controllers
 
                         if (comu != null)
                         {
-                            db.RSVPSchedules.Remove(rsvp);
                             db.RSVP_Event.Remove(comu);
+                            db.RSVPSchedules.Remove(rsvp);
+                            
                         }
                         //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
 

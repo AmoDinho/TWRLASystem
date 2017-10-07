@@ -40,6 +40,12 @@
     </div>
 }
 
+<div class="row">
+    <div>
+        <p>Number of Students: <strong>@ViewBag.StudentCount</strong></p>
+    </div>
+</div>
+
 
 @using (Html.BeginForm("ExportToExcel4", "TRWLASchedules", FormMethod.Post))
 {
@@ -103,11 +109,7 @@
 
         </table>
         </div>
-        <div class="row">
-            <div>
-                <h2>Number of Students: @ViewBag.StudentCount</h2>
-            </div>
-        </div>
+        
 
         <div class="form-inline" style="float:right; margin-bottom:20px;">
             <div class="form-actions no-color form-group" data-toggle="tooltip" title="Export to Excel">

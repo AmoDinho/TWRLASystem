@@ -19,8 +19,7 @@ namespace TRWLASystemMaster.Models.DB
         public int reviewID { get; set; }
 
         [Required(ErrorMessage = "A review is Required")]
-        [Display(Name = "review")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 20)]
+        [Display(Name = "Review")]
         public string Review { get; set; }
         public int RatingID { get; set; }
         public int LectureID { get; set; }

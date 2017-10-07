@@ -67,6 +67,8 @@ namespace TRWLASystemMaster.Controllers
                         comEngEvent.ComEngID = k;
 
 
+
+
                         myAudit.DateDone = DateTime.Now;
                         myAudit.TypeTran = "Create";
                         myAudit.SYSUserProfileID = (int)Session["User"];
@@ -122,6 +124,8 @@ namespace TRWLASystemMaster.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 ComEngEvent comEngEvent = db.ComEngEvents.Find(id);
+
+                ViewBag.date = comEngEvent.ComEng_Date.ToString("dd MMMM yyyy");
                 if (comEngEvent == null)
                 {
                     return HttpNotFound();

@@ -425,13 +425,12 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="RSVP" class="btn btn-default" />
+            <button data-toggle="tooltip" title="RSVP" type="submit" value="RSVP" class="btn"><i class="fa fa-check" aria-hidden="true"></i></button>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'">Return</button>
-
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>
