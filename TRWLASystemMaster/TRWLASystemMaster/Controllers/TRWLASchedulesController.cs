@@ -511,7 +511,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return newl.ToList();
             }
-            ViewBag.Count = at.Count;
+            ViewBag.Count = attendance.Count;
             return attendance;
         }
 
