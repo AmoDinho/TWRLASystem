@@ -31,7 +31,16 @@
 
         <p class="form-group">
             <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+
         </p>
+        <div class="form-group">
+
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'"><i class="fa fa-list-ol" aria-hidden="true"></i></button>
+
+            </div>
+        </div>
+
     </div>
 }
 
@@ -56,7 +65,7 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model.Where(p => p.Graduate == null && p.UserTypeID == 2))
+    @foreach (var item in Model.Where(p => p.UserTypeID == 2))
     {
         <tr>
 
@@ -86,14 +95,15 @@
 </table>
 
 
-
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'">Volunteer Types</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
 
             </div>
         </div>
     </div>
 </div>
+
+

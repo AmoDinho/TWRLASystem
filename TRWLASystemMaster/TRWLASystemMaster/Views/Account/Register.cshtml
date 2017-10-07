@@ -1,4 +1,5 @@
 ﻿@model TRWLASystemMaster.Models.ViewModel.UserSignUpView
+
 @{
 //ViewBag.Title = "Register";
 }
@@ -104,28 +105,16 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.Label("Take a Photo:", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <button type="button" class="btn" onclick="location.href='@Url.Action("CameraBooth", "Account")'"><i class="fa fa-camera" aria-hidden="true"></i></button>
-                </div>
-
-            </div>*@
         <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <div>
-                        <input type="submit" class="btn btn-default " @*data-toggle="modal" data-target="#myModal"*@ value="Register" />
+                        <button type="submit" value="Create" class="btn">Register</button>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

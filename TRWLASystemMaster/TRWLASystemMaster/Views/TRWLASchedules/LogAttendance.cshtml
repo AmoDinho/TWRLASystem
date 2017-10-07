@@ -83,7 +83,7 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
+                <a href="@Url.Action("RSVPdMembers", new { id=item.ScheduleID})" data-toggle="tooltip" title="RSVPs"><i class="fa fa-users" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -93,10 +93,10 @@
 
 <div class="form-inline" style="float:right;">
     <div class="form-group" style="margin-right:5px;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendancePast", "TRWLASchedules")'">Past Events</button>
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendancePast", "TRWLASchedules")'"><i class="fa fa-history" aria-hidden="true"></i></button>
     </div>
     <div class="form-group" style="margin-right:5px;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
     
 </div>

@@ -23,6 +23,7 @@ namespace TRWLASystemMaster.Controllers
 
             var ven = from v in db.Venues
                           select v;
+
            if (!String.IsNullOrEmpty(searchStringV))
           {
              ven = ven.Where(s => s.Venue_Name.Contains(searchStringV));
@@ -139,7 +140,7 @@ namespace TRWLASystemMaster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID,StreetNumber, StreetName, Suburb, City, Province, PostCode")] Venue venue)
+        public ActionResult Edit([Bind(Include = "VenueID,Venue_Name,AddressID,VenueTypeID,StreeNumber, StreetName, Suburb, City, Province, PostCode")] Venue venue)
         {
             try
             {

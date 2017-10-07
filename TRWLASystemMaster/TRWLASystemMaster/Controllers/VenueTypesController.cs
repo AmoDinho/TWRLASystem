@@ -152,7 +152,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         // POST: VenueTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

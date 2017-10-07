@@ -18,7 +18,7 @@
 {
     <div class="form-inline" style="margin-bottom:10px;">
         <p data-toggle="tooltip" title="Search by Name" class="form-group">
-            @Html.TextBox("searchString", "", new { placeholder = "Venue Type", @class = "form-control", style = "width:100%;" })
+            @Html.TextBox("searchStringVT", "", new { placeholder = "Venue Type", @class = "form-control", style = "width:100%;" })
         </p>
 
         <p class="form-group">
@@ -36,19 +36,14 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(p => p.VenueTypeID != 1))
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.VenueType_Description)
             </td>
             <td>
-                <a href="@Url.Action("Edit", new { id=item.VenueTypeID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-
-
-                <a href="@Url.Action("Delete", new { id=item.VenueTypeID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
-
-
+                <a href="@Url.Action("Details", "VenueTypes", new { id=item.VenueTypeID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -59,14 +54,14 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "VenueTypes")'">Add Venue Type</button>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "VenueTypes")'"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
             </div>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
-            <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+            <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

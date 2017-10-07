@@ -74,7 +74,7 @@
                 @Html.DisplayFor(modelItem => item.Residence.Res_Name)
             </td>
             <td>
-                @Html.ActionLink("Add New Student", "StudentDetails", new { id = item.SYSUserProfileID })
+                <a href="@Url.Action("StudentDetails", new { id=item.SYSUserProfileID})" data-toggle="tooltip" title="Add Student"><i class="fa fa-plus" aria-hidden="true"></i></a>
             </td>
         </tr>
 
@@ -84,5 +84,5 @@
 </table>
 
 <div class="form-group" style="margin-right:5px; float:right;">
-    <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+    <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
 </div>

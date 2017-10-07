@@ -23,8 +23,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.StudentTypeID)
 
@@ -49,7 +47,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div>
-                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">Return</button>
+                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
 
                 </div>
             </div>

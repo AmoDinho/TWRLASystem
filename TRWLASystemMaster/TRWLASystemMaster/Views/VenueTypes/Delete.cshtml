@@ -26,19 +26,22 @@
             </div>
         </div>
 
-        <div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10 ">
-                    <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                        Delete
-                    </button>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+                <div class="form-actions no-color form-group">
+                    <div class="col-md-offset-2 col-md-10 ">
+                        <button type="submit" value="Delete" class="btn">Delete</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 ">
+                        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">Return</button>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10 ">
-                    <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">Return</button>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>

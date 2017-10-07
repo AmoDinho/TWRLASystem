@@ -6,7 +6,7 @@
 }
 
 <div class="jumbotron">
-    <h1>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h1>
+    <h2>@Html.DisplayFor(model => model.GuestSpeaker_Name)'s Information</h2>
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
@@ -17,7 +17,7 @@
     <h4>@TempData["notice"]</h4>
 }
 
-<div>
+<div style="margin-top:-150px;">
     <dl class="dl-horizontal">
         <dt>
             Name:
@@ -57,15 +57,15 @@
 <div style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-inline">
         <div class="form-group">
-            <button data-toggle="tooltip" title="Edit Guest Speaker" type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Residences", new { id = Model.GuestSpeakerID })'">Update</button>
+            <button data-toggle="tooltip" title="Edit Guest Speaker" type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GuestSpeaker", new { id = Model.GuestSpeakerID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Delete">
-                Delete
+                <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </div>
         <div class="form-group">
-            <button data-toggle="tooltip" title="Return to Guest Speaker's'" type="button" class="btn" onclick="location.href='@Url.Action("Index", "GuestSpeaker")'">Return</button>
+            <button data-toggle="tooltip" title="Return to Guest Speaker's'" type="button" class="btn" onclick="location.href='@Url.Action("Index", "GuestSpeaker")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>
@@ -89,7 +89,7 @@
                             <button type="submit" value="Delete" class="btn">Delete</button>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn" data-dismiss="modal">Cancel</button>
                         </div>
                     }
 

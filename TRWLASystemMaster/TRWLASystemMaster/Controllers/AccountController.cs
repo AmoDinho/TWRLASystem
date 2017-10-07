@@ -112,7 +112,6 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult RegisterVol()
         {
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-
             ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
             return View();
@@ -134,15 +133,16 @@ namespace TRWLASystemMaster.Controllers
                         USV.UserTypeID = 2;
                         UM.AddUserAccount(USV);
 
+                        FormsAuthentication.SetAuthCookie(USV.FirstName, false);
                         //Adding hashing here
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
-
-
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-                        Session["User"] = myUserP.SYSUserProfileID;
 
-                        FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                        return RedirectToAction("SecurityQuestion", "TRWLASchedules");
+
+                        Session["User"] = myUserP.SYSUserProfileID;
+                        TempData["nUse"] = myUserP.SYSUserProfileID;
+
+                        return RedirectToAction("SecurityQuestion", "Account");
 
                     }
                     else

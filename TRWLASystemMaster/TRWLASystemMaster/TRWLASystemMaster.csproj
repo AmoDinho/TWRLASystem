@@ -744,6 +744,7 @@
     <Content Include="Views\SYSUserProfiles\Details_Students.cshtml" />
     <Content Include="Views\SYSUserProfiles\Details_Volunteers.cshtml" />
     <Content Include="Views\SYSUserProfiles\StudentsView.cshtml" />
+    <Content Include="Views\VenueTypes\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

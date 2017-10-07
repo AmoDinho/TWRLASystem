@@ -29,7 +29,16 @@
 
         <p class="form-group">
             <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+            
         </p>
+        <div class="form-group">
+
+            <div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'"><i class="fa fa-list-ol" aria-hidden="true"></i></button>
+
+            </div>
+        </div>
+
     </div>
 }
 
@@ -218,14 +227,3 @@
         </tr>
     }
 </table>
-
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">Student Types</button>
-
-            </div>
-        </div>
-    </div>
-</div>

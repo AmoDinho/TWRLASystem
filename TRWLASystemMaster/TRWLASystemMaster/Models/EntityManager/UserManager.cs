@@ -86,12 +86,12 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SU.LoginName = user.LoginName;
                 SU.PasswordEncryptedText = user.Password;
                 SU.RowCreatedSYSUserID = user.SYSUserID > 0 ? user.SYSUserID : 1;
-                SU.RowModifiedSYSUserID = user.SYSUserID > 0 ? user.SYSUserID : 1; ;
+                SU.RowModifiedSYSUserID = user.SYSUserID > 0 ? user.SYSUserID : 1; 
                 SU.RowCreatedDateTime = DateTime.Now;
                 SU.RowModifiedDateTime = DateTime.Now;
 
                 db.SYSUsers.Add(SU);
-                db.SaveChanges();
+                
 
                 SYSUserProfile SUP = new SYSUserProfile();
                 SUP.SYSUserID = SU.SYSUserID;
@@ -100,6 +100,11 @@ namespace TRWLASystemMaster.Models.EntityManager
                 SUP.UserTypeID = user.UserTypeID;
                 SUP.Email = user.Email;
                 SUP.DoB = user.DoB;
+                SUP.Degree = "Volunteer";
+                SUP.StudentNumber = "00000000";
+                SUP.YearOfStudy = DateTime.Now;
+                SUP.Graduate = "";
+                SUP.ResID = 1;
                // SUP.ResID = user.ResID;
            
 

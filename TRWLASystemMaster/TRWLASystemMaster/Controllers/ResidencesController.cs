@@ -177,7 +177,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         // POST: Residences/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -199,6 +199,11 @@ namespace TRWLASystemMaster.Controllers
 
                 catch (Exception)
                 {
+                    int res = (from s in db.SYSUserProfiles
+                               where s.ResID == id
+                               select s).Count();
+
+                    ViewBag.Res = Convert.ToString(res);
                     TempData["notice"] = "Please note: The residence has users assigned to it thus you are unable to delete it";
                     return View(residence);
                 }

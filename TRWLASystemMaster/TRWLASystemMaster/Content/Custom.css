@@ -56,7 +56,7 @@ h2
 {
     font-family: "Open Sans";
     color: black;
-    font-size: 200%; 
+    font-size: 150%; 
     z-index:3;
     position:relative;
     background-color:transparent;
@@ -421,7 +421,7 @@ h4
 
 .jumbotron {
   padding: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 150px;
   margin-top: 30px;
   font-size: 20px;
   font-weight: 200;
@@ -435,7 +435,7 @@ h4
 .jumbotron h1 {
     font-family: "Open Sans";
     font-weight: bold;
-    font-size: 55px;
+    font-size: 90px;
     line-height: 1;
     color: black;
     background-color: transparent;
@@ -444,11 +444,10 @@ h4
 .jumbotron h2 {
     font-family: "Open Sans";
     font-weight: bold;
-    font-size: 30px;
-    text-shadow: 1px 1px 0px rgba(26, 3, 21, 1);
+    font-size: 77px;
+    line-height: 1;
+    color: black;
     background-color: transparent;
-  line-height: 1;
-  color: black;
 }
 
 .footer{
@@ -927,7 +926,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
-  opacity:0.9;
+  opacity:0.8;
 }
 .quoteform:before
 {
@@ -962,7 +961,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
-  opacity:0.9;
+  opacity:0.8;
 }
 .quote1form:after {
  background: inherit;
@@ -986,7 +985,7 @@ box-shadow:         0px 2px 0px rgba(86, 8, 125, 1), 0 6px 5px rgba(0, 0, 0, 0.3
   color: #fff;
   position: relative;
   z-index: 1;
-  opacity:0.9;
+  opacity:0.8;
 }
 .quote2form:after {
  background: inherit;

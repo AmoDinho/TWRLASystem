@@ -40,13 +40,7 @@ namespace TRWLASystemMaster.Models.DB
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string GuestSpeaker_Phone { get; set; }
-
-        [Required(ErrorMessage = "An email address is required")]
-        [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$",
-        ErrorMessage = "Please Enter Correct Email Address")]
-        public string Email { get; set; }
+        
         [Required(ErrorMessage = "An email address is required")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
