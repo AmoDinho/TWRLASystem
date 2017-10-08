@@ -21,18 +21,26 @@ namespace TRWLASystemMaster.Controllers
             //var venues = db.Venues.Include(v => v.Address).Include(v => v.VenueType);
             //return View(venues.ToList());
 
-            var ven = from v in db.Venues
+            try
+            {
+                var ven = from v in db.Venues
                           select v;
 
-           if (!String.IsNullOrEmpty(searchStringV))
-          {
-             ven = ven.Where(s => s.Venue_Name.Contains(searchStringV));
+                if (!String.IsNullOrEmpty(searchStringV))
+                {
+                    ven = ven.Where(s => s.Venue_Name.Contains(searchStringV));
 
-          }
+                }
 
 
 
-            return View(ven.ToList());
+                return View(ven.ToList());
+
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
 
 
 
@@ -43,16 +51,23 @@ namespace TRWLASystemMaster.Controllers
         // GET: Venues/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Venue venue = db.Venues.Find(id);
+                if (venue == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(venue);
             }
-            Venue venue = db.Venues.Find(id);
-            if (venue == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(venue);
         }
 
         // GET: Venues/Create
@@ -113,26 +128,33 @@ namespace TRWLASystemMaster.Controllers
                 return View(venue);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
         // GET: Venues/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Venue venue = db.Venues.Find(id);
+                if (venue == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
+                return View(venue);
             }
-            Venue venue = db.Venues.Find(id);
-            if (venue == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            ViewBag.VenueTypeID = new SelectList(db.VenueTypes, "VenueTypeID", "VenueType_Description", venue.VenueTypeID);
-            return View(venue);
         }
 
         // POST: Venues/Edit/5
@@ -147,6 +169,14 @@ namespace TRWLASystemMaster.Controllers
                 if (ModelState.IsValid)
                 {
                     db.Entry(venue).State = EntityState.Modified;
+
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "Venues";
+                    db.AuditLogs.Add(myAudit);
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -154,9 +184,9 @@ namespace TRWLASystemMaster.Controllers
                 return View(venue);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
 
         }
@@ -164,16 +194,23 @@ namespace TRWLASystemMaster.Controllers
         // GET: Venues/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Venue venue = db.Venues.Find(id);
+                if (venue == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(venue);
             }
-            Venue venue = db.Venues.Find(id);
-            if (venue == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(venue);
         }
 
         // POST: Venues/Delete/5
@@ -186,13 +223,21 @@ namespace TRWLASystemMaster.Controllers
 
                 Venue venue = db.Venues.Find(id);
                 db.Venues.Remove(venue);
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "Delete";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "Venues";
+                db.AuditLogs.Add(myAudit);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 

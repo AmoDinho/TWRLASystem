@@ -17,8 +17,15 @@ namespace TRWLASystemMaster.Controllers
         // GET: GenEvents
         public ActionResult Index()
         {
-            var genEvents = db.GenEvents.Include(g => g.Content).Include(g => g.GuestSpeaker).Include(g => g.Residence).Include(g => g.Venue);
-            return View(genEvents.ToList());
+            try
+            {
+                var genEvents = db.GenEvents.Include(g => g.Content).Include(g => g.GuestSpeaker).Include(g => g.Residence).Include(g => g.Venue);
+                return View(genEvents.ToList());
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: GenEvents/Details/5
@@ -54,88 +61,102 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GenID,Gen_Name,Gen_Summary,Gen_Description,Gen_Date,Gen_StartTime,Gen_EndTime,Gene_Theme,VenueID,ResID,ContentID,GuestSpeakerID,Type, option1, optipn2, option3, option4")] GenEvent genEvent)
         {
-            if (ModelState.IsValid)
+            try
             {
-                AuditLog myAudit = new AuditLog();
-
-                int i = db.GenEvents.Count();
-
-                if (i != 0)
+                if (ModelState.IsValid)
                 {
-                    int max = db.GenEvents.Max(p => p.GenID);
-                    int k = max + 1;
+                    AuditLog myAudit = new AuditLog();
 
-                    genEvent.GenID = k;
+                    int i = db.GenEvents.Count();
 
-                    myAudit.DateDone = DateTime.Now;
-                    myAudit.TypeTran = "Create";
-                    myAudit.SYSUserProfileID = (int)Session["User"];
-                    myAudit.TableAff = "GenEvent";
-                    db.AuditLogs.Add(myAudit);
+                    if (i != 0)
+                    {
+                        int max = db.GenEvents.Max(p => p.GenID);
+                        int k = max + 1;
 
-                    genEvent.Type = 4;
-                    
+                        genEvent.GenID = k;
+
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "GenEvent";
+                        db.AuditLogs.Add(myAudit);
+
+                        genEvent.Type = 4;
 
 
 
-                    db.GenEvents.Add(genEvent);
 
-                    TRWLASchedule mySchedule = new TRWLASchedule();
-                    mySchedule.GenID = genEvent.GenID;
-                    db.TRWLASchedules.Add(mySchedule);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "TRWLASchedules");
+                        db.GenEvents.Add(genEvent);
+
+                        TRWLASchedule mySchedule = new TRWLASchedule();
+                        mySchedule.GenID = genEvent.GenID;
+                        db.TRWLASchedules.Add(mySchedule);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "TRWLASchedules");
+                    }
+                    else if (i == 0)
+                    {
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "GenEvent";
+                        db.AuditLogs.Add(myAudit);
+
+                        genEvent.Type = 4;
+
+
+                        db.GenEvents.Add(genEvent);
+
+                        TRWLASchedule mySchedule = new TRWLASchedule();
+                        mySchedule.GenID = genEvent.GenID;
+                        db.TRWLASchedules.Add(mySchedule);
+                        db.SaveChanges();
+
+
+                        return RedirectToAction("Index", "TRWLASchedules");
+
+
+                    }
                 }
-                else if (i == 0)
-                {
-                    myAudit.DateDone = DateTime.Now;
-                    myAudit.TypeTran = "Create";
-                    myAudit.SYSUserProfileID = (int)Session["User"];
-                    myAudit.TableAff = "GenEvent";
-                    db.AuditLogs.Add(myAudit);
 
-                    genEvent.Type = 4;
-                    
-
-                    db.GenEvents.Add(genEvent);
-
-                    TRWLASchedule mySchedule = new TRWLASchedule();
-                    mySchedule.GenID = genEvent.GenID;
-                    db.TRWLASchedules.Add(mySchedule);
-                    db.SaveChanges();
-
-                   
-                    return RedirectToAction("Index", "TRWLASchedules");
-
-
-                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
+                ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", genEvent.ResID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", genEvent.VenueID);
+                return View(genEvent);
             }
-
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
-            ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);
-            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", genEvent.ResID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", genEvent.VenueID);
-            return View(genEvent);
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: GenEvents/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GenEvent genEvent = db.GenEvents.Find(id);
+                ViewBag.date = genEvent.Gen_Date.ToString("dd MMMM yyyy");
+                if (genEvent == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
+                ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", genEvent.ResID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", genEvent.VenueID);
+                return View(genEvent);
             }
-            GenEvent genEvent = db.GenEvents.Find(id);
-            ViewBag.date = genEvent.Gen_Date.ToString("dd MMMM yyyy");
-            if (genEvent == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
-            ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);
-            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", genEvent.ResID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", genEvent.VenueID);
-            return View(genEvent);
         }
 
         // POST: GenEvents/Edit/5
@@ -145,32 +166,46 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GenID,Gen_Name,Gen_Summary,Gen_Description,Gen_Date,Gen_StartTime,Gen_EndTime,Gene_Theme,VenueID,ResID,ContentID,GuestSpeakerID,Type")] GenEvent genEvent)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(genEvent).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index", "TRWLASchedules");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(genEvent).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "TRWLASchedules");
+                }
+                ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
+                ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", genEvent.ResID);
+                ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", genEvent.VenueID);
+                return View(genEvent);
             }
-            ViewBag.ContentID = new SelectList(db.Contents, "ContentID", "Content_Name", genEvent.ContentID);
-            ViewBag.GuestSpeakerID = new SelectList(db.GuestSpeakers, "GuestSpeakerID", "GuestSpeaker_Name", genEvent.GuestSpeakerID);
-            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name", genEvent.ResID);
-            ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", genEvent.VenueID);
-            return View(genEvent);
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: GenEvents/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GenEvent genEvent = db.GenEvents.Find(id);
+                if (genEvent == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(genEvent);
             }
-            GenEvent genEvent = db.GenEvents.Find(id);
-            if (genEvent == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(genEvent);
         }
 
         // POST: GenEvents/Delete/5
@@ -178,10 +213,17 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            GenEvent genEvent = db.GenEvents.Find(id);
-            db.GenEvents.Remove(genEvent);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                GenEvent genEvent = db.GenEvents.Find(id);
+                db.GenEvents.Remove(genEvent);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         protected override void Dispose(bool disposing)

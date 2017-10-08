@@ -18,8 +18,14 @@ namespace TRWLASystemMaster.Controllers
         // GET: ComEngEvents
         public ActionResult Index()
         {
-            var comEngEvents = db.ComEngEvents.Include(c => c.Content).Include(c => c.Venue);
-            return View(comEngEvents.ToList());
+            try {
+                var comEngEvents = db.ComEngEvents.Include(c => c.Content).Include(c => c.Venue);
+                return View(comEngEvents.ToList());
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: ComEngEvents/Details/5
@@ -108,7 +114,7 @@ namespace TRWLASystemMaster.Controllers
                 ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
                 return View(comEngEvent);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -134,7 +140,7 @@ namespace TRWLASystemMaster.Controllers
                 ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
                 return View(comEngEvent);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -166,7 +172,7 @@ namespace TRWLASystemMaster.Controllers
                 ViewBag.VenueID = new SelectList(db.Venues, "VenueID", "Venue_Name", comEngEvent.VenueID);
                 return View(comEngEvent);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }

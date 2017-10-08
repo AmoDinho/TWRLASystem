@@ -18,34 +18,48 @@ namespace TRWLASystemMaster.Controllers
         // GET: StudentTypes
         public ActionResult Index(string searchStringST)
         {
-            //return View(db.StudentTypes.ToList());
-
-            var stutype = from st in db.StudentTypes
-                          select st;
-            if (!String.IsNullOrEmpty(searchStringST))
+            try
             {
-                stutype = stutype.Where(s => s.StudentTypeDescription.Contains(searchStringST));
+                //return View(db.StudentTypes.ToList());
 
+                var stutype = from st in db.StudentTypes
+                              select st;
+                if (!String.IsNullOrEmpty(searchStringST))
+                {
+                    stutype = stutype.Where(s => s.StudentTypeDescription.Contains(searchStringST));
+
+                }
+
+
+
+                return View(stutype.ToList());
             }
-
-
-
-            return View(stutype.ToList());
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: StudentTypes/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                StudentType studentType = db.StudentTypes.Find(id);
+                if (studentType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(studentType);
             }
-            StudentType studentType = db.StudentTypes.Find(id);
-            if (studentType == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(studentType);
         }
 
         // GET: StudentTypes/Create
@@ -63,10 +77,6 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-
-
-
-
                 if (ModelState.IsValid)
                 {
                     int i = db.StudentTypes.Count();
@@ -76,6 +86,13 @@ namespace TRWLASystemMaster.Controllers
 
                         int k = db.StudentTypes.Max(p => p.StudentTypeID);
                         int max = k + 1;
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "StudentTypes";
+                        db.AuditLogs.Add(myAudit);
 
 
                         studentType.StudentTypeID = max;
@@ -90,6 +107,15 @@ namespace TRWLASystemMaster.Controllers
 
                 else
                 {
+
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Create";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "StudentTypes";
+                    db.AuditLogs.Add(myAudit);
+
+
                     db.StudentTypes.Add(studentType);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -97,25 +123,32 @@ namespace TRWLASystemMaster.Controllers
                 return View(studentType);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
         // GET: StudentTypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                StudentType studentType = db.StudentTypes.Find(id);
+                if (studentType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(studentType);
             }
-            StudentType studentType = db.StudentTypes.Find(id);
-            if (studentType == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(studentType);
         }
 
         // POST: StudentTypes/Edit/5
@@ -129,21 +162,30 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "StudentTypes";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Entry(studentType).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 return View(studentType);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
         // GET: StudentTypes/Delete/5
         public ActionResult Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -165,13 +207,21 @@ namespace TRWLASystemMaster.Controllers
             {
                 StudentType studentType = db.StudentTypes.Find(id);
                 db.StudentTypes.Remove(studentType);
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "Delete";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "StudentTypes";
+                db.AuditLogs.Add(myAudit);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
 
         }

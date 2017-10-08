@@ -85,7 +85,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return View(content.ToList());
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -109,7 +109,7 @@ namespace TRWLASystemMaster.Controllers
                 TempData["Image"] = id;
                 return View(content);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -122,15 +122,12 @@ namespace TRWLASystemMaster.Controllers
                 Content contnents = db.Contents.Find(id);
 
                 return new FilePathResult(contnents.Content_Link, System.Net.Mime.MediaTypeNames.Application.Pdf);
-            
 
         }
 
         public FilePathResult Download2()
         {
-
-            return new FilePathResult("~\\Help Manual\\User Manual - PDF.pdf", System.Net.Mime.MediaTypeNames.Application.Pdf);
-
+                return new FilePathResult("~\\Help Manual\\User Manual - PDF.pdf", System.Net.Mime.MediaTypeNames.Application.Pdf);
 
         }
 
@@ -242,7 +239,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return View(content);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -267,7 +264,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(content);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -297,7 +294,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(content);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -319,7 +316,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(content);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -353,11 +350,11 @@ namespace TRWLASystemMaster.Controllers
                     return View(content);
                 }
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            }
+        }
 
         protected override void Dispose(bool disposing)
         {

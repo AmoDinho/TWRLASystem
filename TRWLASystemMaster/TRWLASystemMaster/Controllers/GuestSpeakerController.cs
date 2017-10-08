@@ -30,7 +30,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(guestSpeaker);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -75,7 +75,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return View(guestSpeaker.ToList());
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -137,7 +137,7 @@ namespace TRWLASystemMaster.Controllers
 
                 return View(guestSpeaker);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -159,7 +159,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(guestSpeaker);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -190,7 +190,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(guestSpeaker);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -212,7 +212,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(guestSpeaker);
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
@@ -239,7 +239,7 @@ namespace TRWLASystemMaster.Controllers
                     return View(guestSpeaker);
                 }
             }
-            catch
+            catch (Exception)
             {
                 return RedirectToAction("ErrorPage", "TRWLASchedules");
             }

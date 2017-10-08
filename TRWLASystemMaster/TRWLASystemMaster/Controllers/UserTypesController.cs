@@ -18,22 +18,36 @@ namespace TRWLASystemMaster.Controllers
         // GET: UserTypes
         public ActionResult Index()
         {
-            return View(db.UserTypes.ToList());
+            try {
+
+                return View(db.UserTypes.ToList());
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: UserTypes/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                UserType userType = db.UserTypes.Find(id);
+                if (userType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(userType);
             }
-            UserType userType = db.UserTypes.Find(id);
-            if (userType == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(userType);
         }
 
         // GET: UserTypes/Create
@@ -62,6 +76,13 @@ namespace TRWLASystemMaster.Controllers
                         int k = db.UserTypes.Max(p => p.UserTypeID);
                         int max = k + 1;
 
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "UserTypes";
+                        db.AuditLogs.Add(myAudit);
+
 
                         userType.UserTypeID = max;
 
@@ -82,25 +103,32 @@ namespace TRWLASystemMaster.Controllers
                 return View(userType);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
         // GET: UserTypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                UserType userType = db.UserTypes.Find(id);
+                if (userType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(userType);
             }
-            UserType userType = db.UserTypes.Find(id);
-            if (userType == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(userType);
         }
 
         // POST: UserTypes/Edit/5
@@ -120,9 +148,9 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View(userType);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
@@ -154,9 +182,9 @@ namespace TRWLASystemMaster.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 

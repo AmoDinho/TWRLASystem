@@ -47,10 +47,16 @@ namespace TRWLASystemMaster.Controllers
         //Register Student
         public ActionResult Register()
         {
-
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
-            return View();
+            try
+            {
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
 
@@ -89,9 +95,9 @@ namespace TRWLASystemMaster.Controllers
             }
 
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Account", "Register"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
@@ -111,10 +117,17 @@ namespace TRWLASystemMaster.Controllers
         //Register Volunteer
         public ActionResult RegisterVol()
         {
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
-            ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
+            try
+            {
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "Description", "AccessRight");
+                ViewBag.ResID = new SelectList(db.Residences, "ResID", "Res_Name");
 
-            return View();
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         //Register Volunteer
@@ -150,9 +163,9 @@ namespace TRWLASystemMaster.Controllers
                 }
                 return View();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("ErrorSign", new HandleErrorInfo(ex, "Account", "Register"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
 
         }
@@ -239,7 +252,14 @@ namespace TRWLASystemMaster.Controllers
 
         public ActionResult ForgotPassword()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
 
@@ -250,42 +270,51 @@ namespace TRWLASystemMaster.Controllers
         public ActionResult ForgotPassword(Models.ForgotPasswordViewModel model)
         {
 
-
-            var email = from c in db.SYSUserProfiles
-                        where c.Email == model.Email
-                        select c;
-
-            //TempData["user"] = email;
-            //  var user = db.SYSUserProfiles.Where(O => O.Email.Equals(email));
-
-            int count = email.Count();
-
-
-
-
-
-
-            if (email.ToList().Count == 1)
+            try
             {
-                SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
+                var email = from c in db.SYSUserProfiles
+                            where c.Email == model.Email
+                            select c;
+
+                //TempData["user"] = email;
+                //  var user = db.SYSUserProfiles.Where(O => O.Email.Equals(email));
+
+                int count = email.Count();
+
+                if (count != 0)
+                {
+                    if (email.ToList().Count == 1)
+                    {
+                        SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
 
 
-                int ID = myUser.SYSUserProfileID;
-                TempData["User"] = ID;
+                        int ID = myUser.SYSUserProfileID;
+                        TempData["User"] = ID;
+                        
+
+                        SYSUser ures = db.SYSUsers.FirstOrDefault(c => c.SYSUserID == myUser.SYSUserID);
+
+                        int ID2 = ures.SYSUserID;
+                        TempData["User2"] = ID2;
+
+                        return RedirectToAction("SecuirtyAnswer", "Account");
+                    }
 
 
-                SYSUser ures = db.SYSUsers.FirstOrDefault(c => c.SYSUserID == myUser.SYSUserID);
 
-                int ID2 = ures.SYSUserID;
-                TempData["User2"] = ID2;
-
-                return RedirectToAction("SecuirtyAnswer", "Account");
+                    return View(email);
+                }
+                else
+                {
+                    TempData["Email"] = "This email does not exist on the sysetm";
+                    return View();
+                }
+                // If we got this far, something failed, redisplay form
             }
-
-
-
-            return View(email);
-            // If we got this far, something failed, redisplay form
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
 
         }
 
@@ -293,31 +322,39 @@ namespace TRWLASystemMaster.Controllers
         [AllowAnonymous]
         public ActionResult SecuirtyAnswer()
         {
-            int user = Convert.ToInt32(TempData["User"]);
+            try
+            {
+                int user = Convert.ToInt32(TempData["User"]);
+                TempData["User"] = user;
 
-            //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
+                //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
 
-            SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
-
-
-            //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
-            //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
-
-            //var ans = from a in db.SecurityAnswers
-            //          where a.SYSUserProfileID = 
-            //SecurityAnswer secans = db.SecurityAnswers.Find(id);
-
-            //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
-
-            // secans.Security_Question = Convert.ToString(ques);
+                SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
 
 
-            TempData["Question"] = myanswer.SecurityQuestion.Question;
+                //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
+                //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
+
+                //var ans = from a in db.SecurityAnswers
+                //          where a.SYSUserProfileID = 
+                //SecurityAnswer secans = db.SecurityAnswers.Find(id);
+
+                //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
+                // secans.Security_Question = Convert.ToString(ques);
 
 
-            return View();
+                TempData["Question"] = myanswer.SecurityQuestion.Question;
 
-            //return View(ans);
+
+                return View();
+
+                //return View(ans);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
 
@@ -325,56 +362,95 @@ namespace TRWLASystemMaster.Controllers
         [HttpPost]
         public ActionResult SecuirtyAnswer(string answer)
         {
-            int user = Convert.ToInt32(TempData["User"]);
-
-            //var ans = from c in db.SecurityAnswers
-            //         where c.Security_Answer.Contains(answer) && c.SYSUserProfileID == user
-            //         select c;
-
-
-            //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
-
-
-
-            var s = from n in db.SecurityAnswers
-                    where n.Security_Answer == answer && n.SYSUserProfileID == user
-                    select n.Security_Answer;
-
-
-
-
-            if (s != null)
+            try
             {
+                int user = Convert.ToInt32(TempData["User"]);
+                TempData["User"] = user;
 
-                return RedirectToAction("Edit", "Account");
+                //var ans = from c in db.SecurityAnswers
+                //         where c.Security_Answer.Contains(answer) && c.SYSUserProfileID == user
+                //         select c;
 
 
+                //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
+
+
+
+                var s = from n in db.SecurityAnswers
+                        where n.SYSUserProfileID == user
+                        select n.Security_Answer;
+
+
+                int count = s.Count();
+
+                if (count != 0)
+                {
+
+                    SecurityAnswer ans = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
+
+                    if (ans.Security_Answer == answer)
+                    {
+                        return RedirectToAction("Edit", "Account");
+                    }
+                    else
+                    {
+                       
+                        return View();
+                    }
+                }
+                else
+                {
+                    //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
+
+                    SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
+
+
+                    //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
+                    //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
+
+                    //var ans = from a in db.SecurityAnswers
+                    //          where a.SYSUserProfileID = 
+                    //SecurityAnswer secans = db.SecurityAnswers.Find(id);
+
+                    //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
+
+                    // secans.Security_Question = Convert.ToString(ques);
+
+
+                    TempData["Question"] = myanswer.SecurityQuestion.Question;
+                    ViewBag.Error = "The answer to your question is wrong";
+                    return View();
+                }
             }
-            else
+            catch (Exception)
             {
-                ViewBag.Error = "The answer to your question is wrong";
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-
-
-            return View(s);
         }
 
 
 
         public ActionResult Edit(int? id)
         {
-            id = Convert.ToInt32(TempData["User2"]);
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                id = Convert.ToInt32(TempData["User2"]);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            SYSUser sYSUser = db.SYSUsers.Find(id);
-            if (sYSUser == null)
-            {
-                return HttpNotFound();
+                SYSUser sYSUser = db.SYSUsers.Find(id);
+                if (sYSUser == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sYSUser);
             }
-            return View(sYSUser);
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // POST: SYSUsers/Edit/5
@@ -384,60 +460,85 @@ namespace TRWLASystemMaster.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SYSUserID,LoginName,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sYSUser)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(sYSUser).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Login", "Account");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(sYSUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Login", "Account");
+                }
+                return View(sYSUser);
             }
-            return View(sYSUser);
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // [HttpPost]
         public ActionResult SecurityQuestion()
         {
-            ViewBag.QuestionID = new SelectList(db.SecurityQuestions, "QuestionID", "Question");
+            try
+            {
+                ViewBag.QuestionID = new SelectList(db.SecurityQuestions, "QuestionID", "Question");
 
 
-            return View();
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         [HttpPost]
         public ActionResult SecurityQuestion([Bind(Include = "SecurityAnswerID,QuestionID,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
         {
-
-            int ID = Convert.ToInt32(TempData["nUse"]);
-            if (ModelState.IsValid)
+            try
             {
-                seans.SYSUserProfileID = ID;
-                db.SecurityAnswers.Add(seans);
-                db.SaveChanges();
-
-                SYSUserProfile myuser = db.SYSUserProfiles.Find(ID);
-
-                if (myuser.UserTypeID == 1)
+                int ID = Convert.ToInt32(TempData["nUse"]);
+                if (ModelState.IsValid)
                 {
+                    seans.SYSUserProfileID = ID;
+                    db.SecurityAnswers.Add(seans);
+                    db.SaveChanges();
 
-                    return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                    SYSUserProfile myuser = db.SYSUserProfiles.Find(ID);
+
+                    if (myuser.UserTypeID == 1)
+                    {
+
+                        return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+                    }
+                    else if (myuser.UserTypeID == 2)
+                    {
+                        return RedirectToAction("index", "TRWLASchedules");
+                    }
+
+
                 }
-                else if (myuser.UserTypeID == 2)
-                {
-                    return RedirectToAction("index", "TRWLASchedules");
-                }
 
 
+                return View(seans);
             }
-
-
-            return View(seans);
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         //// GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string rt)
         {
-
-            return View();
+            try {
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         //// POST: /Account/ResetPassword
@@ -476,8 +577,15 @@ namespace TRWLASystemMaster.Controllers
         [Authorize]
         public ActionResult SignOut()
         {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                FormsAuthentication.SignOut();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
 

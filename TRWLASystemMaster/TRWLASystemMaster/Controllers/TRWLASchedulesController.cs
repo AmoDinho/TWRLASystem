@@ -3418,6 +3418,8 @@ namespace TRWLASystemMaster.Controllers
                                     where s.FunctionID == functions.FunctionID
                                     select s;
 
+
+                        db.FunctionEvents.Remove(functions);
                         db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
@@ -3449,6 +3451,7 @@ namespace TRWLASystemMaster.Controllers
                                 {
                                     ViewBag.Status = "Problem while sending email, Please check details.";
                                 }
+                                db.RSVP_Event.Remove(s);
                             }
 
 
@@ -3457,14 +3460,17 @@ namespace TRWLASystemMaster.Controllers
 
 
 
-                        db.FunctionEvents.Remove(functions);
 
-                        RSVP_Event function = db.RSVP_Event.FirstOrDefault(l => l.FunctionID == tRWLASchedule.FunctionID);
+                        var sched = from n in db.RSVPSchedules
+                                    where n.ScheduleID == tRWLASchedule.ScheduleID
+                                    select n;
 
-                        if (function != null)
+                        if (sched != null)
                         {
-                            db.RSVPSchedules.Remove(rsvp);
-                            db.RSVP_Event.Remove(function);
+                            foreach (var n in sched)
+                            {
+                                db.RSVPSchedules.Remove(n);
+                            }
                         }
 
 
@@ -3483,6 +3489,8 @@ namespace TRWLASystemMaster.Controllers
                         var email = from s in db.RSVP_Event
                                     where s.LectureID == lectures.LectureID
                                     select s;
+
+                        db.Lectures.Remove(lectures);
                         db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
@@ -3513,6 +3521,8 @@ namespace TRWLASystemMaster.Controllers
                                 {
                                     ViewBag.Status = "Problem while sending email, Please check details.";
                                 }
+
+                                db.RSVP_Event.Remove(s);
                             }
 
 
@@ -3521,14 +3531,16 @@ namespace TRWLASystemMaster.Controllers
 
 
 
-                        db.Lectures.Remove(lectures);
-                        RSVP_Event lecture = db.RSVP_Event.FirstOrDefault(l => l.LectureID == tRWLASchedule.LectureID);
+                        var sched = from n in db.RSVPSchedules
+                                    where n.ScheduleID == tRWLASchedule.ScheduleID
+                                    select n;
 
-                        if (lecture != null)
+                        if (sched != null)
                         {
-                             db.RSVP_Event.Remove(lecture);
-                            db.RSVPSchedules.Remove(rsvp);
-                           
+                            foreach (var n in sched)
+                            {
+                                db.RSVPSchedules.Remove(n);
+                            }
                         }
 
 
@@ -3550,6 +3562,8 @@ namespace TRWLASystemMaster.Controllers
                         var email = from s in db.RSVP_Event
                                     where s.ComEngID == comeng.ComEngID
                                     select s;
+
+                        db.ComEngEvents.Remove(comeng);
                         db.TRWLASchedules.Remove(tRWLASchedule);
                         if (email != null)
                         {
@@ -3581,18 +3595,22 @@ namespace TRWLASystemMaster.Controllers
                                 {
                                     ViewBag.Status = "Problem while sending email, Please check details.";
                                 }
+                                db.RSVP_Event.Remove(s);
                             }
 
 
                         }
 
-                        db.ComEngEvents.Remove(comeng);
-                        RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.ComEngID == tRWLASchedule.ComEngID);
-                        if (comu != null)
+                        var sched = from n in db.RSVPSchedules
+                                    where n.ScheduleID == tRWLASchedule.ScheduleID
+                                    select n;
+
+                        if (sched != null)
                         {
-                            db.RSVP_Event.Remove(comu);
-                            db.RSVPSchedules.Remove(rsvp);
-                            
+                            foreach (var n in sched)
+                            {
+                                db.RSVPSchedules.Remove(n);
+                            }
                         }
                         //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
 
@@ -3613,7 +3631,10 @@ namespace TRWLASystemMaster.Controllers
                         var email = from s in db.RSVP_Event
                                     where s.GenID == gen.GenID
                                     select s;
+
+                        db.GenEvents.Remove(gen);
                         db.TRWLASchedules.Remove(tRWLASchedule);
+
                         if (email != null)
                         {
 
@@ -3644,6 +3665,7 @@ namespace TRWLASystemMaster.Controllers
                                 {
                                     ViewBag.Status = "Problem while sending email, Please check details.";
                                 }
+                                db.RSVP_Event.Remove(s);
                             }
 
 
@@ -3653,15 +3675,20 @@ namespace TRWLASystemMaster.Controllers
 
                         }
 
-                        RSVP_Event comu = db.RSVP_Event.FirstOrDefault(l => l.GenID == tRWLASchedule.GenID);
-                        db.GenEvents.Remove(gen);
+                        var sched = from n in db.RSVPSchedules
+                                where n.ScheduleID == tRWLASchedule.ScheduleID
+                                select n;
 
-                        if (comu != null)
+                        if (sched != null)
                         {
-                            db.RSVP_Event.Remove(comu);
-                            db.RSVPSchedules.Remove(rsvp);
-                            
+                            foreach (var n in sched)
+                            {
+                                db.RSVPSchedules.Remove(n);
+                            }
                         }
+
+                        
+
                         //Note: Write code to send email to all students who have RSVP'd to the event so that they get the notification. 
 
 

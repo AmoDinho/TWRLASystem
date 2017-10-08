@@ -20,32 +20,47 @@ namespace TRWLASystemMaster.Controllers
         {
             //return View(db.VenueTypes.ToList());
 
-            var ventype = from vt in db.VenueTypes
-                          select vt;
-            if (!String.IsNullOrEmpty(searchStringVT))
+            try
             {
-                ventype = ventype.Where(s => s.VenueType_Description.Contains(searchStringVT));
 
+                var ventype = from vt in db.VenueTypes
+                              select vt;
+                if (!String.IsNullOrEmpty(searchStringVT))
+                {
+                    ventype = ventype.Where(s => s.VenueType_Description.Contains(searchStringVT));
+
+                }
+
+
+
+                return View(ventype.ToList());
             }
-
-
-
-            return View(ventype.ToList());
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
         }
 
         // GET: VenueTypes/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                VenueType venueType = db.VenueTypes.Find(id);
+                if (venueType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(venueType);
             }
-            VenueType venueType = db.VenueTypes.Find(id);
-            if (venueType == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(venueType);
         }
 
         // GET: VenueTypes/Create
@@ -73,6 +88,12 @@ namespace TRWLASystemMaster.Controllers
                         int k = db.VenueTypes.Max(p => p.VenueTypeID);
                         int max = k + 1;
 
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "VenueTypes";
+                        db.AuditLogs.Add(myAudit);
 
                         venueType.VenueTypeID = max;
 
@@ -83,6 +104,14 @@ namespace TRWLASystemMaster.Controllers
                     else
                     {
                         db.VenueTypes.Add(venueType);
+
+                        AuditLog myAudit = new AuditLog();
+                        myAudit.DateDone = DateTime.Now;
+                        myAudit.TypeTran = "Create";
+                        myAudit.SYSUserProfileID = (int)Session["User"];
+                        myAudit.TableAff = "VenueTypes";
+                        db.AuditLogs.Add(myAudit);
+
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -91,9 +120,9 @@ namespace TRWLASystemMaster.Controllers
                 return View(venueType);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
@@ -123,6 +152,13 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "VenueTypes";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Entry(venueType).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -130,9 +166,9 @@ namespace TRWLASystemMaster.Controllers
                 return View(venueType);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
@@ -158,15 +194,23 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
+
+                AuditLog myAudit = new AuditLog();
+                myAudit.DateDone = DateTime.Now;
+                myAudit.TypeTran = "Delete";
+                myAudit.SYSUserProfileID = (int)Session["User"];
+                myAudit.TableAff = "VenueTypes";
+                db.AuditLogs.Add(myAudit);
+
                 VenueType venueType = db.VenueTypes.Find(id);
                 db.VenueTypes.Remove(venueType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage","TRWLASchedules");
             }
         }
 

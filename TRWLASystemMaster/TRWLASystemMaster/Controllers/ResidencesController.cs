@@ -18,41 +18,54 @@ namespace TRWLASystemMaster.Controllers
         // GET: Residences
         public ActionResult Index(string searchString)
         {
-
-            var res = from s in db.Residences
-                      select s;
-
-            if (!String.IsNullOrEmpty(searchString))
+            try
             {
-                res = res.Where(s => s.Res_Name.Contains(searchString));
+                var res = from s in db.Residences
+                          select s;
 
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    res = res.Where(s => s.Res_Name.Contains(searchString));
+
+                }
+
+                return View(res.ToList());
             }
-
-            return View(res.ToList());
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
+            }
             //return View(db.Residences.ToList());
         }
 
         // GET: Residences/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Residence residence = db.Residences.Find(id);
+                if (residence == null)
+                {
+                    return HttpNotFound();
+
+                }
+
+
+                int res = (from s in db.SYSUserProfiles
+                           where s.ResID == id
+                           select s).Count();
+
+                ViewBag.Res = Convert.ToString(res);
+                return View(residence);
             }
-            Residence residence = db.Residences.Find(id);
-            if (residence == null)
+            catch (Exception)
             {
-                return HttpNotFound();
-
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-
-
-            int res = (from s in db.SYSUserProfiles
-                       where s.ResID == id
-                       select s).Count();
-
-            ViewBag.Res = Convert.ToString(res);
-            return View(residence);
         }
 
         // GET: Residences/Create
@@ -109,25 +122,32 @@ namespace TRWLASystemMaster.Controllers
                 return View(residence);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
         // GET: Residences/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Residence residence = db.Residences.Find(id);
+                if (residence == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(residence);
             }
-            Residence residence = db.Residences.Find(id);
-            if (residence == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(residence);
         }
 
         // POST: Residences/Edit/5
@@ -155,25 +175,32 @@ namespace TRWLASystemMaster.Controllers
                 return View(residence);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
         }
 
         // GET: Residences/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Residence residence = db.Residences.Find(id);
+                if (residence == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(residence);
             }
-            Residence residence = db.Residences.Find(id);
-            if (residence == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            return View(residence);
         }
 
         // POST: Residences/Delete/5
@@ -208,11 +235,11 @@ namespace TRWLASystemMaster.Controllers
                     return View(residence);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View("Error", new HandleErrorInfo(ex, "Residences", "Create"));
+                return RedirectToAction("ErrorPage", "TRWLASchedules");
             }
-            }
+        }
 
         protected override void Dispose(bool disposing)
         {

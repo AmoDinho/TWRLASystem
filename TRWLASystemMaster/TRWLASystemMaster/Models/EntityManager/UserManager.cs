@@ -22,7 +22,6 @@ namespace TRWLASystemMaster.Models.EntityManager
 
             using (TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8())
             {
-
                 SYSUser SU = new SYSUser();
                 SU.LoginName = user.LoginName;
                 SU.PasswordEncryptedText = user.Password;
