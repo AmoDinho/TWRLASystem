@@ -19,8 +19,6 @@ namespace TRWLASystemMaster.Models.DB
         public int MessID { get; set; }
         [Required(ErrorMessage = "You cannot send a blank notification")]
         [Display(Name = "Notification")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 20)]
-
         public string Msg { get; set; }
         public System.TimeSpan TimeMes { get; set; }
         public int NumberMess { get; set; }

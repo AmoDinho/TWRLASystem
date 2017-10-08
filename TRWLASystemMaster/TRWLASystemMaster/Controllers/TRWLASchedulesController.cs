@@ -1067,8 +1067,13 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                var rsvp = from s in db.RSVP_Event
+                var rsvp = from s in db.TRWLASchedules
                            select s;
+
+
+                DateTime mydate = DateTime.Now.AddDays(-1);
+
+                rsvp = rsvp.Where(p => p.Lecture.Lecture_Date >= mydate || p.FunctionEvent.Function_Date >= mydate || p.ComEngEvent.ComEng_Date >= mydate || p.GenEvent.Gen_Date >= mydate);
 
                 return View(rsvp.ToList());
             }
@@ -1082,19 +1087,19 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
-                RSVP_Event rsvp = db.RSVP_Event.Find(id);
+                TRWLASchedule sched = db.TRWLASchedules.Find(id);
 
-                if (rsvp.FunctionID != null)
+                if (sched.FunctionID != null)
                 {
-                    ViewBag.Name = rsvp.FunctionEvent.Function_Name;
+                    ViewBag.Name = sched.FunctionEvent.Function_Name;
                 }
-                else if (rsvp.LectureID != null)
+                else if (sched.LectureID != null)
                 {
-                    ViewBag.Name = rsvp.Lecture.Lecture_Name;
+                    ViewBag.Name = sched.Lecture.Lecture_Name;
                 }
-                else if (rsvp.ComEngID != null)
+                else if (sched.ComEngID != null)
                 {
-                    ViewBag.Name = rsvp.ComEngEvent.ComEng_Name;
+                    ViewBag.Name = sched.ComEngEvent.ComEng_Name;
                 }
 
                 return View();
@@ -1112,337 +1117,515 @@ namespace TRWLASystemMaster.Controllers
             try
             {
                 int i = db.EventMessages.Count();
-                RSVP_Event rsvp = db.RSVP_Event.Find(id);
-                var select = from s in db.RSVP_Event
-                             select s;
 
+                TRWLASchedule sched = db.TRWLASchedules.Find(id);
 
-                if (i == 0)
+                if (sched.FunctionID != null)
                 {
-                    if (rsvp.FunctionID != null)
+                    
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.FunctionID == sched.FunctionID);
+                    var choose = from s in db.RSVP_Event
+                                 where s.FunctionID == rsvp.FunctionID
+                                 select s;
+                    if (i == 0)
                     {
-                        foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
+
+                        if (rsvp != null)
+                    {
+
+                    int count = choose.ToList().Count();
+
+                        if (count != 0)
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            mess.TimeMes = DateTime.Now.TimeOfDay;
+
                             
-                            try
-                            {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
 
-                                SmtpClient smtp = new SmtpClient();
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
+                                        SmtpClient smtp = new SmtpClient();
 
-                                ModelState.Clear();
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
+
+                                        ModelState.Clear();
 
 
-                                ViewBag.Status = "Email Sent Successfully.";
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+
+                                    db.EventMessages.Add(mess);
+                                }
                             }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            
-                            db.EventMessages.Add(mess);
+                        }
+                        else
+                        {
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
                         }
                     }
-                    else if (rsvp.LectureID != null)
+                    else
                     {
-                        foreach (var s in select.Where(p => p.LectureID == rsvp.LectureID))
+                        int max = db.EventMessages.Max(p => p.MessID);
+                        int l = max + 1;
+
+
+
+                        mess.MessID = l;
+
+                        if (rsvp != null)
+
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
+                            int count = choose.ToList().Count();
+
+                            if (count != 0)
                             {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
 
-                                SmtpClient smtp = new SmtpClient();
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
+                                        SmtpClient smtp = new SmtpClient();
 
-                                ModelState.Clear();
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
+
+                                        ModelState.Clear();
 
 
-                                ViewBag.Status = "Email Sent Successfully.";
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+
+                                    db.EventMessages.Add(mess);
+                                }
                             }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
                         }
-                    }
-                    else if (rsvp.ComEngID != null)
-                    {
-                        foreach (var s in select.Where(p => p.ComEngID == rsvp.ComEngID))
+                        else
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
-                            {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
-
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
-
-                                SmtpClient smtp = new SmtpClient();
-
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
-
-                                ModelState.Clear();
-
-
-                                ViewBag.Status = "Email Sent Successfully.";
-                            }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
-                        }
-
-                    }
-                    else if (rsvp.GenID != null)
-                    {
-                        foreach (var s in select.Where(p => p.GenID == rsvp.GenID))
-                        {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
-                            {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
-
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.GenEvent.Gen_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
-
-                                SmtpClient smtp = new SmtpClient();
-
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
-
-                                ModelState.Clear();
-
-
-                                ViewBag.Status = "Email Sent Successfully.";
-                            }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
                         }
                     }
                 }
-                else
+                else if (sched.LectureID != null)
                 {
-                    int max = db.EventMessages.Max(p => p.MessID);
-                    int l = max + 1;
-
-                    mess.MessID = l;
-
-                    if (rsvp.FunctionID != null)
+                    if (i == 0)
                     {
-                        foreach (var s in select.Where(p => p.FunctionID == rsvp.FunctionID))
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.LectureID == sched.LectureID);
+                        var choose = from s in db.RSVP_Event
+                                     where s.LectureID == rsvp.LectureID
+                                     select s;
+
+                        if (rsvp != null)
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
+
+                            int count = choose.ToList().Count();
+
+                            if (count != 0)
                             {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.FunctionEvent.Function_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SmtpClient smtp = new SmtpClient();
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
+                                        SmtpClient smtp = new SmtpClient();
 
-                                ModelState.Clear();
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
+
+                                        ModelState.Clear();
 
 
-                                ViewBag.Status = "Email Sent Successfully.";
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+                                    db.EventMessages.Add(mess);
+                                }
                             }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
+                        }
+                        else
+                        {
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
                         }
                     }
-                    else if (rsvp.LectureID != null)
+                    else
                     {
-                        foreach (var s in select.Where(p => p.LectureID == rsvp.LectureID))
+                        int max = db.EventMessages.Max(p => p.MessID);
+                        int l = max + 1;
+
+                        mess.MessID = l;
+
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.LectureID == sched.LectureID);
+                        var choose = from s in db.RSVP_Event
+                                     where s.LectureID == rsvp.LectureID
+                                     select s;
+
+                        if (rsvp != null)
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
+
+                            int count = choose.ToList().Count();
+
+                            if (count != 0)
                             {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.Lecture.Lecture_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
-                                SmtpClient smtp = new SmtpClient();
+                                        SmtpClient smtp = new SmtpClient();
 
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
 
-                                ModelState.Clear();
+                                        ModelState.Clear();
 
 
-                                ViewBag.Status = "Email Sent Successfully.";
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+                                    db.EventMessages.Add(mess);
+                                }
                             }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
+                        }
+                        else
+                        {
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
                         }
                     }
-                    else if (rsvp.ComEngID != null)
+                }
+                else if (sched.GenID != null)
+                {
+                    if (i == 0)
                     {
-                        foreach (var s in select.Where(p => p.ComEngID == rsvp.ComEngID))
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.GenID == sched.GenID);
+                        var choose = from s in db.RSVP_Event
+                                     where s.GenID == rsvp.GenID
+                                     select s;
+
+                        if (rsvp != null)
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
+
+                            int count = choose.ToList().Count();
+
+                            if (count != 0)
                             {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.GenEvent.Gen_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
-                                SmtpClient smtp = new SmtpClient();
+                                        SmtpClient smtp = new SmtpClient();
 
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
 
-                                ModelState.Clear();
+                                        ModelState.Clear();
 
 
-                                ViewBag.Status = "Email Sent Successfully.";
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+                                    db.EventMessages.Add(mess);
+                                }
                             }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
+                        }
+                        else
+                        {
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
                         }
                     }
-                    else if (rsvp.GenID != null)
+                    else
                     {
-                        foreach (var s in select.Where(p => p.GenID == rsvp.GenID))
+                        int max = db.EventMessages.Max(p => p.MessID);
+                        int l = max + 1;
+
+                        mess.MessID = l;
+
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.GenID == sched.GenID);
+                        var choose = from s in db.RSVP_Event
+                                     where s.GenID == rsvp.GenID
+                                     select s;
+
+                        if (rsvp != null)
                         {
-                            mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
-                            try
+
+                            int count = choose.ToList().Count();
+
+                            if (count != 0)
                             {
-                                int k = Convert.ToInt32(rsvp.SYSUserProfileID);
-                                mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
-                                MailMessage msg = new MailMessage();
-                                msg.From = new MailAddress("u15213626@tuks.co.za");
-                                msg.To.Add(myStu.Email);
-                                msg.Subject = rsvp.GenEvent.Gen_Name + " Notification";
-                                msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        mess.TimeMes = DateTime.Now.TimeOfDay;
 
-                                SmtpClient smtp = new SmtpClient();
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.GenEvent.Gen_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
 
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
-                                smtp.EnableSsl = true;
-                                smtp.Send(msg);
+                                        SmtpClient smtp = new SmtpClient();
 
-                                ModelState.Clear();
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
+
+                                        ModelState.Clear();
 
 
-                                ViewBag.Status = "Email Sent Successfully.";
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+                                    db.EventMessages.Add(mess);
+                                }
                             }
-                            catch (Exception)
-                            {
-                                ViewBag.Status = "Problem while sending email, Please check details.";
-                            }
-                            db.EventMessages.Add(mess);
                         }
-
-
+                        else
+                        {
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
+                        }
                     }
+                }
+                else if (sched.ComEngID != null)
+                {
+                    if (i == 0)
+                    {
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.ComEngID == sched.ComEngID);
+
+                        var choose = from s in db.RSVP_Event
+                                     where s.ComEngID == rsvp.ComEngID
+                                     select s;
+
+                        if (rsvp != null)
+                        {
+
+                        int count = choose.ToList().Count();
+
+                            if (count != 0)
+                            {
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        mess.TimeMes = DateTime.Now.TimeOfDay;
+
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+
+                                        SmtpClient smtp = new SmtpClient();
+
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
+
+                                        ModelState.Clear();
+
+
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+                                    db.EventMessages.Add(mess);
+                                }
+                            }
+                            else
+                            {
+                                TempData["mess"] = 1;
+                                return RedirectToAction("Index", "TRWLASchedules");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int max = db.EventMessages.Max(p => p.MessID);
+                        int l = max + 1;
+
+                        mess.MessID = l;
+
+                        RSVP_Event rsvp = db.RSVP_Event.FirstOrDefault(p => p.ComEngID == sched.ComEngID);
+
+                        if (rsvp != null)
+                        {
+
+
+                            var choose = from s in db.RSVP_Event
+                                         where s.ComEngID == rsvp.ComEngID
+                                         select s;
+
+                            int count = choose.ToList().Count();
+
+                            if (count != 0)
+                            {
+                                foreach (var s in choose)
+                                {
+                                    mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
+                                    try
+                                    {
+                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        mess.TimeMes = DateTime.Now.TimeOfDay;
+
+                                        SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
+                                        MailMessage msg = new MailMessage();
+                                        msg.From = new MailAddress("u15213626@tuks.co.za");
+                                        msg.To.Add(myStu.Email);
+                                        msg.Subject = rsvp.ComEngEvent.ComEng_Name + " Notification";
+                                        msg.Body = "Dear " + myStu.FirstName + "\n\n " + mess.Msg;
+
+                                        SmtpClient smtp = new SmtpClient();
+
+                                        smtp.Host = "smtp.gmail.com";
+                                        smtp.Port = 587;
+                                        smtp.UseDefaultCredentials = false;
+                                        smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
+                                        smtp.EnableSsl = true;
+                                        smtp.Send(msg);
+
+                                        ModelState.Clear();
+
+
+                                        ViewBag.Status = "Email Sent Successfully.";
+                                    }
+                                    catch (Exception)
+                                    {
+                                        ViewBag.Status = "Problem while sending email, Please check details.";
+                                    }
+                                    db.EventMessages.Add(mess);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            TempData["mess"] = 1;
+                            return RedirectToAction("Index", "TRWLASchedules");
+                        }
+                    }
+                }
+            
                     AuditLog myAudit = new AuditLog();
                     myAudit.DateDone = DateTime.Now;
                     myAudit.TypeTran = "Create";
                     myAudit.SYSUserProfileID = (int)Session["User"];
                     myAudit.TableAff = "EventMessages";
                     db.AuditLogs.Add(myAudit);
-                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index", "TRWLASchedules");
             }
@@ -1724,7 +1907,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -1733,6 +1916,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -1771,7 +1962,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -1779,6 +1970,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.LecProg = myProgress.LecProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -1814,7 +2013,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -1825,6 +2024,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.ComProg = myProgress.ComProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -1860,7 +2067,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -1870,6 +2077,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.GenProg = myProgress.GenProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -1917,7 +2132,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -1926,6 +2141,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.FuncProg = myProgress.FuncProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -1961,7 +2184,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -1971,6 +2194,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.LecProg = myProgress.LecProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -2005,7 +2236,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -2015,6 +2246,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.ComProg = myProgress.ComProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -2049,7 +2288,7 @@ namespace TRWLASystemMaster.Controllers
 
                             RSVPSchedule mysched = new RSVPSchedule();
                             mysched.rsvpID = @event.rsvpID;
-                            mysched.ScheduleID = id;
+                            mysched.ScheduleID = stude;
                             mysched.SYSUserProfileID = stud.SYSUserProfileID;
                             db.RSVPSchedules.Add(mysched);
                             db.RSVP_Event.Add(@event);
@@ -2059,6 +2298,14 @@ namespace TRWLASystemMaster.Controllers
                             if (myProgress != null)
                             {
                                 myProgress.GenProg = myProgress.GenProg + 1;
+
+                                MasterData master = db.MasterDatas.Find(9);
+
+                                if (myProgress.LecProg == master.LecAttend && myProgress.FuncProg == master.FuncAttend && myProgress.GenProg == master.GenAttend && myProgress.ComProg == master.ComAttend)
+                                {
+                                    SYSUserProfile myuser = db.SYSUserProfiles.Find(FindUser);
+                                    myuser.Graduate = "Graduate";
+                                }
                             }
                             else
                             {
@@ -2093,8 +2340,7 @@ namespace TRWLASystemMaster.Controllers
                     db.AuditLogs.Add(myAudit);
 
                     db.SaveChanges();
-
-                    TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.FirstName;
+                    
                 }
                 catch (Exception)
                 {
@@ -2612,8 +2858,7 @@ namespace TRWLASystemMaster.Controllers
                     db.AuditLogs.Add(myAudit);
 
                     db.SaveChanges();
-
-                    TempData["Attend"] = "You have successfully logged the event attendance of: " + stud.FirstName;
+                    
                 }
                 catch (Exception)
                 {
@@ -2656,7 +2901,7 @@ namespace TRWLASystemMaster.Controllers
                 if (ModelState.IsValid)
                 {
                     int i = db.LectureReviews.Count();
-                    TRWLASchedule tRWLASchedule = db.TRWLASchedules.Find(id);
+                    RSVP_Event tRWLASchedule = db.RSVP_Event.Find(id);
                     Lecture lec = db.Lectures.Find(tRWLASchedule.LectureID);
 
                     if (i == 0)

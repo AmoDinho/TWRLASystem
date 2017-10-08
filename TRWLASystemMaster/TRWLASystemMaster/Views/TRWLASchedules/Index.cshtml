@@ -40,12 +40,24 @@
     <h4>@TempData["Attended"]</h4>
 }
 
+@if (TempData["mess"] != null)
+{
+
+}
 
 
 <script>
     function doNavigate() {
         window.location.href = document.getElementById("UrlList").value;
     };
+
+    $(document).ready(function() {
+        var success = @(TempData["mess"] != null).ToString().ToLower());
+
+        if (success == true) {
+            alert("No one has RSVPd to that event an you cannot send a message.");
+        }
+    });
 </script>
 
 
