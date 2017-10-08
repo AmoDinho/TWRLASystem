@@ -38,7 +38,7 @@
                     Are you sure that you want to create this venue?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color form-group " data-toggle="tooltip" title="Upload">
+                    <div class="form-actions no-color form-group " data-toggle="tooltip" title="Create Venue Type">
                         <button type="submit" value="Create" class="btn">Create</button>
                     </div>
                     <div class="form-group" data-toggle="tooltip" title="Make Changes">
@@ -52,15 +52,15 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Venue Type">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
                 Save
             </button>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-toggle="tooltip" title="Return to Venue Types">
         <div class="col-md-offset-2 col-md-10 ">
-            <button data-toggle="tooltip" title="Return to Contents" type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <button  type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

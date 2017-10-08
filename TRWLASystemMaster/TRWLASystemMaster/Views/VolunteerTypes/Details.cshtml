@@ -33,15 +33,15 @@
 
 <div style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-inline">
-        <div class="form-group">
-            <button data-toggle="tooltip" title="Edit Venue" type="button" class="btn" onclick="location.href='@Url.Action("Edit", "VolunteerTypes", new { id = Model.VolunteerTypeID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        <div class="form-group" data-toggle="tooltip" title="Update">
+            <button  type="button" class="btn" onclick="location.href='@Url.Action("Edit", "VolunteerTypes", new { id = Model.VolunteerTypeID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
         </div>
-        <div class="form-group">
+        <div class="form-group" data-toggle="tooltip" title="Delete">
             <button class="btn btn-default" data-toggle="modal" data-target="#Delete">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </div>
-        <div class="form-group">
+        <div class="form-group" data-toggle="tooltip" title="Return to Volunteer Types">
             <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
@@ -61,11 +61,11 @@
                 @using (Html.BeginForm())
             {
                     @Html.AntiForgeryToken()
-                    <div class="form-actions no-color form-group">
-                        <button data-toggle="tooltip" title="Confirm Delete" type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete</button>
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Delete">
+                        <button  type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete</button>
                     </div>
-                    <div class="form-group">
-                        <button data-toggle="tooltip" title="Make ammendments" type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button  type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
                     </div>
                 }
 

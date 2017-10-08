@@ -16,8 +16,11 @@
     <h4> Please select whether you are signing up as Student or Volunteer.</h4>
 </div>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("VerifyCode", "Select")'" >Register as a Volunteer</button>
+<div data-toggle="tooltip" title="Become a volunteer"></div>
+<button  type="button" class="btn" onclick="location.href='@Url.Action("VerifyCode", "Select")'" >Register as a Volunteer</button>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Register as a Student</button>
+<div data-toggle="tooltip" title="Become a student">
+    <button type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Register as a Student</button>
+</div>
 
 @*onclick="location.href='@Url.Action("RegisterVol", "Account")'"*@

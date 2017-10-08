@@ -307,30 +307,7 @@
             </dd>
         </dl>
 
-        <h4>Student Reviews on @Html.DisplayFor(model => model.Lecture.Lecture_Name)</h4>
         
-                using (Html.BeginForm())
-                {
-                    var review = from s in Model.Lecture.LectureReviews
-                                 select s;
-                    <table class="table" style="overflow-y:auto; max-height:500px;">
-                        <tr>
-                            <th>Name of Student</th>
-                            <th>Student Review</th>
-                            <th>Rating</th>
-                        </tr>
-
-                        @foreach (var rev in review)
-                        {
-                        <tr>
-                            <td>@rev.SYSUserProfile.FirstName
-                            </td>
-                            <td>@rev.Review</td>
-                            <td>@rev.RatingType.Rating</td>
-                        </tr>
-                        }
-                    </table>
-                }
 
     }
 
@@ -420,31 +397,31 @@
         <div style="margin-right:5px; ">
             @if (Model.FunctionID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "FunctionEvents", new { id = Model.FunctionID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button data-toggle="tooltip" title="Update" type="button" class="btn" onclick="location.href='@Url.Action("Edit", "FunctionEvents", new { id = Model.FunctionID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
             @if (Model.LectureID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Lectures", new { id = Model.LectureID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button data-toggle="tooltip" title="Update"  type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Lectures", new { id = Model.LectureID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
             @if (Model.ComEngID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "ComEngEvents", new { id = Model.ComEngID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button data-toggle="tooltip" title="Update"  type="button" class="btn" onclick="location.href='@Url.Action("Edit", "ComEngEvents", new { id = Model.ComEngID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
             @if (Model.GenID != null)
             {
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GenEvents", new { id = Model.GenID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button data-toggle="tooltip" title="Update"  type="button" class="btn" onclick="location.href='@Url.Action("Edit", "GenEvents", new { id = Model.GenID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             }
         </div>
     </div>
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Delete" >
             <button class="btn btn-default" data-toggle="modal" data-target="#Delete" >
                 <i class="fa fa-ban" aria-hidden="true"></i>
             </button>
         </div>
     </div>
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Return to Main Menu" >
                 <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
@@ -464,10 +441,10 @@
                 @using (Html.BeginForm())
             {
                     @Html.AntiForgeryToken()
-                    <div class="form-actions no-color form-group">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Delete Event" >
                         <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Cancel Event</button>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-toggle="tooltip" title="Update Cancel Deletion" >
                         <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
 
                     </div>

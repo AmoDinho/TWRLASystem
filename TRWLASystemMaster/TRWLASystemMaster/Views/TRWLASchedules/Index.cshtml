@@ -91,14 +91,14 @@
                 <h2 style="z-index:100; position:relative; background-color:transparent; margin-top:-50px; ">Manage Events</h2>
                 <div class="form-inline">
                     <div class="form-group">
-                        <div>
-                            <button data-toggle="tooltip" title="Create Event" id="button1" type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <div data-toggle="tooltip" title="Create Event">
+                            <button  id="button1" type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <div class="form-group">
                         <div>
-                            <div>
-                                <button data-toggle="tooltip" title="Log Attendance" type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'"><i class="fa fa-check" aria-hidden="true"></i></button>
+                            <div data-toggle="tooltip" title="Log Attendance">
+                                <button  type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'"><i class="fa fa-check" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -217,18 +217,8 @@
 
 </div>
 
-<iframe src='@Url.Action("EventType", "TRWLASchedules")' style="width:100%; height:750px; overflow-y:auto;" id="iframe1" name="iframe1" hidden></iframe>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
 }
-
-<script>
-    $document(function () {
-        $('#button1').on('click', function () {
-            $('#iframe1').toggle();
-        });
-    });
-</script>

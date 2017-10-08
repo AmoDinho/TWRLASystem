@@ -419,11 +419,11 @@
 
 </div>
 <div class="form-inline" style="float:right; margin-bottom:20px;">
-    <div class="form-group">
+    <div class="form-group" data-toggle="tooltip" title="RSVP">
         <button type="button" class="btn" onclick="location.href='@Url.Action("RSVP", "TRWLASchedules", new { id = Model.ScheduleID })'"><i class="fa fa-check" aria-hidden="true"></i></button>
     </div>
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Return to Main Menu">
             <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>

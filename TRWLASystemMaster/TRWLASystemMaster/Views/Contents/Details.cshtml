@@ -61,7 +61,6 @@
 
     </dl>
 
-
 </div>
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
@@ -101,10 +100,10 @@
                 @using (Html.BeginForm())
             {
                     @Html.AntiForgeryToken()
-                    <div class="form-actions no-color form-group ">
+                    <div class="form-actions no-color form-group " data-toggle="tooltip" title="Delete">
                         <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete Content</button>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-toggle="tooltip" title="Cancel Deletion">
                         <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Cancel</button>
                     </div>
                 }

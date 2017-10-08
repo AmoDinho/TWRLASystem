@@ -59,7 +59,7 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10 ">
-            <div>
+            <div data-toggle="tooltip" title="Return to Event Details">
                 <button type="button" class="btn" onclick="location.href='@Url.Action("StudentEventDetails", "TRWLASchedules", new { id = Convert.ToInt32(@TempData["EventIdNeeded"]) })'">Return</button>
             </div>
         </div>

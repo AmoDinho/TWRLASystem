@@ -118,10 +118,10 @@
                         Are you sure that you want to update this event?
                     </div>
                     <div class="modal-footer form-inline">
-                        <div class="form-actions no-color form-group">
+                        <div class="form-actions no-color form-group" data-toggle="tooltip" title="Update Event">
                             <button type="submit" value="Create" class="btn">Confirm</button>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-toggle="tooltip" title="Make Changes">
                             <button type="button" class="btn" data-dismiss="modal">Edit</button>
                         </div>
                     </div>
@@ -130,15 +130,17 @@
         </div>
 }
 
-<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Changes">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                Update Event
+                Save
             </button>
         </div>
     </div>
     <div class="form-group">
-        <button data-toggle="tooltip" title="Return to the Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Main Menu">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+        </div>
     </div>
 </div>

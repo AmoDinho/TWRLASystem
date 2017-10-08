@@ -19,73 +19,81 @@
             This is a graphical report depicting the percentage of students who RSVP to each respective event type versus the amount of students
             who actually attend the event.
         </p>
-        <button data-toggle="tooltip" title="View Class Attendance Report" style="float:right; margin:auto;font-weight:bold; " type="button" class="btn" onclick="location.href='@Url.Action("ClassAttendance", "TRWLASchedules")'"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+        <div data-toggle="tooltip" title="View Class Attendance Report">
+            <button style="float:right; margin:auto;font-weight:bold; " type="button" class="btn" onclick="location.href='@Url.Action("ClassAttendance", "TRWLASchedules")'"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+        </div>
+        </div>
+
+        <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
+
+            <h2 style="z-index:100; position:relative; background-color:transparent;">No Attendance Report</h2>
+            <p style="z-index:100; position:relative; background-color:transparent;">
+                <strong>About:</strong>
+                A tabular report depicting the all of the students who RSVP to an event but dont attend them!
+            </p>
+            <div data-toggle="tooltip" title="View No Attendance Report">
+                <button style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("NoAttend", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+        <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
+            <h2>Function Attendance</h2>
+            <p>
+                <strong>About:</strong>
+                A tabular report depicting the all of the students who attend the Function Type event.
+            </p>
+            <div data-toggle="tooltip" title="View Function Attendance Report">
+                <button style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("FunctionAttendance", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+        <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
+
+            <h2 style="z-index:100; position:relative; background-color:transparent;">Lecture Attendance Report</h2>
+            <p style="z-index:100; position:relative; background-color:transparent;">
+                <strong>About:</strong>
+                A tabular report depicting the all of the students who attend the Lecture Type event.
+            </p>
+            <div data-toggle="tooltip" title="View Lecture Attendance Report">
+                <button style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("LecAttendance", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+        <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
+            <h2 style="z-index:100; position:relative; background-color:transparent;">Community Engagement Attendance Report</h2>
+            <p style="z-index:100; position:relative; background-color:transparent;">
+                <strong>About:</strong>
+                A tabular report depicting the all of the students who attend the Community Enegagement Type event.
+            </p>
+            <div data-toggle="tooltip" title="View Community Engagement Attendance Report">
+                <button style="float:right;margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("ComAttendance", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+        <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
+            <h2 style="z-index:100; position:relative; background-color:transparent;">General Event Attendance Report</h2>
+            <p style="z-index:100; position:relative; background-color:transparent;">
+                <strong>About:</strong>
+                A tabular report depicting the all of the students who attend the General Event Type event.
+            </p>
+            <div data-toggle="tooltip" title="View General Event Attendance Report">
+                <button style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("GeneralEventReport", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+        <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
+            <h2 style="z-index:100; position:relative; background-color:transparent;">Student Demographic Report</h2>
+            <p style="z-index:100; position:relative; background-color:transparent;">
+                <strong>About:</strong>
+                A tabular report depicting the all of the students currently at TRWLA aiming to achieve certification. Learn about who is a part of <strong>your</strong> academy.
+            </p>
+            <div data-toggle="tooltip" title="View Student Demographic Report">
+                <button style="float:right;  margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("StudentDemographic", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
+            </div>
+        </div>
     </div>
 
-    <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
 
-        <h2 style="z-index:100; position:relative; background-color:transparent;">No Attendance Report</h2>
-        <p style="z-index:100; position:relative; background-color:transparent;">
-            <strong>About:</strong>
-            A tabular report depicting the all of the students who RSVP to an event but dont attend them!
-        </p>
-        <button data-toggle="tooltip" title="View No Attendance Report" style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("NoAttend", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
-
+    <div style="float:right; margin-bottom:20px; margin-top:50px;" data-toggle="tooltip" title="Return to the Main Menu">
+        <button type="button" style="float:right;" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
-
-    <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
-        <h2>Function Attendance</h2>
-        <p>
-            <strong>About:</strong>
-            A tabular report depicting the all of the students who attend the Function Type event.
-        </p>
-        <button data-toggle="tooltip" title="View Function Attendance Report" style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("FunctionAttendance", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
-
-    </div>
-
-    <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
-
-        <h2 style="z-index:100; position:relative; background-color:transparent;">Lecture Attendance Report</h2>
-        <p style="z-index:100; position:relative; background-color:transparent;">
-            <strong>About:</strong>
-            A tabular report depicting the all of the students who attend the Lecture Type event.
-        </p>
-        <button data-toggle="tooltip" title="View Lecture Attendance Report" style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("LecAttendance", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
-
-    </div>
-
-    <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
-        <h2 style="z-index:100; position:relative; background-color:transparent;">Community Engagement Attendance Report</h2>
-        <p style="z-index:100; position:relative; background-color:transparent;">
-            <strong>About:</strong>
-            A tabular report depicting the all of the students who attend the Community Enegagement Type event.
-        </p>
-        <button data-toggle="tooltip" title="View Community Engagement Attendance Report" style="float:right;margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("ComAttendance", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
-
-    </div>
-
-    <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
-        <h2 style="z-index:100; position:relative; background-color:transparent;">General Event Attendance Report</h2>
-        <p style="z-index:100; position:relative; background-color:transparent;">
-            <strong>About:</strong>
-            A tabular report depicting the all of the students who attend the General Event Type event.
-        </p>
-        <button data-toggle="tooltip" title="View General Event Attendance Report" style="float:right; margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("GeneralEventReport", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
-
-    </div>
-
-    <div style="width:50%; height:175px; z-index:100; margin-bottom: 100px; background-color:transparent; margin:auto;">
-        <h2 style="z-index:100; position:relative; background-color:transparent;">Student Demographic Report</h2>
-        <p style="z-index:100; position:relative; background-color:transparent;">
-            <strong>About:</strong>
-            A tabular report depicting the all of the students currently at TRWLA aiming to achieve certification. Learn about who is a part of <strong>your</strong> academy.
-        </p>
-        <button data-toggle="tooltip" title="View Student Demographic Report" style="float:right;  margin:auto;font-weight:bold;" type="button" class="btn" onclick="location.href='@Url.Action("StudentDemographic", "TRWLASchedules")'"><i class="fa fa-table" aria-hidden="true"></i></button>
-
-    </div>
-</div>
-
-
-<div style="float:right; margin-bottom:20px; margin-top:50px;">
-    <button data-toggle="tooltip" title="Return to the Main Menu" type="button" style="float:right;" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-</div>

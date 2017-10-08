@@ -38,14 +38,14 @@
     <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
         <div class="form-group">
             <div style="margin-right:5px;">
-                <div class="form-actions no-color form-group">
+                <div class="form-actions no-color form-group" data-toggle="tooltip" title="Submit Review">
                     <button type="submit" value="Create" class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <div class="form-group">
-                <button data-toggle="tooltip" title="Return to Recipient Selection" type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            <div class="form-group" data-toggle="tooltip" title="Return to Main Menu">
+                <button  type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>

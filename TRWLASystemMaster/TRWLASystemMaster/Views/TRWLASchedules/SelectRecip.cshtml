@@ -57,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.GenEvent.Gen_EndTime)
             </td>
             <td>
-                @Html.ActionLink("Select", "SendNotification", new { id = item.ScheduleID })
+                <a href="@Url.Action("Select", "SendNotification", new { studid = item.ScheduleID })" data-toggle="tooltip" title="Send Notification"><i class="fa fa-check" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -65,7 +65,7 @@
 </table>
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
+    <div class="form-group" data-toggle="tooltip" title="Return to Main Menu">
         <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
 </div>

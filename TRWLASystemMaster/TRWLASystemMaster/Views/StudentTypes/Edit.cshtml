@@ -52,10 +52,10 @@
                     Are you sure that you want to update this student type?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color form-group">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Update Student Type">
                         <button type="submit" value="Create" class="btn">Confirm</button>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
                         <button type="button" class="btn" data-dismiss="modal">Edit</button>
                     </div>
                 </div>
@@ -68,14 +68,14 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Changes">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
                 Save
             </button>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Student Type Details">
             <button type="button" class="btn" onclick="location.href='@Url.Action("Details", "StudentTypes", new { id = Model.StudentTypeID } )'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>

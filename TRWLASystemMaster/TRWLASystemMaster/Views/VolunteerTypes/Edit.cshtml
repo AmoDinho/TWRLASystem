@@ -43,11 +43,11 @@
                     Are you sure that you want to update this volunteer type?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color form-group">
-                        <button data-toggle="tooltip" title="Update Content" type="submit" value="Create" class="btn">Confirm</button>
+                    <div class="form-actions no-color form-group"  data-toggle="tooltip" title="Update Volunteer Type">
+                        <button type="submit" value="Create" class="btn">Confirm</button>
                     </div>
-                    <div class="form-group">
-                        <button data-toggle="tooltip" title="Make Ammendments" type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group"c data-toggle="tooltip" title="Make Changes">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 col-md-10"  data-toggle="tooltip" title="Save Changes">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
                 Save
             </button>
@@ -65,7 +65,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div>
+            <div  data-toggle="tooltip" title="Return to Volunteer Type Details">
                 <button type="button" class="btn" onclick="location.href='@Url.Action("Details", "VolunteerTypes", new { id = Model.VolunteerTypeID } )'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
 
             </div>

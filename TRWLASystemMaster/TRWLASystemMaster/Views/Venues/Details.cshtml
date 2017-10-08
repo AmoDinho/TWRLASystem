@@ -80,7 +80,7 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div data-toggle="tooltip" title="Update">
+            <div data-toggle="tooltip" title="Update" >
                 <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "Venues", new { id = Model.VenueID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             </div>
         </div>
@@ -115,10 +115,10 @@
                 @using (Html.BeginForm())
             {
                     @Html.AntiForgeryToken()
-                    <div class="form-actions no-color form-group">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Delete">
                         <button data-toggle="tooltip" title="Confirm Delete" type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete</button>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" data-toggle="tooltip" title="Cancel Deletion">
                     <button data-toggle="tooltip" title="Make ammendments" type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
                     </div>
                 }

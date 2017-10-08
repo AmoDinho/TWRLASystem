@@ -432,6 +432,7 @@
     <Compile Include="Models\GeneralEventList.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LectureReviewModel.cs" />
+    <Compile Include="Models\LectureReviews.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NoAttend.cs" />
     <Compile Include="Models\SelectRecipients.cs" />
