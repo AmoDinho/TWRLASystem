@@ -10,14 +10,18 @@
     <div class="quoteform"></div>
     <div class="quote1form"></div>
     <div class="quote2form"></div>
+    
 </div>
 
-@if (TempData["notice"] != null)
-{
-    <h4>@TempData["notice"]</h4>
-}
+
 
 <div style="margin-top:-150px;">
+    <div>
+        @if (TempData["notice"] != null)
+        {
+            <p>@TempData["notice"]</p>
+        }
+    </div>
     <dl class="dl-horizontal">
         <dt>
             Name:

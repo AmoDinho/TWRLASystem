@@ -45,15 +45,16 @@
     </div>
 }
 
-@if (TempData["Log"] != null)
-{
-    <h2>@TempData["Log"]</h2>
-}
 
-<div>
+
+<div style="margin-top:-100px;">
+    @if (TempData["Log"] != null)
+    {
+        <p>@TempData["Log"]</p>
+    }
     @if (Model.FunctionID != null)
     {
-        <dl class="dl-horizontal" style="margin-top:-150px;">
+        <dl class="dl-horizontal" >
             <dt>
                 @Html.Label("Name:")
             </dt>
@@ -128,7 +129,7 @@
     }
     @if (Model.GenID != null)
     {
-        <dl class="dl-horizontal" style="margin-top:-150px;">
+        <dl class="dl-horizontal" >
             <dt>
                 @Html.Label("Name:")
             </dt>
@@ -232,7 +233,7 @@
     }
     @if (Model.LectureID != null)
     {
-        <dl class="dl-horizontal" style="margin-top:-150px;">
+        <dl class="dl-horizontal" >
             <dt>
                 @Html.Label("Name:")
             </dt>
@@ -435,7 +436,8 @@
                 <h4 class="modal-title" id="myModalLabel">Cancel Event</h4>
             </div>
             <div class="modal-body">
-                Are you sure that you want to cancel this event?
+                Are you sure that you want to cancel this event? All those who have RSVPd to this event will receive an email informing of the 
+                cancellation.
             </div>
             <div class="modal-footer form-inline">
                 @using (Html.BeginForm())
@@ -444,7 +446,7 @@
                     <div class="form-actions no-color form-group" data-toggle="tooltip" title="Delete Event" >
                         <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Cancel Event</button>
                     </div>
-                    <div class="form-group" data-toggle="tooltip" title="Update Cancel Deletion" >
+                    <div class="form-group" data-toggle="tooltip" title="Cancel Deletion" >
                         <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
 
                     </div>

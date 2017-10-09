@@ -175,7 +175,7 @@ namespace TRWLASystemMaster.Controllers
 
                                     if (fileName.Contains(".pdf"))
                                     {
-                                        var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                                        var path = Path.Combine(Server.MapPath("~/Image/"), fileName);
                                         content.Content_Link = path.ToString(); ;
                                         file.SaveAs(path);
                                     }

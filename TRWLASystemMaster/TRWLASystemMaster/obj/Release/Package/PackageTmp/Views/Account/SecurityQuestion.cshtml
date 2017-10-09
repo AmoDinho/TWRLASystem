@@ -34,13 +34,14 @@
                 @Html.ValidationMessageFor(model => model.Security_Answer, "", new { @class = "text-danger" })
             </div>
         </div>
+        <p>@ViewBag.Err</p>
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <div data-toggle="tooltip" title="Confirm Answer"> 
-                <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
+                <div> 
+                <input data-toggle="tooltip" title="Confirm Answer" type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
     </div>

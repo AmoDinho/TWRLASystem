@@ -27,12 +27,12 @@
         </p>
     </div>
 }
-<h3>By Residence Name:</h3>
+<h3>By Student Name:</h3>
 @using (Html.BeginForm())
 {
     <div class="form-inline" style="margin-bottom:10px;">
         <p data-toggle="tooltip" title="Search by Name" class="form-group">
-            @Html.TextBox("resname", "", new { placeholder = "Name of Student's Residence", @class = "form-control", style = "width:100%;" })
+            @Html.TextBox("resname", "", new { placeholder = "Name of Student", @class = "form-control", style = "width:100%;" })
         </p>
 
         <p class="form-group">

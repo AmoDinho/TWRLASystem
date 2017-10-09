@@ -13,10 +13,7 @@
     <div class="quote2form"></div>
 </div>
 
-@if (TempData["Notice"] != null)
-{
-    @TempData["Notice"]
-}
+
 
 @using (Html.BeginForm("Create","Contents", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -32,12 +29,26 @@
             </div>
         </div>
 
+        <div class="form-group" style="margin-left:200px;">
+            <p>Please ensure the content you choose in a pdf format.</p>
+        </div>
+
         <div class="form-group">
             @Html.Label("Upload Content", new { @class = "control-label col-md-2" })
             <div class="editor-field col-md-10">
-                <input class="btn;" type="file" name="file" id="user_profile_pic" />
+                <input class="btn;" type="file" name="file" id="user_profile_pic" required="required" />
+                @if (TempData["Error"] != null)
+                {
+                    <p>@TempData["Error"]</p>
+                }
+
+                @if (TempData["Notice"] != null)
+                {
+                    @TempData["Notice"]
+                }
             </div>
         </div>
+
         
 
 

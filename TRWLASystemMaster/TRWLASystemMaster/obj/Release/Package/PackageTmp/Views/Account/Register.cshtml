@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.Label("Username:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control", required="required" })
                 @Html.ValidationMessageFor(m => m.LoginName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="form-group">
             @Html.Label("Student Number:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.StudentNumber, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.StudentNumber, new { maxlength = 8, @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.StudentNumber, "", new { @class = "text-danger" })
 
             </div>
@@ -62,6 +62,7 @@
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
         </div>
+        <p>@ViewBag.Err</p>
 
 
         <div class="form-group">
@@ -108,7 +109,7 @@
         <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <div data-toggle="tooltip" title="Confirm Details">
+                    <div data-toggle="tooltip" title="Confirm">
                         <button type="submit" value="Create" class="btn">Register</button>
                     </div>
                 </div>
