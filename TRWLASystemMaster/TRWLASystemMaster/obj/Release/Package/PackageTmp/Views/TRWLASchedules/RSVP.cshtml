@@ -8,31 +8,149 @@
 @if (Model.FunctionID != null)
 {
     <div class="jumbotron">
-        <h2>RSVP to @Html.DisplayFor(model => model.FunctionEvent.Function_Name) </h2>
+        <h1>RSVP to @Html.DisplayFor(model => model.FunctionEvent.Function_Name) </h1>
+        <div class="quoteform"></div>
+        <div class="quote1form"></div>
+        <div class="quote2form"></div>
     </div>
 }
 
 @if (Model.LectureID != null)
 {
     <div class="jumbotron">
-        <h2>RSVP to @Html.DisplayFor(model => model.Lecture.Lecture_Name) </h2>
+        <h1>RSVP to @Html.DisplayFor(model => model.Lecture.Lecture_Name) </h1>
+        <div class="quoteform"></div>
+        <div class="quote1form"></div>
+        <div class="quote2form"></div>
     </div>
 }
 
 @if (Model.ComEngID != null)
 {
     <div class="jumbotron">
-        <h2>RSVP to @Html.DisplayFor(model => model.ComEngEvent.ComEng_Name) </h2>
+        <h1>RSVP to @Html.DisplayFor(model => model.ComEngEvent.ComEng_Name) </h1>
+        <div class="quoteform"></div>
+        <div class="quote1form"></div>
+        <div class="quote2form"></div>
+    </div>
+}
+
+@if (Model.GenID != null)
+{
+    <div class="jumbotron">
+        <h1>RSVP to @Html.DisplayFor(model => model.GenEvent.Gen_Name) </h1>
+        <div class="quoteform"></div>
+        <div class="quote1form"></div>
+        <div class="quote2form"></div>
     </div>
 }
 
 
-
 <div>
-    
-    <h4>Are you sure that you want to RSVP to this event?</h4>
+    @if (Model.GenID != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Label("Name:")
+            </dt>
 
-    <hr />
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gen_Name)
+            </dd>
+
+            <dt>
+                @Html.Label("Summary:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:100px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gen_Summary)
+            </dd>
+
+            <dt>
+                @Html.Label("Description:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:150px; overflow-y:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gen_Description)
+            </dd>
+
+            <dt>
+                @Html.Label("Date:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gen_Date)
+            </dd>
+
+            <dt>
+                @Html.Label("Time:")
+            </dt>
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gen_StartTime)
+            </dd>
+            <dd style="margin-bottom:10px; ">
+                to
+            </dd>
+
+            <dd class="form-group form-control " style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gen_EndTime)
+            </dd>
+
+            <dt>
+                @Html.Label("Theme:")
+            </dt>
+
+            <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                @Html.DisplayFor(model => model.GenEvent.Gene_Theme)
+            </dd>
+
+            @if (Model.GenEvent.GuestSpeakerID != 1)
+            {
+                <dt>
+                    @Html.Label("Guest Speaker:")
+                </dt>
+
+                <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                    @Html.DisplayFor(model => model.GenEvent.GuestSpeaker.GuestSpeaker_Name)
+                </dd>
+            }
+
+            @if (Model.GenEvent.VenueID != 2)
+            {
+                <dt>
+                    @Html.Label("Venue:")
+                </dt>
+
+                <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                    @Html.DisplayFor(model => model.GenEvent.Venue.Venue_Name)
+                </dd>
+            }
+
+            @if (Model.GenEvent.ContentID != 1)
+            {
+                <dt>
+                    @Html.Label("Assigned Content:")
+                </dt>
+
+                <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                    @Html.DisplayFor(model => model.GenEvent.Content.Content_Name)
+                </dd>
+            }
+
+            @if (Model.GenEvent.ResID != 8)
+            {
+                <dt>
+                    @Html.Label("Residence:")
+                </dt>
+
+                <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+                    @Html.DisplayFor(model => model.GenEvent.Residence.Res_Name)
+                </dd>
+            }
+
+        </dl>
+    }
     @if (Model.FunctionID != null)
     {
         <dl class="dl-horizontal">
@@ -97,6 +215,11 @@
 
             <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
                 @Html.DisplayFor(model => model.FunctionEvent.GuestSpeaker.GuestSpeaker_Name)
+            </dd>
+
+            <dt></dt>
+            <dd style="width:200px; height:auto; margin-bottom:10px;">
+                <p type="button" class="btn" onclick="location.href='@Url.Action("StudentGuestSpeaker", "TRWLASchedules", new { id = Convert.ToInt32(@TempData["Guest"]) })'">View Guest Speaker</p>
             </dd>
 
             <dt>
@@ -185,6 +308,32 @@
             </dd>
         </dl>
 
+        <h4>Student Reviews on @Html.DisplayFor(model => model.Lecture.Lecture_Name)</h4>
+
+        using (Html.BeginForm())
+        {
+            var review = from s in Model.Lecture.LectureReviews
+                         select s;
+            <table class="table" style="overflow-y:auto; max-height:500px;">
+                <tr>
+                    <th>Name of Student</th>
+                    <th>Student Review</th>
+                    <th>Rating</th>
+                </tr>
+
+                @foreach (var rev in review)
+                {
+                    <tr>
+                        <td>
+                            @rev.SYSUserProfile.FirstName
+                        </td>
+                        <td>@rev.Review</td>
+                        <td>@rev.RatingType.Rating</td>
+                    </tr>
+                }
+            </table>
+        }
+
     }
 
     @if (Model.ComEngID != null)
@@ -264,9 +413,9 @@
             </dd>
 
         </dl>
-
-        
     }
+
+
 </div>
 
 @using (Html.BeginForm())
@@ -275,13 +424,12 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="RSVP" class="btn btn-default" />
+            <button data-toggle="tooltip" title="RSVP" type="submit" value="RSVP" class="btn"><i class="fa fa-check" aria-hidden="true"></i></button>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'">Return</button>
-
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Main Menu" >
+            <button type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

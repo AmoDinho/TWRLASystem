@@ -70,26 +70,45 @@ namespace TRWLASystemMaster.Controllers
                 if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
-                    if (!UM.IsLoginNameExist(USV.LoginName))
+                    if (UM.IsEmailExist(USV.Email) == "no")
                     {
+                        if (UM.IsLoginNameExist(USV.LoginName) == "no")
+                        {
+                            //if (!UM.IsLoginNameExist(USV.LoginName))
+                            //{
 
-                        USV.UserTypeID = 1;
+                            USV.UserTypeID = 1;
 
-                        UM.AddUserAccount(USV);
+                            UM.AddUserAccount(USV);
 
-                        FormsAuthentication.SetAuthCookie(USV.FirstName, false);
+                            FormsAuthentication.SetAuthCookie(USV.FirstName, false);
 
-                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
-                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
-                        Session["User"] = myUserP.SYSUserProfileID;
+                            SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
+                            SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+                            Session["User"] = myUserP.SYSUserProfileID;
 
-                        TempData["nUse"] = myUserP.SYSUserProfileID;
-                        return RedirectToAction("SecurityQuestion", "Account");
+                            TempData["nUse"] = myUserP.SYSUserProfileID;
+                            return RedirectToAction("SecurityQuestion", "Account");
 
+                            //}
+                            //else
+                            //{
+                            //    ViewBag.error = "Something went wrong with your registration";
+                            //    return RedirectToAction("SelectVolStud", "Select");
+                            //}
+                        }
+                        else
+                        {
+                            ViewBag.error = "Your username has been taken.";
+                            return RedirectToAction("SelectVolStud", "Select");
+                        }
                     }
                     else
-
-                        ModelState.AddModelError("", "Login Name already taken.");
+                    {
+                        ViewBag.error = "Your email already exists.";
+                        return RedirectToAction("Login", "Account");
+                    }
+                   
                 }
                 return View(USV);
             }
@@ -141,25 +160,44 @@ namespace TRWLASystemMaster.Controllers
                 if (ModelState.IsValid)
                 {
                     UserManager UM = new UserManager();
-                    if (!UM.IsLoginNameExist(USV.LoginName))
+                    if (UM.IsEmailExist(USV.Email) == "no")
                     {
-                        USV.UserTypeID = 2;
-                        UM.AddUserAccount(USV);
+                        if(UM.IsLoginNameExist(USV.LoginName) == "no")
+                        {
+                        //if (!UM.IsLoginNameExist(USV.LoginName))
+                        //{
+                            USV.UserTypeID = 2;
+                            UM.AddUserAccount(USV);
 
-                        FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                        //Adding hashing here
-                        SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
-                        SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
+                            FormsAuthentication.SetAuthCookie(USV.FirstName, false);
+                            //Adding hashing here
+                            SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
+                            SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
 
 
-                        Session["User"] = myUserP.SYSUserProfileID;
-                        TempData["nUse"] = myUserP.SYSUserProfileID;
+                            Session["User"] = myUserP.SYSUserProfileID;
+                            TempData["nUse"] = myUserP.SYSUserProfileID;
 
-                        return RedirectToAction("SecurityQuestion", "Account");
+                            return RedirectToAction("SecurityQuestion", "Account");
 
+                            //}
+                            //else
+                            //{
+                            //    ViewBag.error = "Something went wrong with your registration";
+                            //    return RedirectToAction("SelectVolStud", "Select");
+                            //}
+                        }
+                        else
+                        {
+                            ViewBag.error = "Your username has been taken.";
+                            return RedirectToAction("SelectVolStud", "Select");
+                        }
                     }
                     else
-                        ModelState.AddModelError("", "Login Name already taken.");
+                    {
+                        ViewBag.error = "Your email already exists.";
+                        return RedirectToAction("Login", "Account");
+                    }
                 }
                 return View();
             }
@@ -306,7 +344,7 @@ namespace TRWLASystemMaster.Controllers
                 }
                 else
                 {
-                    TempData["Email"] = "This email does not exist on the sysetm";
+                    TempData["Email"] = "This email does not exist.";
                     return View();
                 }
                 // If we got this far, something failed, redisplay form
@@ -332,20 +370,10 @@ namespace TRWLASystemMaster.Controllers
                 SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
 
 
-                //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
-                //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
-
-                //var ans = from a in db.SecurityAnswers
-                //          where a.SYSUserProfileID = 
-                //SecurityAnswer secans = db.SecurityAnswers.Find(id);
-
-                //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
-
-                // secans.Security_Question = Convert.ToString(ques);
-
+                
 
                 TempData["Question"] = myanswer.SecurityQuestion.Question;
-
+                TempData["Carry"] = myanswer.SecurityQuestion.Question;
 
                 return View();
 
@@ -367,6 +395,12 @@ namespace TRWLASystemMaster.Controllers
                 int user = Convert.ToInt32(TempData["User"]);
                 TempData["User"] = user;
 
+                if (TempData["Carry"] != null)
+                {
+                    string question = TempData["Carry"].ToString();
+                    TempData["Question"] = question;
+                }
+                
                 //var ans = from c in db.SecurityAnswers
                 //         where c.Security_Answer.Contains(answer) && c.SYSUserProfileID == user
                 //         select c;
@@ -374,16 +408,21 @@ namespace TRWLASystemMaster.Controllers
 
                 //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
 
+                int s = 0;
+                try
+                {
+                    s = (from n in db.SecurityAnswers
+                            where n.SYSUserProfileID == user
+                            select n.Security_Answer).Count();
+                }
+                catch
+                {
+                    ViewBag.Err = "Please enter an answer to your security question";
+                    TempData["User"] = user;
+                }
 
-
-                var s = from n in db.SecurityAnswers
-                        where n.SYSUserProfileID == user
-                        select n.Security_Answer;
-
-
-                int count = s.Count();
-
-                if (count != 0)
+                
+                if (s != 0)
                 {
 
                     SecurityAnswer ans = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
@@ -394,7 +433,7 @@ namespace TRWLASystemMaster.Controllers
                     }
                     else
                     {
-                       
+                        TempData["User"] = user;
                         return View();
                     }
                 }
@@ -403,20 +442,7 @@ namespace TRWLASystemMaster.Controllers
                     //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
 
                     SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
-
-
-                    //ViewBag.SecuirtyQuestion = db.SecurityAnswers.Select(secans.Security_Question).W
-                    //var user = db.SYSUserProfiles.Where(O => O.SYSUserProfileID.Equals(id));
-
-                    //var ans = from a in db.SecurityAnswers
-                    //          where a.SYSUserProfileID = 
-                    //SecurityAnswer secans = db.SecurityAnswers.Find(id);
-
-                    //ViewBag.SecurityAnswerID = new SelectList(db.SecurityAnswers, "SecurityAnswerID ", "Security_Question", "Security_Answer");
-
-                    // secans.Security_Question = Convert.ToString(ques);
-
-
+                    TempData["User"] = user;
                     TempData["Question"] = myanswer.SecurityQuestion.Question;
                     ViewBag.Error = "The answer to your question is wrong";
                     return View();

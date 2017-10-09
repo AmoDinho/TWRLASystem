@@ -6,15 +6,23 @@
 }
 
 <div class="jumbotron">
-    <h2>Upload Content</h2>
+    <h1>Upload Content</h1>
+
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
+
+@if (TempData["Notice"] != null)
+{
+    @TempData["Notice"]
+}
 
 @using (Html.BeginForm("Create","Contents", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.Label("Name", new { @class = "control-label col-md-2" })
@@ -24,9 +32,13 @@
             </div>
         </div>
 
-        <div class="editor-field">
-            <input type="file" name="file" />
+        <div class="form-group">
+            @Html.Label("Upload Content", new { @class = "control-label col-md-2" })
+            <div class="editor-field col-md-10">
+                <input class="btn;" type="file" name="file" id="user_profile_pic" />
+            </div>
         </div>
+        
 
 
         <div class="form-group">
@@ -45,14 +57,16 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Upload Content</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" data-toggle="tooltip" title="Upload Content">
                     Are you sure that you want to upload this content?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color ">
+                    <div class="form-actions no-color form-group " data-toggle="tooltip" title="Upload">
                         <button type="submit" value="Create" class="btn">Upload Content</button>
                     </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,15 +77,15 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Content">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                Upload Content
+                Save
             </button>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents")'">Return</button>
+        <div class="col-md-offset-2 col-md-10 " >
+            <button data-toggle="tooltip" title="Return to Contents" type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

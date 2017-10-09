@@ -5,12 +5,18 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>Log Event Attendance</h2>
+<div class="jumbotron" style="margin-bottom:150px;">
+    <h1>Log Event Attendance</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
+@if(TempData["Log"] != null)
+{
+    <h4>@TempData["Log"]</h4>
+}
 <h4>Please select an event</h4>
-<hr />
 
 <table class="table">
     <tr>
@@ -39,30 +45,45 @@
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date, "{0:dd/MM/yyyy}")
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date, "{0:dd/MM/yyyy}")
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date, "{0:dd/MM/yyyy}")
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_EndTime)
             </td>
                 
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Venue.Venue_Name)
                 @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
+                @if (item.GenID != null)
+                {
+                    if (item.GenEvent.ResID != 8)
+                        {
+                            @Html.DisplayFor(model => item.GenEvent.Residence.Res_Name)
+                        }
+                if (item.GenEvent.VenueID != 2)
+                        {
+                                @Html.DisplayFor(model => item.GenEvent.Venue.Venue_Name)
+                        }
+                }
             </td>
             <td>
-                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
+                <a href="@Url.Action("RSVPdMembers", new { id=item.ScheduleID})" data-toggle="tooltip" title="RSVPs"><i class="fa fa-users" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -71,11 +92,11 @@
 
 
 <div class="form-inline" style="float:right;">
-    <div class="form-group" style="margin-right:5px;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendancePast", "TRWLASchedules")'">Past Events</button>
+    <div class="form-group" style="margin-right:5px;" data-toggle="tooltip" title="Past Events">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendancePast", "TRWLASchedules")'"><i class="fa fa-history" aria-hidden="true"></i></button>
     </div>
-    <div class="form-group" style="margin-right:5px;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    <div class="form-group" style="margin-right:5px;" data-toggle="tooltip" title="Return to Main Menu">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
     
 </div>

@@ -6,12 +6,51 @@
 }
 
 <div class="jumbotron">
-    <h2>TRWLA Content</h2>
+    <h1>TRWLA Content</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
+<div class="form-inline">
+    <div class="form-group" style="margin-right:10px;">
+        <h2 style="z-index:100; position:relative; background-color:transparent;">Search Content</h2>
+        @using (Html.BeginForm())
+        {
+            <div class="form-inline" style="margin-bottom:10px;">
+                <p data-toggle="tooltip" title="Search by name" class="form-group">
+                    @Html.TextBox("searchString", "", new { placeholder = "Name of Content", @class = "form-control", style = "width:100%;" })
+                </p>
 
-<div class="form-inline" style="margin-bottom:10px;">
+                <p class="form-group">
+                    <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+                </p>
+                <div class="form-group">
+                    <button data-toggle="tooltip" title="Upload new Content" type="button" class="btn" onclick="location.href='@Url.Action("Create", "Contents")'"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <select data-toggle="tooltip" title="Filter Content" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:280px;">
+                <option value="">Filter by...</option>
+                <option value="@Url.Action("Index", "Contents", new { all = ViewBag.SurnameSortParm })'">Show All</option>
+                <option value="@Url.Action("Index", "Contents", new { sortOrder = ViewBag.NameSortParm })'">Name</option>
+                <option value="@Url.Action("Index", "Contents", new { locked = ViewBag.SurnameSortParm })'">Locked</option>
+                <option value="@Url.Action("Index", "Contents", new { unlocked = ViewBag.SurnameSortParm })'">Unlocked</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+    function doNavigate() {
+        window.location.href = document.getElementById("UrlList").value;
+    }
+</script>
+
+
+@*<div class="form-inline" style="margin-bottom:10px;">
     <div class="form-group">
         @using (Html.BeginForm())
         {
@@ -40,7 +79,7 @@
     <div class="form-group">
         <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Contents", new { all = ViewBag.SurnameSortParm })'">All</button>
     </div>
-</div>
+</div>*@
 
 <table class="table">
     <tr>
@@ -56,7 +95,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(p => p.ContentID != 1))
     {
         <tr>
             <td>
@@ -65,11 +104,13 @@
             <td>
                 @if (item.Content_Status == 1)
                 {
-                    <p>Locked</p>
+                    <p ><i data-toggle="tooltip" title="This content is locked. 
+                       It cannot be seen by students." class="fa fa-lock" aria-hidden="true"></i></p>
                 }
                 @if (item.Content_Status == 0)
                 {
-                    <p>Unlocked</p>
+                    <p ><i data-toggle="tooltip" title="This content is unlocked. 
+                       It can be seen by students."  class="fa fa-unlock" aria-hidden="true"></i></p>
                 }
 
             </td>
@@ -77,10 +118,8 @@
                 @Html.DisplayFor(modelItem => item.Content_Description)
             </td>
             <td>
-                <a href="@Url.Action("Edit", new { id=item.ContentID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                <a href="@Url.Action("Details", new { id=item.ContentID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
-                <a href="@Url.Action("Details", new { id=item.ContentID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
-              
             </td>
         </tr>
     }
@@ -88,10 +127,8 @@
 </table>
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <div class="form-group">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Contents")'">Upload Content</button>
-    </div>
-    <div class="form-group">
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    <div class="form-group" data-toggle="tooltip" title="Return to the Main Menu">
+                <button  type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
 </div>
+

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.SYSUserProfile>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+@*VolunteerLoggedInPage.cshtml*@
+<div class="jumbotron">
+    <h1>Volunteers</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
+
+@* Click on student details, takes user to student Dashboard for master data. *@
+<script>
+    function doNavigate() {
+        window.location.href = document.getElementById("UrlList").value;
+    };
+</script>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-inline" style="margin-bottom:10px;">
+        <p data-toggle="tooltip" title="Search by name" class="form-group">
+            @Html.TextBox("searchString", "", new { placeholder = "Volunteer Name", @class = "form-control", style = "width:100%;" })
+        </p>
+
+        <p class="form-group">
+            <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+
+        </p>
+        <div class="form-group">
+
+            <div data-toggle="tooltip" title="View Volunteer Types">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'"><i class="fa fa-list-ol" aria-hidden="true"></i></button>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+<h2>Active Volunteers</h2>
+<table class="table">
+    <tr>
+
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            Email Address
+        </th>
+        <th>
+            Date of Birth
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Where(p => p.UserTypeID == 2))
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phonenumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoB)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Details_Volunteers", new { id=item.SYSUserProfileID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+
+
+            </td>
+        </tr>
+    }
+</table>
+
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div data-toggle="tooltip" title="Return to Main Menu">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

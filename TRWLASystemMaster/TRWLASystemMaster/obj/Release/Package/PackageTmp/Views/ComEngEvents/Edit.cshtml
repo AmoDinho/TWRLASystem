@@ -6,7 +6,8 @@
 }
 
 <div class="jumbotron">
-    <h2>Update @Html.DisplayFor(model => model.ComEng_Name)</h2>
+    <h1>Update</h1>
+    <div class="quote2form"></div>
 </div>
 
 @using (Html.BeginForm())
@@ -14,7 +15,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ComEngID)
@@ -46,11 +46,18 @@
 
             <div class="form-group">
                 @Html.Label("Date", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ComEng_Date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-                    @Html.ValidationMessageFor(model => model.ComEng_Date, "", new { @class = "text-danger" })
+                <div class="col-md-10" style="width:auto;">
+                    <div class="col-md-10 form-control">@ViewBag.Date</div>
                 </div>
             </div>
+
+        <div class="form-group">
+            @Html.Label("    ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ComEng_Date, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.ComEng_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
             <div class="form-group">
                 @Html.Label("Venue", new { @class = "control-label col-md-2" })
@@ -91,7 +98,7 @@
             <div class="form-group">
                 @Html.Label("Summary", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.ComEng_Summary, new { maxlength = 100, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px;" })
+                    @Html.TextAreaFor(model => model.ComEng_Summary, new { maxlength = 100, @class = "form-control", @style = "border: 1px solid #E3E3E3;  color: #2c2c2c; width:280px;" })
                     @Html.ValidationMessageFor(model => model.ComEng_Summary, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -99,7 +106,7 @@
             <div class="form-group">
                 @Html.Label("Description", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.ComEng_Description, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; border-radius:30px; color: #2c2c2c; width:280px; height:200px;" })
+                    @Html.TextAreaFor(model => model.ComEng_Description, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3;  color: #2c2c2c; width:280px; height:200px;" })
                     @Html.ValidationMessageFor(model => model.ComEng_Description, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -117,10 +124,12 @@
                     Are you sure that you want to update this event?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color ">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Update Event">
                         <button type="submit" value="Create" class="btn">Confirm</button>
                     </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,15 +138,15 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Changes">
             <button class="btn btn-default" data-toggle="modal" data-target="#Create">
-                Update Event
+                Save
             </button>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Main Menu">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

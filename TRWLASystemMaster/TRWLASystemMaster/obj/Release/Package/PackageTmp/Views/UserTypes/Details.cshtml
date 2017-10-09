@@ -9,11 +9,15 @@
 
 
 <div class="jumbotron">
-    <h2>Details of the User Type</h2>
+    <h1>Details of the User Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
+
 <div>
-   
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -24,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccessRight)
+            @Html.Label("Access Right")
         </dt>
 
         <dd>
@@ -36,14 +40,12 @@
 
 
 
-
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div>
-                <button class="btn">@Html.ActionLink("Edit", "Edit", new { id = Model.UserTypeID })</button>
-                <button class="btn">@Html.ActionLink("Back", "Index")</button>    
-                      </div>
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "UserTypes")'">Return</button>
+            </div>
         </div>
     </div>
 </div>

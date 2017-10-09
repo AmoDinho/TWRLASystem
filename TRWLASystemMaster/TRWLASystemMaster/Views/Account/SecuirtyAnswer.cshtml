@@ -24,8 +24,8 @@
 
         @using (Html.BeginForm())
         {
-            <p data-toggle="tooltip" title="Search by name" class="form-group">
-                @Html.TextBox("answer", "", new { placeholder = "Name of Event", @class = "form-control", style = "width:30%;" })
+            <p  class="form-group">
+                @Html.TextBox("answer", "", new { placeholder = "Security Answer", @class = "form-control", style = "width:30%;" })
             </p>
 
             <input data-toggle="tooltip" title="Confirm Answer" style="float:right;" type="submit" class="btn btn-default" value="Proceed" />

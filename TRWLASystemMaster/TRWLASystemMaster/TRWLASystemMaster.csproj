@@ -433,6 +433,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LectureReviewModel.cs" />
     <Compile Include="Models\LectureReviews.cs" />
+    <Compile Include="Models\LoginNameChecker.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NoAttend.cs" />
     <Compile Include="Models\SelectRecipients.cs" />
@@ -457,6 +458,7 @@
     <Content Include="Image\girls.jpg" />
     <Content Include="Image\logo.png" />
     <Content Include="Image\train.jpg" />
+    <Content Include="Image\trwla_400_purple.svg" />
     <Content Include="Models\DB\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

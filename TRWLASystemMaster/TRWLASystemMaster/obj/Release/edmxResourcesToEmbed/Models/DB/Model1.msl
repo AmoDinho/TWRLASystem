@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities">
-    <EntitySetMapping Name="Addresses">
-      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Address">
-        <MappingFragment StoreEntitySet="Address">
-          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
-          <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
-          <ScalarProperty Name="StreetName" ColumnName="StreetName" />
-          <ScalarProperty Name="Suburb" ColumnName="Suburb" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Province" ColumnName="Province" />
-          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+  <EntityContainerMapping StorageEntityContainer="TWRLADB_Staging_V2ModelStoreContainer" CdmEntityContainer="TWRLADB_Staging_V2Entities8">
     <EntitySetMapping Name="Attendances">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Attendance">
         <MappingFragment StoreEntitySet="Attendance">
@@ -23,7 +10,28 @@
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+          <ScalarProperty Name="GenID" ColumnName="GenID" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuditLogs">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.AuditLog">
+        <MappingFragment StoreEntitySet="AuditLog">
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+          <ScalarProperty Name="DateDone" ColumnName="DateDone" />
+          <ScalarProperty Name="TypeTran" ColumnName="TypeTran" />
+          <ScalarProperty Name="TableAff" ColumnName="TableAff" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassAttendances">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.ClassAttendance">
+        <MappingFragment StoreEntitySet="ClassAttendance">
+          <ScalarProperty Name="CAPK" ColumnName="CAPK" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="attend" ColumnName="attend" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -40,6 +48,7 @@
           <ScalarProperty Name="ComEng_Theme" ColumnName="ComEng_Theme" />
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
           <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -79,6 +88,26 @@
           <ScalarProperty Name="Function_Theme" ColumnName="Function_Theme" />
           <ScalarProperty Name="GuestSpeakerID" ColumnName="GuestSpeakerID" />
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenEvents">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.GenEvent">
+        <MappingFragment StoreEntitySet="GenEvent">
+          <ScalarProperty Name="GenID" ColumnName="GenID" />
+          <ScalarProperty Name="Gen_Name" ColumnName="Gen_Name" />
+          <ScalarProperty Name="Gen_Summary" ColumnName="Gen_Summary" />
+          <ScalarProperty Name="Gen_Description" ColumnName="Gen_Description" />
+          <ScalarProperty Name="Gen_Date" ColumnName="Gen_Date" />
+          <ScalarProperty Name="Gen_StartTime" ColumnName="Gen_StartTime" />
+          <ScalarProperty Name="Gen_EndTime" ColumnName="Gen_EndTime" />
+          <ScalarProperty Name="Gene_Theme" ColumnName="Gene_Theme" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+          <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="GuestSpeakerID" ColumnName="GuestSpeakerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -108,6 +137,7 @@
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
           <ScalarProperty Name="ResidenceID" ColumnName="ResidenceID" />
           <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -135,6 +165,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MasterDatas">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.MasterData">
+        <MappingFragment StoreEntitySet="MasterData">
+          <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+          <ScalarProperty Name="LecAttend" ColumnName="LecAttend" />
+          <ScalarProperty Name="FuncAttend" ColumnName="FuncAttend" />
+          <ScalarProperty Name="ComAttend" ColumnName="ComAttend" />
+          <ScalarProperty Name="GenAttend" ColumnName="GenAttend" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="CancelEvent" ColumnName="CancelEvent" />
+          <ScalarProperty Name="LogAttendTime" ColumnName="LogAttendTime" />
+          <ScalarProperty Name="PassFactor" ColumnName="PassFactor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Milestones">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Milestone">
         <MappingFragment StoreEntitySet="Milestone">
@@ -149,6 +194,18 @@
           <ScalarProperty Name="ProgressID" ColumnName="ProgressID" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="ProgressCount" ColumnName="ProgressCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="progressbars">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.progressbar">
+        <MappingFragment StoreEntitySet="progressbar">
+          <ScalarProperty Name="ProgBarID" ColumnName="ProgBarID" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+          <ScalarProperty Name="LecProg" ColumnName="LecProg" />
+          <ScalarProperty Name="FuncProg" ColumnName="FuncProg" />
+          <ScalarProperty Name="ComProg" ColumnName="ComProg" />
+          <ScalarProperty Name="GenProg" ColumnName="GenProg" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -178,6 +235,7 @@
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
           <ScalarProperty Name="Attended" ColumnName="Attended" />
+          <ScalarProperty Name="GenID" ColumnName="GenID" />
           <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -195,16 +253,16 @@
     <EntitySetMapping Name="SecurityAnswers">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityAnswer">
         <MappingFragment StoreEntitySet="SecurityAnswer">
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
           <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
-          <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
           <ScalarProperty Name="Security_Answer" ColumnName="Security_Answer" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Students">
       <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.Student">
         <MappingFragment StoreEntitySet="Student">
-          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="StudentNumber" ColumnName="StudentNumber" />
           <ScalarProperty Name="Graduate" ColumnName="Graduate" />
@@ -218,6 +276,7 @@
           <ScalarProperty Name="ResID" ColumnName="ResID" />
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="StudentTypeID" ColumnName="StudentTypeID" />
+          <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -261,7 +320,6 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="DoB" ColumnName="DoB" />
           <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-          <ScalarProperty Name="SecurityAnswerID" ColumnName="SecurityAnswerID" />
           <ScalarProperty Name="Graduate" ColumnName="Graduate" />
           <ScalarProperty Name="Degree" ColumnName="Degree" />
           <ScalarProperty Name="YearOfStudy" ColumnName="YearOfStudy" />
@@ -270,6 +328,7 @@
           <ScalarProperty Name="RowModifiedSYSUserID" ColumnName="RowModifiedSYSUserID" />
           <ScalarProperty Name="RowModifiedDateTime" ColumnName="RowModifiedDateTime" />
           <ScalarProperty Name="ResID" ColumnName="ResID" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -294,6 +353,16 @@
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="LectureID" ColumnName="LectureID" />
           <ScalarProperty Name="ComEngID" ColumnName="ComEngID" />
+          <ScalarProperty Name="GenID" ColumnName="GenID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UniqueCodes">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.UniqueCode">
+        <MappingFragment StoreEntitySet="UniqueCode">
+          <ScalarProperty Name="UniID" ColumnName="UniID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="stamptime" ColumnName="stamptime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -311,7 +380,12 @@
         <MappingFragment StoreEntitySet="Venue">
           <ScalarProperty Name="VenueID" ColumnName="VenueID" />
           <ScalarProperty Name="Venue_Name" ColumnName="Venue_Name" />
-          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+          <ScalarProperty Name="StreeNumber" ColumnName="StreeNumber" />
+          <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+          <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
           <ScalarProperty Name="VenueTypeID" ColumnName="VenueTypeID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -365,6 +439,14 @@
         <MappingFragment StoreEntitySet="VolunteerType">
           <ScalarProperty Name="VolunteerTypeID" ColumnName="VolunteerTypeID" />
           <ScalarProperty Name="VolunteerType_Description" ColumnName="VolunteerType_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityQuestions">
+      <EntityTypeMapping TypeName="TWRLADB_Staging_V2Model.SecurityQuestion">
+        <MappingFragment StoreEntitySet="SecurityQuestion">
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

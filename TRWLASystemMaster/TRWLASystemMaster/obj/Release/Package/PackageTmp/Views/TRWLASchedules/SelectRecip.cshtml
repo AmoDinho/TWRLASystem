@@ -1,12 +1,15 @@
-﻿@model IEnumerable<TRWLASystemMaster.Models.DB.RSVP_Event>
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.TRWLASchedule>
 
 @{
     ViewBag.Title = "SelectRecip";
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>Select Notification Recipients</h2>
+<div class="jumbotron" style="margin-bottom:150px;">
+    <h1>Select Recipients</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 <table class="table">
@@ -33,27 +36,36 @@
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Name)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_Name)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Name)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_Date)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_Date)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Date)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_StartTime)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
                 @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
+                @Html.DisplayFor(modelItem => item.GenEvent.Gen_EndTime)
             </td>
             <td>
-                @Html.ActionLink("Select", "SendNotification", new { id = item.rsvpID })
+                <a href="@Url.Action("Select", "SendNotification", new { studid = item.ScheduleID })" data-toggle="tooltip" title="Send Notification"><i class="fa fa-check" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
 
 </table>
 
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group" data-toggle="tooltip" title="Return to Main Menu">
+        <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    </div>
+</div>

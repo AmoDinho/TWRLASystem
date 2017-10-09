@@ -5,19 +5,20 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>Confirm Attendance of @Html.DisplayFor(p => p.FirstName)</h2>
+<div class="jumbotron" style="margin-bottom:150px;">
+    <h1>Confirm Attendance of @Html.DisplayFor(p => p.FirstName)</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 <div>
-    <h4>Student</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.Label("Student Number:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.StudentNumber)
         </dd>
 
@@ -25,15 +26,15 @@
             @Html.Label("Name:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
 
-        <dt>
+        <dt >
             @Html.Label("Surname:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.LastName)
         </dd>
 
@@ -41,7 +42,7 @@
             @Html.Label("Residence:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.Residence.Res_Name)
         </dd>
 
@@ -49,7 +50,7 @@
             @Html.Label("Degree:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.Degree)
         </dd>
 
@@ -57,7 +58,7 @@
             @Html.Label("Year of Study:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.YearOfStudy)
         </dd>
 
@@ -66,7 +67,7 @@
             @Html.Label("Date of Birth:")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px; height:auto; overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.DoB)
         </dd>
 
@@ -76,12 +77,12 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-inline" style="float:right;">
-        <div class="form-group">
-            <input type="submit" value="Log Attendance" class="btn btn-default" />
+    <div class="form-inline" style="float:right; margin-bottom:10px;">
+        <div class="form-group" data-toggle="tooltip" title="Confirm Student Attendance">
+            <button type="submit" value="Create" class="btn"><i class="fa fa-check" aria-hidden="true"></i></button>
         </div>
-        <div class="form-group" style="margin-right:5px;">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+        <div class="form-group" style="margin-right:5px;" data-toggle="tooltip" title="Return to Log Attendance">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 }

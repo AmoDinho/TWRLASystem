@@ -1,0 +1,162 @@
+﻿@model TRWLASystemMaster.Models.DB.GenEvent
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>General Event</h1>
+    <h4>Create a General Event</h4>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
+<style>
+    .MakeWide {
+        width: 200px;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" style="margin-bottom:100px; margin-top:-150px;">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gen_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gen_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Summary:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Gen_Summary, new { maxlength = 100, @class = "form-control", @style = "border: 1px solid #E3E3E3;  color: #2c2c2c; width:280px;" })
+                @Html.ValidationMessageFor(model => model.Gen_Summary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Description:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Gen_Description, new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3;  color: #2c2c2c; width:280px; height:200px;" })
+                @Html.ValidationMessageFor(model => model.Gen_Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Date:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gen_Date, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Gen_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Start Time:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gen_StartTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                @Html.ValidationMessageFor(model => model.Gen_StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("End Time:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gen_EndTime, new { htmlAttributes = new { @class = "form-control", type = "time" } })
+                @Html.ValidationMessageFor(model => model.Gen_EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Theme:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gene_Theme, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gene_Theme, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Guest Speaker:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("GuestSpeakerID", null, htmlAttributes: new { @class = "form-control MakeWide" })
+                @Html.ValidationMessageFor(model => model.GuestSpeakerID, "", new { @class = "text-danger" })
+                <div style="margin-top:10px; margin-left:10px;">
+                    @Html.ActionLink("Register Guest Speaker", "Create", "GuestSpeaker")
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Residence:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ResID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ResID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.Label("Venue:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VenueID, "", new { @class = "text-danger" })
+                <div style="margin-top:10px; margin-left:10px;">
+                    @Html.ActionLink("Add Venue", "Create", "Venues")
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Content:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ContentID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ContentID, "", new { @class = "text-danger" })
+                <div style="margin-top:10px; margin-left:10px;">
+                    @Html.ActionLink("Upload Content", "Create", "Contents")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Create General Event</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to create this event?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Create Event">
+                        <button type="submit" value="Create" class="btn">Create</button>
+                    </div>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Event">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Save
+            </button>
+        </div>
+    </div>
+    <div class="form-group" data-toggle="tooltip" title="Return to Event Types">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    </div>
+</div>

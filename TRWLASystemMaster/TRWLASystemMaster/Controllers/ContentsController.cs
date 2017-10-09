@@ -185,8 +185,14 @@ namespace TRWLASystemMaster.Controllers
                                         return View("Create");
                                     }
                                 }
+
+                                ViewBag.Message = "File Uploaded Successfully!!";
                             }
-                            ViewBag.Message = "File Uploaded Successfully!!";
+                            else
+                            {
+                                TempData["Error"] = "Please upload content.";
+                                return View();
+                            }
                         }
                         catch
                         {

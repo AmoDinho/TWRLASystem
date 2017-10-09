@@ -142,7 +142,7 @@ namespace TRWLASystemMaster.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 GenEvent genEvent = db.GenEvents.Find(id);
-                ViewBag.date = genEvent.Gen_Date.ToString("dd MMMM yyyy");
+                TempData["Date"] = genEvent.Gen_Date.ToString("dd MMMM yyyy");
                 if (genEvent == null)
                 {
                     return HttpNotFound();
@@ -170,6 +170,16 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    string date = TempData["Date"].ToString();
+                    TempData["Date"] = date;
+
+                    AuditLog myAudit = new AuditLog();
+                    myAudit.DateDone = DateTime.Now;
+                    myAudit.TypeTran = "Update";
+                    myAudit.SYSUserProfileID = (int)Session["User"];
+                    myAudit.TableAff = "GenEvents";
+                    db.AuditLogs.Add(myAudit);
+
                     db.Entry(genEvent).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index", "TRWLASchedules");

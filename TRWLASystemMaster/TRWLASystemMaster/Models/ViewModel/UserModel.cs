@@ -23,8 +23,6 @@ namespace TRWLASystemMaster.Models.ViewModel
 
 
         [Required(ErrorMessage = "A username is required")]
-        [Display(Name = "Username")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string LoginName { get; set; }
 
         [Required(ErrorMessage = "A password is required")]
@@ -52,7 +50,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         //[DataType(DataType.Custom)] 
         [Required(ErrorMessage = "Your student number is required")]
         [Display(Name = "student number")]
-        [StringLength(8, ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
+        [StringLength(20,ErrorMessage = "The {0} must be at least {2} digits long.", MinimumLength = 6)]
         //  [RegularExpression(@"^\(?([1-8]{3})\)?[-. ]?([1-8]{3})[-. ]?([1-8]{4})$", ErrorMessage = "Entered student number is not valid.")]
         public string StudentNumber { get; set; }
 
@@ -67,9 +65,7 @@ namespace TRWLASystemMaster.Models.ViewModel
         [Display(Name = "academic commencement date")]
         [DataType(DataType.Date)]
         public DateTime YearOfStudy { get; set; }
-
-        [Required(ErrorMessage = "Your residence name is required")]
-        [Display(Name = "Residence")]
+        
         public int ResID { get; set; }
 
         [Required(ErrorMessage = "Your email address is required")]
@@ -99,8 +95,6 @@ namespace TRWLASystemMaster.Models.ViewModel
         public string RoleName { get; set; }
 
         [Required(ErrorMessage = "A username is required")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "username")]
         public string LoginName { get; set; }
 
         [Required(ErrorMessage = "A password is required")]
@@ -112,12 +106,12 @@ namespace TRWLASystemMaster.Models.ViewModel
 
         [Required(ErrorMessage = "Your  name is required")]
         [Display(Name = "name")]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Your surname is required")]
         [Display(Name = "surname")]
-        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(35, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
 
         public string LastName { get; set; }
 

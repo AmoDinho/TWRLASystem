@@ -343,6 +343,7 @@ namespace TRWLASystemMaster.Controllers
                       }).ToList();
 
             int count =  at.Count();
+            ViewBag.StudentCount = count;
 
             if (namesearchString == null)
             {
@@ -375,7 +376,7 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            if (!String.IsNullOrEmpty(namesearchString))
+            if (!String.IsNullOrEmpty(resname))
             {
                 var newl = from s in at
                            where s.Res.Contains(resname)
@@ -385,7 +386,6 @@ namespace TRWLASystemMaster.Controllers
             }
 
 
-            ViewBag.StudentCount = count;
 
 
 
@@ -412,6 +412,7 @@ namespace TRWLASystemMaster.Controllers
 
                       }).ToList();
 
+            ViewBag.Count = at.GroupBy(p => p.StudentNp).Distinct().Count();
             if (namesearchString == null)
             {
                 TempData["name"] = "";
@@ -443,16 +444,15 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            if (!String.IsNullOrEmpty(namesearchString))
+            if (!String.IsNullOrEmpty(resname))
             {
                 var newl = from s in at
-                           where s.EventName.Contains(resname)
+                           where s.Student_Name.Contains(resname)
                            select s;
 
                 return newl.ToList();
             }
 
-            ViewBag.Count = at.GroupBy(p => p.StudentNp).Distinct().Count();
             return at;
         }
         public IList<AttendanceViewModel> GetFunctionAttendance(string namesearchString, string resname)
@@ -472,6 +472,9 @@ namespace TRWLASystemMaster.Controllers
                                   StudentNp = s.SYSUserProfile.StudentNumber
                               }).ToList();
 
+
+            ViewBag.Count = attendance.GroupBy(p => p.StudentNp).Distinct().Count();
+
             if (namesearchString == null)
             {
                 TempData["name"] = "";
@@ -503,15 +506,14 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            if (!String.IsNullOrEmpty(namesearchString))
+            if (!String.IsNullOrEmpty(resname))
             {
                 var newl = from s in attendance
-                           where s.EventName.Contains(resname)
+                           where s.Student_Name.Contains(resname)
                            select s;
 
                 return newl.ToList();
             }
-            ViewBag.Count = attendance.GroupBy(p => p.StudentNp).Distinct().Count() ;
             return attendance;
         }
 
@@ -531,6 +533,7 @@ namespace TRWLASystemMaster.Controllers
                                   StudentNumber = s.SYSUserProfile.StudentNumber
                               }).ToList();
 
+            ViewBag.Count = attendance.GroupBy(p => p.StudentNumber).Distinct().Count();
             if (namesearchString == null)
             {
                 TempData["name"] = "";
@@ -562,15 +565,14 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            if (!String.IsNullOrEmpty(namesearchString))
+            if (!String.IsNullOrEmpty(resname))
             {
                 var newl = from s in attendance
-                           where s.EventName.Contains(resname)
+                           where s.StudentName.Contains(resname)
                            select s;
 
                 return newl.ToList();
             }
-            ViewBag.Count = attendance.GroupBy(p => p.StudentNumber).Distinct().Count();
             return attendance;
         }
 
@@ -640,6 +642,8 @@ namespace TRWLASystemMaster.Controllers
                               StudentNp = s.SYSUserProfile.StudentNumber
                           }).ToList();
 
+            ViewBag.Count = attend.GroupBy(p => p.StudentNp).Distinct().Count();
+
             if (namesearchString == null)
             {
                 TempData["name"] = "";
@@ -671,16 +675,15 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            if (!String.IsNullOrEmpty(namesearchString))
+            if (!String.IsNullOrEmpty(resname))
             {
                 var newl = from s in attend
-                           where s.EventName.Contains(resname)
+                           where s.Student_Name.Contains(resname)
                            select s;
 
                 return newl.ToList();
             }
 
-            ViewBag.Count = attend.GroupBy(p => p.StudentNp).Distinct().Count();
 
             return attend;
         }
@@ -710,6 +713,13 @@ namespace TRWLASystemMaster.Controllers
                               GenName = m.GenEvent.Gen_Name
                           }).ToList();
 
+
+            int count = (from n in db.RSVP_Event
+                         where n.Attended != null
+                         select n).Count();
+
+            ViewBag.Attend = count;
+            ViewBag.Count = attend.GroupBy(p => p.StudNo).Distinct().Count();
             if (namesearchString == null)
             {
                 TempData["name"] = "";
@@ -741,7 +751,7 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            if (!String.IsNullOrEmpty(namesearchString))
+            if (!String.IsNullOrEmpty(resname))
             {
                 var newl = from s in attend
                            where s.Res.Contains(resname)
@@ -750,12 +760,7 @@ namespace TRWLASystemMaster.Controllers
                 return newl.ToList();
             }
 
-            int count = (from n in db.RSVP_Event
-                         where n.Attended != null
-                         select n).Count(); ;
 
-                ViewBag.Attend = count;
-                ViewBag.Count = attend.GroupBy(p => p.StudNo).Distinct().Count();
 
             return attend;
         }
@@ -1101,6 +1106,10 @@ namespace TRWLASystemMaster.Controllers
                 {
                     ViewBag.Name = sched.ComEngEvent.ComEng_Name;
                 }
+                else if (sched.GenID != null)
+                {
+                    ViewBag.Name = sched.GenEvent.Gen_Name;
+                }
 
                 return View();
             }
@@ -1146,7 +1155,7 @@ namespace TRWLASystemMaster.Controllers
 
                                     try
                                     {
-                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        int k = Convert.ToInt32(s.SYSUserProfileID);
 
                                         SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                                         MailMessage msg = new MailMessage();
@@ -1188,7 +1197,9 @@ namespace TRWLASystemMaster.Controllers
                     {
                         int max = db.EventMessages.Max(p => p.MessID);
                         int l = max + 1;
-
+                        var select = from s in db.RSVP_Event
+                                     where s.FunctionID == rsvp.FunctionID
+                                     select s;
 
 
                         mess.MessID = l;
@@ -1196,18 +1207,18 @@ namespace TRWLASystemMaster.Controllers
                         if (rsvp != null)
 
                         {
-                            int count = choose.ToList().Count();
+                            int count = select.ToList().Count();
 
                             if (count != 0)
                             {
-                                foreach (var s in choose)
+                                foreach (var s in select)
                                 {
                                     mess.SYSUserProfileID = Convert.ToInt32(s.SYSUserProfileID);
                                     mess.TimeMes = DateTime.Now.TimeOfDay;
 
                                     try
                                     {
-                                        int k = Convert.ToInt32(rsvp.SYSUserProfileID);
+                                        int k = Convert.ToInt32(s.SYSUserProfileID);
 
                                         SYSUserProfile myStu = db.SYSUserProfiles.Find(k);
                                         MailMessage msg = new MailMessage();
@@ -2939,7 +2950,7 @@ namespace TRWLASystemMaster.Controllers
 
                         db.LectureReviews.Add(LecRev);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("StudentMainMenu");
 
                     }
 
@@ -3594,7 +3605,7 @@ namespace TRWLASystemMaster.Controllers
 
                     int diff = m - mytime;
 
-                    if (diff < time)
+                    if (diff <= time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
 
@@ -3607,7 +3618,7 @@ namespace TRWLASystemMaster.Controllers
                     int m = tRWLASchedule.Lecture.Lecture_Date.DayOfYear;
                     int diff = m - mytime;
 
-                    if (diff < time)
+                    if (diff <= time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
                         return View(tRWLASchedule);
@@ -3619,7 +3630,7 @@ namespace TRWLASystemMaster.Controllers
                     int m = tRWLASchedule.GenEvent.Gen_Date.DayOfYear;
                     int diff = m - mytime;
 
-                    if (diff < time)
+                    if (diff <= time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent + ". You cannot delete this event";
                         return View(tRWLASchedule);
@@ -3630,7 +3641,7 @@ namespace TRWLASystemMaster.Controllers
                     int m = tRWLASchedule.ComEngEvent.ComEng_Date.DayOfYear;
                     int diff = m - mytime;
 
-                    if (diff < time)
+                    if (diff <= time)
                     {
                         TempData["Log"] = "Days to event: " + mydata.CancelEvent +". You cannot delete this event";
                         return View(tRWLASchedule);
@@ -3756,7 +3767,7 @@ namespace TRWLASystemMaster.Controllers
                                     smtp.Host = "smtp.gmail.com";
                                     smtp.Port = 587;
                                     smtp.UseDefaultCredentials = false;
-                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Rootsms4");
+                                    smtp.Credentials = new System.Net.NetworkCredential("u15213626@tuks.co.za", "Coakes12345");
                                     smtp.EnableSsl = true;
                                     smtp.Send(msg);
 

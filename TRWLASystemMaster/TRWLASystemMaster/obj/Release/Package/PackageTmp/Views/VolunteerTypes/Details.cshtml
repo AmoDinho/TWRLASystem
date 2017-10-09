@@ -5,23 +5,71 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Details</h2>
+<div class="jumbotron">
+    <h1>Volunteer Type Details</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
 
 <div>
-    <h4>VolunteerType</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.VolunteerType_Description)
+            @Html.Label("Description")
         </dt>
 
-        <dd>
+        <dd class="form-control" style="width:200px;  overflow-y:auto; margin-bottom:10px;">
             @Html.DisplayFor(model => model.VolunteerType_Description)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerTypeID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.VolunteerTypeID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+
+
+<div style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-inline">
+        <div class="form-group" data-toggle="tooltip" title="Update">
+            <button  type="button" class="btn" onclick="location.href='@Url.Action("Edit", "VolunteerTypes", new { id = Model.VolunteerTypeID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        </div>
+        <div class="form-group" data-toggle="tooltip" title="Delete">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Delete">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="form-group" data-toggle="tooltip" title="Return to Volunteer Types">
+            <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VolunteerTypes")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Volunteer Type</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure that you want to delete this volunteer type?
+            </div>
+            <div class="modal-footer form-inline">
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Delete">
+                        <button  type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete</button>
+                    </div>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button  type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Close</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,11 +3,16 @@
     ViewBag.Title = "RegisterVol";
 }
 
-<div class="jumbotron"><h2>Register as a Volunteer</h2></div>
-
+<div class="jumbotron">
+    <h1>Volunteer Registration</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
 
 @using (Html.BeginForm())
 {
+
     @Html.AntiForgeryToken()
     <hr />
     <div class="form-horizontal">
@@ -27,16 +32,17 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("First Name:", new { @class = "control-label col-md-2" })
+            @Html.Label("Name:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Last Name:", new { @class = "control-label col-md-2" })
+            @Html.Label("Surname:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -64,36 +70,23 @@
         </div>
 
 
-        <div class="form-group">
-            @Html.Label("Security Question:", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SecurityAnswerID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.SecurityAnswerID, "", new { @class = "text-danger" })
+
+
+        <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div data-toggle="tooltip" title="Confirm Details">
+                        <button type="submit" value="Create" class="btn">Register</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-  
-        @*<div class="form-group">
-            @Html.LabelFor(m => m.ResID, "ResID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ResID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ResID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-    
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default btn-round" style="color:#9b16d8" @*data-toggle="modal" data-target="#myModal"*@ value="Register" />
-            </div>
-        </div>
-      </div>
-
-  
-      
-
+    </div>
 
 }
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

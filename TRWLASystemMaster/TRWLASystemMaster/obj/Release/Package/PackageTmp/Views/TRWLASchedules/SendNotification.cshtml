@@ -6,7 +6,10 @@
 }
 
 <div class="jumbotron">
-    <h2>Write a Notification for the Attendees of @ViewBag.Name</h2>
+    <h1>Write Notification</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
@@ -14,9 +17,9 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.Label("Write Message", new { @class = "control-label col-md-2" })
+        @Html.Label("Notification Text", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Msg , new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; width:280px; height:200px;" })
+            @Html.TextAreaFor(model => model.Msg , new { maxlength = 300, @class = "form-control", @style = "border: 1px solid #E3E3E3; width:500px; height:200px;" })
             @Html.ValidationMessageFor(model => model.Msg, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -32,10 +35,12 @@
                     Are you sure that you want to send this notification?
                 </div>
                 <div class="modal-footer form-inline">
-                        <div class="form-actions no-color ">
-                            <button type="submit" value="SendNotification" class="btn">Send Notification Event</button>
+                        <div class="form-actions no-color form-group">
+                            <button type="submit" value="SendNotification" class="btn">Send Notification</button>
                         </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,16 +50,15 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div style="margin-right:5px;">
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Send Notification">
             <button class="btn btn-default" data-toggle="modal" data-target="#Delete">
-                Send Notification
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
             </button>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10 ">
-            <button type="button" class="btn" onclick="location.href='@Url.Action("EventType", "TRWLASchedules")'">Return</button>
+        <div class="form-group" data-toggle="tooltip" title="Return to Recipient Selection">
+            <button  type="button" class="btn" onclick="location.href='@Url.Action("SelectRecip")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>
-

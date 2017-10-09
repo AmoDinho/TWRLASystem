@@ -5,34 +5,71 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<h2>Edit</h2>
+
+<div class="jumbotron">
+    <h1>Update a Volunteer Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>VolunteerType</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.VolunteerTypeID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VolunteerType_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2"> Description </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.VolunteerType_Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.VolunteerType_Description, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Update Volunteer Type</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to update this volunteer type?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color form-group"  data-toggle="tooltip" title="Update Volunteer Type">
+                        <button type="submit" value="Create" class="btn">Confirm</button>
+                    </div>
+                    <div class="form-group"c data-toggle="tooltip" title="Make Changes">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:60px;">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10"  data-toggle="tooltip" title="Save Changes">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Save
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div  data-toggle="tooltip" title="Return to Volunteer Type Details">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Details", "VolunteerTypes", new { id = Model.VolunteerTypeID } )'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+
+            </div>
+        </div>
+    </div>
 </div>
+

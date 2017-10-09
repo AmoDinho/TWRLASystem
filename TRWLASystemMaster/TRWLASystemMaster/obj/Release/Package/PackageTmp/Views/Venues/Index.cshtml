@@ -7,24 +7,52 @@
 }
 
 
-<div class="jumbotron">
-    <h2>Venues</h2>
+<div class="jumbotron" style="margin-bottom:50px;">
+    <h1>Venues</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'">View Venue Types</button>
-<hr />
+<script>
+    function doNavigate() {
+        window.location.href = document.getElementById("UrlList").value;
+    };
+</script>
 
-    @* Search Button for 'Venue Name'*@
-    @using (Html.BeginForm())
-    {
-        <p>
-            Find by name: @Html.TextBox("searchStringV", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+<div class="row" @*id="showMe" style="display:none;*@>
+    <div class="col-md-12">
+        <div class="form-inline">
+            <div class="form-group">
+                <h2 style="z-index:100; position:relative; background-color:transparent;">Search Venues</h2>
+                @using (Html.BeginForm())
+                {
+                    <div class="form-inline" style="margin-bottom:10px;">
+                        <p data-toggle="tooltip" title="Search by name" class="form-group">
+                            @Html.TextBox("searchStringV", "", new { placeholder = "Name of Venue", @class = "form-control", style = "width:100%;" })
+                        </p>
 
-            <button value="Search" class="btn btn-default btn-round" style="color:#9b16d8"><i class="fa fa-search" aria-hidden="true"></i> search</button>
-        </p>
-    }
+                        <p class="form-group">
+                            <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+                        </p>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div>
+
+                                    <button data-toggle="tooltip" title="Got to Venue Types " type="button" class="btn" onclick="location.href='@Url.Action("Index", "VenueTypes")'"><i class="fa fa-list-ol" aria-hidden="true"></i></button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
 
+   
 
     <table class="table">
         <tr>
@@ -32,7 +60,7 @@
              Venue Name   @*@Html.DisplayNameFor(model => model.Venue_Name)*@
             </th>
             <th>
-               Street Name @*@Html.DisplayNameFor(model => model.Address.)*@
+               Address @*@Html.DisplayNameFor(model => model.Address.)*@
             </th>
             <th>
                 Description   @*@Html.DisplayNameFor(model => model.VenueType.VenueType_Description)*@
@@ -40,24 +68,21 @@
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Where(p => p.VenueID != 2))
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Venue_Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address.StreetName)
+                    @Html.DisplayFor(modelItem => item.StreeNumber) @Html.DisplayFor(modelItem => item.StreetName), @Html.DisplayFor(modelItem => item.Suburb), @Html.DisplayFor(modelItem => item.City)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VenueType.VenueType_Description)
                 </td>
                 <td>
-                    <a href="@Url.Action("Edit", new { id=item.VenueID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
 
-                    <a href="@Url.Action("Details", new { id=item.VenueID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
-
-                    <a href="@Url.Action("Delete", new { id=item.VenueID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
+                    <a href="@Url.Action("Details", new { id=item.VenueID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 
 
 
@@ -69,9 +94,9 @@
     <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <div>
+                <div data-toggle="tooltip" title="Create">
 
-                    <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Venues")'">Create a New Venue</button>
+                    <button data-toggle="tooltip" title="Create a venue" type="button" class="btn" onclick="location.href='@Url.Action("Create", "Venues")'"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
                 </div>
             </div>

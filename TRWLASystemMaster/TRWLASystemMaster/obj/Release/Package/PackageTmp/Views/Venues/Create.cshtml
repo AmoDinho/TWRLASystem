@@ -6,9 +6,10 @@
 }
 
 <div class="jumbotron">
-
-    <h2>Create a new Venue</h2>
-
+    <h1>Create Venue</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
@@ -18,11 +19,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <label class="control-label col-md-2"> Venue Name</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2"> Venue Name:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Venue_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Venue_Name, "", new { @class = "text-danger" })
@@ -30,26 +29,62 @@
         </div>
 
         <div class="form-group">
-         <label class = "control-label col-md-2"> Street Name</label>   @*@Html.LabelFor(model => model.AddressID, "AddressID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2"> Street Number:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-                @Html.DropDownList("AddressID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AddressID, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.StreeNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StreeNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2">Venue Type</label>     @*@Html.LabelFor(model => model.VenueTypeID, "VenueTypeID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2"> Street Name:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Suburb:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Suburb, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Suburb, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> City:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Province:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Province, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Venue_Name, "", new { @class = "text-danger" })
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2"> Post Code:</label>         @*@Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Venue Type:</label>     @*@Html.LabelFor(model => model.VenueTypeID, "VenueTypeID", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.DropDownList("VenueTypeID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VenueTypeID, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 
 
@@ -64,10 +99,12 @@
                  You are about to create new venue, are sure about this?
                 </div>
                 <div class="modal-footer form-inline">
-                    <div class="form-actions no-color ">
-                        <button type="submit" value="Create" class="btn" data-toggle="modal" data-target="#Create">Create</button>
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Create Venue">
+                        <button data-toggle="tooltip" title="Confirm" type="submit" value="Create" class="btn">Create</button>
                     </div>
-                    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button data-toggle="tooltip" title="Make Ammendments"  type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,16 +113,16 @@
 
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Venues")'">Back</button>   
-            </div>
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Save Venue">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Save
+            </button>
         </div>
     </div>
+    <div class="form-group" data-toggle="tooltip" title="Return to Venues">
+        <button  type="button" class="btn" onclick="location.href='@Url.Action("Index", "Venues")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    </div>
 </div>
-
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

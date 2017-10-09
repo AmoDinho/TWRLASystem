@@ -7,9 +7,10 @@
 
 
 <div class="jumbotron">
-
-    <h2>Edit a venue</h2>
-
+    <h1>Edit @Html.DisplayFor(modelItem => modelItem.Venue_Name) </h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
@@ -19,13 +20,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.VenueID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Venue_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Venue Name:",  new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Venue_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Venue_Name, "", new { @class = "text-danger" })
@@ -33,37 +32,96 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AddressID, "AddressID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Street Number:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("AddressID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AddressID, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.StreeNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StreeNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VenueTypeID, "VenueTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Street Name:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StreetName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Suburb:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Suburb, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Suburb, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("City:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Province:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Province, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Post Code:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Venue Type:", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("VenueTypeID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VenueTypeID, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Update Venue</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to update this venue?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Update Venue">
+                        <button data-toggle="tooltip" title="Update Venue" type="submit" value="Create" class="btn">Confirm</button>
+                    </div>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button data-toggle="tooltip" title="Make Ammendments" type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
 
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+<div class="form-inline" style="float:right; margin-bottom:10px; margin-top:10px;">
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button class="btn">@Html.ActionLink("Back", "Index")</button>
-            </div>
+        <div style="margin-right:5px;" data-toggle="tooltip" title="Update">
+            <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                Save
+            </button>
         </div>
+    </div>
+    <div class="form-group" data-toggle="tooltip" title="Return to Venues">
+        <button  type="button" class="btn" onclick="location.href='@Url.Action("Details", "Venues", new { id = Model.VenueID } )'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
 </div>
 

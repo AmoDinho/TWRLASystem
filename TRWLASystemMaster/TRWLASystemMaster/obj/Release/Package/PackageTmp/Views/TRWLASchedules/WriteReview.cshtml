@@ -2,11 +2,14 @@
 
 @{
     ViewBag.Title = "WriteReview";
-    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
 }
 
 <div class="jumbotron">
-    <h2>Write a review on @ViewBag.LectureName </h2>
+    <h1>Write a review on @ViewBag.LectureName </h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
 
@@ -32,17 +35,23 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Submit Review" class="btn btn-default" />
+    <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+        <div class="form-group">
+            <div style="margin-right:5px;">
+                <div class="form-actions no-color form-group" data-toggle="tooltip" title="Submit Review">
+                    <button type="submit" value="Create" class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-group" data-toggle="tooltip" title="Return to Main Menu">
+                <button  type="button" class="btn" onclick="location.href='@Url.Action("StudentMainMenu")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            </div>
         </div>
     </div>
+
 }
 
-<div class="form-inline" style="float:right;">
-    <div style="margin-right:5px;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
-    </div>
-</div>
+
 
 

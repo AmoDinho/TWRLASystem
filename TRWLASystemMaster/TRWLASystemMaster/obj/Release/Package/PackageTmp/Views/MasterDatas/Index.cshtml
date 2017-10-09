@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.MasterData>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/StudentLoggedInView.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Manage TRWLA Master Data</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LecAttend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuncAttend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComAttend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenAttend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LogAttendTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cancelevent)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LecAttend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuncAttend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComAttend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GenAttend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LogAttendTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cancelevent)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MasterID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MasterID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MasterID })
+        </td>
+    </tr>
+}
+
+</table>

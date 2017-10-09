@@ -6,22 +6,25 @@
 }
 
 
-
 <div class="jumbotron">
-
-    <h2> Residence - Home</h2>
-
+    <h1> Residences</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
-
-
 @* Search Button for 'RES NAME'*@
+
 @using (Html.BeginForm())
 {
-    <p>
-        Find by name: @Html.TextBox("SearchString", null, new { @style = "border-radius:4px; width:300px; color:black; border-color:white" })
+    <div class="form-inline" style="margin-bottom:10px; margin-top:-60px;">
+        <p data-toggle="tooltip" title="Search by name" class="form-group">
+            @Html.TextBox("searchString", "", new { placeholder = "Res Name", @class = "form-control", style = "width:100%;" })
+        </p>
 
-        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
-    </p>
+        <p class="form-group">
+            <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+        </p>
+    </div>
 }
 
 
@@ -29,25 +32,19 @@
 <table class="table">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.Res_Name)*@ Res Name
+            Res Name
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(p => p.ResID != 8))
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Res_Name)
             </td>
             <td>
-                <a href="@Url.Action("Edit", new { id=item.ResID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-
-                <a href="@Url.Action("Details", new { id=item.ResID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> |
-
-                <a href="@Url.Action("Delete", new { id=item.ResID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a> |
-
-
+                <a href="@Url.Action("Details", new { id=item.ResID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -57,10 +54,15 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Residences")'">Add a new Residence</button>
-          
+            <div data-toggle="tooltip" title="Create Residence">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Create", "Residences")'"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Main Menu">
+            <button  type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

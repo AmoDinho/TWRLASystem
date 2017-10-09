@@ -5,47 +5,100 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-
-
-
-<div class="jumbotron">
-
-    <h2>Update a Residence</h2>
-
+<div class="jumbotron" style="text-align:left; margin-bottom:100px;">
+    <h1>Update</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
-
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-       
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ResID)
 
         <div class="form-group">
-        <label class = "control-label col-md-2"> Res Name</label>    @*@Html.LabelFor(model => model.Res_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2"> Residence Name</label>    @*@Html.LabelFor(model => model.Res_Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Res_Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Res_Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:20px;">
+            <div class="form-group">
+                <div style="margin-right:40px;" data-toggle="tooltip" title="Save Changes">
+                    <button class="btn btn-default" data-toggle="modal" data-target="#Create">
+                        Save
+                    </button>
+                </div>
+            </div>
+            <div class="form-group" data-toggle="tooltip" title="Return to Residences">
+                <button  type="button" class="btn" onclick="location.href='@Url.Action("Details", "Residences", new { id = Model.ResID } )'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Update Residence</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to update this residence?
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color form-group" data-toggle="tooltip" title="Update Residence">
+                        <button type="submit" value="Create" class="btn">Update</button>
+                    </div>
+                    <div class="form-group" data-toggle="tooltip" title="Make Changes">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
-    <button class="btn">@Html.ActionLink("Back ", "Index") </button>
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+@*
+    data-toggle="modal" data-target="#Create"
+
+
+        <div class="modal fade" id="Create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure that you want to complete this action
+                </div>
+                <div class="modal-footer form-inline">
+                    <div class="form-actions no-color form-group">
+                        <button type="submit" value="Create" class="btn">Confirm</button>
+
+    <button type="button" class="btn" data-dismiss="modal">Edit</button>
+    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn" data-dismiss="modal">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+*@

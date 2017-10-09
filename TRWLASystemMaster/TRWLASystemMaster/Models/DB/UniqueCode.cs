@@ -6,6 +6,8 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TRWLASystemMaster.Models.DB
 {
@@ -15,6 +17,8 @@ namespace TRWLASystemMaster.Models.DB
     public partial class UniqueCode
     {
         public int UniID { get; set; }
+        [Required(ErrorMessage = "A unique code is required")]
+        [Display(Name = "Unique Code")]
         public int Code { get; set; }
         public System.DateTime stamptime { get; set; }
     }

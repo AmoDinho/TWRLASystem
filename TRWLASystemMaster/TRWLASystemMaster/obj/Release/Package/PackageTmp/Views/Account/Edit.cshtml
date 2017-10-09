@@ -1,0 +1,78 @@
+﻿@model TRWLASystemMaster.Models.DB.SYSUser
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Change Password</h1>
+
+    <div class="quotehome"></div>
+    <div class="quote1home"></div>
+    <div class="quote2home"></div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SYSUserID)
+
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.LoginName)
+                @Html.ValidationMessageFor(model => model.LoginName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("New Password", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.PasswordEncryptedText, new { htmlAttributes = new { @Value = "" } })
+                @Html.ValidationMessageFor(model => model.PasswordEncryptedText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.RowCreatedSYSUserID)
+                @Html.ValidationMessageFor(model => model.RowCreatedSYSUserID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+           @* @Html.LabelFor(model => model.RowCreatedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.RowCreatedDateTime)
+                @Html.ValidationMessageFor(model => model.RowCreatedDateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.RowModifiedSYSUserID)
+                @Html.ValidationMessageFor(model => model.RowModifiedSYSUserID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.RowModifiedDateTime, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.RowModifiedDateTime)
+                @Html.ValidationMessageFor(model => model.RowModifiedDateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" >
+                <input data-toggle="tooltip" title="Confirm" style="float:right;" type="submit" value="Change" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

@@ -140,7 +140,7 @@ namespace TRWLASystemMaster.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 Lecture lecture = db.Lectures.Find(id);
-                ViewBag.date = lecture.Lecture_Date.ToString("dd MMMM yyyy");
+                TempData["Date"] = lecture.Lecture_Date.ToString("dd MMMM yyyy");
 
                 if (lecture == null)
                 {
@@ -168,6 +168,9 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    string date = TempData["Date"].ToString();
+                    TempData["Date"] = date;
+
                     AuditLog myAudit = new AuditLog();
                     myAudit.DateDone = DateTime.Now;
                     myAudit.TypeTran = "Update";

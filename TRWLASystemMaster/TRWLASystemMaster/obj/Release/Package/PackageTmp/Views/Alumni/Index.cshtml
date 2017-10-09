@@ -4,24 +4,27 @@
 }
 
 <div class="jumbotron">
-    <h2>Graduate List</h2>
-
+    <h1>Alumni</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
-<p>You can generate a list of graduates in the acadmey that will quailfy based on the requirements you have set.</p>
-
+<h2>Graduate List</h2>
+<p>Generate a list of current students eligible to graduate.</p>
+<button value="Search" class="btn">Generate Graduate List</button>
+<hr>
 @** Search Button for 'RES NAME'*@
 @using (Html.BeginForm())
 {
     <p>
         Search Alumni: @Html.TextBox("SearchString")
-        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
+        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i></button>
 
     </p>
 }
-<hr />
-<button value="Search" class="btn btn-default btn-round">Generate Graduate List</button>
-<hr />
+
+
 <table class="table">
     <tr>
         <th>

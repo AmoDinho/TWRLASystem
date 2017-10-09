@@ -7,24 +7,32 @@
 
 
 
+
 <div class="jumbotron">
-    <h2>Details of a Student Type</h2>
+    <h1>Details of a Student Type</h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
+
 
 <div>
 
     <dl class="dl-horizontal">
         <dt>
-            @*@Html.DisplayNameFor(model => model.StudentTypeDescription)*@ Student Type
+            @Html.Label("Description")
         </dt>
 
-       
+        <dd class="form-control" style="width:200px; height:auto; margin-bottom:10px;">
+            @Html.DisplayFor(model => model.StudentTypeDescription)
+        </dd>
+
     </dl>
 </div>
 
 <div>
     <p>
-       
+
     </p>
 
 </div>
@@ -32,9 +40,49 @@
 <div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <div>
-                <button class="btn"> @Html.ActionLink("Edit", "Edit", new { id = Model.StudentTypeID })</button>
-                <button class="btn">@Html.ActionLink("Back", "Index") </button>
+            <div data-toggle="tooltip" title="Update">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Edit", "StudentTypes", new { id = Model.StudentTypeID })'"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" data-toggle="tooltip" title="Delete">
+            <button class="btn" data-toggle="modal" data-target="#Delete">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 " data-toggle="tooltip" title="Return to Content">
+            <div data-toggle="tooltip" title="Return to Student Types">
+                <button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete @Html.DisplayFor(model => model.StudentTypeDescription)</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure that you want to delete @Html.DisplayFor(model => model.StudentTypeDescription )'s Information off of the system?
+            </div>
+            <div class="modal-footer form-inline">
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="form-actions no-color form-group " data-toggle="tooltip" title="Delete">
+                        <button type="submit" value="Delete" class="btn btn-default btn-simple form-group">Delete</button>
+                    </div>
+                    <div class="form-group" data-toggle="tooltip" title="Cancel Deletion">
+                        <button type="button" class="btn btn-default btn-simple form-group" data-dismiss="modal">Cancel</button>
+                    </div>
+                }
+
             </div>
         </div>
     </div>

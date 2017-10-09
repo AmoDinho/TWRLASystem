@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="TWRLADB_Staging_V2Entities-Web.config Connection String" description="TWRLADB_Staging_V2Entities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.DB.Model1.csdl|res://*/Models.DB.Model1.ssdl|res://*/Models.DB.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=HP;initial catalog=TWRLADB_Staging_V2;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Documents\\GitHub\\TWRLASystem\\TRWLASystemMaster\\TRWLASystemMaster\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TWRLADB_Staging_V2Entities']/@connectionString" />
+  <parameter name="TWRLADB_Staging_V2Entities8-Web.config Connection String" description="TWRLADB_Staging_V2Entities8 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.DB.Model1.csdl|res://*/Models.DB.Model1.ssdl|res://*/Models.DB.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=HP;initial catalog=TWRLADB_Staging_V2;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Documents\\GitHub\\TWRLASystem\\TRWLASystemMaster\\TRWLASystemMaster\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TWRLADB_Staging_V2Entities8']/@connectionString" />
   </parameter>
   <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="DefaultConnection_ConnectionString" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Documents\\GitHub\\TWRLASystem\\TRWLASystemMaster\\TRWLASystemMaster\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="TRWLASystemMaster.Models.DB.TWRLADB_Staging_V2Entities-Web.config Connection String" description="TRWLASystemMaster.Models.DB.TWRLADB_Staging_V2Entities Connection String used in web.config by the application to access the database." defaultValue="TRWLASystemMaster.Models.DB.TWRLADB_Staging_V2Entities_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\admin\\Documents\\GitHub\\TWRLASystem\\TRWLASystemMaster\\TRWLASystemMaster\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TRWLASystemMaster.Models.DB.TWRLADB_Staging_V2Entities']/@connectionString" />
   </parameter>
 </parameters>

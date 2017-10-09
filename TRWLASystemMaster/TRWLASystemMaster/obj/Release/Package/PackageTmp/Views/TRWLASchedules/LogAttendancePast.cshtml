@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
 }
 
-<div class="jumbotron">
-    <h2>Log Event Attendance of a Past Event</h2>
+<div class="jumbotron" style="margin-bottom:150px;">
+    <h1>Log Attendance</h1>
+    <h4>Events from the past week</h4>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
-
-<h4>Please select an event</h4>
-<hr />
-
 <table class="table">
     <tr>
         <th>
@@ -61,8 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Lecture.Residence.Res_Name)
                 @Html.DisplayFor(modelItem => item.ComEngEvent.Venue.Venue_Name)
             </td>
+
             <td>
-                @Html.ActionLink("View RSVPd Members", "RSVPdMembers", new { id = item.ScheduleID })
+                <a href="@Url.Action("RSVPdMembers", new { id=item.ScheduleID})" data-toggle="tooltip" title="RSVPs"><i class="fa fa-users" aria-hidden="true"></i></a>
             </td>
         </tr>
     }
@@ -71,8 +72,8 @@
 
 
 <div class="form-inline" style="float:right;">
-    <div class="form-group" style="margin-right:5px;">
-        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'">Return</button>
+    <div class="form-group" style="margin-right:5px;" data-toggle="tooltip" title="Return to Main Menu">
+        <button type="button" class="btn" onclick="location.href='@Url.Action("LogAttendance", "TRWLASchedules")'"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
     </div>
 
 </div>

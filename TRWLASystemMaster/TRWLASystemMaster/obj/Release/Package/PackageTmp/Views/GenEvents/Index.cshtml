@@ -1,0 +1,100 @@
+﻿@model IEnumerable<TRWLASystemMaster.Models.DB.GenEvent>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/VolunteerLoggedInPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Gen_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gen_Summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gen_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gen_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gen_StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gen_EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gene_Theme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content.Content_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestSpeaker.GuestSpeaker_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Residence.Res_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venue.Venue_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gen_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gen_Summary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gen_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gen_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gen_StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gen_EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gene_Theme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content.Content_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuestSpeaker.GuestSpeaker_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Residence.Res_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Venue.Venue_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GenID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GenID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GenID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -7,21 +7,27 @@
 
 
 
-<div class="jumbotron">
+<div class="jumbotron" style="margin-bottom:150px">
 
-    <h2>Students - Home</h2>
-
+    <h1>Students </h1>
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
 </div>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">View Student Types</button>
+<button style="margin-bottom:10px;" type="button" class="btn" onclick="location.href='@Url.Action("Index", "StudentTypes")'">View Student Types</button>
 
-<hr />
 @using (Html.BeginForm())
 {
-    <p>
-        Find by Name: @Html.TextBox("SearchStringS") <input style="border-radius:4px; width:300px; color:black; border-color:white" />
-        <button value="Search" class="btn btn-default btn-round"><i class="fa fa-search" aria-hidden="true"></i> search</button>
-    </p>
+    <div class="form-inline" style="margin-bottom:10px;">
+        <p data-toggle="tooltip" title="Search by name" class="form-group">
+            @Html.TextBox("searchString", "", new { placeholder = "Name of Student", @class = "form-control", style = "width:100%;" })
+        </p>
+
+        <p class="form-group">
+            <button data-toggle="tooltip" title="Search" type="submit" value="Search" class="btn"><i class="fa fa-search" aria-hidden="true" style="color:black;"></i></button>
+        </p>
+    </div>
 }
 
 @*<p>
@@ -30,16 +36,13 @@
 <table class="table">
     <tr>
         <th>
-            Student Number     @Html.DisplayNameFor(model => model.StudentNumber)
+            Student Number 
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Graduate)
         </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Degree)
-        </th>
-        <th>
-         Academic Commencement Date   @*@Html.DisplayNameFor(model => model.YearOfStudy)*@
+            Degree
         </th>
         <th>
            Student Name @*@Html.DisplayNameFor(model => model.Student_Name)*@
@@ -51,19 +54,16 @@
           Phone Number  @*@Html.DisplayNameFor(model => model.Student_Phone)*@
         </th>
         <th>
-          DoB  @*@Html.DisplayNameFor(model => model.Student_DoB)*@
+         Date of Birth  @*@Html.DisplayNameFor(model => model.Student_DoB)*@
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.ActiveStatus)
         </th>*@
         <th>
-          Residence  @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
+            Residence  @*@Html.DisplayNameFor(model => model.Residence.Res_Name)*@
         </th>
         <th>
-         Student Type   @*@Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)*@
-        </th>
-        <th>
-        User Type    @*@Html.DisplayNameFor(model => model.UserType.Description)*@
+            Student Type   @*@Html.DisplayNameFor(model => model.StudentType.StudentTypeDescription)*@
         </th>
         <th></th>
     </tr>
@@ -78,9 +78,6 @@
         </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Degree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.YearOfStudy)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Student_Name)
@@ -104,9 +101,6 @@
             @Html.DisplayFor(modelItem => item.StudentType.StudentTypeDescription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserType.Description)
-        </td>
-        <td>
             @*<a href="@Url.Action("Edit", new { id=item.StudentID })" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>*@ 
             <a href="@Url.Action("Details", new { id=item.StudentID })" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle" aria-hidden="true"></i></a> 
             <a href="@Url.Action("Delete", new { id=item.StudentID })" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -115,3 +109,9 @@
 }
 
 </table>
+
+<div class="form-inline" style="float:right; margin-bottom:20px; margin-top:10px;">
+    <div class="form-group">
+        <button data-toggle="tooltip" title="Return to Main Menu" type="button" class="btn" onclick="location.href='@Url.Action("Index", "TRWLASchedules")'">Return</button>
+    </div>
+</div>

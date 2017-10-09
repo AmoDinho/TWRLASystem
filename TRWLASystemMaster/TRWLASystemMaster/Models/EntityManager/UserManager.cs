@@ -228,11 +228,45 @@ namespace TRWLASystemMaster.Models.EntityManager
         }
         //MEHTOD:Does Login Exist?
 
-        public bool IsLoginNameExist(string loginName)
+        public string IsLoginNameExist(string loginName)
         {
             using (TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8())
             {
-                return db.SYSUsers.Where(o => o.LoginName.Equals(loginName)).Any();
+                SYSUser myID = db.SYSUsers.FirstOrDefault(p => p.LoginName == loginName);
+                string id = "";
+
+                if (myID != null)
+                {
+                    id = "yes";
+                    return id;
+                }
+                else
+                {
+                    id = "no";
+                    return id;
+                }
+            }
+        }
+
+
+        //for FUTURE REFERENCE :)
+        public string IsEmailExist(string email)
+        {
+            using (TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8())
+            {
+                SYSUserProfile myID = db.SYSUserProfiles.FirstOrDefault(p => p.Email == email);
+                string yes = "";
+
+                if (myID != null)
+                {
+                    yes = "yes";
+                    return yes;
+                }
+                else
+                {
+                    yes = "no";
+                    return yes;
+                }
             }
         }
 

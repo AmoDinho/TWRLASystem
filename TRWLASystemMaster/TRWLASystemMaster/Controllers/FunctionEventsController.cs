@@ -185,7 +185,7 @@ namespace TRWLASystemMaster.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 FunctionEvent functionEvent = db.FunctionEvents.Find(id);
-                ViewBag.date = functionEvent.Function_Date.ToString("dd MMMM yyyy");
+                TempData["Date"] = functionEvent.Function_Date.ToString("dd MMMM yyyy");
                 if (functionEvent == null)
                 {
                     return HttpNotFound();
@@ -211,6 +211,9 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    string date = TempData["Date"].ToString();
+                    TempData["Date"] = date;
+
                     AuditLog myAudit = new AuditLog();
                     myAudit.DateDone = DateTime.Now;
                     myAudit.TypeTran = "Update";

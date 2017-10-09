@@ -15,12 +15,12 @@
 <div>
     <h4> Please select whether you are signing up as Student or Volunteer.</h4>
 </div>
+<p>@ViewBag.error</p>
 
-<div data-toggle="tooltip" title="Become a volunteer"></div>
-<button  type="button" class="btn" onclick="location.href='@Url.Action("VerifyCode", "Select")'" >Register as a Volunteer</button>
 
-<div data-toggle="tooltip" title="Become a student">
-    <button type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Register as a Student</button>
-</div>
+    <button data-toggle="tooltip" title="Become a volunteer" type="button" class="btn" onclick="location.href='@Url.Action("VerifyCode", "Select")'">Register as a Volunteer</button>
+
+    <button data-toggle="tooltip" title="Become a student" type="button" class="btn" onclick="location.href='@Url.Action("Register", "Account")'">Register as a Student</button>
+
 
 @*onclick="location.href='@Url.Action("RegisterVol", "Account")'"*@

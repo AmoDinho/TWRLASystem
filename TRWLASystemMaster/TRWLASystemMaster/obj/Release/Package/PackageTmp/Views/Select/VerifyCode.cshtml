@@ -1,0 +1,26 @@
+﻿@model TRWLASystemMaster.Models.DB.UniqueCode
+@{
+    ViewBag.Title = "VerifyCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Verify Code</h1>
+
+    <div class="quoteform"></div>
+    <div class="quote1form"></div>
+    <div class="quote2form"></div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-inline" style="margin-bottom:10px;">
+        <p data-toggle="tooltip" title="Please Enter your Unique code" class="form-group">
+            @Html.TextBox("uniqe", "", new { placeholder = "Enter Unique Code", @class = "form-control", style = "width:100%;" })
+        </p>
+
+        <p class="form-group" data-toggle="tooltip" title="Verify">
+            <button  type="submit" value="Search" class="btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        </p>
+    </div>
+}

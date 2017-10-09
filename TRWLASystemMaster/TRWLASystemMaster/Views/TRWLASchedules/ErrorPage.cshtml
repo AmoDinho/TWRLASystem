@@ -4,10 +4,13 @@
 }
 
 <div class="jumbotron">
-    <h2>ErrorPage</h2>
+    <h2>Something went wrong</h2>
+    <h4>It's not you, it's us...</h4>
+    <div class="quotedanger"></div>
+    <div class="quote1danger"></div>
+    <div class="quote2danger"></div>
 </div>
 
-<h4>Oh no, something went wrong.</h4>
 
-<button type="button" class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let us start again</button>
+<button style="float:right;" data-toggle="tooltip" title="Go to Login" type="button" class="btn" onclick="location.href='@Url.Action("Login", "Account")'">Return</button>
 
