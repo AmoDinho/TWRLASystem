@@ -1028,3 +1028,13 @@ VALUES ('None', 'NULL', 'NULL', 'NULL', 'NULL')
 
 INSERT INTO Content(Content_Name, Content_Link, Content_Status, Content_Description)
 VALUES ('None', 'NULL',1,'NULL')
+
+insert into SecurityQuestion (Question)
+  values ('What Is your favorite book?'),( 
+  'What is the name of the road you grew up on?'),
+('What was the first company that you worked for?'),
+('Where did you meet your spouse?'),
+('Where did you go to high school/college?'),
+('What is your favorite food?'),
+('Where is your favorite place to vacation?')
+
