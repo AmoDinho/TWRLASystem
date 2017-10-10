@@ -308,33 +308,8 @@
                 @Html.DisplayFor(model => model.Lecture.Residence.Res_Name)
             </dd>
         </dl>
-
-        <h4>Student Reviews on @Html.DisplayFor(model => model.Lecture.Lecture_Name)</h4>
-
-        using (Html.BeginForm())
-        {
-            var review = from s in Model.Lecture.LectureReviews
-                         select s;
-            <table class="table" style="overflow-y:auto; max-height:500px;">
-                <tr>
-                    <th>Name of Student</th>
-                    <th>Student Review</th>
-                    <th>Rating</th>
-                </tr>
-
-                @foreach (var rev in review)
-                {
-                    <tr>
-                        <td>
-                            @rev.SYSUserProfile.FirstName
-                    </td>
-                    <td>@rev.Review</td>
-                    <td>@rev.RatingType.Rating</td>
-                </tr>
-                }
-            </table>
-        }
-
+        
+       
     }
 
     @if (Model.ComEngID != null)

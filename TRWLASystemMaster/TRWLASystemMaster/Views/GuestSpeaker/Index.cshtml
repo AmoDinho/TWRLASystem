@@ -37,7 +37,8 @@
                 }
                 <select data-toggle="tooltip" title="Filter Guest Speakers" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:280px;">
                     <option value="">Filter by...</option>
-                    <option value="@Url.Action("Index", "GuestSpeaker", new { sortOrder = ViewBag.NameSortParm })'">Name</option>
+                    <option value="@Url.Action("Index", "GuestSpeaker", new { sortOrder = "descending" })'">Names Descending</option>
+                    <option value="@Url.Action("Index", "GuestSpeaker", new { ascending = "ascending" })'">Names Ascending</option>
                 </select>
             </div>
         </div>

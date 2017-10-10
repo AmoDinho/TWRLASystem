@@ -50,14 +50,6 @@
     function doNavigate() {
         window.location.href = document.getElementById("UrlList").value;
     };
-
-    $(document).ready(function() {
-        var success = @(TempData["mess"] != null).ToString().ToLower());
-
-        if (success == true) {
-            alert("No one has RSVPd to that event an you cannot send a message.");
-        }
-    });
 </script>
 
 
@@ -80,11 +72,11 @@
                 }
                 <select data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:280px;">
                     <option value="">Filter by...</option>
-                    <option value="@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">Show All</option>
-                    <option value="@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagement Events</option>
-                    <option value="@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lecture Events</option>
-                    <option value="@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Function Events</option>
-                    <option value="@Url.Action("Index", "TRWLASchedules", new { G = ViewBag.SurnameSortParm })'">General Events</option>
+                    <option value="@Url.Action("Index", "TRWLASchedules", new { all = "all" })'">Show All</option>
+                    <option value="@Url.Action("Index", "TRWLASchedules", new { CO = "com" })'">Community Engagement Events</option>
+                    <option value="@Url.Action("Index", "TRWLASchedules", new { L = "lec" })'">Lecture Events</option>
+                    <option value="@Url.Action("Index", "TRWLASchedules", new { F = "func" })'">Function Events</option>
+                    <option value="@Url.Action("Index", "TRWLASchedules", new { G = "gen" })'">General Events</option>
                 </select>
             </div>
             <div class="form-group" style="z-index:100; position:relative; background-color:transparent; margin-left:50px;">

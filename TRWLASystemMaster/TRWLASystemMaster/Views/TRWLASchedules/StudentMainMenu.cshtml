@@ -59,11 +59,11 @@
                     }
                     <select style="width:100%;" data-toggle="tooltip" title="Filter Events" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:90%;">
                         <option value="">Filter by...</option>
-                        <option value="@Url.Action("Index", "TRWLASchedules", new { all = ViewBag.SurnameSortParm })'">Show All</option>
-                        <option value="@Url.Action("Index", "TRWLASchedules", new { CO = ViewBag.SurnameSortParm })'">Community Engagement Events</option>
-                        <option value="@Url.Action("Index", "TRWLASchedules", new { L = ViewBag.SurnameSortParm })'">Lecture Events</option>
-                        <option value="@Url.Action("Index", "TRWLASchedules", new { F = ViewBag.SurnameSortParm })'">Function Events</option>
-                        <option value="@Url.Action("Index", "TRWLASchedules", new { G = ViewBag.SurnameSortParm })'">General Events</option>
+                        <option value="@Url.Action("StudentMainMenu", "TRWLASchedules", new { all ="All" })'">Show All</option>
+                        <option value="@Url.Action("StudentMainMenu", "TRWLASchedules", new { CO = "Com" })'">Community Engagement Events</option>
+                        <option value="@Url.Action("StudentMainMenu", "TRWLASchedules", new { L = "Lec" })'">Lecture Events</option>
+                        <option value="@Url.Action("StudentMainMenu", "TRWLASchedules", new { F = "Func" })'">Function Events</option>
+                        <option value="@Url.Action("StudentMainMenu", "TRWLASchedules", new { G = "Gen" })'">General Events</option>
                     </select>
                 </div>
                 <div class="form-group" style="z-index:100; position:relative; background-color:transparent; margin-left:50px; margin-top:20px;">
@@ -121,9 +121,7 @@
                     @Html.DisplayFor(modelItem => item.Lecture.Lecture_Summary, new { @style = "width:10%" })
                     @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_Summary, new { @style = "width:10%" })
                     @Html.DisplayFor(modelItem => item.GenEvent.Gen_Summary)
-                    @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
 
-                    to
 
                 </h4>
 
@@ -135,10 +133,9 @@
                             @Html.DisplayFor(modelItem => item.Lecture.Lecture_StartTime)
                                                         @Html.DisplayFor(modelItem => item.ComEngEvent.ComEnge_StartTime)
                                                         @Html.DisplayFor(modelItem => item.GenEvent.Gen_StartTime)
+                            
                             to
-
                         </h4>
-
                     </div>
                     <div class="form-group" style="z-index:100; position:relative; background-color:transparent;">
                         <h4 style="z-index:100; position:relative; background-color:transparent; color:white; text-align:center;">
@@ -146,7 +143,6 @@
                             @Html.DisplayFor(modelItem => item.FunctionEvent.Function_EndTime)
                             @Html.DisplayFor(modelItem => item.Lecture.Lecture_EndTime)
                             @Html.DisplayFor(modelItem => item.ComEngEvent.ComEng_EndTime)
-
                             @Html.DisplayFor(modelItem => item.GenEvent.Gen_EndTime)
                         </h4>
                     </div>

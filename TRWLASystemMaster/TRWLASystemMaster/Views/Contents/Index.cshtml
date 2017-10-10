@@ -34,10 +34,10 @@
         <div class="form-group">
             <select data-toggle="tooltip" title="Filter Content" id="UrlList" onchange="doNavigate()" class="form-control" style="margin-bottom:20px; width:280px;">
                 <option value="">Filter by...</option>
-                <option value="@Url.Action("Index", "Contents", new { all = ViewBag.SurnameSortParm })'">Show All</option>
-                <option value="@Url.Action("Index", "Contents", new { sortOrder = ViewBag.NameSortParm })'">Name</option>
-                <option value="@Url.Action("Index", "Contents", new { locked = ViewBag.SurnameSortParm })'">Locked</option>
-                <option value="@Url.Action("Index", "Contents", new { unlocked = ViewBag.SurnameSortParm })'">Unlocked</option>
+                <option value="@Url.Action("Index", "Contents", new { all = "all" })'">Show All</option>
+                <option value="@Url.Action("Index", "Contents", new { sortOrder = "name" })'">Name</option>
+                <option value="@Url.Action("Index", "Contents", new { locked = "locked" })'">Locked</option>
+                <option value="@Url.Action("Index", "Contents", new { unlocked = "unlocked" })'">Unlocked</option>
             </select>
         </div>
     </div>

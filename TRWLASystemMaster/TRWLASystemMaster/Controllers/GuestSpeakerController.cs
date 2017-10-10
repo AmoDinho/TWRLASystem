@@ -37,7 +37,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         // GET: GuestSpeakers1
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string ascending)
         {
             try
             {
@@ -56,22 +56,17 @@ namespace TRWLASystemMaster.Controllers
                                            || s.GuestSpeaker_Surname.Contains(searchString));
                 }
 
-
-                switch (sortOrder)
+                if (!String.IsNullOrEmpty(sortOrder))
                 {
-                    case "name_desc":
-                        guestSpeaker = guestSpeaker.OrderByDescending(s => s.GuestSpeaker_Name);
-                        break;
-                    case "sur_desc":
-                        guestSpeaker = guestSpeaker.OrderByDescending(s => s.GuestSpeaker_Surname);
-                        break;
-                    case "Surname":
-                        guestSpeaker = guestSpeaker.OrderByDescending(s => s.GuestSpeaker_Surname);
-                        break;
-                    default:
-                        guestSpeaker = guestSpeaker.OrderBy(s => s.GuestSpeaker_Name);
-                        break;
+                    guestSpeaker = guestSpeaker.OrderByDescending(s => s.GuestSpeaker_Name);
                 }
+
+                if (!String.IsNullOrEmpty(ascending))
+                {
+                    guestSpeaker = guestSpeaker.OrderBy(s => s.GuestSpeaker_Name);
+                }
+
+
 
                 return View(guestSpeaker.ToList());
             }
