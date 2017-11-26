@@ -14,39 +14,56 @@ go
 ==================================================================                       =============================
 ========================   TWRLA Staging Database                                     =========================================================
 +++++++++ This database contains the following Tables:                ===========================================
-&&&&&&&&&&&&&&&   Milestone                         
-                  Residence  
-				   Student
-				   StudentMilestone
-				   StudentType
-				   UserType
-				   Volunteer
-				   VolunteerFeedback
-				   VolunteerType        
+&&&&&&&&&&&&&&&       
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                     Address
+                   
 					[dbo].[Attendance]  
+					[dbo].[AuditLog]
+					[dbo].[ClassAttendance]
 					[dbo].[ComEngEvent]
-					 [dbo].[Content]   
-					 [dbo].[FunctionEvent]       
+					 [dbo].[Content]  
+					 [dbo].[EventMessage] 
+					 [dbo].[FunctionEvent]
+					 [dbo].[GenEvent]       
 					 [dbo].[GuestSpeaker]      
 					 [dbo].[Lecture]
+					 [dbo].[LOOKUPRole]
+					 [dbo].[LectureReview]
+					 [dbo].[MasterData]
+					 [dbo].[Milestone]
+					 [dbo].[progressbar]
+					 [dbo].[Progress]
+					 [dbo].[RatingType]
 					 [dbo].[Residence]
 					 [dbo].[RSVP_Event]
+					 [dbo].[RSVPSchedule]
 					 [dbo].[Student]
+					 [dbo].[SecurityAnswer]
+					 [dbo].[SecurityQuestion]
 					 [dbo].[StudentType]
+					 [dbo].[SYSUser]
+					 [dbo].[SYSUserProfile]
+					 [dbo].[SYSUserRole]
 					 [dbo].[TRWLASchedule]
+					 [dbo].[UniqueCode]
 					 [dbo].[Venue]
 					 [dbo].[VenueType]
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^;
-					 ^^^^^^;
-					 
+					 Remove the following tables:
+					 [dbo].[Attendance]
+					 [dbo].[Student]
+					 [dbo].[StudentMilestone]
+					 [dbo].[StudentType]
+					 [dbo].[UserType]
+					 [dbo].[Volunteer]
+					 [dbo].[VolunteerFeedback]
+					 [dbo].[VolunteerType]
 					*/
 
 
 ----------------------------------------  Start of tables --------------------------------------------------;
 
-                 ---User Management --- 
+               
 
 				           --- Residence  ----
 create table Residence
@@ -90,7 +107,7 @@ StudentTypeDescription varchar(25) not null
 )
 go
 
-
+--[SYSUser]--
 
 
 CREATE TABLE [dbo].[SYSUser](
@@ -106,7 +123,7 @@ CREATE TABLE [dbo].[SYSUser](
 
 GO
 
-
+---[SYSUserProfile]---
 CREATE TABLE [dbo].[SYSUserProfile](
     [SYSUserProfileID] [int] IDENTITY(1,1) NOT NULL,
     [SYSUserID] [int] NOT NULL,
@@ -134,6 +151,7 @@ CREATE TABLE [dbo].[SYSUserProfile](
 	
     )
 
+	---SecurityQuestion---
 
 create table SecurityQuestion
 (
@@ -152,6 +170,7 @@ FOREIGN KEY (QuestionID) REFERENCES SecurityQuestion(QuestionID)
  )
  go
 
+ ---Progress---
  Create table Progress
 (
 	ProgressID int identity (1,1) primary key,
@@ -172,7 +191,7 @@ REFERENCES [dbo].[UserType] ([UserTypeID])
 GO
 
 
-
+---[SYSUserRole]---
 CREATE TABLE [dbo].[SYSUserRole](
     [SYSUserRoleID] [int] IDENTITY(1,1) NOT NULL,
     [SYSUserID] [int] NOT NULL,
@@ -195,7 +214,7 @@ REFERENCES [dbo].[SYSUser] ([SYSUserID])
 GO
 
 
-
+---UniqueCode---
 create table UniqueCode
 (
 UniID int IDENTITY(1,1) PRIMARY KEY not null,
@@ -269,17 +288,6 @@ VolunteerTypeID int FOREIGN KEY REFERENCES VolunteerType(VolunteerTypeID) not nu
 )
 go
 
-/*
-create table ResVolunteer
-(
-Facilitation_Year date not null,
-VolunteerID int references Volunteer(VolunteerID),
-Volunteer_Name varchar references Volunteer(Volunteer_Name)
-ResID int references Residence(ResID),
-primary key(VolunteerID, ResID)
-)
-go
-*/
 
 
   --- VolunteerFeedback---
@@ -314,6 +322,335 @@ go
 --(
 --AuditID int identity(1,1)
 --)
+
+
+
+
+
+
+
+--vENUE tYPE
+create table VenueType
+(
+	VenueTypeID int identity(1,1) primary key,
+	VenueType_Description varchar(25) not null
+)
+GO
+
+--vENUE ---
+create table Venue
+(
+	VenueID int identity(1,1) primary key,
+	Venue_Name varchar(35) not null,
+	StreeNumber varchar(10) null,
+StreetName varchar(35) null,
+Suburb varchar(35) null,
+City varchar(35) null,
+Province varchar(35) null,
+PostCode varchar(9) null,
+	VenueTypeID int not null,
+	FOREIGN KEY (VenueTypeID) REFERENCES VenueType(VenueTypeID),
+)
+GO
+
+
+	
+			   
+			
+	---		 [dbo].[GuestSpeaker]   
+
+create table GuestSpeaker
+(
+	GuestSpeakerID int identity(1,1) primary key,
+	GuestSpeaker_Name varchar(35) not null,
+	GuestSpeaker_Surname varchar(35) not null,
+	GuestSpeaker_Phone varchar(20) null,
+	GuestSpeaker_Email varchar(255) not null,
+	GuestSpeaker_PictureLink varchar(100) null
+)
+GO
+
+
+
+
+			  
+		---		 [dbo].[Content]   	
+create table Content 
+(
+	ContentID int identity(1,1) primary key,
+	Content_Name varchar(35) not null,
+	Content_Link varchar(1000) not null,
+	Content_Status int not null,
+	Content_Description varchar(300) not null
+)
+GO
+
+		
+				
+				   
+				---		 [dbo].[Lecture]
+
+create table Lecture
+(
+	LectureID int identity(1,1) primary key,
+	Lecture_Name varchar(35) not null,
+	Lecture_Summary varchar(100) not null,
+	Lecture_Description varchar(300) not null,
+	Lecture_Date datetime not null,
+	Lecture_StartTime time not null,
+	Lecture_EndTime time not null,
+	Lecture_Theme varchar(25) null,
+	VenueID int null,
+	ResidenceID int null,
+	ContentID int null,
+	Type int not null,
+	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
+	FOREIGN KEY (ResidenceID) REFERENCES Residence(ResID),
+	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
+)
+GO
+
+
+---GenEvent
+create table GenEvent
+(
+	GenID int identity(1,1) primary key,
+	Gen_Name varchar(35) not null,
+	Gen_Summary varchar(100) not null,
+	Gen_Description varchar(300) not null,
+	Gen_Date datetime not null,
+	Gen_StartTime time not null,
+	Gen_EndTime time not null,
+	Gene_Theme varchar(25) null,
+	Type int not null,
+	VenueID int null,
+	ResID int null,
+	ContentID int null,
+	GuestSpeakerID int null,
+	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
+	FOREIGN KEY (ResID) REFERENCES Residence(ResID),
+	FOREIGN KEY (ContentID ) REFERENCES Content(ContentID),
+	FOREIGN KEY (GuestSpeakerID) REFERENCES GuestSpeaker(GuestSpeakerID)
+)
+---	[dbo].[ComEngEvent]
+
+
+
+
+create table ComEngEvent
+(
+	ComEngID int identity(1,1) primary key,
+	ComEng_Name varchar(35) not null,
+	ComEng_Summary varchar(100) not null,
+	ComEng_Description varchar(300) not null,
+	ComEng_Date datetime not null,
+	ComEnge_StartTime time not null,
+	ComEng_EndTime time not null,
+	ComEng_Theme varchar(25) null,
+	VenueID int null,
+	ContentID int null,
+	Type int not null,
+	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
+	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
+)
+GO
+
+
+			---		 [dbo].[FunctionEvent]  
+
+
+create table FunctionEvent
+(
+	FunctionID int identity(1,1) primary key,
+	Function_Name varchar(35) not null,
+	Function_Summary varchar(100) not null,
+	Function_Description varchar(300) not null,
+	Function_Date datetime not null,
+	Function_StartTime time not null,
+	Function_EndTime time not null,
+	Function_Theme varchar(25) null,
+	GuestSpeakerID int null,
+	VenueID int null,
+	Type int not null,
+	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
+	FOREIGN KEY (GuestSpeakerID) REFERENCES GuestSpeaker(GuestSpeakerID)
+)
+GO
+					
+				---		 [dbo].[TRWLASchedule]
+create table TRWLASchedule
+(
+	ScheduleID int identity(1,1) primary key,
+	FunctionID int null,
+	LectureID int null,
+	ComEngID int null,
+	GenID int null,
+	FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
+	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
+	FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
+	FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
+)
+GO
+
+
+---	[dbo].[Attendance]  
+
+create table Attendance
+(
+		attendanceID int identity (1,1) primary key,
+		VolunteerID int null,
+		StudentID int null,
+		FunctionID int null,
+		LectureID int null,
+		ComEngID int null,
+		GenID int null,
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
+		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
+		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
+		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
+		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
+		FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
+)
+GO	
+
+						
+				---		 [dbo].[RSVP_Event]
+create table RSVP_Event
+(
+		rsvpID int identity (1,1) primary key,
+		VolunteerID int null,
+		StudentID int null,
+		FunctionID int null,
+		LectureID int null,
+		ComEngID int null,
+		Attended int null,
+		GenID int null,
+		SYSUserProfileID int null,
+		FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
+		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
+		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
+		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
+		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
+		FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
+)	
+GO	
+
+---RSVPSchedule---
+create table RSVPSchedule
+(
+	RsvpScheduleID int identity (1,1) primary key,
+	rsvpID int not null,
+	ScheduleID int not null,
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
+	FOREIGN KEY (rsvpID) REFERENCES RSVP_Event(rsvpID),
+	FOREIGN KEY (ScheduleID) REFERENCES TRWLASchedule(ScheduleID)
+)
+GO
+
+---RatingType---
+create table RatingType
+(
+	RatingID int identity (1,1) primary key,
+	Rating varchar(50) not null
+)
+
+---LectureReview----
+create table LectureReview
+(
+	reviewID int identity (1,1) primary key,
+	Review varchar(500) not null,
+	RatingID int not null,
+	LectureID int not null,
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
+	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
+	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
+)
+
+---Progress---
+Create table Progress
+(
+	ProgressID int identity (1,1) primary key,
+	StudentNumber varchar(1) not null,
+	ProgressCount int not null
+)
+go
+
+----EventMessage----
+create table EventMessage
+(
+	MessID int identity (1,1) primary key,
+	Msg varchar(500) not null,
+	TimeMes time not null,
+	NumberMess int not null,
+	VolunteerID int null,
+	SYSUserProfileID int null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
+	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
+)
+go
+
+
+
+
+---AuditLog---
+
+CREATE TABLE AuditLog
+(
+	AuditID int identity (1,1) Primary key,
+	DateDone datetime not null,
+	TypeTran varchar(50) not null,
+	TableAff varchar(50) not null,
+	SYSUserProfileID int not null,
+	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID)
+)
+
+---progressbar---
+create table progressbar
+(
+	ProgBarID int identity (1,1) primary key,
+	SYSUserProfileID int not null,
+	LecProg int not null,
+	FuncProg int not null,
+	ComProg int not null,
+	GenProg int not null,
+
+	foreign key (SYSUserProfileID) references SYSUserProfile(SYSUserProfileID)
+)
+
+---MasterData----
+create table MasterData
+(
+	MasterID int identity (1,1) primary key,
+	LecAttend int not null,
+	FuncAttend int not null,
+	ComAttend int not null,
+	GenAttend int not null,
+	RegDate date not null,
+	CancelEvent int not null,
+	LogAttendTime int not null,
+	PassFactor varchar(5) null
+)
+
+----ClassAttendance---
+
+Create table ClassAttendance
+(
+	CAPK int identity not null primary key,
+	EventType varchar(50) not null,
+	attend int not null
+)
+
+
+
+
+
+
+
 
 
 
@@ -458,278 +795,6 @@ GO
 	-------------------------=== Events Management ===---------------------
 		  
 		  
-
-
-
---vENUE tYPE
-create table VenueType
-(
-	VenueTypeID int identity(1,1) primary key,
-	VenueType_Description varchar(25) not null
-)
-GO
-
---vENUE ---
-create table Venue
-(
-	VenueID int identity(1,1) primary key,
-	Venue_Name varchar(35) not null,
-	StreeNumber varchar(10) null,
-StreetName varchar(35) null,
-Suburb varchar(35) null,
-City varchar(35) null,
-Province varchar(35) null,
-PostCode varchar(9) null,
-	VenueTypeID int not null,
-	FOREIGN KEY (VenueTypeID) REFERENCES VenueType(VenueTypeID),
-)
-GO
-
-
-	
-			   
-				---		 [dbo].[GuestSpeaker]   
-
-
-create table GuestSpeaker
-(
-	GuestSpeakerID int identity(1,1) primary key,
-	GuestSpeaker_Name varchar(35) not null,
-	GuestSpeaker_Surname varchar(35) not null,
-	GuestSpeaker_Phone varchar(20) null,
-	GuestSpeaker_Email varchar(255) not null,
-	GuestSpeaker_PictureLink varchar(100) null
-)
-GO
-	---		 [dbo].[Content]   
-
-
-
-			  
-		
-create table Content 
-(
-	ContentID int identity(1,1) primary key,
-	Content_Name varchar(35) not null,
-	Content_Link varchar(1000) not null,
-	Content_Status int not null,
-	Content_Description varchar(300) not null
-)
-GO
-
-		
-				
-				   
-				---		 [dbo].[Lecture]
-
-create table Lecture
-(
-	LectureID int identity(1,1) primary key,
-	Lecture_Name varchar(35) not null,
-	Lecture_Summary varchar(100) not null,
-	Lecture_Description varchar(300) not null,
-	Lecture_Date datetime not null,
-	Lecture_StartTime time not null,
-	Lecture_EndTime time not null,
-	Lecture_Theme varchar(25) null,
-	VenueID int null,
-	ResidenceID int null,
-	ContentID int null,
-	Type int not null,
-	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
-	FOREIGN KEY (ResidenceID) REFERENCES Residence(ResID),
-	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
-)
-GO
-
-create table GenEvent
-(
-	GenID int identity(1,1) primary key,
-	Gen_Name varchar(35) not null,
-	Gen_Summary varchar(100) not null,
-	Gen_Description varchar(300) not null,
-	Gen_Date datetime not null,
-	Gen_StartTime time not null,
-	Gen_EndTime time not null,
-	Gene_Theme varchar(25) null,
-	Type int not null,
-	VenueID int null,
-	ResID int null,
-	ContentID int null,
-	GuestSpeakerID int null,
-	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
-	FOREIGN KEY (ResID) REFERENCES Residence(ResID),
-	FOREIGN KEY (ContentID ) REFERENCES Content(ContentID),
-	FOREIGN KEY (GuestSpeakerID) REFERENCES GuestSpeaker(GuestSpeakerID)
-)
----	[dbo].[ComEngEvent]
-
-
-
-
-create table ComEngEvent
-(
-	ComEngID int identity(1,1) primary key,
-	ComEng_Name varchar(35) not null,
-	ComEng_Summary varchar(100) not null,
-	ComEng_Description varchar(300) not null,
-	ComEng_Date datetime not null,
-	ComEnge_StartTime time not null,
-	ComEng_EndTime time not null,
-	ComEng_Theme varchar(25) null,
-	VenueID int null,
-	ContentID int null,
-	Type int not null,
-	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
-	FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
-)
-GO
-
-
-			---		 [dbo].[FunctionEvent]  
-
-
-create table FunctionEvent
-(
-	FunctionID int identity(1,1) primary key,
-	Function_Name varchar(35) not null,
-	Function_Summary varchar(100) not null,
-	Function_Description varchar(300) not null,
-	Function_Date datetime not null,
-	Function_StartTime time not null,
-	Function_EndTime time not null,
-	Function_Theme varchar(25) null,
-	GuestSpeakerID int null,
-	VenueID int null,
-	Type int not null,
-	FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
-	FOREIGN KEY (GuestSpeakerID) REFERENCES GuestSpeaker(GuestSpeakerID)
-)
-GO
-					
-				---		 [dbo].[TRWLASchedule]
-create table TRWLASchedule
-(
-	ScheduleID int identity(1,1) primary key,
-	FunctionID int null,
-	LectureID int null,
-	ComEngID int null,
-	GenID int null,
-	FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
-	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
-	FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
-	FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
-)
-GO
-
-
----	[dbo].[Attendance]  
-
-create table Attendance
-(
-		attendanceID int identity (1,1) primary key,
-		VolunteerID int null,
-		StudentID int null,
-		FunctionID int null,
-		LectureID int null,
-		ComEngID int null,
-		GenID int null,
-	SYSUserProfileID int null,
-	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
-		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
-		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
-		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
-		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
-		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
-		FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
-)
-GO	
-
-						
-				---		 [dbo].[RSVP_Event]
-create table RSVP_Event
-(
-		rsvpID int identity (1,1) primary key,
-		VolunteerID int null,
-		StudentID int null,
-		FunctionID int null,
-		LectureID int null,
-		ComEngID int null,
-		Attended int null,
-		GenID int null,
-		SYSUserProfileID int null,
-		FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
-		FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID),
-		FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
-		FOREIGN KEY (FunctionID) REFERENCES FunctionEvent(FunctionID),
-		FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
-		FOREIGN KEY (ComEngID) REFERENCES ComEngEvent(ComEngID),
-		FOREIGN KEY (GenID) REFERENCES GenEvent(GenID)
-)	
-GO	
-
-create table RSVPSchedule
-(
-	RsvpScheduleID int identity (1,1) primary key,
-	rsvpID int not null,
-	ScheduleID int not null,
-	SYSUserProfileID int null,
-	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
-	FOREIGN KEY (rsvpID) REFERENCES RSVP_Event(rsvpID),
-	FOREIGN KEY (ScheduleID) REFERENCES TRWLASchedule(ScheduleID)
-)
-GO
-
-create table RatingType
-(
-	RatingID int identity (1,1) primary key,
-	Rating varchar(50) not null
-)
-
-create table LectureReview
-(
-	reviewID int identity (1,1) primary key,
-	Review varchar(500) not null,
-	RatingID int not null,
-	LectureID int not null,
-	SYSUserProfileID int null,
-	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
-	FOREIGN KEY (LectureID) REFERENCES Lecture(LectureID),
-	FOREIGN KEY (RatingID) REFERENCES RatingType(RatingID)
-)
-
-Create table Progress
-(
-	ProgressID int identity (1,1) primary key,
-	StudentNumber varchar(1) not null,
-	ProgressCount int not null
-)
-go
-
-create table EventMessage
-(
-	MessID int identity (1,1) primary key,
-	Msg varchar(500) not null,
-	TimeMes time not null,
-	NumberMess int not null,
-	VolunteerID int null,
-	SYSUserProfileID int null,
-	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID),
-	FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
-)
-go
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -939,50 +1004,6 @@ VALUES('25864','2017/09/22')
 INSERT INTO UniqueCode(Code,stamptime)
 VALUES('89752','2017/09/26')
 
-
-
-CREATE TABLE AuditLog
-(
-	AuditID int identity (1,1) Primary key,
-	DateDone datetime not null,
-	TypeTran varchar(50) not null,
-	TableAff varchar(50) not null,
-	SYSUserProfileID int not null,
-	FOREIGN KEY (SYSUserProfileID) REFERENCES SYSUserProfile(SYSUserProfileID)
-)
-
-create table progressbar
-(
-	ProgBarID int identity (1,1) primary key,
-	SYSUserProfileID int not null,
-	LecProg int not null,
-	FuncProg int not null,
-	ComProg int not null,
-	GenProg int not null,
-
-	foreign key (SYSUserProfileID) references SYSUserProfile(SYSUserProfileID)
-)
-
-create table MasterData
-(
-	MasterID int identity (1,1) primary key,
-	LecAttend int not null,
-	FuncAttend int not null,
-	ComAttend int not null,
-	GenAttend int not null,
-	RegDate date not null,
-	CancelEvent int not null,
-	LogAttendTime int not null,
-	PassFactor varchar(5) null
-)
-
-
-Create table ClassAttendance
-(
-	CAPK int identity not null primary key,
-	EventType varchar(50) not null,
-	attend int not null
-)
 
 insert into ClassAttendance(EventType, attend)
 values('Function', 0)
