@@ -28,6 +28,11 @@ namespace TRWLASystemMaster.Controllers
 {
     public class TRWLASchedulesController : Controller
     {
+        /// <summary>
+        /// This controller is responsible for managing all the logic to display the events via the TRWLASchedules table
+        /// 
+        /// There is also logic for attendance etc
+        /// /// </summary>
         private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
         
 

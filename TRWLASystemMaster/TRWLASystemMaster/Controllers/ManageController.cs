@@ -22,6 +22,8 @@ namespace TRWLASystemMaster.Controllers
 {
     public class ManageController : Controller
     {
+
+        //Manage controller for sorting out the logic for the accounts
         private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
         //Manage User
         //[AuthorizeRoles("Admin")]
@@ -65,7 +67,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
         
-
+        //Editing the user's profile
 
         [HttpPost]
         [ValidateAntiForgeryToken]

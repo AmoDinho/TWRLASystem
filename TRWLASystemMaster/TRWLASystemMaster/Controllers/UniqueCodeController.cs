@@ -9,6 +9,9 @@ namespace TRWLASystemMaster.Controllers
 {
     public class UniqueCodeController : Controller
     {
+        /// <summary>
+        /// Code that generates the unique code
+        /// </summary>
         private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
         // GET: UniqueCode
         public ActionResult UniqueCode()

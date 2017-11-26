@@ -60,7 +60,7 @@ namespace TRWLASystemMaster.Controllers
         }
 
 
-        //Register Action 
+        //Register Action for students
         [HttpPost]
         public ActionResult Register(UserSignUpView USV)
         {
@@ -69,6 +69,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //verify that email and username dont exist
                     UserManager UM = new UserManager();
                     if (UM.IsEmailExist(USV.Email) == "no")
                     {
@@ -149,7 +150,7 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
-        //Register Volunteer
+        //Register for Volunteer
 
         [HttpPost]
         public ActionResult RegisterVol(UserSignUpViewVol USV)
@@ -159,6 +160,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //verify that email and username dont exist
                     UserManager UM = new UserManager();
                     if (UM.IsEmailExist(USV.Email) == "no")
                     {
@@ -170,7 +172,8 @@ namespace TRWLASystemMaster.Controllers
                             UM.AddUserAccount(USV);
 
                             FormsAuthentication.SetAuthCookie(USV.FirstName, false);
-                            //Adding hashing here
+                       
+                           // Find the user so that you can make session datat
                             SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == USV.LoginName && p.PasswordEncryptedText == USV.Password);
                             SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
 
@@ -223,6 +226,7 @@ namespace TRWLASystemMaster.Controllers
             {
                 try
                 {
+                    //Check if condition is met first
                     if (ModelState.IsValid)
                     {
                         UserManager UM = new UserManager();
@@ -235,6 +239,8 @@ namespace TRWLASystemMaster.Controllers
                         SYSUser myUser = db.SYSUsers.FirstOrDefault(p => p.LoginName == ULV.LoginName && p.PasswordEncryptedText == ULV.Password);
                         SYSUserProfile myUserP = db.SYSUserProfiles.FirstOrDefault(p => p.SYSUserID == myUser.SYSUserID);
 
+
+                        //Verify password is correct
 
                         if (string.IsNullOrEmpty(password))
                             ModelState.AddModelError("", "The user login or password provided is incorrect.");
@@ -310,6 +316,8 @@ namespace TRWLASystemMaster.Controllers
 
             try
             {
+
+                //Find the users email
                 var email = from c in db.SYSUserProfiles
                             where c.Email == model.Email
                             select c;
@@ -323,9 +331,10 @@ namespace TRWLASystemMaster.Controllers
                 {
                     if (email.ToList().Count == 1)
                     {
+                        //Find the user via email
                         SYSUserProfile myUser = db.SYSUserProfiles.FirstOrDefault(p => p.Email == model.Email);
 
-
+                        //Assign an ID to then get the userID
                         int ID = myUser.SYSUserProfileID;
                         TempData["User"] = ID;
                         
@@ -367,6 +376,7 @@ namespace TRWLASystemMaster.Controllers
 
                 //    var ans = db.SecurityAnswers.Include(t => t.Security_Question).Where(o => o.SYSUserProfileID == user);
 
+                //uSE THE ID to find the security answer
                 SecurityAnswer myanswer = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user);
 
 
@@ -392,6 +402,7 @@ namespace TRWLASystemMaster.Controllers
         {
             try
             {
+                
                 int user = Convert.ToInt32(TempData["User"]);
                 TempData["User"] = user;
 
@@ -408,7 +419,10 @@ namespace TRWLASystemMaster.Controllers
 
                 //SecurityAnswer ans2 = db.SecurityAnswers.FirstOrDefault(p => p.SYSUserProfileID == user).Security_Answer.Equals(answer);
 
+
                 int s = 0;
+
+                //Find tge users secuirty answer
                 try
                 {
                     s = (from n in db.SecurityAnswers
@@ -479,127 +493,86 @@ namespace TRWLASystemMaster.Controllers
             }
         }
 
-        // POST: SYSUsers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SYSUserID,LoginName,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sYSUser)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(sYSUser).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Login", "Account");
-                }
-                return View(sYSUser);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorPage", "TRWLASchedules");
-            }
-        }
 
-        // [HttpPost]
-        public ActionResult SecurityQuestion()
-        {
-            try
-            {
-                ViewBag.QuestionID = new SelectList(db.SecurityQuestions, "QuestionID", "Question");
-
-
-                return View();
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorPage", "TRWLASchedules");
-            }
-        }
-
-        [HttpPost]
-        public ActionResult SecurityQuestion([Bind(Include = "SecurityAnswerID,QuestionID,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
-        {
-            try
-            {
-                int ID = Convert.ToInt32(TempData["nUse"]);
-                if (ModelState.IsValid)
-                {
-                    seans.SYSUserProfileID = ID;
-                    db.SecurityAnswers.Add(seans);
-                    db.SaveChanges();
-
-                    SYSUserProfile myuser = db.SYSUserProfiles.Find(ID);
-
-                    if (myuser.UserTypeID == 1)
-                    {
-
-                        return RedirectToAction("StudentMainMenu", "TRWLASchedules");
-                    }
-                    else if (myuser.UserTypeID == 2)
-                    {
-                        return RedirectToAction("index", "TRWLASchedules");
-                    }
-
-
-                }
-
-
-                return View(seans);
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorPage", "TRWLASchedules");
-            }
-        }
-
-        //// GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string rt)
-        {
-            try {
-                return View();
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("ErrorPage", "TRWLASchedules");
-            }
-        }
-
-        //// POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword()
-        {
-            if (ModelState.IsValid)
-            {
-
-            }
-
-            return View();
-        }
-
-
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        //[AllowAnonymous]
-        //public ActionResult ForgotPasswordConfirmation()
+        //// POST: SYSUsers/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "SYSUserID,LoginName,PasswordEncryptedText,RowCreatedSYSUserID,RowCreatedDateTime,RowModifiedSYSUserID,RowModifiedDateTime")] SYSUser sYSUser)
         //{
-        //    return View();
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            db.Entry(sYSUser).State = EntityState.Modified;
+        //            db.SaveChanges();
+        //            return RedirectToAction("Login", "Account");
+        //        }
+        //        return View(sYSUser);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return RedirectToAction("ErrorPage", "TRWLASchedules");
+        //    }
+        //}
+
+        //// [HttpPost]
+        //public ActionResult SecurityQuestion()
+        //{
+        //    try
+        //    {
+        //        ViewBag.QuestionID = new SelectList(db.SecurityQuestions, "QuestionID", "Question");
+
+
+        //        return View();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return RedirectToAction("ErrorPage", "TRWLASchedules");
+        //    }
+        //}
+
+        //[HttpPost]
+        //public ActionResult SecurityQuestion([Bind(Include = "SecurityAnswerID,QuestionID,Security_Answer,SYSUserProfileID]")] SecurityAnswer seans)
+        //{
+        //    try
+        //    {
+        //        int ID = Convert.ToInt32(TempData["nUse"]);
+        //        if (ModelState.IsValid)
+        //        {
+        //            seans.SYSUserProfileID = ID;
+        //            db.SecurityAnswers.Add(seans);
+        //            db.SaveChanges();
+
+        //            SYSUserProfile myuser = db.SYSUserProfiles.Find(ID);
+
+        //            if (myuser.UserTypeID == 1)
+        //            {
+
+        //                return RedirectToAction("StudentMainMenu", "TRWLASchedules");
+        //            }
+        //            else if (myuser.UserTypeID == 2)
+        //            {
+        //                return RedirectToAction("index", "TRWLASchedules");
+        //            }
+
+
+        //        }
+
+
+        //        return View(seans);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return RedirectToAction("ErrorPage", "TRWLASchedules");
+        //    }
         //}
 
 
 
 
-
-
-
-
         //Sign Out
-
         [Authorize]
         public ActionResult SignOut()
         {
@@ -615,8 +588,9 @@ namespace TRWLASystemMaster.Controllers
         }
 
 
+        
 
-
+        //Not sure what this does, but becarful when removing it.
         internal class ChallengeResult : ActionResult
         {
             private string provider;
@@ -638,66 +612,12 @@ namespace TRWLASystemMaster.Controllers
 
         private object confirmationToken;
 
-        public ActionResult CameraBooth()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult PhotoBooth()
-        {
-            return View();
-        }
-
-
-
-        [HttpGet]
-        public ActionResult Changephoto()
-        {
-            if (Convert.ToString(Session["val"]) != string.Empty)
-            {
-                ViewBag.pic = "http://localhost:26515/WebImages/" + Session["val"].ToString();
-            }
-            else
-            {
-                ViewBag.pic = "../../WebImages/person.jpg";
-            }
-            return View();
-        }
-        public JsonResult Rebind()
-        {
-            string path = "http://localhost:26515/WebImages/" + Session["val"].ToString();
-            return Json(path, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult Capture()
-        {
-            var stream = Request.InputStream;
-            string dump;
-            using (var reader = new StreamReader(stream))
-            {
-                dump = reader.ReadToEnd();
-                DateTime nm = DateTime.Now;
-                string date = nm.ToString("yyyymmddMMss");
-                var path = Server.MapPath("~/WebImages/" + date + "test.jpg");
-                System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
-                ViewData["path"] = date + "test.jpg";
-                Session["val"] = date + "test.jpg";
-            }
-            return View("Index");
-        }
-        private byte[] String_To_Bytes2(string strInput)
-        {
-            int numBytes = (strInput.Length) / 2;
-            byte[] bytes = new byte[numBytes];
-            for (int x = 0; x < numBytes; ++x)
-            {
-                bytes[x] = Convert.ToByte(strInput.Substring(x * 2, 2), 16);
-            }
-            return bytes;
-        }
 
     }
 
+
+
+    //
 
 
 

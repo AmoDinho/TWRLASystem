@@ -13,7 +13,7 @@ namespace TRWLASystemMaster.Controllers
     public class SYSUserProfilesController : Controller
     {
         private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
-        //
+        // This controller manages the searching/viewing of students and volunteers
         /// <summary>
         /// To do :
         ///  Use dropdown to search for vols/students and grads

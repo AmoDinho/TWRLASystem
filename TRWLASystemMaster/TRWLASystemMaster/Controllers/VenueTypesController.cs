@@ -13,6 +13,10 @@ namespace TRWLASystemMaster.Controllers
 {
     public class VenueTypesController : Controller
     {
+        /// <summary>
+        /// 
+        /// Controller for the VenueTypes
+        /// </summary>
         private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();
 
         // GET: VenueTypes

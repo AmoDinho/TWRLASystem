@@ -11,6 +11,10 @@ using TRWLASystemMaster.Models.DB;
 
 namespace TRWLASystemMaster.Controllers
 {
+    /// <summary>
+    /// 
+    /// Controller for the venues
+    /// </summary>
     public class VenuesController : Controller
     {
         private TWRLADB_Staging_V2Entities8 db = new TWRLADB_Staging_V2Entities8();

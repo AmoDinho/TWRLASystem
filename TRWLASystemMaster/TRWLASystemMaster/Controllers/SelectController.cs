@@ -10,6 +10,8 @@ using TRWLASystemMaster.Models.EntityManager;
 
 namespace TRWLASystemMaster.Controllers
 {
+
+    //This Controller allows the user to select whether they are student or volunteer
     public class SelectController : Controller
     {
 
@@ -31,38 +33,7 @@ namespace TRWLASystemMaster.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*Soluntion to test what is in the db
-                 * 
-                 * using (var context = new MyAppUsersEntities())
-                {
-                    var user = from u in context.Users
-                               where u.UserName == username
-                               select u;
-
-                    if (user.ToList().Count == 1)
-                    {
-                        if (user.First().Password == CreatePasswordHash(password, user.First().Salt))
-                        {
-                            Session["logged"] = user.First().UserName;
-                            return RedirectToAction("ShowProducts", "Products");
-                        }
-                    }
-                }
-                 * 
-                 * 
-                 * 
-                 * */
-
-
-
-                //if(!ModelState.IsValid)
-                //{
-                //    RedirectToAction("RegisterVol", "Account");
-                //    return View(vc);
-                //}
-
-                //return View();
-
+                
                 if (uniqe != "")
                 {
                     ViewBag.NameSortParm = String.IsNullOrEmpty(uniqe) ? "name_desc" : "";
